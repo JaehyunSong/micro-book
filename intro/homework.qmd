@@ -1,6 +1,38 @@
 ---
 title: "課題の取り組み方"
 toc: true
-number-sections: true
 ---
 
+```{r}
+#| include: false
+knitr::opts_chunk$set(echo      = FALSE,
+                      fig.align = "center")
+```
+
+:::{.callout-caution}
+## 課題の取り組み方が分からない?
+
+必ず宋と相談すること。
+:::
+
+## Step1: 課題ファイル一式の入手
+
+LMSから
+
+## Step2: 課題ファイルのアップロード
+
+[ファイル管理](file.html)を参考
+
+## Step3: 頑張る
+
+本ページの「課題」のサンプル画面と同じ結果が得られるようにコードを書く
+
+時々Knitする
+
+## Step4: 出力物のダウンロード
+
+[ファイル管理](file.html)を参考
+
+## Step5: 提出
+
+LMSへ

@@ -264,5 +264,61 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\nダウンロード\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n\n\n\n\nUnder30\n\n\n\n\nJimin\n自民党の得票率\n\n\n\nMinshin\n\n\n\n\nKomei\n\n\n\n\nKyosan\n\n\n\n\nIshin\n\n\n\n\nShamin\n\n\n\n\nRegion2\n\n1 = 東日本; 2 = 西日本\n\n\nRegion6"
+  },
+  {
+    "objectID": "intro/homework.html",
+    "href": "intro/homework.html",
+    "title": "課題の取り組み方",
+    "section": "",
+    "text": "1 Step1: 課題ファイル一式の入手\n\n\n2 Step2: 課題ファイルのアップロード\n\n\n3 Step3: 頑張る\n\n\n4 Step4: 出力物のダウンロード\n\n\n5 Step5: 提出"
+  },
+  {
+    "objectID": "intro/homework.html#step1-課題ファイル一式の入手",
+    "href": "intro/homework.html#step1-課題ファイル一式の入手",
+    "title": "課題の取り組み方",
+    "section": "Step1: 課題ファイル一式の入手",
+    "text": "Step1: 課題ファイル一式の入手\nLMSから"
+  },
+  {
+    "objectID": "intro/homework.html#step2-課題ファイルのアップロード",
+    "href": "intro/homework.html#step2-課題ファイルのアップロード",
+    "title": "課題の取り組み方",
+    "section": "Step2: 課題ファイルのアップロード",
+    "text": "Step2: 課題ファイルのアップロード\nファイル管理を参考"
+  },
+  {
+    "objectID": "intro/homework.html#step3-頑張る",
+    "href": "intro/homework.html#step3-頑張る",
+    "title": "課題の取り組み方",
+    "section": "Step3: 頑張る",
+    "text": "Step3: 頑張る\n本ページの「課題」のサンプル画面と同じ結果が得られるようにコードを書く\n時々Knitする"
+  },
+  {
+    "objectID": "intro/homework.html#step4-出力物のダウンロード",
+    "href": "intro/homework.html#step4-出力物のダウンロード",
+    "title": "課題の取り組み方",
+    "section": "Step4: 出力物のダウンロード",
+    "text": "Step4: 出力物のダウンロード\nファイル管理を参考"
+  },
+  {
+    "objectID": "intro/homework.html#step5-提出",
+    "href": "intro/homework.html#step5-提出",
+    "title": "課題の取り組み方",
+    "section": "Step5: 提出",
+    "text": "Step5: 提出\nLMSへ"
+  },
+  {
+    "objectID": "intro/homework.html#step1-課題ファイル一式の入手-step1",
+    "href": "intro/homework.html#step1-課題ファイル一式の入手-step1",
+    "title": "課題の取り組み方",
+    "section": "1 Step1: 課題ファイル一式の入手 {Step1}",
+    "text": "1 Step1: 課題ファイル一式の入手 {Step1}"
+  },
+  {
+    "objectID": "intro/homework.html#Step1",
+    "href": "intro/homework.html#Step1",
+    "title": "課題の取り組み方",
+    "section": "1 Step1: 課題ファイル一式の入手",
+    "text": "1 Step1: 課題ファイル一式の入手"
   }
 ]
