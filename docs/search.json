@@ -4,7 +4,7 @@
     "href": "materials/basic.html#電卓としてのr",
     "title": "第3回講義資料",
     "section": "電卓としてのR",
-    "text": "電卓としてのR\n\n1 + 1\n\n[1] 2"
+    "text": "電卓としてのR\nFile > New File > R Scriptをクリックする。\nSourceペインを最大化する。\nSourceに以下の内容を入力する。\n\n1 + 1\n\nコードの行にカーソルをおいたままCmd + Return（Windowsの場合、Control (Ctrl) + Enter）を入力\nConsoleペインに結果が表示される。\n\n\n[1] 2\n\n\nこれくらいの計算はConsoleペインで直接打ち込んでも良いが、自分がこれまで書いたコードを残すという意味でSourceペインに入力することを推奨する。R Scriptを保存しておけばいつでも開いて前回のコードを再現できる。"
   },
   {
     "objectID": "materials/basic.html#コメント",
@@ -18,14 +18,14 @@
     "href": "materials/basic.html#算術演算子",
     "title": "第3回講義資料",
     "section": "算術演算子",
-    "text": "算術演算子"
+    "text": "算術演算子\n\n結果として何らかの数字が返される\n累乗（^）を除き、演算子の前後にはスペースを入れるのがRの流儀\n\n必須ではないが、コードが読みやすくなる\n\n\n\n1 + 5  # 足し算\n\n[1] 6\n\n3 - 10 # 引き算\n\n[1] -7\n\n19 * 2 # 掛け算\n\n[1] 38\n\n13 / 7 # 割り算\n\n[1] 1.857143\n\n5^3    # 5の3乗\n\n[1] 125\n\n\n\n\n\n演算子\n意味\n例\n結果\n\n\n\n\n+\n和\n2 + 5\n7\n\n\n-\n差\n2 - 8\n-6\n\n\n*\n積\n7 * 3\n21\n\n\n/\n商\n16 / 5\n3.2\n\n\n^、**\n累乗（べき乗）\n2^3または2 ** 3\n8\n\n\n%%\n剰余 (モジュロ)\n18 %% 7\n4\n\n\n%/%\n整数商\n18 %/% 7\n2"
   },
   {
     "objectID": "materials/basic.html#論理演算子",
     "href": "materials/basic.html#論理演算子",
     "title": "第3回講義資料",
     "section": "論理演算子",
-    "text": "論理演算子"
+    "text": "論理演算子\n\n真（TRUE）か偽（FALSE）の値を返す演算子\n\n\n3 > 2 # 3は2より大きいの?\n\n[1] TRUE\n\n5 <= 10 # 5は10と同じか小さいの?\n\n[1] TRUE\n\n2 + 3 == 1 # 2と3の和は1なの?\n\n[1] FALSE\n\n2 + 2 != 2 * 2 # 2と2の和は2と2の積と同じなの?\n\n[1] FALSE\n\n\n\n「等しい」は=でなく、==であることに注意すること\n\n\n\n\n演算子\n意味\n例\n結果\n\n\n\n\nx < y\nxはyより小さい\n3 < 1\nFALSE\n\n\nx <= y\nxはyと等しいか、小さい\n2 <= 2\nTRUE\n\n\nx > y\nxはyより大きい\n6 > 5\nTRUE\n\n\nx >= y\nxはyと等しいか、大きい\n4 >= 5\nFALSE\n\n\nx == y\nxとyは等しい\n(2 + 3) == (4 + 1)\nTRUE\n\n\nx != y\nxとyは等しくない\n((2 * 3) + 1) != (2 * (3 + 1))\nTRUE\n\n\n\nAND演算子: &\n\n&を挟む左右の両側がTRUEの場合のみTRUEを返す\n\n\n(2 + 3 == 5) & (1 * 2 == 3) # TRUE and FALSEだから\n\n[1] FALSE\n\n\nOR演算子: |\n\n|を挟む左右の片側、あるいは両側がTRUEの場合のみTRUEを返す\n\n\n(2 + 3 == 5) | (1 * 2 == 3) # TRUE or FALSEだから\n\n[1] TRUE"
   },
   {
     "objectID": "materials/basic.html#代入",
@@ -299,5 +299,12 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\nダウンロード\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n\n\n\n\nUnder30\n\n\n\n\nJimin\n自民党の得票率\n\n\n\nMinshin\n\n\n\n\nKomei\n\n\n\n\nKyosan\n\n\n\n\nIshin\n\n\n\n\nShamin\n\n\n\n\nRegion2\n\n1 = 東日本; 2 = 西日本\n\n\nRegion6"
+  },
+  {
+    "objectID": "materials/basic.html#代入とベクトル",
+    "href": "materials/basic.html#代入とベクトル",
+    "title": "第3回講義資料",
+    "section": "代入とベクトル",
+    "text": "代入とベクトル\n\n123454321 \\(\\times\\) 2を計算してみよう\n123454321 \\(\\times\\) 3を計算してみよう\n123454321 \\(\\times\\) 4を計算してみよう\n…\n123454321 \\(\\times\\) 200を計算してみよう\n\n123454321 * 2\n123454321 * 3\n123454321 * 4\n\n(省略)\n\n123454321 * 198\n123454321 * 199\n123454321 * 200\n199行のコードを書く必要がある。\n効率的な方法は?\n\n123454321をコピーし貼り付けながら計算を繰り返す\n123454321にxという名前を付けて、x * 1のように表記する（ここが重要）\n\nRにおいてベクトルはデータの最小単位\n\nベクトルの特徴\n同じデータ型（数値、文字列など）\n\n数値と文字列が混在するベクトルは作成不可\n\n長さは1以上\n\n1や\"Cat\"は長さ1のベクトル\n\n長さ2以上のベクトルはc()関数で作成\n\n()の中にベクトルの要素を入力する\n\n\nベクトルの格納\n\n<-演算子で格納\n\nベクトル名という名前のオブジェクト（object）が生成される\n\n格納しない場合、作業環境に保存されず、出力のみ\n\nxという器に6という数字を代入したい場合はx <- 6\nここでの器は「オブジェクト (object)」と呼ばれ、オブジェクトの内容を確認するためにはオブジェクトの名前のみを入力する。\n\nx <- 123454321 # xに123454321を代入\nx\n\n[1] 123454321\n\nx * 35\n\n[1] 4320901235"
   }
 ]
