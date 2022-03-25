@@ -255,24 +255,157 @@
 </div>
 <section id="step1-課題ファイル一式の入手" class="level2">
 <h2 class="anchored" data-anchor-id="step1-課題ファイル一式の入手">Step1: 課題ファイル一式の入手</h2>
-<p>LMSから</p>
+<p><strong>手順1:</strong> LMSの授業ページから「第XX回 課題資料」を選択する。</p>
+<ul>
+<li>以下の画面は2021年度のページである。</li>
+<li>タイトルは「第XX回 課題資料」でなく「第XX回 課題用ファイル」など変更される可能性もある。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step1_1.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>手順2:</strong> 通常、課題ファイルは2つであるが、1つのみ、または3つ以上の場合もある。それぞれの資料の「添付資料」クリックする。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step1_2.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>手順3:</strong> 新しいウィンドウが表示される。ここでファイル名をクリックするとファイルがダウンロードされる。この作業を全ファイルに対して行うこと。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step1_3.png" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="step2-課題ファイルのアップロード" class="level2">
 <h2 class="anchored" data-anchor-id="step2-課題ファイルのアップロード">Step2: 課題ファイルのアップロード</h2>
-<p><a href="file.html">ファイル管理</a>を参考</p>
+<p><strong>手順1:</strong> NIIオンライン分析システムへアクセスし、RStudioを起動する。</p>
+<p><strong>手順2:</strong> 課題用のプロジェクトを作成する。プロジェクト名は任意だが、<code>Homework_XX</code>や<code>HW_XX</code>など、分かりやすい名前を付けよう。</p>
+<p><strong>手順3:</strong> ダウンロードしたファイルにデータ（<code>.csv</code>など）がある場合、プロジェクト・フォルダー内に<code>Data</code>というフォルダーを作成する。</p>
+<p><strong>手順4:</strong> ダウンロードしたファイルをアップロードする。課題用ファイル（<code>.Rmd</code>ファイル）はプロジェクト・フォルダー直に、課題用データ（<code>.csv</code>、<code>.xlsx</code>など）は手順3で作成した<code>Data</code>にアップロードする。</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+プロジェクト、フォルダー、ファイルの管理
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のページを参照すること。</p>
+<ul>
+<li><a href="project.html">プロジェクト管理</a></li>
+<li><a href="file.html">ファイル管理</a></li>
+</ul>
+</div>
+</div>
+<p>一部の課題を除き、履修者がやることは「学籍番号と氏名の修正」と「チャンク（chunk）内にコードを入力すること」、そして最後に「Knit」することだけである。チャンク内には<code># ここにコード</code>と既に何かが書いてあるが、この<code># ここにコード</code>の行は消してからコードを書くこと。あっても減点にはならない（印象は悪くなるかも知れない）。</p>
 </section>
 <section id="step3-頑張る" class="level2">
 <h2 class="anchored" data-anchor-id="step3-頑張る">Step3: 頑張る</h2>
-<p>本ページの「課題」のサンプル画面と同じ結果が得られるようにコードを書く</p>
-<p>時々Knitする</p>
+<p>一部の課題を除き、本講義の課題は本サポートページの「課題」メニューに掲載されている画面と同じ結果が得られるようにコードを書くことである。</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+学籍番号と名前を忘れずに!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>課題用ファイル（<code>.Rmd</code>）の2行目には「情20-0012 関大太郎」と名前が記入されている。課題に取り組む前にまず学籍番号と名前を修正しよう。毎年、関大太郎と関大花子さんから提出された課題が散見されるが、この場合、課題未提出とみなす。むろん、自分の名前が関大太郎/関大花子なら学籍番号のみ修正しても良い。</p>
+</div>
+</div>
 </section>
 <section id="step4-出力物のダウンロード" class="level2">
 <h2 class="anchored" data-anchor-id="step4-出力物のダウンロード">Step4: 出力物のダウンロード</h2>
-<p><a href="file.html">ファイル管理</a>を参考</p>
+<p>本講義の課題は一部を除き、成果として<code>.html</code>ファイルを提出する。Knit後のHTMLファイルは<code>元のRmdファイル名.html</code>である。こちらのファイルをダウンロードしよう。<code>.Rmd</code>も一緒にダウンロードして良いが、指定された形式のファイルを提出すること。<code>.html</code>ファイルを提出しなければならないのに、<code>.Rmd</code>ファイルを提出した場合は未提出とみなす。</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+右クリックしてダウンロードは厳禁!!!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>出力物のダウンロード方法は<a href="file.html">ファイル管理</a>を参考すること。JupyterHubのホーム画面でファイルを右クリックして保存することは<strong>絶対にしないこと</strong>。開いてみれば分かるが、なんの情報もない（ほぼ）空っぽのファイルがダウンロードされる。提出期限が過ぎてから「知りませんでした！ごめんなさい！てへっ」と言われても、宋は「そうか、残念！てへっ」としか言わないので、ダウンロードしたファイルは必ず一回自分で開いてみよう。</p>
+</div>
+</div>
 </section>
 <section id="step5-提出" class="level2">
 <h2 class="anchored" data-anchor-id="step5-提出">Step5: 提出</h2>
-<p>LMSへ</p>
+<p><strong>手順1:</strong> LMSの授業ページから「第XX回 課題提出窓口」をクリックする。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step5_1.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>手順2:</strong> 指定された形式のファイルを添付し、「レポート提出」クリックする。</p>
+<ul>
+<li>提出されたら「202X-XX-XX XX:XX:XX にファイル xxxxxxxx が提出済みです。」と表示される。ここまでできたら終了ボタンをクリックする。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step5_2.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+課題がちゃんと提出されているか不安です…
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>自分が提出した課題はLMSの「マイレポート」から確認できる。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step5_3.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>以下のように自分が提出した課題のリストが表示される。提出物のダウンロードもできるため、ファイルが問題なくアップロードされているかも確認できる。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/HW/Step5_4.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
