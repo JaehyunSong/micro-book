@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: docs
 
+language: translate_jp.yml
+
 website:
   title: "MicroAnalysis@Kandai"
   page-footer: "Copyright 2022, Jaehyun Song. Powered by <a href='https://quarto.org/' target='_blank'>Quarto</a>" 

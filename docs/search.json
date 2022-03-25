@@ -66,64 +66,64 @@
     "objectID": "intro/install.html#初期設定",
     "href": "intro/install.html#初期設定",
     "title": "Rの導入",
-    "section": "初期設定",
-    "text": "初期設定\n\n\n\n\n\n\n注意!!!\n\n\n\n初期設定は国立情報学研究所（以下、NII）のサーバーに自分の作業用スペースを借りる作業である。つまり、初期設定を繰り返すことはNIIのサーバー（のスペース）をいくつも借りることとなり、サーバーを圧迫してしまう可能性がある。したがって、初期設定は授業全体を通じて1回のみ実行すること。\n\n\n手順1: 以下のアドレスにアクセスする。\n\nhttps://binder.cs.rcos.nii.ac.jp/v2/gh/JaehyunSong/Binder_R/HEAD\n\n手順2: 所属機関に「関西大学」、または「Kansai University」を入力・選択し、「選択」をクリックする。このような画面が表示されない場合は手順2から5は飛ばしても良い。\n\n手順3: 自分の関西大学のIDをパスワードを入力する。こちらのIDとパスワードは関西大学インフォメーション・システムおよびLMSのID/パスワードと同じである。\n\n\n\n\n\n\n\n\n\n手順4: このまま「同意します」をクリックする。\n\n\n\n\n\n\n\n\n\n手順5: 以下のような画面が表示されたらしばらく待つ。\n\n手順6: 以下のような画面が表示されたら初期設定は完了\n\n手順7: 初期設定が終わったら、すぐRおよびRStudioが利用可能だが、ここでは一旦右上の「Logout」をクリックし、タブ (or ウィンドウ) を閉じる。"
+    "section": "1 初期設定",
+    "text": "1 初期設定\n\n\n\n\n\n\n注意!!!\n\n\n\n初期設定は国立情報学研究所（以下、NII）のサーバーに自分の作業用スペースを借りる作業である。つまり、初期設定を繰り返すことはNIIのサーバー（のスペース）をいくつも借りることとなり、サーバーを圧迫してしまう可能性がある。したがって、初期設定は授業全体を通じて1回のみ実行すること。\n\n\n手順1: 以下のアドレスにアクセスする。\n\nhttps://binder.cs.rcos.nii.ac.jp/v2/gh/JaehyunSong/Binder_R/HEAD\n\n手順2: 所属機関に「関西大学」、または「Kansai University」を入力・選択し、「選択」をクリックする。このような画面が表示されない場合は手順2から5は飛ばしても良い。\n\n手順3: 自分の関西大学のIDをパスワードを入力する。こちらのIDとパスワードは関西大学インフォメーション・システムおよびLMSのID/パスワードと同じである。\n\n\n\n\n\n\n\n\n\n手順4: このまま「同意します」をクリックする。\n\n\n\n\n\n\n\n\n\n手順5: 以下のような画面が表示されたらしばらく待つ。\n\n手順6: 以下のような画面が表示されたら初期設定は完了\n\n手順7: 初期設定が終わったら、すぐRおよびRStudioが利用可能だが、ここでは一旦右上の「Logout」をクリックし、タブ (or ウィンドウ) を閉じる。"
   },
   {
     "objectID": "intro/install.html#niiオンライン分析システムの起動",
     "href": "intro/install.html#niiオンライン分析システムの起動",
     "title": "Rの導入",
-    "section": "NIIオンライン分析システムの起動",
-    "text": "NIIオンライン分析システムの起動\n初期設定が終わったら、今後、以下の手順でNIIオンライン分析システムを起動する。\n手順1: 以下のアドレスにアクセスするか、本ページの上のある「オンライン分析システムの起動」をクリックする。\n\nhttps://jupyter.cs.rcos.nii.ac.jp/\n\n手順2: 必要に応じて認証を行う（初期設定の手順2, 3, 4と同じ）。\n手順3: サーバーリストが表示される。URL列のアドレスをクリックする。\n\n参考) 初期設定を1回のみ行ったら1行のみ表示されるため混同することはないが、個人利用などを目的に初期設定を複数回行った場合は2行以上が表示されるだろう。本講義に使うサーバーのURLをクリックすること。\n\n\n手順4: 以下のような画面が表示されたらNIIオンライン分析システムの起動完了である。この画面を今後、「JupyterHub（ジュピターハブ）のホーム画面」と呼ぶ。"
+    "section": "2 NIIオンライン分析システムの起動",
+    "text": "2 NIIオンライン分析システムの起動\n初期設定が終わったら、今後、以下の手順でNIIオンライン分析システムを起動する。\n手順1: 以下のアドレスにアクセスするか、本ページの上のある「オンライン分析システムの起動」をクリックする。\n\nhttps://jupyter.cs.rcos.nii.ac.jp/\n\n手順2: 必要に応じて認証を行う（初期設定の手順2, 3, 4と同じ）。\n手順3: サーバーリストが表示される。URL列のアドレスをクリックする。\n\n参考) 初期設定を1回のみ行ったら1行のみ表示されるため混同することはないが、個人利用などを目的に初期設定を複数回行った場合は2行以上が表示されるだろう。本講義に使うサーバーのURLをクリックすること。\n\n\n手順4: 以下のような画面が表示されたらNIIオンライン分析システムの起動完了である。この画面を今後、「JupyterHub（ジュピターハブ）のホーム画面」と呼ぶ。"
   },
   {
     "objectID": "intro/install.html#rstudioの起動",
     "href": "intro/install.html#rstudioの起動",
     "title": "Rの導入",
-    "section": "RStudioの起動",
-    "text": "RStudioの起動\n手順1: JupyterHubのホーム画面の右上の「New▼」をクリックし、「RStudio」をクリックする。\n\n手順2: 以下の画面が表示されたら、RStudioの起動完了である（RStudioの見栄は初期状態の場合、白ベースである）。"
+    "section": "3 RStudioの起動",
+    "text": "3 RStudioの起動\n手順1: JupyterHubのホーム画面の右上の「New▼」をクリックし、「RStudio」をクリックする。\n\n手順2: 以下の画面が表示されたら、RStudioの起動完了である（RStudioの見栄は初期状態の場合、白ベースである）。"
   },
   {
     "objectID": "intro/install.html#rstudioの終了",
     "href": "intro/install.html#rstudioの終了",
     "title": "Rの導入",
-    "section": "RStudioの終了",
-    "text": "RStudioの終了\n手順1: RStudio画面右上のオレンジ色のボタンをクリックする。\n\n\n\n\n\n\n\n\n\n手順2: 以下のダイアログが表示されたらタブ、またはウィンドウを閉じる。"
+    "section": "4 RStudioの終了",
+    "text": "4 RStudioの終了\n手順1: RStudio画面右上のオレンジ色のボタンをクリックする。\n\n\n\n\n\n\n\n\n\n手順2: 以下のダイアログが表示されたらタブ、またはウィンドウを閉じる。"
   },
   {
     "objectID": "intro/packages.html#インストール",
     "href": "intro/packages.html#インストール",
     "title": "パッケージ",
-    "section": "インストール",
-    "text": "インストール\ninstall.packages(\"インストールするパッケージ名\")\n前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用。NIIオンライン分析システムでは既に導入済みであるため、以下のコードは実行しなくても良い。\n\ninstall.packages(\"tidyverse\")"
+    "section": "1 インストール",
+    "text": "1 インストール\n　Rには数万以上のパッケージが存在し、Rをインストールするだけでも数十のパッケージが自動的にインストールされる。しかし、データ分析/ハンドリング/可視化の手法は日々発展しており、R内蔵パッケージだけでは対応が難しい (できないわけではない)。したがって、必要に応じて新しいパッケージを導入する必要があるが、パッケージのインストールするにはConsoleペインに以下のように入力する。\ninstall.packages(\"インストールするパッケージ名\")\n　前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用する予定である。ただし、本講義ようにセッティングされた環境を導入する場合、{tidyverse}は既に導入済みであるため、以下のコードは実行しなくても良い。"
   },
   {
     "objectID": "intro/packages.html#アップデート",
     "href": "intro/packages.html#アップデート",
     "title": "パッケージ",
-    "section": "アップデート",
-    "text": "アップデート\n特定のパッケージをアップデートする方法はインストールと同じ\nもし、インストール済みの全てのパッケージに新しいバージョンが公開されたものを確認し、アップデートするためには?\n\nRStudioのPackagesペインのUpdateをクリックする。\nアップデートしたいパッケージの左にチェックを付けるか、左下のSelect Allをクリックし、Install Updatesをクリックする。\n\n　以下のようなメッセージが出力される場合がある。\n  There are binary versions available but the source versions\n  are later:\n      binary source needs_compilation\nterra 1.5-17 1.5-21              TRUE\nyaml   2.2.2  2.3.4              TRUE\n\nDo you want to install from sources the packages which need compilation? (Yes/no/cancel)\n　この場合、Consoleペイン上でYes、no、cancelのいずれかを入力してReturnキー (Enterキー)を押す必要がある。大文字と小文字は区別すること。どうしても最新のパッケージが欲しい場合はYesを入力すれば良いが、インストールに時間がかかる場合がある。一方、noを入力した場合は、若干古いバージョンがインストールされるが、インストールに必要な時間が短いため、基本的にはnoでも問題ないだろう。cancelを入力した場合はアップデートが全てキャンセルされる。"
+    "section": "2 アップデート",
+    "text": "2 アップデート\n　特定のパッケージをアップデートする方法はインストールと同じだが、一つ一つのパッケージが全て最新バージョンかどうかを確認するのは大変である。また、久々のアップデートで数十個のパッケージをアップデートする必要があるケースもあろう。この場合、RStudioの内蔵機能を使えば一瞬で更新可能なパッケージのリスト化、インストールができる。\n手順1: PackagesペインのUpdateをクリックする。\n\n\n\n\n\n\n\n\n\n手順2: アップデートしたいパッケージの左にチェックを付けるか、左下のSelect Allをクリックし、右下のInstall Updatesをクリックする。\n\n\n\n\n\n\n\n\n\n　インストール、またはアップデートの際、以下のようなメッセージが出力される場合がある。\n  There are binary versions available but the source versions\n  are later:\n      binary source needs_compilation\nterra 1.5-17 1.5-21              TRUE\nyaml   2.2.2  2.3.4              TRUE\n\nDo you want to install from sources the packages which need compilation? (Yes/no/cancel)\n　この場合、Consoleペイン上でYes、no、cancelのいずれかを入力してReturnキー (Enterキー)を押す必要がある。大文字と小文字は区別すること。どうしても最新のパッケージが欲しい場合はYesを入力すれば良いが、インストールに時間がかかる場合がある。一方、noを入力した場合は、若干古いバージョンがインストールされるが、インストールに必要な時間が短いため、基本的にはnoでも問題ないだろう。cancelを入力した場合はアップデートが全てキャンセルされる。"
   },
   {
     "objectID": "intro/packages.html#教科書",
     "href": "intro/packages.html#教科書",
     "title": "パッケージ",
-    "section": "教科書",
-    "text": "教科書\n『私たちのR』の第5章「Rパッケージ」: https://www.jaysong.net/RBook/packages.html"
+    "section": "3 教科書",
+    "text": "3 教科書\n『私たちのR』の第5章「Rパッケージ」: https://www.jaysong.net/RBook/packages.html"
   },
   {
     "objectID": "intro/project.html#プロジェクトの作成",
     "href": "intro/project.html#プロジェクトの作成",
     "title": "プロジェクト管理",
-    "section": "プロジェクトの作成",
-    "text": "プロジェクトの作成\n手順1: File > New Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: New Directoryをクリックする。\n\n\n\n\n\n\n\n\n\n手順3: New Projectをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: Directory name:にプロジェクト名を入力し、Create Projectをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n注意: プロジェクト名の付け方\n\n\n\nプロジェクト名にはローマ字、数字のみを使おう。スペースもなるべく使わず、空白を入れたい場合はスペースの代わりにアンダースコア（_）を使おう。"
+    "section": "1 プロジェクトの作成",
+    "text": "1 プロジェクトの作成\n手順1: File > New Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: New Directoryをクリックする。\n\n\n\n\n\n\n\n\n\n手順3: New Projectをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: Directory name:にプロジェクト名を入力し、Create Projectをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n注意: プロジェクト名の付け方\n\n\n\nプロジェクト名にはローマ字、数字のみを使おう。スペースもなるべく使わず、空白を入れたい場合はスペースの代わりにアンダースコア（_）を使おう。"
   },
   {
     "objectID": "intro/project.html#プロジェクトの開き方",
     "href": "intro/project.html#プロジェクトの開き方",
     "title": "プロジェクト管理",
-    "section": "プロジェクトの開き方",
-    "text": "プロジェクトの開き方\n　プロジェクトを作成すれば、自動的に出来たてのプロジェクトが開かれる。しかし、NIIオンライン分析システムから一旦ログアウトし、改めてRStudioを起動する場合、プロジェクトをロードする必要がある。\n手順1: File > Open Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: プロジェクト・フォルダー名をダブルクリックする。\n\n\n\n\n\n\n\n\n\n手順3: .Rprojで終わるファイルをダブルクリックする。\n\n\n\n\n\n\n\n\n\nプロジェクトが正しくロードされている場合、RStudioの右上にプロジェクト名が表示される。"
+    "section": "2 プロジェクトの開き方",
+    "text": "2 プロジェクトの開き方\n　プロジェクトを作成すれば、自動的に出来たてのプロジェクトが開かれる。しかし、NIIオンライン分析システムから一旦ログアウトし、改めてRStudioを起動する場合、プロジェクトをロードする必要がある。\n手順1: File > Open Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: プロジェクト・フォルダー名をダブルクリックする。\n\n\n\n\n\n\n\n\n\n手順3: .Rprojで終わるファイルをダブルクリックする。\n\n\n\n\n\n\n\n\n\nプロジェクトが正しくロードされている場合、RStudioの右上にプロジェクト名が表示される。"
   },
   {
     "objectID": "intro/rstudio.html#general",
@@ -172,7 +172,7 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。\nページの案内\n\n本講義について\n\n本講義の簡単なシラバス\n\nRの使い方\n講義資料\n課題\n\n課題のサンプルファイルを掲載しています。課題用ファイル/データ/回答例はLMSから入手してください。\n\nデータ集:\nオンライン分析システムの起動\n\nNIIオンライン分析システムを起動 (初期設定が必要)"
+    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月25日\n開発環境\n\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html#概要",

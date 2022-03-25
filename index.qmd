@@ -4,14 +4,13 @@ title: "ミクロ政治データ分析実習"
 
 本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。
 
-**ページの案内**
+:::{.callout-note}
+## ページ情報
 
-* [本講義について](about.html)
-   * 本講義の簡単なシラバス
-* [Rの使い方](intro/install.html)
-* [講義資料](material/basic.html)
-* [課題](HW/HW01.qmd)
-   * 課題のサンプルファイルを掲載しています。課題用ファイル/データ/回答例はLMSから入手してください。
-* [データ集](data.html):
-* <a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank">オンライン分析システムの起動</a>
-   * NIIオンライン分析システムを起動 (初期設定が必要)
+* 最終更新日: `r format(Sys.Date(), "%Y年%m月%d日")`
+* 開発環境
+   * `r version$version.string`
+   * RStudio 2022.02.0+442 "Prairie Trillium"
+   * Quarto `r quarto::quarto_inspect()$quarto$version`
+   * R package {quarto} `r packageVersion("quarto")`
+:::

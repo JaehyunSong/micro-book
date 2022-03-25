@@ -1,7 +1,6 @@
 ---
 title: "ファイル管理"
 toc: true
-toc-title: "目次"
 number-sections: true
 ---
 

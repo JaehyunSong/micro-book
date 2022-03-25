@@ -289,9 +289,9 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">目次</h2>
 <ul>
-<li><a href="#インストール" class="nav-link active" data-scroll-target="#インストール">インストール</a></li>
-<li><a href="#アップデート" class="nav-link" data-scroll-target="#アップデート">アップデート</a></li>
-<li><a href="#教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
+<li><a href="#インストール" class="nav-link active" data-scroll-target="#インストール"> <span class="header-section-number">1</span> インストール</a></li>
+<li><a href="#アップデート" class="nav-link" data-scroll-target="#アップデート"> <span class="header-section-number">2</span> アップデート</a></li>
+<li><a href="#教科書" class="nav-link" data-scroll-target="#教科書"> <span class="header-section-number">3</span> 教科書</a></li>
 </ul>
 </nav>
     </div>
@@ -301,23 +301,39 @@
 <h1 class="title d-none d-lg-block display-7">パッケージ</h1>
 </header>
 
-<section id="インストール" class="level2">
-<h2 class="anchored" data-anchor-id="インストール">インストール</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"インストールするパッケージ名"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用。NIIオンライン分析システムでは既に導入済みであるため、以下のコードは実行しなくても良い。</p>
-<div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="インストール" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="インストール"><span class="header-section-number">1</span> インストール</h2>
+<p>　Rには数万以上のパッケージが存在し、Rをインストールするだけでも数十のパッケージが自動的にインストールされる。しかし、データ分析/ハンドリング/可視化の手法は日々発展しており、R内蔵パッケージだけでは対応が難しい (できないわけではない)。したがって、必要に応じて新しいパッケージを導入する必要があるが、パッケージのインストールするにはConsoleペインに以下のように入力する。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"インストールするパッケージ名"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>　前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用する予定である。ただし、<a href="install.html">本講義ようにセッティングされた環境</a>を導入する場合、{tidyverse}は既に導入済みであるため、以下のコードは実行しなくても良い。</p>
+<div class="cell" data-layout-align="center">
+
 </div>
 </section>
-<section id="アップデート" class="level2">
-<h2 class="anchored" data-anchor-id="アップデート">アップデート</h2>
-<p>特定のパッケージをアップデートする方法はインストールと同じ</p>
-<p>もし、インストール済みの全てのパッケージに新しいバージョンが公開されたものを確認し、アップデートするためには?</p>
-<ol type="1">
-<li>RStudioのPackagesペインのUpdateをクリックする。</li>
-<li>アップデートしたいパッケージの左にチェックを付けるか、左下のSelect Allをクリックし、Install Updatesをクリックする。</li>
-</ol>
-<p>　以下のようなメッセージが出力される場合がある。</p>
+<section id="アップデート" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="アップデート"><span class="header-section-number">2</span> アップデート</h2>
+<p>　特定のパッケージをアップデートする方法はインストールと同じだが、一つ一つのパッケージが全て最新バージョンかどうかを確認するのは大変である。また、久々のアップデートで数十個のパッケージをアップデートする必要があるケースもあろう。この場合、RStudioの内蔵機能を使えば一瞬で更新可能なパッケージのリスト化、インストールができる。</p>
+<p><strong>手順1:</strong> PackagesペインのUpdateをクリックする。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/Packages/Update1.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>手順2:</strong> アップデートしたいパッケージの左にチェックを付けるか、左下のSelect Allをクリックし、右下のInstall Updatesをクリックする。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/Packages/Update2.png" class="img-fluid figure-img" width="350"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>　インストール、またはアップデートの際、以下のようなメッセージが出力される場合がある。</p>
 <pre><code>  There are binary versions available but the source versions
   are later:
       binary source needs_compilation
@@ -327,8 +343,8 @@ yaml   2.2.2  2.3.4              TRUE
 Do you want to install from sources the packages which need compilation? (Yes/no/cancel)</code></pre>
 <p>　この場合、<strong>Consoleペイン上</strong>でYes、no、cancelのいずれかを入力してReturnキー (Enterキー)を押す必要がある。大文字と小文字は区別すること。どうしても最新のパッケージが欲しい場合はYesを入力すれば良いが、インストールに時間がかかる場合がある。一方、noを入力した場合は、若干古いバージョンがインストールされるが、インストールに必要な時間が短いため、基本的にはnoでも問題ないだろう。cancelを入力した場合はアップデートが全てキャンセルされる。</p>
 </section>
-<section id="教科書" class="level2">
-<h2 class="anchored" data-anchor-id="教科書">教科書</h2>
+<section id="教科書" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="教科書"><span class="header-section-number">3</span> 教科書</h2>
 <p>『私たちのR』の第5章「Rパッケージ」: <a href="https://www.jaysong.net/RBook/packages.html" class="uri">https://www.jaysong.net/RBook/packages.html</a></p>
 
 

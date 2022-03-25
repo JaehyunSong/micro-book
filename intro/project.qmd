@@ -1,13 +1,13 @@
 ---
 title: "プロジェクト管理"
 toc: true
-toc-title: "目次"
 number-sections: true
 ---
 
 ```{r}
 #| include: false
-knitr::opts_chunk$set(fig.align = "center")
+knitr::opts_chunk$set(echo      = FALSE,
+                      fig.align = "center")
 ```
 
 ## プロジェクトの作成
@@ -15,7 +15,6 @@ knitr::opts_chunk$set(fig.align = "center")
 **手順1:** File > New Project...をクリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Create1.png")
 ```
@@ -23,7 +22,6 @@ knitr::include_graphics("Figs/Project/Create1.png")
 **手順2:** New Directoryをクリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Create2.png")
 ```
@@ -31,7 +29,6 @@ knitr::include_graphics("Figs/Project/Create2.png")
 **手順3:** New Projectをクリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Create3.png")
 ```
@@ -39,7 +36,6 @@ knitr::include_graphics("Figs/Project/Create3.png")
 **手順4:** Directory name:にプロジェクト名を入力し、Create Projectをクリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Create4.png")
 ```
@@ -57,7 +53,6 @@ knitr::include_graphics("Figs/Project/Create4.png")
 **手順1:** File > Open Project...をクリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Open1.png")
 ```
@@ -65,7 +60,6 @@ knitr::include_graphics("Figs/Project/Open1.png")
 **手順2:** プロジェクト・フォルダー名を**ダブル**クリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Open2.png")
 ```
@@ -73,7 +67,6 @@ knitr::include_graphics("Figs/Project/Open2.png")
 **手順3:** `.Rproj`で終わるファイルを**ダブル**クリックする。
 
 ```{r}
-#| echo: false
 #| out-width: "500px"
 knitr::include_graphics("Figs/Project/Open3.png")
 ```
@@ -81,7 +74,6 @@ knitr::include_graphics("Figs/Project/Open3.png")
 プロジェクトが正しくロードされている場合、RStudioの右上にプロジェクト名が表示される。
 
 ```{r}
-#| echo: false
 #| out-width: "300px"
 knitr::include_graphics("Figs/Project/Check.png")
 ```
