@@ -1,0 +1,173 @@
+---
+title: "ファイル管理"
+toc: true
+toc-title: "目次"
+number-sections: true
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(echo      = FALSE,
+                      fig.align = "center")
+```
+
+　フォルダー/ファイルの管理はJupyterHub内でも、RStudio内でもできるが、ここではRStudio側で管理する方法を紹介する。RStudioを起動し、作業するプロジェクトを開き、Filesペインを確認しよう。RStudioを経由したフォルダー/ファイルの管理は全てFilesペイン上で行われる。
+
+:::{.callout-note}
+## Filesペインはどこ?
+
+[宋が推奨する設定](rstudio.html)の場合、Filesペインは画面の右下領域にある。Environment、History、Files、Plotsなど様々なタブがあるが、FilesをクリックするとFilesペインが表示される。RStudioではこれらの領域のことをペイン（pane）と呼ぶ。
+:::
+
+## フォルダーの管理
+
+　講義、または課題ごとのプロジェクトを作ったら、JupyterHubにプロジェクトのフォルダーが生成される。各プロジェクトごとにRスクリプト、Markdownファイル、出力物（図、文書など）が管理できるが、プロジェクト内のファイルが多くなる可能性もある。この場合、プロジェクト・フォルダー内に更に下位フォルダーを作成し、ファイルを管理した方が望ましい。
+
+### フォルダーの作成
+
+**手順1:** 現在、Filesペインで表示されているフォルダーがプロジェクトの最上位フォルダーであることを確認する。「Home > プロジェクト名」と表示されていれば問題ない。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/Folder_create1.png")
+```
+
+**手順2:** New Folderをクリックする。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/Folder_create2.png")
+```
+
+**手順3:** 作成するフォルダーの名前を入力する。ここではデータなどを集めておく`Data`という名のフォルダーを作成する。
+
+```{r}
+#| out-width: "300px"
+knitr::include_graphics("Figs/Files/Folder_create3.png")
+```
+
+**手順4:** 正しくフォルダーが作成されているかを確認する。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/Folder_create4.png")
+```
+
+:::{.callout-important}
+## フォルダー名の付け方
+
+フォルダー名には**ローマ字、数字のみ**を使おう。スペースもなるべく使わず、空白を入れたい場合はスペースの代わりにアンダースコア（`_`）を使おう。
+:::
+
+### フォルダーの削除
+
+:::{.callout-important}
+## フォルダーの削除は慎重に!
+
+フォルダーを削除するとフォルダー内のファイルも全て削除される。削除する前には慎重にフォルダー内のファイルを確認しておくこと。
+:::
+
+**手順1:** 削除するフォルダーの左にチェックを付け、Deleteをクリックする。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/Folder_delete1.png")
+```
+
+**手順2:** Yesをクリックする。
+
+```{r}
+#| out-width: "300px"
+knitr::include_graphics("Figs/Files/Folder_delete2.png")
+```
+
+## ファイルの管理
+
+　分析に使用するデータセットを自分のPCにダウンロードしてもそのままNIIオンライン分析システムで使うことはできない。NIIオンライン分析システムで使用するためには、ファイルをアップロードする必要がある。これはデータだけでなく、本講義の課題用ファイルについても同様である。
+
+### ファイルのアップロード
+
+**手順1:** ファイルをアップロードしたいフォルダーへ移動する。
+
+* 下位フォルダーへの移動: フォルダー名をクリックする。
+* 上位フォルダーへの移動: ..をクリックするか、パスが表示されているバーで移動先をクリックする。
+
+**手順2:** ファイルのアップロード先が正しいかを確認し、Uploadをクリックする。
+
+* 以下の例は`Homework_01`プロジェクト・フォルダー内の`Data`フォルダーがアップロード先である。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/File_Upload1.png")
+```
+
+**手順3:** File to upload:でアップロードしたいファイルを選択する。
+
+```{r}
+#| out-width: "300px"
+knitr::include_graphics("Figs/Files/File_Upload2.png")
+```
+
+:::{.callout-note}
+## 複数のファイルをアップロードしたい場合
+
+RStudio上でファイルは一度の一つしかアップロードできない。複数のファイルを同時にアップロードしたい場合は、この作業を繰り返すか、JupyterHubのホーム画面でアップロードする必要がある。
+:::
+
+**手順4:** アップロードするファイルをダブルクリックする。
+
+* 以下では`Prev_Vote.csv`というファイルをアップロードする例である。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/File_Upload3.png")
+```
+
+**手順5:** OKをクリックする。
+
+```{r}
+#| out-width: "300px"
+knitr::include_graphics("Figs/Files/File_Upload4.png")
+```
+
+**手順6:** 正しくファイルがアップロードされているかを確認する。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/File_Upload5.png")
+```
+
+### ファイルのダウンロード
+
+　作成した図表をLaTex/Microsoft Wordなどで使うためには、その図表を自分のPCにダウンロードする必要がある。同様に、課題の出力物をLMSに提出するためにも、出力物を一旦自分のPCにダウンロードしてから提出する必要がある。
+
+**手順1:** ダウンロードするファイル名の左にチェックを付ける。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/File_Download1.png")
+```
+
+**手順2:** More > Export...をクリックする。
+
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Files/File_Download2.png")
+```
+
+**手順3:** Downloadをクリックする。
+
+```{r}
+#| out-width: "300px"
+knitr::include_graphics("Figs/Files/File_Download3.png")
+```
+
+:::{.callout-important}
+## 課題の出力物は提出する前に必ず確認を!!
+
+LMSで課題を提出するためには出力物を提出する必要があるが、提出する前にダウンロードしたファイルを必ず確認しよう。間違ったファイルを提出した場合でも提出期限内なら差し替え可能だが、期限が過ぎた場合、理由を問わず差し替えは認めない。また、間違ったファイルが提出されたことを宋が個別に知らせることもないため注意しよう。
+:::
+
+### ファイルの削除
+
+フォルダーの削除と同じ手順で削除できる。

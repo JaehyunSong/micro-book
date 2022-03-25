@@ -1,0 +1,46 @@
+---
+title: "パッケージ"
+toc: true
+toc-title: "目次"
+number-sections: true
+---
+
+## インストール
+
+```r
+install.packages("インストールするパッケージ名")
+```
+
+前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用。NIIオンライン分析システムでは既に導入済みであるため、以下のコードは実行しなくても良い。
+
+```{r}
+#| eval: false
+install.packages("tidyverse")
+```
+
+## アップデート
+
+特定のパッケージをアップデートする方法はインストールと同じ
+
+もし、インストール済みの全てのパッケージに新しいバージョンが公開されたものを確認し、アップデートするためには?
+
+1. RStudioのPackagesペインのUpdateをクリックする。
+2. アップデートしたいパッケージの左にチェックを付けるか、左下のSelect Allをクリックし、Install Updatesをクリックする。
+
+　以下のようなメッセージが出力される場合がある。
+
+```
+  There are binary versions available but the source versions
+  are later:
+      binary source needs_compilation
+terra 1.5-17 1.5-21              TRUE
+yaml   2.2.2  2.3.4              TRUE
+
+Do you want to install from sources the packages which need compilation? (Yes/no/cancel)
+```
+
+　この場合、**Consoleペイン上**でYes、no、cancelのいずれかを入力してReturnキー (Enterキー)を押す必要がある。大文字と小文字は区別すること。どうしても最新のパッケージが欲しい場合はYesを入力すれば良いが、インストールに時間がかかる場合がある。一方、noを入力した場合は、若干古いバージョンがインストールされるが、インストールに必要な時間が短いため、基本的にはnoでも問題ないだろう。cancelを入力した場合はアップデートが全てキャンセルされる。
+
+## 教科書
+
+『私たちのR』の第5章「Rパッケージ」: <https://www.jaysong.net/RBook/packages.html>

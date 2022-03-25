@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.19">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>MicroAnalysis@Kandai - RStudioの設定</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+
+  <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="../site_libs/quarto-nav/headroom.min.js"></script>
+  <script src="../site_libs/clipboard/clipboard.min.js"></script>
+  <meta name="quarto:offset" content="../">
+  <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+  <script src="../site_libs/quarto-search/fuse.min.js"></script>
+  <script src="../site_libs/quarto-search/quarto-search.js"></script>
+  <script src="../site_libs/quarto-html/quarto.js"></script>
+  <script src="../site_libs/quarto-html/popper.min.js"></script>
+  <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="../site_libs/quarto-html/anchor.min.js"></script>
+  <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script id="quarto-search-options" type="application/json">{
+    "location": "navbar",
+    "copy-button": false,
+    "collapse-after": 2,
+    "panel-placement": "end",
+    "type": "overlay",
+    "limit": 20,
+    "language": {
+      "search-no-results-text": "No results",
+      "search-matching-documents-text": "matching documents",
+      "search-copy-link-title": "Copy link to search",
+      "search-hide-matches-text": "Hide additional matches",
+      "search-more-match-text": "more match in this document",
+      "search-more-matches-text": "more matches in this document",
+      "search-clear-button-title": "Clear",
+      "search-detached-cancel-button-title": "Cancel",
+      "search-submit-button-title": "Submit"
+    }
+  }</script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="docked">
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">MicroAnalysis@Kandai</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">本講義について</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-rの使い方" role="button" data-bs-toggle="dropdown" aria-expanded="false">Rの使い方</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-rの使い方">    
+        <li>
+    <a class="dropdown-item" href="../intro/install.html">Rの導入</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/rstudio.html">RStudioの設定</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/project.html">プロジェクト管理</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/file.html">ファイル管理</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/packages.html">パッケージ</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/homework.html">課題の取り組み方</a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">講義資料</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../materials/basic.html">第3回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/programming.html">第4回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/rmarkdown.html">第5回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/datatype.html">第7回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/datastructure.html">第8回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/handling1.html">第9回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/handling2.html">第10回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/handling3.html">第11回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/visualization1.html">第12回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/visualization2.html">第13回講義資料</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/visualization3.html">第14回講義資料</a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="button" data-bs-toggle="dropdown" aria-expanded="false">課題</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
+        <li>
+    <a class="dropdown-item" href="../HW/HW01.html">第1回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW05.html">第5回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW07.html">第7回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW08.html">第8回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW09.html">第9回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW10.html">第10回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW11.html">第11回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW13.html">第13回課題</a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW14.html">第14回課題</a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../data.html">データ集</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/">オンライン分析システムの起動</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">RStudioの設定</h1>
+      <button type="button" class="quarto-btn-toggle btn">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro/install.html" class="sidebar-item-text sidebar-link">Rの導入</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro/rstudio.html" class="sidebar-item-text sidebar-link active">RStudioの設定</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro/project.html" class="sidebar-item-text sidebar-link">プロジェクト管理</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro/file.html" class="sidebar-item-text sidebar-link">ファイル管理</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro/packages.html" class="sidebar-item-text sidebar-link">パッケージ</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro/homework.html" class="sidebar-item-text sidebar-link">課題の取り組み方</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">目次</h2>
+<ul>
+<li><a href="#general" class="nav-link active" data-scroll-target="#general"> <span class="header-section-number">1</span> General</a></li>
+<li><a href="#code" class="nav-link" data-scroll-target="#code"> <span class="header-section-number">2</span> Code</a>
+<ul class="collapse">
+<li><a href="#editingタブ" class="nav-link" data-scroll-target="#editingタブ"> <span class="header-section-number">2.1</span> Editingタブ</a></li>
+<li><a href="#displayタブ" class="nav-link" data-scroll-target="#displayタブ"> <span class="header-section-number">2.2</span> Displayタブ</a></li>
+<li><a href="#savingタブ" class="nav-link" data-scroll-target="#savingタブ"> <span class="header-section-number">2.3</span> Savingタブ</a></li>
+<li><a href="#completionタブ" class="nav-link" data-scroll-target="#completionタブ"> <span class="header-section-number">2.4</span> Completionタブ</a></li>
+</ul></li>
+<li><a href="#console" class="nav-link" data-scroll-target="#console"> <span class="header-section-number">3</span> Console</a></li>
+<li><a href="#appearance" class="nav-link" data-scroll-target="#appearance"> <span class="header-section-number">4</span> Appearance</a></li>
+<li><a href="#pane-layout" class="nav-link" data-scroll-target="#pane-layout"> <span class="header-section-number">5</span> Pane Layout</a></li>
+<li><a href="#r-markdown" class="nav-link" data-scroll-target="#r-markdown"> <span class="header-section-number">6</span> R Markdown</a></li>
+</ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header id="title-block-header">
+<h1 class="title d-none d-lg-block display-7">RStudioの設定</h1>
+</header>
+
+<p>　RStudioはそのままでも使えるが、少しカスタマイズするとより使い勝手が良くなる。RStudioのカスタマイズ画面はTools &gt; Global Optionsをクリックすることで表示される。</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize01.png" class="img-fluid" width="744"></p>
+</div>
+</div>
+<p>　以下の設定はNIIオンライン分析システムで使用可能なRStudio最新版 (RStudio Server 2021.09.1+372)の設定であり、宋の設定と同じである。</p>
+<section id="general" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="general"><span class="header-section-number">1</span> General</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize02.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Restore .RData into workspace at startupのチェックを<strong>消す</strong>。</li>
+<li>Save workspace to .RData on exit:を<strong>Never</strong>に変更する。</li>
+<li>Always save history (even when not saving .RData)のチェックを<strong>消す</strong>。</li>
+</ul>
+</section>
+<section id="code" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="code"><span class="header-section-number">2</span> Code</h2>
+<section id="editingタブ" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="editingタブ"><span class="header-section-number">2.1</span> Editingタブ</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize03.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Insert spaces for tabのチェックを<strong>付ける</strong>。</li>
+<li>Tab widthは<strong>2、または4</strong>を指定する。</li>
+<li>Auto-detect code indentationのチェックを<strong>付ける</strong>。</li>
+<li>Insert matching parens/quotesのチェックを<strong>付ける</strong>。</li>
+<li>Auto-indent code after pasteのチェックを<strong>付ける</strong>。</li>
+<li>Vertically align arguments in auto-indentのチェックを<strong>付ける</strong>。</li>
+<li>Always save R scripts before sourcingのチェックを<strong>付ける</strong>。</li>
+<li>Ctrl + Return executes:を<strong>Multi-line R statement</strong>に変更する。</li>
+</ul>
+</section>
+<section id="displayタブ" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="displayタブ"><span class="header-section-number">2.2</span> Displayタブ</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize04.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Highlight selected wordのチェックを<strong>付ける</strong>。</li>
+<li>Highlight selected lineのチェックを<strong>付ける</strong>。</li>
+<li>Show line numbersのチェックを<strong>付ける</strong>。</li>
+<li>Show syntax highlighting in console inputのチェックを<strong>付ける</strong>。</li>
+<li>Highlight R function callsのチェックを<strong>付ける</strong>。</li>
+<li>Rainbow parenthesesのチェックを<strong>付ける</strong>。</li>
+</ul>
+</section>
+<section id="savingタブ" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="savingタブ"><span class="header-section-number">2.3</span> Savingタブ</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize05.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Default text encoding:のChangeをクリックし、<strong>UTF-8</strong>を選択する。</li>
+</ul>
+</section>
+<section id="completionタブ" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="completionタブ"><span class="header-section-number">2.4</span> Completionタブ</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize06.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Show code completion:を<strong>Automatically</strong>に変更する。</li>
+<li>Allow automatic completions in consoleのチェックを<strong>付ける</strong>。</li>
+<li>Insert parentheses after function completionsのチェックを<strong>付ける</strong>。</li>
+<li>Show help tooltip after function completionsのチェックを<strong>付ける</strong>。</li>
+<li>Insert spaces around equals for argument completionsのチェックを<strong>付ける</strong>。</li>
+<li>Use tab for autocompletionのチェックを<strong>付ける</strong>。</li>
+</ul>
+</section>
+</section>
+<section id="console" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="console"><span class="header-section-number">3</span> Console</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize07.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Show syntax highlighting in console inputのチェックを<strong>付ける</strong>。</li>
+</ul>
+</section>
+<section id="appearance" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="appearance"><span class="header-section-number">4</span> Appearance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize08.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>自分の好みのものを選択する。ただし、小さすぎる文字サイズ (font size) は推奨しない。目に優しくないだけでなく、誤字脱字が見つけにくくなる。</li>
+</ul>
+</section>
+<section id="pane-layout" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="pane-layout"><span class="header-section-number">5</span> Pane Layout</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize09.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>左上: Source</li>
+<li>右上: Console</li>
+<li>左下: 全てチェックを<strong>消す</strong>。</li>
+<li>左下: 全てチェックを<strong>付ける</strong>。</li>
+</ul>
+</section>
+<section id="r-markdown" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="r-markdown"><span class="header-section-number">6</span> R Markdown</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Figs/RStudio/Customize10.png" class="img-fluid" width="590"></p>
+</div>
+</div>
+<ul>
+<li>Show output preview in:を<strong>Viewer Pane</strong>に変更する。</li>
+<li>Show output inline for all R Markdown documentsのチェックを<strong>消す</strong>。</li>
+</ul>
+<p>設定が終わったら右下のOK、またはApplyをクリックする。</p>
+
+
+</section>
+</main> <!-- /main -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Jaehyun Song. Powered by <a href="https://quarto.org/" target="_blank">Quarto</a></div>
+  </div>
+</footer>
+
+
+</body></html>

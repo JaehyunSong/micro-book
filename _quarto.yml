@@ -1,0 +1,77 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "MicroAnalysis@Kandai"
+  page-footer: "Copyright 2022, Jaehyun Song. Powered by <a href='https://quarto.org/' target='_blank'>Quarto</a>" 
+  navbar:
+    search: true
+    background: "#4169E1"
+    left:
+      - text: "本講義について"
+        href: about.qmd
+      - sidebar:intro
+      - sidebar:material
+      - sidebar:homework
+      - text: "データ集"
+        href: data.qmd
+      - text: "オンライン分析システムの起動"
+        href: https://jupyter.cs.rcos.nii.ac.jp/
+  sidebar:
+    - id: intro
+      title: "Rの使い方"
+      style: "docked"
+      contents:
+        - intro/install.qmd
+        - intro/rstudio.qmd
+        - intro/project.qmd
+        - intro/file.qmd
+        - text: "パッケージ"
+          href: intro/packages.qmd
+        - intro/homework.qmd
+    - id: material
+      title: "講義資料"
+      style: "docked"
+      contents:
+        - materials/basic.qmd
+        - materials/programming.qmd
+        - materials/rmarkdown.qmd
+        - materials/datatype.qmd
+        - materials/datastructure.qmd
+        - materials/handling1.qmd
+        - materials/handling2.qmd
+        - materials/handling3.qmd
+        - materials/visualization1.qmd
+        - materials/visualization2.qmd
+        - materials/visualization3.qmd
+    - id: homework
+      title: "課題"
+      style: "docked"
+      contents:
+        - text: "第1回課題"
+          href: HW/HW01.qmd
+        - text: "第5回課題"
+          href: HW/HW05.qmd
+        - text: "第7回課題"
+          href: HW/HW07.qmd
+        - text: "第8回課題"
+          href: HW/HW08.qmd
+        - text: "第9回課題"
+          href: HW/HW09.qmd
+        - text: "第10回課題"
+          href: HW/HW10.qmd
+        - text: "第11回課題"
+          href: HW/HW11.qmd
+        - text: "第13回課題"
+          href: HW/HW13.qmd
+        - text: "第14回課題"
+          href: HW/HW14.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+
+

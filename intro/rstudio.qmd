@@ -1,0 +1,128 @@
+---
+title: "RStudioの設定"
+toc: true
+toc-title: "目次"
+number-sections: true
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+　RStudioはそのままでも使えるが、少しカスタマイズするとより使い勝手が良くなる。RStudioのカスタマイズ画面はTools > Global Optionsをクリックすることで表示される。
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize01.png")
+```
+
+　以下の設定はNIIオンライン分析システムで使用可能なRStudio最新版 (RStudio Server 2021.09.1+372)の設定であり、宋の設定と同じである。
+
+## General
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize02.png")
+```
+
+* Restore .RData into workspace at startupのチェックを**消す**。
+* Save workspace to .RData on exit:を**Never**に変更する。
+* Always save history (even when not saving .RData)のチェックを**消す**。
+
+## Code
+
+### Editingタブ
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize03.png")
+```
+
+* Insert spaces for tabのチェックを**付ける**。
+* Tab widthは**2、または4**を指定する。
+* Auto-detect code indentationのチェックを**付ける**。
+* Insert matching parens/quotesのチェックを**付ける**。
+* Auto-indent code after pasteのチェックを**付ける**。
+* Vertically align arguments in auto-indentのチェックを**付ける**。
+* Always save R scripts before sourcingのチェックを**付ける**。
+* Ctrl + Return executes:を**Multi-line R statement**に変更する。
+
+### Displayタブ
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize04.png")
+```
+
+* Highlight selected wordのチェックを**付ける**。
+* Highlight selected lineのチェックを**付ける**。
+* Show line numbersのチェックを**付ける**。
+* Show syntax highlighting in console inputのチェックを**付ける**。
+* Highlight R function callsのチェックを**付ける**。
+* Rainbow parenthesesのチェックを**付ける**。
+
+### Savingタブ
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize05.png")
+```
+
+* Default text encoding:のChangeをクリックし、**UTF-8**を選択する。
+
+### Completionタブ
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize06.png")
+```
+
+* Show code completion:を**Automatically**に変更する。
+* Allow automatic completions in consoleのチェックを**付ける**。
+* Insert parentheses after function completionsのチェックを**付ける**。
+* Show help tooltip after function completionsのチェックを**付ける**。
+* Insert spaces around equals for argument completionsのチェックを**付ける**。
+* Use tab for autocompletionのチェックを**付ける**。
+
+## Console
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize07.png")
+```
+
+* Show syntax highlighting in console inputのチェックを**付ける**。
+
+## Appearance
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize08.png")
+```
+
+* 自分の好みのものを選択する。ただし、小さすぎる文字サイズ (font size) は推奨しない。目に優しくないだけでなく、誤字脱字が見つけにくくなる。
+
+## Pane Layout
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize09.png")
+```
+
+* 左上: Source
+* 右上: Console
+* 左下: 全てチェックを**消す**。
+* 左下: 全てチェックを**付ける**。
+
+## R Markdown
+
+```{r}
+#| fig.height: 1
+knitr::include_graphics("Figs/RStudio/Customize10.png")
+```
+
+* Show output preview in:を**Viewer Pane**に変更する。
+* Show output inline for all R Markdown documentsのチェックを**消す**。
+
+設定が終わったら右下のOK、またはApplyをクリックする。
