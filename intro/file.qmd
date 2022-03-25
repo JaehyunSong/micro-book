@@ -142,6 +142,8 @@ knitr::include_graphics("Figs/Files/File_Upload5.png")
 
 **手順1:** ダウンロードするファイル名の左にチェックを付ける。
 
+* 以下では`Micro_HW01.html`というファイルをダウンロードする例である。
+
 ```{r}
 #| out-width: "700px"
 knitr::include_graphics("Figs/Files/File_Download1.png")
