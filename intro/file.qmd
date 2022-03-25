@@ -28,28 +28,28 @@ knitr::opts_chunk$set(echo      = FALSE,
 
 ```{r}
 #| out-width: "700px"
-knitr::include_graphics("Figs/Files/Folder_create1.png")
+knitr::include_graphics("Figs/Files/Folder_Create1.png")
 ```
 
 **手順2:** New Folderをクリックする。
 
 ```{r}
 #| out-width: "700px"
-knitr::include_graphics("Figs/Files/Folder_create2.png")
+knitr::include_graphics("Figs/Files/Folder_Create2.png")
 ```
 
 **手順3:** 作成するフォルダーの名前を入力する。ここではデータなどを集めておく`Data`という名のフォルダーを作成する。
 
 ```{r}
 #| out-width: "300px"
-knitr::include_graphics("Figs/Files/Folder_create3.png")
+knitr::include_graphics("Figs/Files/Folder_Create3.png")
 ```
 
 **手順4:** 正しくフォルダーが作成されているかを確認する。
 
 ```{r}
 #| out-width: "700px"
-knitr::include_graphics("Figs/Files/Folder_create4.png")
+knitr::include_graphics("Figs/Files/Folder_Create4.png")
 ```
 
 :::{.callout-important}
@@ -70,14 +70,14 @@ knitr::include_graphics("Figs/Files/Folder_create4.png")
 
 ```{r}
 #| out-width: "700px"
-knitr::include_graphics("Figs/Files/Folder_delete1.png")
+knitr::include_graphics("Figs/Files/Folder_Delete1.png")
 ```
 
 **手順2:** Yesをクリックする。
 
 ```{r}
 #| out-width: "300px"
-knitr::include_graphics("Figs/Files/Folder_delete2.png")
+knitr::include_graphics("Figs/Files/Folder_Delete2.png")
 ```
 
 ## ファイルの管理
