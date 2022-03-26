@@ -20,6 +20,11 @@ website:
         href: data.qmd
       - text: "オンライン分析システムの起動"
         href: https://jupyter.cs.rcos.nii.ac.jp/
+    right: 
+      - icon: house-fill
+        href: https://www.jaysong.net
+      - icon: github
+        href: https://github.com/JaehyunSong/micro-book
   sidebar:
     - id: intro
       title: "Rの使い方"
