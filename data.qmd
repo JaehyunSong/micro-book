@@ -15,13 +15,13 @@ toc-title: "目次"
 
 ||ファイル名|備考|
 |:---:|:---|:---|
-|1|<a href = "Data/Pref_Vote.csv" download>`Pref_Vote.csv`</a>|第3回講義で使用|
+|1|<a href = "materials/Data/Pref_Vote.csv" download>`Pref_Vote.csv`</a>|第3回講義で使用|
 
 ## データ説明
 
 ### `Pref_Vote.csv`
 
-* <a href = "Data/Pref_Vote.csv" download>ダウンロード</a>
+* <a href = "materials/Data/Pref_Vote.csv" download>ダウンロード</a>
 
 |変数名|説明|詳細|
 |:---|:---|:---|

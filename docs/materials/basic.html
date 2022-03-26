@@ -77,7 +77,6 @@
   </style>
 
   <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="../site_libs/quarto-nav/headroom.min.js"></script>
   <script src="../site_libs/clipboard/clipboard.min.js"></script>
   <meta name="quarto:offset" content="../">
   <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -261,11 +260,6 @@
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.jaysong.net"><i class="bi bi-house-fill" role="img">
-</i> 
- </a>
-  </li>  
-  <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/JaehyunSong/micro-book"><i class="bi bi-github" role="img">
 </i> 
  </a>
@@ -371,57 +365,75 @@
 
 <section id="電卓としてのr" class="level2">
 <h2 class="anchored" data-anchor-id="電卓としてのr">電卓としてのR</h2>
-<p>File &gt; New File &gt; R Scriptをクリックする。</p>
-<p>Sourceペインを最大化する。</p>
-<p>Sourceに以下の内容を入力する。</p>
-<div class="cell">
+<p><strong>手順1:</strong> File &gt; New File &gt; R Scriptをクリックする。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/03/Script_1.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>手順2:</strong> Sourceペインのペイン最大化ポタンをクリックし、Sourceペインの大きさ最大化する。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figs/03/Script_2.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>手順3:</strong> Sourceペインに以下の内容を入力する。</p>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>コードの行にカーソルをおいたままCmd + Return（Windowsの場合、Control (Ctrl) + Enter）を入力</p>
-<p>Consoleペインに結果が表示される。</p>
-<div class="cell">
+<p><strong>手順4:</strong> コードの行にカーソルをおいたままCmd + Return（Windowsの場合、Control (Ctrl) + Enter）を入力する。これはカーソルが位置する行のコードを実行するコマンドである。</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+カーソルって…?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>カーソル (cursor)とは文字の入力位置を意味する。RStudioのテーマによって色は異なるが、Sourceペイン、またはConsoleペインなど、何らかの文字が入力できる箇所において点滅する「<code>|</code>」がカーソルです。</p>
+</div>
+</div>
+<p><strong>手順5:</strong> Consoleペインに結果が表示される。</p>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
-<p>これくらいの計算はConsoleペインで直接打ち込んでも良いが、自分がこれまで書いたコードを残すという意味でSourceペインに入力することを推奨する。R Scriptを保存しておけばいつでも開いて前回のコードを再現できる。</p>
+<p>　これくらいの計算はConsoleペインで直接打ち込んでも良いが、自分がこれまで書いたコードを残すという意味でSourceペインに入力することを推奨する。R Scriptを保存しておけばいつでも開いて前回のコードを再現できる。</p>
 </section>
 <section id="コメント" class="level2">
 <h2 class="anchored" data-anchor-id="コメント">コメント</h2>
-<p><code>#</code>を使用する。<code>#</code>以降の内容は処理に影響を与えない。</p>
-<p>こまめにコメントを書こう。</p>
+<p>　Rのスクリプトを作成する際、何かのメモを書いておきたいケースが多々ある。コードが長くなったり、複雑になったりすると、自分が書いたコードでも意味がよく分からないケースも多く発生する。これはデータ分析のプロでも例外でなく、宋も同じである。この場合、スクリプト内にこまめにメモを書いておくと、このコードが何のためのコードかなどが素早く把握できる。</p>
+<p>　Rにおけるコメントは<code>#</code>を使用する。同じ行における<code>#</code>以降の内容は処理に影響を与えない。たとえば、以下のコードだと<code># 12345と12345の積</code>は処理に影響を与えない</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 12345と12345の積</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">12345</span> <span class="sc">*</span> <span class="dv">12345</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 152399025</code></pre>
+</div>
+</div>
+<p>　また、コードと同じ行にコメントを書くこともできる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">12345</span> <span class="sc">*</span> <span class="dv">12345</span> <span class="co"># 12345と12345の積</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 152399025</code></pre>
+</div>
+</div>
+<p>　コードにこまめにコメントを書くのは意外と面倒な作業であるが、コメントに「書きすぎ」は存在しない。書けば書くほど未来の自分から感謝されるだろう。</p>
 </section>
 <section id="算術演算子" class="level2">
 <h2 class="anchored" data-anchor-id="算術演算子">算術演算子</h2>
-<ul>
-<li>結果として何らかの<strong>数字</strong>が返される</li>
-<li>累乗（<code>^</code>）を除き、演算子の前後にはスペースを入れるのがRの流儀
-<ul>
-<li>必須ではないが、コードが読みやすくなる</li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">5</span>  <span class="co"># 足し算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">-</span> <span class="dv">10</span> <span class="co"># 引き算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] -7</code></pre>
-</div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span> <span class="sc">*</span> <span class="dv">2</span> <span class="co"># 掛け算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 38</code></pre>
-</div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">/</span> <span class="dv">7</span> <span class="co"># 割り算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 1.857143</code></pre>
-</div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">^</span><span class="dv">3</span>    <span class="co"># 5の3乗</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 125</code></pre>
-</div>
-</div>
+<p>　算術演算子は数字と数字の間に入力し、結果として何らかの<strong>数字</strong>が返される演算子である。先ほどの<code>+</code>や<code>*</code>も算術演算子（足し算と掛け算）である。ここでは良く使う算術演算子7つを紹介する。</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -476,34 +488,54 @@
 </tr>
 </tbody>
 </table>
+<p>　例を見てみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">5</span>  <span class="co"># 足し算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">-</span> <span class="dv">10</span> <span class="co"># 引き算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] -7</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span> <span class="sc">*</span> <span class="dv">2</span> <span class="co"># 掛け算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 38</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">/</span> <span class="dv">7</span> <span class="co"># 割り算</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1.857143</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">^</span><span class="dv">3</span>    <span class="co"># 5の3乗</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 125</code></pre>
+</div>
+</div>
+<p>　これは義務ではないがないが、累乗（<code>^</code>）を除き、演算子の前後にはスペースを入れるのがRの流儀であり、コードが読みやすくなる。以下のコードを比べてみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 読みにくい例</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">3</span><span class="sc">+</span><span class="dv">5</span>)<span class="sc">*</span><span class="dv">4</span>)<span class="sc">+</span>((<span class="dv">5</span><span class="sc">%%</span><span class="dv">2</span>)<span class="sc">+</span><span class="dv">3</span>))<span class="sc">^</span><span class="dv">2</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1296</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 読みやすい例</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">4</span>) <span class="sc">+</span> ((<span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="dv">3</span>))<span class="sc">^</span><span class="dv">2</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1296</code></pre>
+</div>
+</div>
+<p>　結果は同じだが、後者の方が読みやすいだろう。これから紹介する論理演算子でも共通する内容であるが、「累乗（<code>^</code>）を除き、演算子の前後にはスペースを入れる」ことを覚えておこう。ちなみにカッコ（<code>(</code>と<code>)</code>）は演算子ではないため、スペースは不要である。</p>
 </section>
 <section id="論理演算子" class="level2">
 <h2 class="anchored" data-anchor-id="論理演算子">論理演算子</h2>
-<ul>
-<li>真（<code>TRUE</code>）か偽（<code>FALSE</code>）の値を返す演算子</li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">2</span> <span class="co"># 3は2より大きいの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="co"># 5は10と同じか小さいの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">1</span> <span class="co"># 2と3の和は1なの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="co"># 2と2の和は2と2の積と同じなの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-</div>
-<ul>
-<li>「等しい」は<code>=</code>でなく、<code>==</code>であることに注意すること</li>
-</ul>
+<p>　算術演算子は結果として数値が返ってくるが、論理演算子は真（<code>TRUE</code>）か偽（<code>FALSE</code>）のいずれかの値を返す演算子である。ここではまず、大小関係を判定する論理演算子を紹介する。</p>
 <table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 35%">
+<col style="width: 43%">
+<col style="width: 9%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>演算子</th>
@@ -551,29 +583,77 @@
 </tr>
 </tbody>
 </table>
-<p>AND演算子: <code>&amp;</code></p>
-<ul>
-<li><code>&amp;</code>を挟む左右の<strong>両側</strong>が<code>TRUE</code>の場合のみ<code>TRUE</code>を返す</li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">&amp;</span> (<span class="dv">1</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>) <span class="co"># TRUE and FALSEだから</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>　一つ注意すべき点は「等しい」を意味する論理演算子は<code>=</code>でなく、<code>==</code>だということだ<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">2</span> <span class="co"># 3は2より大きいの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="co"># 5は10と同じか小さいの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">1</span> <span class="co"># 2と3の和は1なの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="co"># 2と2の和は2と2の積と同じなの?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-<p>OR演算子: <code>|</code></p>
-<ul>
-<li><code>|</code>を挟む左右の<strong>片側、あるいは両側</strong>が<code>TRUE</code>の場合のみ<code>TRUE</code>を返す</li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|</span> (<span class="dv">1</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>) <span class="co"># TRUE or FALSEだから</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>　算術演算子は一行に何回も使えるが、通常、論理演算子は一行に一つしか使えない。複数の論理演算子を使うためには、<code>&amp;</code>（AND演算子）と<code>|</code>（OR演算子）を使う必要がある。</p>
+<p>　AND演算子<code>&amp;</code>は、<code>&amp;</code>を挟む左右の<strong>両側</strong>が<code>TRUE</code>の場合のみ<code>TRUE</code>を返す演算子である。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="co"># TRUE and FALSEだから... FALSE!</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">6</span>) <span class="co"># TRUE and TRUEだから... TRUE!</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>　OR演算子<code>|</code>は、<code>|</code>を挟む左右の<strong>片側、あるいは両側</strong>が<code>TRUE</code>の場合のみ<code>TRUE</code>を返す論理演算子である。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb33"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="co"># TRUE or FALSEだから... TRUE!</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">6</span>) <span class="co"># TRUE or TRUEだから... TRUE!</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="co"># FALSE or FALSEだから... FALSE!</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>　論理演算子には他にもいくつかあるが、説明は割愛する。</p>
+<ul>
+<li><code>!</code>: 否定演算子（<code>TRUE</code>なら<code>FALSE</code>、<code>FALSE</code>なら<code>TRUE</code>が返ってくる。意外と良く使う）</li>
+<li><code>&amp;&amp;</code>: <code>&amp;</code>と同じ</li>
+<li><code>||</code>: <code>|</code>と同じ</li>
+<li><code>xor()</code>: 排他的論理和（<code>xor(FALSE, TRUE)</code>と<code>xor(TRUE, FALSE)</code>の場合のみ<code>TRUE</code>が返ってくる。論理回路に興味あれば重要な演算子だが、実際に使うケースはあまりない。）</li>
+</ul>
+<p>　論理演算子が活躍するのはデータ加工（データハンドリング）の時である。何かの条件を指定して、その行件に合致するケースのみを抽出する場合は、これらの論理演算子の使用が必須である。</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+マッチング演算子: <code>%in%</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>もう一つ便利な論理演算子としてマッチング演算子<code>%in%</code>がある。これについてはデータハンドリングの講義で解説する。</p>
 </div>
 </div>
 </section>
 <section id="代入とベクトル" class="level2">
 <h2 class="anchored" data-anchor-id="代入とベクトル">代入とベクトル</h2>
+<p>　まず、以下のような例を考えてみよう。</p>
 <ul>
 <li>123454321 <span class="math inline">\(\times\)</span> 2を計算してみよう</li>
 <li>123454321 <span class="math inline">\(\times\)</span> 3を計算してみよう</li>
@@ -581,66 +661,248 @@
 <li>…</li>
 <li>123454321 <span class="math inline">\(\times\)</span> 200を計算してみよう</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">3</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">4</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>(省略)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">198</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">199</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>199行のコードを書く必要がある。</p>
-<p>効率的な方法は?</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>(省略)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">198</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">199</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>　このように199行のコードを書く必要がある。もう少し効率的な方法はないだろうか。まず、この<code>123454321</code>を書く手間をなんとかしてみよう。</p>
 <ul>
-<li><code>123454321</code>をコピーし貼り付けながら計算を繰り返す</li>
-<li><code>123454321</code>に<code>x</code>という名前を付けて、<code>x * 1</code>のように表記する（<strong>ここが重要</strong>）</li>
+<li><strong>方法1:</strong> <code>123454321</code>をコピーし貼り付けながら計算を繰り返す</li>
+<li><strong>方法2:</strong> <code>123454321</code>に<code>x</code>という名前を付けて、<code>x * 1</code>のように表記する（<strong>ここが重要</strong>）</li>
 </ul>
-<p>Rにおいてベクトルはデータの最小単位</p>
+<p>　いずれも有効な方法であるが、方法1には致命的なデメリットがある。それは修正が面倒だという点である。もし「あ、ごめん！123454321じゃなくて、23235211だったわ！コード直してもらえる？」と言われたら、199行のコードをすべて修正する必要がある。一方、方法2を使えば、「<code>123454321</code>に<code>x</code>という名前を付ける」コードのみを修正すれば良い。このように何かの数字、文字列などに名前を付けて後から使えるようにする作業を<strong>代入</strong>（assignment）と呼ぶ。</p>
+<p>　代入の話をする前にRにおけるデータ構造の一種である<strong>ベクトル</strong>（vector）の話をしなければならない。ベクトルは<strong>Rにけるデータの最小単位</strong>である。Rには様々なデータ構造があるが、これらはすべてベクトルの集合と言っても過言ではない。このベクトルには以下のような特徴がある。</p>
+<p><strong>ベクトルの特徴</strong></p>
 <ul>
-<li>ベクトルの特徴</li>
-<li>同じデータ型（数値、文字列など）
-<ul>
-<li>数値と文字列が混在するベクトルは作成不可</li>
-</ul></li>
-<li>長さは1以上
+<li>ベクトルの長さは1以上である。
 <ul>
 <li><code>1</code>や<code>"Cat"</code>は長さ1のベクトル</li>
+<li>長さ1のベクトルは原子ベクトル（atomic vector）とも呼ばれる。</li>
 </ul></li>
-<li>長さ2以上のベクトルは<code>c()</code>関数で作成
+<li>一つのベクトル同じデータ型（数値、文字列など）で構成される。
 <ul>
-<li><code>()</code>の中にベクトルの要素を入力する</li>
+<li>数値と文字列が混在するベクトルは作成できない。</li>
 </ul></li>
 </ul>
-<p>ベクトルの格納</p>
-<ul>
-<li><code>&lt;-</code>演算子で格納
-<ul>
-<li><code>ベクトル名</code>という名前の<strong>オブジェクト（object）</strong>が生成される</li>
-</ul></li>
-<li>格納しない場合、作業環境に保存されず、出力のみ</li>
-</ul>
-<p><code>x</code>という器に6という数字を代入したい場合は<code>x &lt;- 6</code></p>
-<p>ここでの器は「オブジェクト (object)」と呼ばれ、オブジェクトの内容を確認するためにはオブジェクトの名前のみを入力する。</p>
-<div class="cell">
-<div class="sourceCode" id="cb26"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span> <span class="co"># xに123454321を代入</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+データ型? データ構造?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>データ型とデータ構造については今後の講義で解説する。</p>
+</div>
+</div>
+<p>　まずはこの2つだけ覚えておけば問題ない。重要なのはベクトルの作り方であるが、長さ1のベクトルであれば、<code>1</code>、<code>"Cat"</code>などで十分である。もし、ながさ2以上のベクトルを作る場合は<code>c()</code>関数を使う。<code>()</code>内にコンマ区切りの要素 (element)を入れるだけである。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb40"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19861008</span> <span class="co"># 長さ1の数値型ベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 19861008</code></pre>
+</div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1986</span>, <span class="dv">10</span>, <span class="dv">8</span>) <span class="co"># 長さ3の数値型ベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1986   10    8</code></pre>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<code>,</code>の後にはスペースを入れよう！
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>コードの可読性の観点から見ると、<code>c(1986,10,8)</code>より<code>c(1986, 10, 8)</code>の方が読みやすい。</p>
+</div>
+</div>
+<p>　それでは、（原子ベクトルを含む）ベクトルに名前を付ける方法について紹介する。それは代入演算子<code>&lt;-</code>である。<code>x &lt;- 123454321</code>は<code>x</code>という器に<code>123454321</code>という数字を入れることを意味する。ここでいう「器」のことを<strong>オブジェクト</strong>（object）と呼ぶ。オブジェクトに関する説明は今後の講義で解説する。オブジェクトの内容を確認するためにはオブジェクトの名前のみを入力する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb44"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span> <span class="co"># xに123454321を代入</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 123454321</code></pre>
 </div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">35</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 4320901235</code></pre>
 </div>
+<p>　先ほどの作業は以下のように簡略化することができる。</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span> <span class="co"># xに123454321を代入</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>(省略)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">198</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">199</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>　これを使えば、もし修正要請があったとしても<code>x &lt;- 123454321</code>の部分だけ修正すれば良いだろう。ただ、それでも200行のコード（代入で1行、計算で199行）を書くことには代わりがない。これをなんとか出来ないだろうか。以上のコードは1〜3行にまとめることができる。そのためにベクトル同士の計算について考える必要がある。同じ長さのベクトル同士の計算の場合、同じ位置の要素同士の計算が行われる。以下の例を考えてみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb47"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>my_vec1 <span class="sc">*</span> my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  0  2  6  0  5 12</code></pre>
+</div>
+</div>
+<p>　上記のコードは以下のように表すことができる。</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>ベクトル/位置</th>
+<th style="text-align: center;">1番目</th>
+<th style="text-align: center;">2番目</th>
+<th style="text-align: center;">3番目</th>
+<th style="text-align: center;">4番目</th>
+<th style="text-align: center;">5番目</th>
+<th style="text-align: center;">6番目</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>my_vec1</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>my_vec2</code></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td>結果</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">12</td>
+</tr>
+</tbody>
+</table>
+<p>　もし、ベクトルの長さが一致しない場合はどうなるだろうか。この場合、短い方のベクトルが繰り返されることとなり、これを<strong>ベクトル・リサイクル</strong>（vector recycle）と呼ぶ。以下の例では<code>my_vec4</code>の方が短いため、<code>3 * 2</code>までの計算が終わったあと、もう一回<code>my_vec4</code>の1番目の要素、<code>0</code>が使われることになる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb49"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>my_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>my_vec3 <span class="sc">*</span> my_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  0  2  6  0  5 12</code></pre>
+</div>
+</div>
+<p>　このベクトル・リサイクルを利用すれば簡単に199行のコードを簡略化できよう。ただし、2から200まで格納されている長さ199のベクトルを作るのが面倒かも知れない。2, 3, 4, …, 199, 200は公差1の等差数列であり、Rでは<code>seq()</code>関数を使うことで等差数列を簡単に作ることができる。たとえば、2から10までの公差1の等差数列であれば、以下のように作れる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb51"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>) <span class="co"># 2から10までの公差1の等差数列</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>　公差1でなく公差2であれば、<code>by = 1</code>を<code>by = 2</code>に修正する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb53"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>) <span class="co"># 2から10までの公差2の等差数列</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  2  4  6  8 10</code></pre>
+</div>
+</div>
+<p>　また、公差1の等差数列であれば、<code>:</code>演算子を使うこともできる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb55"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># 2から10までの公差1の等差数列</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>　これで199行のコードを簡略化する準備は整った。まずは3行に簡略化した例を見てみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb57"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3行の例</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span> <span class="co"># または、y &lt;- seq(2, 200, by = 1)</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>  [1]   246908642   370362963   493817284   617271605   740725926   864180247
+  [7]   987634568  1111088889  1234543210  1357997531  1481451852  1604906173
+ [13]  1728360494  1851814815  1975269136  2098723457  2222177778  2345632099
+ [19]  2469086420  2592540741  2715995062  2839449383  2962903704  3086358025
+ [25]  3209812346  3333266667  3456720988  3580175309  3703629630  3827083951
+ [31]  3950538272  4073992593  4197446914  4320901235  4444355556  4567809877
+ [37]  4691264198  4814718519  4938172840  5061627161  5185081482  5308535803
+ [43]  5431990124  5555444445  5678898766  5802353087  5925807408  6049261729
+ [49]  6172716050  6296170371  6419624692  6543079013  6666533334  6789987655
+ [55]  6913441976  7036896297  7160350618  7283804939  7407259260  7530713581
+ [61]  7654167902  7777622223  7901076544  8024530865  8147985186  8271439507
+ [67]  8394893828  8518348149  8641802470  8765256791  8888711112  9012165433
+ [73]  9135619754  9259074075  9382528396  9505982717  9629437038  9752891359
+ [79]  9876345680  9999800001 10123254322 10246708643 10370162964 10493617285
+ [85] 10617071606 10740525927 10863980248 10987434569 11110888890 11234343211
+ [91] 11357797532 11481251853 11604706174 11728160495 11851614816 11975069137
+ [97] 12098523458 12221977779 12345432100 12468886421 12592340742 12715795063
+[103] 12839249384 12962703705 13086158026 13209612347 13333066668 13456520989
+[109] 13579975310 13703429631 13826883952 13950338273 14073792594 14197246915
+[115] 14320701236 14444155557 14567609878 14691064199 14814518520 14937972841
+[121] 15061427162 15184881483 15308335804 15431790125 15555244446 15678698767
+[127] 15802153088 15925607409 16049061730 16172516051 16295970372 16419424693
+[133] 16542879014 16666333335 16789787656 16913241977 17036696298 17160150619
+[139] 17283604940 17407059261 17530513582 17653967903 17777422224 17900876545
+[145] 18024330866 18147785187 18271239508 18394693829 18518148150 18641602471
+[151] 18765056792 18888511113 19011965434 19135419755 19258874076 19382328397
+[157] 19505782718 19629237039 19752691360 19876145681 19999600002 20123054323
+[163] 20246508644 20369962965 20493417286 20616871607 20740325928 20863780249
+[169] 20987234570 21110688891 21234143212 21357597533 21481051854 21604506175
+[175] 21727960496 21851414817 21974869138 22098323459 22221777780 22345232101
+[181] 22468686422 22592140743 22715595064 22839049385 22962503706 23085958027
+[187] 23209412348 23332866669 23456320990 23579775311 23703229632 23826683953
+[193] 23950138274 24073592595 24197046916 24320501237 24443955558 24567409879
+[199] 24690864200</code></pre>
+</div>
+</div>
+<p>　これを2行にまとめる場合は、<code>x</code>と<code>y</code>いずれかをベクトルとして格納し、もう片方は格納せずそのまま計算に使う（結果は省略）。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb59"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2行の例 (1)</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb60"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2行の例 (2)</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> x</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>　究極のやり方は<code>x</code>も<code>y</code>も格納せずそのまま使う方法であり、これなら1行にまとめることができる（結果は省略）。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb61"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1行の例</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="表形式データの読み込み" class="level2">
 <h2 class="anchored" data-anchor-id="表形式データの読み込み">表形式データの読み込み</h2>
-<div class="cell">
-<div class="sourceCode" id="cb30"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb62"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode" id="cb31"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb63"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stderr">
 <pre><code>Rows: 47 Columns: 13
 ── Column specification ────────────────────────────────────────────────────────
@@ -652,14 +914,14 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode" id="cb33"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb65"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] "my_data" "x"      </code></pre>
+<pre><code>[1] "my_data" "my_vec1" "my_vec2" "my_vec3" "my_vec4" "x"       "y"      </code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode" id="cb35"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="co"># または、print(my_data)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb67"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="co"># または、print(my_data)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -679,8 +941,8 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 </div>
 <pre><code># … with 37 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
 <p>出力された内容以外にも36行が更にあり、<code>Region2</code>と<code>Region6</code>という名の列もある。もし、20行を出力したい場合は<code>print(オブジェクト名, n = 20)</code>と入力する。</p>
-<div class="cell">
-<div class="sourceCode" id="cb38"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb70"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -709,8 +971,8 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 </div>
 </div>
 <p>最初の6行のみを出力する場合は<code>head()</code>、最後の6行を出力する場合は<code>tail()</code>を使う。</p>
-<div class="cell">
-<div class="sourceCode" id="cb40"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb72"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 6 × 13
      ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -724,8 +986,8 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 # … with 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 6 × 13
      ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -744,7 +1006,13 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 
 
 </section>
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">注</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>他のプログラミング言語の経験があれば分かるだろうが、ほとんどのプログラミング言語において<code>=</code>は「代入」を意味し、Rも例外ではない。ただし、Rにおける代入には<code>=</code>と<code>&lt;-</code>の2つの方法があり、後者が推奨される。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
@@ -824,7 +1092,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Jaehyun Song. Powered by <a href="https://quarto.org/" target="_blank">Quarto</a></div>
+    <div class="nav-footer-left">Copyright 2022, Jaehyun Song. Powered by <a href="https://quarto.org/" target="_blank">Quarto</a></div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.jaysong.net">
+      <i class="bi bi-house-fill" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JaehyunSong">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
   </div>
 </footer>
 
