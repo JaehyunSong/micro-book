@@ -137,7 +137,7 @@
     "href": "intro/install.html#rstudioの起動",
     "title": "Rの導入",
     "section": "3 RStudioの起動",
-    "text": "3 RStudioの起動\n手順1: JupyterHubのホーム画面の右上の「New▼」をクリックし、「RStudio」をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: 以下の画面が表示されたら、RStudioの起動完了である（RStudioの見栄は初期状態の場合、白ベースである）。"
+    "text": "3 RStudioの起動\n手順1: JupyterHubのホーム画面の右上の「New」をクリックし、「RStudio」をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: 以下の画面が表示されたら、RStudioの起動完了である（RStudioの見栄は初期状態の場合、白ベースである）。"
   },
   {
     "objectID": "intro/install.html#rstudioの終了",
