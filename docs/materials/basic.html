@@ -254,13 +254,10 @@
   <li class="nav-item">
     <a class="nav-link" href="../data.html">データ集</a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/">オンライン分析システムの起動</a>
-  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/JaehyunSong/micro-book"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/"><i class="bi bi-graph-up" role="img">
 </i> 
  </a>
   </li>  
@@ -351,8 +348,14 @@
 <li><a href="#コメント" class="nav-link" data-scroll-target="#コメント">コメント</a></li>
 <li><a href="#算術演算子" class="nav-link" data-scroll-target="#算術演算子">算術演算子</a></li>
 <li><a href="#論理演算子" class="nav-link" data-scroll-target="#論理演算子">論理演算子</a></li>
-<li><a href="#代入とベクトル" class="nav-link" data-scroll-target="#代入とベクトル">代入とベクトル</a></li>
+<li><a href="#代入とベクトル" class="nav-link" data-scroll-target="#代入とベクトル">代入とベクトル</a>
+<ul class="collapse">
+<li><a href="#ベクトル" class="nav-link" data-scroll-target="#ベクトル">ベクトル</a></li>
+<li><a href="#ベクトル同士の計算" class="nav-link" data-scroll-target="#ベクトル同士の計算">ベクトル同士の計算</a></li>
+<li><a href="#要素の抽出" class="nav-link" data-scroll-target="#要素の抽出">要素の抽出</a></li>
+</ul></li>
 <li><a href="#表形式データの読み込み" class="nav-link" data-scroll-target="#表形式データの読み込み">表形式データの読み込み</a></li>
+<li><a href="#教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
 </ul>
 </nav>
     </div>
@@ -676,6 +679,8 @@
 <li><strong>方法2:</strong> <code>123454321</code>に<code>x</code>という名前を付けて、<code>x * 1</code>のように表記する（<strong>ここが重要</strong>）</li>
 </ul>
 <p>　いずれも有効な方法であるが、方法1には致命的なデメリットがある。それは修正が面倒だという点である。もし「あ、ごめん！123454321じゃなくて、23235211だったわ！コード直してもらえる？」と言われたら、199行のコードをすべて修正する必要がある。一方、方法2を使えば、「<code>123454321</code>に<code>x</code>という名前を付ける」コードのみを修正すれば良い。このように何かの数字、文字列などに名前を付けて後から使えるようにする作業を<strong>代入</strong>（assignment）と呼ぶ。</p>
+<section id="ベクトル" class="level3">
+<h3 class="anchored" data-anchor-id="ベクトル">ベクトル</h3>
 <p>　代入の話をする前にRにおけるデータ構造の一種である<strong>ベクトル</strong>（vector）の話をしなければならない。ベクトルは<strong>Rにけるデータの最小単位</strong>である。Rには様々なデータ構造があるが、これらはすべてベクトルの集合と言っても過言ではない。このベクトルには以下のような特徴がある。</p>
 <p><strong>ベクトルの特徴</strong></p>
 <ul>
@@ -726,6 +731,9 @@
 <p>コードの可読性の観点から見ると、<code>c(1986,10,8)</code>より<code>c(1986, 10, 8)</code>の方が読みやすい。</p>
 </div>
 </div>
+</section>
+<section id="ベクトル同士の計算" class="level3">
+<h3 class="anchored" data-anchor-id="ベクトル同士の計算">ベクトル同士の計算</h3>
 <p>　それでは、（原子ベクトルを含む）ベクトルに名前を付ける方法について紹介する。それは代入演算子<code>&lt;-</code>である。<code>x &lt;- 123454321</code>は<code>x</code>という器に<code>123454321</code>という数字を入れることを意味する。ここでいう「器」のことを<strong>オブジェクト</strong>（object）と呼ぶ。オブジェクトに関する説明は今後の講義で解説する。オブジェクトの内容を確認するためにはオブジェクトの名前のみを入力する。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb44"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span> <span class="co"># xに123454321を代入</span></span>
@@ -896,32 +904,93 @@
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="要素の抽出" class="level3">
+<h3 class="anchored" data-anchor-id="要素の抽出">要素の抽出</h3>
+<p>　最後にベクトルから任意の要素を抽出する2つの方法について紹介する。</p>
+<p><strong>方法1</strong>: 抽出する要素の位置を指定する。</p>
+<p>　要素の抽出する基本的な方法は<code>ベクトル名[抽出する要素の位置]</code>である。たとえば、<code>my_vec5</code>という11から20までの公差1の等差数列のベクトルがあるとする。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb62"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span> <span class="co"># my_vec &lt;- seq(11, 20, by = 1) と同じ</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+</div>
+<p>　この<code>my_vec5</code>から3番目の要素は13であり、この値を抽出するためには<code>my_vec5[3]</code>と入力する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb64"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>my_vec5[<span class="dv">3</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+</div>
+<p>　複数の要素を抽出したい場合は、<code>[]</code>内にベクトルを入れる。たとえば、<code>my_vec5</code>から2、3、4、5番目の要素を抽出する場合は、<code>[]</code>内に<code>c(2, 3, 4, 5)</code>を入力する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb66"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>my_vec5[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+</div>
+<p>　この<code>c(2, 3, 4, 5)</code>は2から5までの公差1の等差数列であるため、<code>c(2, 3, 4, 5)</code>の代わりに<code>seq(2, 5, by = 1)</code>を使用しても良い。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb68"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>my_vec5[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+</div>
+<p>　むろん、公差1の等差数列を使う<code>:</code>を使用し、<code>[]</code>内に<code>2:5</code>を指定した方がより効率的であろう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb70"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>my_vec5[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+</div>
+<p><strong>方法2</strong>: 論理演算子を利用する。</p>
+<p>　もう一つは<code>[]</code>内に<code>TRUE</code>か<code>FALSE</code>を入れる方法である。位置を指定す方法では抽出したい要素の位置のみを指定するだけであったが、この方法はすべての要素に対して、抽出するか（<code>TRUE</code>）しないか（<code>FALSE</code>）を指定する必要がある。たとえば、<code>my_vec5</code>の1、4、7、9、10番目の要素を抽出したい場合は<code>my_vec5[c(1, 4, 7, 9, 10)]</code>でも良いが、以下のように抽出する箇所に<code>TRUE</code>、抽出しない箇所に<code>FALSE</code>を指定することもできる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb72"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>my_vec5[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 11 14 17 19 20</code></pre>
+</div>
+</div>
+<p>　<code>[]</code>内にベクトルの長さ分のベクトルを更に入力する必要がある。<code>my_vec5</code>のように長さ10のベクトルなら問題ないだろうが、長さが数千のベクトルも稀ではない。これを考えると、一つ一つの要素に対して<code>TRUE</code>、<code>FALSE</code>を指定することは非効率的である。</p>
+<p>　しかし、我々はすでに論理演算子を使えば<code>TRUE</code>、または<code>FALSE</code>のベクトルを作れることを知っている。たとえば、<code>my_vec5</code>から奇数のみを抽出したいとする。奇数は2で割って1が余る数字である。余りを計算する算術演算子は<code>%%</code>であり、この余りが1かどうかを判定すれば良い。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
+</div>
+</div>
+<p>　この論理演算子が含まれた判定文を<code>[]</code>内に入れることで、<code>my_vec5</code>から奇数のみを抽出することができる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb76"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>my_vec5[my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 11 13 15 17 19</code></pre>
+</div>
+</div>
+</section>
+</section>
 <section id="表形式データの読み込み" class="level2">
 <h2 class="anchored" data-anchor-id="表形式データの読み込み">表形式データの読み込み</h2>
+<p>　データ分析に用いられるデータの形式は表、文字列、画像、音声など様々であるが、本講義では表形式のデータのみを扱う。ここでは表形式データの読み込み方法について紹介する。表形式データにはエクセル形式（<code>.xlsx</code>）がおなじみであろうが、データ分析の業界においてはカンマ区切る形式（<code>.csv</code>）が標準である。</p>
+<p>　csvファイルの読み込みにはR内蔵関数<code>read.csv()</code>関数が使えるが、本講義では{tidyverse}パッケージが提供する<code>read_csv()</code>関数を使用する。データ読み込みの前にまず{tidyverse}パッケージを読み込む。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb62"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>　読み込み方法は<code>read_csv("読み込むファイルのパス")</code>である。プロジェクト・フォルダー内に<code>Data</code>フォルダーがあり、そこに<code>Pref_Vote.csv</code>というファイルがあれば、<code>read_csv("Data/Pref_Vote.csv")</code>となる。もし、プロジェクト・フォルダー直にデータが入っているのであれば、<code>read_csv("Pref_Vote.csv")</code>となる。ただし、<code>read_csv()</code>だけだとデータの中身が出力されるだけであり、作業環境内に格納されない。代入演算子<code>&lt;-</code>を使って作業環境内にデータを入れておく必要がある。ここでは<code>my_data</code>という名のオブジェクトを作成する。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb63"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stderr">
-<pre><code>Rows: 47 Columns: 13
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (1): Pref
-dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>　ちなみに現在の作業環境内に、どのようなオブジェクトが存在するかを確認するためにはConsoleペイン上で<code>ls()</code>を入力する<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb65"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] "my_data" "my_vec1" "my_vec2" "my_vec3" "my_vec4" "x"       "y"      </code></pre>
+<pre><code>[1] "my_data" "my_vec1" "my_vec2" "my_vec3" "my_vec4" "my_vec5" "x"      
+[8] "y"      </code></pre>
 </div>
 </div>
+<p>　問題なく<code>my_data</code>というオブジェクトが生成されていることが分かる。それではデータの中身を確認してみよう。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb67"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="co"># または、print(my_data)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="co"># または、print(my_data)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -939,10 +1008,14 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 # … with 37 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<p>　この画面からデータの中身以外にもいくつかの情報が読み取れる。たとえば、1行目には以下のような内容が入っている。</p>
+<pre><code># A tibble: 47 × 13</code></pre>
+<p>　これは47行13列のデータであることを意味する。しかし、数えてみれば、どうみても47行13列には見えない。見えるのは10行11列のみである。ちなみに、自分が使用するPCのモニターが大きいか、文字の大きさが小さい場合は最初から13列が表示される場合もあり、11列より少なく表示される場合もある。表示しきれなかったものについては一番下の行を参照すれば良い。</p>
 <pre><code># … with 37 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
-<p>出力された内容以外にも36行が更にあり、<code>Region2</code>と<code>Region6</code>という名の列もある。もし、20行を出力したい場合は<code>print(オブジェクト名, n = 20)</code>と入力する。</p>
+<p>　これは出力された内容以外にも36行が更にあり（つまり、36行は省略されているだけである）、<code>Region2</code>と<code>Region6</code>という名の列も更にあることを意味する。データは問題なく47行13列であることが分かる。</p>
+<p>　もし、20行を出力したい場合は<code>print(オブジェクト名, n = 20)</code>と入力する。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb70"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -970,9 +1043,10 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 # … with 27 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>最初の6行のみを出力する場合は<code>head()</code>、最後の6行を出力する場合は<code>tail()</code>を使う。</p>
+<p>　最初の6行のみを出力する場合は<code>head()</code>、最後の6行を出力する場合は<code>tail()</code>を使う。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb72"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_dataの最初の6行を出力</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data) <span class="co"># print(my_data, n = 6) と同じ </span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 6 × 13
      ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -987,7 +1061,7 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb74"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(my_data) <span class="co"># my_dataの最後の6行を出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 6 × 13
      ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -1001,7 +1075,15 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 # … with 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>6行でなく、任意の行数を指定したい場合は<code>head()</code>、または<code>tail()</code>内に<code>n = ...</code>を追加する。</p>
+<p>　6行でなく、任意の行数を指定したい場合は<code>head()</code>、または<code>tail()</code>内に<code>n = ...</code>を追加する。このような表形式のデータをRでは<strong>データフレーム</strong>（data.frame）と呼び、ベクトル、リストと共に最も頻繁に使うデータ構造である。これらについては「<a href="datastructure.html">第8回: データ構造</a>」で解説する。</p>
+</section>
+<section id="教科書" class="level2">
+<h2 class="anchored" data-anchor-id="教科書">教科書</h2>
+<ul>
+<li>『私たちのR: ベストプラクティスの探求』<a href="https://www.jaysong.net/RBook/rbasic.html">第6章: 基本的な操作</a></li>
+<li>『私たちのR: ベストプラクティスの探求』<a href="https://www.jaysong.net/RBook/datastructure.html#structure-vector">第8章: データ構造 (第2節)</a></li>
+<li>『私たちのR: ベストプラクティスの探求』<a href="https://www.jaysong.net/RBook/io.html">第7章: データの入出力</a></li>
+</ul>
 
 
 
@@ -1011,6 +1093,7 @@ dbl (12): ID, Zaisei, Over65, Under30, Jimin, Minshin, Komei, Kyosan, Ishin,...
 
 <ol>
 <li id="fn1" role="doc-endnote"><p>他のプログラミング言語の経験があれば分かるだろうが、ほとんどのプログラミング言語において<code>=</code>は「代入」を意味し、Rも例外ではない。ただし、Rにおける代入には<code>=</code>と<code>&lt;-</code>の2つの方法があり、後者が推奨される。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>実は数戦以上のオブジェクトがあるはずだが、ここでは自分が作成したオブジェクトのみ表示される。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script type="application/javascript">
@@ -1092,7 +1175,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2022, Jaehyun Song. Powered by <a href="https://quarto.org/" target="_blank">Quarto</a></div>   
+    <div class="nav-footer-left">Copyright 2022, <a href="https://www.jaysong.net" target="_blank">Jaehyun Song</a>. Powered by <a href="https://quarto.org/" target="_blank">Quarto</a></div>   
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

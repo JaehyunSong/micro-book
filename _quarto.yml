@@ -7,7 +7,7 @@ language: translate_jp.yml
 website:
   title: "MicroAnalysis@Kandai"
   page-footer: 
-    left: "Copyright 2022, Jaehyun Song. Powered by <a href='https://quarto.org/' target='_blank'>Quarto</a>" 
+    left: "Copyright 2022, <a href='https://www.jaysong.net' target='_blank'>Jaehyun Song</a>. Powered by <a href='https://quarto.org/' target='_blank'>Quarto</a>" 
     right:
       - icon: house-fill
         href: https://www.jaysong.net
@@ -25,11 +25,9 @@ website:
       - sidebar:homework
       - text: "データ集"
         href: data.qmd
-      - text: "オンライン分析システムの起動"
-        href: https://jupyter.cs.rcos.nii.ac.jp/
     right: 
-      - icon: github
-        href: https://github.com/JaehyunSong/micro-book
+      - icon: graph-up
+        href: https://jupyter.cs.rcos.nii.ac.jp/
   sidebar:
     - id: intro
       title: "Rの使い方"
