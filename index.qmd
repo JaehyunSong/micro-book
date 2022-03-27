@@ -4,10 +4,11 @@ title: "ミクロ政治データ分析実習"
 
 本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。
 
-* NIIオンライン分析システムを起動するためには右上の<a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank"><i class="bi bi-graph-up"></i></a>ボタンをクリックしてください。
+* NIIオンライン分析システムを起動するためには右上の <a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank"><i class="bi bi-terminal"></i></a> ボタンをクリックしてください。
    * 右クリックし、新しいタブ（or ウィンドウ）で開いてください。
    * 初期設定が必要です。初期設定の方法はRの使い方 > [Rの導入](intro/install.html)を参照してください。
-* 右上の<i class="bi bi-search"></i>から本ページ内の検索が出来ます。
+* 右上の <a href="https://www.jaysong.net/RBook/" target="_blank"><i class="bi bi-book"></i></a> ボタンから本講義の教科書ページへ移動できます。   
+* 右上の <i class="bi bi-search"></i> から本ページ内の検索が出来ます。
 
 :::{.callout-note}
 ## ページ情報

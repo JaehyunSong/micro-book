@@ -64,7 +64,7 @@ knitr::include_graphics("Figs/Install/Jupyterhub_home.png")
 
 初期設定が終わったら、今後、以下の手順でNIIオンライン分析システムを起動する。
 
-**手順1:** 以下のアドレスにアクセスするか、本ページの右上にある右上の<a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank"><i class="bi bi-graph-up"></i></a>ボタンをクリックする。
+**手順1:** 以下のアドレスにアクセスするか、本ページの右上にある右上の <a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank"><i class="bi bi-terminal"></i></a> ボタンをクリックする（右クリックし、新しいタブ or ウィンドウで開くことを推奨する）。
 
 * <a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank">https://jupyter.cs.rcos.nii.ac.jp/</a>
 

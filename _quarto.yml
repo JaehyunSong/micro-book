@@ -27,7 +27,7 @@ website:
       - text: "データ集"
         href: data.qmd
     right: 
-      - icon: graph-up
+      - icon: terminal
         href: https://jupyter.cs.rcos.nii.ac.jp/
       - icon: book
         href: https://www.jaysong.net/RBook/
