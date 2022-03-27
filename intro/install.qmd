@@ -6,7 +6,8 @@ number-sections: true
 
 ```{r}
 #| include: false
-knitr::opts_chunk$set(fig.align = "center")
+knitr::opts_chunk$set(echo      = FALSE,
+                      fig.align = "center")
 ```
 
 ## 初期設定
@@ -23,33 +24,39 @@ knitr::opts_chunk$set(fig.align = "center")
 
 **手順2:** 所属機関に「関西大学」、または「Kansai University」を入力・選択し、「選択」をクリックする。このような画面が表示されない場合は手順2から5は飛ばしても良い。
 
-![](Figs/Install/iDP_select.png)
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("Figs/Install/iDP_select.png")
+```
 
 **手順3:** 自分の関西大学のIDをパスワードを入力する。こちらのIDとパスワードは関西大学インフォメーション・システムおよびLMSのID/パスワードと同じである。
 
 ```{r}
-#| echo: false
-#| fig-width: 4
-#| fig-align: "center"
+#| out-width: "400px"
 knitr::include_graphics("Figs/Install/Kandai_Login.png")
 ```
 
 **手順4:** このまま「同意します」をクリックする。
 
 ```{r}
-#| echo: false
-#| fig-width: 5
-#| fig-align: "center"
+#| out-width: "500px"
 knitr::include_graphics("Figs/Install/Gakunin_agreement.png")
 ```
 
 **手順5:** 以下のような画面が表示されたらしばらく待つ。
 
-![](Figs/Install/Binder_Setup.png)
+```{r}
+#| out-width: "700px"
+knitr::include_graphics("Figs/Install/Binder_Setup.png")
+```
+
 
 **手順6:** 以下のような画面が表示されたら初期設定は完了
 
-![](Figs/Install/Jupyterhub_home.png)
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("Figs/Install/Jupyterhub_home.png")
+```
 
 **手順7:** 初期設定が終わったら、すぐRおよびRStudioが利用可能だが、ここでは一旦右上の「Logout」をクリックし、タブ (or ウィンドウ) を閉じる。
 
@@ -67,38 +74,47 @@ knitr::include_graphics("Figs/Install/Gakunin_agreement.png")
 
 * 参考) 初期設定を1回のみ行ったら1行のみ表示されるため混同することはないが、個人利用などを目的に初期設定を複数回行った場合は2行以上が表示されるだろう。本講義に使うサーバーのURLをクリックすること。
 
-![](Figs/Install/Jupyterhub_serverlist.png)
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("Figs/Install/Jupyterhub_serverlist.png")
+```
 
 **手順4:** 以下のような画面が表示されたらNIIオンライン分析システムの起動完了である。この画面を今後、「JupyterHub（ジュピターハブ）のホーム画面」と呼ぶ。
 
-![](Figs/Install/Jupyterhub_home.png)
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("Figs/Install/Jupyterhub_home.png")
+```
 
 ## RStudioの起動
 
 **手順1:** JupyterHubのホーム画面の右上の「New▼」をクリックし、「RStudio」をクリックする。
 
-![](Figs/Install/RStudio_launch.png)
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("Figs/Install/RStudio_launch.png")
+```
 
 **手順2:** 以下の画面が表示されたら、RStudioの起動完了である（RStudioの見栄は初期状態の場合、白ベースである）。
 
-![](Figs/Install/RStudio_home.png)
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("Figs/Install/RStudio_home.png")
+```
+
 
 ## RStudioの終了
 
 **手順1:** RStudio画面右上のオレンジ色のボタンをクリックする。
 
 ```{r}
-#| echo: false
-#| fig-width: 3.5
-#| fig-align: "center"
+#| out-width: "300px"
 knitr::include_graphics("Figs/Install/RStudio_logout1.png")
 ```
 
 **手順2:** 以下のダイアログが表示されたらタブ、またはウィンドウを閉じる。
 
 ```{r}
-#| echo: false
-#| fig-width: 5
-#| fig-align: "center"
+#| out-width: "450px"
 knitr::include_graphics("Figs/Install/RStudio_logout2.png")
 ```
