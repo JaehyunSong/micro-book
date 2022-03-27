@@ -15,6 +15,7 @@ title: "ミクロ政治データ分析実習"
 
 * 最終更新日: `r format(Sys.Date(), "%Y年%m月%d日")`
 * 開発環境
+   * macOS 12.3 "Monterey"
    * `r version$version.string`
    * RStudio 2022.02.0+442 "Prairie Trillium"
    * Quarto `r quarto::quarto_inspect()$quarto$version`
