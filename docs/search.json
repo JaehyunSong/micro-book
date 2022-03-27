@@ -326,6 +326,6 @@
     "href": "data.html#データ説明",
     "title": "実習用データ集",
     "section": "データ説明",
-    "text": "データ説明\n\nPref_Vote.csv\n\nダウンロード\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n\n\n\n\nUnder30\n\n\n\n\nJimin\n自民党の得票率\n\n\n\nMinshin\n\n\n\n\nKomei\n\n\n\n\nKyosan\n\n\n\n\nIshin\n\n\n\n\nShamin\n\n\n\n\nRegion2\n\n1 = 東日本; 2 = 西日本\n\n\nRegion6"
+    "text": "データ説明\n\nPref_Vote.csv\n\n\n\n\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n65歳以上人口の割合\n(%)\n\n\nUnder30\n30歳未満人口の割合\n(%)\n\n\nJimin\n自民党の得票率\n比例区; (%)\n\n\nMinshin\n民進党の得票率\n比例区; (%)\n\n\nKomei\n公明党の得票率\n比例区; (%)\n\n\nKyosan\n共産党の得票率\n比例区; (%)\n\n\nIshin\n維新の得票率\n比例区; (%)\n\n\nShamin\n社民党の得票率\n比例区; (%)\n\n\nRegion2\n地域区分\n1 = 東日本; 2 = 西日本\n\n\nRegion6\n地域区分\n1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄"
   }
 ]
