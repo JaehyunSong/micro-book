@@ -57,7 +57,7 @@ knitr::include_graphics("Figs/Install/Gakunin_agreement.png")
 
 初期設定が終わったら、今後、以下の手順でNIIオンライン分析システムを起動する。
 
-**手順1:** 以下のアドレスにアクセスするか、本ページの上のある「オンライン分析システムの起動」をクリックする。
+**手順1:** 以下のアドレスにアクセスするか、本ページの右上にある右上の<a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank"><i class="bi bi-graph-up"></i></a>ボタンをクリックする。
 
 * <a href="https://jupyter.cs.rcos.nii.ac.jp/" target="_blank">https://jupyter.cs.rcos.nii.ac.jp/</a>
 
