@@ -256,7 +256,7 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "NIIオンライン分析システムを起動するためには右上の  ボタンをクリックしてください。\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n右上の  ボタンから本講義の教科書ページへ移動できます。\n\n右上の  から本ページ内の検索が出来ます。\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月27日\n開発環境\n\nmacOS 12.3 “Monterey”\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.135\nR package {quarto} 1.1"
+    "text": "アイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月27日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.135\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html",

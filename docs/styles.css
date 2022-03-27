@@ -3,6 +3,18 @@ a {
     text-decoration:none; 
 }
 
-ul {
+ul > li > ul {
+  margin-bottom: 0px;
+}
+
+ul > li > ul > li > ul {
+  margin-bottom: 0px;
+}
+
+ol > li > ol {
+  margin-bottom: 0px;
+}
+
+ol > li > ul {
   margin-bottom: 0px;
 }
