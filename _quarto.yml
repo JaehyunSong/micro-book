@@ -29,6 +29,8 @@ website:
     right: 
       - icon: graph-up
         href: https://jupyter.cs.rcos.nii.ac.jp/
+      - icon: book
+        href: https://www.jaysong.net/RBook/
   sidebar:
     - id: intro
       title: "Rの使い方"
