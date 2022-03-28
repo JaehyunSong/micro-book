@@ -47,23 +47,23 @@ website:
       title: "講義資料"
       style: "docked"
       contents:
-        - materials/basic.qmd
-        - materials/programming.qmd
-        - materials/rmarkdown.qmd
-        - materials/datatype.qmd
-        - materials/datastructure.qmd
-        - materials/handling1.qmd
-        - materials/handling2.qmd
-        - materials/handling3.qmd
-        - materials/visualization1.qmd
-        - materials/visualization2.qmd
-        - materials/visualization3.qmd
+        - materials/introduction.qmd      # 第 1回
+        - materials/install.qmd           # 第 2回
+        - materials/basic.qmd             # 第 3回
+        - materials/programming.qmd       # 第 4回
+        - materials/rmarkdown.qmd         # 第 5回
+        - materials/datatype.qmd          # 第 7回
+        - materials/datastructure.qmd     # 第 8回
+        - materials/handling1.qmd         # 第 9回
+        - materials/handling2.qmd         # 第10回
+        - materials/handling3.qmd         # 第11回
+        - materials/visualization1.qmd    # 第12回
+        - materials/visualization2.qmd    # 第13回
+        - materials/visualization3.qmd    # 第14回
     - id: homework
       title: "課題"
       style: "docked"
       contents:
-        - text: "第1回課題"
-          href: HW/HW01.qmd
         - text: "第5回課題"
           href: HW/HW05.qmd
         - text: "第7回課題"

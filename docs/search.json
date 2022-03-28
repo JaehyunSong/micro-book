@@ -28,6 +28,13 @@
     "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』の第21章: R Markdown [基礎]"
   },
   {
+    "objectID": "materials/install.html#スライド",
+    "href": "materials/install.html#スライド",
+    "title": "第2回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
+  },
+  {
     "objectID": "materials/datatype.html#データ型とは",
     "href": "materials/datatype.html#データ型とは",
     "title": "第7回講義資料",
@@ -75,6 +82,13 @@
     "title": "第7回講義資料",
     "section": "欠損値",
     "text": "欠損値\nデータ分析において頻繁に遭遇するのはNA\n参考\n\nNA: 何らかの値があるはずだが、欠損している状態\n\n「欠損値」とも呼ばれる\n多くのデータには欠損値が含まれているため、欠損値処理は非常に重要\n\nNULL: そもそも存在しない\nNaN: 計算不可（例: 0 \\(\\div\\) 0）\nInf: 無限大（例: 10 \\(\\div\\) 0）\n\nNaNとInfのベクトルを作ることも可能であるが、使う機会はない * 計算された結果としてNaNとInfの意味が分かれば問題なし\n\nNAとNULLの違い\nNAは要素扱いだが、NULLはカウントされない\n\nNA_Vec   <- c(1, 2, 3, NA, 5, NA, 7)\nNULL_Vec <- c(1, 2, 3, NULL, 5, NULL, 7)\nlength(NA_Vec)\n\n[1] 7\n\nlength(NULL_Vec)\n\n[1] 5\n\nNA_Vec\n\n[1]  1  2  3 NA  5 NA  7\n\nNULL_Vec\n\n[1] 1 2 3 5 7\n\n\n\n\n欠損値を含むベクトルの計算\nベクトルに欠損値が含まれている場合、平均値（mean()）、標準偏差（sd()）などの計算ができないことに注意 * NAが含まれているベクトルの平均値、標準偏差、分散などはNAと出力される * length()などは機能する\n\nmean(NA_Vec)\n\n[1] NA\n\n\n\n\n欠損値を含むベクトルの計算（１）\n\n方法1: データから欠損値を除外する\n\n!演算子は否定を意味する（第3回参照）\nちなみに、NA_Vec == NA、NA_Vec != NAは使用不可\n\n\n\nis.na(NA_Vec) # 各要素がNAか否かを判定\n\n[1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE\n\n!is.na(NA_Vec) # 各要素がNAか否かの判定を反転\n\n[1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE\n\nNA_Vec[!is.na(NA_Vec)] # 欠損値でない要素のみ抽出\n\n[1] 1 2 3 5 7\n\nmean(NA_Vec[!is.na(NA_Vec)])\n\n[1] 3.6\n\n\n\n方法2: 関数内にna.rm = TRUEを追加する\n\nna.rmはmean()関数の仮引数(かりひきすう)であり、TRUEは仮引数(じつひきすう)と呼ぶ。合わせて引数(ひきすう)\n通常、関数には様々な引数が用意されている。Rコンソール上で?関数名を入力するとヘルプが読める（例: ?mean）\n\n\n\nmean(NA_Vec, na.rm = TRUE)\n\n[1] 3.6"
+  },
+  {
+    "objectID": "materials/introduction.html#スライド",
+    "href": "materials/introduction.html#スライド",
+    "title": "第1回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
   },
   {
     "objectID": "materials/basic.html#電卓としてのr",
@@ -126,11 +140,81 @@
     "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』第6章: 基本的な操作\n『私たちのR: ベストプラクティスの探求』第9章: データ構造（第2節）\n『私たちのR: ベストプラクティスの探求』第7章: データの入出力\n『私たちのR: ベストプラクティスの探求』第8章: データ型（第3節）"
   },
   {
-    "objectID": "HW/HW01.html",
-    "href": "HW/HW01.html",
-    "title": "「ミクロ政治データ分析実習」第1回課題",
-    "section": "",
-    "text": "課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）"
+    "objectID": "slide/slide01.html#講義概要",
+    "href": "slide/slide01.html#講義概要",
+    "title": "ミクロ政治データ分析実習",
+    "section": "講義概要",
+    "text": "講義概要\n\n\n\n\n講義日: 木曜日 第4時限（14:40～16:10）\n場所: TC304教室（高槻キャンパス C棟 304教室）\n講義内容: Rの使い方\n\nRの基本的な操作 & R Markdown\nデータの入出力\nデータのハンドリング（前処理）\nデータの可視化\n\n統計学、確率、多変量解析、因果推論の授業ではない。\n\nデータ分析の手法は後期の「マクロ政治データ分析実習」\n後期の授業ではRの使い方について解説しない。\n\n到達目標: Rを用いたデータ分析の教科書が読める土台づくり"
+  },
+  {
+    "objectID": "slide/slide01.html#講義内容予定",
+    "href": "slide/slide01.html#講義内容予定",
+    "title": "ミクロ政治データ分析実習",
+    "section": "講義内容（予定）",
+    "text": "講義内容（予定）\n\n第1回 イントロダクション\n第2回 RとIDEの導入\n第3回 Rの基本的な操作\n第4回 プログラミングの基本的な概念\n第5回 R Markdownと再現可能な研究\n第6回 データ収集\n第7回 データ型\n第8回 データ構造\n第9回 データハンドリング（1）\n第10回 データハンドリング（2）\n第11回 データハンドリング（3）\n第12回 可視化（1）\n第13回 可視化（2）\n第14回 可視化（3）\n第15回 期末テスト"
+  },
+  {
+    "objectID": "slide/slide01.html#参考-マクロ政治データ分析実習の内容-予定",
+    "href": "slide/slide01.html#参考-マクロ政治データ分析実習の内容-予定",
+    "title": "ミクロ政治データ分析実習",
+    "section": "参考) マクロ政治データ分析実習の内容 (予定)",
+    "text": "参考) マクロ政治データ分析実習の内容 (予定)\n\nリサーチデザイン\n記述統計\n統計的推定\n統計的仮説検定\n変数間の関係 ( \\(t\\) 検定、 \\(\\chi^2\\) 検定、相関分析)\n(線形) 回帰分析\n交互作用\nロジスティック回帰分析\n分析結果の可視化"
+  },
+  {
+    "objectID": "slide/slide01.html#本講義の位置づけ",
+    "href": "slide/slide01.html#本講義の位置づけ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "本講義の位置づけ",
+    "text": "本講義の位置づけ\nデータの分析単位として「ミクロ」と「マクロ」\n\nミクロデータ（個票データ）\n\n主に個人データ\n\nマクロデータ（集計データ）\n\n国家、市区町村、選挙区など\nミクロにおける主体（たとえば、人）の集合\n\n\n分析における「ミクロ」と「マクロ」\n\n「ミクロ」のための手法、「マクロ」のための手法の区別はほぼない\n\nほとんどぼ分析手法はミクロ、マクロ区別なく使用\n\n計量分析の主なツールでとしてR: 敷居が高い\n\nミクロ政治データ分析演習\n\nツールの使い方を習得してから具体的な分析手法へ\n\nマクロ政治データ分析演習"
+  },
+  {
+    "objectID": "slide/slide01.html#前提知識",
+    "href": "slide/slide01.html#前提知識",
+    "title": "ミクロ政治データ分析実習",
+    "section": "前提知識",
+    "text": "前提知識\n\nファイル・システムの理解\n\nフォルダー (ディレクトリ)の概念\nC:/AAA/BBB/CCC.txtや~/AAA/BBB/CCC.textの意味が理解できること\n\nブラインド・タッチ (重要)\n\n期末レポートは第15回の授業中に執筆する。\nタイピングが遅いと、時間内に期末レポートの完成ができない。\n第15回の授業までにブラインドタッチの練習を推奨\nこの授業に限らず、現代社会で極めて重要なスキル"
+  },
+  {
+    "objectID": "slide/slide01.html#教科書",
+    "href": "slide/slide01.html#教科書",
+    "title": "ミクロ政治データ分析実習",
+    "section": "教科書",
+    "text": "教科書\nSong Jaehyun・矢内勇生.『私たちのR: ベストプラクティスの探求』Web-book\n\n本講義内容を200%カバーする\n無料 (https://www.jaysong.net/RBook)"
+  },
+  {
+    "objectID": "slide/slide01.html#教科書と本講義の位置づけ",
+    "href": "slide/slide01.html#教科書と本講義の位置づけ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "教科書と本講義の位置づけ",
+    "text": "教科書と本講義の位置づけ\n章立ては予告なく変更される可能性がある。\n\nRとIDEの導入: 第1〜5章\nRの基本的な操作: 第6、7章\nR Markdownと再現可能な研究: 第21章\nデータ型とデータ構造: 第8、9章\nRプログラミング基礎: 第10、11章\nデータハンドリング: 第12〜15章\n可視化: 第17〜20章"
+  },
+  {
+    "objectID": "slide/slide01.html#参考書",
+    "href": "slide/slide01.html#参考書",
+    "title": "ミクロ政治データ分析実習",
+    "section": "参考書",
+    "text": "参考書\n\n松村優哉 他. 2021. 『改訂2版 RユーザのためのRStudio[実践]入門』技術評論社\nGarrett Grolemund and Hadley Wickham. 2017. R for Data Science. O’Reilly.\n\n邦訳『Rではじめるデータサイエンス』(原著は無料: https://r4ds.had.co.nz/)\n\nJared P. Lander. 2018. R for Everyone. Addison-Wesley Professional.\n\n邦訳『みんなのR』"
+  },
+  {
+    "objectID": "slide/slide01.html#成績評価",
+    "href": "slide/slide01.html#成績評価",
+    "title": "ミクロ政治データ分析実習",
+    "section": "成績評価",
+    "text": "成績評価\n\n平常点 (20%)\n\n学生証を持参すること\n欠席4回以上は評価の対象外（3回まで評価対象）\n\n課題 (50%)\n\n計8〜9回の課題を予定\n未提出4回以上は評価の対象外（3回まで評価対象）\n課題提出期限の延長はない (提出までの期間が長めであるため)\n\n提出期限は次回講義の前日23時59分まで\n期限内に提出出来なかった場合でも宋に連絡する必要はない (どうせ延ばしてくれない)。\n\n不正行為厳禁\n\n期末レポート (30%)\n\n第15回の授業内 + 持ち帰りで期末レポートを執筆\n\n授業内で完成した分を提出し、残りを持ち帰りで執筆して再提出。\n\n未提出者は評価の対象外\n不正行為厳禁"
+  },
+  {
+    "objectID": "slide/slide01.html#オフィスアワー",
+    "href": "slide/slide01.html#オフィスアワー",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オフィス・アワー",
+    "text": "オフィス・アワー\n宋、またはTAが研究室に待機し、事前予約なしに相談、質問などが可能な時間\n\n毎週火・木曜日3限 (13:00〜14:30)\n\n火曜日は宋、木曜日はTAが対応（宋は木3に授業がある）\n上記の時間外は事前予約が必要（メール、対面）\nメール: song@kansai-u.ac.jp\n\n場所：TA227研究室（A棟の2階）"
+  },
+  {
+    "objectID": "slide/slide01.html#課題",
+    "href": "slide/slide01.html#課題",
+    "title": "ミクロ政治データ分析実習",
+    "section": "課題",
+    "text": "課題\n課題の遂行有無は確認しない（履修者の良心に任せる）。\n課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
     "objectID": "intro/file.html#フォルダーの管理",
@@ -383,5 +467,12 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\n\n\n\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n65歳以上人口の割合\n(%)\n\n\nUnder30\n30歳未満人口の割合\n(%)\n\n\nJimin\n自民党の得票率\n比例区; (%)\n\n\nMinshin\n民進党の得票率\n比例区; (%)\n\n\nKomei\n公明党の得票率\n比例区; (%)\n\n\nKyosan\n共産党の得票率\n比例区; (%)\n\n\nIshin\n維新の得票率\n比例区; (%)\n\n\nShamin\n社民党の得票率\n比例区; (%)\n\n\nRegion2\n地域区分\n1 = 東日本; 2 = 西日本\n\n\nRegion6\n地域区分\n1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄"
+  },
+  {
+    "objectID": "slide/slide01.html#課題-1",
+    "href": "slide/slide01.html#課題-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "課題",
+    "text": "課題\n課題の遂行有無は確認しない（履修者の良心に任せる）。\n課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   }
 ]
