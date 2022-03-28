@@ -10,3 +10,4 @@ subtitle: "ガイダンス"
 ```{=html}
 <iframe class="slide-deck" src="../slide/slide01.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 ```
+

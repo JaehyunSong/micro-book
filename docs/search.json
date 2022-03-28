@@ -474,5 +474,89 @@
     "title": "ミクロ政治データ分析実習",
     "section": "課題",
     "text": "課題\n課題の遂行有無は確認しない（履修者の良心に任せる）。\n課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
+    "objectID": "slide/Slide01.html",
+    "href": "slide/Slide01.html",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "class: inverse, middle, center, mline # 講義概要\n\n\n講義概要\n\n講義日: 木曜日 第4時限（14:40～16:10）\n場所: TC304教室（高槻キャンパス C棟 304教室）\n講義内容: Rの使い方\n\nRの基本的な操作 & R Markdown\nデータの入出力\nデータのハンドリング（前処理）\nデータの可視化\n\n統計学、確率、多変量解析、因果推論の授業.kenten[ではない]。\n\nデータ分析の.kenten[手法]は後期の「マクロ政治データ分析実習」\n後期の授業ではRの使い方について解説.kenten[しない]。\n\n到達目標: Rを用いたデータ分析の教科書が読める土台づくり\n\n\n\n\n講義内容（予定）\n\n第1回 イントロダクション\n第2回 RとIDEの導入\n第3回 Rの基本的な操作\n第4回 プログラミングの基本的な概念\n第5回 R Markdownと再現可能な研究\n第6回 データ収集\n第7回 データ型\n第8回 データ構造\n第9回 データハンドリング（1）\n第10回 データハンドリング（2）\n第11回 データハンドリング（3）\n第12回 可視化（1）\n第13回 可視化（2）\n第14回 可視化（3）\n第15回 期末テスト\n\n\n\n\n参考) マクロ政治データ分析実習の内容 (予定)\n\nリサーチデザイン\n記述統計\n統計的推定\n統計的仮説検定\n変数間の関係 ( \\(t\\) 検定、 \\(\\chi^2\\) 検定、相関分析)\n(線形) 回帰分析\n交互作用\nロジスティック回帰分析\n分析結果の可視化\n\n\n\n\n本講義の位置づけ\n\nデータの分析単位として「ミクロ」と「マクロ」\n\nミクロデータ（個票データ）\n\n主に個人データ\n\nマクロデータ（集計データ）\n\n国家、市区町村、選挙区など\nミクロにおける主体（たとえば、人）の集合\n\n\n\n\n分析における「ミクロ」と「マクロ」\n\n「ミクロ」のための手法、「マクロ」のための手法の区別はほぼない\n\nほとんどぼ分析手法はミクロ、マクロ区別なく使用\n\n計量分析の主なツールでとしてR: 敷居が高い\n\nミクロ政治データ分析演習\n\nツールの使い方を習得してから具体的な分析手法へ\n\nマクロ政治データ分析演習\n\n\n\n\n\n\n前提知識\n\nファイル・システムの理解\n\nフォルダー (ディレクトリ)の概念\nC:/AAA/BBB/CCC.txtや~/AAA/BBB/CCC.textの意味が理解できること\n\nブラインド・タッチ (重要)\n\n期末レポートは第15回の授業中に執筆する。\nタイピングが遅いと、時間内に期末レポートの完成ができない。\n第15回の授業までにブラインドタッチの練習を推奨\nこの授業に限らず、現代社会で極めて重要なスキル\n\n\n\n\n\n教科書\nSong Jaehyun・矢内勇生.『私たちのR: ベストプラクティスの探求』Web-book\n\n本講義内容を200%カバーする\n無料 (https://www.jaysong.net/RBook)\n\n.center[]\n\n\n\n教科書と本講義の位置づけ\n章立ては予告なく変更される可能性がある。\n\nRとIDEの導入: 第2〜5章\nRの基本的な操作: 第7、8章\nR Markdownと再現可能な研究: 第25章\nデータ型とデータ構造: 第9、10章\nRプログラミング基礎: 第11、12、28章\nデータハンドリング: 第13〜16章\n可視化: 第17〜20章\n\n\n\n\n参考書\n\n松村優哉 他. 2021. 『改訂2版 RユーザのためのRStudio[実践]入門』技術評論社\nGarrett Grolemund and Hadley Wickham. 2017. R for Data Science. O’Reilly.\n\n邦訳『Rではじめるデータサイエンス』(原著は無料: https://r4ds.had.co.nz/)\n\nJared P. Lander. 2018. R for Everyone. Addison-Wesley Professional.\n\n邦訳『みんなのR』\n\n\n.pull-left3[ .center[]] .pull-center3[ .center[]] .pull-right3[ .center[]]\n\n\n\n成績評価\n\n平常点 (20%)\n\n学生証を持参すること\n欠席4回以上は評価の対象外（3回まで評価対象）\n\n課題 (50%)\n\n計8〜9回の課題を予定\n未提出4回以上は評価の対象外（3回まで評価対象）\n課題提出期限の延長はない (提出までの期間が長めであるため)\n\n提出期限は次回講義の前日23時59分まで\n期限内に提出出来なかった場合でも宋に連絡する必要はない (どうせ延ばしてくれない)。\n\n不正行為厳禁\n\n期末レポート (30%)\n\n第15回の授業内に期末レポートを執筆\n未提出者は評価の対象外\n不正行為厳禁\n\n\n\n\n\nオフィス・アワー\n宋、またはTAが研究室に待機し、事前予約.kenten[なし]に相談、質問などが可能な時間\n\n毎週火・木曜日3限 (13:00〜14:30)\n\n火曜日は宋、木曜日はTAが対応\n上記の時間外は事前予約が必要（メール、対面）\nメール: song@kansai-u.ac.jp\n\n場所：TA227研究室（A棟の2階）\n\n\n\n課題\n\n課題1\n\n教科書第7章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）"
+  },
+  {
+    "objectID": "slide/slide02.html#rとは",
+    "href": "slide/slide02.html#rとは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rとは",
+    "text": "Rとは\n\n\n\n\n\n統計、データ分析、作図のためのインタープリタープログラミング言語\n1976年開発されたS言語の後継者\nRoss IhakaとRobert Clifford Gentlemanが開発\n統計分析のためのソフトウェアは星の数ほど存在"
+  },
+  {
+    "objectID": "materials/introduction.html#統計ソフトウェア言語",
+    "href": "materials/introduction.html#統計ソフトウェア言語",
+    "title": "第1回講義資料",
+    "section": "統計ソフトウェア/言語",
+    "text": "統計ソフトウェア/言語\n\n有償\n\nSAS\nSPSS\nStata\nMATLAB\n\n\n\n無償\n\nPSPP: SPSSにとてもよく似た無料ソフトウェア\nJASP/jamovi: 裏で動いているのはR\ngretl: 時系列分析など、計量経済学で利用される手法に特化したソフト\nGNU Octave: MATLABとほぼ同じ文法をもつ無料言語\nHAD: 清水裕士先生が開発しているExcelベースのデータ分析マクロ\n\nただし、Excelが有償ソフト"
+  },
+  {
+    "objectID": "slide/slide02.html#統計ソフトウェア言語",
+    "href": "slide/slide02.html#統計ソフトウェア言語",
+    "title": "ミクロ政治データ分析実習",
+    "section": "統計ソフトウェア/言語",
+    "text": "統計ソフトウェア/言語\n有償\n\nSAS\nSPSS\nStata\nMATLAB\n\n無償\n\nPSPP: SPSSにとてもよく似た無料ソフトウェア\nJASP/jamovi: 裏で動いているのはR\ngretl: 時系列分析など、計量経済学で利用される手法に特化したソフト\nGNU Octave: MATLABとほぼ同じ文法をもつ無料言語\nHAD: 清水裕士先生が開発しているExcelベースのデータ分析マクロ\n\nただし、Excelが有償ソフト"
+  },
+  {
+    "objectID": "slide/slide02.html#rのライバルたちどれも無料",
+    "href": "slide/slide02.html#rのライバルたちどれも無料",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rのライバルたち（どれも無料）",
+    "text": "Rのライバルたち（どれも無料）\n\n現在のデータサイエンス業界において標準はR + Python\nどれもGUIでなく、CUI\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n汎用プログラミング言語\n機械分析に強い\n豊富なパッケージ\nRより速く、Juliaより遅い\n\n\n\n\nJulia\n\n\n\n\n\n\n\n\n\n\n統計プログラミング言語\n非常に高速\nパッケージがRやPythonに比べ、少ない"
+  },
+  {
+    "objectID": "slide/slide02.html#why-r",
+    "href": "slide/slide02.html#why-r",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Why R?",
+    "text": "Why R?\nR界隈の神様、Hadley Wickham（羽鳥先生）によると… (Hadley 2019)\n\n無料、オープンソース、多くのプラットフォームで利用可能\nオンライン、オフラインの両方で、多様なRコミュニティが存在\n膨大なパッケージが用意されている。\n分析結果を伝達する強力なツールを提供（R Markdown）\n代表的な統合開発環境であるRStudioはデータサイエンス、対話型のデータ分析、そして統計的プログラミングが必要とするものに最適化されている。\n多くの統計学や機械学習の研究者は自分の研究成果とRパッケージを同時に公開している。\nデータ分析を特化した言語（欠損値、データフレーム、ベクトル化など）\n関数型プログラミングのための最適な環境を提供\nRStudio社は営利企業であるものの、その収益の多くをオープンソースコミュニティーに投資している。\nメタプログラミングが非常に強力\nRはC、C++、Fortranのようなhigh-performance言語と容易に結合できるように設計されている。"
+  },
+  {
+    "objectID": "slide/slide02.html#guiとcui",
+    "href": "slide/slide02.html#guiとcui",
+    "title": "ミクロ政治データ分析実習",
+    "section": "GUIとCUI",
+    "text": "GUIとCUI\n\n\nGUI: Graphical User Interface; ソフトウェア上の入出力にグラフィックを利用\n\nマウスでポチポチするだけで操作できる環境\n間違いがほぼ起きない\n柔軟性が低い（決まったオプション、機能しか使えない）\n分析の再現が難しい（出来ないわけではない）\n\nCUI: Character User Interface\n\n全ての操作を文字列ベース（=キーボード）で行う\n一文字でも間違えるとエラーが出たり\n柔軟性が高い（カスタマイズ自由）\n分析の再現性が非常に高い（コードさえ保存しておけばOK）"
+  },
+  {
+    "objectID": "slide/slide02.html#guiとcuiの操作の違い",
+    "href": "slide/slide02.html#guiとcuiの操作の違い",
+    "title": "ミクロ政治データ分析実習",
+    "section": "GUIとCUIの操作の違い",
+    "text": "GUIとCUIの操作の違い\nData.csvを読み込み、Xという変数の平均値と分散を計算\nGUI (SPSS)の例\n\n「ファイル」→「開く」→「データ」をクリック\nファイルを選択し、「開く」をクリック\n「分析」→「記述統計」→「記述統計」をクリック\n左側のパネルからXを右側の「変数」パネルへ移動\n「オブション」をクリック\n「散らばり」の「分散」にチェック\n「続行」をクリック→「OK」をクリック\n\nCUI (R)の例\nMyData <- read.csv(\"Data.csv\")\nmean(MyData$X)\nvar(MyData$X)"
+  },
+  {
+    "objectID": "slide/slide02.html#統合開発環境ide",
+    "href": "slide/slide02.html#統合開発環境ide",
+    "title": "ミクロ政治データ分析実習",
+    "section": "統合開発環境（IDE）",
+    "text": "統合開発環境（IDE）\n\nR Studioが代表的（ほぼ一択）\n\n他にもR Tools for Visual Studio、Atom、Sublime Text、Vim、Emacsなど\n\nIDEの使用は必須ではないが、生産性に大きく関与する\nデータ分析、プログラミングの手助けをする優秀な秘書\n\nファイルの管理、うろ覚えのコマンドのプロンプト、コードの色分けなどを自動的に行う\nコードの実行結果の画面をコードと同時に表示\nこれまでの作業を記録"
+  },
+  {
+    "objectID": "slide/slide02.html#rとrstudioの導入",
+    "href": "slide/slide02.html#rとrstudioの導入",
+    "title": "ミクロ政治データ分析実習",
+    "section": "RとRStudioの導入",
+    "text": "RとRStudioの導入\n\n本講義のサポートページを参照\n対面講義では宋と一緒に初期設定、起動、終了などを行ってもらう。"
+  },
+  {
+    "objectID": "slide/slide02.html#プロジェクト機能について",
+    "href": "slide/slide02.html#プロジェクト機能について",
+    "title": "ミクロ政治データ分析実習",
+    "section": "「プロジェクト」機能について",
+    "text": "「プロジェクト」機能について\n\n本講義のサポートページを参照\n毎回の講義、課題ごとに独立したプロジェクトを作ること\nファイル・システムに関する知識（パス、相対パス、絶対パス）がない場合、プロジェクト昨日は必須\n\nファイル・システムを知っている宋でも常にプロジェクト機能を使用している。"
+  },
+  {
+    "objectID": "slide/slide02.html#課題",
+    "href": "slide/slide02.html#課題",
+    "title": "ミクロ政治データ分析実習",
+    "section": "課題",
+    "text": "課題\nブラインドタッチに自信のない履修者は引き続き、ブラインドタッチの練習\n\n毎日欠かさず練習すれば2週間でできるようになる。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   }
 ]

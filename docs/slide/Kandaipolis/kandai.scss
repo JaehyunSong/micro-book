@@ -1,0 +1,44 @@
+/*-- scss:defaults --*/
+
+// fonts
+@import url(https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400);
+$font-family-sans-serif: "Noto Sans JP", serif;
+$font-family-monospace: "Ricty Diminished", monospace;
+
+// colors
+$body-bg: #FDFDFD;
+$body-color: #1A292C;
+$link-color: #1D2088;
+
+// sizes
+$presentation-font-size-root: 24px;
+$code-block-font-size: 0.75em;
+
+/*-- scss:rules --*/
+
+.reveal h1 {
+  text-align: center;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #EB811B;
+}
+.reveal .title, .subtitle, .author, .institute, .date {
+  text-align: left;
+  border-bottom-width: 0px;
+}
+.subtitle {
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #EB811B;
+  padding-bottom: 0.25em;
+}
+
+.reveal strong {
+  color: orange;
+}
+
+.reveal img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
