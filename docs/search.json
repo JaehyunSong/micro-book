@@ -1,17 +1,24 @@
 [
   {
+    "objectID": "materials/rmarkdown.html#rmdファイルの作成",
+    "href": "materials/rmarkdown.html#rmdファイルの作成",
+    "title": "第5回講義資料",
+    "section": "Rmdファイルの作成",
+    "text": "Rmdファイルの作成\n手順1: RStudioを起動し、プロジェクトを作成する。\n手順2: File > New > R Markdown…を選択する。\n\n\n\n\n\n\n\n\n\n手順3: OKをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: タイトル情報などを以下のように修正する。\n変更前\n---\ntitle: \"Untitled\"\noutput: html_document\n---\n変更後\n---\ntitle: \"はじめてのR Markdown\"\nauthor: \"関大花子\"\ndate: \"2022年 5月 12日\"\noutput: html_document\n---\n\n\n\n\n\n\n自動的に日付を付けたい\n\n\n\ndate:の内容をdate: `r Sys.Date()`に修正するとKnitした日付が自動的につけられる。\n\n\n手順5: ファイルを保存する。ファイル名は適宜付けること。\n\nファイルの保存はFile > Saveか、ショートカットキー（macOSだとCmd (⌘) + S、WindowsだとControl (Ctrl) + S）で出来る。\n\n手順6: Sourceペイン上段のKnitをクリックする。\n\nKnitは「ニット」と読む。\n\n\n\n\n\n\n\n\n\n\n手順7: 新しいウィンドウ、またはViewerペインに出力物が表示される。\n\n\n\n\n\n\n出力物が新しいウィンドウに表示されて面倒くさい\n\n\n\n宋が推奨するRStudioの設定だと出力物がRStudioと同じ画面（Viewerペイン）に表示される。具体的にはTools > Global Options… > R Markdownへ移動し、Show output preview in:をWindowからViewer Paneに変更すれば良い。"
+  },
+  {
     "objectID": "materials/rmarkdown.html#markdown文法の基本",
     "href": "materials/rmarkdown.html#markdown文法の基本",
     "title": "第5回講義資料",
     "section": "Markdown文法の基本",
-    "text": "Markdown文法の基本\n　ここでは本講義の課題を遂行するための必要最低限のことのみ解説する。R Markdwonの詳細については教科書の第21章（R Markdown [基礎]）を参照すること。\n\n改行\n　Markdownにおける改行はやや特殊である。特殊といっても難しいことではない。普段よりもう一行改行するだけだ。Markdownの場合、1回の改行は改行として判定されず、同じ行の連続と認識する。たとえば、Inputのように入力するとOutputのように文章1と文章2が繋がってしまう。\nInput:\n文章1\n文章2\nOutput:\n文章1 文章2\n　文章1と文章2を改行するためにはもう一行、改行する必要がある。以下の例を見てみよう。\nInput:\n文章1\n\n文章2\nOutput:\n文章1\n文章2\n　こうすることで段落間の間隔を強制的に入れることとなり、作成者側にも読みやすい文書構造になるといった利点がある1。\n\n\n強調\n　文章の一部を強調する方法として太字、イタリック2、アンダーラインがあり、強調ではないが、ついでに取り消し線についても紹介する。いずれも強調したい箇所を記号で囲むだけだ。\nInput:\n文章の一部を**太字**にしてみましょう。\n\n*イタリック*もいいですね。\n\n~~取り消し線~~はあまり使わないかも。\n\n<u>アンダーライン</u>はHTMLタグを使います。\nOutput:\n文章の一部を太字にしてみましょう。\nイタリックもいいですね。\n取り消し線はあまり使わないかも。\nアンダーラインはHTMLタグを使います。\n\n\n箇条書き\n　箇条書きには順序なしと順序付きがある。順序なしの場合*または-の後に半角スペースを1つ入れるだけである。また、3文字以上の字下げで下位項目を追加することもできる。\nInput:\n- 項目1\n   - 項目1-1\n   - 項目1-2\n      - 項目1-2-1\n         - 項目1-2-1-1\n      - 項目1-2-2\n- 項目2\n- 項目3\nOutput:\n\n項目1\n\n項目1-1\n項目1-2\n\n項目1-2-1\n\n項目1-2-1-1\n\n項目1-2-2\n\n\n項目2\n項目3\n\n　順序付き箇条書きは、これは-（または*）を数字.に換えるだけである。順序なしの場合と違って数字の後にピリオド（.）が付くことに注意すること。また、順序付き箇条書きと順序なし箇条書きは組み合わせて使うことも出来る。\nInput:\n1. 項目1\n   1. 項目1-1\n   2. 項目1-2\n2. 項目2\n   * 項目2-1\n   * 項目2-2\n3. 項目3\nOutput:\n\n項目1\n\n項目1-1\n項目1-2\n\n項目2\n\n項目2-1\n項目2-2\n\n項目3\n\n\n\n見出し\n　章、節、段落のタイトルを付ける際は#を使う。#の数が多いほど文字が小さくなる。章の見出しを##にするなら節は###、小節または段落は####が適切だろう。R Markdownの使用上、見出しは####まで使える。\nInput:\n# 見出し1\n## 見出し2\n### 見出し3\n#### 見出し4\nOutput:\n見出し1\n見出し2\n見出し3\n見出し4\n\n\n区切り線\n区切り線は---または***を使う。\nInput:\n---\nOutput:\n\n\n\n表\n　Markdownの表は非常にシンプルな書き方をしている。行は改行で、列は|で区切られる。ただ、表の第1行はヘッダー（変数名や列名が表示される行）扱いとなり、ヘッダーと内容の区分は|---|で行う。以下はMarkdownを利用した簡単な表の例である。ここでは可読性のために、適宜スペースを入れたが、スペースの有無は結果に影響を与えない。\nInput:\n|ID   |Name     |Math    |English |Favorite food|\n|:---:|---------|-------:|-------:|-------------|\n|1    |SONG     |15      |10      |Ramen        |\n|2    |Yanai    |100     |100     |Cat food     |\n|3    |Shigemura|80      |50      |Raw chicken  |\n|4    |Wickham  |80      |90      |Lamb         |\nOutput:\n\n\n\nID\nName\nMath\nEnglish\nFavorite food\n\n\n\n\n1\nSONG\n15\n10\nRamen\n\n\n2\nYanai\n100\n100\nCat food\n\n\n3\nShigemura\n80\n50\nRaw chicken\n\n\n4\nWickham\n80\n90\nLamb\n\n\n\n　1行目はヘッダーであり、太字かつ中央揃えになる。2行目以降はデフォルトでは左揃えになるが、|---|をいじることによって当該列の揃えを調整できる。|:---|は左 (デフォルト)、|---:|は右、|:---:|は中央揃えになる。また-の個数は1個以上なら問題なく、|-|も|---|も同じである。\n\n\n画像\n　R Markdownに画像を入れるには![代替テキスト](ファイル名)と入力する。画像ファイル名はパス付きを指定する必要がある。[代替テキスト]は画像を読み込めなかった場合に出力されるテキストを意味する。これは画像が読み込めなかった場合の代替テキストでもあるが、視覚障害者用のウェブブラウザーのためにも使われる。これらのウェブブラウザーはテキストのみ出力されるものが多く、画像の代わりには代替テキストが読み込まれる。\n　例えば、Figsフォルダー内のfavicon.pngというファイルを読み込む場合、以下のように書く。\nInput:\n![『私たちのR』ロゴ](Figs/favicon.png)\nOutput:\n\n\n\n『私たちのR』ロゴ\n\n\n\n\nリンク\n　ハイパーリンクは[テキスト](URL)のように書く。[]内は実際に表示されるテキストであり、()は飛ばすURLとなる。\nInput:\n毎日1回は[SONGのホームページ](https://www.jaysong.net)へアクセスしましょう。\nOutput:\n毎日1回はSONGのホームページへアクセスしましょう。\n\n\n脚注\n　脚注は[^固有識別子]と[^固有識別子]: 脚注内容の2つの要素が必要だ。まず、文末脚注を入れる箇所に[^xxxx]を挿入する。xxxxは任意の文字列で良い。しかし、同じR Markdown内においてこの識別子は被らないように注意すること（固有識別子だから）。実際の脚注の内容は[^xxxx]: 内容のように入力する。これはどこに位置しても問題ない。文書の途中でも、最後に入れても、脚注の内容は文末に位置する。ただし、脚注を入れる段落のすぐ後の方が作成する側としては読みやすいだろう。\nInput:\nこれは普通の文章です[^foot1]。\n\n[^foot1]: これは普通の脚注です。\nOutput:\nこれは普通の文章です3。\n\n\n数式\n　インライン数式は$数式$で埋め込むことができる。数式はLaTeXの書き方とほぼ同じだ。ちなみに、R Markdownの数式はMathJaxによってレンダリングされる。このMathJaxライブラリはHTMLに埋め込まれているのではないため、インターネットに接続せずにHTMLファイルを開くと数式が正しく出力されない可能性がある。\nInput:\nアインシュタインと言えば、$e = mc^2$でしょう。\nOutput:\nアインシュタインと言えば、\\(e = mc^2\\)でしょう。\n　数式を独立した行として出力する場合は、$の代わりに$$を使用する。\nInput:\n独立した数式の書き方\n\n$$\ny_i \\sim \\text{Normal}(\\mathbf{X} \\boldsymbol{\\beta}, \\sigma).\n$$\nOutput:\n独立した数式の書き方\n\\[\ny_i \\sim \\text{Normal}(\\mathbf{X} \\boldsymbol{\\beta}, \\sigma).\n\\]\n　もし数式が複数の行で構成されている場合は$$内にaligned環境（\\begin{aligned}〜\\end{aligned}）を使用する。むろん、使い方はLaTeXと同じである。\nInput:\n複数の行にわたる数式の書き方\n\n$$\n\\begin{aligned}\n  Y_i      & \\sim \\text{Bernoulli}(\\theta_i), \\\\\n  \\theta_i & = \\text{logit}^{-1}(y_i^*), \\\\\n  y_i^*    & = \\beta_0 + \\beta_1 x_1 + \\beta_2 z_1.\n\\end{aligned}\n$$\nOutput:\n複数の行にわたる数式の書き方\n\\[\n\\begin{aligned}\n  Y_i      & \\sim \\text{Bernoulli}(\\theta_i), \\\\\n  \\theta_i & = \\text{logit}^{-1}(y_i^*), \\\\\n  y_i^*    & = \\beta_0 + \\beta_1 x_1 + \\beta_2 z_1.\n\\end{aligned}\n\\]\n　ここまで見ればLaTeXユーザーはお分かりだろうが、$$の中にはLaTeXコマンドが使える。たとえば、行列を作成する際は以下のように\\begin{bmatrix}環境を使う。\nInput:\n行列の書き方\n\n$$\nX = \\begin{bmatrix}\n  x_{11} & x_{12} \\\\\n  x_{21} & x_{22} \\\\\n  x_{31} & x_{32}\n\\end{bmatrix}.\n$$\nOutput:\n行列の書き方\n\\[\nX = \\begin{bmatrix}\n  x_{11} & x_{12} \\\\\n  x_{21} & x_{22} \\\\\n  x_{31} & x_{32}\n\\end{bmatrix}.\n\\]\n\n\n引用\n　引用の際は文章の最初に>を入れるだけだ。>の後に半角のスペースを1つ入れること。\nInput:\n「政治とは何か」についてイーストンは以下のように定義しました。\n\n> [A] political system can be designated as those interactions through which values are authoritatively allocated for a society.\nOutput:\n「政治とは何か」についてイーストンは以下のように定義しました。\n\n[A] political system can be designated as those interactions through which values are authoritatively allocated for a society.\n\n\n\nコメント\n　R Markdownにもコメントを付けることができる。とりあえず書いたが要らなくなった段落や文章があって、消すことがもったいない場合はコメントアウトするのも1つの方法だろう。ただし、Rのコメントアウトの方法は#だったが、これはR Markdownでは見出しの記号である。R Markdownのコメントは<!--と-->で囲む必要がある。\nInput:\n文章1\n\n<!--\nここはコメントです。\n-->\n\n文章2\nOutput:\n文章1\n\n文章2"
+    "text": "Markdown文法の基本\n　ここでは本講義の課題を遂行するための必要最低限のことのみ解説する。R Markdwonの詳細については教科書の第21章（R Markdown [基礎]）を参照すること。\n\n改行\n　Markdownにおける改行はやや特殊である。特殊といっても難しいことではない。普段よりもう一行改行するだけだ。Markdownの場合、1回の改行は改行として判定されず、同じ行の連続と認識する。たとえば、Inputのように入力するとOutputのように文章1と文章2が繋がってしまう。\nInput:\n文章1\n文章2\nOutput:\n文章1 文章2\n　文章1と文章2を改行するためにはもう一行、改行する必要がある。以下の例を見てみよう。\nInput:\n文章1\n\n文章2\nOutput:\n文章1\n文章2\n　こうすることで段落間の間隔を強制的に入れることとなり、作成者側にも読みやすい文書構造になるといった利点がある1。\n\n\n強調\n　文章の一部を強調する方法として太字、イタリック2、アンダーラインがあり、強調ではないが、ついでに取り消し線についても紹介する。いずれも強調したい箇所を記号で囲むだけだ。\nInput:\n文章の一部を**太字**にしてみましょう。\n\n*イタリック*もいいですね。\n\n~~取り消し線~~はあまり使わないかも。\n\n<u>アンダーライン</u>はHTMLタグを使います。\nOutput:\n文章の一部を太字にしてみましょう。\nイタリックもいいですね。\n取り消し線はあまり使わないかも。\nアンダーラインはHTMLタグを使います。\n\n\n箇条書き\n　箇条書きには順序なしと順序付きがある。順序なしの場合*または-の後に半角スペースを1つ入れるだけである。また、3文字以上の字下げで下位項目を追加することもできる。\nInput:\n- 項目1\n   - 項目1-1\n   - 項目1-2\n      - 項目1-2-1\n         - 項目1-2-1-1\n      - 項目1-2-2\n- 項目2\n- 項目3\nOutput:\n\n項目1\n\n項目1-1\n項目1-2\n\n項目1-2-1\n\n項目1-2-1-1\n\n項目1-2-2\n\n\n項目2\n項目3\n\n　順序付き箇条書きは、これは-（または*）を数字.に換えるだけである。順序なしの場合と違って数字の後にピリオド（.）が付くことに注意すること。また、順序付き箇条書きと順序なし箇条書きは組み合わせて使うことも出来る。\nInput:\n1. 項目1\n   1. 項目1-1\n   2. 項目1-2\n2. 項目2\n   * 項目2-1\n   * 項目2-2\n3. 項目3\nOutput:\n\n項目1\n\n項目1-1\n項目1-2\n\n項目2\n\n項目2-1\n項目2-2\n\n項目3\n\n\n\n見出し\n　章、節、段落のタイトルを付ける際は#を使う。#の数が多いほど文字が小さくなる。章の見出しを##にするなら節は###、小節または段落は####が適切だろう。R Markdownの使用上、見出しは####まで使える。\nInput:\n# 見出し1\n## 見出し2\n### 見出し3\n#### 見出し4\nOutput:\n見出し1\n見出し2\n見出し3\n見出し4\n\n\n区切り線\n　区切り線は---または***を使う。ただし、---または***の前後には必ず改行を行うこと。とりわけ、---の前に空いた行がないと、見出しとして認識されるケースがある。\nInput:\n---\nOutput:\n\n\n\n表\n　Markdownの表は非常にシンプルな書き方をしている。行は改行で、列は|で区切られる。ただ、表の第1行はヘッダー（変数名や列名が表示される行）扱いとなり、ヘッダーと内容の区分は|---|で行う。以下はMarkdownを利用した簡単な表の例である。ここでは可読性のために、適宜スペースを入れたが、スペースの有無は結果に影響を与えない。\nInput:\n|ID   |Name     |Math    |English |Favorite food|\n|:---:|---------|-------:|-------:|-------------|\n|1    |SONG     |15      |10      |Ramen        |\n|2    |Yanai    |100     |100     |Cat food     |\n|3    |Shigemura|80      |50      |Raw chicken  |\n|4    |Wickham  |80      |90      |Lamb         |\nOutput:\n\n\n\nID\nName\nMath\nEnglish\nFavorite food\n\n\n\n\n1\nSONG\n15\n10\nRamen\n\n\n2\nYanai\n100\n100\nCat food\n\n\n3\nShigemura\n80\n50\nRaw chicken\n\n\n4\nWickham\n80\n90\nLamb\n\n\n\n　1行目はヘッダーであり、太字かつ中央揃えになる。2行目以降はデフォルトでは左揃えになるが、|---|をいじることによって当該列の揃えを調整できる。|:---|は左 (デフォルト)、|---:|は右、|:---:|は中央揃えになる。また-の個数は1個以上なら問題なく、|-|も|---|も同じである。\n\n\n画像\n　R Markdownに画像を入れるには![代替テキスト](ファイル名)と入力する。画像ファイル名はパス付きを指定する必要がある。[代替テキスト]は画像を読み込めなかった場合に出力されるテキストを意味する。これは画像が読み込めなかった場合の代替テキストでもあるが、視覚障害者用のウェブブラウザーのためにも使われる。これらのウェブブラウザーはテキストのみ出力されるものが多く、画像の代わりには代替テキストが読み込まれる。また、場合によっては代替テキストが図のタイトル（キャプション）として機能する場合もある（以下の例がそうである）。この代替テキストは必須でないため![](ファイル名)でも画像の添付は出来る。\n　例えば、Figsフォルダー内のfavicon.pngというファイルを読み込む場合、以下のように書く。\nInput:\n![『私たちのR』ロゴ](Figs/favicon.png)\nOutput:\n\n\n\n『私たちのR』ロゴ\n\n\n\n\nリンク\n　ハイパーリンクは[テキスト](URL)のように書く。[]内は実際に表示されるテキストであり、()は飛ばすURLとなる。\nInput:\n毎日1回は[SONGのホームページ](https://www.jaysong.net)へアクセスしましょう。\nOutput:\n毎日1回はSONGのホームページへアクセスしましょう。\n\n\n脚注\n　脚注は[^固有識別子]と[^固有識別子]: 脚注内容の2つの要素が必要だ。まず、文末脚注を入れる箇所に[^xxxx]を挿入する。xxxxは任意の文字列で良い。しかし、同じR Markdown内においてこの識別子は被らないように注意すること（固有識別子だから）。実際の脚注の内容は[^xxxx]: 内容のように入力する。これはどこに位置しても問題ない。文書の途中でも、最後に入れても、脚注の内容は文末に位置する。ただし、脚注を入れる段落のすぐ後の方が作成する側としては読みやすいだろう。\nInput:\nこれは普通の文章です[^foot1]。\n\n[^foot1]: これは普通の脚注です。\nOutput:\nこれは普通の文章です3。\n\n\n数式\n　以下の内容（数式）は少なくとも本講義（ミクロ政治データ分析実習）では使わないため、飛ばしても良い。\n　インライン数式は$数式$で埋め込むことができる。数式は\\(\\LaTeX\\)の書き方とほぼ同じだ。ちなみに、R Markdownの数式はMathJaxによってレンダリングされる。このMathJaxライブラリはHTMLに埋め込まれているのではないため、インターネットに接続せずにHTMLファイルを開くと数式が正しく出力されない可能性がある。\nInput:\nアインシュタインと言えば、$e = mc^2$でしょう。\nOutput:\nアインシュタインと言えば、\\(e = mc^2\\)でしょう。\n　数式を独立した行として出力する場合は、$の代わりに$$を使用する。\nInput:\n独立した数式の書き方\n\n$$\ny_i \\sim \\text{Normal}(\\mathbf{X} \\boldsymbol{\\beta}, \\sigma).\n$$\nOutput:\n独立した数式の書き方\n\\[\ny_i \\sim \\text{Normal}(\\mathbf{X} \\boldsymbol{\\beta}, \\sigma).\n\\]\n　もし数式が複数の行で構成されている場合は$$内にaligned環境（\\begin{aligned} … \\end{aligned}）を使用する。むろん、使い方は\\(\\LaTeX\\)と同じである。\nInput:\n複数の行にわたる数式の書き方\n\n$$\n\\begin{aligned}\n  Y_i      & \\sim \\text{Bernoulli}(\\theta_i), \\\\\n  \\theta_i & = \\text{logit}^{-1}(y_i^*), \\\\\n  y_i^*    & = \\beta_0 + \\beta_1 x_1 + \\beta_2 z_1.\n\\end{aligned}\n$$\nOutput:\n複数の行にわたる数式の書き方\n\\[\n\\begin{aligned}\n  Y_i      & \\sim \\text{Bernoulli}(\\theta_i), \\\\\n  \\theta_i & = \\text{logit}^{-1}(y_i^*), \\\\\n  y_i^*    & = \\beta_0 + \\beta_1 x_1 + \\beta_2 z_1.\n\\end{aligned}\n\\]\n　ここまで見れば\\(\\LaTeX\\)ユーザーはお分かりだろうが、$$の中には\\(\\LaTeX\\)コマンドが使える。たとえば、行列を作成する際は以下のように\\begin{bmatrix}環境を使う。\nInput:\n行列の書き方\n\n$$\nX = \\begin{bmatrix}\n  x_{11} & x_{12} \\\\\n  x_{21} & x_{22} \\\\\n  x_{31} & x_{32}\n\\end{bmatrix}.\n$$\nOutput:\n行列の書き方\n\\[\nX = \\begin{bmatrix}\n  x_{11} & x_{12} \\\\\n  x_{21} & x_{22} \\\\\n  x_{31} & x_{32}\n\\end{bmatrix}.\n\\]\n\n\n引用\n　引用の際は文章の最初に>を入れるだけだ。>の後に半角のスペースを1つ入れること。\nInput:\n「政治とは何か」についてイーストンは以下のように定義しました。\n\n> [A] political system can be designated as those interactions through which values are authoritatively allocated for a society.\nOutput:\n「政治とは何か」についてイーストンは以下のように定義しました。\n\n[A] political system can be designated as those interactions through which values are authoritatively allocated for a society.\n\n\n\nコメント\n　R Markdownにもコメントを付けることができる。とりあえず書いたが要らなくなった段落や文章があって、消すことがもったいない場合はコメントアウトするのも1つの方法だろう。ただし、Rのコメントアウトの方法は#だったが、これはR Markdownでは見出しの記号である。R Markdownのコメントは<!--と-->で囲む必要がある。\nInput:\n文章1\n\n<!--\nここはコメントです。\n-->\n\n文章2\nOutput:\n文章1\n\n文章2"
   },
   {
     "objectID": "materials/rmarkdown.html#rコード",
     "href": "materials/rmarkdown.html#rコード",
     "title": "第5回講義資料",
     "section": "Rコード",
-    "text": "Rコード\n　以上の内容まで抑えると、R Markdownを使って、簡単な文法のみで構造化された文書が作成できる。しかし、R Markdownの意義は文章とコード、結果が統合されることだろう。それでは文書内にRコードとその実行結果を入れる方法を紹介する。\n　コードは```{r}と```の間に入力するだけだ。これでコードと結果が同時に出力される。たとえば、print(\"Hello World!\")を走らせるコードを入れてみよう。\nInput:\n\"Hello World!\"を出力するコード\n\n```{r, error=TRUE}\nprint(\"Hello World!\")\n```\nOutput:\n“Hello World!”を出力するコード\n\nprint(\"Hello World!\")\n\n[1] \"Hello World!\"\n\n\n　```{r}と```で囲まれた範囲をR Markdownではチャンク（Chunk）と呼ぶ。このチャンク内ではRと全く同じことが出来る。パッケージやデータの読み込み、オブジェクトの生成、データハンドリング、可視化など、全てが出来る。可視化の方法については第12回講義以降の講義で解説するが、ここでは例として紹介する。\nInput: 　\n```{r}\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n```\nOutput:\n\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n\n\n\n\n\n\n\n\n　他にも文中にRコードを埋め込むこともできる。例えば、ベクトルX <- c(2, 3, 5, 7, 12)があり、この平均値を文中で示したいとする。むろん、文中に「5.8」と書いても問題なし。しかし、実はXの入力ミスが見つかり、実はc(2, 3, 5, 7, 11)になったらどうなるだろうか。この「5.8」と書いた箇所を見つけて5.6と修正したいといけない。これは非常に面倒な作業であり、ミスも起こりやすい。文中にRコードを入れるためには`rコード`のように入力する。\n```{r}\nX <- c(2, 3, 5, 7, 11)\n```\n\n変数`X`の平均値は`r mean(X)`です。\nOutput:\n\nX <- c(2, 3, 5, 7, 11)\n\n変数Xの平均値は5.6です。\n　ここで`X`だが、単に`で囲まれただけではコードと認識されない。これは主に文中に短いコードを入れる際に使う機能である。\n　チャンクには様々なオプションを付けることができる。出力される図の大きさ、位置、解像度、コードの非常時、結果の非表示、チャンク間の依存関係などが指定できるが、これらについては教科書の第21章（R Markdown [基礎]）を参照すること。"
+    "text": "Rコード\n\nRコードの入れ方\n　以上の内容まで抑えると、R Markdownを使って、簡単な文法のみで構造化された文書が作成できる。しかし、R Markdownの意義は文章とコード、結果が統合されることだろう。それでは文書内にRコードとその実行結果を入れる方法を紹介する。\n　コードは```{r}と```の間に入力するだけだ。これでコードと結果が同時に出力される。たとえば、print(\"Hello World!\")を走らせるコードを入れてみよう。\n\n\n\n\n\n\n`はどこにありますか。\n\n\n\nこれは使用するキーボードの配列によって異なる。日本語配列キーボードの場合、「@」と同じ所に位置するケースが多い。ただ、日本語配列は世界標準からかなりずれている配列を採用しており、日本語以外の配列では主に「〜」と同じ所に位置する。たとえば、宋はUNIX配列（HHKB）を使っているため、キーボードの右上に位置するが、左上に位置するケースも多い。ちなみに単一引用符（'; 「シングル・クォーテーション」とも呼ばれる）とは別の記号であることに注意すること。\n\n\nInput:\n\"Hello World!\"を出力するコード\n\n```{r, error=TRUE}\nprint(\"Hello World!\")\n```\nOutput:\n“Hello World!”を出力するコード\n\nprint(\"Hello World!\")\n\n[1] \"Hello World!\"\n\n\n　```{r}と```で囲まれた範囲をR Markdownではチャンク（Chunk）と呼ぶ。このチャンク内ではRと全く同じことが出来る。パッケージやデータの読み込み、オブジェクトの生成、データハンドリング、可視化など、全てが出来る。可視化の方法については第12回講義以降の講義で解説するが、ここでは例として紹介する。\nInput: 　\n```{r}\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n```\nOutput:\n\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n\n\n\n\n\n\n\n\n\n\nインラインコード\n　他にも文中にRコードを埋め込むこともできる（これをinline codeと呼ぶ）。例えば、ベクトルX <- c(2, 3, 5, 7, 12)があり、この平均値を文中で示したいとする。むろん、文中に「5.8」と書いても問題なし。しかし、実はXの入力ミスが見つかり、実はc(2, 3, 5, 7, 11)になったらどうなるだろうか。この「5.8」と書いた箇所を見つけて5.6と修正したいといけない。これは非常に面倒な作業であり、ミスも起こりやすい。文中にRコードを入れるためには`r Rコード`のように入力する。\n```{r}\nX <- c(2, 3, 5, 7, 11)\n```\n\n変数`X`の平均値は`r mean(X)`です。\nOutput:\n\nX <- c(2, 3, 5, 7, 11)\n\n変数Xの平均値は5.6です。\n　ここで`X`だが、単に`で囲まれただけだとコードのように表示してくれるものの、そのコードは実行されない。これは主に文中に短いコードのみを入れたり、変数名、関数名を示す際に使う機能である。\n\n\nコードの非表示\n　既に説明した通り、R MakrdownはR + Markdownである。Rはチャンク、Markdownはチャンク外の部分に相当し、それぞれのカスタマイズができる。分析のコードと結果はチャンクにオプションを付けることで修正できる。ここではチャンクのオプションについて解説する。\n　チャンクは```{r}で始まるが、実は{r}の箇所にオプションを追加することができる。具体的には{r チャンク名, オプション1, オプション2, ...}といった形だが、ここでは2つのオプションを紹介する。\n　まずはコードを表示せず、結果のみを表示させる方法である。R Markdownでレポートや論文を執筆する場合、最終的に提出するものにコードは不要であろう4。R Markdownではコードと結果が同時に表示されるが、片方（あるいは両方）を非表示にすることができる。{r}の内部にecho = FALSEを指定すれば、コードは表示されず、結果のみ表示される。\nInput:\n```{r, echo = FALSE}\nprint(\"Rは楽しい!\")\n```\nOutput:\n\n\n[1] \"Rは楽しい!\"\n\n\n\n\n結果の非表示\n　一方、{r}の内部にeval = FALSEを指定すれば、結果は表示されず、コードのみ表示される。本ページのようにマニュアルや技術書を書く際、時々使われる。\nInput:\n```{r, eval = FALSE}\nprint(\"Rは楽しい!\")\n```\nOutput:\n\nprint(\"Rは楽しい!\")\n\n　このようにコードのみ表示され、結果は表示されない。チャンクには他にも様々なオプションを付けることができる。出力される図の大きさ、位置、解像度、コードの非常時、結果の非表示、チャンク間の依存関係などが指定できるが、これらについては教科書の第21章（R Markdown [基礎]）を参照すること。\n　また、R Markdownでは様々な形式の文書（以外のものも）が作成可能である。たとえば、宋のホームページ5や本講義の教科書6、本講義のスライド7もR Markdownで作成されたものであり、本サポートページもR Markdownに類似するQuartoで作成されている。他にも履歴書（{vitae}、{pagedown}パッケージ）、ポスター・名刺（{pagedown}パッケージ）、Rパッケージの開発（{fusen}パッケージ）、Webアプリケーション（{shiny}パッケージ）、Rのチュートリアル（{learnr}パッケージ）などもR Markdownで作成可能である。"
   },
   {
     "objectID": "materials/rmarkdown.html#教科書",
@@ -21,11 +28,60 @@
     "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』の第21章: R Markdown [基礎]"
   },
   {
-    "objectID": "materials/basic.html",
-    "href": "materials/basic.html",
+    "objectID": "materials/datatype.html#データ型とは",
+    "href": "materials/datatype.html#データ型とは",
+    "title": "第7回講義資料",
+    "section": "データ型とは",
+    "text": "データ型とは\n　ベクトル（vector）はデータ構造（data structure）であり、ベクトル内の一つ一つの要素は数値や、文字など様々なデータ型（data type）の値を取り得る。\n\nObject1 <- c(1, 3, 5, 7, 9, 11)\nObject2 <- c(\"Kansai\", \"Kwansei Gakuin\", \"Doshisha\", \"Ritsumeikan\")\nObject3 <- c(TRUE, FALSE, FALSE)\nObject4 <- \"R\"\n\n\nObject1: 長さ6の数値型ベクトル\nObject2: 長さ4の文字型ベクトル\nObject3: 長さ3の論理型ベクトル\nObject4: 長さ1の文字型ベクトル\n\n長さ1のベクトルは原子ベクトル（atomic vector）とも呼ばれる\n\n\n\n\n\n\n\n\nベクトルの長さが知りたい\n\n\n\nベクトルの長さはlength(オブジェクト名)で計算できる。たとえば、Object2の長さは4である。\n\nlength(Object2)\n\n[1] 4\n\n\n\n\n　他にもRには様々なデータ型が使える。以下のリストはRが提供するデータ型の一部であり、太字は本講義で紹介するデータ型である。ここでは説明を割愛するが日付型（Date型）もよく使われるデータ型であり、それそれの詳細は教科書第8章を参照されたい。\n\nLogical\nNumeric\nComplex\nCharacter\nFactor\nDate\nNA\nNULL\nNaN\nInf\nその他"
+  },
+  {
+    "objectID": "materials/datatype.html#データ型の確認",
+    "href": "materials/datatype.html#データ型の確認",
+    "title": "第7回講義資料",
+    "section": "データ型の確認",
+    "text": "データ型の確認\n　ベクトル内の要素は全て同じデータ型を取るが、そのデータ型を確認するためには、class(ベクトル・オブジェクト名)関数を使用する。先ほど作成した4つのベクトルのデータ型を確認してみよう。\n\nclass(Object1) # 数値型 (numeric)\n\n[1] \"numeric\"\n\nclass(Object2) # 文字型 (character)\n\n[1] \"character\"\n\nclass(Object3) # 論理型 (logical)\n\n[1] \"logical\"\n\nclass(Object4) # 文字型 (character)\n\n[1] \"character\""
+  },
+  {
+    "objectID": "materials/datatype.html#logical型",
+    "href": "materials/datatype.html#logical型",
+    "title": "第7回講義資料",
+    "section": "Logical型",
+    "text": "Logical型\n　論理型（logical型）とはTRUEとFALSEのみで構成されるデータ型である。論理演算子の計算結果は必ず論理型の結果が返される。\n\n(2 + 3) == (4 + 1)\n\n[1] TRUE\n\n\n\nLogical1 <- (2 + 3) == (2 * 3)\nLogical1\n\n[1] FALSE\n\nclass(Logical1)\n\n[1] \"logical\"\n\n\nあるオブジェクトがlogical型か否かを判定するにはis.logical()を使用する。\n\nis.logical(FALSE)\n\n[1] TRUE\n\n\n\n作成\n　Logical型ベクトルを作成するためには、通常のベクトルと同様、c()関数で作成する。\n\nLogical_Vec1 <- c(TRUE, FALSE, TRUE, TRUE, FALSE)\nLogical_Vec1\n\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n\n\n　ここでのTRUEはT、FALSEはFと略すことが出来るが、推奨しない。必ずTRUEとFALSEで表記すること。\n\nLogical_Vec2 <- c(T, F, T, T, F)\nLogical_Vec2\n\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n\n\n\n\n注意点\n　Logical型の値であるTRUEとFALSEを\"で囲んではいけない。もし、一つでも\"で囲んでしまうと、そのベクトルlogical型でなく、後ほど紹介するcharacter型へ変換される。\n\n# 2つ目のFALSEを\"で囲むと...\nLogical_Vec3 <- c(TRUE, \"FALSE\", TRUE, TRUE, FALSE)\nLogical_Vec3\n\n[1] \"TRUE\"  \"FALSE\" \"TRUE\"  \"TRUE\"  \"FALSE\"\n\nclass(Logical_Vec3)\n\n[1] \"character\"\n\n\n\n\n使い方\n　直接TRUEやFALSEが格納されたベクトルを使う場面はほとんどない。つまり、ほとんどのlogical型ベクトルは何らかの論理演算子から返されたものである。以下の例は、My_Vector1から奇数の要素のみを抽出するために、My_Logical1というベクトルを作成する例である。\n\nMy_Vector1  <- c(89, 28, 93, 64, 6)\nMy_Logical1 <- My_Vector1 %% 2 == 1 # My_Vector1を2で割ったら余りが1か\nMy_Logical1\n\n[1]  TRUE FALSE  TRUE FALSE FALSE\n\nclass(My_Logical1)\n\n[1] \"logical\"\n\nMy_Vector1[My_Logical1] # My_Vector1から奇数のみ抽出\n\n[1] 89 93\n\nMy_Vector1[My_Vector1 %% 2 == 0] # 直接式を入れてもOK\n\n[1] 28 64  6"
+  },
+  {
+    "objectID": "materials/datatype.html#numeric型",
+    "href": "materials/datatype.html#numeric型",
+    "title": "第7回講義資料",
+    "section": "Numeric型",
+    "text": "Numeric型\n\nNumeric_Vec1 <- c(2, 0, 0, 1, 3)\nNumeric_Vec1\n\n[1] 2 0 0 1 3\n\n# Numeric_Vec1のデータ型\nclass(Numeric_Vec1)\n\n[1] \"numeric\"\n\n# Numeric_Vec1がNumeric型か否かを判定\nis.numeric(Numeric_Vec1)\n\n[1] TRUE\n\n\n\nNumeric型の演算\nCase1: 同じ長さのベクトル同士の演算\n\nNumeric_Vec2 <- c(1, 2, 3, 4, 5)  # 長さ5のnumeric型ベクトル\nNumeric_Vec3 <- c(11, 7, 5, 3, 2) # 長さ5のnumeric型ベクトル\n\n\nNumeric_Vec2 + Numeric_Vec3 # c(1+11, 2+7, 3+5, 4+3, 5+2)\n\n[1] 12  9  8  7  7\n\nNumeric_Vec2^Numeric_Vec3 # c(1^11, 2^7, 3^5, 4^3, 5^2)\n\n[1]   1 128 243  64  25\n\n\n\n同じ長さのベクトル同士の演算の場合、同じ位置の要素同士で演算を行う。\n\nCase2: 長さ2以上 (A)と長さ1 (B)同士の演算\n\nNumeric_Vec4 <- c(10) # 長さ1の場合、c()はなくてもOK\n\n\nNumeric_Vec3 * Numeric_Vec4 # c(11*10, 7*10, 5*10, 3*10, 2*10)\n\n[1] 110  70  50  30  20\n\nNumeric_Vec3 / Numeric_Vec4 # c(11/10, 7/10, 5/10, 3/10, 2/10)\n\n[1] 1.1 0.7 0.5 0.3 0.2\n\n\n\n(A)のそれぞれ要素と(B)の要素同士で演算を行う\n\nc(10)が自動的にc(10, 10, 10, 10, 10)へ変換されたと考えてもOK\n\n\nCase3: 長さ2以上と長さ2以上で長さが異なる場合\n\nNumeric_Vec5 <- c(1, 2, 3)\n\n\nNumeric_Vec3 * Numeric_Vec5 # c(11*1, 7*2, 5*3, 3*1, 2*2)\n\n[1] 11 14 15  3  4\n\nNumeric_Vec3 / Numeric_Vec5 # c(11/1, 7/2, 5/3, 3/1, 2/2)\n\n[1] 11.000000  3.500000  1.666667  3.000000  1.000000\n\n\n\nより短いの要素がリサイクルされる\n\nc(1, 2, 3)が自動的にc(1, 2, 3, 1, 2)へ変換されたと考えてもOK\n警告が表示される場合もあるが、演算には問題なし（長さが倍数になっていない場合など）\nベクトル・リサイクル（vector recycle）\n\n\n\n\n注意点\n　Logical型と同じ理由でnumeric型の値を\"で囲んではいけない。一つでも\"で囲むとNumeric型でなく、Character型へ変換されてしまう。\n\n# 4つ目のFALSEを\"で囲むと...\nNumeric_Vec6 <- c(38, 29, 10, \"94\", 51)\nNumeric_Vec6\n\n[1] \"38\" \"29\" \"10\" \"94\" \"51\"\n\nclass(Numeric_Vec6)\n\n[1] \"character\""
+  },
+  {
+    "objectID": "materials/datatype.html#character型",
+    "href": "materials/datatype.html#character型",
+    "title": "第7回講義資料",
+    "section": "Character型",
+    "text": "Character型\n要素が\"で囲まれたデータ型\n\n文字列型\n\n\nChar_Vec1 <- c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsmeikan\")\nChar_Vec1\n\n[1] \"Kansai\"         \"Kwansei-gakuin\" \"Doshisha\"       \"Ritsmeikan\"    \n\nclass(Char_Vec1)\n\n[1] \"character\"\n\nis.character(Char_Vec1)\n\n[1] TRUE\n\n\n\n文字列の長さ\n\nlength()はベクトルの長さを求める関数\n\n\nlength(Char_Vec1)\n\n[1] 4\n\n\n\nnchar()は各要素の文字数を求める関数\n\n\nnchar(Char_Vec1)\n\n[1]  6 14  8 10\n\n\n\n\n文字の結合\n\npaste(Character型, Character型)\n\nケース1: Char_Vec1の全要素の後に\"University\"を付ける\n\nChar_Vec2 <- paste(Char_Vec1, \"University\")\nChar_Vec2 # \"University\"の前に自動的にスペースが入る\n\n[1] \"Kansai University\"         \"Kwansei-gakuin University\"\n[3] \"Doshisha University\"       \"Ritsmeikan University\"    \n\n\nケース2: Char_Vec2の全要素の前に1、2、…を付け、数字と大学名は\".\"で結合\n\nsep =で結合される要素間に入る文字を指定（デフォルトはスペース）\n\n\nChar_Vec3 <- paste(1:4, Char_Vec2, sep = \".\")\nChar_Vec3\n\n[1] \"1.Kansai University\"         \"2.Kwansei-gakuin University\"\n[3] \"3.Doshisha University\"       \"4.Ritsmeikan University\"    \n\n\npaste()は結合される文字列の間にスペースが自動的に入り、なくすためにはsep = \"\"を指定する必要がある\n\npaste0()はスペース無しで結合する関数\n\nケース3: Char_Vec1の全要素の後に\"-Daigaku\"を付ける\n\nChar_Vec4 <- paste0(Char_Vec1, \"-Daigaku\")\n# \"-Daigaku\"の前にスペースがないことに注目\nChar_Vec4\n\n[1] \"Kansai-Daigaku\"         \"Kwansei-gakuin-Daigaku\" \"Doshisha-Daigaku\"      \n[4] \"Ritsmeikan-Daigaku\""
+  },
+  {
+    "objectID": "materials/datatype.html#factor型",
+    "href": "materials/datatype.html#factor型",
+    "title": "第7回講義資料",
+    "section": "Factor型",
+    "text": "Factor型\n順序付きの文字列型 / ラベル付き数値型\n\nCharacter型だと、アルファベット順となる\n図表を作成する際に重宝されるデータ型\n\n図表上の表示順番はFactor型でなくとアルファベット順となる\n\n詳細はデータハンドリングおよび可視化で解説\n\n\n\nCharacter型の場合\n\n\n\nPrefecture\nPopulation\n\n\n\n\nAichi\n7,484,094\n\n\nAkita\n1,022,839\n\n\n…\n…\n\n\nYamaguchi\n1,405,007\n\n\nYamanashi\n835,165\n\n\n\n\n\n\nFactor型の場合\n\n\n\nPrefecture\nPopulation\n\n\n\n\nHokkaido\n5,383,579\n\n\nAomori\n1,308,649\n\n\n…\n…\n\n\nKagoshima\n1,648,752\n\n\nOkinawa\n1,434,138\n\n\n\n\n\n\nFactor型の作成\n既存のCharacter型ベクトルをFactor型に\n\nKankandoritsu <- c(\"Doshisha\", \"Kansai\", \"Kwansei-gakuin\", \"Ritsumeikan\")\nclass(Kankandoritsu)\n\n[1] \"character\"\n\nKankandoritsu\n\n[1] \"Doshisha\"       \"Kansai\"         \"Kwansei-gakuin\" \"Ritsumeikan\"   \n\n\n\nKankandoritsu <- factor(Kankandoritsu,\n                        levels = c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsumeikan\"))\nclass(Kankandoritsu)\n\n[1] \"factor\"\n\nKankandoritsu\n\n[1] Doshisha       Kansai         Kwansei-gakuin Ritsumeikan   \nLevels: Kansai Kwansei-gakuin Doshisha Ritsumeikan\n\n\n\n\nFactor型の詳細\n　このfactor型は非常に重要なデータ型であり、図表を作成する際には必ず考えなくてはならないものである。先ほどの例のように、文字列をfactor化しないと要素はアルファベット順になる。図表において順番が思い通りにならない原因は、factor化していない、またはfactor化が間違っているのがほとんどである。factor型については今後データハンドリング、可視化の講義で改めて解説する。"
+  },
+  {
+    "objectID": "materials/datatype.html#欠損値",
+    "href": "materials/datatype.html#欠損値",
+    "title": "第7回講義資料",
+    "section": "欠損値",
+    "text": "欠損値\nデータ分析において頻繁に遭遇するのはNA\n参考\n\nNA: 何らかの値があるはずだが、欠損している状態\n\n「欠損値」とも呼ばれる\n多くのデータには欠損値が含まれているため、欠損値処理は非常に重要\n\nNULL: そもそも存在しない\nNaN: 計算不可（例: 0 \\(\\div\\) 0）\nInf: 無限大（例: 10 \\(\\div\\) 0）\n\nNaNとInfのベクトルを作ることも可能であるが、使う機会はない * 計算された結果としてNaNとInfの意味が分かれば問題なし\n\nNAとNULLの違い\nNAは要素扱いだが、NULLはカウントされない\n\nNA_Vec   <- c(1, 2, 3, NA, 5, NA, 7)\nNULL_Vec <- c(1, 2, 3, NULL, 5, NULL, 7)\nlength(NA_Vec)\n\n[1] 7\n\nlength(NULL_Vec)\n\n[1] 5\n\nNA_Vec\n\n[1]  1  2  3 NA  5 NA  7\n\nNULL_Vec\n\n[1] 1 2 3 5 7\n\n\n\n\n欠損値を含むベクトルの計算\nベクトルに欠損値が含まれている場合、平均値（mean()）、標準偏差（sd()）などの計算ができないことに注意 * NAが含まれているベクトルの平均値、標準偏差、分散などはNAと出力される * length()などは機能する\n\nmean(NA_Vec)\n\n[1] NA\n\n\n\n\n欠損値を含むベクトルの計算（１）\n\n方法1: データから欠損値を除外する\n\n!演算子は否定を意味する（第3回参照）\nちなみに、NA_Vec == NA、NA_Vec != NAは使用不可\n\n\n\nis.na(NA_Vec) # 各要素がNAか否かを判定\n\n[1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE\n\n!is.na(NA_Vec) # 各要素がNAか否かの判定を反転\n\n[1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE\n\nNA_Vec[!is.na(NA_Vec)] # 欠損値でない要素のみ抽出\n\n[1] 1 2 3 5 7\n\nmean(NA_Vec[!is.na(NA_Vec)])\n\n[1] 3.6\n\n\n\n方法2: 関数内にna.rm = TRUEを追加する\n\nna.rmはmean()関数の仮引数(かりひきすう)であり、TRUEは仮引数(じつひきすう)と呼ぶ。合わせて引数(ひきすう)\n通常、関数には様々な引数が用意されている。Rコンソール上で?関数名を入力するとヘルプが読める（例: ?mean）\n\n\n\nmean(NA_Vec, na.rm = TRUE)\n\n[1] 3.6"
+  },
+  {
+    "objectID": "materials/basic.html#電卓としてのr",
+    "href": "materials/basic.html#電卓としてのr",
     "title": "第3回講義資料",
-    "section": "",
-    "text": "手順1: File > New File > R Scriptをクリックする。\n\n\n\n\n\n\n\n\n\n手順2: Sourceペインのペイン最大化ポタンをクリックし、Sourceペインの大きさ最大化する。\n\n\n\n\n\n\n\n\n\n手順3: Sourceペインに以下の内容を入力する。\n\n1 + 1\n\n手順4: コードの行にカーソルをおいたままCmd + Return（Windowsの場合、Control (Ctrl) + Enter）を入力する。これはカーソルが位置する行のコードを実行するコマンドである。\n\n\n\n\n\n\nカーソルって…?\n\n\n\nカーソル (cursor)とは文字の入力位置を意味する。RStudioのテーマによって色は異なるが、Sourceペイン、またはConsoleペインなど、何らかの文字が入力できる箇所において点滅する「|」がカーソルです。\n\n\n手順5: Consoleペインに結果が表示される。\n\n\n[1] 2\n\n\n　これくらいの計算はConsoleペインで直接打ち込んでも良いが、自分がこれまで書いたコードを残すという意味でSourceペインに入力することを推奨する。R Scriptを保存しておけばいつでも開いて前回のコードを再現できる。"
+    "section": "電卓としてのR",
+    "text": "電卓としてのR\n手順1: File > New File > R Scriptをクリックする。\n\n\n\n\n\n\n\n\n\n手順2: Sourceペインのペイン最大化ポタンをクリックし、Sourceペインの大きさ最大化する。\n\n\n\n\n\n\n\n\n\n手順3: Sourceペインに以下の内容を入力する。\n\n1 + 1\n\n手順4: コードの行にカーソルをおいたままCmd + Return（Windowsの場合、Control (Ctrl) + Enter）を入力する。これはカーソルが位置する行のコードを実行するコマンドである。\n\n\n\n\n\n\nカーソルって…?\n\n\n\nカーソル (cursor)とは文字の入力位置を意味する。RStudioのテーマによって色は異なるが、Sourceペイン、またはConsoleペインなど、何らかの文字が入力できる箇所において点滅する「|」がカーソルです。\n\n\n手順5: Consoleペインに結果が表示される。\n\n\n[1] 2\n\n\n　これくらいの計算はConsoleペインで直接打ち込んでも良いが、自分がこれまで書いたコードを残すという意味でSourceペインに入力することを推奨する。R Scriptを保存しておけばいつでも開いて前回のコードを再現できる。"
   },
   {
     "objectID": "materials/basic.html#コメント",
@@ -67,21 +123,14 @@
     "href": "materials/basic.html#教科書",
     "title": "第3回講義資料",
     "section": "教科書",
-    "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』第6章: 基本的な操作\n『私たちのR: ベストプラクティスの探求』第8章: データ構造 (第2節)\n『私たちのR: ベストプラクティスの探求』第7章: データの入出力"
+    "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』第6章: 基本的な操作\n『私たちのR: ベストプラクティスの探求』第9章: データ構造（第2節）\n『私たちのR: ベストプラクティスの探求』第7章: データの入出力\n『私たちのR: ベストプラクティスの探求』第8章: データ型（第3節）"
   },
   {
     "objectID": "HW/HW01.html",
     "href": "HW/HW01.html",
     "title": "「ミクロ政治データ分析実習」第1回課題",
     "section": "",
-    "text": "課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）"
-  },
-  {
-    "objectID": "intro/file.html",
-    "href": "intro/file.html",
-    "title": "ファイル管理",
-    "section": "",
-    "text": "フォルダー/ファイルの管理はJupyterHub内でも、RStudio内でもできるが、ここではRStudio側で管理する方法を紹介する。RStudioを起動し、作業するプロジェクトを開き、Filesペインを確認しよう。RStudioを経由したフォルダー/ファイルの管理は全てFilesペイン上で行われる。"
+    "text": "課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）"
   },
   {
     "objectID": "intro/file.html#フォルダーの管理",
@@ -96,13 +145,6 @@
     "title": "ファイル管理",
     "section": "2 ファイルの管理",
     "text": "2 ファイルの管理\n　分析に使用するデータセットを自分のPCにダウンロードしてもそのままNIIオンライン分析システムで使うことはできない。NIIオンライン分析システムで使用するためには、ファイルをアップロードする必要がある。これはデータだけでなく、本講義の課題用ファイルについても同様である。\n\n2.1 ファイルのアップロード\n手順1: ファイルをアップロードしたいフォルダーへ移動する。\n\n下位フォルダーへの移動: フォルダー名をクリックする。\n上位フォルダーへの移動: 「..」をクリックするか、パスが表示されているバーで移動先をクリックする。\n\n手順2: ファイルのアップロード先が正しいかを確認し、Uploadをクリックする。\n\n以下の例はHomework_01プロジェクト・フォルダー内のDataフォルダーがアップロード先である。\n\n\n\n\n\n\n\n\n\n\n手順3: File to upload:でアップロードしたいファイルを選択する。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n複数のファイルをアップロードしたい場合\n\n\n\nRStudio上でファイルは一度の一つしかアップロードできない。複数のファイルを同時にアップロードしたい場合は、この作業を繰り返すか、JupyterHubのホーム画面でアップロードする必要がある。\n\n\n手順4: アップロードするファイルをダブルクリックする。\n\n以下ではPrev_Vote.csvというファイルをアップロードする例である。\n\n\n\n\n\n\n\n\n\n\n手順5: OKをクリックする。\n\n\n\n\n\n\n\n\n\n手順6: 正しくファイルがアップロードされているかを確認する。\n\n\n\n\n\n\n\n\n\n\n\n2.2 ファイルのダウンロード\n　作成した図表をLaTex/Microsoft Word/Powerpoint/Pages/Keynoteなどで使うためには、その図表を自分のPCにダウンロードする必要がある。同様に、課題の出力物をLMSに提出するためにも、出力物を一旦自分のPCにダウンロードしてから提出する必要がある。\n\n\n\n\n\n\n複数ファイルのダウンロード\n\n\n\nアップロードは一度ごとに一つのファイルしかアップロードできないが、ダウンロードは複数のファイルを同時にダウンロードできる。ただし、個別のファイルがダウンロードされるのではなく、一つのファイルととして圧縮（zip形式）されてからダウンロードされる。ダウンロード後はファイルを解凍すること。\n\n\n手順1: ダウンロードするファイル名の左にチェックを付ける。\n\n以下ではMicro_HW01.htmlというファイルをダウンロードする例である。\n\n\n\n\n\n\n\n\n\n\n手順2: More > Export…をクリックする。\n\n\n\n\n\n\n\n\n\n手順3: Downloadをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n課題の出力物は提出する前に必ず確認を!!\n\n\n\nLMSで課題を提出するためには出力物を提出する必要があるが、提出する前にダウンロードしたファイルを必ず確認しよう。間違ったファイルを提出した場合でも提出期限内なら差し替え可能だが、期限が過ぎた場合、理由を問わず差し替えは認めない。また、間違ったファイルが提出されたことを宋が個別に知らせることもないため注意しよう。\n\n\n\n\n2.3 ファイルの削除\nフォルダーの削除と同じ手順で削除できる。"
-  },
-  {
-    "objectID": "intro/homework.html",
-    "href": "intro/homework.html",
-    "title": "課題の取り組み方",
-    "section": "",
-    "text": "課題の取り組み方が分からない?\n\n\n\n必ず宋と相談すること。"
   },
   {
     "objectID": "intro/homework.html#step1-課題ファイル一式の入手",
@@ -140,11 +182,11 @@
     "text": "Step5: 提出\n手順1: LMSの授業ページから「第XX回 課題提出窓口」をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: 指定された形式のファイルを添付し、「レポート提出」クリックする。\n\n提出されたら「202X-XX-XX XX:XX:XX にファイル xxxxxxxx が提出済みです。」と表示される。ここまでできたら終了ボタンをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n課題がちゃんと提出されているか不安です…\n\n\n\n自分が提出した課題はLMSの「マイレポート」から確認できる。\n\n\n\n\n\n\n\n\n\n以下のように自分が提出した課題のリストが表示される。提出物のダウンロードもできるため、ファイルが問題なくアップロードされているかも確認できる。"
   },
   {
-    "objectID": "intro/install.html",
-    "href": "intro/install.html",
+    "objectID": "intro/install.html#初期設定",
+    "href": "intro/install.html#初期設定",
     "title": "Rの導入",
-    "section": "",
-    "text": "注意!!!\n\n\n\n初期設定は国立情報学研究所（以下、NII）のサーバーに自分の作業用スペースを借りる作業である。つまり、初期設定を繰り返すことはNIIのサーバー（のスペース）をいくつも借りることとなり、サーバーを圧迫してしまう可能性がある。したがって、初期設定は授業全体を通じて1回のみ実行すること。\n\n\n手順1: 以下のアドレスにアクセスする。\n\nhttps://binder.cs.rcos.nii.ac.jp/v2/gh/JaehyunSong/Binder_R/HEAD\n\n手順2: 所属機関に「関西大学」、または「Kansai University」を入力・選択し、「選択」をクリックする。このような画面が表示されない場合は手順2から5は飛ばしても良い。\n\n\n\n\n\n\n\n\n\n手順3: 自分の関西大学のIDをパスワードを入力する。こちらのIDとパスワードは関西大学インフォメーション・システムおよびLMSのID/パスワードと同じである。\n\n\n\n\n\n\n\n\n\n手順4: このまま「同意します」をクリックする。\n\n\n\n\n\n\n\n\n\n手順5: 以下のような画面が表示されたらしばらく待つ。\n\n\n\n\n\n\n\n\n\n手順6: 以下のような画面が表示されたら初期設定は完了\n\n\n\n\n\n\n\n\n\n手順7: 初期設定が終わったら、すぐRおよびRStudioが利用可能だが、ここでは一旦右上の「Logout」をクリックし、タブ (or ウィンドウ) を閉じる。"
+    "section": "1 初期設定",
+    "text": "1 初期設定\n\n\n\n\n\n\n注意!!!\n\n\n\n初期設定は国立情報学研究所（以下、NII）のサーバーに自分の作業用スペースを借りる作業である。つまり、初期設定を繰り返すことはNIIのサーバー（のスペース）をいくつも借りることとなり、サーバーを圧迫してしまう可能性がある。したがって、初期設定は授業全体を通じて1回のみ実行すること。\n\n\n手順1: 以下のアドレスにアクセスする。\n\nhttps://binder.cs.rcos.nii.ac.jp/v2/gh/JaehyunSong/Binder_R/HEAD\n\n手順2: 所属機関に「関西大学」、または「Kansai University」を入力・選択し、「選択」をクリックする。このような画面が表示されない場合は手順2から5は飛ばしても良い。\n\n\n\n\n\n\n\n\n\n手順3: 自分の関西大学のIDをパスワードを入力する。こちらのIDとパスワードは関西大学インフォメーション・システムおよびLMSのID/パスワードと同じである。\n\n\n\n\n\n\n\n\n\n手順4: このまま「同意します」をクリックする。\n\n\n\n\n\n\n\n\n\n手順5: 以下のような画面が表示されたらしばらく待つ。\n\n\n\n\n\n\n\n\n\n手順6: 以下のような画面が表示されたら初期設定は完了\n\n\n\n\n\n\n\n\n\n手順7: 初期設定が終わったら、すぐRおよびRStudioが利用可能だが、ここでは一旦右上の「Logout」をクリックし、タブ (or ウィンドウ) を閉じる。"
   },
   {
     "objectID": "intro/install.html#niiオンライン分析システムの起動",
@@ -168,11 +210,11 @@
     "text": "4 RStudioの終了\n手順1: RStudio画面右上のオレンジ色のボタンをクリックする。\n\n\n\n\n\n\n\n\n\n手順2: 以下のダイアログが表示されたらタブ、またはウィンドウを閉じる。"
   },
   {
-    "objectID": "intro/packages.html",
-    "href": "intro/packages.html",
+    "objectID": "intro/packages.html#インストール",
+    "href": "intro/packages.html#インストール",
     "title": "パッケージ",
-    "section": "",
-    "text": "Rには数万以上のパッケージが存在し、Rをインストールするだけでも数十のパッケージが自動的にインストールされる。しかし、データ分析/ハンドリング/可視化の手法は日々発展しており、R内蔵パッケージだけでは対応が難しい (できないわけではない)。したがって、必要に応じて新しいパッケージを導入する必要があるが、パッケージのインストールするにはConsoleペインに以下のように入力する。\ninstall.packages(\"インストールするパッケージ名\")\n　前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用する予定である。ただし、本講義ようにセッティングされた環境を導入する場合、{tidyverse}は既に導入済みであるため、以下のコードは実行しなくても良い。"
+    "section": "1 インストール",
+    "text": "1 インストール\n　Rには数万以上のパッケージが存在し、Rをインストールするだけでも数十のパッケージが自動的にインストールされる。しかし、データ分析/ハンドリング/可視化の手法は日々発展しており、R内蔵パッケージだけでは対応が難しい (できないわけではない)。したがって、必要に応じて新しいパッケージを導入する必要があるが、パッケージのインストールするにはConsoleペインに以下のように入力する。\ninstall.packages(\"インストールするパッケージ名\")\n　前期の「ミクロ政治データ分析実習」では{tidyverse}パッケージのみ使用する予定である。ただし、本講義ようにセッティングされた環境を導入する場合、{tidyverse}は既に導入済みであるため、以下のコードは実行しなくても良い。"
   },
   {
     "objectID": "intro/packages.html#アップデート",
@@ -189,11 +231,11 @@
     "text": "3 教科書\n『私たちのR』の第5章「Rパッケージ」: https://www.jaysong.net/RBook/packages.html"
   },
   {
-    "objectID": "intro/project.html",
-    "href": "intro/project.html",
+    "objectID": "intro/project.html#プロジェクトの作成",
+    "href": "intro/project.html#プロジェクトの作成",
     "title": "プロジェクト管理",
-    "section": "",
-    "text": "手順1: File > New Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: New Directoryをクリックする。\n\n\n\n\n\n\n\n\n\n手順3: New Projectをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: Directory name:にプロジェクト名を入力し、Create Projectをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n注意: プロジェクト名の付け方\n\n\n\nプロジェクト名にはローマ字、数字のみを使おう。スペースもなるべく使わず、空白を入れたい場合はスペースの代わりにアンダースコア（_）を使おう。"
+    "section": "1 プロジェクトの作成",
+    "text": "1 プロジェクトの作成\n手順1: File > New Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: New Directoryをクリックする。\n\n\n\n\n\n\n\n\n\n手順3: New Projectをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: Directory name:にプロジェクト名を入力し、Create Projectをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n注意: プロジェクト名の付け方\n\n\n\nプロジェクト名にはローマ字、数字のみを使おう。スペースもなるべく使わず、空白を入れたい場合はスペースの代わりにアンダースコア（_）を使おう。"
   },
   {
     "objectID": "intro/project.html#プロジェクトの開き方",
@@ -201,13 +243,6 @@
     "title": "プロジェクト管理",
     "section": "2 プロジェクトの開き方",
     "text": "2 プロジェクトの開き方\n　プロジェクトを作成すれば、自動的に出来たてのプロジェクトが開かれる。しかし、NIIオンライン分析システムから一旦ログアウトし、改めてRStudioを起動する場合、プロジェクトをロードする必要がある。\n手順1: File > Open Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: プロジェクト・フォルダー名をダブルクリックする。\n\n\n\n\n\n\n\n\n\n手順3: .Rprojで終わるファイルをダブルクリックする。\n\n\n\n\n\n\n\n\n\nプロジェクトが正しくロードされている場合、RStudioの右上にプロジェクト名が表示される。"
-  },
-  {
-    "objectID": "intro/rstudio.html",
-    "href": "intro/rstudio.html",
-    "title": "RStudioの設定",
-    "section": "",
-    "text": "RStudioはそのままでも使えるが、少しカスタマイズするとより使い勝手が良くなる。RStudioのカスタマイズ画面はTools > Global Optionsをクリックすることで表示される。\n以下の設定はNIIオンライン分析システムで使用可能なRStudio最新版 (RStudio Server 2021.09.1+372)の設定であり、宋の設定と同じである。"
   },
   {
     "objectID": "intro/rstudio.html#general",
@@ -256,14 +291,14 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "アイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月27日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.135\nR package {quarto} 1.1"
+    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月28日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
+    "objectID": "about.html#概要",
+    "href": "about.html#概要",
     "title": "本講義について",
-    "section": "",
-    "text": "講義日: 木曜日 第4時限（14:40～16:10）\n場所: TC304教室（高槻キャンパス C棟 304教室）\n講義内容: Rの使い方\n\nRの基本的な操作 & R Markdown\nデータの入出力\nデータのハンドリング（前処理）\nデータの可視化\n\n統計学、確率、多変量解析、因果推論の授業ではない。\n\nデータ分析の手法は後期の「マクロ政治データ分析実習」で紹介する。\n後期の授業ではRの使い方について解説しない。\n\n到達目標: Rを用いたデータ分析の教科書が読める土台づくり"
+    "section": "概要",
+    "text": "概要\n\n講義日: 木曜日 第4時限（14:40～16:10）\n場所: TC304教室（高槻キャンパス C棟 304教室）\n講義内容: Rの使い方\n\nRの基本的な操作 & R Markdown\nデータの入出力\nデータのハンドリング（前処理）\nデータの可視化\n\n統計学、確率、多変量解析、因果推論の授業ではない。\n\nデータ分析の手法は後期の「マクロ政治データ分析実習」で紹介する。\n後期の授業ではRの使い方について解説しない。\n\n到達目標: Rを用いたデータ分析の教科書が読める土台づくり"
   },
   {
     "objectID": "about.html#オフィスアワー",
@@ -277,7 +312,7 @@
     "href": "about.html#講義内容",
     "title": "本講義について",
     "section": "講義内容",
-    "text": "講義内容\n\n第1回 イントロダクション\n第2回 RとIDEの導入\n第3回 Rの基本的な操作\n第4回 プログラミングの基本的な概念\n第5回 R Markdownと再現可能な研究\n第6回 データ収集\n第7回 データ型\n第8回 データ構造\n第9回 データハンドリング（1）\n第10回 データハンドリング（2）\n第11回 データハンドリング（3）\n第12回 可視化（1）\n第13回 可視化（2）\n第14回 可視化（3）\n第15回 期末テスト"
+    "text": "講義内容\n\n\n\n回\n内容\n教科書\n\n\n\n\n1\nイントロダクション\n\n\n\n2\nRとIDEの導入\n第1、2、3、4、5章\n\n\n3\nRの基本的な操作\n第6章\n\n\n4\nプログラミングの基本的な概念\n第10、11章\n\n\n5\nR Markdownと再現可能な研究\n第21章\n\n\n6\nデータ収集\n\n\n\n7\nデータ型\n第8章\n\n\n8\nデータ構造\n第9章\n\n\n9\nデータハンドリング（1）\n第12、13、14、15章\n\n\n10\nデータハンドリング（2）\n同上\n\n\n11\nデータハンドリング（3）\n同上\n\n\n12\n可視化（1）\n第17、18、19、20、章\n\n\n13\n可視化（2）\n同上\n\n\n14\n可視化（3）\n同上\n\n\n15\n期末テスト"
   },
   {
     "objectID": "about.html#本講義の位置づけ",
@@ -319,7 +354,7 @@
     "href": "about.html#注意事項",
     "title": "本講義について",
     "section": "注意事項",
-    "text": "注意事項"
+    "text": "注意事項\n\nコードは以下のように背景に色が付けられている部分である。\n\n\nprint(\"Hello!\")\n\n\nコードの中で#で始まる内容はコメントであり、分析に影響を与えない。ただし、\"や'で囲まれた#はコメントではない。また、行の途中から#が入る場合、#以降は実行されない。\n\n\n# Hello!を出力するコード\nprint(\"Hello!\")\n\n# \"や'内の#はコメントではない\nprint(\"この#はコメントではありません\")\n\nprint(\"Hello World!\") # Hello World!を出力\n\n\n出力結果は以下のように背景なし&等幅フォントで出力される。\n\n\n\n[1] \"Hello!\"\n\n\n\nオブジェクト名は変数名や関数名()のように文中の色付き背景で示された部分である。\nパッケージ名は{}で囲む。tidyverseパッケージの場合、{tidyverse}と表記する1。"
   },
   {
     "objectID": "about.html#参考-マクロ政治データ分析実習の内容-予定",
@@ -329,11 +364,11 @@
     "text": "参考) マクロ政治データ分析実習の内容 (予定)\n\nリサーチデザイン\n記述統計\n統計的推定と仮説検定\n変数間の関係 ( \\(t\\) 検定、 \\(\\chi^2\\) 検定、相関分析)\n線形回帰分析\n交互作用\nロジスティック回帰分析\n分析結果の可視化"
   },
   {
-    "objectID": "data.html",
-    "href": "data.html",
+    "objectID": "data.html#データの利用",
+    "href": "data.html#データの利用",
     "title": "実習用データ集",
-    "section": "",
-    "text": "以下のリストからデータのファイル名をクリックし、PCにダウンロード&保存する。\nNIIオンライン分析システムのプロジェクト・フォルダー内にDataという名の新しいフォルダーを作成する。\nDataフォルダーにダウンロードしたデータをアップロードする。\n\nプロジェクト・フォルダー直に入れても良いが、データ読み込みの際、パスを適宜修正すること。"
+    "section": "データの利用",
+    "text": "データの利用\n\n以下のリストからデータのファイル名をクリックし、PCにダウンロード&保存する。\nNIIオンライン分析システムのプロジェクト・フォルダー内にDataという名の新しいフォルダーを作成する。\nDataフォルダーにダウンロードしたデータをアップロードする。\n\nプロジェクト・フォルダー直に入れても良いが、データ読み込みの際、パスを適宜修正すること。"
   },
   {
     "objectID": "data.html#データ一覧",

@@ -1,4 +1,5 @@
 /* css styles */
+
 a {
     text-decoration:none; 
 }
@@ -17,4 +18,8 @@ ol > li > ol {
 
 ol > li > ul {
   margin-bottom: 0px;
+}
+
+figure figcaption {
+    text-align: center;
 }

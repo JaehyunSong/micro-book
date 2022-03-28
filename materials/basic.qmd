@@ -7,7 +7,8 @@ toc-title: "目次"
 
 ```{r}
 #| include: false
-knitr::opts_chunk$set(fig.align = "center")
+knitr::opts_chunk$set(fig.align = "center",
+                      commnet   = "#>")
 rm(list = ls())
 ```
 
@@ -451,5 +452,6 @@ tail(my_data) # my_dataの最後の6行を出力
 ## 教科書
 
 * 『私たちのR: ベストプラクティスの探求』[第6章: 基本的な操作](https://www.jaysong.net/RBook/rbasic.html)
-* 『私たちのR: ベストプラクティスの探求』[第8章: データ構造 (第2節)](https://www.jaysong.net/RBook/datastructure.html#structure-vector)
+* 『私たちのR: ベストプラクティスの探求』[第9章: データ構造（第2節）](https://www.jaysong.net/RBook/datastructure.html#structure-vector)
 * 『私たちのR: ベストプラクティスの探求』[第7章: データの入出力](https://www.jaysong.net/RBook/io.html)
+* 『私たちのR: ベストプラクティスの探求』[第8章: データ型（第3節）](https://www.jaysong.net/RBook/datatype.html#type-numeric)

@@ -35,21 +35,23 @@ knitr::opts_chunk$set(fig.align = "center")
 
 ## 講義内容
 
-* 第1回 イントロダクション
-* 第2回 RとIDEの導入
-* 第3回 Rの基本的な操作
-* 第4回 プログラミングの基本的な概念
-* 第5回 R Markdownと再現可能な研究
-* 第6回 データ収集
-* 第7回 データ型
-* 第8回 データ構造
-* 第9回 データハンドリング（1）
-* 第10回 データハンドリング（2）
-* 第11回 データハンドリング（3）
-* 第12回 可視化（1）
-* 第13回 可視化（2）
-* 第14回 可視化（3）
-* 第15回 期末テスト
+| 回 | 内容 | 教科書 |
+|:--:|------|--------|
+|  1 | イントロダクション | |
+|  2 | RとIDEの導入 | 第[1](https://www.jaysong.net/RBook/aboutr.html)、[2](https://www.jaysong.net/RBook/installation.html)、[3](https://www.jaysong.net/RBook/ide.html)、[4](https://www.jaysong.net/RBook/R-Customize.html)、[5](https://www.jaysong.net/RBook/packages.html)章 |
+|  3 | Rの基本的な操作 | 第[6](https://www.jaysong.net/RBook/rbasic.html)章 |
+|  4 | プログラミングの基本的な概念 | 第[10](https://www.jaysong.net/RBook/programming.html)、[11](https://www.jaysong.net/RBook/functions.html)章 |
+|  5 | R Markdownと再現可能な研究 | 第[21](https://www.jaysong.net/RBook/rmarkdown.html)章 |
+|  6 | データ収集 | |
+|  7 | データ型 | 第[8](https://www.jaysong.net/RBook/datatype.html)章 |
+|  8 | データ構造 | 第[9](https://www.jaysong.net/RBook/datastructure.html)章 |
+|  9 | データハンドリング（1） | 第[12](https://www.jaysong.net/RBook/datahandling1.html)、[13](https://www.jaysong.net/RBook/datahandling2.html)、[14](https://www.jaysong.net/RBook/factor.html)、[15](https://www.jaysong.net/RBook/tidydata.html)章 |
+| 10 | データハンドリング（2） | 同上 |
+| 11 | データハンドリング（3） | 同上 |
+| 12 | 可視化（1） | 第[17](https://www.jaysong.net/RBook/visualization1.html)、[18](https://www.jaysong.net/RBook/visualization2.html)、[19](https://www.jaysong.net/RBook/visualization3.html)、[20](https://www.jaysong.net/RBook/visualization4.html)、章 |
+| 13 | 可視化（2） | 同上 |
+| 14 | 可視化（3） | 同上 |
+| 15 | 期末テスト | |
 
 ## 本講義の位置づけ
 
@@ -108,8 +110,6 @@ knitr::include_graphics("Figs/Syllabus/Reference3.jpg")
 ```
 :::
 
-
-
 ## 成績評価
 
 * **平常点** (20%)
@@ -128,6 +128,38 @@ knitr::include_graphics("Figs/Syllabus/Reference3.jpg")
    * 不正行為厳禁
 
 ## 注意事項
+
+* コードは以下のように背景に色が付けられている部分である。
+
+```{r}
+#| eval: false
+print("Hello!")
+```
+
+* コードの中で`#`で始まる内容はコメントであり、分析に影響を与えない。ただし、`"`や`'`で囲まれた`#`はコメントではない。また、行の途中から`#`が入る場合、`#`以降は実行されない。
+
+```{r}
+#| eval: false
+# Hello!を出力するコード
+print("Hello!")
+
+# "や'内の#はコメントではない
+print("この#はコメントではありません")
+
+print("Hello World!") # Hello World!を出力
+```
+
+* 出力結果は以下のように背景なし&等幅フォントで出力される。
+
+```{r}
+#| echo: false
+print("Hello!")
+```
+
+* オブジェクト名は`変数名`や`関数名()`のように文中の色付き背景で示された部分である。
+* パッケージ名は{}で囲む。tidyverseパッケージの場合、{tidyverse}と表記する[^package-name]。
+
+[^package-name]: ただし、パッケージ名を{}で囲むのは一般的な表記ではないことを断っておきたい。
 
 ## 参考) マクロ政治データ分析実習の内容 (予定)
 

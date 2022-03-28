@@ -1,5 +1,382 @@
 ---
 title: "第7回講義資料"
 subtitle: "データ型"
+toc: true
 ---
 
+## データ型とは
+
+　ベクトル（vector）はデータ構造（data structure）であり、ベクトル内の一つ一つの要素は数値や、文字など様々なデータ型（data type）の値を取り得る。
+
+```{r}
+Object1 <- c(1, 3, 5, 7, 9, 11)
+Object2 <- c("Kansai", "Kwansei Gakuin", "Doshisha", "Ritsumeikan")
+Object3 <- c(TRUE, FALSE, FALSE)
+Object4 <- "R"
+```
+
+* `Object1`: 長さ6の**数値型**ベクトル
+* `Object2`: 長さ4の**文字型**ベクトル
+* `Object3`: 長さ3の**論理型**ベクトル
+* `Object4`: 長さ1の**文字型**ベクトル
+   * 長さ1のベクトルは原子ベクトル（atomic vector）とも呼ばれる
+
+:::{.callout-tip}
+## ベクトルの長さが知りたい
+
+ベクトルの長さは`length(オブジェクト名)`で計算できる。たとえば、`Object2`の長さは4である。
+
+```{r}
+length(Object2)
+```
+:::
+
+　他にもRには様々なデータ型が使える。以下のリストはRが提供するデータ型の一部であり、太字は本講義で紹介するデータ型である。ここでは説明を割愛するが日付型（Date型）もよく使われるデータ型であり、それそれの詳細は教科書[第8章](https://www.jaysong.net/RBook/datatype.html)を参照されたい。
+
+* **Logical**
+* **Numeric**
+* Complex
+* **Character**
+* **Factor**
+* Date
+* **NA**
+* NULL
+* NaN
+* Inf
+* その他
+
+## データ型の確認
+
+　ベクトル内の要素は全て同じデータ型を取るが、そのデータ型を確認するためには、`class(ベクトル・オブジェクト名)`関数を使用する。先ほど作成した4つのベクトルのデータ型を確認してみよう。
+
+```{r}
+class(Object1) # 数値型 (numeric)
+class(Object2) # 文字型 (character)
+class(Object3) # 論理型 (logical)
+class(Object4) # 文字型 (character)
+```
+
+---
+
+## Logical型
+
+　論理型（logical型）とは`TRUE`と`FALSE`のみで構成されるデータ型である。論理演算子の計算結果は必ず論理型の結果が返される。
+
+```{r}
+(2 + 3) == (4 + 1)
+```
+
+```{r}
+Logical1 <- (2 + 3) == (2 * 3)
+Logical1
+class(Logical1)
+```
+
+ あるオブジェクトがlogical型か否かを判定するには`is.logical()`を使用する。
+
+```{r}
+is.logical(FALSE)
+```
+
+### 作成
+
+　Logical型ベクトルを作成するためには、通常のベクトルと同様、`c()`関数で作成する。
+
+```{r}
+Logical_Vec1 <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+Logical_Vec1
+```
+
+　ここでの`TRUE`は`T`、`FALSE`は`F`と略すことが出来るが、**推奨しない**。必ず`TRUE`と`FALSE`で表記すること。
+
+```{r}
+Logical_Vec2 <- c(T, F, T, T, F)
+Logical_Vec2
+```
+
+### 注意点
+
+　Logical型の値である`TRUE`と`FALSE`を`"`で囲んではいけない。もし、一つでも`"`で囲んでしまうと、そのベクトルlogical型でなく、後ほど紹介するcharacter型へ変換される。
+
+```{r}
+# 2つ目のFALSEを"で囲むと...
+Logical_Vec3 <- c(TRUE, "FALSE", TRUE, TRUE, FALSE)
+Logical_Vec3
+class(Logical_Vec3)
+```
+
+### 使い方
+
+　直接`TRUE`や`FALSE`が格納されたベクトルを使う場面はほとんどない。つまり、ほとんどのlogical型ベクトルは何らかの**論理演算子から返された**ものである。以下の例は、`My_Vector1`から奇数の要素のみを抽出するために、`My_Logical1`というベクトルを作成する例である。
+
+```{r}
+My_Vector1  <- c(89, 28, 93, 64, 6)
+My_Logical1 <- My_Vector1 %% 2 == 1 # My_Vector1を2で割ったら余りが1か
+My_Logical1
+class(My_Logical1)
+My_Vector1[My_Logical1] # My_Vector1から奇数のみ抽出
+My_Vector1[My_Vector1 %% 2 == 0] # 直接式を入れてもOK
+```
+
+---
+
+## Numeric型
+
+```{r}
+Numeric_Vec1 <- c(2, 0, 0, 1, 3)
+Numeric_Vec1
+# Numeric_Vec1のデータ型
+class(Numeric_Vec1)
+# Numeric_Vec1がNumeric型か否かを判定
+is.numeric(Numeric_Vec1)
+```
+
+### Numeric型の演算
+
+Case1: **同じ長さのベクトル**同士の演算
+
+```{r}
+Numeric_Vec2 <- c(1, 2, 3, 4, 5)  # 長さ5のnumeric型ベクトル
+Numeric_Vec3 <- c(11, 7, 5, 3, 2) # 長さ5のnumeric型ベクトル
+```
+
+```{r}
+Numeric_Vec2 + Numeric_Vec3 # c(1+11, 2+7, 3+5, 4+3, 5+2)
+Numeric_Vec2^Numeric_Vec3 # c(1^11, 2^7, 3^5, 4^3, 5^2)
+```
+
+* 同じ長さのベクトル同士の演算の場合、**同じ位置の要素**同士で演算を行う。
+
+Case2: **長さ2以上 (A)**と**長さ1 (B)**同士の演算
+
+```{r}
+Numeric_Vec4 <- c(10) # 長さ1の場合、c()はなくてもOK
+```
+
+```{r}
+Numeric_Vec3 * Numeric_Vec4 # c(11*10, 7*10, 5*10, 3*10, 2*10)
+Numeric_Vec3 / Numeric_Vec4 # c(11/10, 7/10, 5/10, 3/10, 2/10)
+```
+
+* **(A)のそれぞれ要素と(B)の要素**同士で演算を行う
+   * `c(10)`が自動的に`c(10, 10, 10, 10, 10)`へ変換されたと考えてもOK
+
+Case3: **長さ2以上**と**長さ2以上**で長さが異なる場合
+
+```{r}
+Numeric_Vec5 <- c(1, 2, 3)
+```
+
+```{r, warning = FALSE}
+Numeric_Vec3 * Numeric_Vec5 # c(11*1, 7*2, 5*3, 3*1, 2*2)
+Numeric_Vec3 / Numeric_Vec5 # c(11/1, 7/2, 5/3, 3/1, 2/2)
+```
+
+* **より短いの要素**がリサイクルされる
+   * `c(1, 2, 3)`が自動的に`c(1, 2, 3, 1, 2)`へ変換されたと考えてもOK
+   * 警告が表示される場合もあるが、演算には問題なし（長さが倍数になっていない場合など）
+   * ベクトル・リサイクル（vector recycle）
+
+### 注意点
+
+　Logical型と同じ理由でnumeric型の値を`"`で囲んではいけない。一つでも`"`で囲むとNumeric型でなく、Character型へ変換されてしまう。
+
+```{r}
+# 4つ目のFALSEを"で囲むと...
+Numeric_Vec6 <- c(38, 29, 10, "94", 51)
+Numeric_Vec6
+class(Numeric_Vec6)
+```
+
+---
+
+## Character型
+
+要素が`"`で囲まれたデータ型
+
+* 文字列型
+
+```{r}
+Char_Vec1 <- c("Kansai", "Kwansei-gakuin", "Doshisha", "Ritsmeikan")
+Char_Vec1
+class(Char_Vec1)
+is.character(Char_Vec1)
+```
+
+### 文字列の長さ
+
+* `length()`は**ベクトルの長さ**を求める関数
+
+```{r}
+length(Char_Vec1)
+```
+
+* `nchar()`は**各要素の文字数**を求める関数
+
+```{r}
+nchar(Char_Vec1)
+```
+
+### 文字の結合
+
+* `paste(Character型, Character型)`
+
+**ケース1:** `Char_Vec1`の全要素の後に`"University"`を付ける
+
+```{r}
+Char_Vec2 <- paste(Char_Vec1, "University")
+Char_Vec2 # "University"の前に自動的にスペースが入る
+```
+
+**ケース2:** `Char_Vec2`の全要素の前に`1`、`2`、...を付け、数字と大学名は`"."`で結合
+
+* `sep = `で結合される要素間に入る文字を指定（デフォルトはスペース）
+
+```{r}
+Char_Vec3 <- paste(1:4, Char_Vec2, sep = ".")
+Char_Vec3
+```
+
+`paste()`は結合される文字列の間にスペースが自動的に入り、なくすためには`sep = ""`を指定する必要がある
+
+* `paste0()`はスペース無しで結合する関数
+
+**ケース3:** `Char_Vec1`の全要素の後に`"-Daigaku"`を付ける
+
+```{r}
+Char_Vec4 <- paste0(Char_Vec1, "-Daigaku")
+# "-Daigaku"の前にスペースがないことに注目
+Char_Vec4
+```
+
+---
+
+## Factor型
+
+順序付きの文字列型 / ラベル付き数値型
+
+* Character型だと、アルファベット順となる
+* 図表を作成する際に重宝されるデータ型
+   * 図表上の表示順番はFactor型でなくとアルファベット順となる
+* 詳細はデータハンドリングおよび可視化で解説
+
+:::: {.columns}
+
+::: {.column width="40%"}
+Character型の場合
+
+|Prefecture|Population|
+|:---------|---------:|
+|Aichi     |7,484,094 |
+|Akita     |1,022,839 |
+|...       |...       |
+|Yamaguchi |1,405,007 |
+|Yamanashi |835,165   |
+:::
+
+::: {.column width="20%"}
+
+:::
+
+::: {.column width="40%"}
+Factor型の場合
+
+|Prefecture|Population|
+|:---------|---------:|
+|Hokkaido  |5,383,579 |
+|Aomori    |1,308,649 |
+|...       |...       |
+|Kagoshima |1,648,752 |
+|Okinawa   |1,434,138 |
+:::
+
+::::
+
+### Factor型の作成
+
+既存のCharacter型ベクトルをFactor型に
+
+```{r}
+Kankandoritsu <- c("Doshisha", "Kansai", "Kwansei-gakuin", "Ritsumeikan")
+class(Kankandoritsu)
+Kankandoritsu
+```
+
+```{r}
+Kankandoritsu <- factor(Kankandoritsu,
+                        levels = c("Kansai", "Kwansei-gakuin", "Doshisha", "Ritsumeikan"))
+class(Kankandoritsu)
+Kankandoritsu
+```
+
+### Factor型の詳細
+
+　このfactor型は非常に重要なデータ型であり、図表を作成する際には必ず考えなくてはならないものである。先ほどの例のように、文字列をfactor化しないと要素はアルファベット順になる。図表において順番が思い通りにならない原因は、factor化していない、またはfactor化が間違っているのがほとんどである。factor型については今後データハンドリング、可視化の講義で改めて解説する。
+
+---
+
+## 欠損値
+
+データ分析において頻繁に遭遇するのは`NA`
+
+参考
+
+* `NA`: 何らかの値があるはずだが、欠損している状態
+   * 「**欠損値**」とも呼ばれる
+   * 多くのデータには欠損値が含まれているため、欠損値処理は非常に重要
+* `NULL`: そもそも存在しない
+* `NaN`: 計算不可（例: 0 $\div$ 0）
+* `Inf`: 無限大（例: 10 $\div$ 0）
+
+`NaN`と`Inf`のベクトルを作ることも可能であるが、使う機会はない
+* 計算された結果として`NaN`と`Inf`の意味が分かれば問題なし
+
+### `NA`と`NULL`の違い
+
+`NA`は要素扱いだが、`NULL`はカウントされない
+
+```{r}
+NA_Vec   <- c(1, 2, 3, NA, 5, NA, 7)
+NULL_Vec <- c(1, 2, 3, NULL, 5, NULL, 7)
+length(NA_Vec)
+length(NULL_Vec)
+NA_Vec
+NULL_Vec
+```
+
+### 欠損値を含むベクトルの計算
+
+ベクトルに欠損値が含まれている場合、平均値（`mean()`）、標準偏差（`sd()`）などの計算ができないことに注意
+   * `NA`が含まれているベクトルの平均値、標準偏差、分散などは`NA`と出力される
+   * `length()`などは機能する
+
+```{r}
+mean(NA_Vec)
+```
+
+### 欠損値を含むベクトルの計算（１）
+
+* **方法1:** データから欠損値を除外する
+   * `!`演算子は否定を意味する（第3回参照）
+   * ちなみに、`NA_Vec == NA`、`NA_Vec != NA`は使用不可
+
+```{r}
+is.na(NA_Vec) # 各要素がNAか否かを判定
+!is.na(NA_Vec) # 各要素がNAか否かの判定を反転
+NA_Vec[!is.na(NA_Vec)] # 欠損値でない要素のみ抽出
+mean(NA_Vec[!is.na(NA_Vec)])
+```
+
+* **方法2:** 関数内に`na.rm = TRUE`を追加する
+   * `na.rm`は`mean()`関数の<ruby>仮引数<rp>(</rp><rt>かりひきすう</rt><rp>)</rp></ruby>であり、`TRUE`は<ruby>仮引数<rp>(</rp><rt>じつひきすう</rt><rp>)</rp></ruby>と呼ぶ。合わせて<ruby>引数<rp>(</rp><rt>ひきすう</rt><rp>)</rp></ruby>
+   * 通常、関数には様々な引数が用意されている。Rコンソール上で`?関数名`を入力するとヘルプが読める（例: `?mean`）
+
+```{r}
+mean(NA_Vec, na.rm = TRUE)
+```
+
+---
+
+# 教科書
+
+* 『私たちのR: ベストプラクティスの探求』[第8章: データ型](https://www.jaysong.net/RBook/datatype.html)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.135">
+  <meta name="generator" content="quarto-0.9.19">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>MicroAnalysis@Kandai - 本講義について</title>
   <style>
@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -25,14 +88,14 @@
   <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
   <script src="site_libs/quarto-html/anchor.min.js"></script>
   <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <script src="site_libs/bootstrap/bootstrap.min.js"></script>
   <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
   <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
   <script id="quarto-search-options" type="application/json">{
     "location": "navbar",
     "copy-button": false,
-    "collapse-after": 3,
+    "collapse-after": 2,
     "panel-placement": "end",
     "type": "overlay",
     "limit": 20,
@@ -74,28 +137,22 @@
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-rの使い方" role="button" data-bs-toggle="dropdown" aria-expanded="false">Rの使い方</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-rの使い方">    
         <li>
-    <a class="dropdown-item" href="./intro/install.html">
- <span class="dropdown-text">Rの導入</span></a>
+    <a class="dropdown-item" href="./intro/install.html">Rの導入</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/rstudio.html">
- <span class="dropdown-text">RStudioの設定</span></a>
+    <a class="dropdown-item" href="./intro/rstudio.html">RStudioの設定</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/project.html">
- <span class="dropdown-text">プロジェクト管理</span></a>
+    <a class="dropdown-item" href="./intro/project.html">プロジェクト管理</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/file.html">
- <span class="dropdown-text">ファイル管理</span></a>
+    <a class="dropdown-item" href="./intro/file.html">ファイル管理</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/packages.html">
- <span class="dropdown-text">パッケージ</span></a>
+    <a class="dropdown-item" href="./intro/packages.html">パッケージ</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/homework.html">
- <span class="dropdown-text">課題の取り組み方</span></a>
+    <a class="dropdown-item" href="./intro/homework.html">課題の取り組み方</a>
   </li>  
     </ul>
   </li>
@@ -103,48 +160,37 @@
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">講義資料</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./materials/basic.html">
- <span class="dropdown-text">第3回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/basic.html">第3回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/programming.html">
- <span class="dropdown-text">第4回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/programming.html">第4回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/rmarkdown.html">
- <span class="dropdown-text">第5回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/rmarkdown.html">第5回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/datatype.html">
- <span class="dropdown-text">第7回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/datatype.html">第7回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/datastructure.html">
- <span class="dropdown-text">第8回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/datastructure.html">第8回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/handling1.html">
- <span class="dropdown-text">第9回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/handling1.html">第9回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/handling2.html">
- <span class="dropdown-text">第10回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/handling2.html">第10回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/handling3.html">
- <span class="dropdown-text">第11回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/handling3.html">第11回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/visualization1.html">
- <span class="dropdown-text">第12回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/visualization1.html">第12回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/visualization2.html">
- <span class="dropdown-text">第13回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/visualization2.html">第13回講義資料</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/visualization3.html">
- <span class="dropdown-text">第14回講義資料</span></a>
+    <a class="dropdown-item" href="./materials/visualization3.html">第14回講義資料</a>
   </li>  
     </ul>
   </li>
@@ -152,40 +198,31 @@
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="button" data-bs-toggle="dropdown" aria-expanded="false">課題</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
         <li>
-    <a class="dropdown-item" href="./HW/HW01.html">
- <span class="dropdown-text">第1回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW01.html">第1回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW05.html">
- <span class="dropdown-text">第5回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW05.html">第5回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW07.html">
- <span class="dropdown-text">第7回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW07.html">第7回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW08.html">
- <span class="dropdown-text">第8回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW08.html">第8回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW09.html">
- <span class="dropdown-text">第9回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW09.html">第9回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW10.html">
- <span class="dropdown-text">第10回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW10.html">第10回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW11.html">
- <span class="dropdown-text">第11回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW11.html">第11回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW13.html">
- <span class="dropdown-text">第13回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW13.html">第13回課題</a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW14.html">
- <span class="dropdown-text">第14回課題</span></a>
+    <a class="dropdown-item" href="./HW/HW14.html">第14回課題</a>
   </li>  
     </ul>
   </li>
@@ -195,12 +232,12 @@
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/"><i class="bi bi-terminal" role="img">
+    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/"><i class="bi-terminal" role="img">
 </i> 
  </a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.jaysong.net/RBook/"><i class="bi bi-book" role="img">
+    <a class="nav-link" href="https://www.jaysong.net/RBook/"><i class="bi-book" role="img">
 </i> 
  </a>
   </li>  
@@ -233,9 +270,9 @@
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<header id="title-block-header" class="quarto-title-block default">
-
-<div class="quarto-title"><h1 class="title display-7">本講義について</h1></div></header>
+<header id="title-block-header">
+<h1 class="title display-7">本講義について</h1>
+</header>
 
 <section id="概要" class="level2">
 <h2 class="anchored" data-anchor-id="概要">概要</h2>
@@ -272,23 +309,92 @@
 </section>
 <section id="講義内容" class="level2">
 <h2 class="anchored" data-anchor-id="講義内容">講義内容</h2>
-<ul>
-<li>第1回 イントロダクション</li>
-<li>第2回 RとIDEの導入</li>
-<li>第3回 Rの基本的な操作</li>
-<li>第4回 プログラミングの基本的な概念</li>
-<li>第5回 R Markdownと再現可能な研究</li>
-<li>第6回 データ収集</li>
-<li>第7回 データ型</li>
-<li>第8回 データ構造</li>
-<li>第9回 データハンドリング（1）</li>
-<li>第10回 データハンドリング（2）</li>
-<li>第11回 データハンドリング（3）</li>
-<li>第12回 可視化（1）</li>
-<li>第13回 可視化（2）</li>
-<li>第14回 可視化（3）</li>
-<li>第15回 期末テスト</li>
-</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">回</th>
+<th>内容</th>
+<th>教科書</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td>イントロダクション</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td>RとIDEの導入</td>
+<td>第<a href="https://www.jaysong.net/RBook/aboutr.html">1</a>、<a href="https://www.jaysong.net/RBook/installation.html">2</a>、<a href="https://www.jaysong.net/RBook/ide.html">3</a>、<a href="https://www.jaysong.net/RBook/R-Customize.html">4</a>、<a href="https://www.jaysong.net/RBook/packages.html">5</a>章</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td>Rの基本的な操作</td>
+<td>第<a href="https://www.jaysong.net/RBook/rbasic.html">6</a>章</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td>プログラミングの基本的な概念</td>
+<td>第<a href="https://www.jaysong.net/RBook/programming.html">10</a>、<a href="https://www.jaysong.net/RBook/functions.html">11</a>章</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td>R Markdownと再現可能な研究</td>
+<td>第<a href="https://www.jaysong.net/RBook/rmarkdown.html">21</a>章</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td>データ収集</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td>データ型</td>
+<td>第<a href="https://www.jaysong.net/RBook/datatype.html">8</a>章</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td>データ構造</td>
+<td>第<a href="https://www.jaysong.net/RBook/datastructure.html">9</a>章</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td>データハンドリング（1）</td>
+<td>第<a href="https://www.jaysong.net/RBook/datahandling1.html">12</a>、<a href="https://www.jaysong.net/RBook/datahandling2.html">13</a>、<a href="https://www.jaysong.net/RBook/factor.html">14</a>、<a href="https://www.jaysong.net/RBook/tidydata.html">15</a>章</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td>データハンドリング（2）</td>
+<td>同上</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td>データハンドリング（3）</td>
+<td>同上</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td>可視化（1）</td>
+<td>第<a href="https://www.jaysong.net/RBook/visualization1.html">17</a>、<a href="https://www.jaysong.net/RBook/visualization2.html">18</a>、<a href="https://www.jaysong.net/RBook/visualization3.html">19</a>、<a href="https://www.jaysong.net/RBook/visualization4.html">20</a>、章</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td>可視化（2）</td>
+<td>同上</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td>可視化（3）</td>
+<td>同上</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td>期末テスト</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="本講義の位置づけ" class="level2">
 <h2 class="anchored" data-anchor-id="本講義の位置づけ">本講義の位置づけ</h2>
@@ -403,6 +509,36 @@
 </section>
 <section id="注意事項" class="level2">
 <h2 class="anchored" data-anchor-id="注意事項">注意事項</h2>
+<ul>
+<li>コードは以下のように背景に色が付けられている部分である。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello!"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>コードの中で<code>#</code>で始まる内容はコメントであり、分析に影響を与えない。ただし、<code>"</code>や<code>'</code>で囲まれた<code>#</code>はコメントではない。また、行の途中から<code>#</code>が入る場合、<code>#</code>以降は実行されない。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hello!を出力するコード</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello!"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># "や'内の#はコメントではない</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"この#はコメントではありません"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello World!"</span>) <span class="co"># Hello World!を出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>出力結果は以下のように背景なし&amp;等幅フォントで出力される。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-stdout">
+<pre><code>[1] "Hello!"</code></pre>
+</div>
+</div>
+<ul>
+<li>オブジェクト名は<code>変数名</code>や<code>関数名()</code>のように文中の色付き背景で示された部分である。</li>
+<li>パッケージ名は{}で囲む。tidyverseパッケージの場合、{tidyverse}と表記する<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</li>
+</ul>
 </section>
 <section id="参考-マクロ政治データ分析実習の内容-予定" class="level2">
 <h2 class="anchored" data-anchor-id="参考-マクロ政治データ分析実習の内容-予定">参考) マクロ政治データ分析実習の内容 (予定)</h2>
@@ -418,7 +554,12 @@
 </ul>
 
 
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>注</h2>
 
+<ol>
+<li id="fn1" role="doc-endnote"><p>ただし、パッケージ名を{}で囲むのは一般的な表記ではないことを断っておきたい。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 </main> <!-- /main -->
 <script type="application/javascript">
@@ -505,13 +646,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
     <a class="nav-link" href="https://www.jaysong.net">
-      <i class="bi bi-house-fill" role="img">
+      <i class="bi-house-fill" role="img">
 </i> 
     </a>
   </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/JaehyunSong">
-      <i class="bi bi-github" role="img">
+      <i class="bi-github" role="img">
 </i> 
     </a>
   </li>  
