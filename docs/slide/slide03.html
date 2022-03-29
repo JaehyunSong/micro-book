@@ -1091,18 +1091,265 @@
 </section>
 <section id="ベクトル要素の抽出" class="slide level2">
 <h2>ベクトル要素の抽出</h2>
+<p>ベクトルから任意の要素を抽出する2つの方法</p>
+<p><strong>方法1</strong>: 抽出する要素の位置を指定する。 <strong>方法2</strong>: 論理演算子を利用する。</p>
+<p><br></p>
+<p><strong>例)</strong> 11, 12, 13, …, 19, 20が格納された<code>my_vec5</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span> <span class="co"># my_vec &lt;- seq(11, 20, by = 1) と同じ</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+</div>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>位置</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>my_vec5</code></td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">20</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="要素の抽出-位置指定" class="slide level2">
 <h2>要素の抽出: 位置指定</h2>
+<ul>
+<li><code>ベクトル名[抽出する要素の位置]</code></li>
+</ul>
+<p><strong>例1)</strong> <code>my_vec5</code>の3番目の要素</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>my_vec5[<span class="dv">3</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+</div>
+<p><strong>例2)</strong> <code>my_vec5</code>の2, 3, 4, 5番目の要素</p>
+<ul>
+<li><code>[]</code>内に抽出する要素の位置を表すベクトルを指定</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>pos_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb65-2"><a href="#cb65-2"></a>my_vec5[pos_vec]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>my_vec5[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>my_vec5[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>my_vec5[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 12 13 14 15</code></pre>
+</div>
+</div>
 </section>
 <section id="要素の抽出-論理演算子の利用" class="slide level2">
 <h2>要素の抽出: 論理演算子の利用</h2>
+<ul>
+<li>それぞれの要素に対し、抽出するか（<code>TRUE</code>）しないか（<code>FALSE</code>）を指定</li>
+</ul>
+<p><strong>例1)</strong> <code>my_vec5</code>から1, 4, 7, 9, 10番目の要素を抽出</p>
+<ul>
+<li><code>[]</code>内にベクトルの長さ分のベクトルを更に入力する必要があるため、あまり使わない方法</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="co"># my_vec5[c(1, 4, 7, 9, 10)] と同じ結果</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a>my_vec5[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 11 14 17 19 20</code></pre>
+</div>
+</div>
+<p><strong>例2)</strong> <code>my_vec5</code>から奇数のみ抽出（論理演算子の利用）</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="co"># my_vec5を2で割った場合、余りが1ならTRUE、その他はFALSE</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a>my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>my_vec5[my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 11 13 15 17 19</code></pre>
+</div>
+</div>
 </section>
 <section id="表形式データの読み込み" class="slide level2">
 <h2>表形式データの読み込み</h2>
+<p>{tidyverse}パッケージが提供する<code>read_csv()</code>関数を利用</p>
+<ul>
+<li><code>オブジェクト名 &lt;- read_csv("パスを含むファイル名")</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb79-2"><a href="#cb79-2"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span>
+<span id="cb79-3"><a href="#cb79-3"></a>my_data <span class="co"># my_dataの中身の出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 47 × 13
+      ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
+   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1     1 北海道  0.419   29.1    24.7  32.8    30.6 13.4    3.43 11.4    1.68
+ 2     2 青森県  0.332   30.1    23.9  40.4    24.6 12.8    3.82  8.92   3.41
+ 3     3 岩手県  0.341   30.4    24.5  34.9    22.4  8.61   5.16 11.2    5.29
+ 4     4 宮城県  0.596   25.8    27.3  36.7    25.4 13.4    3.97  9.99   3.62
+ 5     5 秋田県  0.299   33.8    21.4  43.5    22.7 11.2    5.17  7.56   5.12
+ 6     6 山形県  0.342   30.8    24.8  42.5    21.5 11.8    4.3   7.6    5.2 
+ 7     7 福島県  0.509   28.7    25.2  33.8    28.3 11.0    3.43 10.4    3.24
+ 8     8 茨城県  0.633   26.8    26.6  40.6    19.0 15.0    6.67 10.1    2.88
+ 9     9 栃木県  0.622   25.9    26.8  38.8    21.6 12.4   10.9   7      2.05
+10    10 群馬県  0.603   27.6    26.6  42.1    19.3 13.8    5.61 10      2.44
+# … with 37 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="データが全部見えない" class="slide level2">
+<h2>データが全部見えない?</h2>
+<p><strong>1行目</strong></p>
+<ul>
+<li>意味: 47行13列の表形式データ</li>
+</ul>
+<pre><code># A tibble: 47 × 13</code></pre>
+<p><br></p>
+<p><strong>最終行</strong></p>
+<ul>
+<li>意味: 表示された行以外にも更に37行があり、<code>Region2</code>と<code>Region6</code>は画面では省略されている。
+<ul>
+<li>文字サイズが小さい or 画面が大きい場合は省略されず、13列がすべて出力される場合もある。</li>
+</ul></li>
+</ul>
+<pre><code># … with 37 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
 </section>
 <section id="読み込んだデータの出力" class="slide level2">
 <h2>読み込んだデータの出力</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">デフォルト</a></li><li><a href="#tabset-2-2">出力行数の指定</a></li><li><a href="#tabset-2-3">最後の6行</a></li><li><a href="#tabset-2-4">最後のx行</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li><code>オブジェクト名</code>、または<code>print(オブジェクト名)</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>my_data</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 47 × 13
+      ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
+   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1     1 北海道  0.419   29.1    24.7  32.8    30.6 13.4    3.43 11.4    1.68
+ 2     2 青森県  0.332   30.1    23.9  40.4    24.6 12.8    3.82  8.92   3.41
+ 3     3 岩手県  0.341   30.4    24.5  34.9    22.4  8.61   5.16 11.2    5.29
+ 4     4 宮城県  0.596   25.8    27.3  36.7    25.4 13.4    3.97  9.99   3.62
+ 5     5 秋田県  0.299   33.8    21.4  43.5    22.7 11.2    5.17  7.56   5.12
+ 6     6 山形県  0.342   30.8    24.8  42.5    21.5 11.8    4.3   7.6    5.2 
+ 7     7 福島県  0.509   28.7    25.2  33.8    28.3 11.0    3.43 10.4    3.24
+ 8     8 茨城県  0.633   26.8    26.6  40.6    19.0 15.0    6.67 10.1    2.88
+ 9     9 栃木県  0.622   25.9    26.8  38.8    21.6 12.4   10.9   7      2.05
+10    10 群馬県  0.603   27.6    26.6  42.1    19.3 13.8    5.61 10      2.44
+# … with 37 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<ul>
+<li><code>print(オブジェクト名, n = 行数)</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 47 × 13
+      ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
+   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1     1 北海道    0.419   29.1    24.7  32.8    30.6 13.4    3.43 11.4    1.68
+ 2     2 青森県    0.332   30.1    23.9  40.4    24.6 12.8    3.82  8.92   3.41
+ 3     3 岩手県    0.341   30.4    24.5  34.9    22.4  8.61   5.16 11.2    5.29
+ 4     4 宮城県    0.596   25.8    27.3  36.7    25.4 13.4    3.97  9.99   3.62
+ 5     5 秋田県    0.299   33.8    21.4  43.5    22.7 11.2    5.17  7.56   5.12
+ 6     6 山形県    0.342   30.8    24.8  42.5    21.5 11.8    4.3   7.6    5.2 
+ 7     7 福島県    0.509   28.7    25.2  33.8    28.3 11.0    3.43 10.4    3.24
+ 8     8 茨城県    0.633   26.8    26.6  40.6    19.0 15.0    6.67 10.1    2.88
+ 9     9 栃木県    0.622   25.9    26.8  38.8    21.6 12.4   10.9   7      2.05
+10    10 群馬県    0.603   27.6    26.6  42.1    19.3 13.8    5.61 10      2.44
+11    11 埼玉県    0.765   24.8    27.7  32.3    20.4 16      7.23 13.9    1.91
+12    12 千葉県    0.777   25.9    26.7  37.8    21.7 14.0    5.46 11.3    2.01
+13    13 東京都    1.00    22.7    27.4  34.4    19.8 11.4    7.34 14.2    2.82
+14    14 神奈川県  0.917   23.9    27.8  34.9    21.5 12.2    7.77 12.5    2.79
+15    15 新潟県    0.435   29.9    25.2  43.7    25.2  8.27   4.39  8      3.76
+# … with 32 more rows, and 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<ul>
+<li><code>tail(オブジェクト名)</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 6 × 13
+     ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
+  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1    42 長崎県    0.316   29.6    25.8  41.7    20.7  16.9   5.12  6.27   3.48
+2    43 熊本県    0.387   28.8    27.2  46.5    19.3  15.3   4.53  6.32   2.6 
+3    44 大分県    0.358   30.4    25.6  39.4    18.4  13.3   4.42  6.85  13.0 
+4    45 宮崎県    0.320   29.5    26.3  40.1    14.5  17.1   5.74  7.27   6.81
+5    46 鹿児島県  0.321   29.4    26.0  46.0    16.2  14.5   6.47  6.52   3.62
+6    47 沖縄県    0.315   19.6    33.4  27.8    13.3  15.1   7.66 15.6   12.1 
+# … with 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-4">
+<ul>
+<li><code>tail(オブジェクト名, n = 行数)</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="fu">tail</span>(my_data, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 10 × 13
+      ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
+   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1    38 愛媛県    0.412   30.6    24.8  43.6    19.3  14.8   6.77  6.97   2.4 
+ 2    39 高知県    0.245   32.8    23.6  37.0    17.0  15.8   3.93 17.4    2.91
+ 3    40 福岡県    0.618   25.9    28.2  36.5    19.1  17.2   7.03 10.8    3.33
+ 4    41 佐賀県    0.329   27.7    28.0  43.5    21.1  15.5   4.85  5.67   4.16
+ 5    42 長崎県    0.316   29.6    25.8  41.7    20.7  16.9   5.12  6.27   3.48
+ 6    43 熊本県    0.387   28.8    27.2  46.5    19.3  15.3   4.53  6.32   2.6 
+ 7    44 大分県    0.358   30.4    25.6  39.4    18.4  13.3   4.42  6.85  13.0 
+ 8    45 宮崎県    0.320   29.5    26.3  40.1    14.5  17.1   5.74  7.27   6.81
+ 9    46 鹿児島県  0.321   29.4    26.0  46.0    16.2  14.5   6.47  6.52   3.62
+10    47 沖縄県    0.315   19.6    33.4  27.8    13.3  15.1   7.66 15.6   12.1 
+# … with 2 more variables: Region2 &lt;dbl&gt;, Region6 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 <img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
