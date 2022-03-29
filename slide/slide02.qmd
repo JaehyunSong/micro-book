@@ -39,6 +39,8 @@ knitr::include_graphics("Figs/02/rlogo.png")
 * **R**oss Ihakaと**R**obert Clifford Gentlemanが開発
 * 統計分析のためのソフトウェアは星の数ほど存在
 
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
 ## 統計ソフトウェア/言語
 
 #### 有償

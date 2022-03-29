@@ -778,6 +778,322 @@
 <li>コードを記録し、残すことが重要</li>
 </ul></li>
 </ul>
+</section>
+<section id="比較" class="slide level2">
+<h2>比較</h2>
+<p>コードは一行増えたものの、全体的にはコードの量が著しく減る。</p>
+<ul>
+<li>ただし、200行書かないといけない点は変わらない。
+<ul>
+<li>より効率的な方法は?</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="do">## [1] 246908642</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="do">## [1] 370362963</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a><span class="do">## [1] 493817284</span></span>
+<span id="cb41-7"><a href="#cb41-7"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a><span class="do">## [1] 617271605</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="do">## [1] 246908642</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>x <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="do">## [1] 370362963</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a>x <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a><span class="do">## [1] 493817284</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a>x <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="do">## [1] 617271605</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="等差数列ベクトルの作り方" class="slide level2">
+<h2>等差数列ベクトルの作り方</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>公差 <strong>=</strong> 1の等差数列</p>
+<ul>
+<li><code>:</code>演算子を利用</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5 6 7</code></pre>
+</div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">7</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5 6 7</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<p>公差 <strong>&gt;</strong> 1の等差数列</p>
+<ul>
+<li><code>seq()</code>関数の使用 (<code>by</code>で公差を指定)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1 3 5 7 9</code></pre>
+</div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1 3 5 7 9</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ベクトル同士の演算" class="slide level2">
+<h2>ベクトル同士の演算</h2>
+<p><strong>例)</strong> ベクトル<code>X</code>とベクトル<code>Y</code>同士の演算</p>
+<ul>
+<li><strong>ケース1:</strong> <code>X</code>の長さ = <code>Y</code>の長さ</li>
+<li><strong>ケース2:</strong> <code>X</code>の長さ <span class="math inline">\(\neq\)</span> <code>Y</code>の長さ</li>
+</ul>
+</section>
+<section id="ケース1-ベクトルの長さが同じ場合" class="slide level2">
+<h2>ケース1: ベクトルの長さが同じ場合</h2>
+<ul>
+<li>同じ位置の要素同士の演算</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>ベクトル/位置</th>
+<th style="text-align: center;">1番目</th>
+<th style="text-align: center;">2番目</th>
+<th style="text-align: center;">3番目</th>
+<th style="text-align: center;">4番目</th>
+<th style="text-align: center;">5番目</th>
+<th style="text-align: center;">6番目</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>my_vec1</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>my_vec2</code></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td>結果</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">12</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb51-2"><a href="#cb51-2"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb51-3"><a href="#cb51-3"></a>my_vec1 <span class="sc">*</span> my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  0  2  6  0  5 12</code></pre>
+</div>
+</div>
+</section>
+<section id="ケース2-ベクトルの長さが異なる場合" class="slide level2">
+<h2>ケース2: ベクトルの長さが異なる場合</h2>
+<ul>
+<li>短い方のベクトルがリサイクルされる（<strong>ベクトル・リサイクル</strong>）。
+<ul>
+<li><code>my_vec4</code>の方が短いため、足りない分（太字の部分）はリサイクルされる。</li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>ベクトル/位置</th>
+<th style="text-align: center;">1番目</th>
+<th style="text-align: center;">2番目</th>
+<th style="text-align: center;">3番目</th>
+<th style="text-align: center;">4番目</th>
+<th style="text-align: center;">5番目</th>
+<th style="text-align: center;">6番目</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>my_vec3</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\times\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>my_vec4</code></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+</tr>
+<tr class="even">
+<td>結果</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">6</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb53-2"><a href="#cb53-2"></a>my_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb53-3"><a href="#cb53-3"></a>my_vec3 <span class="sc">*</span> my_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 0 2 0 4 0 6</code></pre>
+</div>
+</div>
+</section>
+<section id="最初の問題" class="slide level2">
+<h2>最初の問題</h2>
+<p>結果はどのコードでも同じ</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">コード</a></li><li><a href="#tabset-1-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="columns">
+<div class="column" style="width:30%;">
+<p>答え（3行 ver.）</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a>x <span class="sc">*</span> y</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:30%;">
+<p>答え（2行 ver.）</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>x <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>または、</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a><span class="dv">123454321</span> <span class="sc">*</span> x</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:30%;">
+<p>答え（1行 ver.）</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>  [1]   246908642   370362963   493817284   617271605   740725926   864180247
+  [7]   987634568  1111088889  1234543210  1357997531  1481451852  1604906173
+ [13]  1728360494  1851814815  1975269136  2098723457  2222177778  2345632099
+ [19]  2469086420  2592540741  2715995062  2839449383  2962903704  3086358025
+ [25]  3209812346  3333266667  3456720988  3580175309  3703629630  3827083951
+ [31]  3950538272  4073992593  4197446914  4320901235  4444355556  4567809877
+ [37]  4691264198  4814718519  4938172840  5061627161  5185081482  5308535803
+ [43]  5431990124  5555444445  5678898766  5802353087  5925807408  6049261729
+ [49]  6172716050  6296170371  6419624692  6543079013  6666533334  6789987655
+ [55]  6913441976  7036896297  7160350618  7283804939  7407259260  7530713581
+ [61]  7654167902  7777622223  7901076544  8024530865  8147985186  8271439507
+ [67]  8394893828  8518348149  8641802470  8765256791  8888711112  9012165433
+ [73]  9135619754  9259074075  9382528396  9505982717  9629437038  9752891359
+ [79]  9876345680  9999800001 10123254322 10246708643 10370162964 10493617285
+ [85] 10617071606 10740525927 10863980248 10987434569 11110888890 11234343211
+ [91] 11357797532 11481251853 11604706174 11728160495 11851614816 11975069137
+ [97] 12098523458 12221977779 12345432100 12468886421 12592340742 12715795063
+[103] 12839249384 12962703705 13086158026 13209612347 13333066668 13456520989
+[109] 13579975310 13703429631 13826883952 13950338273 14073792594 14197246915
+[115] 14320701236 14444155557 14567609878 14691064199 14814518520 14937972841
+[121] 15061427162 15184881483 15308335804 15431790125 15555244446 15678698767
+[127] 15802153088 15925607409 16049061730 16172516051 16295970372 16419424693
+[133] 16542879014 16666333335 16789787656 16913241977 17036696298 17160150619
+[139] 17283604940 17407059261 17530513582 17653967903 17777422224 17900876545
+[145] 18024330866 18147785187 18271239508 18394693829 18518148150 18641602471
+[151] 18765056792 18888511113 19011965434 19135419755 19258874076 19382328397
+[157] 19505782718 19629237039 19752691360 19876145681 19999600002 20123054323
+[163] 20246508644 20369962965 20493417286 20616871607 20740325928 20863780249
+[169] 20987234570 21110688891 21234143212 21357597533 21481051854 21604506175
+[175] 21727960496 21851414817 21974869138 22098323459 22221777780 22345232101
+[181] 22468686422 22592140743 22715595064 22839049385 22962503706 23085958027
+[187] 23209412348 23332866669 23456320990 23579775311 23703229632 23826683953
+[193] 23950138274 24073592595 24197046916 24320501237 24443955558 24567409879
+[199] 24690864200</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ベクトル要素の抽出" class="slide level2">
+<h2>ベクトル要素の抽出</h2>
+</section>
+<section id="要素の抽出-位置指定" class="slide level2">
+<h2>要素の抽出: 位置指定</h2>
+</section>
+<section id="要素の抽出-論理演算子の利用" class="slide level2">
+<h2>要素の抽出: 論理演算子の利用</h2>
+</section>
+<section id="表形式データの読み込み" class="slide level2">
+<h2>表形式データの読み込み</h2>
+</section>
+<section id="読み込んだデータの出力" class="slide level2">
+<h2>読み込んだデータの出力</h2>
 
 
 <img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
