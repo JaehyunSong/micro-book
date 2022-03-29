@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "materials/rmarkdown.html#スライド",
+    "href": "materials/rmarkdown.html#スライド",
+    "title": "第5回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
+  },
+  {
     "objectID": "materials/rmarkdown.html#rmdファイルの作成",
     "href": "materials/rmarkdown.html#rmdファイルの作成",
     "title": "第5回講義資料",
@@ -31,6 +38,20 @@
     "objectID": "materials/install.html#スライド",
     "href": "materials/install.html#スライド",
     "title": "第2回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
+  },
+  {
+    "objectID": "materials/programming.html#スライド",
+    "href": "materials/programming.html#スライド",
+    "title": "第4回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
+  },
+  {
+    "objectID": "materials/datatype.html#スライド",
+    "href": "materials/datatype.html#スライド",
+    "title": "第7回講義資料",
     "section": "スライド",
     "text": "スライド\n 新しいタブで開く"
   },
@@ -147,6 +168,13 @@
     "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』第6章: 基本的な操作\n『私たちのR: ベストプラクティスの探求』第9章: データ構造（第2節）\n『私たちのR: ベストプラクティスの探求』第7章: データの入出力\n『私たちのR: ベストプラクティスの探求』第8章: データ型（第3節）"
   },
   {
+    "objectID": "materials/data_collection.html#スライド",
+    "href": "materials/data_collection.html#スライド",
+    "title": "第6回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
+  },
+  {
     "objectID": "slide/slide01.html#講義概要",
     "href": "slide/slide01.html#講義概要",
     "title": "ミクロ政治データ分析実習",
@@ -224,11 +252,11 @@
     "text": "課題\n課題の遂行有無は確認しない（履修者の良心に任せる）。\n課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
-    "objectID": "slide/slide03.html#電卓としてのrと演算子",
-    "href": "slide/slide03.html#電卓としてのrと演算子",
+    "objectID": "slide/slide03.html#電卓としてのrと算術演算子",
+    "href": "slide/slide03.html#電卓としてのrと算術演算子",
     "title": "ミクロ政治データ分析実習",
-    "section": "電卓としてのRと演算子",
-    "text": "電卓としてのRと演算子\n\n\n\n\nStep 1: File > New File > R Script\nStep 2: Sourceペインの大きさを最大化する。\nStep 3: Sourceペインに以下のように入力する\n\n\n1 + 2 + 3\n\n\nStep 4: Step 3で入力した行に移動し、Cmd + Return (Ctrl + Enter)\n\nConsoleペインに以下のように出力されればOK\n\n\n\n\n[1] 6"
+    "section": "電卓としてのRと算術演算子",
+    "text": "電卓としてのRと算術演算子\n\n\n\n\nStep 1: File > New File > R Script\nStep 2: Sourceペインの大きさを最大化する。\nStep 3: Sourceペインに以下のように入力する\n\n\n1 + 2 + 3\n\n\nStep 4: Step 3で入力した行に移動し、Cmd + Return (Ctrl + Enter)\n\nConsoleペインに以下のように出力されればOK\n\n\n\n\n[1] 6"
   },
   {
     "objectID": "slide/slide03.html#rの算術演算子",
@@ -376,6 +404,13 @@
     "title": "ミクロ政治データ分析実習",
     "section": "表形式データの読み込み",
     "text": "表形式データの読み込み\n{tidyverse}パッケージが提供するread_csv()関数を利用\n\nオブジェクト名 <- read_csv(\"パスを含むファイル名\")\n\n\nlibrary(tidyverse)\nmy_data <- read_csv(\"Data/Pref_Vote.csv\")\nmy_data # my_dataの中身の出力\n\n# A tibble: 47 × 13\n      ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin\n   <dbl> <chr>   <dbl>  <dbl>   <dbl> <dbl>   <dbl> <dbl>  <dbl> <dbl>  <dbl>\n 1     1 北海道  0.419   29.1    24.7  32.8    30.6 13.4    3.43 11.4    1.68\n 2     2 青森県  0.332   30.1    23.9  40.4    24.6 12.8    3.82  8.92   3.41\n 3     3 岩手県  0.341   30.4    24.5  34.9    22.4  8.61   5.16 11.2    5.29\n 4     4 宮城県  0.596   25.8    27.3  36.7    25.4 13.4    3.97  9.99   3.62\n 5     5 秋田県  0.299   33.8    21.4  43.5    22.7 11.2    5.17  7.56   5.12\n 6     6 山形県  0.342   30.8    24.8  42.5    21.5 11.8    4.3   7.6    5.2 \n 7     7 福島県  0.509   28.7    25.2  33.8    28.3 11.0    3.43 10.4    3.24\n 8     8 茨城県  0.633   26.8    26.6  40.6    19.0 15.0    6.67 10.1    2.88\n 9     9 栃木県  0.622   25.9    26.8  38.8    21.6 12.4   10.9   7      2.05\n10    10 群馬県  0.603   27.6    26.6  42.1    19.3 13.8    5.61 10      2.44\n# … with 37 more rows, and 2 more variables: Region2 <dbl>, Region6 <dbl>"
+  },
+  {
+    "objectID": "slide/slide03.html#データが全部見えない",
+    "href": "slide/slide03.html#データが全部見えない",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データが全部見えない?",
+    "text": "データが全部見えない?\n1行目\n\n意味: 47行13列の表形式データ\n\n# A tibble: 47 × 13\n\n最終行\n\n意味: 表示された行以外にも更に37行があり、Region2とRegion6は画面では省略されている。\n\n文字サイズが小さい or 画面が大きい場合は省略されず、13列がすべて出力される場合もある。\n\n\n# … with 37 more rows, and 2 more variables: Region2 <dbl>, Region6 <dbl>"
   },
   {
     "objectID": "slide/slide03.html#読み込んだデータの出力",
@@ -705,40 +740,5 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\n\n\n\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n65歳以上人口の割合\n(%)\n\n\nUnder30\n30歳未満人口の割合\n(%)\n\n\nJimin\n自民党の得票率\n比例区; (%)\n\n\nMinshin\n民進党の得票率\n比例区; (%)\n\n\nKomei\n公明党の得票率\n比例区; (%)\n\n\nKyosan\n共産党の得票率\n比例区; (%)\n\n\nIshin\n維新の得票率\n比例区; (%)\n\n\nShamin\n社民党の得票率\n比例区; (%)\n\n\nRegion2\n地域区分\n1 = 東日本; 2 = 西日本\n\n\nRegion6\n地域区分\n1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄"
-  },
-  {
-    "objectID": "slide/slide03.html#データが全部見えない",
-    "href": "slide/slide03.html#データが全部見えない",
-    "title": "ミクロ政治データ分析実習",
-    "section": "データが全部見えない?",
-    "text": "データが全部見えない?\n1行目\n\n意味: 47行13列の表形式データ\n\n# A tibble: 47 × 13\n\n最終行\n\n意味: 表示された行以外にも更に37行があり、Region2とRegion6は画面では省略されている。\n\n文字サイズが小さい or 画面が大きい場合は省略されず、13列がすべて出力される場合もある。\n\n\n# … with 37 more rows, and 2 more variables: Region2 <dbl>, Region6 <dbl>"
-  },
-  {
-    "objectID": "slide/slide03.html#電卓としてのrと算術演算子",
-    "href": "slide/slide03.html#電卓としてのrと算術演算子",
-    "title": "ミクロ政治データ分析実習",
-    "section": "電卓としてのRと算術演算子",
-    "text": "電卓としてのRと算術演算子\n\n\n\n\nStep 1: File > New File > R Script\nStep 2: Sourceペインの大きさを最大化する。\nStep 3: Sourceペインに以下のように入力する\n\n\n1 + 2 + 3\n\n\nStep 4: Step 3で入力した行に移動し、Cmd + Return (Ctrl + Enter)\n\nConsoleペインに以下のように出力されればOK\n\n\n\n\n[1] 6"
-  },
-  {
-    "objectID": "materials/rmarkdown.html#スライド",
-    "href": "materials/rmarkdown.html#スライド",
-    "title": "第5回講義資料",
-    "section": "スライド",
-    "text": "スライド\n 新しいタブで開く"
-  },
-  {
-    "objectID": "materials/data_collection.html#スライド",
-    "href": "materials/data_collection.html#スライド",
-    "title": "第6回講義資料",
-    "section": "スライド",
-    "text": "スライド\n 新しいタブで開く"
-  },
-  {
-    "objectID": "materials/datatype.html#スライド",
-    "href": "materials/datatype.html#スライド",
-    "title": "第7回講義資料",
-    "section": "スライド",
-    "text": "スライド\n 新しいタブで開く"
   }
 ]
