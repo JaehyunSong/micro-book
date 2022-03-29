@@ -19,6 +19,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -334,239 +397,386 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">ミクロ政治データ分析実習</h1>
-  <p class="subtitle">第1回 ガイダンス</p>
+  <p class="subtitle">第3回 Rの基本的な操作</p>
   <p class="author"><ruby>宋<rp>(</rp><rt>そん</rt><rp>)</rp></ruby>&nbsp;&nbsp;<ruby>財泫<rp>(</rp><rt>じぇひょん</rt><rp>)</rp></ruby></p>
   <p class="institute">関西大学総合情報学部</p>
-  <p class="date">2022年 4月 7日</p>
+  <p class="date">2022年 4月 21日</p>
 </section>
 
-<section id="講義概要" class="slide level2">
-<h2>講義概要</h2>
+<section id="電卓としてのrと演算子" class="slide level2">
+<h2>電卓としてのRと演算子</h2>
 <div class="cell">
 
 </div>
 <ul>
-<li>講義日: 木曜日 第4時限（14:40～16:10）</li>
-<li>場所: TC304教室（高槻キャンパス C棟 304教室）</li>
-<li>講義内容: Rの使い方
-<ul>
-<li>Rの基本的な操作 &amp; R Markdown</li>
-<li>データの入出力</li>
-<li>データのハンドリング（前処理）</li>
-<li>データの可視化</li>
-</ul></li>
-<li>統計学、確率、多変量解析、因果推論の授業<strong>ではない</strong>。
-<ul>
-<li>データ分析の<strong>手法</strong>は後期の「マクロ政治データ分析実習」</li>
-<li>後期の授業ではRの使い方について解説<strong>しない</strong>。</li>
-</ul></li>
-<li>到達目標: Rを用いたデータ分析の教科書が読める土台づくり</li>
+<li><strong>Step 1</strong>: File &gt; New File &gt; R Script</li>
+<li><strong>Step 2</strong>: Sourceペインの大きさを最大化する。</li>
+<li><strong>Step 3</strong>: Sourceペインに以下のように入力する</li>
 </ul>
-</section>
-<section id="講義内容予定" class="slide level2">
-<h2>講義内容（予定）</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li>第1回 イントロダクション</li>
-<li>第2回 RとIDEの導入</li>
-<li>第3回 Rの基本的な操作</li>
-<li>第4回 プログラミングの基本的な概念</li>
-<li>第5回 R Markdownと再現可能な研究</li>
-<li>第6回 データ収集</li>
-<li>第7回 データ型</li>
-<li>第8回 データ構造</li>
-<li>第9回 データハンドリング（1）</li>
-<li>第10回 データハンドリング（2）</li>
-<li>第11回 データハンドリング（3）</li>
-<li>第12回 可視化（1）</li>
-<li>第13回 可視化（2）</li>
-<li>第14回 可視化（3）</li>
-<li>第15回 期末テスト</li>
-</ul>
-</section>
-<section id="参考-マクロ政治データ分析実習の内容-予定" class="slide level2">
-<h2>参考) マクロ政治データ分析実習の内容 (予定)</h2>
+<li><strong>Step 4</strong>: Step 3で入力した行に移動し、Cmd + Return (Ctrl + Enter)
 <ul>
-<li>リサーチデザイン</li>
-<li>記述統計</li>
-<li>統計的推定</li>
-<li>統計的仮説検定</li>
-<li>変数間の関係 ( <span class="math inline">\(t\)</span> 検定、 <span class="math inline">\(\chi^2\)</span> 検定、相関分析)</li>
-<li>(線形) 回帰分析</li>
-<li>交互作用</li>
-<li>ロジスティック回帰分析</li>
-<li>分析結果の可視化</li>
-</ul>
-</section>
-<section id="本講義の位置づけ" class="slide level2">
-<h2>本講義の位置づけ</h2>
-<h4 id="データの分析単位としてミクロとマクロ">データの分析単位として「ミクロ」と「マクロ」</h4>
-<ul>
-<li>ミクロデータ（個票データ）
-<ul>
-<li>主に個人データ</li>
-</ul></li>
-<li>マクロデータ（集計データ）
-<ul>
-<li>国家、市区町村、選挙区など</li>
-<li>ミクロにおける主体（たとえば、人）の集合</li>
+<li>Consoleペインに以下のように出力されればOK</li>
 </ul></li>
 </ul>
-<h4 id="分析におけるミクロとマクロ">分析における「ミクロ」と「マクロ」</h4>
-<ul>
-<li>「ミクロ」のための手法、「マクロ」のための手法の区別はほぼない
-<ul>
-<li>ほとんどぼ分析手法はミクロ、マクロ区別なく使用</li>
-</ul></li>
-<li>計量分析の主なツールでとしてR: 敷居が高い
-<ul>
-<li>ミクロ政治データ分析演習</li>
-</ul></li>
-<li>ツールの使い方を習得してから具体的な分析手法へ
-<ul>
-<li>マクロ政治データ分析演習</li>
-</ul></li>
-</ul>
-</section>
-<section id="前提知識" class="slide level2">
-<h2>前提知識</h2>
-<ul>
-<li>ファイル・システムの理解
-<ul>
-<li>フォルダー (ディレクトリ)の概念</li>
-<li><code>C:/AAA/BBB/CCC.txt</code>や<code>~/AAA/BBB/CCC.text</code>の意味が理解できること</li>
-</ul></li>
-<li>ブラインド・タッチ (<strong>重要</strong>)
-<ul>
-<li>期末レポートは第15回の授業中に執筆する。</li>
-<li>タイピングが遅いと、時間内に期末レポートの完成ができない。</li>
-<li>第15回の授業までにブラインドタッチの練習を推奨</li>
-<li>この授業に限らず、現代社会で極めて重要なスキル</li>
-</ul></li>
-</ul>
-</section>
-<section id="教科書" class="slide level2">
-<h2>教科書</h2>
-<p>Song Jaehyun・矢内勇生.『私たちのR: ベストプラクティスの探求』Web-book</p>
-<ul>
-<li>本講義内容を200%カバーする</li>
-<li>無料 (<a href="https://www.jaysong.net/RBook" class="uri">https://www.jaysong.net/RBook</a>)</li>
-</ul>
-
-<img data-src="Figs/01/Textbook1.png" width="198" class="r-stretch quarto-figure-center"></section>
-<section id="教科書と本講義の位置づけ" class="slide level2">
-<h2>教科書と本講義の位置づけ</h2>
-<p>章立ては予告なく変更される可能性がある。</p>
-<ul>
-<li>RとIDEの導入: 第1〜5章</li>
-<li>Rの基本的な操作: 第6、7章</li>
-<li>R Markdownと再現可能な研究: 第21章</li>
-<li>データ型とデータ構造: 第8、9章</li>
-<li>Rプログラミング基礎: 第10、11章</li>
-<li>データハンドリング: 第12〜15章</li>
-<li>可視化: 第17〜20章</li>
-</ul>
-</section>
-<section id="参考書" class="slide level2">
-<h2>参考書</h2>
-<ul>
-<li>松村優哉 他. 2021. 『<a href="https://www.amazon.co.jp/dp/4297121700/">改訂2版 RユーザのためのRStudio[実践]入門</a>』技術評論社</li>
-<li>Garrett Grolemund and Hadley Wickham. 2017. <a href="https://r4ds.had.co.nz"><em>R for Data Science.</em></a> O’Reilly.
-<ul>
-<li>邦訳『Rではじめるデータサイエンス』(<strong>原著は無料:</strong> https://r4ds.had.co.nz/)</li>
-</ul></li>
-<li>Jared P. Lander. 2018. <a href="https://www.amazon.co.jp/dp/4839962154"><em>R for Everyone.</em></a> Addison-Wesley Professional.
-<ul>
-<li>邦訳『みんなのR』</li>
-</ul></li>
-</ul>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Figs/01/Reference1.jpg" height="350"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Figs/01/Reference2.jpg" height="350"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Figs/01/Reference3.jpg" height="350"></p>
-</figure>
-</div>
-</div>
-</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-stdout">
+<pre><code>[1] 6</code></pre>
 </div>
 </div>
 </section>
-<section id="成績評価" class="slide level2">
-<h2>成績評価</h2>
+<section id="rの算術演算子" class="slide level2">
+<h2>Rの算術演算子</h2>
 <ul>
-<li><strong>平常点</strong> (20%)
+<li>結果として何らかの<strong>数字</strong>が返される</li>
+<li>累乗（<code>^</code>）を除き、演算子の前後にはスペースを入れるのがRの流儀
 <ul>
-<li>学生証を持参すること</li>
-<li>欠席4回以上は評価の対象外（3回まで評価対象）</li>
+<li>必須ではないが、コードが読みやすくなる</li>
 </ul></li>
-<li><strong>課題</strong> (50%)
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">演算子</th>
+<th>意味</th>
+<th>例</th>
+<th style="text-align: right;">結果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>+</code></td>
+<td>和</td>
+<td><code>2 + 5</code></td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>-</code></td>
+<td>差</td>
+<td><code>2 - 8</code></td>
+<td style="text-align: right;">-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>*</code></td>
+<td>積</td>
+<td><code>7 * 3</code></td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>/</code></td>
+<td>商</td>
+<td><code>16 / 5</code></td>
+<td style="text-align: right;">3.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>^</code>、<code>**</code></td>
+<td>累乗（べき乗）</td>
+<td><code>2^3</code>または<code>2 ** 3</code></td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>%%</code></td>
+<td>剰余 (モジュロ)</td>
+<td><code>18 %% 7</code></td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>%/%</code></td>
+<td>整数商</td>
+<td><code>18 %/% 7</code></td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rの論理演算子" class="slide level2">
+<h2>Rの論理演算子</h2>
 <ul>
-<li>計8〜9回の課題を予定</li>
-<li>未提出4回以上は評価の対象外（3回まで評価対象）</li>
-<li>課題提出期限の延長はない (提出までの期間が長めであるため)
+<li>真（<code>TRUE</code>）か偽（<code>FALSE</code>）の値を返す演算子</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">2</span> <span class="co"># 3は2より大きいか</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">5</span> <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="co"># 5は10以下か</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">1</span> <span class="co"># 2 + 3は1に等しいか</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="co"># 2 + 3は2 * 2と等しくないか</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">!=</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>) <span class="co"># こっちの方がもう少し読みやすい</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="rの論理演算子まとめ" class="slide level2">
+<h2>Rの論理演算子（まとめ）</h2>
 <ul>
-<li>提出期限は次回講義の前日23時59分まで</li>
-<li>期限内に提出出来なかった場合でも宋に連絡する必要はない (どうせ延ばしてくれない)。</li>
+<li>「等しい」は<code>=</code>でなく、<code>==</code>であることに注意すること
+<ul>
+<li><code>=</code>は代入演算子として機能する（他の言語と同じ）。</li>
 </ul></li>
-<li><strong>不正行為厳禁</strong></li>
-</ul></li>
-<li><strong>期末レポート</strong> (30%)
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>演算子</th>
+<th>意味</th>
+<th>例</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x &lt; y</code></td>
+<td><code>x</code>は<code>y</code>より小さい</td>
+<td><code>3 &lt; 1</code></td>
+<td><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td><code>x &lt;= y</code></td>
+<td><code>x</code>は<code>y</code>と等しいか、小さい</td>
+<td><code>2 &lt;= 2</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td><code>x &gt; y</code></td>
+<td><code>x</code>は<code>y</code>より大きい</td>
+<td><code>6 &gt; 5</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>x &gt;= y</code></td>
+<td><code>x</code>は<code>y</code>と等しいか、大きい</td>
+<td><code>4 &gt;= 5</code></td>
+<td><code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td><code>x == y</code></td>
+<td><code>x</code>と<code>y</code>は等しい</td>
+<td><code>(2 + 3) == (4 + 1)</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>x != y</code></td>
+<td><code>x</code>と<code>y</code>は等しくない</td>
+<td><code>((2 * 3) + 1) != (2 * (3 + 1))</code></td>
+<td><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="論理演算子-andとor" class="slide level2">
+<h2>論理演算子: ANDとOR</h2>
+<h4 id="and演算子">AND演算子: <code>&amp;</code></h4>
 <ul>
-<li>第15回の<strong>授業内</strong> + 持ち帰りで期末レポートを執筆
+<li><code>&amp;</code>を挟む左右の<strong>両側</strong>が<code>TRUE</code>の場合のみ<code>TRUE</code>を返す</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">&amp;</span> (<span class="dv">1</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>) <span class="co"># TRUE and FALSEだから</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">4</span>) <span class="co"># TRUE and TRUEだから</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><br></p>
+<h4 id="or演算子">OR演算子: <code>|</code></h4>
 <ul>
-<li>授業内で完成した分を提出し、残りを持ち帰りで執筆して再提出。</li>
+<li><code>|</code>を挟む左右の<strong>片側、あるいは両側</strong>が<code>TRUE</code>の場合のみ<code>TRUE</code>を返す</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|</span> (<span class="dv">1</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>) <span class="co"># TRUE or FALSEだから</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">4</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">4</span>) <span class="co"># FALSE or FALSEだから</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="練習問題" class="slide level2">
+<h2>練習問題</h2>
+<ol type="1">
+<li><span class="math inline">\(\frac{1234 \times 4321}{3}\)</span></li>
+<li><span class="math inline">\(\frac{1234 \times 4321}{3}\)</span>の余りは？
+<ul>
+<li><span class="math inline">\((1234 \times 4321) \text{ mod } 3\)</span>とも表記する</li>
 </ul></li>
-<li>未提出者は評価の対象外</li>
-<li><strong>不正行為厳禁</strong></li>
+<li><span class="math inline">\(2 \times 3\)</span> と <span class="math inline">\(2 + 3\)</span> は等しいか</li>
+<li><span class="math inline">\(1009 \text{ mod } 3\)</span> は0か</li>
+<li><span class="math inline">\(5^5\)</span> は100<strong>以上</strong>、かつ1000<strong>未満</strong>であるか</li>
+</ol>
+</section>
+<section id="練習問題答え" class="slide level2">
+<h2>練習問題（答え）</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>(<span class="dv">1234</span> <span class="sc">*</span> <span class="dv">4321</span>) <span class="sc">/</span> <span class="dv">3</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1777371</code></pre>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>(<span class="dv">1234</span> <span class="sc">*</span> <span class="dv">4321</span>) <span class="sc">%%</span> <span class="dv">3</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="dv">1009</span> <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>(<span class="dv">5</span><span class="sc">^</span><span class="dv">5</span> <span class="sc">&gt;=</span> <span class="dv">100</span>) <span class="sc">&amp;</span> (<span class="dv">5</span><span class="sc">^</span><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1000</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="ベクトル" class="slide level2">
+<h2>ベクトル</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>123454321 <span class="math inline">\(\times\)</span> 2を計算してみよう</li>
+<li>123454321 <span class="math inline">\(\times\)</span> 3を計算してみよう</li>
+<li>123454321 <span class="math inline">\(\times\)</span> 4を計算してみよう</li>
+<li>…</li>
+<li>123454321 <span class="math inline">\(\times\)</span> 199を計算してみよう</li>
+<li>123454321 <span class="math inline">\(\times\)</span> 200を計算してみよう</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a>...</span>
+<span id="cb31-6"><a href="#cb31-6"></a></span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">199</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p><br></p>
+<h4 id="効率的な方法は">効率的な方法は?</h4>
+<ul>
+<li><code>123454321</code>をコピーし貼り付けながら計算を繰り返す</li>
+<li><code>123454321</code>に<code>x</code>という名前を付けて、<code>x * 1</code>のように表記する</li>
+</ul>
+</section>
+<section id="rにおけるベクトル" class="slide level2">
+<h2>Rにおけるベクトル</h2>
+<p>ベクトル（vector）: Rにおけるデータの最小単位</p>
+<ul>
+<li>同じデータ型（数値、文字列など）
+<ul>
+<li>数値と文字列が混在するベクトルは作成不可</li>
+</ul></li>
+<li>長さは1以上
+<ul>
+<li><code>1</code>や<code>"Cat"</code>は長さ1のベクトル</li>
+</ul></li>
+<li><code>c()</code>関数で作成
+<ul>
+<li><code>()</code>の中にベクトルの要素を入力する</li>
 </ul></li>
 </ul>
 </section>
-<section id="オフィスアワー" class="slide level2">
-<h2>オフィス・アワー</h2>
-<p>宋、またはTAが研究室に待機し、事前予約<strong>なし</strong>に相談、質問などが可能な時間</p>
+<section id="ベクトルの作成" class="slide level2">
+<h2>ベクトルの作成</h2>
 <ul>
-<li>毎週<strong>火・木曜日3限</strong> (13:00〜14:30)
+<li><code>&lt;-</code>演算子で格納
 <ul>
-<li>火曜日は宋、木曜日はTAが対応（宋は木3に授業がある）</li>
-<li>上記の時間外は事前予約が必要（メール、対面）</li>
-<li>メール: <a href="mailto:song@kansai-u.ac.jp" class="email">song@kansai-u.ac.jp</a></li>
+<li><code>ベクトル名</code>という名前の<strong>オブジェクト（object）</strong>が生成される</li>
 </ul></li>
-<li>場所：<strong>TA227</strong>研究室（A棟の2階）</li>
+<li>格納しない場合、作業環境に保存されず、出力のみ</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>ベクトル名 <span class="ot">&lt;-</span> <span class="fu">c</span>(要素1, 要素2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+<p><strong>例1:</strong> 要素が1, 2, 3, 4, 5の長さ5の数値型ベクトル</p>
+<ul>
+<li>ベクトルを<code>my_vector1</code>という名前で作業環境に格納</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>my_vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<p><strong>例2:</strong> 要素が”Cat”, “Lion”, “Tiger”の長さ3の文字型ベクトルを<code>my_vector2</code>という名で格納</p>
+<ul>
+<li>文字は必ず<code>"</code>か<code>'</code>で囲む</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>my_vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Cat"</span>, <span class="st">"Lion"</span>, <span class="st">"Tiger"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="オブジェクトの名前" class="slide level2">
+<h2>オブジェクトの名前</h2>
+<p>基本的にオブジェクト名は何でも良いが、いくつかの禁則事項がある</p>
+<ul>
+<li>特殊記号、スペース禁止（例外: <code>_</code>と<code>.</code>）
+<ul>
+<li>スペースの代わりに<code>_</code>か<code>.</code>が使われるが、<code>_</code>を推奨</li>
+</ul></li>
+<li>数字、または<code>_</code>、<code>.</code>で始まるオブジェクト名</li>
+<li>予約語は使えない（<code>for</code>や<code>if</code>など）
+<ul>
+<li>使える予約語もあるが、非推奨</li>
+</ul></li>
+<li>日本語、ハングル、簡体字、アラビア文字も可能であるが、非推奨</li>
+</ul>
+<p><br></p>
+<h4 id="良いオブジェクト名は">良いオブジェクト名は</h4>
+<ul>
+<li>オブジェクト名を見るだけで、中身の内容が想像できる</li>
+<li>短いオブジェクト名</li>
 </ul>
 </section>
-<section id="課題" class="slide level2">
-<h2>課題</h2>
-<p>課題の遂行有無は確認しない（履修者の良心に任せる）。</p>
-<h4 id="課題1">課題1</h4>
+<section id="オブジェクトの表示" class="slide level2">
+<h2>オブジェクトの表示</h2>
+<h4 id="現在の作業環境におけるオブジェクトリスト">現在の作業環境におけるオブジェクトリスト</h4>
+<ol type="1">
+<li>Environmentペインで確認</li>
+<li>Consoleペインで<code>ls()</code>を入力</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">ls</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "my_vector1" "my_vector2"</code></pre>
+</div>
+</div>
+<p><br></p>
+<h4 id="オブジェクトの出力">オブジェクトの出力</h4>
+<p>オブジェクト名のみ入力（<code>print(オブジェクト名)</code>もOK）</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>my_vector1 <span class="co"># print(my_vector1) でもOK</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>my_vector2 <span class="co"># print(my_vector2) でもOK</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "Cat"   "Lion"  "Tiger"</code></pre>
+</div>
+</div>
 <ul>
-<li>教科書<a href="https://www.jaysong.net/RBook/rbasic.html#rbasic-compbasic">第6章の第1節</a>を読んでおく。
+<li>Rを再起動すると作業環境が初期化されるため、もう一回作成する必要がある。
 <ul>
-<li>ファイルシステムに関する内容</li>
+<li>コードを記録し、残すことが重要</li>
 </ul></li>
-</ul>
-<h4 id="課題2">課題2</h4>
-<ul>
-<li>ブラインドタッチの練習（Googleで「タイピング練習」を検索）</li>
 </ul>
 
 

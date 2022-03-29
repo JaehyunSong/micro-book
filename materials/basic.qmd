@@ -5,10 +5,17 @@ toc: true
 toc-title: "目次"
 ---
 
+## スライド
+
+<a href="../slide/slide03.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a>
+
+```{=html}
+<iframe class="slide-deck" src="../slide/slide03.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+```
+
 ```{r}
 #| include: false
-knitr::opts_chunk$set(fig.align = "center",
-                      commnet   = "#>")
+knitr::opts_chunk$set(fig.align = "center")
 rm(list = ls())
 ```
 

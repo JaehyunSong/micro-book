@@ -17,7 +17,7 @@ format:
     touch: true
     controls: true
 resources:
-  - demo.pdf
+  - slide02.pdf
 ---
 
 ## Rとは

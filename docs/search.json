@@ -91,6 +91,13 @@
     "text": "スライド\n 新しいタブで開く"
   },
   {
+    "objectID": "materials/basic.html#スライド",
+    "href": "materials/basic.html#スライド",
+    "title": "第3回講義資料",
+    "section": "スライド",
+    "text": "スライド\n 新しいタブで開く"
+  },
+  {
     "objectID": "materials/basic.html#電卓としてのr",
     "href": "materials/basic.html#電卓としてのr",
     "title": "第3回講義資料",
@@ -215,6 +222,160 @@
     "title": "ミクロ政治データ分析実習",
     "section": "課題",
     "text": "課題\n課題の遂行有無は確認しない（履修者の良心に任せる）。\n課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
+    "objectID": "slide/slide03.html#電卓としてのrと演算子",
+    "href": "slide/slide03.html#電卓としてのrと演算子",
+    "title": "ミクロ政治データ分析実習",
+    "section": "電卓としてのRと演算子",
+    "text": "電卓としてのRと演算子\n\n\n\n\nStep 1: File > New File > R Script\nStep 2: Sourceペインの大きさを最大化する。\nStep 3: Sourceペインに以下のように入力する\n\n\n1 + 2 + 3\n\n\nStep 4: Step 3で入力した行に移動し、Cmd + Return (Ctrl + Enter)\n\nConsoleペインに以下のように出力されればOK\n\n\n\n\n[1] 6"
+  },
+  {
+    "objectID": "slide/slide03.html#rの算術演算子",
+    "href": "slide/slide03.html#rの算術演算子",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rの算術演算子",
+    "text": "Rの算術演算子\n\n結果として何らかの数字が返される\n累乗（^）を除き、演算子の前後にはスペースを入れるのがRの流儀\n\n必須ではないが、コードが読みやすくなる\n\n\n\n\n\n演算子\n意味\n例\n結果\n\n\n\n\n+\n和\n2 + 5\n7\n\n\n-\n差\n2 - 8\n-6\n\n\n*\n積\n7 * 3\n21\n\n\n/\n商\n16 / 5\n3.2\n\n\n^、**\n累乗（べき乗）\n2^3または2 ** 3\n8\n\n\n%%\n剰余 (モジュロ)\n18 %% 7\n4\n\n\n%/%\n整数商\n18 %/% 7\n2"
+  },
+  {
+    "objectID": "slide/slide03.html#rの論理演算子",
+    "href": "slide/slide03.html#rの論理演算子",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rの論理演算子",
+    "text": "Rの論理演算子\n\n真（TRUE）か偽（FALSE）の値を返す演算子\n\n\n3 > 2 # 3は2より大きいか\n\n[1] TRUE\n\n5 <= 10 # 5は10以下か\n\n[1] TRUE\n\n2 + 3 == 1 # 2 + 3は1に等しいか\n\n[1] FALSE\n\n2 + 2 != 2 * 2 # 2 + 3は2 * 2と等しくないか\n\n[1] FALSE\n\n(2 + 2) != (2 * 2) # こっちの方がもう少し読みやすい\n\n[1] FALSE"
+  },
+  {
+    "objectID": "slide/slide03.html#rの論理演算子まとめ",
+    "href": "slide/slide03.html#rの論理演算子まとめ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rの論理演算子（まとめ）",
+    "text": "Rの論理演算子（まとめ）\n\n「等しい」は=でなく、==であることに注意すること\n\n=は代入演算子として機能する（他の言語と同じ）。\n\n\n\n\n\n演算子\n意味\n例\n結果\n\n\n\n\nx < y\nxはyより小さい\n3 < 1\nFALSE\n\n\nx <= y\nxはyと等しいか、小さい\n2 <= 2\nTRUE\n\n\nx > y\nxはyより大きい\n6 > 5\nTRUE\n\n\nx >= y\nxはyと等しいか、大きい\n4 >= 5\nFALSE\n\n\nx == y\nxとyは等しい\n(2 + 3) == (4 + 1)\nTRUE\n\n\nx != y\nxとyは等しくない\n((2 * 3) + 1) != (2 * (3 + 1))\nTRUE"
+  },
+  {
+    "objectID": "slide/slide03.html#論理演算子-andとor",
+    "href": "slide/slide03.html#論理演算子-andとor",
+    "title": "ミクロ政治データ分析実習",
+    "section": "論理演算子: ANDとOR",
+    "text": "論理演算子: ANDとOR\nAND演算子: &\n\n&を挟む左右の両側がTRUEの場合のみTRUEを返す\n\n\n(2 + 3 == 5) & (1 * 2 == 3) # TRUE and FALSEだから\n\n[1] FALSE\n\n(2 + 2 == 4) & (2 * 2 == 4) # TRUE and TRUEだから\n\n[1] TRUE\n\n\n\nOR演算子: |\n\n|を挟む左右の片側、あるいは両側がTRUEの場合のみTRUEを返す\n\n\n(2 + 3 == 5) | (1 * 2 == 3) # TRUE or FALSEだから\n\n[1] TRUE\n\n(2 + 2 != 4) | (2 * 2 != 4) # FALSE or FALSEだから\n\n[1] FALSE"
+  },
+  {
+    "objectID": "slide/slide03.html#練習問題",
+    "href": "slide/slide03.html#練習問題",
+    "title": "ミクロ政治データ分析実習",
+    "section": "練習問題",
+    "text": "練習問題\n\n\\(\\frac{1234 \\times 4321}{3}\\)\n\\(\\frac{1234 \\times 4321}{3}\\)の余りは？\n\n\\((1234 \\times 4321) \\text{ mod } 3\\)とも表記する\n\n\\(2 \\times 3\\) と \\(2 + 3\\) は等しいか\n\\(1009 \\text{ mod } 3\\) は0か\n\\(5^5\\) は100以上、かつ1000未満であるか"
+  },
+  {
+    "objectID": "slide/slide03.html#練習問題答え",
+    "href": "slide/slide03.html#練習問題答え",
+    "title": "ミクロ政治データ分析実習",
+    "section": "練習問題（答え）",
+    "text": "練習問題（答え）\n\n(1234 * 4321) / 3\n\n[1] 1777371\n\n(1234 * 4321) %% 3\n\n[1] 1\n\n2 * 3 == 2 + 3\n\n[1] FALSE\n\n1009 %% 3 == 0\n\n[1] FALSE\n\n(5^5 >= 100) & (5^5 < 1000)\n\n[1] FALSE"
+  },
+  {
+    "objectID": "slide/slide03.html#ベクトル",
+    "href": "slide/slide03.html#ベクトル",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ベクトル",
+    "text": "ベクトル\n\n\n\n123454321 \\(\\times\\) 2を計算してみよう\n123454321 \\(\\times\\) 3を計算してみよう\n123454321 \\(\\times\\) 4を計算してみよう\n…\n123454321 \\(\\times\\) 199を計算してみよう\n123454321 \\(\\times\\) 200を計算してみよう\n\n\n\n123454321 * 2\n123454321 * 3\n123454321 * 4\n\n...\n\n123454321 * 199\n123454321 * 200\n\n\n\n\n効率的な方法は?\n\n123454321をコピーし貼り付けながら計算を繰り返す\n123454321にxという名前を付けて、x * 1のように表記する"
+  },
+  {
+    "objectID": "slide/slide03.html#rにおけるベクトル",
+    "href": "slide/slide03.html#rにおけるベクトル",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rにおけるベクトル",
+    "text": "Rにおけるベクトル\nベクトル（vector）: Rにおけるデータの最小単位\n\n同じデータ型（数値、文字列など）\n\n数値と文字列が混在するベクトルは作成不可\n\n長さは1以上\n\n1や\"Cat\"は長さ1のベクトル\n\nc()関数で作成\n\n()の中にベクトルの要素を入力する"
+  },
+  {
+    "objectID": "slide/slide03.html#ベクトルの作成",
+    "href": "slide/slide03.html#ベクトルの作成",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ベクトルの作成",
+    "text": "ベクトルの作成\n\n<-演算子で格納\n\nベクトル名という名前のオブジェクト（object）が生成される\n\n格納しない場合、作業環境に保存されず、出力のみ\n\nベクトル名 <- c(要素1, 要素2, ...)\n\n例1: 要素が1, 2, 3, 4, 5の長さ5の数値型ベクトル\n\nベクトルをmy_vector1という名前で作業環境に格納\n\n\nmy_vector1 <- c(1, 2, 3, 4, 5)\n\n\n例2: 要素が”Cat”, “Lion”, “Tiger”の長さ3の文字型ベクトルをmy_vector2という名で格納\n\n文字は必ず\"か'で囲む\n\n\nmy_vector2 <- c(\"Cat\", \"Lion\", \"Tiger\")"
+  },
+  {
+    "objectID": "slide/slide03.html#オブジェクトの名前",
+    "href": "slide/slide03.html#オブジェクトの名前",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクトの名前",
+    "text": "オブジェクトの名前\n基本的にオブジェクト名は何でも良いが、いくつかの禁則事項がある\n\n特殊記号、スペース禁止（例外: _と.）\n\nスペースの代わりに_か.が使われるが、_を推奨\n\n数字、または_、.で始まるオブジェクト名\n予約語は使えない（forやifなど）\n\n使える予約語もあるが、非推奨\n\n日本語、ハングル、簡体字、アラビア文字も可能であるが、非推奨\n\n\n良いオブジェクト名は\n\nオブジェクト名を見るだけで、中身の内容が想像できる\n短いオブジェクト名"
+  },
+  {
+    "objectID": "slide/slide03.html#オブジェクトの表示",
+    "href": "slide/slide03.html#オブジェクトの表示",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクトの表示",
+    "text": "オブジェクトの表示\n現在の作業環境におけるオブジェクトリスト\n\nEnvironmentペインで確認\nConsoleペインでls()を入力\n\n\nls()\n\n[1] \"my_vector1\" \"my_vector2\"\n\n\n\nオブジェクトの出力\nオブジェクト名のみ入力（print(オブジェクト名)もOK）\n\nmy_vector1 # print(my_vector1) でもOK\n\n[1] 1 2 3 4 5\n\nmy_vector2 # print(my_vector2) でもOK\n\n[1] \"Cat\"   \"Lion\"  \"Tiger\"\n\n\n\nRを再起動すると作業環境が初期化されるため、もう一回作成する必要がある。\n\nコードを記録し、残すことが重要\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
+    "objectID": "slide/slide02.html#rとは",
+    "href": "slide/slide02.html#rとは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rとは",
+    "text": "Rとは\n\n\n\n\n\n統計、データ分析、作図のためのインタープリタープログラミング言語\n1976年開発されたS言語の後継者\nRoss IhakaとRobert Clifford Gentlemanが開発\n統計分析のためのソフトウェアは星の数ほど存在"
+  },
+  {
+    "objectID": "slide/slide02.html#統計ソフトウェア言語",
+    "href": "slide/slide02.html#統計ソフトウェア言語",
+    "title": "ミクロ政治データ分析実習",
+    "section": "統計ソフトウェア/言語",
+    "text": "統計ソフトウェア/言語\n有償\n\nSAS\nSPSS\nStata\nMATLAB\n\n無償\n\nPSPP: SPSSにとてもよく似た無料ソフトウェア\nJASP/jamovi: 裏で動いているのはR\ngretl: 時系列分析など、計量経済学で利用される手法に特化したソフト\nGNU Octave: MATLABとほぼ同じ文法をもつ無料言語\nHAD: 清水裕士先生が開発しているExcelベースのデータ分析マクロ\n\nただし、Excelが有償ソフト"
+  },
+  {
+    "objectID": "slide/slide02.html#rのライバルたちどれも無料",
+    "href": "slide/slide02.html#rのライバルたちどれも無料",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rのライバルたち（どれも無料）",
+    "text": "Rのライバルたち（どれも無料）\n\n現在のデータサイエンス業界において標準はR + Python\nどれもGUIでなく、CUI\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n汎用プログラミング言語\n機械分析に強い\n豊富なパッケージ\nRより速く、Juliaより遅い\n\n\n\n\nJulia\n\n\n\n\n\n\n\n\n\n\n統計プログラミング言語\n非常に高速\nパッケージがRやPythonに比べ、少ない"
+  },
+  {
+    "objectID": "slide/slide02.html#why-r",
+    "href": "slide/slide02.html#why-r",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Why R?",
+    "text": "Why R?\nR界隈の神様、Hadley Wickham（羽鳥先生）によると… (Hadley 2019)\n\n無料、オープンソース、多くのプラットフォームで利用可能\nオンライン、オフラインの両方で、多様なRコミュニティが存在\n膨大なパッケージが用意されている。\n分析結果を伝達する強力なツールを提供（R Markdown）\n代表的な統合開発環境であるRStudioはデータサイエンス、対話型のデータ分析、そして統計的プログラミングが必要とするものに最適化されている。\n多くの統計学や機械学習の研究者は自分の研究成果とRパッケージを同時に公開している。\nデータ分析を特化した言語（欠損値、データフレーム、ベクトル化など）\n関数型プログラミングのための最適な環境を提供\nRStudio社は営利企業であるものの、その収益の多くをオープンソースコミュニティーに投資している。\nメタプログラミングが非常に強力\nRはC、C++、Fortranのようなhigh-performance言語と容易に結合できるように設計されている。"
+  },
+  {
+    "objectID": "slide/slide02.html#guiとcui",
+    "href": "slide/slide02.html#guiとcui",
+    "title": "ミクロ政治データ分析実習",
+    "section": "GUIとCUI",
+    "text": "GUIとCUI\n\n\nGUI: Graphical User Interface; ソフトウェア上の入出力にグラフィックを利用\n\nマウスでポチポチするだけで操作できる環境\n間違いがほぼ起きない\n柔軟性が低い（決まったオプション、機能しか使えない）\n分析の再現が難しい（出来ないわけではない）\n\nCUI: Character User Interface\n\n全ての操作を文字列ベース（=キーボード）で行う\n一文字でも間違えるとエラーが出たり\n柔軟性が高い（カスタマイズ自由）\n分析の再現性が非常に高い（コードさえ保存しておけばOK）"
+  },
+  {
+    "objectID": "slide/slide02.html#guiとcuiの操作の違い",
+    "href": "slide/slide02.html#guiとcuiの操作の違い",
+    "title": "ミクロ政治データ分析実習",
+    "section": "GUIとCUIの操作の違い",
+    "text": "GUIとCUIの操作の違い\nData.csvを読み込み、Xという変数の平均値と分散を計算\nGUI (SPSS)の例\n\n「ファイル」→「開く」→「データ」をクリック\nファイルを選択し、「開く」をクリック\n「分析」→「記述統計」→「記述統計」をクリック\n左側のパネルからXを右側の「変数」パネルへ移動\n「オブション」をクリック\n「散らばり」の「分散」にチェック\n「続行」をクリック→「OK」をクリック\n\nCUI (R)の例\nMyData <- read.csv(\"Data.csv\")\nmean(MyData$X)\nvar(MyData$X)"
+  },
+  {
+    "objectID": "slide/slide02.html#統合開発環境ide",
+    "href": "slide/slide02.html#統合開発環境ide",
+    "title": "ミクロ政治データ分析実習",
+    "section": "統合開発環境（IDE）",
+    "text": "統合開発環境（IDE）\n\nR Studioが代表的（ほぼ一択）\n\n他にもR Tools for Visual Studio、Atom、Sublime Text、Vim、Emacsなど\n\nIDEの使用は必須ではないが、生産性に大きく関与する\nデータ分析、プログラミングの手助けをする優秀な秘書\n\nファイルの管理、うろ覚えのコマンドのプロンプト、コードの色分けなどを自動的に行う\nコードの実行結果の画面をコードと同時に表示\nこれまでの作業を記録"
+  },
+  {
+    "objectID": "slide/slide02.html#rとrstudioの導入",
+    "href": "slide/slide02.html#rとrstudioの導入",
+    "title": "ミクロ政治データ分析実習",
+    "section": "RとRStudioの導入",
+    "text": "RとRStudioの導入\n\n本講義のサポートページを参照\n対面講義では宋と一緒に初期設定、起動、終了などを行ってもらう。"
+  },
+  {
+    "objectID": "slide/slide02.html#プロジェクト機能について",
+    "href": "slide/slide02.html#プロジェクト機能について",
+    "title": "ミクロ政治データ分析実習",
+    "section": "「プロジェクト」機能について",
+    "text": "「プロジェクト」機能について\n\n本講義のサポートページを参照\n毎回の講義、課題ごとに独立したプロジェクトを作ること\nファイル・システムに関する知識（パス、相対パス、絶対パス）がない場合、プロジェクト昨日は必須\n\nファイル・システムを知っている宋でも常にプロジェクト機能を使用している。"
+  },
+  {
+    "objectID": "slide/slide02.html#課題",
+    "href": "slide/slide02.html#課題",
+    "title": "ミクロ政治データ分析実習",
+    "section": "課題",
+    "text": "課題\nブラインドタッチに自信のない履修者は引き続き、ブラインドタッチの練習\n\n毎日欠かさず練習すれば2週間でできるようになる。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
     "objectID": "intro/file.html#フォルダーの管理",
@@ -375,7 +536,7 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月28日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
+    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月29日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html#概要",
@@ -467,96 +628,5 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\n\n\n\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n65歳以上人口の割合\n(%)\n\n\nUnder30\n30歳未満人口の割合\n(%)\n\n\nJimin\n自民党の得票率\n比例区; (%)\n\n\nMinshin\n民進党の得票率\n比例区; (%)\n\n\nKomei\n公明党の得票率\n比例区; (%)\n\n\nKyosan\n共産党の得票率\n比例区; (%)\n\n\nIshin\n維新の得票率\n比例区; (%)\n\n\nShamin\n社民党の得票率\n比例区; (%)\n\n\nRegion2\n地域区分\n1 = 東日本; 2 = 西日本\n\n\nRegion6\n地域区分\n1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄"
-  },
-  {
-    "objectID": "slide/slide01.html#課題-1",
-    "href": "slide/slide01.html#課題-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "課題",
-    "text": "課題\n課題の遂行有無は確認しない（履修者の良心に任せる）。\n課題1\n\n教科書第6章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）\n\n\n\n\nhttps://www.jaysong.net/micro-book"
-  },
-  {
-    "objectID": "slide/Slide01.html",
-    "href": "slide/Slide01.html",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "class: inverse, middle, center, mline # 講義概要\n\n\n講義概要\n\n講義日: 木曜日 第4時限（14:40～16:10）\n場所: TC304教室（高槻キャンパス C棟 304教室）\n講義内容: Rの使い方\n\nRの基本的な操作 & R Markdown\nデータの入出力\nデータのハンドリング（前処理）\nデータの可視化\n\n統計学、確率、多変量解析、因果推論の授業.kenten[ではない]。\n\nデータ分析の.kenten[手法]は後期の「マクロ政治データ分析実習」\n後期の授業ではRの使い方について解説.kenten[しない]。\n\n到達目標: Rを用いたデータ分析の教科書が読める土台づくり\n\n\n\n\n講義内容（予定）\n\n第1回 イントロダクション\n第2回 RとIDEの導入\n第3回 Rの基本的な操作\n第4回 プログラミングの基本的な概念\n第5回 R Markdownと再現可能な研究\n第6回 データ収集\n第7回 データ型\n第8回 データ構造\n第9回 データハンドリング（1）\n第10回 データハンドリング（2）\n第11回 データハンドリング（3）\n第12回 可視化（1）\n第13回 可視化（2）\n第14回 可視化（3）\n第15回 期末テスト\n\n\n\n\n参考) マクロ政治データ分析実習の内容 (予定)\n\nリサーチデザイン\n記述統計\n統計的推定\n統計的仮説検定\n変数間の関係 ( \\(t\\) 検定、 \\(\\chi^2\\) 検定、相関分析)\n(線形) 回帰分析\n交互作用\nロジスティック回帰分析\n分析結果の可視化\n\n\n\n\n本講義の位置づけ\n\nデータの分析単位として「ミクロ」と「マクロ」\n\nミクロデータ（個票データ）\n\n主に個人データ\n\nマクロデータ（集計データ）\n\n国家、市区町村、選挙区など\nミクロにおける主体（たとえば、人）の集合\n\n\n\n\n分析における「ミクロ」と「マクロ」\n\n「ミクロ」のための手法、「マクロ」のための手法の区別はほぼない\n\nほとんどぼ分析手法はミクロ、マクロ区別なく使用\n\n計量分析の主なツールでとしてR: 敷居が高い\n\nミクロ政治データ分析演習\n\nツールの使い方を習得してから具体的な分析手法へ\n\nマクロ政治データ分析演習\n\n\n\n\n\n\n前提知識\n\nファイル・システムの理解\n\nフォルダー (ディレクトリ)の概念\nC:/AAA/BBB/CCC.txtや~/AAA/BBB/CCC.textの意味が理解できること\n\nブラインド・タッチ (重要)\n\n期末レポートは第15回の授業中に執筆する。\nタイピングが遅いと、時間内に期末レポートの完成ができない。\n第15回の授業までにブラインドタッチの練習を推奨\nこの授業に限らず、現代社会で極めて重要なスキル\n\n\n\n\n\n教科書\nSong Jaehyun・矢内勇生.『私たちのR: ベストプラクティスの探求』Web-book\n\n本講義内容を200%カバーする\n無料 (https://www.jaysong.net/RBook)\n\n.center[]\n\n\n\n教科書と本講義の位置づけ\n章立ては予告なく変更される可能性がある。\n\nRとIDEの導入: 第2〜5章\nRの基本的な操作: 第7、8章\nR Markdownと再現可能な研究: 第25章\nデータ型とデータ構造: 第9、10章\nRプログラミング基礎: 第11、12、28章\nデータハンドリング: 第13〜16章\n可視化: 第17〜20章\n\n\n\n\n参考書\n\n松村優哉 他. 2021. 『改訂2版 RユーザのためのRStudio[実践]入門』技術評論社\nGarrett Grolemund and Hadley Wickham. 2017. R for Data Science. O’Reilly.\n\n邦訳『Rではじめるデータサイエンス』(原著は無料: https://r4ds.had.co.nz/)\n\nJared P. Lander. 2018. R for Everyone. Addison-Wesley Professional.\n\n邦訳『みんなのR』\n\n\n.pull-left3[ .center[]] .pull-center3[ .center[]] .pull-right3[ .center[]]\n\n\n\n成績評価\n\n平常点 (20%)\n\n学生証を持参すること\n欠席4回以上は評価の対象外（3回まで評価対象）\n\n課題 (50%)\n\n計8〜9回の課題を予定\n未提出4回以上は評価の対象外（3回まで評価対象）\n課題提出期限の延長はない (提出までの期間が長めであるため)\n\n提出期限は次回講義の前日23時59分まで\n期限内に提出出来なかった場合でも宋に連絡する必要はない (どうせ延ばしてくれない)。\n\n不正行為厳禁\n\n期末レポート (30%)\n\n第15回の授業内に期末レポートを執筆\n未提出者は評価の対象外\n不正行為厳禁\n\n\n\n\n\nオフィス・アワー\n宋、またはTAが研究室に待機し、事前予約.kenten[なし]に相談、質問などが可能な時間\n\n毎週火・木曜日3限 (13:00〜14:30)\n\n火曜日は宋、木曜日はTAが対応\n上記の時間外は事前予約が必要（メール、対面）\nメール: song@kansai-u.ac.jp\n\n場所：TA227研究室（A棟の2階）\n\n\n\n課題\n\n課題1\n\n教科書第7章の第1節を読んでおく。\n\nファイルシステムに関する内容\n\n\n\n\n課題2\n\nブラインドタッチの練習（Googleで「タイピング練習」を検索）"
-  },
-  {
-    "objectID": "slide/slide02.html#rとは",
-    "href": "slide/slide02.html#rとは",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Rとは",
-    "text": "Rとは\n\n\n\n\n\n統計、データ分析、作図のためのインタープリタープログラミング言語\n1976年開発されたS言語の後継者\nRoss IhakaとRobert Clifford Gentlemanが開発\n統計分析のためのソフトウェアは星の数ほど存在"
-  },
-  {
-    "objectID": "materials/introduction.html#統計ソフトウェア言語",
-    "href": "materials/introduction.html#統計ソフトウェア言語",
-    "title": "第1回講義資料",
-    "section": "統計ソフトウェア/言語",
-    "text": "統計ソフトウェア/言語\n\n有償\n\nSAS\nSPSS\nStata\nMATLAB\n\n\n\n無償\n\nPSPP: SPSSにとてもよく似た無料ソフトウェア\nJASP/jamovi: 裏で動いているのはR\ngretl: 時系列分析など、計量経済学で利用される手法に特化したソフト\nGNU Octave: MATLABとほぼ同じ文法をもつ無料言語\nHAD: 清水裕士先生が開発しているExcelベースのデータ分析マクロ\n\nただし、Excelが有償ソフト"
-  },
-  {
-    "objectID": "slide/slide02.html#統計ソフトウェア言語",
-    "href": "slide/slide02.html#統計ソフトウェア言語",
-    "title": "ミクロ政治データ分析実習",
-    "section": "統計ソフトウェア/言語",
-    "text": "統計ソフトウェア/言語\n有償\n\nSAS\nSPSS\nStata\nMATLAB\n\n無償\n\nPSPP: SPSSにとてもよく似た無料ソフトウェア\nJASP/jamovi: 裏で動いているのはR\ngretl: 時系列分析など、計量経済学で利用される手法に特化したソフト\nGNU Octave: MATLABとほぼ同じ文法をもつ無料言語\nHAD: 清水裕士先生が開発しているExcelベースのデータ分析マクロ\n\nただし、Excelが有償ソフト"
-  },
-  {
-    "objectID": "slide/slide02.html#rのライバルたちどれも無料",
-    "href": "slide/slide02.html#rのライバルたちどれも無料",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Rのライバルたち（どれも無料）",
-    "text": "Rのライバルたち（どれも無料）\n\n現在のデータサイエンス業界において標準はR + Python\nどれもGUIでなく、CUI\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n汎用プログラミング言語\n機械分析に強い\n豊富なパッケージ\nRより速く、Juliaより遅い\n\n\n\n\nJulia\n\n\n\n\n\n\n\n\n\n\n統計プログラミング言語\n非常に高速\nパッケージがRやPythonに比べ、少ない"
-  },
-  {
-    "objectID": "slide/slide02.html#why-r",
-    "href": "slide/slide02.html#why-r",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Why R?",
-    "text": "Why R?\nR界隈の神様、Hadley Wickham（羽鳥先生）によると… (Hadley 2019)\n\n無料、オープンソース、多くのプラットフォームで利用可能\nオンライン、オフラインの両方で、多様なRコミュニティが存在\n膨大なパッケージが用意されている。\n分析結果を伝達する強力なツールを提供（R Markdown）\n代表的な統合開発環境であるRStudioはデータサイエンス、対話型のデータ分析、そして統計的プログラミングが必要とするものに最適化されている。\n多くの統計学や機械学習の研究者は自分の研究成果とRパッケージを同時に公開している。\nデータ分析を特化した言語（欠損値、データフレーム、ベクトル化など）\n関数型プログラミングのための最適な環境を提供\nRStudio社は営利企業であるものの、その収益の多くをオープンソースコミュニティーに投資している。\nメタプログラミングが非常に強力\nRはC、C++、Fortranのようなhigh-performance言語と容易に結合できるように設計されている。"
-  },
-  {
-    "objectID": "slide/slide02.html#guiとcui",
-    "href": "slide/slide02.html#guiとcui",
-    "title": "ミクロ政治データ分析実習",
-    "section": "GUIとCUI",
-    "text": "GUIとCUI\n\n\nGUI: Graphical User Interface; ソフトウェア上の入出力にグラフィックを利用\n\nマウスでポチポチするだけで操作できる環境\n間違いがほぼ起きない\n柔軟性が低い（決まったオプション、機能しか使えない）\n分析の再現が難しい（出来ないわけではない）\n\nCUI: Character User Interface\n\n全ての操作を文字列ベース（=キーボード）で行う\n一文字でも間違えるとエラーが出たり\n柔軟性が高い（カスタマイズ自由）\n分析の再現性が非常に高い（コードさえ保存しておけばOK）"
-  },
-  {
-    "objectID": "slide/slide02.html#guiとcuiの操作の違い",
-    "href": "slide/slide02.html#guiとcuiの操作の違い",
-    "title": "ミクロ政治データ分析実習",
-    "section": "GUIとCUIの操作の違い",
-    "text": "GUIとCUIの操作の違い\nData.csvを読み込み、Xという変数の平均値と分散を計算\nGUI (SPSS)の例\n\n「ファイル」→「開く」→「データ」をクリック\nファイルを選択し、「開く」をクリック\n「分析」→「記述統計」→「記述統計」をクリック\n左側のパネルからXを右側の「変数」パネルへ移動\n「オブション」をクリック\n「散らばり」の「分散」にチェック\n「続行」をクリック→「OK」をクリック\n\nCUI (R)の例\nMyData <- read.csv(\"Data.csv\")\nmean(MyData$X)\nvar(MyData$X)"
-  },
-  {
-    "objectID": "slide/slide02.html#統合開発環境ide",
-    "href": "slide/slide02.html#統合開発環境ide",
-    "title": "ミクロ政治データ分析実習",
-    "section": "統合開発環境（IDE）",
-    "text": "統合開発環境（IDE）\n\nR Studioが代表的（ほぼ一択）\n\n他にもR Tools for Visual Studio、Atom、Sublime Text、Vim、Emacsなど\n\nIDEの使用は必須ではないが、生産性に大きく関与する\nデータ分析、プログラミングの手助けをする優秀な秘書\n\nファイルの管理、うろ覚えのコマンドのプロンプト、コードの色分けなどを自動的に行う\nコードの実行結果の画面をコードと同時に表示\nこれまでの作業を記録"
-  },
-  {
-    "objectID": "slide/slide02.html#rとrstudioの導入",
-    "href": "slide/slide02.html#rとrstudioの導入",
-    "title": "ミクロ政治データ分析実習",
-    "section": "RとRStudioの導入",
-    "text": "RとRStudioの導入\n\n本講義のサポートページを参照\n対面講義では宋と一緒に初期設定、起動、終了などを行ってもらう。"
-  },
-  {
-    "objectID": "slide/slide02.html#プロジェクト機能について",
-    "href": "slide/slide02.html#プロジェクト機能について",
-    "title": "ミクロ政治データ分析実習",
-    "section": "「プロジェクト」機能について",
-    "text": "「プロジェクト」機能について\n\n本講義のサポートページを参照\n毎回の講義、課題ごとに独立したプロジェクトを作ること\nファイル・システムに関する知識（パス、相対パス、絶対パス）がない場合、プロジェクト昨日は必須\n\nファイル・システムを知っている宋でも常にプロジェクト機能を使用している。"
-  },
-  {
-    "objectID": "slide/slide02.html#課題",
-    "href": "slide/slide02.html#課題",
-    "title": "ミクロ政治データ分析実習",
-    "section": "課題",
-    "text": "課題\nブラインドタッチに自信のない履修者は引き続き、ブラインドタッチの練習\n\n毎日欠かさず練習すれば2週間でできるようになる。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   }
 ]
