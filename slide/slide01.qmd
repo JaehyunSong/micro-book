@@ -78,6 +78,59 @@ knitr::opts_chunk$set(fig.align = "center",
 
 ## 本講義の位置づけ
 
+```{r}
+#| echo: false
+#| message: false
+#| cache: true
+pacman::p_load(tidyverse, ggforce)
+
+ggplot() +
+   geom_circle(aes(x0 =  0.5, y0 = 0, r = 1), 
+               fill = "red", alpha = 0.3) +
+   geom_circle(aes(x0 = -0.5, y0 = 0, r = 1), 
+               fill = "blue", alpha = 0.3) +
+   geom_circle(aes(x0 =  0,   y0 = 1, r = 1), 
+               fill = "green", alpha = 0.3) +
+   coord_fixed(xlim = c(-2.7, 2.7), ylim = c(-1, 2), ratio = 0.75) +
+   annotate("text", x =  0,    y =  1.5, 
+            label = "政治学", size = 10) +
+   annotate("text", x = -0.85, y = -0.25, 
+            label = "コーディング", size = 10,
+            angle = -45) +
+   annotate("text", x =  0.85, y = -0.25, 
+            label = "統計学", size = 10,
+            angle = 45) +
+   annotate("text", x =  0,    y =  -0.25, 
+            label = "機械学習", size = 5) +
+   annotate("text", x =  0.5,  y =   0.75, 
+            label = "伝統的な\n実証政治学", size = 5) +
+   annotate("text", x = -0.5,  y =   0.75, 
+            label = "？？", size = 5) +
+   geom_segment(aes(x = -1.5, y = 1.5, xend = -0.9, yend = 1.5),
+                arrow = arrow(type = "closed")) +
+   geom_segment(aes(x =  1.5, y = 1.5, xend =  0.9, yend = 1.5),
+                arrow = arrow(type = "closed")) +
+   geom_segment(aes(x =  1.5,   y = -0.75, xend = 1.3, yend = -0.6),
+                arrow = arrow(type = "closed")) +
+   geom_segment(aes(x = -1.5,   y = -0.75, xend = -1.3, yend = -0.6),
+                arrow = arrow(type = "closed")) +
+   annotate("text", x =  0,    y =   0.25, color = "darkred",
+            label = "データサイエンス", size = 8, fontface = 2) +
+   annotate("label", x = 1.5, y = -0.75, hjust = 0,
+            label = "マクロ政治データ分析実習", size = 5) +
+   annotate("label", x = -1.5, y = -0.75, hjust = 1,
+            label = "ミクロ政治データ分析実習", size = 5) +
+   annotate("label", x = -1.25, y = 1.5,   hjust = 1,
+            label = "ミクロ政治分析", size = 5) +
+   annotate("label", x =  1.25, y = 1.5,   hjust = 0,
+           label = "マクロ政治分析", size = 5) +
+   theme_void()
+```
+
+---
+
+## ミクロ政治とマクロ政治
+
 #### データの分析単位として「ミクロ」と「マクロ」
 
 * ミクロデータ（個票データ）
