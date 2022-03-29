@@ -16,11 +16,9 @@ format:
     chalkboard: true
     touch: true
     controls: true
-resources:
-  - slide03.pdf
 ---
 
-## 電卓としてのRと演算子
+## 電卓としてのRと算術演算子
 
 ```{r}
 rm(list = ls())
@@ -606,6 +604,7 @@ tail(my_data)
 ### 最後のx行
 
 * `tail(オブジェクト名, n = 行数)`
+   * `head()`を使うと**最初**のx行の出力も可能
 
 ```{r}
 tail(my_data, n = 10)

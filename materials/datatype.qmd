@@ -4,6 +4,15 @@ subtitle: "データ型"
 toc: true
 ---
 
+## スライド
+
+<a href="../slide/slide07.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a>
+
+```{=html}
+<iframe class="slide-deck" src="../slide/slide07.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+```
+
+
 ## データ型とは
 
 　ベクトル（vector）はデータ構造（data structure）であり、ベクトル内の一つ一つの要素は数値や、文字など様々なデータ型（data type）の値を取り得る。

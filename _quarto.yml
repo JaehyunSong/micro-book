@@ -6,7 +6,7 @@ language: translate_jp.yml
 
 website:
   favicon: Figs/favicon.png
-  title: "MicroAnalysis@Kandai"
+  title: "<img src='Figs/logo.png' height='20'> MicroAnalysis@Kandai"
   page-footer: 
     left: "Copyright 2022, <a href='https://www.jaysong.net' target='_blank'>Jaehyun Song</a>. Powered by <a href='https://quarto.org/' target='_blank'>Quarto</a>" 
     right:
@@ -52,6 +52,7 @@ website:
         - materials/basic.qmd             # 第 3回
         - materials/programming.qmd       # 第 4回
         - materials/rmarkdown.qmd         # 第 5回
+        - materials/data_collection.qmd  # 第 5回
         - materials/datatype.qmd          # 第 7回
         - materials/datastructure.qmd     # 第 8回
         - materials/handling1.qmd         # 第 9回
