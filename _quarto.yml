@@ -6,7 +6,7 @@ language: translate_jp.yml
 
 website:
   favicon: Figs/favicon.png
-  title: "<img src='/Figs/logo.png' height='20'> MicroAnalysis@Kandai"
+  title: "<img src='/Figs/logo.png' height='20' style='vertical-align:baseline;'> MicroAnalysis@Kandai"
   page-footer: 
     left: "Copyright 2022, <a href='https://www.jaysong.net' target='_blank'>Jaehyun Song</a>. Powered by <a href='https://quarto.org/' target='_blank'>Quarto</a>" 
     right:
