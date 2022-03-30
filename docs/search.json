@@ -550,21 +550,28 @@
     "href": "slide/slide04.html#オブジェクト名1",
     "title": "ミクロ政治データ分析実習",
     "section": "オブジェクト名（1）",
-    "text": "オブジェクト名（1）\n\nオブジェクト名は英数字と限られた記号のみにする\n数字で始まる変数名は避ける"
+    "text": "オブジェクト名（1）\n原則1: オブジェクト名は英数字と一部の記号（_と.）のみにする\n\nローマ字以外の文字も使える場合もあるが、絶対に使わないこと！\n\n\nvariable1 <- \"R is fun!\"\nvariable1\n\n[1] \"R is fun!\"\n\n変数2 <- \"Rは楽しいよ！\"\n変数2\n\n[1] \"Rは楽しいよ！\"\n\nへんすう3 <- \"Rはええでー\"\nへんすう3\n\n[1] \"Rはええでー\"\n\n변수4 <- \"매일 아침 눈을 뜨면 R부터 기동시킵니다.\"\n변수4\n\n[1] \"매일 아침 눈을 뜨면 R부터 기동시킵니다.\""
   },
   {
     "objectID": "slide/slide04.html#オブジェクト名2",
     "href": "slide/slide04.html#オブジェクト名2",
     "title": "ミクロ政治データ分析実習",
     "section": "オブジェクト名（2）",
-    "text": "オブジェクト名（2）\n\n予約語を避ける"
+    "text": "オブジェクト名（2）\n原則2: 数字で始まる変数名、記号が含まれた変数名は指定できない\n\n裏技で使うことも可能だが、なるべく使わないこと\n\n\n100ABC <- c(1, 2, 3, 5, 7, 11)\n\nError: <text>:1:4: unexpected symbol\n1: 100ABC\n       ^\n\n\n\nSmile^^ <- \"マクドでスマイルを頼んでみたい！\"\n\nError: <text>:1:7: unexpected '^'\n1: Smile^^\n          ^\n\n\n\nWeather_2022/03/30 <- \"最高気温22度\"\n\nError in Weather_2022/3/30 <- \"最高気温22度\": object 'Weather_2022' not found\n\n\nただし、_と.は使用可能であり、.より_を推奨\n\nWeather_2022_03_30 <- \"最高気温22度\"\nWeather_2022_03_30\n\n[1] \"最高気温22度\""
   },
   {
     "objectID": "slide/slide04.html#オブジェクト名3",
     "href": "slide/slide04.html#オブジェクト名3",
     "title": "ミクロ政治データ分析実習",
     "section": "オブジェクト名（3）",
-    "text": "オブジェクト名（3）\n\n短さと分かりやすさの両立"
+    "text": "オブジェクト名（3）\n原則3: 予約語を避ける\n\nRがデフォルトで提供する組込の関数やオブジェクトと重複する名前を自分で作成するオブジェクトに付けることは避ける（できない場合もある）。\n\n例) pi（円周率）、if、forなど\n\n\n例1: 指定は出来るが、非推奨\n\npi # 円周率\n\n[1] 3.141593\n\n\n\npi <- \"3月14日はpie day!\"\npi # もはや円周率ではない\n\n[1] \"3月14日はpie day!\"\n\n\n例2: そもそも指定できない\n\nfor <- \"フォー！\"\n\nError: <text>:1:5: unexpected assignment\n1: for <-\n        ^"
+  },
+  {
+    "objectID": "slide/slide04.html#オブジェクト名4",
+    "href": "slide/slide04.html#オブジェクト名4",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクト名（4）",
+    "text": "オブジェクト名（4）\n原則4: 短さと分かりやすさの両立\n\nオブジェクト名を付けるセンスはプログラマーのレベルが測れる指標の一つ\n\n例1: 変数の中身を見るまでは、どのような内容が入っているか分からない\n\nvar2   <- c(\"female\", \"male\", \"male\", \"female\") # 分かりにくい\ngender <- c(\"female\", \"male\", \"male\", \"female\") # 分かりやすい\n\n\n例2: 長すぎて今後、打つのが面倒くさい\n\nmathematicsscore <- c(30, 91, 43, 77, 100) # 長い!!\nMathScore        <- c(30, 91, 43, 77, 100) # 大文字キャメルケース\nmathScore        <- c(30, 91, 43, 77, 100) # 小文字キャメルケース\nmath_score       <- c(30, 91, 43, 77, 100) # スネークケース"
   },
   {
     "objectID": "slide/slide04.html#改行",
