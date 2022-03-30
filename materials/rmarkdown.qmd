@@ -35,6 +35,8 @@ knitr::include_graphics("Figs/05/Setup_1.png")
 
 **手順3:** OKをクリックする。
 
+* この段階で文書のタイトル（Title:）と作成者名（Author:）を指定することもでKるが、手順4で修正することもできるからここではOKをクリックしても良い。
+
 ```{r}
 #| echo: false
 #| out-width: "450px"

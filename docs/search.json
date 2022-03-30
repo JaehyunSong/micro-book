@@ -11,7 +11,7 @@
     "href": "materials/rmarkdown.html#rmdファイルの作成",
     "title": "第5回講義資料",
     "section": "Rmdファイルの作成",
-    "text": "Rmdファイルの作成\n手順1: RStudioを起動し、プロジェクトを作成する。\n手順2: File > New > R Markdown…を選択する。\n\n\n\n\n\n\n\n\n\n手順3: OKをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: タイトル情報などを以下のように修正する。\n変更前\n---\ntitle: \"Untitled\"\noutput: html_document\n---\n変更後\n---\ntitle: \"はじめてのR Markdown\"\nauthor: \"関大花子\"\ndate: \"2022年 5月 12日\"\noutput: html_document\n---\n\n\n\n\n\n\n自動的に日付を付けたい\n\n\n\ndate:の内容をdate: `r Sys.Date()`に修正するとKnitした日付が自動的につけられる。\n\n\n手順5: ファイルを保存する。ファイル名は適宜付けること。\n\nファイルの保存はFile > Saveか、ショートカットキー（macOSだとCmd (⌘) + S、WindowsだとControl (Ctrl) + S）で出来る。\n\n手順6: Sourceペイン上段のKnitをクリックする。\n\nKnitは「ニット」と読む。\n\n\n\n\n\n\n\n\n\n\n手順7: 新しいウィンドウ、またはViewerペインに出力物が表示される。\n\n\n\n\n\n\n出力物が新しいウィンドウに表示されて面倒くさい\n\n\n\n宋が推奨するRStudioの設定だと出力物がRStudioと同じ画面（Viewerペイン）に表示される。具体的にはTools > Global Options… > R Markdownへ移動し、Show output preview in:をWindowからViewer Paneに変更すれば良い。"
+    "text": "Rmdファイルの作成\n手順1: RStudioを起動し、プロジェクトを作成する。\n手順2: File > New > R Markdown…を選択する。\n\n\n\n\n\n\n\n\n\n手順3: OKをクリックする。\n\nこの段階で文書のタイトル（Title:）と作成者名（Author:）を指定することもでKるが、手順4で修正することもできるからここではOKをクリックしても良い。\n\n\n\n\n\n\n\n\n\n\n手順4: タイトル情報などを以下のように修正する。\n変更前\n---\ntitle: \"Untitled\"\noutput: html_document\n---\n変更後\n---\ntitle: \"はじめてのR Markdown\"\nauthor: \"関大花子\"\ndate: \"2022年 5月 12日\"\noutput: html_document\n---\n\n\n\n\n\n\n自動的に日付を付けたい\n\n\n\ndate:の内容をdate: `r Sys.Date()`に修正するとKnitした日付が自動的につけられる。\n\n\n手順5: ファイルを保存する。ファイル名は適宜付けること。\n\nファイルの保存はFile > Saveか、ショートカットキー（macOSだとCmd (⌘) + S、WindowsだとControl (Ctrl) + S）で出来る。\n\n手順6: Sourceペイン上段のKnitをクリックする。\n\nKnitは「ニット」と読む。\n\n\n\n\n\n\n\n\n\n\n手順7: 新しいウィンドウ、またはViewerペインに出力物が表示される。\n\n\n\n\n\n\n出力物が新しいウィンドウに表示されて面倒くさい\n\n\n\n宋が推奨するRStudioの設定だと出力物がRStudioと同じ画面（Viewerペイン）に表示される。具体的にはTools > Global Options… > R Markdownへ移動し、Show output preview in:をWindowからViewer Paneに変更すれば良い。"
   },
   {
     "objectID": "materials/rmarkdown.html#markdown文法の基本",
@@ -497,6 +497,118 @@
     "text": "課題\nブラインドタッチに自信のない履修者は引き続き、ブラインドタッチの練習\n\n毎日欠かさず練習すれば2週間でできるようになる。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
+    "objectID": "slide/slide04.html#プログラミングの基礎概念",
+    "href": "slide/slide04.html#プログラミングの基礎概念",
+    "title": "ミクロ政治データ分析実習",
+    "section": "プログラミングの基礎概念",
+    "text": "プログラミングの基礎概念\n\n\n\n\nオブジェクト（object）\nクラス（class）\n関数（function）\n引数\n\n仮引数（parameter）と実引数（argument）"
+  },
+  {
+    "objectID": "slide/slide04.html#オブジェクト",
+    "href": "slide/slide04.html#オブジェクト",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクト",
+    "text": "オブジェクト\nオブジェクト (object) : メモリに割り当てられた「何か」\n\nベクトル (vector)、行列 (matrix)、データフレーム (data frame)、リスト (list)、関数 (function) など\nそれぞれ固有の（=他のオブジェクトと重複しない）名前が付いている。\n1から5までの自然数の数列をmy_vec1という名前のオブジェクトとして格納\n\n\nmy_vec1 <- c(1, 2, 3, 4, 5) # my_vec1 <- 1:5  も同じ\n\n\nRに存在するあらゆるものはオブジェクトである（Chambers 2016）\n\n“Everything that exists in R is an object”\n\n\nmy_vec1 * 2\n\n\n以上のコードの場合、2もオブジェクト\n\n計算が終わった瞬間、メモリから削除されるだけ\n\n演算子*もオブジェクト"
+  },
+  {
+    "objectID": "slide/slide04.html#クラス",
+    "href": "slide/slide04.html#クラス",
+    "title": "ミクロ政治データ分析実習",
+    "section": "クラス",
+    "text": "クラス\nクラス (class): オブジェクトを特徴づける属性\n\nclass()関数で確認可能\nすべてのオブジェクトは何らかのクラスを持つ\n\n\nclass(my_vec1) # my_vec1 のクラス\n\n[1] \"numeric\"\n\nclass(2)       # 2 のクラス\n\n[1] \"numeric\"\n\nclass(`*`)     # * のクラス\n\n[1] \"function\"\n\nclass(class)   # class() のクラス\n\n[1] \"function\""
+  },
+  {
+    "objectID": "slide/slide04.html#なぜクラスが重要か",
+    "href": "slide/slide04.html#なぜクラスが重要か",
+    "title": "ミクロ政治データ分析実習",
+    "section": "なぜクラスが重要か",
+    "text": "なぜクラスが重要か\n\nある関数の引数（後述）には使用可能なクラスが指定されている。\n?関数名で確認可能\nmean()関数の例（Consoleペイン上で?mean）\n\nmean()に使用可能な引数はx、trim、na.rm\nx: numeric型ベクトル、logical型ベクトルなどが使用可能\nna.rm: 長さ1のlogical型ベクトル（a logical value）のみ使用可能\n\n\nmean(c(1, 2, 3, NA, 5), na.rm = TRUE)\n\n関数を使いこなすためには関数のヘルプを確認する\n\n必要な引数、返されるデータの構造、サンプルコードなど豊富な情報が載っている。"
+  },
+  {
+    "objectID": "slide/slide04.html#関数と引数",
+    "href": "slide/slide04.html#関数と引数",
+    "title": "ミクロ政治データ分析実習",
+    "section": "関数と引数",
+    "text": "関数と引数\n関数 (function): 入力されたデータを内部で決められた手順に従って処理し、その結果を返すもの\n\nRで起こるあらゆることは関数の呼び出しである (Chambers, 2016)\n\nEverything that happens in R is a function call。\n\n使い方: 関数名(関数の入力となるオブジェクト)\n\n例) class(my_vec1)、sum(my_vec1)\n\n自分で関数を作成することも可能\n関数には引数（ひきすう）が必要"
+  },
+  {
+    "objectID": "slide/slide04.html#引数",
+    "href": "slide/slide04.html#引数",
+    "title": "ミクロ政治データ分析実習",
+    "section": "引数",
+    "text": "引数\nsum()関数の例\nsum(c(1, 2, 3, NA, 5), na.rm = TRUE)\n\n関数名はsum\n仮引数 (parameter): na.rm\n実引数 (argument): c(1, 2, 3, NA, 5)、TRUE\n\nc(1, 2, 3, NA, 5)の仮引数名はない（ヘルプを見ると...と表示される）。このように仮引数名が存在しないケースもある。\n\n第一引数の仮引数は省略するケースが多い\n第二引数以降は仮引数名を明記（実引数がどの仮引数に対応するかを明示）\n\n関数によっては引数は数十個ある場合も\n\n引数には既定値 (default value)が指定されているものもあり、省略可能。既定値がない引数はすべて指定する。\n\nたとえば、mean()のtrim引数の既定値は0（?mean参照）\nUsageに仮引数 = 実引数と表記されている場合、既定値が存在する\nArguemntsにan optional…と書いていれば、既定値はないが、指定しなくても関数は動くことを意味する。"
+  },
+  {
+    "objectID": "slide/slide04.html#コーディングスタイル",
+    "href": "slide/slide04.html#コーディングスタイル",
+    "title": "ミクロ政治データ分析実習",
+    "section": "コーディング・スタイル",
+    "text": "コーディング・スタイル\n\nオブジェクト名の付け方\n改行\nスペースと字下げ（インデント）\n代入の演算子は=でなく、<-を使用\n\n\n参考\n\nThe tidyverse style guide\nGoogle’s Style Guide\n{styler}パッケージと{lintr}パッケージ"
+  },
+  {
+    "objectID": "slide/slide04.html#オブジェクト名1",
+    "href": "slide/slide04.html#オブジェクト名1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクト名（1）",
+    "text": "オブジェクト名（1）\n\nオブジェクト名は英数字と限られた記号のみにする\n数字で始まる変数名は避ける"
+  },
+  {
+    "objectID": "slide/slide04.html#オブジェクト名2",
+    "href": "slide/slide04.html#オブジェクト名2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクト名（2）",
+    "text": "オブジェクト名（2）\n\n予約語を避ける"
+  },
+  {
+    "objectID": "slide/slide04.html#オブジェクト名3",
+    "href": "slide/slide04.html#オブジェクト名3",
+    "title": "ミクロ政治データ分析実習",
+    "section": "オブジェクト名（3）",
+    "text": "オブジェクト名（3）\n\n短さと分かりやすさの両立"
+  },
+  {
+    "objectID": "slide/slide04.html#改行",
+    "href": "slide/slide04.html#改行",
+    "title": "ミクロ政治データ分析実習",
+    "section": "改行",
+    "text": "改行\n\nコードは1行が長すぎないように適宜改行すること。\n\n1行に何文字までするかはモニター・サイズと相談すること（昔は80文字という非公式的なルールがあった）。\n\n\n良い例: 改行あり\n\nfit1 <- glm(Voted ~ Female + Age + Education + Income + Region +\n              Attitude1 + Attitude2 + Attitude3, \n            family = binomial(\"logit\"), data = my_data)\n\n悪い例: 改行なし\n\nfit1 <- glm(Voted ~ Female + Age + Education + Income + Region + Attitude1 + Attitude2 + Attitude3, family = binomial(\"logit\"), data = my_data)"
+  },
+  {
+    "objectID": "slide/slide04.html#スペースと字下げ1",
+    "href": "slide/slide04.html#スペースと字下げ1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "スペースと字下げ（1）",
+    "text": "スペースと字下げ（1）\n\nコードが長くなるほどスペースの字下げは重要\n全ての演算子の前後には半角スペースを入れる。\n\n+、-、*、%%、&、|、<-など\nただし、^は例外\n全角スペースは絶対に使わないこと\n\n同じブロック（()、{}）内なら字下げも可読性の観点から重要\n\nただし、字下げはRStudioを手伝ってくれる。\n\n\n良い例:\n\nsum(my_vec2, na.rm = TRUE)\n\n悪い例:\n\nsum(my_vec2,na.rm=TRUE)"
+  },
+  {
+    "objectID": "slide/slide04.html#スペースと字下げ2",
+    "href": "slide/slide04.html#スペースと字下げ2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "スペースと字下げ（2）",
+    "text": "スペースと字下げ（2）\n以下のコードは全て同じであるが、可読性が桁違い（表形式データ作成の例）\n良い例: 改行あり、字下げあり、スペースあり\n\ndata.frame(\n  name     = c(\"Song\",  \"Yanai\", \"Wickham\"),\n  favorite = c(\"Ramen\", \"Cat\",   \"R\"),\n  gender   = c(\"Male\",  \"Male\",  \"Male\")\n)\n\n悪い例: 改行あり、字下げなし、スペースあり\n\ndata.frame(\nname = c(\"Song\", \"Yanai\", \"Hadley\"),\nfavorite = c(\"Ramen\", \"Cat\", \"R\"),\ngender = c(\"Male\", \"Male\", \"Male\")\n)\n\n邪悪な例: 改行なし（=字下げなし）、スペースなし\n\ndata.frame(name=c(\"Song\",\"Yanai\",\"Hadley\"),favorite=c(\"Ramen\",\"Cat\",\"R\"),fender=c(\"Male\",\"Male\",\"Male\"))"
+  },
+  {
+    "objectID": "slide/slide04.html#本格的なプログラミングの世界へ",
+    "href": "slide/slide04.html#本格的なプログラミングの世界へ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "本格的なプログラミングの世界へ",
+    "text": "本格的なプログラミングの世界へ\n中級者以上を目指すなら以下のようなプログラミングの知識は必須であるものの、本講義では一部を除き、解説しない。\n詳細は教科書の第10章を参照\n\n反復\n\nfor()\nwhile()\n\n条件分岐\n\nif()、else if()、else()\nifelse()（\\(\\simeq\\) if_else()）\n\n本講義ではかなり頻繁に使うため、第9回以降に解説する。\n\nswitch()"
+  },
+  {
+    "objectID": "slide/slide04.html#プログラミングは簡単だから難しい",
+    "href": "slide/slide04.html#プログラミングは簡単だから難しい",
+    "title": "ミクロ政治データ分析実習",
+    "section": "プログラミングは簡単だから難しい",
+    "text": "プログラミングは簡単だから難しい\nチューリング完全な言語の2条件\n\nデータの読み書き\n条件分岐\nデータの読み書きと条件分岐を組み合わせると反復処理が可能\n\n\nプログラミングが簡単な理由\nデータの読み書き、条件分岐、反復処理を覚えるだけで、パソコンで出来るすべてのことができる。\n\nプログラミングが難しい理由\nデータの読み書き、条件分岐、反復処理だけですべてを処理しなければならない。"
+  },
+  {
+    "objectID": "slide/slide04.html#例-bubble-sortアルゴリズム",
+    "href": "slide/slide04.html#例-bubble-sortアルゴリズム",
+    "title": "ミクロ政治データ分析実習",
+    "section": "例) Bubble Sortアルゴリズム",
+    "text": "例) Bubble Sortアルゴリズム\n\n代入（<-）、条件分岐（if()）、反復（for()）だけでベクトルのソート\n\n\nbubble_sort <- function(x){\n  n <- length(x)\n  for (i in 1 : (n - 1)) {\n    for (j in 1 : (n - i)) {\n      if (x[j] > x[j + 1]) {\n        temp <- x[j]\n        x[j] <- x[j + 1]\n        x[j + 1] <- temp\n      }\n    }\n  }\n  return(x)\n}\n\n\n\nx <- c(4, 2, 6, 3, 1, 11, 5, 9)\nbubble_sort(x)\n\n[1]  1  2  3  4  5  6  9 11\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
     "objectID": "intro/file.html#フォルダーの管理",
     "href": "intro/file.html#フォルダーの管理",
     "title": "ファイル管理",
@@ -655,7 +767,7 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月29日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
+    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月30日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html#概要",
