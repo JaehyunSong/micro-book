@@ -19,6 +19,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -336,6 +399,8 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body>
   <div class="reveal">
@@ -349,11 +414,2448 @@
   <p class="date">2022年 5月 19日</p>
 </section>
 
-<section class="slide level2">
+<section id="授業を始める前に" class="slide level2">
+<h2>授業を始める前に</h2>
+<ul>
+<li>分析単位、仮説のような概念が登場するが、これらについては後期の「マクロ政治データ分析実習」の前半（リサーチデザイン）で解説する。</li>
+<li>本日の内容は<strong>前期</strong>の内容とあまり関係のない内容だが、<strong>後期</strong>の授業は自分でデータセットを構築/入手して、独自の問いに対する分析行う（= 期末レポート）必要があるため、非常に重要。</li>
+</ul>
+</section>
+<section id="データの形" class="slide level2 scrollable">
+<h2>データの形</h2>
+<p>データの構造は基本的に「<strong>四角形</strong>」</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="jwyxpbenfi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
 
+#jwyxpbenfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
 
+#jwyxpbenfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
-<img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+#jwyxpbenfi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jwyxpbenfi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jwyxpbenfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jwyxpbenfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jwyxpbenfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jwyxpbenfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jwyxpbenfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jwyxpbenfi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jwyxpbenfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jwyxpbenfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jwyxpbenfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jwyxpbenfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jwyxpbenfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwyxpbenfi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jwyxpbenfi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jwyxpbenfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwyxpbenfi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jwyxpbenfi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwyxpbenfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jwyxpbenfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwyxpbenfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jwyxpbenfi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jwyxpbenfi .gt_left {
+  text-align: left;
+}
+
+#jwyxpbenfi .gt_center {
+  text-align: center;
+}
+
+#jwyxpbenfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jwyxpbenfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#jwyxpbenfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#jwyxpbenfi .gt_font_italic {
+  font-style: italic;
+}
+
+#jwyxpbenfi .gt_super {
+  font-size: 65%;
+}
+
+#jwyxpbenfi .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#jwyxpbenfi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jwyxpbenfi .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#jwyxpbenfi .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#jwyxpbenfi .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">都道府県</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">自民得票率</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">財政力指数</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">高齢者比</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">第一次産業従事者比率</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">北海道</td>
+<td class="gt_row gt_right">32.82</td>
+<td class="gt_row gt_right">0.43523</td>
+<td class="gt_row gt_right">29.19036</td>
+<td class="gt_row gt_right">6.9950367</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">青森県</td>
+<td class="gt_row gt_right">40.44</td>
+<td class="gt_row gt_right">0.34082</td>
+<td class="gt_row gt_right">30.21411</td>
+<td class="gt_row gt_right">12.0293305</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">岩手県</td>
+<td class="gt_row gt_right">34.90</td>
+<td class="gt_row gt_right">0.35156</td>
+<td class="gt_row gt_right">30.48886</td>
+<td class="gt_row gt_right">10.6440222</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">宮城県</td>
+<td class="gt_row gt_right">36.68</td>
+<td class="gt_row gt_right">0.61443</td>
+<td class="gt_row gt_right">25.85974</td>
+<td class="gt_row gt_right">4.3617982</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">秋田県</td>
+<td class="gt_row gt_right">43.46</td>
+<td class="gt_row gt_right">0.30876</td>
+<td class="gt_row gt_right">33.94153</td>
+<td class="gt_row gt_right">9.6208687</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">山形県</td>
+<td class="gt_row gt_right">42.49</td>
+<td class="gt_row gt_right">0.35108</td>
+<td class="gt_row gt_right">30.90099</td>
+<td class="gt_row gt_right">9.1944841</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">福島県</td>
+<td class="gt_row gt_right">33.82</td>
+<td class="gt_row gt_right">0.53346</td>
+<td class="gt_row gt_right">28.77917</td>
+<td class="gt_row gt_right">6.4827959</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">茨城県</td>
+<td class="gt_row gt_right">40.64</td>
+<td class="gt_row gt_right">0.63726</td>
+<td class="gt_row gt_right">27.10318</td>
+<td class="gt_row gt_right">5.6398160</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">栃木県</td>
+<td class="gt_row gt_right">38.78</td>
+<td class="gt_row gt_right">0.63993</td>
+<td class="gt_row gt_right">26.34192</td>
+<td class="gt_row gt_right">5.5164637</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">群馬県</td>
+<td class="gt_row gt_right">42.06</td>
+<td class="gt_row gt_right">0.62459</td>
+<td class="gt_row gt_right">28.08067</td>
+<td class="gt_row gt_right">4.9627352</td></tr>
+    <tr><td class="gt_row gt_right">11</td>
+<td class="gt_row gt_left">埼玉県</td>
+<td class="gt_row gt_right">32.30</td>
+<td class="gt_row gt_right">0.76593</td>
+<td class="gt_row gt_right">25.17737</td>
+<td class="gt_row gt_right">1.5923560</td></tr>
+    <tr><td class="gt_row gt_right">12</td>
+<td class="gt_row gt_left">千葉県</td>
+<td class="gt_row gt_right">37.79</td>
+<td class="gt_row gt_right">0.77827</td>
+<td class="gt_row gt_right">26.16599</td>
+<td class="gt_row gt_right">2.7855056</td></tr>
+    <tr><td class="gt_row gt_right">13</td>
+<td class="gt_row gt_left">東京都</td>
+<td class="gt_row gt_right">34.37</td>
+<td class="gt_row gt_right">1.10133</td>
+<td class="gt_row gt_right">23.17111</td>
+<td class="gt_row gt_right">0.3872702</td></tr>
+    <tr><td class="gt_row gt_right">14</td>
+<td class="gt_row gt_left">神奈川県</td>
+<td class="gt_row gt_right">34.92</td>
+<td class="gt_row gt_right">0.90832</td>
+<td class="gt_row gt_right">24.20895</td>
+<td class="gt_row gt_right">0.8338070</td></tr>
+    <tr><td class="gt_row gt_right">15</td>
+<td class="gt_row gt_left">新潟県</td>
+<td class="gt_row gt_right">43.66</td>
+<td class="gt_row gt_right">0.45107</td>
+<td class="gt_row gt_right">29.99366</td>
+<td class="gt_row gt_right">5.7604046</td></tr>
+    <tr><td class="gt_row gt_right">16</td>
+<td class="gt_row gt_left">富山県</td>
+<td class="gt_row gt_right">44.16</td>
+<td class="gt_row gt_right">0.46651</td>
+<td class="gt_row gt_right">30.82200</td>
+<td class="gt_row gt_right">3.2660962</td></tr>
+    <tr><td class="gt_row gt_right">17</td>
+<td class="gt_row gt_left">石川県</td>
+<td class="gt_row gt_right">48.09</td>
+<td class="gt_row gt_right">0.48499</td>
+<td class="gt_row gt_right">28.06994</td>
+<td class="gt_row gt_right">3.0190636</td></tr>
+    <tr><td class="gt_row gt_right">18</td>
+<td class="gt_row gt_left">福井県</td>
+<td class="gt_row gt_right">45.29</td>
+<td class="gt_row gt_right">0.39353</td>
+<td class="gt_row gt_right">28.89013</td>
+<td class="gt_row gt_right">3.7142163</td></tr>
+    <tr><td class="gt_row gt_right">19</td>
+<td class="gt_row gt_left">山梨県</td>
+<td class="gt_row gt_right">37.36</td>
+<td class="gt_row gt_right">0.39625</td>
+<td class="gt_row gt_right">28.73440</td>
+<td class="gt_row gt_right">7.1834624</td></tr>
+    <tr><td class="gt_row gt_right">20</td>
+<td class="gt_row gt_left">長野県</td>
+<td class="gt_row gt_right">35.27</td>
+<td class="gt_row gt_right">0.49610</td>
+<td class="gt_row gt_right">30.39107</td>
+<td class="gt_row gt_right">9.0571664</td></tr>
+    <tr><td class="gt_row gt_right">21</td>
+<td class="gt_row gt_left">岐阜県</td>
+<td class="gt_row gt_right">39.71</td>
+<td class="gt_row gt_right">0.53444</td>
+<td class="gt_row gt_right">28.52990</td>
+<td class="gt_row gt_right">3.0858851</td></tr>
+    <tr><td class="gt_row gt_right">22</td>
+<td class="gt_row gt_left">静岡県</td>
+<td class="gt_row gt_right">37.47</td>
+<td class="gt_row gt_right">0.71954</td>
+<td class="gt_row gt_right">28.19953</td>
+<td class="gt_row gt_right">3.8015628</td></tr>
+    <tr><td class="gt_row gt_right">23</td>
+<td class="gt_row gt_left">愛知県</td>
+<td class="gt_row gt_right">34.32</td>
+<td class="gt_row gt_right">0.92079</td>
+<td class="gt_row gt_right">24.21588</td>
+<td class="gt_row gt_right">2.0715470</td></tr>
+    <tr><td class="gt_row gt_right">24</td>
+<td class="gt_row gt_left">三重県</td>
+<td class="gt_row gt_right">33.67</td>
+<td class="gt_row gt_right">0.58545</td>
+<td class="gt_row gt_right">28.32133</td>
+<td class="gt_row gt_right">3.5781354</td></tr>
+    <tr><td class="gt_row gt_right">25</td>
+<td class="gt_row gt_left">滋賀県</td>
+<td class="gt_row gt_right">37.85</td>
+<td class="gt_row gt_right">0.54974</td>
+<td class="gt_row gt_right">24.42326</td>
+<td class="gt_row gt_right">2.6453739</td></tr>
+    <tr><td class="gt_row gt_right">26</td>
+<td class="gt_row gt_left">京都府</td>
+<td class="gt_row gt_right">31.18</td>
+<td class="gt_row gt_right">0.58423</td>
+<td class="gt_row gt_right">27.78059</td>
+<td class="gt_row gt_right">2.0519098</td></tr>
+    <tr><td class="gt_row gt_right">27</td>
+<td class="gt_row gt_left">大阪府</td>
+<td class="gt_row gt_right">22.12</td>
+<td class="gt_row gt_right">0.76505</td>
+<td class="gt_row gt_right">26.47324</td>
+<td class="gt_row gt_right">0.5047311</td></tr>
+    <tr><td class="gt_row gt_right">28</td>
+<td class="gt_row gt_left">兵庫県</td>
+<td class="gt_row gt_right">31.71</td>
+<td class="gt_row gt_right">0.63363</td>
+<td class="gt_row gt_right">27.29242</td>
+<td class="gt_row gt_right">1.9681756</td></tr>
+    <tr><td class="gt_row gt_right">29</td>
+<td class="gt_row gt_left">奈良県</td>
+<td class="gt_row gt_right">33.51</td>
+<td class="gt_row gt_right">0.42074</td>
+<td class="gt_row gt_right">28.80949</td>
+<td class="gt_row gt_right">2.6246661</td></tr>
+    <tr><td class="gt_row gt_right">30</td>
+<td class="gt_row gt_left">和歌山県</td>
+<td class="gt_row gt_right">39.61</td>
+<td class="gt_row gt_right">0.32692</td>
+<td class="gt_row gt_right">30.97829</td>
+<td class="gt_row gt_right">8.7569556</td></tr>
+    <tr><td class="gt_row gt_right">31</td>
+<td class="gt_row gt_left">鳥取県</td>
+<td class="gt_row gt_right">41.62</td>
+<td class="gt_row gt_right">0.26553</td>
+<td class="gt_row gt_right">29.86492</td>
+<td class="gt_row gt_right">8.7820593</td></tr>
+    <tr><td class="gt_row gt_right">32</td>
+<td class="gt_row gt_left">島根県</td>
+<td class="gt_row gt_right">48.24</td>
+<td class="gt_row gt_right">0.25199</td>
+<td class="gt_row gt_right">32.70654</td>
+<td class="gt_row gt_right">7.7575701</td></tr>
+    <tr><td class="gt_row gt_right">33</td>
+<td class="gt_row gt_left">岡山県</td>
+<td class="gt_row gt_right">37.87</td>
+<td class="gt_row gt_right">0.51755</td>
+<td class="gt_row gt_right">28.89047</td>
+<td class="gt_row gt_right">4.5740178</td></tr>
+    <tr><td class="gt_row gt_right">34</td>
+<td class="gt_row gt_left">広島県</td>
+<td class="gt_row gt_right">39.93</td>
+<td class="gt_row gt_right">0.60157</td>
+<td class="gt_row gt_right">27.77751</td>
+<td class="gt_row gt_right">3.0909015</td></tr>
+    <tr><td class="gt_row gt_right">35</td>
+<td class="gt_row gt_left">山口県</td>
+<td class="gt_row gt_right">46.75</td>
+<td class="gt_row gt_right">0.44031</td>
+<td class="gt_row gt_right">32.20171</td>
+<td class="gt_row gt_right">4.8076461</td></tr>
+    <tr><td class="gt_row gt_right">36</td>
+<td class="gt_row gt_left">徳島県</td>
+<td class="gt_row gt_right">38.44</td>
+<td class="gt_row gt_right">0.32946</td>
+<td class="gt_row gt_right">31.14240</td>
+<td class="gt_row gt_right">8.1905828</td></tr>
+    <tr><td class="gt_row gt_right">37</td>
+<td class="gt_row gt_left">香川県</td>
+<td class="gt_row gt_right">44.07</td>
+<td class="gt_row gt_right">0.47572</td>
+<td class="gt_row gt_right">30.15175</td>
+<td class="gt_row gt_right">5.2630765</td></tr>
+    <tr><td class="gt_row gt_right">38</td>
+<td class="gt_row gt_left">愛媛県</td>
+<td class="gt_row gt_right">43.57</td>
+<td class="gt_row gt_right">0.42524</td>
+<td class="gt_row gt_right">30.81198</td>
+<td class="gt_row gt_right">7.3426155</td></tr>
+    <tr><td class="gt_row gt_right">39</td>
+<td class="gt_row gt_left">高知県</td>
+<td class="gt_row gt_right">37.01</td>
+<td class="gt_row gt_right">0.25820</td>
+<td class="gt_row gt_right">32.99393</td>
+<td class="gt_row gt_right">11.4168481</td></tr>
+    <tr><td class="gt_row gt_right">40</td>
+<td class="gt_row gt_left">福岡県</td>
+<td class="gt_row gt_right">36.52</td>
+<td class="gt_row gt_right">0.63402</td>
+<td class="gt_row gt_right">26.09215</td>
+<td class="gt_row gt_right">2.7790311</td></tr>
+    <tr><td class="gt_row gt_right">41</td>
+<td class="gt_row gt_left">佐賀県</td>
+<td class="gt_row gt_right">43.53</td>
+<td class="gt_row gt_right">0.34093</td>
+<td class="gt_row gt_right">27.79119</td>
+<td class="gt_row gt_right">8.4424369</td></tr>
+    <tr><td class="gt_row gt_right">42</td>
+<td class="gt_row gt_left">長崎県</td>
+<td class="gt_row gt_right">41.70</td>
+<td class="gt_row gt_right">0.32607</td>
+<td class="gt_row gt_right">29.75835</td>
+<td class="gt_row gt_right">7.4224487</td></tr>
+    <tr><td class="gt_row gt_right">43</td>
+<td class="gt_row gt_left">熊本県</td>
+<td class="gt_row gt_right">46.54</td>
+<td class="gt_row gt_right">0.39854</td>
+<td class="gt_row gt_right">28.91214</td>
+<td class="gt_row gt_right">9.5894910</td></tr>
+    <tr><td class="gt_row gt_right">44</td>
+<td class="gt_row gt_left">大分県</td>
+<td class="gt_row gt_right">39.44</td>
+<td class="gt_row gt_right">0.37071</td>
+<td class="gt_row gt_right">30.69506</td>
+<td class="gt_row gt_right">6.6783603</td></tr>
+    <tr><td class="gt_row gt_right">45</td>
+<td class="gt_row gt_left">宮崎県</td>
+<td class="gt_row gt_right">40.11</td>
+<td class="gt_row gt_right">0.33278</td>
+<td class="gt_row gt_right">29.59453</td>
+<td class="gt_row gt_right">10.7896612</td></tr>
+    <tr><td class="gt_row gt_right">46</td>
+<td class="gt_row gt_left">鹿児島県</td>
+<td class="gt_row gt_right">45.97</td>
+<td class="gt_row gt_right">0.33303</td>
+<td class="gt_row gt_right">29.56849</td>
+<td class="gt_row gt_right">9.3186355</td></tr>
+    <tr><td class="gt_row gt_right">47</td>
+<td class="gt_row gt_left">沖縄県</td>
+<td class="gt_row gt_right">27.82</td>
+<td class="gt_row gt_right">0.33241</td>
+<td class="gt_row gt_right">19.76016</td>
+<td class="gt_row gt_right">4.5100859</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="行と列" class="slide level2">
+<h2>行と列</h2>
+<ul>
+<li>行: <strong>ケース</strong>
+<ul>
+<li>人、クラス、都道府県、国、年など</li>
+<li>分析単位に注意すること</li>
+</ul></li>
+<li>列: <strong>変数</strong>
+<ul>
+<li>性別、年齢、人口、成績など</li>
+</ul></li>
+<li>一行目は<strong>変数名</strong>。<strong>ヘッダー</strong> (header) とも呼ぶ。</li>
+</ul>
+</section>
+<section id="分析単位" class="slide level2">
+<h2>分析単位</h2>
+<p>各行（ケース）は分析単位を表すこと</p>
+<ul>
+<li>仮説: 高齢<strong>者</strong>ほど政党Xに投票する</li>
+<li>分析単位は「人」</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> ID </th>
+   <th style="text-align:right;"> 年齢 </th>
+   <th style="text-align:right;"> 政党Xへの投票有無 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 49 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="分析単位-1" class="slide level2">
+<h2>分析単位</h2>
+<p>各行（ケース）は分析単位を表すこと</p>
+<ul>
+<li>仮説: 高齢者が多い<strong>都道府県</strong>ほど政党Xの得票率が高い</li>
+<li>分析単位は「都道府県」</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="xyppqoijkq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#xyppqoijkq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xyppqoijkq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xyppqoijkq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xyppqoijkq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xyppqoijkq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xyppqoijkq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xyppqoijkq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xyppqoijkq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xyppqoijkq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xyppqoijkq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xyppqoijkq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xyppqoijkq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xyppqoijkq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyppqoijkq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xyppqoijkq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xyppqoijkq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyppqoijkq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xyppqoijkq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyppqoijkq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xyppqoijkq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyppqoijkq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xyppqoijkq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyppqoijkq .gt_left {
+  text-align: left;
+}
+
+#xyppqoijkq .gt_center {
+  text-align: center;
+}
+
+#xyppqoijkq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xyppqoijkq .gt_font_normal {
+  font-weight: normal;
+}
+
+#xyppqoijkq .gt_font_bold {
+  font-weight: bold;
+}
+
+#xyppqoijkq .gt_font_italic {
+  font-style: italic;
+}
+
+#xyppqoijkq .gt_super {
+  font-size: 65%;
+}
+
+#xyppqoijkq .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#xyppqoijkq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xyppqoijkq .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#xyppqoijkq .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#xyppqoijkq .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">都道府県</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">政党Xの得票率</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">高齢者比</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">北海道</td>
+<td class="gt_row gt_right">32.82</td>
+<td class="gt_row gt_right">29.19036</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">青森県</td>
+<td class="gt_row gt_right">40.44</td>
+<td class="gt_row gt_right">30.21411</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">岩手県</td>
+<td class="gt_row gt_right">34.90</td>
+<td class="gt_row gt_right">30.48886</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">宮城県</td>
+<td class="gt_row gt_right">36.68</td>
+<td class="gt_row gt_right">25.85974</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">秋田県</td>
+<td class="gt_row gt_right">43.46</td>
+<td class="gt_row gt_right">33.94153</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">山形県</td>
+<td class="gt_row gt_right">42.49</td>
+<td class="gt_row gt_right">30.90099</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">福島県</td>
+<td class="gt_row gt_right">33.82</td>
+<td class="gt_row gt_right">28.77917</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">茨城県</td>
+<td class="gt_row gt_right">40.64</td>
+<td class="gt_row gt_right">27.10318</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">栃木県</td>
+<td class="gt_row gt_right">38.78</td>
+<td class="gt_row gt_right">26.34192</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">群馬県</td>
+<td class="gt_row gt_right">42.06</td>
+<td class="gt_row gt_right">28.08067</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="変数の尺度" class="slide level2">
+<h2>変数の尺度</h2>
+<p>多くの場合、間隔尺度と比率尺度の区別は行わない</p>
+<ul>
+<li>離散変数 (Discrete variable)
+<ul>
+<li>名目尺度 (Nomial scale)</li>
+<li>順序尺度 (Ordinal scale)</li>
+</ul></li>
+<li>連続変数 (Continuous variable)
+<ul>
+<li>間隔尺度 (Interval scale)</li>
+<li>比率尺度 (Ratio scale)</li>
+</ul></li>
+</ul>
+</section>
+<section id="名目尺度" class="slide level2">
+<h2>名目尺度</h2>
+<p>「範疇尺度」、「名義尺度」とも</p>
+<ul>
+<li>例) 男性は0、女性は1</li>
+<li>例) 北海道 = 1、青森 = 2、…、鹿児島 = 46、沖縄 = 47</li>
+</ul>
+<p>数字は各項目を.kenten[識別]するものであり、<strong>数字として意味を持たない</strong></p>
+<ul>
+<li>沖縄 - 北海道 = 鹿児島?</li>
+<li>男性 = 1、女性 = 0でも問題ない</li>
+</ul>
+<p><br></p>
+<p>できること</p>
+<ul>
+<li><strong>度数</strong> (Frequency): 女性は何人? 大阪出身は何人?</li>
+<li><strong>最頻値</strong> (Mode): 最も多い出身地はどこ?</li>
+</ul>
+</section>
+<section id="順序尺度" class="slide level2">
+<h2>順序尺度</h2>
+<p><strong>「大小」に関する情報のみ</strong>を持つ</p>
+<ul>
+<li>例) 1位、2位、3位、···</li>
+<li>例)とても幸せ、どちらかといえば幸せ、···、とても不幸</li>
+<li>1位と2位の差 <span class="math inline">\(\neq\)</span> 2位と3位の差</li>
+<li>幸せの基準は人それぞれ</li>
+</ul>
+<p><br></p>
+<p>できること</p>
+<ul>
+<li>名目尺度でできること</li>
+<li><strong>順位</strong> (Order, Rank): 1 位 &gt; 2 位 &gt; 3 位</li>
+<li><strong>中央値</strong> (Median): 真ん中は何か</li>
+</ul>
+</section>
+<section id="間隔尺度" class="slide level2">
+<h2>間隔尺度</h2>
+<p>わりと少ない尺度</p>
+<ul>
+<li>例として「気温」</li>
+<li>「0」の意味はない
+<ul>
+<li>0 <span class="math inline">\(^\circ\)</span>C は「温度がない」ではない</li>
+<li>0 <span class="math inline">\(^\circ\)</span>C = 32 <span class="math inline">\(^\circ\)</span>F</li>
+</ul></li>
+<li>掛け算ができない
+<ul>
+<li>2 <span class="math inline">\(^\circ\)</span>Cは1 <span class="math inline">\(^\circ\)</span>Cより2倍暑い?</li>
+</ul></li>
+</ul>
+<p><br></p>
+<p>できること</p>
+<ul>
+<li>順序尺度でできること</li>
+<li><strong>足し算</strong>と<strong>引き算</strong></li>
+<li><strong>平均値</strong> (Average): 平均気温</li>
+<li><strong>差の比較</strong>: 30度 − 20度 = 10度 − 0度</li>
+</ul>
+</section>
+<section id="比率尺度" class="slide level2">
+<h2>比率尺度</h2>
+<p>最も一般的な変数</p>
+<ul>
+<li>「0」の意味あり
+<ul>
+<li>0円=お金がない</li>
+<li>0 Km/s. = 動かない</li>
+</ul></li>
+</ul>
+<p><br></p>
+<p>できること</p>
+<ul>
+<li>間隔尺度でできること</li>
+<li><strong>掛け算</strong>と<strong>割り算</strong>: 1 万円 × 2 = 2 万円</li>
+</ul>
+</section>
+<section id="尺度の比較" class="slide level2">
+<h2>尺度の比較</h2>
+<p>尺度によって使える統計量・手法が異なる</p>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>名目</th>
+<th>順序</th>
+<th>間隔</th>
+<th>連続</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>順位（大小関係）</td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="even">
+<td>度数（頻度）</td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="odd">
+<td>最頻値</td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="even">
+<td>中央値</td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="odd">
+<td>平均値</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="even">
+<td>差の比較</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="odd">
+<td>足し算と引き算</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="even">
+<td>掛け算と割り算</td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+<tr class="odd">
+<td>0の有無</td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\bigcirc\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="変数と尺度" class="slide level2">
+<h2>変数と尺度</h2>
+<p><span class="math inline">\(\bigcirc\bigcirc\)</span> 尺度で測定された変数 <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\bigcirc\bigcirc\)</span> 変数</p>
+<ul>
+<li><p><strong>同じ対象でも用いる尺度は複数あり得る</strong>。</p></li>
+<li><p>例) 年収</p>
+<ul>
+<li><strong>順序:</strong> ∼200万円、201万円∼400万円、401万円∼</li>
+<li><strong>比率:</strong> 178万円, 308万円, 968万円, 1兆300円, ···</li>
+</ul></li>
+<li><p>例) 年齢</p>
+<ul>
+<li><strong>順序:</strong> 20代未満, 20代, 30代, 40代, 50代, 60代以上</li>
+<li><strong>比率:</strong> 88歳, 37歳, 11歳, 130歳, ···</li>
+</ul></li>
+</ul>
+</section>
+<section id="尺度の変換" class="slide level2">
+<h2>尺度の変換</h2>
+<p>情報量の多さは</p>
+<ul>
+<li>比率 &gt; 間隔 &gt; 順序 &gt; 名目</li>
+<li><strong>情報量の多い尺度は下位の尺度へ変換が可能</strong>
+<ul>
+<li>例) 358万円 (比率) <span class="math inline">\(\rightarrow\)</span> 「300万円以上、400万円未満」 (順序)<br>
+</li>
+<li>その<strong>逆は不可能</strong></li>
+<li>例) 「300万円以上、400万円未満」 <span class="math inline">\(\rightarrow\)</span> 301万? 358万? 399万?</li>
+</ul></li>
+</ul>
+</section>
+<section id="データセット構築の手順" class="slide level2">
+<h2>データセット構築の手順</h2>
+<ol type="1">
+<li>仮説を立てる
+<ul>
+<li>データから仮説を立てる方法もあるが、現時点では非推奨</li>
+</ul></li>
+<li>分析単位を明らかにする
+<ul>
+<li>個人? 自治体? 国?</li>
+</ul></li>
+<li>必要な変数を特定する
+<ul>
+<li>入手可能な変数か</li>
+<li>個人の投票先? 各政党の都道府県別得票率?</li>
+</ul></li>
+<li>公開済みのデータが存在するか
+<ul>
+<li>あればダウンロード</li>
+<li>ない場合は世論調査の実施 or データセットの構築</li>
+</ul></li>
+</ol>
+</section>
+<section id="データセット構築の2つの方法" class="slide level2">
+<h2>データセット構築の2つの方法</h2>
+<ol type="1">
+<li>分析単位が国、自治体、選挙区などの場合（集計データ）
+<ul>
+<li>既に構築されているデータをダウンロード
+<ul>
+<li>非常に稀なケース; 自分の問いに答えるためのピッタリのデータはなかなか存在しない。</li>
+</ul></li>
+<li>自力で構築（政府統計などを結合）</li>
+</ul></li>
+<li>分析単位は個人の場合（個票データ）
+<ul>
+<li>データ・アーカイブから公開されている世論調査データを入手する。</li>
+<li>自分で世論調査を実施する。
+<ul>
+<li>非常に高い（金銭的）コストを伴う。</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+<section id="集計データ-自力で構築する" class="slide level2">
+<h2>集計データ: 自力で構築する</h2>
+<p>公開されているデータの計算・結合</p>
+<ul>
+<li>ほとんどの場合、集計データ（市区町村、都道府県、国、年など）</li>
+<li>多くの場合、無料で入手することが可能
+<ul>
+<li>例) <a href="https://www.soumu.go.jp/iken/shihyo_ichiran.html">財政力指数</a>と<a href="https://www.soumu.go.jp/senkyo/senkyo_s/data/index.html">政党得票率</a></li>
+<li>例) <a href="http://www.systemicpeace.org/inscrdata.html">民主化指標</a>と<a href="http://www.systemicpeace.org/warlist/warlist.htm">武力紛争の頻度</a></li>
+<li>例) <a href="https://www.e-stat.go.jp/dbview?sid=0003215480">一人当たりたこ焼き消費量</a>と<a href="https://www.soumu.go.jp/senkyo/senkyo_s/data/index.html">投票率</a></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li>信頼できる機関のデータを利用すること
+<ul>
+<li>政府機関、企業、研究所など「データのミスについて責任の所在が明確な機関」</li>
+</ul></li>
+</ul>
+</section>
+<section id="個票データ-公開データの利用" class="slide level2">
+<h2>個票データ: 公開データの利用</h2>
+<ul>
+<li><a href="https://csrda.iss.u-tokyo.ac.jp/">SSJDA</a>, <a href="https://www.icpsr.umich.edu/web/pages/">ICPSR</a> などのデータアーカイブを利用</li>
+<li>一部の大規模調査は専用ホームページで入手
+<ul>
+<li><a href="https://www.worldvaluessurvey.org/wvs.jsp">World Value Survey</a></li>
+<li><a href="https://cses.org/">Comparative Study of Electoral Systems</a></li>
+<li><a href="https://electionstudies.org/">American National Election Studies</a></li>
+<li><a href="https://jgss.daishodai.ac.jp/index.html">Japaneses General Social Surveys</a></li>
+<li><a href="http://www.masaki.j.u-tokyo.ac.jp/utas/utasindex.html">東京大学谷口研究室・朝日新聞社共同調査</a>など</li>
+</ul></li>
+<li>学術論文で使われたデータなら著者がデータを公開する場合も (<a href="https://dataverse.harvard.edu/">Harvard Dataverse</a>、著者のHPなど)</li>
+<li>データの入手先は多岐にわたるため、見つからない場合、指導教員、授業担当教員と相談すること
+<ul>
+<li>学部生の場合、指導教員の許可がないとダウンロードできないデータも</li>
+<li>とりわけ、日本のデータは条件が厳しい</li>
+</ul></li>
+<li>参考) 佐藤博樹・池田謙一・石田浩. 2000. 『<a href="https://www.amazon.co.jp/dp/4130520172/">社会調査の公開データ―2次分析への招待</a>』東京大学出版会.</li>
+</ul>
+</section>
+<section id="個票データ-自力で構築する" class="slide level2">
+<h2>個票データ: 自力で構築する</h2>
+<p>分析単位が「人」であり、公開されているデータがない場合</p>
+<ul>
+<li>世論調査を実施</li>
+<li>一般的に高額（数万〜数百万円）</li>
+<li>世論調査を行う前に<strong>社会調査法の知識</strong>は必須
+<ul>
+<li>調査倫理</li>
+<li>調査設計の方法</li>
+<li>サンプリング
+<ul>
+<li>SNSでアンケートを拡散して収集したデータは「日本人の意識」、「若者の行動」と解釈できない。</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="実習内容" class="slide level2">
+<h2>実習内容</h2>
+<ul>
+<li>既に公開されている世論調査データの入手
+<ul>
+<li>データ・アーカイブの利用: SSJDAの例 (<a href="https://csrda.iss.u-tokyo.ac.jp/" class="uri">https://csrda.iss.u-tokyo.ac.jp/</a>)</li>
+<li>調査の独自HPから入手: 世界価値観調査の例 (<a href="https://www.worldvaluessurvey.org/" class="uri">https://www.worldvaluessurvey.org/</a>)</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li>政府統計などを入手時、独自のデータセットを構築
+<ul>
+<li><a href="https://www.soumu.go.jp/senkyo/senkyo_s/data/index.html">2016参院選の自民党・立憲民主党の得票率</a></li>
+<li><a href="https://www.soumu.go.jp/iken/shihyo_ichiran.html">財政力指数</a></li>
+<li><a href="https://www.e-stat.go.jp/">都道府県別高齢者比率</a></li>
+<li><a href="https://www.e-stat.go.jp/">都道府県別一次産業従事者比率</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="データアーカイブの利用-ssjdaの例" class="slide level2">
+<h2>データ・アーカイブの利用: SSJDAの例</h2>
+<p><strong>仮説:</strong> 高校時代に<strong>主権者教育</strong>を受けた<strong>若年層</strong>ほど<strong>2016年参院選で投票</strong>する傾向がある。</p>
+<ul>
+<li>分析単位: 個人 (若年層)　<span class="math inline">\(\rightarrow\)</span>　世論調査データが必要</li>
+<li>必要な変数
+<ul>
+<li>高校時代に主権者教育を受けたか否か</li>
+<li>2016年参院選で投票したかどうか</li>
+</ul></li>
+</ul>
+<h3 id="手順">手順</h3>
+<ol type="1">
+<li>SSJDAへアクセス (<a href="https://csrda.iss.u-tokyo.ac.jp/" class="uri">https://csrda.iss.u-tokyo.ac.jp/</a>)</li>
+<li>キーワードで検索（例: 「若年 選挙」）
+<ul>
+<li>明るい選挙推進協会の「新有権者等若年層の参院選投票後の意識調査，2016」など</li>
+</ul></li>
+<li>調査票を確認し、必要な変数が含まれているかを確認
+<ul>
+<li>Q9とQ17など</li>
+</ul></li>
+<li>教員（ゼミ教員や授業担当者）と相談する
+<ul>
+<li>学部生は教員経由でしか入手できない　<span class="math inline">\(\rightarrow\)</span>　教員による代理申請</li>
+<li>大学院生は指導教員の事前承認の下で入手可能</li>
+</ul></li>
+</ol>
+</section>
+<section id="調査ホームページの利用-wvsの例" class="slide level2">
+<h2>調査ホームページの利用: WVSの例</h2>
+<p><strong>仮説:</strong> 日本において<strong>高学歴</strong>、かつ<strong>平等より自由を重視</strong>するの<strong>人</strong>ほど<strong>民主主義を重視</strong>する</p>
+<ul>
+<li>分析単位: 個人　<span class="math inline">\(\rightarrow\)</span>　世論調査データが必要</li>
+<li>必要な変数
+<ul>
+<li>学歴、平等と自由のどちらを重視するか</li>
+<li>民主主義の重視程度</li>
+</ul></li>
+</ul>
+<h3 id="手順-1">手順</h3>
+<ol type="1">
+<li>WVSのHPへアクセス (https://www.worldvaluessurvey.org/)</li>
+<li>Data and Documentation　<span class="math inline">\(\rightarrow\)</span>　Data Download　<span class="math inline">\(\rightarrow\)</span>　Wave 7 (2017-2020)</li>
+<li>Japan 2019を選択</li>
+<li>Questionnaire（質問票; 日本語）とCodebook（コードブック; 英語）を確認
+<ul>
+<li>質問票: F10a (Q275)、問37 (Q149)、問70 (Q250)</li>
+<li>カッコ内はコードブック上の番号（データの変数名はコードブック基準）</li>
+<li><strong>質問票とコードブックの設問番号は一致しない</strong>ため注意が必要</li>
+</ul></li>
+<li>Excel形式のデータをダウンロード (WVS Wave 7 Japan Excel v2.0)</li>
+</ol>
+</section>
+<section id="データ構築の例" class="slide level2">
+<h2>データ構築の例</h2>
+<p><strong>仮説:</strong> 2021年10月の衆院選において<strong>財政力指数</strong>が低く、<strong>高齢者の比率</strong>が高い<strong>都道府県</strong>ほど、<strong>投票率</strong>が高い</p>
+<ul>
+<li>分析単位：都道府県</li>
+<li>必要な変数
+<ul>
+<li><strong>都道府県</strong>ごとの財政力指数（googleで「財政力指数」）</li>
+<li><strong>都道府県</strong>ごとの65歳以上人口比（e-statで「国勢調査」）
+<ul>
+<li><ol type="1">
+<li>都道府県ごとの人口、(2) 65歳以上人口が必要</li>
+</ol></li>
+</ul></li>
+<li><strong>都道府県</strong>ごとの2021年衆院選における投票率（googleで「総務省 選挙結果」）</li>
+</ul></li>
+</ul>
+<h3 id="手順-2">手順</h3>
+<ol type="1">
+<li>各データの公表先からデータをダウンロード</li>
+<li>必要な変数のみを抜粋</li>
+<li>表計算ソフト (Excel, Numbers, <a href="https://www.libreoffice.org/">LibreOffice Calc</a>)などを利用し、一つのデータとして統合</li>
+</ol>
+</section>
+<section id="完成したデータ" class="slide level2 scrollable">
+<h2>完成したデータ</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Data</a></li><li><a href="#tabset-1-2">Analysis1</a></li><li><a href="#tabset-1-3">Analysis2</a></li><li><a href="#tabset-1-4">Analysis3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/BuildingData.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">gt</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fhjuarlsdk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#fhjuarlsdk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fhjuarlsdk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fhjuarlsdk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fhjuarlsdk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fhjuarlsdk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fhjuarlsdk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fhjuarlsdk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fhjuarlsdk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fhjuarlsdk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fhjuarlsdk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fhjuarlsdk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fhjuarlsdk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fhjuarlsdk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhjuarlsdk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fhjuarlsdk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fhjuarlsdk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhjuarlsdk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fhjuarlsdk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhjuarlsdk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fhjuarlsdk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhjuarlsdk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fhjuarlsdk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhjuarlsdk .gt_left {
+  text-align: left;
+}
+
+#fhjuarlsdk .gt_center {
+  text-align: center;
+}
+
+#fhjuarlsdk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fhjuarlsdk .gt_font_normal {
+  font-weight: normal;
+}
+
+#fhjuarlsdk .gt_font_bold {
+  font-weight: bold;
+}
+
+#fhjuarlsdk .gt_font_italic {
+  font-style: italic;
+}
+
+#fhjuarlsdk .gt_super {
+  font-size: 65%;
+}
+
+#fhjuarlsdk .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#fhjuarlsdk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fhjuarlsdk .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#fhjuarlsdk .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#fhjuarlsdk .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Pref</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Finance</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Over65</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Turnout</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">北海道</td>
+<td class="gt_row gt_right">0.46217</td>
+<td class="gt_row gt_right">32.26170</td>
+<td class="gt_row gt_right">58.79</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">青森県</td>
+<td class="gt_row gt_right">0.35801</td>
+<td class="gt_row gt_right">33.69179</td>
+<td class="gt_row gt_right">52.93</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">岩手県</td>
+<td class="gt_row gt_right">0.37248</td>
+<td class="gt_row gt_right">33.81424</td>
+<td class="gt_row gt_right">60.38</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">宮城県</td>
+<td class="gt_row gt_right">0.62649</td>
+<td class="gt_row gt_right">28.43901</td>
+<td class="gt_row gt_right">55.87</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">秋田県</td>
+<td class="gt_row gt_right">0.32157</td>
+<td class="gt_row gt_right">37.60177</td>
+<td class="gt_row gt_right">58.24</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">山形県</td>
+<td class="gt_row gt_right">0.37896</td>
+<td class="gt_row gt_right">33.98365</td>
+<td class="gt_row gt_right">64.34</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">福島県</td>
+<td class="gt_row gt_right">0.54482</td>
+<td class="gt_row gt_right">31.82748</td>
+<td class="gt_row gt_right">58.01</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">茨城県</td>
+<td class="gt_row gt_right">0.65584</td>
+<td class="gt_row gt_right">30.30695</td>
+<td class="gt_row gt_right">52.54</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">栃木県</td>
+<td class="gt_row gt_right">0.64821</td>
+<td class="gt_row gt_right">29.56807</td>
+<td class="gt_row gt_right">53.06</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">群馬県</td>
+<td class="gt_row gt_right">0.63796</td>
+<td class="gt_row gt_right">30.88517</td>
+<td class="gt_row gt_right">53.89</td></tr>
+    <tr><td class="gt_row gt_right">11</td>
+<td class="gt_row gt_left">埼玉県</td>
+<td class="gt_row gt_right">0.77024</td>
+<td class="gt_row gt_right">27.33047</td>
+<td class="gt_row gt_right">53.97</td></tr>
+    <tr><td class="gt_row gt_right">12</td>
+<td class="gt_row gt_left">千葉県</td>
+<td class="gt_row gt_right">0.77845</td>
+<td class="gt_row gt_right">28.02414</td>
+<td class="gt_row gt_right">53.64</td></tr>
+    <tr><td class="gt_row gt_right">13</td>
+<td class="gt_row gt_left">東京都</td>
+<td class="gt_row gt_right">1.15019</td>
+<td class="gt_row gt_right">23.29183</td>
+<td class="gt_row gt_right">57.21</td></tr>
+    <tr><td class="gt_row gt_right">14</td>
+<td class="gt_row gt_left">神奈川県</td>
+<td class="gt_row gt_right">0.88898</td>
+<td class="gt_row gt_right">25.86952</td>
+<td class="gt_row gt_right">56.29</td></tr>
+    <tr><td class="gt_row gt_right">15</td>
+<td class="gt_row gt_left">新潟県</td>
+<td class="gt_row gt_right">0.47506</td>
+<td class="gt_row gt_right">32.97734</td>
+<td class="gt_row gt_right">63.16</td></tr>
+    <tr><td class="gt_row gt_right">16</td>
+<td class="gt_row gt_left">富山県</td>
+<td class="gt_row gt_right">0.48457</td>
+<td class="gt_row gt_right">32.92857</td>
+<td class="gt_row gt_right">55.68</td></tr>
+    <tr><td class="gt_row gt_right">17</td>
+<td class="gt_row gt_left">石川県</td>
+<td class="gt_row gt_right">0.51759</td>
+<td class="gt_row gt_right">30.17642</td>
+<td class="gt_row gt_right">57.13</td></tr>
+    <tr><td class="gt_row gt_right">18</td>
+<td class="gt_row gt_left">福井県</td>
+<td class="gt_row gt_right">0.42058</td>
+<td class="gt_row gt_right">31.06232</td>
+<td class="gt_row gt_right">57.77</td></tr>
+    <tr><td class="gt_row gt_right">19</td>
+<td class="gt_row gt_left">山梨県</td>
+<td class="gt_row gt_right">0.40857</td>
+<td class="gt_row gt_right">31.14433</td>
+<td class="gt_row gt_right">60.57</td></tr>
+    <tr><td class="gt_row gt_right">20</td>
+<td class="gt_row gt_left">長野県</td>
+<td class="gt_row gt_right">0.52762</td>
+<td class="gt_row gt_right">32.28879</td>
+<td class="gt_row gt_right">59.77</td></tr>
+    <tr><td class="gt_row gt_right">21</td>
+<td class="gt_row gt_left">岐阜県</td>
+<td class="gt_row gt_right">0.55930</td>
+<td class="gt_row gt_right">31.11373</td>
+<td class="gt_row gt_right">58.10</td></tr>
+    <tr><td class="gt_row gt_right">22</td>
+<td class="gt_row gt_left">静岡県</td>
+<td class="gt_row gt_right">0.72648</td>
+<td class="gt_row gt_right">30.66518</td>
+<td class="gt_row gt_right">54.81</td></tr>
+    <tr><td class="gt_row gt_right">23</td>
+<td class="gt_row gt_left">愛知県</td>
+<td class="gt_row gt_right">0.91216</td>
+<td class="gt_row gt_right">25.83282</td>
+<td class="gt_row gt_right">55.97</td></tr>
+    <tr><td class="gt_row gt_right">24</td>
+<td class="gt_row gt_left">三重県</td>
+<td class="gt_row gt_right">0.60941</td>
+<td class="gt_row gt_right">30.58887</td>
+<td class="gt_row gt_right">56.17</td></tr>
+    <tr><td class="gt_row gt_right">25</td>
+<td class="gt_row gt_left">滋賀県</td>
+<td class="gt_row gt_right">0.57552</td>
+<td class="gt_row gt_right">26.71561</td>
+<td class="gt_row gt_right">57.33</td></tr>
+    <tr><td class="gt_row gt_right">26</td>
+<td class="gt_row gt_left">京都府</td>
+<td class="gt_row gt_right">0.59466</td>
+<td class="gt_row gt_right">29.47203</td>
+<td class="gt_row gt_right">56.32</td></tr>
+    <tr><td class="gt_row gt_right">27</td>
+<td class="gt_row gt_left">大阪府</td>
+<td class="gt_row gt_right">0.79157</td>
+<td class="gt_row gt_right">27.65828</td>
+<td class="gt_row gt_right">56.20</td></tr>
+    <tr><td class="gt_row gt_right">28</td>
+<td class="gt_row gt_left">兵庫県</td>
+<td class="gt_row gt_right">0.64914</td>
+<td class="gt_row gt_right">29.32041</td>
+<td class="gt_row gt_right">54.29</td></tr>
+    <tr><td class="gt_row gt_right">29</td>
+<td class="gt_row gt_left">奈良県</td>
+<td class="gt_row gt_right">0.43666</td>
+<td class="gt_row gt_right">31.72145</td>
+<td class="gt_row gt_right">59.13</td></tr>
+    <tr><td class="gt_row gt_right">30</td>
+<td class="gt_row gt_left">和歌山県</td>
+<td class="gt_row gt_right">0.33779</td>
+<td class="gt_row gt_right">33.42466</td>
+<td class="gt_row gt_right">58.24</td></tr>
+    <tr><td class="gt_row gt_right">31</td>
+<td class="gt_row gt_left">鳥取県</td>
+<td class="gt_row gt_right">0.28689</td>
+<td class="gt_row gt_right">32.47166</td>
+<td class="gt_row gt_right">58.16</td></tr>
+    <tr><td class="gt_row gt_right">32</td>
+<td class="gt_row gt_left">島根県</td>
+<td class="gt_row gt_right">0.26570</td>
+<td class="gt_row gt_right">34.66566</td>
+<td class="gt_row gt_right">61.55</td></tr>
+    <tr><td class="gt_row gt_right">33</td>
+<td class="gt_row gt_left">岡山県</td>
+<td class="gt_row gt_right">0.53481</td>
+<td class="gt_row gt_right">30.67966</td>
+<td class="gt_row gt_right">50.94</td></tr>
+    <tr><td class="gt_row gt_right">34</td>
+<td class="gt_row gt_left">広島県</td>
+<td class="gt_row gt_right">0.61848</td>
+<td class="gt_row gt_right">29.79257</td>
+<td class="gt_row gt_right">52.13</td></tr>
+    <tr><td class="gt_row gt_right">35</td>
+<td class="gt_row gt_left">山口県</td>
+<td class="gt_row gt_right">0.45738</td>
+<td class="gt_row gt_right">34.84154</td>
+<td class="gt_row gt_right">49.67</td></tr>
+    <tr><td class="gt_row gt_right">36</td>
+<td class="gt_row gt_left">徳島県</td>
+<td class="gt_row gt_right">0.32716</td>
+<td class="gt_row gt_right">34.34980</td>
+<td class="gt_row gt_right">53.86</td></tr>
+    <tr><td class="gt_row gt_right">37</td>
+<td class="gt_row gt_left">香川県</td>
+<td class="gt_row gt_right">0.48747</td>
+<td class="gt_row gt_right">32.14574</td>
+<td class="gt_row gt_right">56.09</td></tr>
+    <tr><td class="gt_row gt_right">38</td>
+<td class="gt_row gt_left">愛媛県</td>
+<td class="gt_row gt_right">0.44767</td>
+<td class="gt_row gt_right">33.43253</td>
+<td class="gt_row gt_right">54.98</td></tr>
+    <tr><td class="gt_row gt_right">39</td>
+<td class="gt_row gt_left">高知県</td>
+<td class="gt_row gt_right">0.27382</td>
+<td class="gt_row gt_right">35.61885</td>
+<td class="gt_row gt_right">57.34</td></tr>
+    <tr><td class="gt_row gt_right">40</td>
+<td class="gt_row gt_left">福岡県</td>
+<td class="gt_row gt_right">0.65820</td>
+<td class="gt_row gt_right">28.21122</td>
+<td class="gt_row gt_right">52.12</td></tr>
+    <tr><td class="gt_row gt_right">41</td>
+<td class="gt_row gt_left">佐賀県</td>
+<td class="gt_row gt_right">0.35551</td>
+<td class="gt_row gt_right">30.85767</td>
+<td class="gt_row gt_right">58.49</td></tr>
+    <tr><td class="gt_row gt_right">42</td>
+<td class="gt_row gt_left">長崎県</td>
+<td class="gt_row gt_right">0.34825</td>
+<td class="gt_row gt_right">33.16014</td>
+<td class="gt_row gt_right">56.89</td></tr>
+    <tr><td class="gt_row gt_right">43</td>
+<td class="gt_row gt_left">熊本県</td>
+<td class="gt_row gt_right">0.42692</td>
+<td class="gt_row gt_right">31.66006</td>
+<td class="gt_row gt_right">56.40</td></tr>
+    <tr><td class="gt_row gt_right">44</td>
+<td class="gt_row gt_left">大分県</td>
+<td class="gt_row gt_right">0.39540</td>
+<td class="gt_row gt_right">33.53593</td>
+<td class="gt_row gt_right">57.26</td></tr>
+    <tr><td class="gt_row gt_right">45</td>
+<td class="gt_row gt_left">宮崎県</td>
+<td class="gt_row gt_right">0.35767</td>
+<td class="gt_row gt_right">32.85051</td>
+<td class="gt_row gt_right">53.66</td></tr>
+    <tr><td class="gt_row gt_right">46</td>
+<td class="gt_row gt_left">鹿児島県</td>
+<td class="gt_row gt_right">0.35338</td>
+<td class="gt_row gt_right">32.70230</td>
+<td class="gt_row gt_right">57.71</td></tr>
+    <tr><td class="gt_row gt_right">47</td>
+<td class="gt_row gt_left">沖縄県</td>
+<td class="gt_row gt_right">0.37469</td>
+<td class="gt_row gt_right">22.70253</td>
+<td class="gt_row gt_right">54.90</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<p>可視化は第12回講義以降で解説</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Finance, <span class="at">y =</span> Turnout)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"財政力指数"</span>, </span>
+<span id="cb2-5"><a href="#cb2-5"></a>       <span class="at">y =</span> <span class="st">"投票率 (%)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide06_files/figure-revealjs/unnamed-chunk-6-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Finance, <span class="at">y =</span> Turnout)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"65歳以上人口の割合"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5"></a>       <span class="at">y =</span> <span class="st">"投票率 (%)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide06_files/figure-revealjs/unnamed-chunk-7-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<p>線形回帰分析は後期の「マクロ政治データ分析実習」で</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Turnout <span class="sc">~</span> Finance <span class="sc">+</span> Over65, <span class="at">data =</span> df)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">summary</span>(fit)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Turnout ~ Finance + Over65, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.2182 -1.6627  0.1581  1.5689  7.1454 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 57.31951    8.20293   6.988 1.19e-08 ***
+Finance     -4.40402    3.52987  -1.248    0.219    
+Over65       0.04544    0.21608   0.210    0.834    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.923 on 44 degrees of freedom
+Multiple R-squared:  0.09674,   Adjusted R-squared:  0.05568 
+F-statistic: 2.356 on 2 and 44 DF,  p-value: 0.1066</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-4">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">prediction</span>(fit, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">Finance =</span> <span class="fu">seq</span>(<span class="fl">0.3</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">summary</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">rename</span>(<span class="st">"Finance"</span> <span class="ot">=</span> <span class="st">"at(Finance)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> Finance, <span class="at">y =</span> Prediction,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>                      <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"財政力指数"</span>, </span>
+<span id="cb6-8"><a href="#cb6-8"></a>       <span class="at">y =</span> <span class="st">"投票率の予測値と95%信頼区間 (%)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide06_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<p><img src="Figs/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://www.jaysong.net/micro-book" class="uri">https://www.jaysong.net/micro-book</a></p>
 </div>
 </section>
@@ -571,6 +3073,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
