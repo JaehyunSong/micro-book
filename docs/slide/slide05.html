@@ -19,6 +19,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -349,8 +412,714 @@
   <p class="date">2022年 5月 12日</p>
 </section>
 
-<section class="slide level2">
+<section id="r-markdownとは" class="slide level2">
+<h2>R Markdownとは</h2>
+<ul>
+<li>R + Markdown</li>
+<li>Rのコードと結果、そして文章が一つの文書としてまとまったもの
+<ul>
+<li>文書の形式はHTML、Microsoft Word（<code>.docx</code>）、PDFで出力される</li>
+<li>スライド、ホームページなども作成可能</li>
+<li>本講義のスライドもR Markdownで作成（{xaringan}）</li>
+<li>本講義の教科書もR Markdownで作成（{bookdown}）</li>
+<li>宋のホームページもR Markdownで作成（{blogdown}）</li>
+</ul></li>
+</ul>
+</section>
+<section id="markdownとは" class="slide level2">
+<h2>Markdownとは</h2>
+<h4 id="プレーンテキストとリッチテキスト">プレーンテキストとリッチテキスト</h4>
+<ul>
+<li>Plain text: 書式情報などが含まれていない純粋なテキストのみで構成されている文書
+<ul>
+<li>macOSの「テキストエディット」、Windowsの「メモ帳」など</li>
+</ul></li>
+<li>Rich text: 書式情報だけでなく、図表なども含まれる文書
+<ul>
+<li>Microsoft Word、Apple Pagesなど</li>
+</ul></li>
+<li>書式情報の例: 文書の余白、行間の幅、文字サイズ、太さ、色</li>
+<li>リッチテキストには文字情報以外にも様々な書式情報が含まれているため、サイズが大きく、パソコンへの負担も大きい</li>
+</ul>
+</section>
+<section id="プレーンからリッチへ" class="slide level2">
+<h2>プレーンからリッチへ</h2>
+<h4 id="markup言語とは">Markup言語とは</h4>
+<ul>
+<li>プレーンテキストをリッチテキストへ変換するための言語</li>
+<li>HTMLが代表的
+<ul>
+<li>例: <code>&lt;b&gt;</code>と<code>&lt;/b&gt;</code>で囲まれた文字は太字として出力される。</li>
+</ul></li>
+</ul>
+<p><strong>Input:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a>この文字は<span class="kw">&lt;b&gt;</span>太字<span class="kw">&lt;/b&gt;</span>にしましょう。<span class="kw">&lt;br/&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>この文字は<span class="kw">&lt;a</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">"https://www.jaysong.net"</span><span class="kw">&gt;</span>リンク<span class="kw">&lt;/a&gt;</span>にしましょう。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output:</strong></p>
+<p>この文字は<strong>太字</strong>にしましょう。<br> この文字は<a href="https://www.jaysong.net">リンク</a>にしましょう。</p>
+</section>
+<section id="markdownとは-1" class="slide level2">
+<h2>Markdownとは</h2>
+<ul>
+<li>Mark<strong>down</strong>: Mark<strong>up</strong>言語の軽量版</li>
+<li>文章作成に必要なタグ（tag）をより簡単に記述できる。</li>
+<li>ブラインドタッチに慣れればWordよりも素早く文書を作成することができるようになる。</li>
+</ul>
+<p><br></p>
+<p>以下の2つのコードは同じ結果を返す。</p>
+<p><strong>Markup</strong>の場合（HTML）</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a>この文字は<span class="kw">&lt;b&gt;</span>太字<span class="kw">&lt;/b&gt;</span>にしましょう。<span class="kw">&lt;br/&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>この文字は<span class="kw">&lt;a</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">"https://www.jaysong.net"</span><span class="kw">&gt;</span>リンク<span class="kw">&lt;/a&gt;</span>にしましょう。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Markdown</strong>の場合</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a>この文字は**太字**にしましょう。</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>この文字は<span class="co">[</span><span class="ot">リンク</span><span class="co">](https://www.jaysong.net)</span>にしましょう。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="markup-vs.-markdown" class="slide level2">
+<h2>Markup vs.&nbsp;Markdown</h2>
+<h4 id="表の作成">表の作成</h4>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Markup</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">&lt;table&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">&lt;thead</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"font-weight:bold;"</span><span class="kw">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>        <span class="kw">&lt;td&gt;</span>ID<span class="kw">&lt;/td&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        <span class="kw">&lt;td&gt;</span>Name<span class="kw">&lt;/td&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="kw">&lt;/thead&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>        <span class="kw">&lt;td&gt;</span>1<span class="kw">&lt;/td&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>        <span class="kw">&lt;td&gt;</span>Song<span class="kw">&lt;/td&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>        <span class="kw">&lt;td&gt;</span>2<span class="kw">&lt;/td&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>        <span class="kw">&lt;td&gt;</span>Kojima<span class="kw">&lt;/td&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">&lt;/table&gt;</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:10%;">
 
+</div><div class="column" style="width:45%;">
+<p><strong>Markdown</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a>| ID | Name |</span>
+<span id="cb5-2"><a href="#cb5-2"></a>|----|------|</span>
+<span id="cb5-3"><a href="#cb5-3"></a>| 1  | Song |</span>
+<span id="cb5-4"><a href="#cb5-4"></a>| 2  |Kojima|</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong> (どれも同じ結果)</p>
+<table>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Song</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Kojima</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="markup-vs.-markdown-1" class="slide level2">
+<h2>Markup vs.&nbsp;Markdown</h2>
+<h3 id="箇条書き">箇条書き</h3>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p><strong>Markup</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">&lt;ul&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="kw">&lt;li&gt;</span>箇条書き1<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>      <span class="kw">&lt;li&gt;</span>箇条書き1A<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>      <span class="kw">&lt;li&gt;</span>箇条書き1B<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="kw">&lt;li&gt;</span>箇条書き2<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="kw">&lt;li&gt;</span>箇条書き3<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">&lt;/ul&gt;</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p><strong>Markdown</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="ss">* </span>箇条書き1</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ss">  * </span>箇条書き1A</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ss">  * </span>箇条書き1B</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ss">* </span>箇条書き2</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ss">* </span>箇条書き3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<ul>
+<li>箇条書き1
+<ul>
+<li>箇条書き1A</li>
+<li>箇条書き1B</li>
+</ul></li>
+<li>箇条書き2</li>
+<li>箇条書き3</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="rmdファイルの生成" class="slide level2">
+<h2><code>.Rmd</code>ファイルの生成</h2>
+<ol type="1">
+<li>RStudioを起動し、プロジェクトを作成する。</li>
+<li>File &gt; New &gt; R Markdown…を選択する。</li>
+<li>OKをクリックする。</li>
+<li>YAMLヘッダーを修正する。</li>
+</ol>
+<ul>
+<li>ファイルを保存する（File &gt; Save）。
+<ul>
+<li>ショートカットキー: ⌘+S（macOS）、または Ctrl + S (Windows)</li>
+</ul></li>
+<li>Sourceペイン上段のKnitをクリックする。
+<ul>
+<li>Knitは「ニット」と読む（「クニット」ではない）。</li>
+</ul></li>
+</ul>
+</section>
+<section id="yamlヘッダー" class="slide level2">
+<h2>YAMLヘッダー</h2>
+<p><code>.Rmd</code>ファイル最上段に位置する文書の情報に関するデータ</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">---</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"はじめてのR Markdown"</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"関大花子"</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"2022年 5月 12日"</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="pp">---</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>title</code>: 文書のタイトル
+<ul>
+<li><code>subtitle:</code>でサブタイトルも付けられる。</li>
+</ul></li>
+<li><code>author</code>: 文書の作成者</li>
+<li><code>date</code>: 日付
+<ul>
+<li><code>date: `r Sys.Date()`</code>に修正すると、Knitした日の日付が自動的につけられる。</li>
+</ul></li>
+<li><code>output</code>: 出力形式（このままで良い）</li>
+<li>その他オプション多数
+<ul>
+<li>YAMLヘッダーの詳細は<a href="https://rstudio.com/wp-content/uploads/2016/11/Rmarkdown-cheatsheet-2.0_ja.pdf">R Markdown Cheetsheet</a>などを参照</li>
+</ul></li>
+</ul>
+</section>
+<section id="markdownの文法-文章の改行" class="slide level2">
+<h2>Markdownの文法: 文章の改行</h2>
+<ul>
+<li>2回改行</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a>これは文章1です。</span>
+<span id="cb9-2"><a href="#cb9-2"></a>これは文章2です。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p>これは文章1です。 これは文章2です。</p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a>これは文章1です。</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>これは文章2です。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p>これは文章1です。</p>
+<p>これは文章2です。</p>
+</div>
+</div>
+</section>
+<section id="markdownの文法-強調" class="slide level2">
+<h2>Markdownの文法: 強調</h2>
+<ul>
+<li>英語の強調はイタリック、日本語の強調は太字を使用</li>
+</ul>
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>文章の一部を<span class="sc">**</span>太字<span class="sc">**</span>にしてみましょう。</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>The G7 consists of Canada, France, Germany, Italy, <span class="sc">*</span>Japan<span class="sc">*</span>, UK, and USA.</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="sc">~</span><span class="er">~</span>取り消し線<span class="sc">~</span><span class="er">~</span>はあまり使わないかも。</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="sc">&lt;</span>u<span class="sc">&gt;</span>アンダーライン<span class="sc">&lt;</span><span class="er">/</span>u<span class="sc">&gt;</span>はHTMLタグを使います。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p>文章の一部を<strong>太字</strong>にしてみましょう。</p>
+<p>The G7 consists of Canada, France, Germany, Italy, <em>Japan</em>, UK, and USA.</p>
+<p><del>取り消し線</del>はあまり使わないかも。</p>
+<p><u>アンダーライン</u>はHTMLタグを使います。</p>
+</section>
+<section id="markdownの文法-リンク" class="slide level2">
+<h2>Markdownの文法: リンク</h2>
+<ul>
+<li><code>[リンク文](URL)</code></li>
+<li><code>[]</code>で囲まれた文章をクリックすると指定したURLへ移動</li>
+</ul>
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">[</span><span class="ot">ここ</span><span class="co">](https://www.jaysong.net)</span>をクリックすると、宋のHPへ移動します。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p><a href="https://www.jaysong.net">ここ</a>をクリックすると、宋のHPへ移動します。</p>
+</section>
+<section id="markdownの文法-見出し" class="slide level2">
+<h2>Markdownの文法: 見出し</h2>
+<ul>
+<li><code>#</code> + 半角スペース + 見出し（<code>#</code>が多いほど小さくなる）</li>
+</ul>
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu"># 見出し1 (ヘッディング1)</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">## 見出し2 (ヘッディング2)</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">### 見出し3 (ヘッディング3)</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">#### 見出し4 (ヘッディング4)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p style="font-size:3em;margin-top:0px;margin-bottom:0px;">
+見出し1 (ヘッディング1)
+</p>
+<p style="font-size:2.5em;margin-top:0px;margin-bottom:0px;">
+見出し2 (ヘッディング2)
+</p>
+<p style="font-size:2em;margin-top:0px;margin-bottom:0px;">
+見出し3 (ヘッディング3)
+</p>
+<p style="font-size:1.5em;margin-top:0px;margin-bottom:0px;">
+見出し4 (ヘッディング4)
+</p>
+</section>
+<section id="markdownの文法-水平線" class="slide level2">
+<h2>Markdownの文法: 水平線</h2>
+<ul>
+<li>任意の行に<code>---</code>を挿入</li>
+<li>章と章の区切り、節と節の区切りなどに使用</li>
+</ul>
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a>文章1</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a>---</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a>文章2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p>文章1</p>
+<hr>
+<p>文章2</p>
+</section>
+<section id="markdownの文法-箇条書き順序なし" class="slide level2">
+<h2>Markdownの文法: 箇条書き（順序なし）</h2>
+<ul>
+<li><code>*</code> + 半角スペース + 文字列</li>
+<li>階層構造にする場合、<code>*</code>の前に半角スペースを3個以上入れる</li>
+<li><code>*</code>の代わりに<code>-</code>も可</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a><span class="ss">* </span>リスト1</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ss">* </span>リスト2</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="ss">   * </span>リスト2-1</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ss">      * </span>リスト2-1-1</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="ss">      * </span>リスト2-1-2</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="ss">   * </span>リスト2-1</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="ss">* </span>リスト3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p><strong>Output</strong></p>
+<ul>
+<li>リスト1</li>
+<li>リスト2
+<ul>
+<li>リスト2-1
+<ul>
+<li>リスト2-1-1</li>
+<li>リスト2-1-2</li>
+</ul></li>
+<li>リスト2-1</li>
+</ul></li>
+<li>リスト3</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="markdownの文法-箇条書き順序付き" class="slide level2">
+<h2>Markdownの文法: 箇条書き（順序付き）</h2>
+<ul>
+<li><code>1.</code> + 半角スペース + 文字列</li>
+<li><code>1.</code>の箇所は任意の数字でもOK。<code>1.</code>、<code>2.</code>、…も可</li>
+<li>階層構造にする場合、<code>*</code>の前に半角スペースを3個入れる</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a><span class="ss">1. </span>リスト1</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="ss">2. </span>リスト2</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="ss">   1. </span>リスト2-1</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="ss">      1. </span>リスト2-1-1</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="ss">      2. </span>リスト2-1-2</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="ss">   2. </span>リスト2-1</span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="ss">3. </span>リスト3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p><strong>Output</strong></p>
+<ol type="1">
+<li>リスト1</li>
+<li>リスト2
+<ol type="1">
+<li>リスト2-1
+<ol type="1">
+<li>リスト2-1-1</li>
+<li>リスト2-1-2</li>
+</ol></li>
+<li>リスト2-1</li>
+</ol></li>
+<li>リスト3</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="markdownの文法-数式" class="slide level2">
+<h2>Markdownの文法: 数式</h2>
+<ul>
+<li>文中数式は<code>$数式$</code>、独立した行の数式は<code>$$</code>で囲む</li>
+<li><span class="math inline">\(\LaTeX\)</span> の数式表記法を理解する必要がある</li>
+</ul>
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1"></a>文中の数式の例: $e = mc^2$</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>独立した数式の例は、</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a>$$</span>
+<span id="cb17-6"><a href="#cb17-6"></a>y_i \sim \text{Normal}(\mathbf{X} \boldsymbol{\beta}, \sigma).</span>
+<span id="cb17-7"><a href="#cb17-7"></a>$$</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<p>文中の数式の例: <span class="math inline">\(e = mc^2\)</span></p>
+<p>独立した数式の例は、</p>
+<p><span class="math display">\[
+y_i \sim \text{Normal}(\mathbf{X} \boldsymbol{\beta}, \sigma).
+\]</span></p>
+</section>
+<section id="markdownの文法-表" class="slide level2">
+<h2>Markdownの文法: 表</h2>
+<ul>
+<li>行は改行で、列は<code>|</code>で区切る</li>
+<li>1行目は表のヘッダーであり、<code>|---|</code>で区切る（<code>-</code>は1個以上でOK）
+<ul>
+<li><code>|---|</code>、または<code>|:---|</code>は左揃え、<code>|---:|</code>は右揃え、<code>|:---:|</code>は中央揃え</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p><strong>Input</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a>|ID |Name   |Birth (Year)|Pref   |</span>
+<span id="cb18-2"><a href="#cb18-2"></a>|:-:|-------|-----------:|-------|</span>
+<span id="cb18-3"><a href="#cb18-3"></a>|1  |Ogura  |1852        |Tokyo  |</span>
+<span id="cb18-4"><a href="#cb18-4"></a>|2  |Tsurumi|1858        |Tochigi|</span>
+<span id="cb18-5"><a href="#cb18-5"></a>|3  |Yoshida|1858        |Fukuoka|</span>
+<span id="cb18-6"><a href="#cb18-6"></a>|4  |Hotta  |1859        |Chiba  |</span>
+<span id="cb18-7"><a href="#cb18-7"></a>|5  |Inoue  |1847        |Nagano |</span>
+<span id="cb18-8"><a href="#cb18-8"></a>|6  |Tezuka |1862        |Tokyo  |</span>
+<span id="cb18-9"><a href="#cb18-9"></a>|7  |Shikata|1857        |Saitama|</span>
+<span id="cb18-10"><a href="#cb18-10"></a>|8  |Nomura |1855        |Gunma  |</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p><strong>Output</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: right;">Birth (Year)</th>
+<th style="text-align: left;">Pref</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Ogura</td>
+<td style="text-align: right;">1852</td>
+<td style="text-align: left;">Tokyo</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Tsurumi</td>
+<td style="text-align: right;">1858</td>
+<td style="text-align: left;">Tochigi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Yoshida</td>
+<td style="text-align: right;">1858</td>
+<td style="text-align: left;">Fukuoka</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Hotta</td>
+<td style="text-align: right;">1859</td>
+<td style="text-align: left;">Chiba</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Inoue</td>
+<td style="text-align: right;">1847</td>
+<td style="text-align: left;">Nagano</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Tezuka</td>
+<td style="text-align: right;">1862</td>
+<td style="text-align: left;">Tokyo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">Shikata</td>
+<td style="text-align: right;">1857</td>
+<td style="text-align: left;">Saitama</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">Nomura</td>
+<td style="text-align: right;">1855</td>
+<td style="text-align: left;">Gunma</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="markdownの文法-コメント" class="slide level2">
+<h2>Markdownの文法: コメント</h2>
+<p>出力に影響されないコメントを入れる場合 * <code>&lt;!--</code>と<code>--&gt;</code>内に囲む * <code>&lt;!--</code>と<code>--&gt;</code>の間の文章は出力されない * 自分用のメモ、とりあえず出力させない内容などに使用 * チャンク内コメントは<code>#</code>（チャンクは後に解説）</p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p><strong>Input:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>これは文章1です。</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="sc">&lt;!--</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>これはコメントです。</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="sc">-</span><span class="ot">-&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a>これは文章2です。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p><strong>Output:</strong></p>
+<p>これは文章1です。</p>
+<!--
+これはコメントです。
+-->
+<p>これは文章2です。</p>
+</div>
+</div>
+</section>
+<section id="markdownの文法-その他" class="slide level2">
+<h2>Markdownの文法: その他</h2>
+<p><a href="https://www.jaysong.net/RBook/rmarkdown.html">教科書第21章</a>を参照</p>
+<ul>
+<li>図の挿入</li>
+<li>脚注</li>
+<li>引用など</li>
+<li>HTMLタグを直接入れることも可能
+<ul>
+<li>出力形式がHTMLならJavaScriptも可</li>
+</ul></li>
+<li><a href="https://rstudio.com/wp-content/uploads/2016/11/Rmarkdown-cheatsheet-2.0_ja.pdf">R Markdown Cheetsheet</a>も参照</li>
+</ul>
+</section>
+<section id="rコード-チャンクchunk" class="slide level2">
+<h2>Rコード: チャンク（Chunk）</h2>
+<p>Rのコードを挿入する領域</p>
+<ul>
+<li><code>```{r}</code>と<code>```</code>で囲む
+<ul>
+<li>チャンクの外にコードを書いても文章として認識する</li>
+</ul></li>
+<li>コードの出力 &gt; 結果の出力の順番</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Input</a></li><li><a href="#tabset-1-2">Output</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1"></a>ここはチャンクの外</span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a>ここに書いたものは文章として扱われる。</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="in">```{r}</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># 円の半径</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="fu">print</span>(<span class="fl">3.14</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="in">```</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a></span>
+<span id="cb20-10"><a href="#cb20-10"></a>ここに書いたのも文章</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2">
+<p>ここはチャンクの外</p>
+<p>ここに書いたものは文章として扱われる。</p>
+<div class="cell">
+<div class="cell-output-stdout">
+<pre><code>[1] 78.5</code></pre>
+</div>
+</div>
+<p>ここに書いたのも文章</p>
+</div>
+</div>
+</div>
+</section>
+<section id="rコード-チャンクのオプション" class="slide level2">
+<h2>Rコード: チャンクのオプション</h2>
+<p><code>{r}</code>の箇所にオプションが指定可能（<code>,</code>の後）</p>
+<ul>
+<li>チャンクに名前を付ける: <code>{r チャンクの名前}</code>
+<ul>
+<li>チャンク名の場合<code>,</code>は不要。オプションはチャンク名の後に付ける</li>
+</ul></li>
+<li>コードのみ出力し、結果は出力しない
+<ul>
+<li><code>{r, eval = FALSE}</code></li>
+</ul></li>
+<li>結果のみ出力し、コードは出力しない
+<ul>
+<li><code>{r, echo = FALSE}</code></li>
+</ul></li>
+<li>出力される図の幅を8インチ、高さを10インチに
+<ul>
+<li><code>{r, fig.width = 5, fig.height = 10}</code></li>
+</ul></li>
+<li>出力される図を中央揃えに
+<ul>
+<li><code>{r, fig.align = center}</code></li>
+</ul></li>
+<li>警告メッセージを隠す
+<ul>
+<li><code>{r, warning = FALSE}</code></li>
+</ul></li>
+<li>他にも数十のオプションの指定が可能
+<ul>
+<li>詳しくは<a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">R Markdown Cheetsheet</a>を参照</li>
+</ul></li>
+</ul>
+</section>
+<section id="rコード-インラインコード" class="slide level2">
+<h2>Rコード: インラインコード</h2>
+<p>文章内にRコードの結果を埋め込む場合</p>
+<ul>
+<li><code>`r</code>と<code>`</code>の間にコードを挿入</li>
+</ul>
+<p><strong>Input:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="in">```</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a>変数<span class="in">`X`</span>の平均値は<span class="in">`r mean(X)`</span>です。</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output:</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>変数<code>X</code>の平均値は5.6です。</p>
+<p><br></p>
+<ul>
+<li><strong>参考)</strong> 単に<code>`</code>で囲まれたものはコードのように表示してくれるものの、そのコードは実行されない。文中に短いコードのみを入れたり、変数名、関数名を示す際に使う機能である。</li>
+</ul>
+</section>
+<section id="再現可能性と再生可能性" class="slide level2">
+<h2>再現可能性と再生可能性</h2>
+<p>国里 (2020)による定義</p>
+<ul>
+<li>学会、分野によっては正反対の概念になる場合もある (Barba 2018)</li>
+</ul>
+<p><br></p>
+<h3 id="再生可能性-reproducibility">再生可能性 (Reproducibility)</h3>
+<ul>
+<li>同じデータ + 同じ方法 = 同じ結果</li>
+<li>R Markdownの主な目的は<strong>再生可能性</strong></li>
+</ul>
+<p><br></p>
+<h3 id="再現可能性-replicability">再現可能性 (Replicability)</h3>
+<ul>
+<li>新しいデータ + 同じ方法 = 同じ結果</li>
+<li>新しいデータ + 違う方法 = 同じ結果</li>
+</ul>
+<div class="aside">
+<p>参考文献</p>
+<ul>
+<li><a href="http://doi.org/10.34360/00011014">国里愛彦. 2020.「再現可能な心理学研究入門」『専修大学人間科学論集:心理学篇』10. 21-33.</a></li>
+<li><a href="https://arxiv.org/abs/1802.03311">Lorena A. Barba. 2018. “Terminologies for Reproducible Research.” <em>ArXiv.</em> 1802.03311</a></li>
+</ul>
+</div>
+</section>
+<section id="r-markdownと再生可能性" class="slide level2">
+<h2>R Markdownと再生可能性</h2>
+<ol type="1">
+<li>具体的にどのような手順で分析が行われたかが分かる
+<ul>
+<li>コードを記録&amp;公開</li>
+</ul></li>
+<li>コードに対する説明が付いている
+<ul>
+<li>自分が書いたコードであっても、昔書いたコードは読みにくい</li>
+<li>過去、自分が行った分析の再生する出来ない場合も
+<ul>
+<li>今、教壇に立っている人の話ではない</li>
+</ul></li>
+</ul></li>
+<li>コードと結果が同時に照会できる
+<ul>
+<li>わざわざRを立ち上げなくても、その場で分析の手順が分かる</li>
+</ul></li>
+</ol>
+</section>
+<section id="再生可能な研究を目指して" class="slide level2">
+<h2>再生可能な研究を目指して</h2>
+<ul>
+<li>可能な限り、詳細な説明を付ける
+<ul>
+<li>文章領域では「以下のコードがどのような目的で書かれたコードであるか」などを明示する。</li>
+<li>チャンク内にもこまめにコメント（<code>#</code>）を付ける
+<ul>
+<li>理想としては一行ごとにコメントを付ける</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>悪い例</strong> (悪くはないが、良くもない)</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">5</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>良い例</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">5</span>) <span class="co"># 欠損値で埋められた長さ5のベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="再生可能な研究を目指して-1" class="slide level2">
+<h2>再生可能な研究を目指して</h2>
+<ul>
+<li>コードを分かりやすく書く
+<ul>
+<li>長いオブジェクト名を避ける</li>
+<li>分かりやすいオブジェクト名</li>
+<li>適宜スペースと字下げを入れるなど</li>
+<li>読みやすいコードの書き方: 第4回の内容（<a href="https://www.jaysong.net/RBook/programming.html#programming-style">教科書 第10.2章</a>）</li>
+</ul></li>
+<li>データについても詳細に書く
+<ul>
+<li>どのように収集されたデータであるのか</li>
+<li>どのような変数があるのか</li>
+</ul></li>
+</ul>
+</section>
+<section id="課題" class="slide level2">
+<h2>課題</h2>
+<p>今回以降の練習はR Markdownを利用する。</p>
+<ol type="1">
+<li>今回課題用のプロジェクトを作成する。</li>
+<li>LMSの「第5回課題」から「問題ファイル（<code>.Rmd</code>形式）」ダウンロードし、プロジェクトのフォルダーにアップローロする。</li>
+<li>プロジェクトからRStudioを起動し、<code>.Rmd</code>ファイルを開く</li>
+<li>Knitし、結果を確認する。</li>
+<li>本講義のサポートページの「課題 &gt; 第5回課題」へアクセス</li>
+<li>サンプルのような体裁になるように問題ファイルを修正する。
+<ul>
+<li><strong>学籍番号・氏名は自分の学籍番号・氏名に直すこと。</strong></li>
+</ul></li>
+<li>完成後、生成された<code>.html</code>ファイルを<strong>ダウンロード</strong>し、関大LMSに提出する。
+<ul>
+<li>ダウンロード方法はサポートページの「Rの使い方 &gt; ファイル管理」を参照すること</li>
+</ul></li>
+<li><strong>期限は2022年5月18日（水）の23時59分とする。</strong></li>
+</ol>
 
 
 <img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
@@ -571,6 +1340,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

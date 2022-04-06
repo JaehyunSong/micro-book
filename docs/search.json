@@ -25,7 +25,7 @@
     "href": "materials/rmarkdown.html#rコード",
     "title": "第5回講義資料",
     "section": "Rコード",
-    "text": "Rコード\n\nRコードの入れ方\n　以上の内容まで抑えると、R Markdownを使って、簡単な文法のみで構造化された文書が作成できる。しかし、R Markdownの意義は文章とコード、結果が統合されることだろう。それでは文書内にRコードとその実行結果を入れる方法を紹介する。\n　コードは```{r}と```の間に入力するだけだ。これでコードと結果が同時に出力される。たとえば、print(\"Hello World!\")を走らせるコードを入れてみよう。\n\n\n\n\n\n\n`はどこにありますか。\n\n\n\nこれは使用するキーボードの配列によって異なる。日本語配列キーボードの場合、「@」と同じ所に位置するケースが多い。ただ、日本語配列は世界標準からかなりずれている配列を採用しており、日本語以外の配列では主に「〜」と同じ所に位置する。たとえば、宋はUNIX配列（HHKB）を使っているため、キーボードの右上に位置するが、左上に位置するケースも多い。ちなみに単一引用符（'; 「シングル・クォーテーション」とも呼ばれる）とは別の記号であることに注意すること。\n\n\nInput:\n\"Hello World!\"を出力するコード\n\n```{r, error=TRUE}\nprint(\"Hello World!\")\n```\nOutput:\n“Hello World!”を出力するコード\n\nprint(\"Hello World!\")\n\n[1] \"Hello World!\"\n\n\n　```{r}と```で囲まれた範囲をR Markdownではチャンク（Chunk）と呼ぶ。このチャンク内ではRと全く同じことが出来る。パッケージやデータの読み込み、オブジェクトの生成、データハンドリング、可視化など、全てが出来る。可視化の方法については第12回講義以降の講義で解説するが、ここでは例として紹介する。\nInput: 　\n```{r}\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n```\nOutput:\n\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n\n\n\n\n\n\n\n\n\n\nインラインコード\n　他にも文中にRコードを埋め込むこともできる（これをinline codeと呼ぶ）。例えば、ベクトルX <- c(2, 3, 5, 7, 12)があり、この平均値を文中で示したいとする。むろん、文中に「5.8」と書いても問題なし。しかし、実はXの入力ミスが見つかり、実はc(2, 3, 5, 7, 11)になったらどうなるだろうか。この「5.8」と書いた箇所を見つけて5.6と修正したいといけない。これは非常に面倒な作業であり、ミスも起こりやすい。文中にRコードを入れるためには`r Rコード`のように入力する。\n```{r}\nX <- c(2, 3, 5, 7, 11)\n```\n\n変数`X`の平均値は`r mean(X)`です。\nOutput:\n\nX <- c(2, 3, 5, 7, 11)\n\n変数Xの平均値は5.6です。\n　ここで`X`だが、単に`で囲まれただけだとコードのように表示してくれるものの、そのコードは実行されない。これは主に文中に短いコードのみを入れたり、変数名、関数名を示す際に使う機能である。\n\n\nコードの非表示\n　既に説明した通り、R MakrdownはR + Markdownである。Rはチャンク、Markdownはチャンク外の部分に相当し、それぞれのカスタマイズができる。分析のコードと結果はチャンクにオプションを付けることで修正できる。ここではチャンクのオプションについて解説する。\n　チャンクは```{r}で始まるが、実は{r}の箇所にオプションを追加することができる。具体的には{r チャンク名, オプション1, オプション2, ...}といった形だが、ここでは2つのオプションを紹介する。\n　まずはコードを表示せず、結果のみを表示させる方法である。R Markdownでレポートや論文を執筆する場合、最終的に提出するものにコードは不要であろう4。R Markdownではコードと結果が同時に表示されるが、片方（あるいは両方）を非表示にすることができる。{r}の内部にecho = FALSEを指定すれば、コードは表示されず、結果のみ表示される。\nInput:\n```{r, echo = FALSE}\nprint(\"Rは楽しい!\")\n```\nOutput:\n\n\n[1] \"Rは楽しい!\"\n\n\n\n\n結果の非表示\n　一方、{r}の内部にeval = FALSEを指定すれば、結果は表示されず、コードのみ表示される。本ページのようにマニュアルや技術書を書く際、時々使われる。\nInput:\n```{r, eval = FALSE}\nprint(\"Rは楽しい!\")\n```\nOutput:\n\nprint(\"Rは楽しい!\")\n\n　このようにコードのみ表示され、結果は表示されない。チャンクには他にも様々なオプションを付けることができる。出力される図の大きさ、位置、解像度、コードの非常時、結果の非表示、チャンク間の依存関係などが指定できるが、これらについては教科書の第21章（R Markdown [基礎]）を参照すること。\n　また、R Markdownでは様々な形式の文書（以外のものも）が作成可能である。たとえば、宋のホームページ5や本講義の教科書6、本講義のスライド7もR Markdownで作成されたものであり、本サポートページもR Markdownに類似するQuartoで作成されている。他にも履歴書（{vitae}、{pagedown}パッケージ）、ポスター・名刺（{pagedown}パッケージ）、Rパッケージの開発（{fusen}パッケージ）、Webアプリケーション（{shiny}パッケージ）、Rのチュートリアル（{learnr}パッケージ）などもR Markdownで作成可能である。"
+    "text": "Rコード\n\nRコードの入れ方\n　以上の内容まで抑えると、R Markdownを使って、簡単な文法のみで構造化された文書が作成できる。しかし、R Markdownの意義は文章とコード、結果が統合されることだろう。それでは文書内にRコードとその実行結果を入れる方法を紹介する。\n　コードは```{r}と```の間に入力するだけだ。これでコードと結果が同時に出力される。たとえば、print(\"Hello World!\")を走らせるコードを入れてみよう。\n\n\n\n\n\n\n`はどこにありますか。\n\n\n\nこれは使用するキーボードの配列によって異なる。日本語配列キーボードの場合、「@」と同じ所に位置するケースが多い。ただ、日本語配列は世界標準からかなりずれている配列を採用しており、日本語以外の配列では主に「〜」と同じ所に位置する。たとえば、宋はUNIX配列（HHKB）を使っているため、キーボードの右上に位置するが、左上に位置するケースも多い。ちなみに単一引用符（'; 「シングル・クォーテーション」とも呼ばれる）とは別の記号であることに注意すること。\n\n\nInput:\n\"Hello World!\"を出力するコード\n\n```{r, error=TRUE}\nprint(\"Hello World!\")\n```\nOutput:\n“Hello World!”を出力するコード\n\nprint(\"Hello World!\")\n\n[1] \"Hello World!\"\n\n\n　```{r}と```で囲まれた範囲をR Markdownではチャンク（Chunk）と呼ぶ。このチャンク内ではRと全く同じことが出来る。パッケージやデータの読み込み、オブジェクトの生成、データハンドリング、可視化など、全てが出来る。可視化の方法については第12回講義以降の講義で解説するが、ここでは例として紹介する。\nInput: 　\n```{r}\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n```\nOutput:\n\n# パッケージの読み込み\nlibrary(tidyverse)\n# R内蔵データセットのirisを使った可視化\niris %>%\n  mutate(Species2 = recode(Species,\n                           \"setosa\"     = \"セトナ\",\n                           \"versicolor\" = \"バーシクル\",\n                           \"virginica\"  = \"バージニカ\")) %>%\n  ggplot() +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, color = Species2)) +\n  labs(x = \"萼片の長さ (cm)\", y = \"萼片の幅 (cm)\", color = \"品種\") +\n  theme_minimal(base_size = 12)\n\n\n\n\n\n\n\n\n\n\nインラインコード\n　他にも文中にRコードを埋め込むこともできる（これをinline codeと呼ぶ）。例えば、ベクトルX <- c(2, 3, 5, 7, 12)があり、この平均値を文中で示したいとする。むろん、文中に「5.8」と書いても問題なし。しかし、実はXの入力ミスが見つかり、実はc(2, 3, 5, 7, 11)になったらどうなるだろうか。この「5.8」と書いた箇所を見つけて5.6と修正したいといけない。これは非常に面倒な作業であり、ミスも起こりやすい。文中にRコードを入れるためには`r Rコード`のように入力する。\nInput:\n```{r}\nX <- c(2, 3, 5, 7, 11)\n```\n\n変数`X`の平均値は`r mean(X)`です。\nOutput:\n\nX <- c(2, 3, 5, 7, 11)\n\n変数Xの平均値は5.6です。\n　ここで`X`だが、単に`で囲まれただけだとコードのように表示してくれるものの、そのコードは実行されない。これは主に文中に短いコードのみを入れたり、変数名、関数名を示す際に使う機能である。\n\n\nコードの非表示\n　既に説明した通り、R MakrdownはR + Markdownである。Rはチャンク、Markdownはチャンク外の部分に相当し、それぞれのカスタマイズができる。分析のコードと結果はチャンクにオプションを付けることで修正できる。ここではチャンクのオプションについて解説する。\n　チャンクは```{r}で始まるが、実は{r}の箇所にオプションを追加することができる。具体的には{r チャンク名, オプション1, オプション2, ...}といった形だが、ここでは2つのオプションを紹介する。\n　まずはコードを表示せず、結果のみを表示させる方法である。R Markdownでレポートや論文を執筆する場合、最終的に提出するものにコードは不要であろう4。R Markdownではコードと結果が同時に表示されるが、片方（あるいは両方）を非表示にすることができる。{r}の内部にecho = FALSEを指定すれば、コードは表示されず、結果のみ表示される。\nInput:\n```{r, echo = FALSE}\nprint(\"Rは楽しい!\")\n```\nOutput:\n\n\n[1] \"Rは楽しい!\"\n\n\n\n\n結果の非表示\n　一方、{r}の内部にeval = FALSEを指定すれば、結果は表示されず、コードのみ表示される。本ページのようにマニュアルや技術書を書く際、時々使われる。\nInput:\n```{r, eval = FALSE}\nprint(\"Rは楽しい!\")\n```\nOutput:\n\nprint(\"Rは楽しい!\")\n\n　このようにコードのみ表示され、結果は表示されない。チャンクには他にも様々なオプションを付けることができる。出力される図の大きさ、位置、解像度、コードの非常時、結果の非表示、チャンク間の依存関係などが指定できるが、これらについては教科書の第21章（R Markdown [基礎]）を参照すること。\n　また、R Markdownでは様々な形式の文書（以外のものも）が作成可能である。たとえば、宋のホームページ5や本講義の教科書6、本講義のスライド7もR Markdownで作成されたものであり、本サポートページもR Markdownに類似するQuartoで作成されている。他にも履歴書（{vitae}、{pagedown}パッケージ）、ポスター・名刺（{pagedown}パッケージ）、Rパッケージの開発（{fusen}パッケージ）、Webアプリケーション（{shiny}パッケージ）、Rのチュートリアル（{learnr}パッケージ）などもR Markdownで作成可能である。"
   },
   {
     "objectID": "materials/rmarkdown.html#教科書",
@@ -497,6 +497,195 @@
     "text": "課題\nブラインドタッチに自信のない履修者は引き続き、ブラインドタッチの練習\n\n毎日欠かさず練習すれば2週間でできるようになる。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
+    "objectID": "slide/slide05.html#r-markdownとは",
+    "href": "slide/slide05.html#r-markdownとは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "R Markdownとは",
+    "text": "R Markdownとは\n\nR + Markdown\nRのコードと結果、そして文章が一つの文書としてまとまったもの\n\n文書の形式はHTML、Microsoft Word（.docx）、PDFで出力される\nスライド、ホームページなども作成可能\n本講義のスライドもR Markdownで作成（{xaringan}）\n本講義の教科書もR Markdownで作成（{bookdown}）\n宋のホームページもR Markdownで作成（{blogdown}）"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownとは",
+    "href": "slide/slide05.html#markdownとは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownとは",
+    "text": "Markdownとは\nプレーンテキストとリッチテキスト\n\nPlain text: 書式情報などが含まれていない純粋なテキストのみで構成されている文書\n\nmacOSの「テキストエディット」、Windowsの「メモ帳」など\n\nRich text: 書式情報だけでなく、図表なども含まれる文書\n\nMicrosoft Word、Apple Pagesなど\n\n書式情報の例: 文書の余白、行間の幅、文字サイズ、太さ、色\nリッチテキストには文字情報以外にも様々な書式情報が含まれているため、サイズが大きく、パソコンへの負担も大きい"
+  },
+  {
+    "objectID": "slide/slide05.html#プレーンからリッチへ",
+    "href": "slide/slide05.html#プレーンからリッチへ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "プレーンからリッチへ",
+    "text": "プレーンからリッチへ\nMarkup言語とは\n\nプレーンテキストをリッチテキストへ変換するための言語\nHTMLが代表的\n\n例: <b>と</b>で囲まれた文字は太字として出力される。\n\n\nInput:\nこの文字は<b>太字</b>にしましょう。<br/>\nこの文字は<a href = \"https://www.jaysong.net\">リンク</a>にしましょう。\nOutput:\nこの文字は太字にしましょう。 この文字はリンクにしましょう。"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownとは-1",
+    "href": "slide/slide05.html#markdownとは-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownとは",
+    "text": "Markdownとは\n\nMarkdown: Markup言語の軽量版\n文章作成に必要なタグ（tag）をより簡単に記述できる。\nブラインドタッチに慣れればWordよりも素早く文書を作成することができるようになる。\n\n\n以下の2つのコードは同じ結果を返す。\nMarkupの場合（HTML）\nこの文字は<b>太字</b>にしましょう。<br/>\nこの文字は<a href = \"https://www.jaysong.net\">リンク</a>にしましょう。\nMarkdownの場合\nこの文字は**太字**にしましょう。\n\nこの文字は[リンク](https://www.jaysong.net)にしましょう。"
+  },
+  {
+    "objectID": "slide/slide05.html#markup-vs.-markdown",
+    "href": "slide/slide05.html#markup-vs.-markdown",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markup vs. Markdown",
+    "text": "Markup vs. Markdown\n表の作成\n\n\nMarkup\n<table>\n    <thead style = \"font-weight:bold;\">\n        <td>ID</td>\n        <td>Name</td>\n    </thead>\n    <tr>\n        <td>1</td>\n        <td>Song</td>\n    </tr>\n    <tr>\n        <td>2</td>\n        <td>Kojima</td>\n    </tr>\n</table>\n\n\n\nMarkdown\n| ID | Name |\n|----|------|\n| 1  | Song |\n| 2  |Kojima|\nOutput (どれも同じ結果)\n\n\n\nID\nName\n\n\n\n\n1\nSong\n\n\n2\nKojima"
+  },
+  {
+    "objectID": "slide/slide05.html#markup-vs.-markdown-1",
+    "href": "slide/slide05.html#markup-vs.-markdown-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markup vs. Markdown",
+    "text": "Markup vs. Markdown\n箇条書き\n\n\nMarkup\n<ul>\n  <li>箇条書き1</li>\n    <ul>\n      <li>箇条書き1A</li>\n      <li>箇条書き1B</li>\n    </ul>\n  <li>箇条書き2</li>\n  <li>箇条書き3</li>\n</ul>\n\n\n\nMarkdown\n* 箇条書き1\n  * 箇条書き1A\n  * 箇条書き1B\n* 箇条書き2\n* 箇条書き3\nOutput\n\n箇条書き1\n\n箇条書き1A\n箇条書き1B\n\n箇条書き2\n箇条書き3"
+  },
+  {
+    "objectID": "slide/slide05.html#rmdファイルの生成",
+    "href": "slide/slide05.html#rmdファイルの生成",
+    "title": "ミクロ政治データ分析実習",
+    "section": ".Rmdファイルの生成",
+    "text": ".Rmdファイルの生成\n\nRStudioを起動し、プロジェクトを作成する。\nFile > New > R Markdown…を選択する。\nOKをクリックする。\nYAMLヘッダーを修正する。\n\n\nファイルを保存する（File > Save）。\n\nショートカットキー: ⌘+S（macOS）、または Ctrl + S (Windows)\n\nSourceペイン上段のKnitをクリックする。\n\nKnitは「ニット」と読む（「クニット」ではない）。"
+  },
+  {
+    "objectID": "slide/slide05.html#yamlヘッダー",
+    "href": "slide/slide05.html#yamlヘッダー",
+    "title": "ミクロ政治データ分析実習",
+    "section": "YAMLヘッダー",
+    "text": "YAMLヘッダー\n.Rmdファイル最上段に位置する文書の情報に関するデータ\n---\ntitle: \"はじめてのR Markdown\"\nauthor: \"関大花子\"\ndate: \"2022年 5月 12日\"\noutput: html_document\n---\n\ntitle: 文書のタイトル\n\nsubtitle:でサブタイトルも付けられる。\n\nauthor: 文書の作成者\ndate: 日付\n\ndate: `r Sys.Date()`に修正すると、Knitした日の日付が自動的につけられる。\n\noutput: 出力形式（このままで良い）\nその他オプション多数\n\nYAMLヘッダーの詳細はR Markdown Cheetsheetなどを参照"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-文章の改行",
+    "href": "slide/slide05.html#markdownの文法-文章の改行",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 文章の改行",
+    "text": "Markdownの文法: 文章の改行\n\n2回改行\n\n\n\nInput\nこれは文章1です。\nこれは文章2です。\nOutput\nこれは文章1です。 これは文章2です。\n\n\n\nInput\nこれは文章1です。\n\nこれは文章2です。\nOutput\nこれは文章1です。\nこれは文章2です。"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-強調",
+    "href": "slide/slide05.html#markdownの文法-強調",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 強調",
+    "text": "Markdownの文法: 強調\n\n英語の強調はイタリック、日本語の強調は太字を使用\n\nInput\n文章の一部を**太字**にしてみましょう。\n\nThe G7 consists of Canada, France, Germany, Italy, *Japan*, UK, and USA.\n\n~~取り消し線~~はあまり使わないかも。\n\n<u>アンダーライン</u>はHTMLタグを使います。\nOutput\n文章の一部を太字にしてみましょう。\nThe G7 consists of Canada, France, Germany, Italy, Japan, UK, and USA.\n取り消し線はあまり使わないかも。\nアンダーラインはHTMLタグを使います。"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-リンク",
+    "href": "slide/slide05.html#markdownの文法-リンク",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: リンク",
+    "text": "Markdownの文法: リンク\n\n[リンク文](URL)\n[]で囲まれた文章をクリックすると指定したURLへ移動\n\nInput\n[ここ](https://www.jaysong.net)をクリックすると、宋のHPへ移動します。\nOutput\nここをクリックすると、宋のHPへ移動します。"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-見出し",
+    "href": "slide/slide05.html#markdownの文法-見出し",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 見出し",
+    "text": "Markdownの文法: 見出し\n\n# + 半角スペース + 見出し（#が多いほど小さくなる）\n\nInput\n# 見出し1 (ヘッディング1)\n## 見出し2 (ヘッディング2)\n### 見出し3 (ヘッディング3)\n#### 見出し4 (ヘッディング4)\nOutput\n\n見出し1 (ヘッディング1)\n\n\n見出し2 (ヘッディング2)\n\n\n見出し3 (ヘッディング3)\n\n\n見出し4 (ヘッディング4)"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-水平線",
+    "href": "slide/slide05.html#markdownの文法-水平線",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 水平線",
+    "text": "Markdownの文法: 水平線\n\n任意の行に---を挿入\n章と章の区切り、節と節の区切りなどに使用\n\nInput\n文章1\n\n---\n\n文章2\nOutput\n文章1\n\n文章2"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-箇条書き順序なし",
+    "href": "slide/slide05.html#markdownの文法-箇条書き順序なし",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 箇条書き（順序なし）",
+    "text": "Markdownの文法: 箇条書き（順序なし）\n\n* + 半角スペース + 文字列\n階層構造にする場合、*の前に半角スペースを3個以上入れる\n*の代わりに-も可\n\n\n\nInput\n* リスト1\n* リスト2\n   * リスト2-1\n      * リスト2-1-1\n      * リスト2-1-2\n   * リスト2-1\n* リスト3\n\n\n\nOutput\n\nリスト1\nリスト2\n\nリスト2-1\n\nリスト2-1-1\nリスト2-1-2\n\nリスト2-1\n\nリスト3"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-箇条書き順序付き",
+    "href": "slide/slide05.html#markdownの文法-箇条書き順序付き",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 箇条書き（順序付き）",
+    "text": "Markdownの文法: 箇条書き（順序付き）\n\n1. + 半角スペース + 文字列\n1.の箇所は任意の数字でもOK。1.、2.、…も可\n階層構造にする場合、*の前に半角スペースを3個入れる\n\n\n\nInput\n1. リスト1\n2. リスト2\n   1. リスト2-1\n      1. リスト2-1-1\n      2. リスト2-1-2\n   2. リスト2-1\n3. リスト3\n\n\n\nOutput\n\nリスト1\nリスト2\n\nリスト2-1\n\nリスト2-1-1\nリスト2-1-2\n\nリスト2-1\n\nリスト3"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-数式",
+    "href": "slide/slide05.html#markdownの文法-数式",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 数式",
+    "text": "Markdownの文法: 数式\n\n文中数式は$数式$、独立した行の数式は$$で囲む\n\\(\\LaTeX\\) の数式表記法を理解する必要がある\n\nInput\n文中の数式の例: $e = mc^2$\n\n独立した数式の例は、\n\n$$\ny_i \\sim \\text{Normal}(\\mathbf{X} \\boldsymbol{\\beta}, \\sigma).\n$$\nOutput\n文中の数式の例: \\(e = mc^2\\)\n独立した数式の例は、\n\\[\ny_i \\sim \\text{Normal}(\\mathbf{X} \\boldsymbol{\\beta}, \\sigma).\n\\]"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-表",
+    "href": "slide/slide05.html#markdownの文法-表",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: 表",
+    "text": "Markdownの文法: 表\n\n行は改行で、列は|で区切る\n1行目は表のヘッダーであり、|---|で区切る（-は1個以上でOK）\n\n|---|、または|:---|は左揃え、|---:|は右揃え、|:---:|は中央揃え\n\n\n\n\nInput\n|ID |Name   |Birth (Year)|Pref   |\n|:-:|-------|-----------:|-------|\n|1  |Ogura  |1852        |Tokyo  |\n|2  |Tsurumi|1858        |Tochigi|\n|3  |Yoshida|1858        |Fukuoka|\n|4  |Hotta  |1859        |Chiba  |\n|5  |Inoue  |1847        |Nagano |\n|6  |Tezuka |1862        |Tokyo  |\n|7  |Shikata|1857        |Saitama|\n|8  |Nomura |1855        |Gunma  |\n\n\n\nOutput\n\n\n\nID\nName\nBirth (Year)\nPref\n\n\n\n\n1\nOgura\n1852\nTokyo\n\n\n2\nTsurumi\n1858\nTochigi\n\n\n3\nYoshida\n1858\nFukuoka\n\n\n4\nHotta\n1859\nChiba\n\n\n5\nInoue\n1847\nNagano\n\n\n6\nTezuka\n1862\nTokyo\n\n\n7\nShikata\n1857\nSaitama\n\n\n8\nNomura\n1855\nGunma"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-コメント",
+    "href": "slide/slide05.html#markdownの文法-コメント",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: コメント",
+    "text": "Markdownの文法: コメント\n出力に影響されないコメントを入れる場合 * <!--と-->内に囲む * <!--と-->の間の文章は出力されない * 自分用のメモ、とりあえず出力させない内容などに使用 * チャンク内コメントは#（チャンクは後に解説）\n\n\nInput:\nこれは文章1です。\n\n<!--\nこれはコメントです。\n-->\n\nこれは文章2です。\n\n\n\nOutput:\nこれは文章1です。\n\nこれは文章2です。"
+  },
+  {
+    "objectID": "slide/slide05.html#markdownの文法-その他",
+    "href": "slide/slide05.html#markdownの文法-その他",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Markdownの文法: その他",
+    "text": "Markdownの文法: その他\n教科書第21章を参照\n\n図の挿入\n脚注\n引用など\nHTMLタグを直接入れることも可能\n\n出力形式がHTMLならJavaScriptも可\n\nR Markdown Cheetsheetも参照"
+  },
+  {
+    "objectID": "slide/slide05.html#rコード-チャンクchunk",
+    "href": "slide/slide05.html#rコード-チャンクchunk",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rコード: チャンク（Chunk）",
+    "text": "Rコード: チャンク（Chunk）\nRのコードを挿入する領域\n\n```{r}と```で囲む\n\nチャンクの外にコードを書いても文章として認識する\n\nコードの出力 > 結果の出力の順番\n\n\nInputOutput\n\n\nここはチャンクの外\n\nここに書いたものは文章として扱われる。\n\n```{r}\nx <- 5 # 円の半径\nprint(3.14 * x^2)\n```\n\nここに書いたのも文章\n\n\nここはチャンクの外\nここに書いたものは文章として扱われる。\n\n\n[1] 78.5\n\n\nここに書いたのも文章"
+  },
+  {
+    "objectID": "slide/slide05.html#rコード-チャンクのオプション",
+    "href": "slide/slide05.html#rコード-チャンクのオプション",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rコード: チャンクのオプション",
+    "text": "Rコード: チャンクのオプション\n{r}の箇所にオプションが指定可能（,の後）\n\nチャンクに名前を付ける: {r チャンクの名前}\n\nチャンク名の場合,は不要。オプションはチャンク名の後に付ける\n\nコードのみ出力し、結果は出力しない\n\n{r, eval = FALSE}\n\n結果のみ出力し、コードは出力しない\n\n{r, echo = FALSE}\n\n出力される図の幅を8インチ、高さを10インチに\n\n{r, fig.width = 5, fig.height = 10}\n\n出力される図を中央揃えに\n\n{r, fig.align = center}\n\n警告メッセージを隠す\n\n{r, warning = FALSE}\n\n他にも数十のオプションの指定が可能\n\n詳しくはR Markdown Cheetsheetを参照"
+  },
+  {
+    "objectID": "slide/slide05.html#rコード-インラインコード",
+    "href": "slide/slide05.html#rコード-インラインコード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Rコード: インラインコード",
+    "text": "Rコード: インラインコード\n文章内にRコードの結果を埋め込む場合\n\n`rと`の間にコードを挿入\n\nInput:\n```{r}\nX <- c(2, 3, 5, 7, 11)\n```\n\n変数`X`の平均値は`r mean(X)`です。\nOutput:\n\nX <- c(2, 3, 5, 7, 11)\n\n変数Xの平均値は5.6です。\n\n\n参考) 単に`で囲まれたものはコードのように表示してくれるものの、そのコードは実行されない。文中に短いコードのみを入れたり、変数名、関数名を示す際に使う機能である。"
+  },
+  {
+    "objectID": "slide/slide05.html#再現可能性と再生可能性",
+    "href": "slide/slide05.html#再現可能性と再生可能性",
+    "title": "ミクロ政治データ分析実習",
+    "section": "再現可能性と再生可能性",
+    "text": "再現可能性と再生可能性\n国里 (2020)による定義\n\n学会、分野によっては正反対の概念になる場合もある (Barba 2018)\n\n\n再生可能性 (Reproducibility)\n\n同じデータ + 同じ方法 = 同じ結果\nR Markdownの主な目的は再生可能性\n\n\n再現可能性 (Replicability)\n\n新しいデータ + 同じ方法 = 同じ結果\n新しいデータ + 違う方法 = 同じ結果\n\n\n参考文献\n\n国里愛彦. 2020.「再現可能な心理学研究入門」『専修大学人間科学論集:心理学篇』10. 21-33.\nLorena A. Barba. 2018. “Terminologies for Reproducible Research.” ArXiv. 1802.03311"
+  },
+  {
+    "objectID": "slide/slide05.html#r-markdownと再生可能性",
+    "href": "slide/slide05.html#r-markdownと再生可能性",
+    "title": "ミクロ政治データ分析実習",
+    "section": "R Markdownと再生可能性",
+    "text": "R Markdownと再生可能性\n\n具体的にどのような手順で分析が行われたかが分かる\n\nコードを記録&公開\n\nコードに対する説明が付いている\n\n自分が書いたコードであっても、昔書いたコードは読みにくい\n過去、自分が行った分析の再生する出来ない場合も\n\n今、教壇に立っている人の話ではない\n\n\nコードと結果が同時に照会できる\n\nわざわざRを立ち上げなくても、その場で分析の手順が分かる"
+  },
+  {
+    "objectID": "slide/slide05.html#再生可能な研究を目指して",
+    "href": "slide/slide05.html#再生可能な研究を目指して",
+    "title": "ミクロ政治データ分析実習",
+    "section": "再生可能な研究を目指して",
+    "text": "再生可能な研究を目指して\n\n可能な限り、詳細な説明を付ける\n\n文章領域では「以下のコードがどのような目的で書かれたコードであるか」などを明示する。\nチャンク内にもこまめにコメント（#）を付ける\n\n理想としては一行ごとにコメントを付ける\n\n\n\n悪い例 (悪くはないが、良くもない)\nx <- rep(NA, 5)\n良い例\nx <- rep(NA, 5) # 欠損値で埋められた長さ5のベクトル"
+  },
+  {
+    "objectID": "slide/slide05.html#再生可能な研究を目指して-1",
+    "href": "slide/slide05.html#再生可能な研究を目指して-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "再生可能な研究を目指して",
+    "text": "再生可能な研究を目指して\n\nコードを分かりやすく書く\n\n長いオブジェクト名を避ける\n分かりやすいオブジェクト名\n適宜スペースと字下げを入れるなど\n読みやすいコードの書き方: 第4回の内容（教科書 第10.2章）\n\nデータについても詳細に書く\n\nどのように収集されたデータであるのか\nどのような変数があるのか"
+  },
+  {
+    "objectID": "slide/slide05.html#課題",
+    "href": "slide/slide05.html#課題",
+    "title": "ミクロ政治データ分析実習",
+    "section": "課題",
+    "text": "課題\n今回以降の練習はR Markdownを利用する。\n\n今回課題用のプロジェクトを作成する。\nLMSの「第5回課題」から「問題ファイル（.Rmd形式）」ダウンロードし、プロジェクトのフォルダーにアップローロする。\nプロジェクトからRStudioを起動し、.Rmdファイルを開く\nKnitし、結果を確認する。\n本講義のサポートページの「課題 > 第5回課題」へアクセス\nサンプルのような体裁になるように問題ファイルを修正する。\n\n学籍番号・氏名は自分の学籍番号・氏名に直すこと。\n\n完成後、生成された.htmlファイルをダウンロードし、関大LMSに提出する。\n\nダウンロード方法はサポートページの「Rの使い方 > ファイル管理」を参照すること\n\n期限は2022年5月18日（水）の23時59分とする。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
     "objectID": "slide/slide04.html#プログラミングの基礎概念",
     "href": "slide/slide04.html#プログラミングの基礎概念",
     "title": "ミクロ政治データ分析実習",
@@ -774,7 +963,7 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年03月30日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.2 (2021-11-01)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
+    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年04月06日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.3 (2022-03-10)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html#概要",
