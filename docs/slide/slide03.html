@@ -830,7 +830,7 @@
 <h2>等差数列ベクトルの作り方</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<p>公差 <strong>=</strong> 1の等差数列</p>
+<p>公差 = 1の等差数列</p>
 <ul>
 <li><code>:</code>演算子を利用</li>
 </ul>
@@ -843,22 +843,34 @@
 <div class="cell-output-stdout">
 <pre><code>[1] 1 2 3 4 5 6 7</code></pre>
 </div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="dv">8</span><span class="sc">:</span><span class="dv">3</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 8 7 6 5 4 3</code></pre>
+</div>
 </div>
 </div><div class="column" style="width:10%;">
 
 </div><div class="column" style="width:45%;">
-<p>公差 <strong>&gt;</strong> 1の等差数列</p>
+<p>公差 <span class="math inline">\(\neq\)</span> 1の等差数列</p>
 <ul>
 <li><code>seq()</code>関数の使用 (<code>by</code>で公差を指定)</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 1 3 5 7 9</code></pre>
 </div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 1 3 5 7 9</code></pre>
+</div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.5</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0</code></pre>
+</div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">seq</span>(<span class="dv">8</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 8 7 6 5 4 3</code></pre>
 </div>
 </div>
 </div>
@@ -871,6 +883,21 @@
 <li><strong>ケース1:</strong> <code>X</code>の長さ = <code>Y</code>の長さ</li>
 <li><strong>ケース2:</strong> <code>X</code>の長さ <span class="math inline">\(\neq\)</span> <code>Y</code>の長さ</li>
 </ul>
+<p><br></p>
+<p><strong>参考)</strong> ベクトルの長さの求め方</p>
+<ul>
+<li><code>length()</code>関数を使用</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">length</span>(my_vector1) <span class="co"># c(1, 2, 3, 4, 5)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">length</span>(my_vector2) <span class="co"># c("Cat", "Lion", "Tiger")</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
 </section>
 <section id="ケース1-ベクトルの長さが同じ場合" class="slide level2">
 <h2>ケース1: ベクトルの長さが同じ場合</h2>
@@ -930,9 +957,9 @@
 </table>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb51-2"><a href="#cb51-2"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb51-3"><a href="#cb51-3"></a>my_vec1 <span class="sc">*</span> my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb61-2"><a href="#cb61-2"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb61-3"><a href="#cb61-3"></a>my_vec1 <span class="sc">*</span> my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  0  2  6  0  5 12</code></pre>
 </div>
@@ -999,9 +1026,9 @@
 </table>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb53-2"><a href="#cb53-2"></a>my_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb53-3"><a href="#cb53-3"></a>my_vec3 <span class="sc">*</span> my_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb63-2"><a href="#cb63-2"></a>my_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb63-3"><a href="#cb63-3"></a>my_vec3 <span class="sc">*</span> my_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 0 2 0 4 0 6</code></pre>
 </div>
@@ -1018,36 +1045,36 @@
 <div class="column" style="width:30%;">
 <p>答え（3行 ver.）</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
-<span id="cb55-3"><a href="#cb55-3"></a>x <span class="sc">*</span> y</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb65-3"><a href="#cb65-3"></a>x <span class="sc">*</span> y</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:30%;">
 <p>答え（2行 ver.）</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a>x <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>x <span class="ot">&lt;-</span> <span class="dv">123454321</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>x <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>または、</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
-<span id="cb57-2"><a href="#cb57-2"></a><span class="dv">123454321</span> <span class="sc">*</span> x</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="dv">123454321</span> <span class="sc">*</span> x</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:30%;">
 <p>答え（1行 ver.）</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <div id="tabset-1-2">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="dv">123454321</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">200</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>  [1]   246908642   370362963   493817284   617271605   740725926   864180247
   [7]   987634568  1111088889  1234543210  1357997531  1481451852  1604906173
@@ -1096,8 +1123,8 @@
 <p><br></p>
 <p><strong>例)</strong> 11, 12, 13, …, 19, 20が格納された<code>my_vec5</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span> <span class="co"># my_vec &lt;- seq(11, 20, by = 1) と同じ</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span> <span class="co"># my_vec &lt;- seq(11, 20, by = 1) と同じ</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
@@ -1143,7 +1170,7 @@
 </ul>
 <p><strong>例1)</strong> <code>my_vec5</code>の3番目の要素</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>my_vec5[<span class="dv">3</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>my_vec5[<span class="dv">3</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 13</code></pre>
 </div>
@@ -1153,20 +1180,20 @@
 <li><code>[]</code>内に抽出する要素の位置を表すベクトルを指定</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>pos_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb65-2"><a href="#cb65-2"></a>my_vec5[pos_vec]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>pos_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb75-2"><a href="#cb75-2"></a>my_vec5[pos_vec]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 12 13 14 15</code></pre>
 </div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>my_vec5[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>my_vec5[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 12 13 14 15</code></pre>
 </div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>my_vec5[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>my_vec5[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 12 13 14 15</code></pre>
 </div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>my_vec5[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>my_vec5[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 12 13 14 15</code></pre>
 </div>
@@ -1182,20 +1209,20 @@
 <li><code>[]</code>内にベクトルの長さ分のベクトルを更に入力する必要があるため、あまり使わない方法</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="co"># my_vec5[c(1, 4, 7, 9, 10)] と同じ結果</span></span>
-<span id="cb73-2"><a href="#cb73-2"></a>my_vec5[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="co"># my_vec5[c(1, 4, 7, 9, 10)] と同じ結果</span></span>
+<span id="cb83-2"><a href="#cb83-2"></a>my_vec5[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 11 14 17 19 20</code></pre>
 </div>
 </div>
 <p><strong>例2)</strong> <code>my_vec5</code>から奇数のみ抽出（論理演算子の利用）</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="co"># my_vec5を2で割った場合、余りが1ならTRUE、その他はFALSE</span></span>
-<span id="cb75-2"><a href="#cb75-2"></a>my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="co"># my_vec5を2で割った場合、余りが1ならTRUE、その他はFALSE</span></span>
+<span id="cb85-2"><a href="#cb85-2"></a>my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>my_vec5[my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a>my_vec5[my_vec5 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 11 13 15 17 19</code></pre>
 </div>
@@ -1208,9 +1235,9 @@
 <li><code>オブジェクト名 &lt;- read_csv("パスを含むファイル名")</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb79-2"><a href="#cb79-2"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span>
-<span id="cb79-3"><a href="#cb79-3"></a>my_data <span class="co"># my_dataの中身の出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb89-2"><a href="#cb89-2"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Pref_Vote.csv"</span>)</span>
+<span id="cb89-3"><a href="#cb89-3"></a>my_data <span class="co"># my_dataの中身の出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -1256,7 +1283,7 @@
 <li><code>オブジェクト名</code>、または<code>print(オブジェクト名)</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>my_data</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a>my_data</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref   Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -1280,7 +1307,7 @@
 <li><code>print(オブジェクト名, n = 行数)</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="fu">print</span>(my_data, <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 47 × 13
       ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -1309,7 +1336,7 @@
 <li><code>tail(オブジェクト名)</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a><span class="fu">tail</span>(my_data)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 6 × 13
      ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
@@ -1332,7 +1359,7 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="fu">tail</span>(my_data, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="fu">tail</span>(my_data, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 10 × 13
       ID Pref     Zaisei Over65 Under30 Jimin Minshin Komei Kyosan Ishin Shamin
