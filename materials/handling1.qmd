@@ -3,3 +3,10 @@ title: "第9回講義資料"
 subtitle: "データハンドリング (1)"
 ---
 
+## スライド
+
+<a href="../slide/slide09.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a>
+
+```{=html}
+<iframe class="slide-deck" src="../slide/slide09.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+```

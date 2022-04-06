@@ -3,3 +3,10 @@ title: "第13回講義資料"
 subtitle: "可視化 (2)"
 ---
 
+## スライド
+
+<a href="../slide/slide13.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a>
+
+```{=html}
+<iframe class="slide-deck" src="../slide/slide13.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+```

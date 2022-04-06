@@ -3,3 +3,10 @@ title: "第8回講義資料"
 subtitle: "データ構造"
 ---
 
+## スライド
+
+<a href="../slide/slide08.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a>
+
+```{=html}
+<iframe class="slide-deck" src="../slide/slide08.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+```
