@@ -19,6 +19,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -349,8 +412,372 @@
   <p class="date">2022年 5月 26日</p>
 </section>
 
-<section class="slide level2">
+<section id="データ型とは" class="slide level2">
+<h2>データ型とは</h2>
+</section>
+<section id="データ型の種類" class="slide level2">
+<h2>データ型の種類</h2>
+<p>以下のデータ型はRが提供しているデータ型の<strong>一部</strong>（太字は本講義で紹介するデータ型）</p>
+<ul>
+<li><strong>Logical</strong></li>
+<li><strong>Numeric</strong></li>
+<li>Complex</li>
+<li><strong>Character</strong></li>
+<li><strong>Factor</strong></li>
+<li>Date</li>
+<li><strong>NA</strong></li>
+<li>NULL</li>
+<li>その他</li>
+</ul>
+</section>
+<section id="データ型の確認" class="slide level2">
+<h2>データ型の確認</h2>
+<p><code>class()</code>関数を使用</p>
+<ul>
+<li>オブジェクトがベクトルの場合はデータ<strong>型</strong>が出力され、ベクトル以外の場合はデータ<strong>構造</strong>が出力される。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ramen"</span>, <span class="st">"Soba"</span>, <span class="st">"Udon"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">class</span>(my_vec1) <span class="co"># my_vec1のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">class</span>(my_vec2) <span class="co"># my_vec2のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">class</span>(my_vec3) <span class="co"># my_vec3のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</section>
+<section id="logical型-紹介" class="slide level2">
+<h2>Logical型: 紹介</h2>
+<ul>
+<li><code>TRUE</code>と<code>FALSE</code>のみで構成されるデータ型
+<ul>
+<li>論理型とも呼ばれる。</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>logi_vec1 <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">==</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>logi_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li><code>logi_vec1</code>のデータ型の確認</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">class</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li>あるベクトルがlogical型かどうかは<code>is.logical()</code>で確認可能。
+<ul>
+<li><code>()</code>内のオブジェクトがlogical型なら<code>TRUE</code>、それ以外は<code>FALSE</code>が返ってくる。</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">is.logical</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="logical型-作成" class="slide level2">
+<h2>Logical型: 作成</h2>
+<ul>
+<li>長さ2以上のlogical型ベクトルを作成する場合、<code>c()</code>を使用
+<ul>
+<li><code>TRUE</code>と<code>FALSE</code>は<code>"</code>で囲んではいけない（character型として認識される）。</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>logi_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>ただし、このように直接logical型ベクトルを作成することは非常に稀であり、通常、論理演算子の計算から得られた結果で作成する。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>my_vec4 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>logi_vec3 <span class="ot">&lt;-</span> my_vec4 <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="co"># my_vec4の要素は3で割り切れるか</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="logical型-活用" class="slide level2">
+<h2>Logical型: 活用</h2>
+<ul>
+<li>何かの条件（=論理演算子）に合致する要素のみを抽出する際に使用</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>my_vec4[logi_vec3]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  3  6  9 12 15</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li>Logical型ベクトルを作成せず、<code>[]</code>内に直接打ち込んでも良い</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># my_vec4の要素の中から3で割り切れる要素（=3の倍数）を抽出する。</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>my_vec4[my_vec4 <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  3  6  9 12 15</code></pre>
+</div>
+</div>
+</section>
+<section id="numeric型-紹介" class="slide level2">
+<h2>Numeric型: 紹介</h2>
+</section>
+<section id="numeric型-作成活用" class="slide level2">
+<h2>Numeric型: 作成&amp;活用</h2>
+<ul>
+<li>第3回講義を参照</li>
+</ul>
+</section>
+<section id="character型-紹介" class="slide level2">
+<h2>Character型: 紹介</h2>
+</section>
+<section id="character型-作成" class="slide level2">
+<h2>Character型: 作成</h2>
+<ul>
+<li>要素を<code>"</code>で囲む
+<ul>
+<li>長さ2以上のcharacter型のベクトル作成は<code>c()</code>を使用</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>char_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>char_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "Kansai"         "Kwansei-gakuin" "Doshisha"       "Ritsumeikan"   </code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li><code>char_vec1</code>のデータ型の確認</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">class</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li>あるベクトルがcharacter型かどうかは<code>is.character()</code>で確認可能。
+<ul>
+<li><code>()</code>内のオブジェクトがlogical型なら<code>TRUE</code>、それ以外は<code>FALSE</code>が返ってくる。</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">is.character</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="character型-活用" class="slide level2">
+<h2>Character型: 活用</h2>
+<ul>
+<li>文字列の長さ
+<ul>
+<li><code>length()</code>: ベクトルの長さ</li>
+<li><code>nchar()</code>: 各要素の文字数</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">length</span>(char_vec1) <span class="co"># char_vec1の長さ</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">nchar</span>(char_vec1)  <span class="co"># char_vec1の各要素の文字数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  6 14  8 11</code></pre>
+</div>
+</div>
+<ul>
+<li><code>paste()</code>: 文字列の結合
+<ul>
+<li><code>paste0()</code>にすると、結合時、スペースが入らない。</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># 各要素の後にUniversityを付ける（スペースあり）</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>char_vec2 <span class="ot">&lt;-</span> <span class="fu">paste</span>(char_vec1, <span class="st">"Univeristy"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>char_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "Kansai Univeristy"         "Kwansei-gakuin Univeristy"
+[3] "Doshisha Univeristy"       "Ritsumeikan Univeristy"   </code></pre>
+</div>
+</div>
+</section>
+<section id="factor型" class="slide level2">
+<h2>Factor型</h2>
+</section>
+<section id="欠損値" class="slide level2">
+<h2>欠損値</h2>
+</section>
+<section id="naとnull-1" class="slide level2">
+<h2>NAとNULL (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a>Vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">13</span>)</span>
+<span id="cb32-3"><a href="#cb32-3"></a>Vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NULL</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="dv">13</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  1  2  3  5  7 11 13</code></pre>
+</div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>Vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  1 NA  3  5 NA NA 13</code></pre>
+</div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  1  3  5 13</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">length</span>(Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">length</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">length</span>(Vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</section>
+<section id="naとnull-2" class="slide level2">
+<h2>NAとNULL (2)</h2>
+<p>初心者レベルで<code>NULL</code>を使うことはないが、中級以上からは（そこそこ）使う機会がある。</p>
 
+<img data-src="Figs/07/NA_NULL.png" width="300" class="r-stretch quarto-figure-center"></section>
+<section id="欠損値が含まれたベクトルの動き" class="slide level2">
+<h2>欠損値が含まれたベクトルの動き</h2>
+<ul>
+<li><code>mean()</code>関数で<code>Vec2</code>の平均値を計算してみよう。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">mean</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<ul>
+<li>コンソール上で<code>?mean</code>を打ち、<code>mean()</code>関数の詳細について調べてみると、<code>mean()</code>関数で使用可能な引数の一覧が表示される。</li>
+</ul>
+<pre><code>na.rm    a logical value indicating whether NA values should be stripped before 
+         the computation proceeds.</code></pre>
+<ul>
+<li>意味: 「<code>na.rm</code>はlogical型の値であり、計算の前に欠損値（<code>NA</code>）を除去するか否かを示す引数である。」</li>
+</ul>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">mean</span>(Vec2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 5.5</code></pre>
+</div>
+</div>
+<ul>
+<li>このように一部の関数では欠損値が含まれているオブジェクトの計算ができないため、おかしいと思ったらヘルプを読んでみること。</li>
+</ul>
+</section>
+<section id="共通-要素の追加" class="slide level2">
+<h2>共通: 要素の追加</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb50-2"><a href="#cb50-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4 3 2 1</code></pre>
+</div>
+</div>
+<ul>
+<li><code>my_vec5</code>の5番目の要素として、0を追加</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>my_vec5[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4 3 2 1 0</code></pre>
+</div>
+</div>
+<ul>
+<li><code>my_vec5</code>の6、7、8番目の要素として、-1、-2、-3を追加</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># 6:8の代わりにc(6, 7, 8)もOK</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>my_vec5[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb54-3"><a href="#cb54-3"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  4  3  2  1  0 -1 -2 -3</code></pre>
+</div>
+</div>
+<ul>
+<li><code>my_vec5</code>の11番目に10を入れたら?</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA 10</code></pre>
+</div>
+</div>
+</section>
+<section id="共通-要素の置換" class="slide level2">
+<h2>共通: 要素の置換</h2>
+<ul>
+<li>要素の追加と方法は同じ</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">6</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA -6</code></pre>
+</div>
+</div>
+<ul>
+<li>複数の要素を置換する場合</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>my_vec5[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>)</span>
+<span id="cb60-2"><a href="#cb60-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6</code></pre>
+</div>
+</div>
+<ul>
+<li><code>my_vec5</code>の要素の中から0より小さい要素に-1を掛けて置換する。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] 4 3 2 1 0 1 2 3 4 5 6</code></pre>
+</div>
+</div>
+</section>
+<section id="課題" class="slide level2">
+<h2>課題</h2>
 
 
 <img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
@@ -571,6 +998,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

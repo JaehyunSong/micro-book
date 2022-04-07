@@ -99,7 +99,8 @@ ggplot() +
    annotate("label", x = 1.5, y = -0.75, hjust = 0,
             label = "マクロ政治データ分析実習", size = 5) +
    annotate("label", x = -1.5, y = -0.75, hjust = 1,
-            label = "ミクロ政治データ分析実習", size = 5) +
+            label = "ミクロ政治データ分析実習", size = 5,
+            color = "red") +
    annotate("label", x = -1.25, y = 1.5,   hjust = 1,
             label = "ミクロ政治分析", size = 5) +
    annotate("label", x =  1.25, y = 1.5,   hjust = 0,
