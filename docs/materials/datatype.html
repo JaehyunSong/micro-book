@@ -864,22 +864,18 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </section>
 <section id="欠損値" class="level2">
 <h2 class="anchored" data-anchor-id="欠損値">欠損値</h2>
-<p>データ分析において頻繁に遭遇するのは<code>NA</code></p>
-<p>参考</p>
+<p>　データ分析において頻繁に遭遇するのは<code>NA</code>であるが、これは欠損値（missing value）を意味する。欠損値は何らかの値があるはずであるものの、観察されていない値である。例えば、国連開発機構が毎年発表している「<a href="https://hdr.undp.org/en/data">人間開発指数</a>（Human Development Index; HDI）」では世界各国のデータが含まれている。しかし、世界における全ての国のデータが入っているわけではなく、たとえば台湾や北朝鮮のデータは含まれていない。これらの国/地域に人間開発という概念がないわけではなく、なんらかの理由（今回は政治的な理由）で値が欠損しているだけである。</p>
+<p>　自分でデータセットを構築しようとする時に、特定のケースに欠損が生じるケースは多々あり、世論調査でも例外ではない。たとえば答えづらい質問に対して「わからない」や「答えたくない」を選んだ場合、その回答者における当該質問は欠損となる。このように多くのデータには欠損値が含まれているため、欠損値処理は非常に重要である。欠損値の処理には様々な方法があるが、本講義では欠損値が含まれたケースを除外した分析を行う予定である。</p>
+<p>　他にも計算上、何らかの問題を生じさせうるものはあるが、以下では簡単にその例を紹介する。ただし、<code>NaN</code>と<code>Inf</code>のベクトルを作ることは可能であるが、使う機会はほとんどなく、何かの計算の結果によって返ってくるケースが多いので、その意味さえ把握しておけば良い。</p>
 <ul>
-<li><code>NA</code>: 何らかの値があるはずだが、欠損している状態
-<ul>
-<li>「<strong>欠損値</strong>」とも呼ばれる</li>
-<li>多くのデータには欠損値が含まれているため、欠損値処理は非常に重要</li>
-</ul></li>
+<li><code>NA</code>: 何らかの値があるはずだが、欠損している状態</li>
 <li><code>NULL</code>: そもそも存在しない</li>
 <li><code>NaN</code>: 計算不可（例: 0 <span class="math inline">\(\div\)</span> 0）</li>
 <li><code>Inf</code>: 無限大（例: 10 <span class="math inline">\(\div\)</span> 0）</li>
 </ul>
-<p><code>NaN</code>と<code>Inf</code>のベクトルを作ることも可能であるが、使う機会はない * 計算された結果として<code>NaN</code>と<code>Inf</code>の意味が分かれば問題なし</p>
 <section id="naとnullの違い" class="level3">
 <h3 class="anchored" data-anchor-id="naとnullの違い"><code>NA</code>と<code>NULL</code>の違い</h3>
-<p><code>NA</code>は要素扱いだが、<code>NULL</code>はカウントされない</p>
+<p>　値がないという点で<code>NA</code>と<code>NULL</code>は似ているように見えるが、実は全く異なる概念である。<code>NA</code>は要素としてカウントされるが、<code>NULL</code>はカウントされない。以下の例を見てみよう。</p>
 <div class="cell">
 <div class="sourceCode" id="cb85"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>NA_Vec   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">7</span>)</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>NULL_Vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NULL</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="dv">7</span>)</span>
@@ -900,6 +896,7 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <pre><code>[1] 1 2 3 5 7</code></pre>
 </div>
 </div>
+<p>　このように<code>NULL</code>はそもそも存在しないことを意味する。<code>NA</code>が入居者がいない空き部屋であれば、<code>NULL</code>はそもそも部屋が存在しないことを意味する。ここまでの話だと<code>NULL</code>の存在意義が疑われるだろうが、中級者以上になるといずれ使う機会があろう。</p>
 </section>
 <section id="欠損値を含むベクトルの計算" class="level3">
 <h3 class="anchored" data-anchor-id="欠損値を含むベクトルの計算">欠損値を含むベクトルの計算</h3>
