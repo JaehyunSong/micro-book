@@ -404,16 +404,16 @@
 <h2 class="anchored" data-anchor-id="データ型とは">データ型とは</h2>
 <p>　ベクトル（vector）はデータ構造（data structure）であり、ベクトル内の一つ一つの要素は数値や、文字など様々なデータ型（data type）の値を取り得る。</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Object1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Object2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei Gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Object3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Object4 <span class="ot">&lt;-</span> <span class="st">"R"</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>obj1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>obj2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei Gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>obj3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>obj4 <span class="ot">&lt;-</span> <span class="st">"R"</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li><code>Object1</code>: 長さ6の<strong>数値型</strong>ベクトル</li>
-<li><code>Object2</code>: 長さ4の<strong>文字型</strong>ベクトル</li>
-<li><code>Object3</code>: 長さ3の<strong>論理型</strong>ベクトル</li>
-<li><code>Object4</code>: 長さ1の<strong>文字型</strong>ベクトル
+<li><code>obj1</code>: 長さ6の<strong>数値型</strong>ベクトル</li>
+<li><code>obj2</code>: 長さ4の<strong>文字型</strong>ベクトル</li>
+<li><code>obj3</code>: 長さ3の<strong>論理型</strong>ベクトル</li>
+<li><code>obj4</code>: 長さ1の<strong>文字型</strong>ベクトル
 <ul>
 <li>長さ1のベクトルは原子ベクトル（atomic vector）とも呼ばれる</li>
 </ul></li>
@@ -430,7 +430,7 @@
 <div class="callout-body-container callout-body">
 <p>ベクトルの長さは<code>length(オブジェクト名)</code>で計算できる。たとえば、<code>Object2</code>の長さは4である。</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Object2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(obj2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
@@ -456,19 +456,19 @@
 <h2 class="anchored" data-anchor-id="データ型の確認">データ型の確認</h2>
 <p>　ベクトル内の要素は全て同じデータ型を取るが、そのデータ型を確認するためには、<code>class(ベクトル・オブジェクト名)</code>関数を使用する。先ほど作成した4つのベクトルのデータ型を確認してみよう。</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Object1) <span class="co"># 数値型 (numeric)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(obj1) <span class="co"># 数値型 (numeric)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Object2) <span class="co"># 文字型 (character)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(obj2) <span class="co"># 文字型 (character)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Object3) <span class="co"># 論理型 (logical)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(obj3) <span class="co"># 論理型 (logical)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Object4) <span class="co"># 文字型 (character)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(obj4) <span class="co"># 文字型 (character)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -477,20 +477,21 @@
 </section>
 <section id="logical型" class="level2">
 <h2 class="anchored" data-anchor-id="logical型">Logical型</h2>
-<p>　論理型（logical型）とは<code>TRUE</code>と<code>FALSE</code>のみで構成されるデータ型である。論理演算子の計算結果は必ず論理型の結果が返される。</p>
+<p>　論理型（logical型）とは<code>TRUE</code>と<code>FALSE</code>のみで構成されるデータ型である。論理演算子の計算結果は必ず以下のように論理型の結果が返される。</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">==</span> (<span class="dv">4</span> <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
+<p>　この結果を代入演算子（<code>&lt;-</code>）を使って、オブジェクトに格納するとlogical型ベクトルが作業環境内に格納される。</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Logical1 <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">==</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Logical1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>logi_vec1 <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">==</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>logi_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Logical1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
@@ -506,16 +507,16 @@
 <h3 class="anchored" data-anchor-id="作成">作成</h3>
 <p>　Logical型ベクトルを作成するためには、通常のベクトルと同様、<code>c()</code>関数で作成する。</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Logical_Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Logical_Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>logi_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>logi_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  TRUE FALSE  TRUE  TRUE FALSE</code></pre>
 </div>
 </div>
 <p>　ここでの<code>TRUE</code>は<code>T</code>、<code>FALSE</code>は<code>F</code>と略すことが出来るが、<strong>推奨しない</strong>。必ず<code>TRUE</code>と<code>FALSE</code>で表記すること。</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Logical_Vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(T, F, T, T, F)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>Logical_Vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>logi_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(T, F, T, T, F)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>logi_vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  TRUE FALSE  TRUE  TRUE FALSE</code></pre>
 </div>
@@ -526,12 +527,12 @@
 <p>　Logical型の値である<code>TRUE</code>と<code>FALSE</code>を<code>"</code>で囲んではいけない。もし、一つでも<code>"</code>で囲んでしまうと、そのベクトルlogical型でなく、後ほど紹介するcharacter型へ変換される。</p>
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2つ目のFALSEを"で囲むと...</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Logical_Vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="st">"FALSE"</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Logical_Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>logi_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="st">"FALSE"</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>logi_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "TRUE"  "FALSE" "TRUE"  "TRUE"  "FALSE"</code></pre>
 </div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Logical_Vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(logi_vec4)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -539,23 +540,23 @@
 </section>
 <section id="使い方" class="level3">
 <h3 class="anchored" data-anchor-id="使い方">使い方</h3>
-<p>　直接<code>TRUE</code>や<code>FALSE</code>が格納されたベクトルを使う場面はほとんどない。つまり、ほとんどのlogical型ベクトルは何らかの<strong>論理演算子から返された</strong>ものである。以下の例は、<code>My_Vector1</code>から奇数の要素のみを抽出するために、<code>My_Logical1</code>というベクトルを作成する例である。</p>
+<p>　直接<code>TRUE</code>や<code>FALSE</code>が格納されたベクトルを使う場面はほとんどない。つまり、ほとんどのlogical型ベクトルは何らかの<strong>論理演算子から返された</strong>ものである。以下の例は、<code>my_vec1</code>から奇数の要素のみを抽出するために、<code>logi_vec5</code>というベクトルを作成する例である。</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>My_Vector1  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">89</span>, <span class="dv">28</span>, <span class="dv">93</span>, <span class="dv">64</span>, <span class="dv">6</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>My_Logical1 <span class="ot">&lt;-</span> My_Vector1 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span> <span class="co"># My_Vector1を2で割ったら余りが1か</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>My_Logical1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>my_vec1  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">89</span>, <span class="dv">28</span>, <span class="dv">93</span>, <span class="dv">64</span>, <span class="dv">6</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>logi_vec5 <span class="ot">&lt;-</span> my_vec1 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span> <span class="co"># my_vec1を2で割ったら余りが1か</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>logi_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  TRUE FALSE  TRUE FALSE FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(My_Logical1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(logi_vec5)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>My_Vector1[My_Logical1] <span class="co"># My_Vector1から奇数のみ抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>my_vec1[logi_vec5] <span class="co"># my_vec1から奇数のみ抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 89 93</code></pre>
 </div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>My_Vector1[My_Vector1 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="co"># 直接式を入れてもOK</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>my_vec1[my_vec1 <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="co"># 直接式を入れてもOK</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 28 64  6</code></pre>
 </div>
@@ -566,96 +567,73 @@
 <section id="numeric型" class="level2">
 <h2 class="anchored" data-anchor-id="numeric型">Numeric型</h2>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>Numeric_Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>num_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>num_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 2 0 0 1 3</code></pre>
 </div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numeric_Vec1のデータ型</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Numeric_Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># num_vec1のデータ型</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(num_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numeric_Vec1がNumeric型か否かを判定</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(Numeric_Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># num_vec1がnumeric型か否かを判定</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(num_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <section id="numeric型の演算" class="level3">
 <h3 class="anchored" data-anchor-id="numeric型の演算">Numeric型の演算</h3>
-<p>Case1: <strong>同じ長さのベクトル</strong>同士の演算</p>
+<p>　以下ではnumeric型ベクトル<strong>同士</strong>の演算について解説する。Numeric型ベクトル同士は常に可能であるが、ベクトルの長さによって動きがやや異なる（<strong>ベクトル・リサイクル</strong>）。ベクトル・リサイクルは第3回にて解説したが、ここで改めて解説する。</p>
+<p><strong>ケース1:</strong> <strong>同じ長さのベクトル</strong>同士の演算</p>
+<p>　2つのベクトルの長さが同じ場合、<strong>同じ位置の要素同士の演算</strong>となる。したがって、返ってくる結果（ベクトル）の長さは元のベクトルの長さと同じとなる。たとえば、長さ5の2つのベクトル同士の演算を考えてみよう。</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># 長さ5のnumeric型ベクトル</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>Numeric_Vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>) <span class="co"># 長さ5のnumeric型ベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode" id="cb43"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec2 <span class="sc">+</span> Numeric_Vec3 <span class="co"># c(1+11, 2+7, 3+5, 4+3, 5+2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>num_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># 長さ5のnumeric型ベクトル</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>num_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>) <span class="co"># 長さ5のnumeric型ベクトル</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>num_vec2 <span class="sc">+</span> num_vec3 <span class="co"># c(1+11, 2+7, 3+5, 4+3, 5+2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 12  9  8  7  7</code></pre>
 </div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec2<span class="sc">^</span>Numeric_Vec3 <span class="co"># c(1^11, 2^7, 3^5, 4^3, 5^2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1]   1 128 243  64  25</code></pre>
 </div>
-</div>
-<ul>
-<li>同じ長さのベクトル同士の演算の場合、<strong>同じ位置の要素</strong>同士で演算を行う。</li>
-</ul>
-<p>Case2: <strong>長さ2以上 (A)</strong>と<strong>長さ1 (B)</strong>同士の演算</p>
+<p>　この場合、<code>num_vec2</code>の1番目の要素（1）と<code>num_vec3</code>の1番目の要素（11）の足し算、<code>num_vec2</code>の2番目の要素（2）と<code>num_vec3</code>の2番目の要素（7）の足し算、…が行われる。</p>
+<p><strong>ケース2:</strong> <strong>長さ2以上 (A)</strong>と<strong>長さ1 (B)</strong>同士の演算</p>
+<p>　この場合、<strong>(A)のそれぞれ要素と(B)の要素</strong>同士で演算を行う。長さ5のベクトルに対し、たとえば長さ1のベクトルが<code>c(10)</code>であれば、自動的に<code>c(10, 10, 10, 10, 10)</code>へ変換されたと考えても良いだろう。</p>
 <div class="cell">
-<div class="sourceCode" id="cb47"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>) <span class="co"># 長さ1の場合、c()はなくてもOK</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode" id="cb48"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec3 <span class="sc">*</span> Numeric_Vec4 <span class="co"># c(11*10, 7*10, 5*10, 3*10, 2*10)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 110  70  50  30  20</code></pre>
-</div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec3 <span class="sc">/</span> Numeric_Vec4 <span class="co"># c(11/10, 7/10, 5/10, 3/10, 2/10)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>num_vec4 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># 長さ1の場合、c()はなくてもOK</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>num_vec3 <span class="sc">/</span> num_vec4 <span class="co"># c(11/10, 7/10, 5/10, 3/10, 2/10)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 1.1 0.7 0.5 0.3 0.2</code></pre>
 </div>
 </div>
-<ul>
-<li><strong>(A)のそれぞれ要素と(B)の要素</strong>同士で演算を行う
-<ul>
-<li><code>c(10)</code>が自動的に<code>c(10, 10, 10, 10, 10)</code>へ変換されたと考えてもOK</li>
-</ul></li>
-</ul>
-<p>Case3: <strong>長さ2以上</strong>と<strong>長さ2以上</strong>で長さが異なる場合</p>
+<p><strong>ケース3:</strong> <strong>長さ2以上</strong>と<strong>長さ2以上</strong>で長さが異なる場合</p>
+<p>　この場合、<strong>より短いの要素</strong>がリサイクルされる。長さ5のベクトルに対し、たとえば長さ3のベクトルが<code>c(1, 2, 3)</code>であれば、自動的に<code>c(1, 2, 3, 1, 2)</code>へ変換されたと考えても良いだろう。これをRでは「<strong>ベクトル・リサイクル</strong>」（vector recycle）と呼ぶ。ちなみに、この場合、警告が表示される場合もある。これは長い方のベクトルの長さが短い方の長さの倍数になっていない場合に出力される。しかし、計算そのものには問題がない。</p>
 <div class="cell">
-<div class="sourceCode" id="cb52"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>num_vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>num_vec3 <span class="sc">*</span> num_vec5 <span class="co"># c(11*1, 7*2, 5*3, 3*1, 2*2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>Warning in num_vec3 * num_vec5: longer object length is not a multiple of
+shorter object length</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode" id="cb53"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec3 <span class="sc">*</span> Numeric_Vec5 <span class="co"># c(11*1, 7*2, 5*3, 3*1, 2*2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 11 14 15  3  4</code></pre>
 </div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>Numeric_Vec3 <span class="sc">/</span> Numeric_Vec5 <span class="co"># c(11/1, 7/2, 5/3, 3/1, 2/2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 11.000000  3.500000  1.666667  3.000000  1.000000</code></pre>
 </div>
-</div>
-<ul>
-<li><strong>より短いの要素</strong>がリサイクルされる
-<ul>
-<li><code>c(1, 2, 3)</code>が自動的に<code>c(1, 2, 3, 1, 2)</code>へ変換されたと考えてもOK</li>
-<li>警告が表示される場合もあるが、演算には問題なし（長さが倍数になっていない場合など）</li>
-<li>ベクトル・リサイクル（vector recycle）</li>
-</ul></li>
-</ul>
 </section>
 <section id="注意点-1" class="level3">
 <h3 class="anchored" data-anchor-id="注意点-1">注意点</h3>
 <p>　Logical型と同じ理由でnumeric型の値を<code>"</code>で囲んではいけない。一つでも<code>"</code>で囲むとNumeric型でなく、Character型へ変換されてしまう。</p>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4つ目のFALSEを"で囲むと...</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>Numeric_Vec6 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="dv">29</span>, <span class="dv">10</span>, <span class="st">"94"</span>, <span class="dv">51</span>)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>Numeric_Vec6</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4つ目のFALSEを"で囲むと...</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>num_vec6 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="dv">29</span>, <span class="dv">10</span>, <span class="st">"94"</span>, <span class="dv">51</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>num_vec6</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "38" "29" "10" "94" "51"</code></pre>
 </div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Numeric_Vec6)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(num_vec6)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -665,41 +643,34 @@
 </section>
 <section id="character型" class="level2">
 <h2 class="anchored" data-anchor-id="character型">Character型</h2>
-<p>要素が<code>"</code>で囲まれたデータ型</p>
-<ul>
-<li>文字列型</li>
-</ul>
+<p>　Character型（文字型）は要素が<code>"</code>で囲まれたデータ型である。</p>
 <div class="cell">
-<div class="sourceCode" id="cb61"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>Char_Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsmeikan"</span>)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>Char_Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>char_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsmeikan"</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>char_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "Kansai"         "Kwansei-gakuin" "Doshisha"       "Ritsmeikan"    </code></pre>
 </div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Char_Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(Char_Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(char_vec1) <span class="co"># char_vec1がcharacter型であればTRUE</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <section id="文字列の長さ" class="level3">
 <h3 class="anchored" data-anchor-id="文字列の長さ">文字列の長さ</h3>
-<ul>
-<li><code>length()</code>は<strong>ベクトルの長さ</strong>を求める関数</li>
-</ul>
+<p>　文字列ベクトルの長さを求める場合は<code>length()</code>関数を使用する。</p>
 <div class="cell">
-<div class="sourceCode" id="cb67"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Char_Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
-<ul>
-<li><code>nchar()</code>は<strong>各要素の文字数</strong>を求める関数</li>
-</ul>
+<p>　ただし、<code>length()</code>関数はベクトルの長さを求める関数であって、各要素の文字数を求める関数ではない。各要素の文字数を求める場合は<code>nchar()</code>関数を使用する。</p>
 <div class="cell">
-<div class="sourceCode" id="cb69"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(Char_Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  6 14  8 10</code></pre>
 </div>
@@ -707,42 +678,42 @@
 </section>
 <section id="文字の結合" class="level3">
 <h3 class="anchored" data-anchor-id="文字の結合">文字の結合</h3>
-<ul>
-<li><code>paste(Character型, Character型)</code></li>
-</ul>
-<p><strong>ケース1:</strong> <code>Char_Vec1</code>の全要素の後に<code>"University"</code>を付ける</p>
+<p>　本講義では使うことはほとんどないものの、頻繁に使う関数として<code>paste()</code>関数（または<code>paste0()</code>関数）がある。これは2つの文字列を結合する関数であり、使い方は<code>paste(Character型ベクトル, Character型ベクトル)</code>である。</p>
+<p><strong>ケース1:</strong> <code>char_vec1</code>の全要素の後に<code>"University"</code>を付ける。</p>
 <div class="cell">
-<div class="sourceCode" id="cb71"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>Char_Vec2 <span class="ot">&lt;-</span> <span class="fu">paste</span>(Char_Vec1, <span class="st">"University"</span>)</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>Char_Vec2 <span class="co"># "University"の前に自動的にスペースが入る</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>char_vec2 <span class="ot">&lt;-</span> <span class="fu">paste</span>(char_vec1, <span class="st">"University"</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>char_vec2 <span class="co"># "University"の前に自動的にスペースが入る</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "Kansai University"         "Kwansei-gakuin University"
 [3] "Doshisha University"       "Ritsmeikan University"    </code></pre>
 </div>
 </div>
-<p><strong>ケース2:</strong> <code>Char_Vec2</code>の全要素の前に<code>1</code>、<code>2</code>、…を付け、数字と大学名は<code>"."</code>で結合</p>
-<ul>
-<li><code>sep =</code>で結合される要素間に入る文字を指定（デフォルトはスペース）</li>
-</ul>
+<p>　この場合、大学名（たとえば、<code>"Kansai"</code>）と<code>"University"</code>の間には自動的にスペースが入る。スペースを無くしたい場合は、<code>paste()</code>内に<code>sep = ""</code>を追加するか、<code>paste0()</code>関数を使用する。この<code>sep</code>引数は結合される2つの文字列の間に入る文字を意味し、デフォルトはスペース（<code>" "</code>）である。</p>
 <div class="cell">
-<div class="sourceCode" id="cb73"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>Char_Vec3 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, Char_Vec2, <span class="at">sep =</span> <span class="st">"."</span>)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>Char_Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(char_vec1, <span class="st">"University"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "KansaiUniversity"         "Kwansei-gakuinUniversity"
+[3] "DoshishaUniversity"       "RitsmeikanUniversity"    </code></pre>
+</div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(char_vec1, <span class="st">"University"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "KansaiUniversity"         "Kwansei-gakuinUniversity"
+[3] "DoshishaUniversity"       "RitsmeikanUniversity"    </code></pre>
+</div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(char_vec1, <span class="st">"University"</span>, <span class="at">sep =</span> <span class="st">"-"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "Kansai-University"         "Kwansei-gakuin-University"
+[3] "Doshisha-University"       "Ritsmeikan-University"    </code></pre>
+</div>
+</div>
+<p><strong>ケース2:</strong> <code>char_vec2</code>の全要素の前に<code>1</code>、<code>2</code>、…を付け、数字と大学名は<code>"."</code>で結合</p>
+<p>　結合する2つのベクトルの長さがいずれも2以上の場合、同じ位置の要素同士の結合となる。</p>
+<div class="cell">
+<div class="sourceCode" id="cb71"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>char_vec3 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, char_vec2, <span class="at">sep =</span> <span class="st">"."</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>char_vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "1.Kansai University"         "2.Kwansei-gakuin University"
 [3] "3.Doshisha University"       "4.Ritsmeikan University"    </code></pre>
-</div>
-</div>
-<p><code>paste()</code>は結合される文字列の間にスペースが自動的に入り、なくすためには<code>sep = ""</code>を指定する必要がある</p>
-<ul>
-<li><code>paste0()</code>はスペース無しで結合する関数</li>
-</ul>
-<p><strong>ケース3:</strong> <code>Char_Vec1</code>の全要素の後に<code>"-Daigaku"</code>を付ける</p>
-<div class="cell">
-<div class="sourceCode" id="cb75"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>Char_Vec4 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(Char_Vec1, <span class="st">"-Daigaku"</span>)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "-Daigaku"の前にスペースがないことに注目</span></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>Char_Vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] "Kansai-Daigaku"         "Kwansei-gakuin-Daigaku" "Doshisha-Daigaku"      
-[4] "Ritsmeikan-Daigaku"    </code></pre>
 </div>
 </div>
 <hr>
@@ -750,111 +721,97 @@
 </section>
 <section id="factor型" class="level2">
 <h2 class="anchored" data-anchor-id="factor型">Factor型</h2>
-<p>順序付きの文字列型 / ラベル付き数値型</p>
-<ul>
-<li>Character型だと、アルファベット順となる</li>
-<li>図表を作成する際に重宝されるデータ型
-<ul>
-<li>図表上の表示順番はFactor型でなくとアルファベット順となる</li>
-</ul></li>
-<li>詳細はデータハンドリングおよび可視化で解説</li>
-</ul>
+<p>　Factor型は見た目上はcharacter型と同じであるが要素に順番（順位）が付いている点で異なる。つまり、factor型は順序付きcharacter型とも言えよう。</p>
+<p>　以下の2つの表形式データの内容は全く同じものである。しかし、左の表の場合<code>大学名</code>列のデータ型はcharacter型（列名の下に<code>&lt;chr&gt;</code>と表示される）、右の表の場合はfactor型（列名の下に<code>&lt;fct&gt;</code>と表示される）である。Factor型変数は要素の順番（順位）が決まっていて、ここでは<code>"Kansai"</code> &gt; <code>"Kwansei-gakuin"</code> &gt; <code>"Doshisha"</code> &gt; <code>"Ritsumeikan"</code>の順番で設定してある。</p>
 <div class="columns">
-<div class="column" style="width:40%;">
-<p>Character型の場合</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Prefecture</th>
-<th style="text-align: right;">Population</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Aichi</td>
-<td style="text-align: right;">7,484,094</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Akita</td>
-<td style="text-align: right;">1,022,839</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">…</td>
-<td style="text-align: right;">…</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Yamaguchi</td>
-<td style="text-align: right;">1,405,007</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Yamanashi</td>
-<td style="text-align: right;">835,165</td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:20%;">
+<div class="column" style="width:45%;">
+<p><code>大学名</code>がcharacter型の場合</p>
+<div class="cell">
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  大学名         学生数
+  &lt;chr&gt;           &lt;dbl&gt;
+1 Kansai          27736
+2 Kwansei-gakuin  23671
+3 Doshisha        25974
+4 Ritsumeikan     32467</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
 
-</div><div class="column" style="width:40%;">
-<p>Factor型の場合</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Prefecture</th>
-<th style="text-align: right;">Population</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Hokkaido</td>
-<td style="text-align: right;">5,383,579</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Aomori</td>
-<td style="text-align: right;">1,308,649</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">…</td>
-<td style="text-align: right;">…</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Kagoshima</td>
-<td style="text-align: right;">1,648,752</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Okinawa</td>
-<td style="text-align: right;">1,434,138</td>
-</tr>
-</tbody>
-</table>
+</div><div class="column" style="width:45%;">
+<p><code>大学名</code>がfactor型の場合</p>
+<div class="cell">
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  大学名         学生数
+  &lt;fct&gt;           &lt;dbl&gt;
+1 Kansai          27736
+2 Kwansei-gakuin  23671
+3 Doshisha        25974
+4 Ritsumeikan     32467</code></pre>
 </div>
 </div>
+</div>
+</div>
+<p>　この見た目上は全く同じの2つのデータを使って、大学別学生数の棒グラフを作成した例が以下の図である。</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="datatype_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption"><code>大学名</code>がcharacter型の場合</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="datatype_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption"><code>大学名</code>がfactor型の場合</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>　このようにcharacter型だと、作図の際、大学がアルファベット順で並ぶものの、factor型であれば、予め決めておいた順番で並ぶ。Factor型は図表を作成する際に重宝されるデータ型である。</p>
 <section id="factor型の作成" class="level3">
 <h3 class="anchored" data-anchor-id="factor型の作成">Factor型の作成</h3>
-<p>既存のCharacter型ベクトルをFactor型に</p>
+<p>　ここでは、既存のcharacter型ベクトルをfactor型に変換する方法について紹介する。以下の<code>char_vec4</code>は関関同立の名前をアルファベット順で格納した長さ4のcharacter型ベクトルである。</p>
 <div class="cell">
-<div class="sourceCode" id="cb77"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>Kankandoritsu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Doshisha"</span>, <span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Ritsumeikan"</span>)</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Kankandoritsu)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>char_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Doshisha"</span>, <span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Ritsumeikan"</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(char_vec4)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>Kankandoritsu</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>char_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "Doshisha"       "Kansai"         "Kwansei-gakuin" "Ritsumeikan"   </code></pre>
 </div>
 </div>
+<p>　Factor型ベクトルは<code>factor()</code>関数で作成する。第一引数は元となるcharacter型ベクトルであり、<code>levels</code>引数に要素の順位を付ける。</p>
 <div class="cell">
-<div class="sourceCode" id="cb81"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>Kankandoritsu <span class="ot">&lt;-</span> <span class="fu">factor</span>(Kankandoritsu,</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>))</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Kankandoritsu)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>fct_vec1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(char_vec4,</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>))</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>Kankandoritsu</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>fct_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] Doshisha       Kansai         Kwansei-gakuin Ritsumeikan   
 Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </div>
 </div>
+<p>　このようにfactor型ベクトルを出力した場合、ベクトルの中身に加え、下段に要素の順位が表示され、図表を作成する際はこの順番で自動的にソートされる。</p>
 </section>
 <section id="factor型の詳細" class="level3">
 <h3 class="anchored" data-anchor-id="factor型の詳細">Factor型の詳細</h3>
@@ -877,21 +834,21 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <h3 class="anchored" data-anchor-id="naとnullの違い"><code>NA</code>と<code>NULL</code>の違い</h3>
 <p>　値がないという点で<code>NA</code>と<code>NULL</code>は似ているように見えるが、実は全く異なる概念である。<code>NA</code>は要素としてカウントされるが、<code>NULL</code>はカウントされない。以下の例を見てみよう。</p>
 <div class="cell">
-<div class="sourceCode" id="cb85"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>NA_Vec   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">7</span>)</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>NULL_Vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NULL</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="dv">7</span>)</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(NA_Vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>NA_vec   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">7</span>)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>NULL_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NULL</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="dv">7</span>)</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(NA_vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(NULL_Vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(NULL_vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>NA_Vec</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>NA_vec</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  1  2  3 NA  5 NA  7</code></pre>
 </div>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>NULL_Vec</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>NULL_vec</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 1 2 3 5 7</code></pre>
 </div>
@@ -902,7 +859,7 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <h3 class="anchored" data-anchor-id="欠損値を含むベクトルの計算">欠損値を含むベクトルの計算</h3>
 <p>ベクトルに欠損値が含まれている場合、平均値（<code>mean()</code>）、標準偏差（<code>sd()</code>）などの計算ができないことに注意 * <code>NA</code>が含まれているベクトルの平均値、標準偏差、分散などは<code>NA</code>と出力される * <code>length()</code>などは機能する</p>
 <div class="cell">
-<div class="sourceCode" id="cb93"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_Vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -914,23 +871,23 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><strong>方法1:</strong> データから欠損値を除外する
 <ul>
 <li><code>!</code>演算子は否定を意味する（第3回参照）</li>
-<li>ちなみに、<code>NA_Vec == NA</code>、<code>NA_Vec != NA</code>は使用不可</li>
+<li>ちなみに、<code>NA_vec == NA</code>、<code>NA_vec != NA</code>は使用不可</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb95"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(NA_Vec) <span class="co"># 各要素がNAか否かを判定</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(NA_vec) <span class="co"># 各要素がNAか否かを判定</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="fu">is.na</span>(NA_Vec) <span class="co"># 各要素がNAか否かの判定を反転</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="fu">is.na</span>(NA_vec) <span class="co"># 各要素がNAか否かの判定を反転</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>NA_Vec[<span class="sc">!</span><span class="fu">is.na</span>(NA_Vec)] <span class="co"># 欠損値でない要素のみ抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>NA_vec[<span class="sc">!</span><span class="fu">is.na</span>(NA_vec)] <span class="co"># 欠損値でない要素のみ抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 1 2 3 5 7</code></pre>
 </div>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_Vec[<span class="sc">!</span><span class="fu">is.na</span>(NA_Vec)])</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_vec[<span class="sc">!</span><span class="fu">is.na</span>(NA_vec)])</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 3.6</code></pre>
 </div>
@@ -943,7 +900,7 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb103"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_Vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 3.6</code></pre>
 </div>
