@@ -383,6 +383,11 @@
 <li><a href="#naとnullの違い" class="nav-link" data-scroll-target="#naとnullの違い"><code>NA</code>と<code>NULL</code>の違い</a></li>
 <li><a href="#欠損値を含むベクトルの計算" class="nav-link" data-scroll-target="#欠損値を含むベクトルの計算">欠損値を含むベクトルの計算</a></li>
 </ul></li>
+<li><a href="#ベクトル操作続" class="nav-link" data-scroll-target="#ベクトル操作続">ベクトル操作（続）</a>
+<ul class="collapse">
+<li><a href="#要素の追加" class="nav-link" data-scroll-target="#要素の追加">要素の追加</a></li>
+<li><a href="#要素の置換" class="nav-link" data-scroll-target="#要素の置換">要素の置換</a></li>
+</ul></li>
 <li><a href="#教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
 </ul>
 </nav>
@@ -893,6 +898,74 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 3.6</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="ベクトル操作続" class="level2">
+<h2 class="anchored" data-anchor-id="ベクトル操作続">ベクトル操作（続）</h2>
+<p>　今回はデータ型が主な内容であったが、ベクトル操作はこれからも必要となるため、以下では第3回に続き、ベクトルの操作方法について解説する。練習用のベクトルとして<code>my_vec2</code>を用意する。</p>
+<div class="cell">
+<div class="sourceCode" id="cb103"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4 3 2 1</code></pre>
+</div>
+</div>
+<section id="要素の追加" class="level3">
+<h3 class="anchored" data-anchor-id="要素の追加">要素の追加</h3>
+<p>　ベクトルに新しい要素を追加するためには<code>ベクトル名[追加したい位置] &lt;- 追加する値</code>と入力する。たとえば、<code>my_vec2</code>の5番目の要素として0を追加する場合は以下のように入力する。</p>
+<div class="cell">
+<div class="sourceCode" id="cb105"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>my_vec2[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4 3 2 1 0</code></pre>
+</div>
+</div>
+<p>　複数の要素を入れることができる。<code>my_vec2</code>の6、7、8番目の要素として、-1、-2、-3を追加する場合、以下のように入力する。</p>
+<div class="cell">
+<div class="sourceCode" id="cb107"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6:8の代わりにc(6, 7, 8)もOK</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>my_vec2[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  4  3  2  1  0 -1 -2 -3</code></pre>
+</div>
+</div>
+<p>　今、<code>my_vec2</code>の長さは8である。もし、この<code>my_vec2</code>の11番目の要素としてに10を入れたらどうなるだろうか。</p>
+<div class="cell">
+<div class="sourceCode" id="cb109"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>my_vec2[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA 10</code></pre>
+</div>
+</div>
+<p>　このように11番目に10が追加され、9、10番目の要素は欠損値（<code>NA</code>）になる。</p>
+</section>
+<section id="要素の置換" class="level3">
+<h3 class="anchored" data-anchor-id="要素の置換">要素の置換</h3>
+<p>　要素の置換は要素の追加と同じである。つまり、<code>ベクトル名[置換したい位置] &lt;- 置換する値</code>と入力する。<code>my_vec2</code>の11番目の要素は10であったが、これを-6に置換する。</p>
+<div class="cell">
+<div class="sourceCode" id="cb111"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>my_vec2[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">6</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA -6</code></pre>
+</div>
+</div>
+<p>　要素の追加と同様、複数の要素を置換することもできる。ここでは<code>my_vec2</code>の9、10番目の要素（<code>NA</code>と<code>NA</code>）を-4、-5に置換してみよう。</p>
+<div class="cell">
+<div class="sourceCode" id="cb113"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>my_vec2[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>)</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6</code></pre>
+</div>
+</div>
+<p>　置換する位置を指定する<code>[]</code>内に論理演算子を使えば、条件に合致する要素のみ置換することができる。たとえば、<code>my_vec2</code>の要素の中で、0より小さい要素に-1を掛けて置換する場合、以下のように入力する。</p>
+<div class="cell">
+<div class="sourceCode" id="cb115"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>my_vec2[my_vec2 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> my_vec2[my_vec2 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>my_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] 4 3 2 1 0 1 2 3 4 5 6</code></pre>
 </div>
 </div>
 <hr>

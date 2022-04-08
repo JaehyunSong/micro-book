@@ -147,6 +147,13 @@
     "text": "欠損値\n　データ分析において頻繁に遭遇するのはNAであるが、これは欠損値（missing value）を意味する。欠損値は何らかの値があるはずであるものの、観察されていない値である。例えば、国連開発機構が毎年発表している「人間開発指数（Human Development Index; HDI）」では世界各国のデータが含まれている。しかし、世界における全ての国のデータが入っているわけではなく、たとえば台湾や北朝鮮のデータは含まれていない。これらの国/地域に人間開発という概念がないわけではなく、なんらかの理由（今回は政治的な理由）で値が欠損しているだけである。\n　自分でデータセットを構築しようとする時に、特定のケースに欠損が生じるケースは多々あり、世論調査でも例外ではない。たとえば答えづらい質問に対して「わからない」や「答えたくない」を選んだ場合、その回答者における当該質問は欠損となる。このように多くのデータには欠損値が含まれているため、欠損値処理は非常に重要である。欠損値の処理には様々な方法があるが、本講義では欠損値が含まれたケースを除外した分析を行う予定である。\n　他にも計算上、何らかの問題を生じさせうるものはあるが、以下では簡単にその例を紹介する。ただし、NaNとInfのベクトルを作ることは可能であるが、使う機会はほとんどなく、何かの計算の結果によって返ってくるケースが多いので、その意味さえ把握しておけば良い。\n\nNA: 何らかの値があるはずだが、欠損している状態\nNULL: そもそも存在しない\nNaN: 計算不可（例: 0 \\(\\div\\) 0）\nInf: 無限大（例: 10 \\(\\div\\) 0）\n\n\nNAとNULLの違い\n　値がないという点でNAとNULLは似ているように見えるが、実は全く異なる概念である。NAは要素としてカウントされるが、NULLはカウントされない。以下の例を見てみよう。\n\nNA_vec   <- c(1, 2, 3, NA, 5, NA, 7)\nNULL_vec <- c(1, 2, 3, NULL, 5, NULL, 7)\nlength(NA_vec)\n\n[1] 7\n\nlength(NULL_vec)\n\n[1] 5\n\nNA_vec\n\n[1]  1  2  3 NA  5 NA  7\n\nNULL_vec\n\n[1] 1 2 3 5 7\n\n\n　このようにNULLはそもそも存在しないことを意味する。NAが入居者がいない空き部屋であれば、NULLはそもそも部屋が存在しないことを意味する。ここまでの話だとNULLの存在意義が疑われるだろうが、中級者以上になるといずれ使う機会があろう。\n\n\n欠損値を含むベクトルの計算\n　ベクトルに欠損値が含まれている場合、平均値（mean()）、標準偏差（sd()）などの計算ができず、以下のように結果としてNAが返ってくる。\n\nmean(NA_vec)\n\n[1] NA\n\n\n　ここで欠損値を以外の要素のみを使って計算する方法としては以下の2つの方法がある1。\n方法1: データから欠損値を除外する。\n\n!演算子は否定を意味する（第3回参照）\nちなみに、NA_vec == NA、NA_vec != NAは使用不可\n\n\nis.na(NA_vec) # 各要素がNAか否かを判定\n\n[1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE\n\n!is.na(NA_vec) # 各要素がNAか否かの判定を反転\n\n[1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE\n\nNA_vec[!is.na(NA_vec)] # 欠損値でない要素のみ抽出\n\n[1] 1 2 3 5 7\n\nmean(NA_vec[!is.na(NA_vec)])\n\n[1] 3.6\n\n\n方法2: 関数内にna.rm = TRUEを追加する。\n　mean()関数の場合、na.rmという引数が用意されており、これをTRUEにすると、欠損値を除外した平均値が求められる（既定値はFALSE）。通常、関数には様々な引数が用意されている。Rコンソール上で?関数名を入力するとヘルプが読める（mean()関数のヘルプは?meanで読める）。\n\nmean(NA_vec, na.rm = TRUE)\n\n[1] 3.6"
   },
   {
+    "objectID": "materials/datatype.html#ベクトル操作続",
+    "href": "materials/datatype.html#ベクトル操作続",
+    "title": "第7回講義資料",
+    "section": "ベクトル操作（続）",
+    "text": "ベクトル操作（続）\n　今回はデータ型が主な内容であったが、ベクトル操作はこれからも必要となるため、以下では第3回に続き、ベクトルの操作方法について解説する。練習用のベクトルとしてmy_vec2を用意する。\n\nmy_vec2 <- c(4, 3, 2, 1)\nmy_vec2\n\n[1] 4 3 2 1\n\n\n\n要素の追加\n　ベクトルに新しい要素を追加するためにはベクトル名[追加したい位置] <- 追加する値と入力する。たとえば、my_vec2の5番目の要素として0を追加する場合は以下のように入力する。\n\nmy_vec2[5] <- 0\nmy_vec2\n\n[1] 4 3 2 1 0\n\n\n　複数の要素を入れることができる。my_vec2の6、7、8番目の要素として、-1、-2、-3を追加する場合、以下のように入力する。\n\n# 6:8の代わりにc(6, 7, 8)もOK\nmy_vec2[6:8] <- c(-1, -2, -3)\nmy_vec2\n\n[1]  4  3  2  1  0 -1 -2 -3\n\n\n　今、my_vec2の長さは8である。もし、このmy_vec2の11番目の要素としてに10を入れたらどうなるだろうか。\n\nmy_vec2[11] <- 10\nmy_vec2\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA 10\n\n\n　このように11番目に10が追加され、9、10番目の要素は欠損値（NA）になる。\n\n\n要素の置換\n　要素の置換は要素の追加と同じである。つまり、ベクトル名[置換したい位置] <- 置換する値と入力する。my_vec2の11番目の要素は10であったが、これを-6に置換する。\n\nmy_vec2[11] <- -6\nmy_vec2\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA -6\n\n\n　要素の追加と同様、複数の要素を置換することもできる。ここではmy_vec2の9、10番目の要素（NAとNA）を-4、-5に置換してみよう。\n\nmy_vec2[9:10] <- c(-4, -5)\nmy_vec2\n\n [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6\n\n\n　置換する位置を指定する[]内に論理演算子を使えば、条件に合致する要素のみ置換することができる。たとえば、my_vec2の要素の中で、0より小さい要素に-1を掛けて置換する場合、以下のように入力する。\n\nmy_vec2[my_vec2 < 0] <- my_vec2[my_vec2 < 0] * -1\nmy_vec2\n\n [1] 4 3 2 1 0 1 2 3 4 5 6"
+  },
+  {
     "objectID": "materials/introduction.html#スライド",
     "href": "materials/introduction.html#スライド",
     "title": "第1回講義資料",
@@ -707,6 +714,139 @@
     "text": "完成したデータ\n\nDataAnalysis1Analysis2Analysis3\n\n\n\ndf <- read_csv(\"Data/BuildingData.csv\")\ndf %>% \n  gt()\n\n\n\n\n  \n  \n    \n      ID\n      Pref\n      Finance\n      Over65\n      Turnout\n    \n  \n  \n    1\n北海道\n0.46217\n32.26170\n58.79\n    2\n青森県\n0.35801\n33.69179\n52.93\n    3\n岩手県\n0.37248\n33.81424\n60.38\n    4\n宮城県\n0.62649\n28.43901\n55.87\n    5\n秋田県\n0.32157\n37.60177\n58.24\n    6\n山形県\n0.37896\n33.98365\n64.34\n    7\n福島県\n0.54482\n31.82748\n58.01\n    8\n茨城県\n0.65584\n30.30695\n52.54\n    9\n栃木県\n0.64821\n29.56807\n53.06\n    10\n群馬県\n0.63796\n30.88517\n53.89\n    11\n埼玉県\n0.77024\n27.33047\n53.97\n    12\n千葉県\n0.77845\n28.02414\n53.64\n    13\n東京都\n1.15019\n23.29183\n57.21\n    14\n神奈川県\n0.88898\n25.86952\n56.29\n    15\n新潟県\n0.47506\n32.97734\n63.16\n    16\n富山県\n0.48457\n32.92857\n55.68\n    17\n石川県\n0.51759\n30.17642\n57.13\n    18\n福井県\n0.42058\n31.06232\n57.77\n    19\n山梨県\n0.40857\n31.14433\n60.57\n    20\n長野県\n0.52762\n32.28879\n59.77\n    21\n岐阜県\n0.55930\n31.11373\n58.10\n    22\n静岡県\n0.72648\n30.66518\n54.81\n    23\n愛知県\n0.91216\n25.83282\n55.97\n    24\n三重県\n0.60941\n30.58887\n56.17\n    25\n滋賀県\n0.57552\n26.71561\n57.33\n    26\n京都府\n0.59466\n29.47203\n56.32\n    27\n大阪府\n0.79157\n27.65828\n56.20\n    28\n兵庫県\n0.64914\n29.32041\n54.29\n    29\n奈良県\n0.43666\n31.72145\n59.13\n    30\n和歌山県\n0.33779\n33.42466\n58.24\n    31\n鳥取県\n0.28689\n32.47166\n58.16\n    32\n島根県\n0.26570\n34.66566\n61.55\n    33\n岡山県\n0.53481\n30.67966\n50.94\n    34\n広島県\n0.61848\n29.79257\n52.13\n    35\n山口県\n0.45738\n34.84154\n49.67\n    36\n徳島県\n0.32716\n34.34980\n53.86\n    37\n香川県\n0.48747\n32.14574\n56.09\n    38\n愛媛県\n0.44767\n33.43253\n54.98\n    39\n高知県\n0.27382\n35.61885\n57.34\n    40\n福岡県\n0.65820\n28.21122\n52.12\n    41\n佐賀県\n0.35551\n30.85767\n58.49\n    42\n長崎県\n0.34825\n33.16014\n56.89\n    43\n熊本県\n0.42692\n31.66006\n56.40\n    44\n大分県\n0.39540\n33.53593\n57.26\n    45\n宮崎県\n0.35767\n32.85051\n53.66\n    46\n鹿児島県\n0.35338\n32.70230\n57.71\n    47\n沖縄県\n0.37469\n22.70253\n54.90\n  \n  \n  \n\n\n\n\n\n\n可視化は第12回講義以降で解説\n\n\n\ndf %>%\n  ggplot(aes(x = Finance, y = Turnout)) +\n  geom_point() +\n  labs(x = \"財政力指数\", \n       y = \"投票率 (%)\")\n\n\n\n\n\n\n\n\n\n\n\n\ndf %>%\n  ggplot(aes(x = Over65, y = Turnout)) +\n  geom_point() +\n  labs(x = \"65歳以上人口の割合\", \n       y = \"投票率 (%)\")\n\n\n\n\n\n\n\n\n\n\n\n\n線形回帰分析は後期の「マクロ政治データ分析実習」で\n\nfit <- lm(Turnout ~ Finance + Over65, data = df)\nsummary(fit)\n\n\nCall:\nlm(formula = Turnout ~ Finance + Over65, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-7.2182 -1.6627  0.1581  1.5689  7.1454 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 57.31951    8.20293   6.988 1.19e-08 ***\nFinance     -4.40402    3.52987  -1.248    0.219    \nOver65       0.04544    0.21608   0.210    0.834    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.923 on 44 degrees of freedom\nMultiple R-squared:  0.09674,   Adjusted R-squared:  0.05568 \nF-statistic: 2.356 on 2 and 44 DF,  p-value: 0.1066\n\n\n\n\n\nprediction(fit, at = list(Finance = seq(0.3, 1.1, 0.1))) %>%\n  summary() %>%\n  rename(\"Finance\" = \"at(Finance)\") %>%\n  ggplot() +\n  geom_pointrange(aes(x = Finance, y = Prediction,\n                      ymin = lower, ymax = upper)) +\n  labs(x = \"財政力指数\", \n       y = \"投票率の予測値と95%信頼区間 (%)\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
+    "objectID": "slide/slide07.html#データ型とは",
+    "href": "slide/slide07.html#データ型とは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ型とは",
+    "text": "データ型とは\n\nRにおける最小単位であるベクトル（vector）内の要素の種類\n\nベクトルはデータ構造（data structure）の一つ\n\\(\\bigcirc\\bigcirc\\bigcirc\\)型ベクトル呼ぶ。\n\n例) 全ての要素が数値型（numeric型）なら「numeric型ベクトル」\n例) 全ての要素が文字型（character型）なら「character型ベクトル」"
+  },
+  {
+    "objectID": "slide/slide07.html#データ型の種類",
+    "href": "slide/slide07.html#データ型の種類",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ型の種類",
+    "text": "データ型の種類\n以下のデータ型はRが提供しているデータ型の一部（太字は本講義で紹介するデータ型）\n\nLogical\nNumeric\nComplex\nCharacter\nFactor\nDate\nNA\nNULL\nその他"
+  },
+  {
+    "objectID": "slide/slide07.html#データ型の確認",
+    "href": "slide/slide07.html#データ型の確認",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ型の確認",
+    "text": "データ型の確認\nclass()関数を使用\n\nオブジェクトがベクトルの場合はデータ型が出力され、ベクトル以外の場合はデータ構造が出力される。\n\n\nmy_vec1 <- c(2, 3, 5, 7, 11)\nmy_vec2 <- c(\"Ramen\", \"Soba\", \"Udon\")\nmy_vec3 <- c(TRUE, TRUE, FALSE, FALSE)\n\n\n\nclass(my_vec1) # my_vec1のデータ型は?\n\n[1] \"numeric\"\n\nclass(my_vec2) # my_vec2のデータ型は?\n\n[1] \"character\"\n\nclass(my_vec3) # my_vec3のデータ型は?\n\n[1] \"logical\""
+  },
+  {
+    "objectID": "slide/slide07.html#logical型-紹介",
+    "href": "slide/slide07.html#logical型-紹介",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Logical型: 紹介",
+    "text": "Logical型: 紹介\n\nTRUEとFALSEのみで構成されるデータ型\n\n論理型とも呼ばれる。\n\n\n\nlogi_vec1 <- (2 + 3) == (2 * 3)\nlogi_vec1\n\n[1] FALSE\n\n\n\n\nlogi_vec1のデータ型の確認\n\n\nclass(logi_vec1)\n\n[1] \"logical\"\n\n\n\n\nあるベクトルがlogical型かどうかはis.logical()で確認可能。\n\n()内のオブジェクトがlogical型ならTRUE、それ以外はFALSEが返ってくる。\n\n\n\nis.logical(logi_vec1)\n\n[1] TRUE"
+  },
+  {
+    "objectID": "slide/slide07.html#logical型-作成",
+    "href": "slide/slide07.html#logical型-作成",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Logical型: 作成",
+    "text": "Logical型: 作成\n\n長さ2以上のlogical型ベクトルを作成する場合、c()を使用\n\nTRUEとFALSEは\"で囲んではいけない（character型として認識される）。\n\n\n\nlogi_vec2 <- c(TRUE, FALSE, TRUE, TRUE, FALSE)\n\n\nただし、このように直接logical型ベクトルを作成することは非常に稀であり、通常、論理演算子の計算から得られた結果で作成する。\n\n\nmy_vec4 <- 1:15\nlogi_vec3 <- my_vec4 %% 3 == 0 # my_vec4の要素は3で割り切れるか"
+  },
+  {
+    "objectID": "slide/slide07.html#logical型-活用",
+    "href": "slide/slide07.html#logical型-活用",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Logical型: 活用",
+    "text": "Logical型: 活用\n\n何かの条件（=論理演算子）に合致する要素のみを抽出する際に使用\n\n\nmy_vec4[logi_vec3]\n\n[1]  3  6  9 12 15\n\n\n\n\nLogical型ベクトルを作成せず、[]内に直接打ち込んでも良い\n\n\n# my_vec4の要素の中から3で割り切れる要素（=3の倍数）を抽出する。\nmy_vec4[my_vec4 %% 3 == 0]\n\n[1]  3  6  9 12 15"
+  },
+  {
+    "objectID": "slide/slide07.html#numeric型",
+    "href": "slide/slide07.html#numeric型",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Numeric型",
+    "text": "Numeric型\n\n第3回講義を参照"
+  },
+  {
+    "objectID": "slide/slide07.html#character型-紹介作成",
+    "href": "slide/slide07.html#character型-紹介作成",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Character型: 紹介&作成",
+    "text": "Character型: 紹介&作成\n\n要素が\"で囲まれているデータ型\n\n文字型とも呼ばれる。\n長さ2以上のcharacter型のベクトル作成はc()を使用\n\n\n\nchar_vec1 <- c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsumeikan\")\nchar_vec1\n\n[1] \"Kansai\"         \"Kwansei-gakuin\" \"Doshisha\"       \"Ritsumeikan\"   \n\n\n\n\nchar_vec1のデータ型の確認\n\n\nclass(char_vec1)\n\n[1] \"character\"\n\n\n\n\nあるベクトルがcharacter型かどうかはis.character()で確認可能。\n\n()内のオブジェクトがlogical型ならTRUE、それ以外はFALSEが返ってくる。\n\n\n\nis.character(char_vec1)\n\n[1] TRUE"
+  },
+  {
+    "objectID": "slide/slide07.html#character型-活用",
+    "href": "slide/slide07.html#character型-活用",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Character型: 活用",
+    "text": "Character型: 活用\n\n文字列の長さ\n\nlength(): ベクトルの長さ\nnchar(): 各要素の文字数\n\n\n\nlength(char_vec1) # char_vec1の長さ\n\n[1] 4\n\nnchar(char_vec1)  # char_vec1の各要素の文字数\n\n[1]  6 14  8 11\n\n\n\npaste(): 文字列の結合\n\npaste0()にすると、結合時、スペースが入らない。\n\n\n\n# 各要素の後にUniversityを付ける（スペースあり）\nchar_vec2 <- paste(char_vec1, \"Univeristy\")\nchar_vec2\n\n[1] \"Kansai Univeristy\"         \"Kwansei-gakuin Univeristy\"\n[3] \"Doshisha Univeristy\"       \"Ritsumeikan Univeristy\""
+  },
+  {
+    "objectID": "slide/slide07.html#factor型",
+    "href": "slide/slide07.html#factor型",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Factor型",
+    "text": "Factor型\n\n順序付き文字型\n\n主に図表を作成する際に使用する。\n\n\n\nデータ行のソート可視化\n\n\n列名の下が<chr>ならcharacter型、<fct>ならfactor型\n\n\n大学名がcharacter型の場合\n\n\n# A tibble: 4 × 2\n  大学名         学生数\n  <chr>           <dbl>\n1 Ritsumeikan     32467\n2 Kwansei-gakuin  23671\n3 Kansai          27736\n4 Doshisha        25974\n\n\n\n\n\n大学名がfactor型の場合\n\n順番は関西-関学-同志社-立命館\n\n\n\n# A tibble: 4 × 2\n  大学名         学生数\n  <fct>           <dbl>\n1 Ritsumeikan     32467\n2 Kwansei-gakuin  23671\n3 Kansai          27736\n4 Doshisha        25974\n\n\n\n\n\n\n行のソートについてはデータ・ハンドリングの講義にて解説\n\n\n大学名がcharacter型の場合\n\nアルファベット順になる。\n\n\n\n# A tibble: 4 × 2\n  大学名         学生数\n  <chr>           <dbl>\n1 Doshisha        25974\n2 Kansai          27736\n3 Kwansei-gakuin  23671\n4 Ritsumeikan     32467\n\n\n\n\n\n大学名がfactor型の場合\n\n予め指定した順番で表示される。\n\n\n\n# A tibble: 4 × 2\n  大学名         学生数\n  <fct>           <dbl>\n1 Kansai          27736\n2 Kwansei-gakuin  23671\n3 Doshisha        25974\n4 Ritsumeikan     32467\n\n\n\n\n\n\n作図については可視化の講義にて解説\n\n\n大学名がcharacter型の場合\n\nアルファベット順になる。\n\n\n\n\n\n\n\n\n\n\n\n\n\n大学名がfactor型の場合\n\n予め指定した順番で表示される。"
+  },
+  {
+    "objectID": "slide/slide07.html#factor型-作成-1",
+    "href": "slide/slide07.html#factor型-作成-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Factor型: 作成 (1)",
+    "text": "Factor型: 作成 (1)\n\nCharacter型からfactor型へ\n\n\nchar_vec3 <- c(\"Ritsumeikan\", \"Kwansei-gakuin\", \"Kansai\", \"Doshisha\")\nchar_vec3\n\n[1] \"Ritsumeikan\"    \"Kwansei-gakuin\" \"Kansai\"         \"Doshisha\"      \n\nclass(char_vec3)\n\n[1] \"character\"\n\n\n\n要素をソートしてみると、アルファベット順になる。\n\nsort()関数を使用\n\n\n\nsort(char_vec3)\n\n[1] \"Doshisha\"       \"Kansai\"         \"Kwansei-gakuin\" \"Ritsumeikan\""
+  },
+  {
+    "objectID": "slide/slide07.html#factor型-作成-2",
+    "href": "slide/slide07.html#factor型-作成-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Factor型: 作成 (2)",
+    "text": "Factor型: 作成 (2)\n\nfactor()関数でfactor化\n\nlevels引数に順番を指定すること\nfactor型ベクトルを出力すると水準 (level)の順番も下に表示される。\n\n\n\nfct_vec1 <- factor(char_vec3, \n                   levels = c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsumeikan\"))\nfct_vec1\n\n[1] Ritsumeikan    Kwansei-gakuin Kansai         Doshisha      \nLevels: Kansai Kwansei-gakuin Doshisha Ritsumeikan\n\nclass(fct_vec1)\n\n[1] \"factor\"\n\n\n\n要素をソートしてみると、予め指定した順番になる。\n\n\nsort(fct_vec1)\n\n[1] Kansai         Kwansei-gakuin Doshisha       Ritsumeikan   \nLevels: Kansai Kwansei-gakuin Doshisha Ritsumeikan"
+  },
+  {
+    "objectID": "slide/slide07.html#factor型-活用",
+    "href": "slide/slide07.html#factor型-活用",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Factor型: 活用",
+    "text": "Factor型: 活用\n\n詳細はデータハンドリング、および可視化の講義で説明"
+  },
+  {
+    "objectID": "slide/slide07.html#欠損値",
+    "href": "slide/slide07.html#欠損値",
+    "title": "ミクロ政治データ分析実習",
+    "section": "欠損値",
+    "text": "欠損値\n\n欠損値（missing value）\n\n何らかの値があるはずであるものの、観察されていない値である。\n例) 人間開発指数（Human Development Index; HDI）」では世界各国のデータが含まれているものの、台湾や北朝鮮のデータは含まれていない。これらの国（地域）に人間開発という概念がないわけではなく、なんらかの理由（今回は政治的な理由）で値が欠損しているだけ\n\n\n\n\n欠損値以外に計算上、何らかの問題を生じさせ得る値\n\n\n\n\n値\n意味\n例\n\n\n\n\nNA\n何らかの値があるはずだが、欠損している状態\n\n\n\nNULL\nそもそも存在しない\n\n\n\nNaN\n計算不可\n0 / 0\n\n\nInf\n無限大\n10 / 0"
+  },
+  {
+    "objectID": "slide/slide07.html#naとnull-1",
+    "href": "slide/slide07.html#naとnull-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "NAとNULL (1)",
+    "text": "NAとNULL (1)\n\nVec1 <- c(1, 2, 3, 5, 7, 11, 13)\nVec2 <- c(1, NA, 3, 5, NA, NA, 13)\nVec3 <- c(1, NULL, 3, 5, NULL, NULL, 13)\n\n\n\nVec1\n\n[1]  1  2  3  5  7 11 13\n\nVec2\n\n[1]  1 NA  3  5 NA NA 13\n\nVec3\n\n[1]  1  3  5 13\n\n\n\nlength(Vec1)\n\n[1] 7\n\nlength(Vec2)\n\n[1] 7\n\nlength(Vec3)\n\n[1] 4"
+  },
+  {
+    "objectID": "slide/slide07.html#naとnull-2",
+    "href": "slide/slide07.html#naとnull-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "NAとNULL (2)",
+    "text": "NAとNULL (2)\n初心者レベルでNULLを使うことはないが、中級以上からは（そこそこ）使う機会がある。"
+  },
+  {
+    "objectID": "slide/slide07.html#欠損値が含まれたベクトルの動き",
+    "href": "slide/slide07.html#欠損値が含まれたベクトルの動き",
+    "title": "ミクロ政治データ分析実習",
+    "section": "欠損値が含まれたベクトルの動き",
+    "text": "欠損値が含まれたベクトルの動き\n\nmean()関数でVec2の平均値を計算してみよう。\n\n\nmean(Vec2)\n\n[1] NA\n\n\n\nコンソール上で?meanを打ち、mean()関数の詳細について調べてみると、mean()関数で使用可能な引数の一覧が表示される。\n\nna.rm    a logical value indicating whether NA values should be stripped before \n         the computation proceeds.\n\n意味: 「na.rmはlogical型の値であり、計算の前に欠損値（NA）を除去するか否かを示す引数である。」\n\n\n\nmean(Vec2, na.rm = TRUE)\n\n[1] 5.5\n\n\n\nこのように一部の関数では欠損値が含まれているオブジェクトの計算ができないため、おかしいと思ったらヘルプを読んでみること。"
+  },
+  {
+    "objectID": "slide/slide07.html#共通-要素の追加",
+    "href": "slide/slide07.html#共通-要素の追加",
+    "title": "ミクロ政治データ分析実習",
+    "section": "共通: 要素の追加",
+    "text": "共通: 要素の追加\n\nmy_vec5 <- c(4, 3, 2, 1)\nmy_vec5\n\n[1] 4 3 2 1\n\n\n\nmy_vec5の5番目の要素として、0を追加\n\n\nmy_vec5[5] <- 0\nmy_vec5\n\n[1] 4 3 2 1 0\n\n\n\nmy_vec5の6、7、8番目の要素として、-1、-2、-3を追加\n\n\n# 6:8の代わりにc(6, 7, 8)もOK\nmy_vec5[6:8] <- c(-1, -2, -3)\nmy_vec5\n\n[1]  4  3  2  1  0 -1 -2 -3\n\n\n\nmy_vec5の11番目に10を入れたら?\n\n\nmy_vec5[11] <- 10\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA 10"
+  },
+  {
+    "objectID": "slide/slide07.html#共通-要素の置換",
+    "href": "slide/slide07.html#共通-要素の置換",
+    "title": "ミクロ政治データ分析実習",
+    "section": "共通: 要素の置換",
+    "text": "共通: 要素の置換\n\n要素の追加と方法は同じ\n\n\nmy_vec5[11] <- -6\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA -6\n\n\n\n複数の要素を置換する場合\n\n\nmy_vec5[9:10] <- c(-4, -5)\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6\n\n\n\nmy_vec5の要素の中から0より小さい要素に-1を掛けて置換する。\n\n\nmy_vec5[my_vec5 < 0] <- my_vec5[my_vec5 < 0] * -1\nmy_vec5\n\n [1] 4 3 2 1 0 1 2 3 4 5 6\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
     "objectID": "slide/slide05.html#r-markdownとは",
     "href": "slide/slide05.html#r-markdownとは",
     "title": "ミクロ政治データ分析実習",
@@ -1015,6 +1155,55 @@
     "text": "例) Bubble Sortアルゴリズム\n\n代入（<-）、条件分岐（if()）、反復（for()）だけでベクトルのソート\n\n\nbubble_sort <- function(x){\n  n <- length(x)\n  for (i in 1 : (n - 1)) {\n    for (j in 1 : (n - i)) {\n      if (x[j] > x[j + 1]) {\n        temp <- x[j]\n        x[j] <- x[j + 1]\n        x[j + 1] <- temp\n      }\n    }\n  }\n  return(x)\n}\n\n\n\nx <- c(4, 2, 6, 3, 1, 11, 5, 9)\nbubble_sort(x)\n\n[1]  1  2  3  4  5  6  9 11\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
+    "objectID": "slide/slide08.html#データ構造とは",
+    "href": "slide/slide08.html#データ構造とは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ構造とは",
+    "text": "データ構造とは"
+  },
+  {
+    "objectID": "slide/slide08.html#データ構造の種類",
+    "href": "slide/slide08.html#データ構造の種類",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ構造の種類",
+    "text": "データ構造の種類\n\nvector\nmatrix\n\narray\n\ndata.frame / tibble\nlist"
+  },
+  {
+    "objectID": "slide/slide08.html#ベクトル",
+    "href": "slide/slide08.html#ベクトル",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ベクトル",
+    "text": "ベクトル\n\nvector\nRにおけるデータの最小単位\n長さは1以上、一つのベクトル内の全ての要素は同じデータ型"
+  },
+  {
+    "objectID": "slide/slide08.html#行列",
+    "href": "slide/slide08.html#行列",
+    "title": "ミクロ政治データ分析実習",
+    "section": "行列",
+    "text": "行列\n\nmatrix\nnumeric型、またはcomplex型のベクトルを積み重ねたもの"
+  },
+  {
+    "objectID": "slide/slide08.html#配列",
+    "href": "slide/slide08.html#配列",
+    "title": "ミクロ政治データ分析実習",
+    "section": "配列",
+    "text": "配列\n\narray\nmatrixを更に積み重ねたもの\n\nつまり、matrixは層（layer）が1つのみの配列"
+  },
+  {
+    "objectID": "slide/slide08.html#データフレーム",
+    "href": "slide/slide08.html#データフレーム",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データフレーム",
+    "text": "データフレーム\n\n表形式データ\n縦ベクトルを横に並べたもの\n一つ一つの列はベクトルであるため、一つの列は同じデータ型"
+  },
+  {
+    "objectID": "slide/slide08.html#リスト",
+    "href": "slide/slide08.html#リスト",
+    "title": "ミクロ政治データ分析実習",
+    "section": "リスト",
+    "text": "リスト\n\nあらゆるデータ構造が格納できるデータ型\nRに存在する多くのオブジェクトはリストであるため、Rでデータを自由自在に操るためにはリストの知識が必須\nただし、本講義ではリストは使わない。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
     "objectID": "intro/file.html#フォルダーの管理",
     "href": "intro/file.html#フォルダーの管理",
     "title": "ファイル管理",
@@ -1173,7 +1362,7 @@
     "href": "index.html",
     "title": "ミクロ政治データ分析実習",
     "section": "",
-    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年04月06日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.3 (2022-03-10)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
+    "text": "本ウェブサイトは関西大学総合情報学部「ミクロ政治データ分析実習」のサポートページです。本ページはPC画面での閲覧を推奨します。\n\n\n\n\n\n\nアイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年04月08日\n開発環境\n\nmacOS 12.3 “Monterey”\nFirefox 98.0.2\nR version 4.1.3 (2022-03-10)\nRStudio 2022.02.0+442 “Prairie Trillium”\nQuarto 0.9.19\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html#概要",
@@ -1265,187 +1454,5 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\n\n\n\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n\n\n\nOver65\n65歳以上人口の割合\n(%)\n\n\nUnder30\n30歳未満人口の割合\n(%)\n\n\nJimin\n自民党の得票率\n比例区; (%)\n\n\nMinshin\n民進党の得票率\n比例区; (%)\n\n\nKomei\n公明党の得票率\n比例区; (%)\n\n\nKyosan\n共産党の得票率\n比例区; (%)\n\n\nIshin\n維新の得票率\n比例区; (%)\n\n\nShamin\n社民党の得票率\n比例区; (%)\n\n\nRegion2\n地域区分\n1 = 東日本; 2 = 西日本\n\n\nRegion6\n地域区分\n1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄"
-  },
-  {
-    "objectID": "slide/slide07.html#データ型とは",
-    "href": "slide/slide07.html#データ型とは",
-    "title": "ミクロ政治データ分析実習",
-    "section": "データ型とは",
-    "text": "データ型とは"
-  },
-  {
-    "objectID": "slide/slide07.html#データ型の種類",
-    "href": "slide/slide07.html#データ型の種類",
-    "title": "ミクロ政治データ分析実習",
-    "section": "データ型の種類",
-    "text": "データ型の種類\n以下のデータ型はRが提供しているデータ型の一部（太字は本講義で紹介するデータ型）\n\nLogical\nNumeric\nComplex\nCharacter\nFactor\nDate\nNA\nNULL\nその他"
-  },
-  {
-    "objectID": "slide/slide07.html#データ型の確認",
-    "href": "slide/slide07.html#データ型の確認",
-    "title": "ミクロ政治データ分析実習",
-    "section": "データ型の確認",
-    "text": "データ型の確認\nclass()関数を使用\n\nオブジェクトがベクトルの場合はデータ型が出力され、ベクトル以外の場合はデータ構造が出力される。\n\n\nmy_vec1 <- c(2, 3, 5, 7, 11)\nmy_vec2 <- c(\"Ramen\", \"Soba\", \"Udon\")\nmy_vec3 <- c(TRUE, TRUE, FALSE, FALSE)\n\n\n\nclass(my_vec1) # my_vec1のデータ型は?\n\n[1] \"numeric\"\n\nclass(my_vec2) # my_vec2のデータ型は?\n\n[1] \"character\"\n\nclass(my_vec3) # my_vec3のデータ型は?\n\n[1] \"logical\""
-  },
-  {
-    "objectID": "slide/slide07.html#logical型",
-    "href": "slide/slide07.html#logical型",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Logical型",
-    "text": "Logical型"
-  },
-  {
-    "objectID": "slide/slide07.html#numeric型",
-    "href": "slide/slide07.html#numeric型",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Numeric型",
-    "text": "Numeric型"
-  },
-  {
-    "objectID": "slide/slide07.html#character型",
-    "href": "slide/slide07.html#character型",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Character型",
-    "text": "Character型"
-  },
-  {
-    "objectID": "slide/slide07.html#factor型",
-    "href": "slide/slide07.html#factor型",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Factor型",
-    "text": "Factor型\n\n順序付き文字型\n\n主に図表を作成する際に使用する。\n\n\n\nデータ可視化\n\n\n列名の下が<chr>ならcharacter型、<fct>ならfactor型\n\n\n大学名がcharacter型の場合\n\n\n# A tibble: 4 × 2\n  大学名         学生数\n  <chr>           <dbl>\n1 Kansai          27736\n2 Kwansei-gakuin  23671\n3 Doshisha        25974\n4 Ritsumeikan     32467\n\n\n\n\n\n大学名がfactor型の場合\n\n順番は関西-関学-同志社-立命館\n\n\n\n# A tibble: 4 × 2\n  大学名         学生数\n  <fct>           <dbl>\n1 Kansai          27736\n2 Kwansei-gakuin  23671\n3 Doshisha        25974\n4 Ritsumeikan     32467\n\n\n\n\n\n\n\n\n大学名がcharacter型の場合\n\nアルファベット順になる。\n\n\n\n\n\n\n\n\n\n\n\n\n\n大学名がfactor型の場合\n\n予め指定した順番で表示される。"
-  },
-  {
-    "objectID": "slide/slide07.html#欠損値",
-    "href": "slide/slide07.html#欠損値",
-    "title": "ミクロ政治データ分析実習",
-    "section": "欠損値",
-    "text": "欠損値"
-  },
-  {
-    "objectID": "slide/slide07.html#naとnull",
-    "href": "slide/slide07.html#naとnull",
-    "title": "ミクロ政治データ分析実習",
-    "section": "NAとNULL",
-    "text": "NAとNULL\n\nNA_vec   <- c(1, 2, 3, NA, 4, NA, 6)\nNULL_vec <- c(1, 2, 3, NULL, 4, NULL, 6)\n\n\nNA_vec\n\n[1]  1  2  3 NA  4 NA  6\n\nNULL_vec\n\n[1] 1 2 3 4 6\n\n\n\nlength(NA_vec)\n\n[1] 7\n\nlength(NULL_vec)\n\n[1] 5"
-  },
-  {
-    "objectID": "slide/slide07.html#欠損値が含まれたベクトルの動き",
-    "href": "slide/slide07.html#欠損値が含まれたベクトルの動き",
-    "title": "ミクロ政治データ分析実習",
-    "section": "欠損値が含まれたベクトルの動き",
-    "text": "欠損値が含まれたベクトルの動き\n\nmean()関数でVec2の平均値を計算してみよう。\n\n\nmean(Vec2)\n\n[1] NA\n\n\n\nコンソール上で?meanを打ち、mean()関数の詳細について調べてみると、mean()関数で使用可能な引数の一覧が表示される。\n\nna.rm    a logical value indicating whether NA values should be stripped before \n         the computation proceeds.\n\n意味: 「na.rmはlogical型の値であり、計算の前に欠損値（NA）を除去するか否かを示す引数である。」\n\n\n\nmean(Vec2, na.rm = TRUE)\n\n[1] 5.5\n\n\n\nこのように一部の関数では欠損値が含まれているオブジェクトの計算ができないため、おかしいと思ったらヘルプを読んでみること。"
-  },
-  {
-    "objectID": "slide/slide07.html#課題",
-    "href": "slide/slide07.html#課題",
-    "title": "ミクロ政治データ分析実習",
-    "section": "課題",
-    "text": "課題\n\n\n\nhttps://www.jaysong.net/micro-book"
-  },
-  {
-    "objectID": "slide/slide07.html#logical型-紹介",
-    "href": "slide/slide07.html#logical型-紹介",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Logical型: 紹介",
-    "text": "Logical型: 紹介\n\nTRUEとFALSEのみで構成されるデータ型\n\n論理型とも呼ばれる。\n\n\n\nlogi_vec1 <- (2 + 3) == (2 * 3)\nlogi_vec1\n\n[1] FALSE\n\n\n\n\nlogi_vec1のデータ型の確認\n\n\nclass(logi_vec1)\n\n[1] \"logical\"\n\n\n\n\nあるベクトルがlogical型かどうかはis.logical()で確認可能。\n\n()内のオブジェクトがlogical型ならTRUE、それ以外はFALSEが返ってくる。\n\n\n\nis.logical(logi_vec1)\n\n[1] TRUE"
-  },
-  {
-    "objectID": "slide/slide07.html#logical型-作成",
-    "href": "slide/slide07.html#logical型-作成",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Logical型: 作成",
-    "text": "Logical型: 作成\n\n長さ2以上のlogical型ベクトルを作成する場合、c()を使用\n\nTRUEとFALSEは\"で囲んではいけない（character型として認識される）。\n\n\n\nlogi_vec2 <- c(TRUE, FALSE, TRUE, TRUE, FALSE)\n\n\nただし、このように直接logical型ベクトルを作成することは非常に稀であり、通常、論理演算子の計算から得られた結果で作成する。\n\n\nmy_vec4 <- 1:15\nlogi_vec3 <- my_vec4 %% 3 == 0 # my_vec4の要素は3で割り切れるか"
-  },
-  {
-    "objectID": "slide/slide07.html#logical型-活用",
-    "href": "slide/slide07.html#logical型-活用",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Logical型: 活用",
-    "text": "Logical型: 活用\n\n何かの条件（=論理演算子）に合致する要素のみを抽出する際に使用\n\n\nmy_vec4[logi_vec3]\n\n[1]  3  6  9 12 15\n\n\n\n\nLogical型ベクトルを作成せず、[]内に直接打ち込んでも良い\n\n\n# my_vec4の要素の中から3で割り切れる要素（=3の倍数）を抽出する。\nmy_vec4[my_vec4 %% 3 == 0]\n\n[1]  3  6  9 12 15"
-  },
-  {
-    "objectID": "slide/slide07.html#naとnull-1",
-    "href": "slide/slide07.html#naとnull-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "NAとNULL (1)",
-    "text": "NAとNULL (1)\n\nVec1 <- c(1, 2, 3, 5, 7, 11, 13)\nVec2 <- c(1, NA, 3, 5, NA, NA, 13)\nVec3 <- c(1, NULL, 3, 5, NULL, NULL, 13)\n\n\n\nVec1\n\n[1]  1  2  3  5  7 11 13\n\nVec2\n\n[1]  1 NA  3  5 NA NA 13\n\nVec3\n\n[1]  1  3  5 13\n\n\n\nlength(Vec1)\n\n[1] 7\n\nlength(Vec2)\n\n[1] 7\n\nlength(Vec3)\n\n[1] 4"
-  },
-  {
-    "objectID": "slide/slide07.html#naとnull-2",
-    "href": "slide/slide07.html#naとnull-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "NAとNULL (2)",
-    "text": "NAとNULL (2)\n初心者レベルでNULLを使うことはないが、中級以上からは（そこそこ）使う機会がある。"
-  },
-  {
-    "objectID": "slide/slide07.html#numeric型-紹介",
-    "href": "slide/slide07.html#numeric型-紹介",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Numeric型: 紹介",
-    "text": "Numeric型: 紹介"
-  },
-  {
-    "objectID": "slide/slide07.html#共通-要素の追加",
-    "href": "slide/slide07.html#共通-要素の追加",
-    "title": "ミクロ政治データ分析実習",
-    "section": "共通: 要素の追加",
-    "text": "共通: 要素の追加\n\nmy_vec5 <- c(4, 3, 2, 1)\nmy_vec5\n\n[1] 4 3 2 1\n\n\n\nmy_vec5の5番目の要素として、0を追加\n\n\nmy_vec5[5] <- 0\nmy_vec5\n\n[1] 4 3 2 1 0\n\n\n\nmy_vec5の6、7、8番目の要素として、-1、-2、-3を追加\n\n\n# 6:8の代わりにc(6, 7, 8)もOK\nmy_vec5[6:8] <- c(-1, -2, -3)\nmy_vec5\n\n[1]  4  3  2  1  0 -1 -2 -3\n\n\n\nmy_vec5の11番目に10を入れたら?\n\n\nmy_vec5[11] <- 10\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA 10"
-  },
-  {
-    "objectID": "slide/slide07.html#共通-要素の置換",
-    "href": "slide/slide07.html#共通-要素の置換",
-    "title": "ミクロ政治データ分析実習",
-    "section": "共通: 要素の置換",
-    "text": "共通: 要素の置換\n\n要素の追加と方法は同じ\n\n\nmy_vec5[11] <- -6\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA -6\n\n\n\n複数の要素を置換する場合\n\n\nmy_vec5[9:10] <- c(-4, -5)\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6\n\n\n\nmy_vec5の要素の中から0より小さい要素に-1を掛けて置換する。\n\n\nmy_vec5[my_vec5 < 0] <- my_vec5[my_vec5 < 0] * -1\nmy_vec5\n\n [1] 4 3 2 1 0 1 2 3 4 5 6"
-  },
-  {
-    "objectID": "slide/slide07.html#character型-紹介",
-    "href": "slide/slide07.html#character型-紹介",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Character型: 紹介",
-    "text": "Character型: 紹介"
-  },
-  {
-    "objectID": "slide/slide07.html#character型-作成",
-    "href": "slide/slide07.html#character型-作成",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Character型: 作成",
-    "text": "Character型: 作成\n\n要素を\"で囲む\n\n長さ2以上のcharacter型のベクトル作成はc()を使用\n\n\n\nchar_vec1 <- c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsumeikan\")\nchar_vec1\n\n[1] \"Kansai\"         \"Kwansei-gakuin\" \"Doshisha\"       \"Ritsumeikan\"   \n\n\n\n\nchar_vec1のデータ型の確認\n\n\nclass(char_vec1)\n\n[1] \"character\"\n\n\n\n\nあるベクトルがcharacter型かどうかはis.character()で確認可能。\n\n()内のオブジェクトがlogical型ならTRUE、それ以外はFALSEが返ってくる。\n\n\n\nis.character(char_vec1)\n\n[1] TRUE"
-  },
-  {
-    "objectID": "slide/slide07.html#character型-活用",
-    "href": "slide/slide07.html#character型-活用",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Character型: 活用",
-    "text": "Character型: 活用\n\n文字列の長さ\n\nlength(): ベクトルの長さ\nnchar(): 各要素の文字数\n\n\n\nlength(char_vec1) # char_vec1の長さ\n\n[1] 4\n\nnchar(char_vec1)  # char_vec1の各要素の文字数\n\n[1]  6 14  8 11\n\n\n\npaste(): 文字列の結合\n\npaste0()にすると、結合時、スペースが入らない。\n\n\n\n# 各要素の後にUniversityを付ける（スペースあり）\nchar_vec2 <- paste(char_vec1, \"Univeristy\")\nchar_vec2\n\n[1] \"Kansai Univeristy\"         \"Kwansei-gakuin Univeristy\"\n[3] \"Doshisha Univeristy\"       \"Ritsumeikan Univeristy\""
-  },
-  {
-    "objectID": "slide/slide07.html#numeric型-作成活用",
-    "href": "slide/slide07.html#numeric型-作成活用",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Numeric型: 作成&活用",
-    "text": "Numeric型: 作成&活用\n\n第3回講義を参照"
-  },
-  {
-    "objectID": "slide/slide07.html#character型-紹介作成",
-    "href": "slide/slide07.html#character型-紹介作成",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Character型: 紹介&作成",
-    "text": "Character型: 紹介&作成\n\n要素が\"で囲まれているデータ型\n\n文字型とも呼ばれる。\n長さ2以上のcharacter型のベクトル作成はc()を使用\n\n\n\nchar_vec1 <- c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsumeikan\")\nchar_vec1\n\n[1] \"Kansai\"         \"Kwansei-gakuin\" \"Doshisha\"       \"Ritsumeikan\"   \n\n\n\n\nchar_vec1のデータ型の確認\n\n\nclass(char_vec1)\n\n[1] \"character\"\n\n\n\n\nあるベクトルがcharacter型かどうかはis.character()で確認可能。\n\n()内のオブジェクトがlogical型ならTRUE、それ以外はFALSEが返ってくる。\n\n\n\nis.character(char_vec1)\n\n[1] TRUE"
-  },
-  {
-    "objectID": "slide/slide07.html#factor型-作成",
-    "href": "slide/slide07.html#factor型-作成",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Factor型: 作成",
-    "text": "Factor型: 作成\n\nCharacter型からfactor型へ\n\n\nchar_vec3 <- c(\"Doshisha\", \"Kansai\", \"Kwansei-gakuin\", \"Ritsumeikan\")\nchar_vec3\n\n[1] \"Doshisha\"       \"Kansai\"         \"Kwansei-gakuin\" \"Ritsumeikan\"   \n\nclass(char_vec3)\n\n[1] \"character\"\n\n\n\nfactor()関数でfactor化\n\nlevels引数に順番を指定すること\nfactor型ベクトルを出力すると水準 (level)の順番も下に表示される。\n\n\n\nfct_vec1 <- factor(char_vec3, \n                   levels = c(\"Kansai\", \"Kwansei-gakuin\", \"Doshisha\", \"Ritsumeikan\"))\nfct_vec1\n\n[1] Doshisha       Kansai         Kwansei-gakuin Ritsumeikan   \nLevels: Kansai Kwansei-gakuin Doshisha Ritsumeikan\n\nclass(fct_vec1)\n\n[1] \"factor\""
-  },
-  {
-    "objectID": "slide/slide07.html#factor型-活用",
-    "href": "slide/slide07.html#factor型-活用",
-    "title": "ミクロ政治データ分析実習",
-    "section": "Factor型: 活用",
-    "text": "Factor型: 活用\n\n詳細はデータハンドリング、および可視化の講義で説明"
   }
 ]

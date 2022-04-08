@@ -414,6 +414,17 @@
 
 <section id="データ型とは" class="slide level2">
 <h2>データ型とは</h2>
+<ul>
+<li>Rにおける最小単位であるベクトル（vector）内の要素の種類
+<ul>
+<li>ベクトルはデータ構造（data structure）の一つ</li>
+<li><span class="math inline">\(\bigcirc\bigcirc\bigcirc\)</span>型ベクトル呼ぶ。
+<ul>
+<li>例) 全ての要素が数値型（numeric型）なら「numeric型ベクトル」</li>
+<li>例) 全ての要素が文字型（character型）なら「character型ベクトル」</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="データ型の種類" class="slide level2">
 <h2>データ型の種類</h2>
@@ -538,11 +549,8 @@
 </div>
 </div>
 </section>
-<section id="numeric型-紹介" class="slide level2">
-<h2>Numeric型: 紹介</h2>
-</section>
-<section id="numeric型-作成活用" class="slide level2">
-<h2>Numeric型: 作成&amp;活用</h2>
+<section id="numeric型" class="slide level2">
+<h2>Numeric型</h2>
 <ul>
 <li>第3回講義を参照</li>
 </ul>
@@ -631,7 +639,7 @@
 </ul></li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">データ</a></li><li><a href="#tabset-1-2">可視化</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">データ</a></li><li><a href="#tabset-1-2">行のソート</a></li><li><a href="#tabset-1-3">可視化</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <p>列名の下が<code>&lt;chr&gt;</code>ならcharacter型、<code>&lt;fct&gt;</code>ならfactor型</p>
@@ -643,10 +651,10 @@
 <pre><code># A tibble: 4 × 2
   大学名         学生数
   &lt;chr&gt;           &lt;dbl&gt;
-1 Kansai          27736
+1 Ritsumeikan     32467
 2 Kwansei-gakuin  23671
-3 Doshisha        25974
-4 Ritsumeikan     32467</code></pre>
+3 Kansai          27736
+4 Doshisha        25974</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -655,6 +663,46 @@
 <p><code>大学名</code>がfactor型の場合</p>
 <ul>
 <li>順番は関西-関学-同志社-立命館</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  大学名         学生数
+  &lt;fct&gt;           &lt;dbl&gt;
+1 Ritsumeikan     32467
+2 Kwansei-gakuin  23671
+3 Kansai          27736
+4 Doshisha        25974</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<p>行のソートについてはデータ・ハンドリングの講義にて解説</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><code>大学名</code>がcharacter型の場合</p>
+<ul>
+<li>アルファベット順になる。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  大学名         学生数
+  &lt;chr&gt;           &lt;dbl&gt;
+1 Doshisha        25974
+2 Kansai          27736
+3 Kwansei-gakuin  23671
+4 Ritsumeikan     32467</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<p><code>大学名</code>がfactor型の場合</p>
+<ul>
+<li>予め指定した順番で表示される。</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-stdout">
@@ -670,7 +718,8 @@
 </div>
 </div>
 </div>
-<div id="tabset-1-2">
+<div id="tabset-1-3">
+<p>作図については可視化の講義にて解説</p>
 <div class="columns">
 <div class="column" style="width:45%;">
 <p><code>大学名</code>がcharacter型の場合</p>
@@ -681,7 +730,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide07_files/figure-revealjs/unnamed-chunk-18-1.png" width="3000"></p>
+<p><img data-src="slide07_files/figure-revealjs/unnamed-chunk-20-1.png" width="3000"></p>
 </figure>
 </div>
 </div>
@@ -697,7 +746,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide07_files/figure-revealjs/unnamed-chunk-19-1.png" width="3000"></p>
+<p><img data-src="slide07_files/figure-revealjs/unnamed-chunk-21-1.png" width="3000"></p>
 </figure>
 </div>
 </div>
@@ -708,22 +757,37 @@
 </div>
 </div>
 </section>
-<section id="factor型-作成" class="slide level2">
-<h2>Factor型: 作成</h2>
+<section id="factor型-作成-1" class="slide level2">
+<h2>Factor型: 作成 (1)</h2>
 <ul>
 <li>Character型からfactor型へ</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>char_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Doshisha"</span>, <span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Ritsumeikan"</span>)</span>
-<span id="cb34-2"><a href="#cb34-2"></a>char_vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>char_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ritsumeikan"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Kansai"</span>, <span class="st">"Doshisha"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2"></a>char_vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] "Doshisha"       "Kansai"         "Kwansei-gakuin" "Ritsumeikan"   </code></pre>
+<pre><code>[1] "Ritsumeikan"    "Kwansei-gakuin" "Kansai"         "Doshisha"      </code></pre>
 </div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">class</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">class</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
+<ul>
+<li>要素をソートしてみると、アルファベット順になる。
+<ul>
+<li><code>sort()</code>関数を使用</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">sort</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "Doshisha"       "Kansai"         "Kwansei-gakuin" "Ritsumeikan"   </code></pre>
+</div>
+</div>
+</section>
+<section id="factor型-作成-2" class="slide level2">
+<h2>Factor型: 作成 (2)</h2>
 <ul>
 <li><code>factor()</code>関数でfactor化
 <ul>
@@ -732,16 +796,26 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>fct_vec1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(char_vec3, </span>
-<span id="cb38-2"><a href="#cb38-2"></a>                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>))</span>
-<span id="cb38-3"><a href="#cb38-3"></a>fct_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>fct_vec1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(char_vec3, </span>
+<span id="cb42-2"><a href="#cb42-2"></a>                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>))</span>
+<span id="cb42-3"><a href="#cb42-3"></a>fct_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] Doshisha       Kansai         Kwansei-gakuin Ritsumeikan   
+<pre><code>[1] Ritsumeikan    Kwansei-gakuin Kansai         Doshisha      
 Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">class</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">class</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
+</div>
+</div>
+<ul>
+<li>要素をソートしてみると、予め指定した順番になる。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">sort</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] Kansai         Kwansei-gakuin Doshisha       Ritsumeikan   
+Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </div>
 </div>
 </section>
@@ -753,39 +827,81 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </section>
 <section id="欠損値" class="slide level2">
 <h2>欠損値</h2>
+<ul>
+<li><strong>欠損値</strong>（missing value）
+<ul>
+<li>何らかの値があるはずであるものの、観察されていない値である。</li>
+<li>例) 人間開発指数（Human Development Index; HDI）」では世界各国のデータが含まれているものの、台湾や北朝鮮のデータは含まれていない。これらの国（地域）に人間開発という概念がないわけではなく、なんらかの理由（今回は政治的な理由）で値が欠損しているだけ</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li>欠損値以外に計算上、何らかの問題を生じさせ得る値</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">値</th>
+<th style="text-align: left;">意味</th>
+<th style="text-align: left;">例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>NA</code></td>
+<td style="text-align: left;">何らかの値があるはずだが、欠損している状態</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>NULL</code></td>
+<td style="text-align: left;">そもそも存在しない</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>NaN</code></td>
+<td style="text-align: left;">計算不可</td>
+<td style="text-align: left;"><code>0 / 0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Inf</code></td>
+<td style="text-align: left;">無限大</td>
+<td style="text-align: left;"><code>10 / 0</code></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="naとnull-1" class="slide level2">
 <h2>NAとNULL (1)</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>)</span>
-<span id="cb42-2"><a href="#cb42-2"></a>Vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">13</span>)</span>
-<span id="cb42-3"><a href="#cb42-3"></a>Vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NULL</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="dv">13</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>)</span>
+<span id="cb48-2"><a href="#cb48-2"></a>Vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">13</span>)</span>
+<span id="cb48-3"><a href="#cb48-3"></a>Vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NULL</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="dv">13</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  1  2  3  5  7 11 13</code></pre>
 </div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>Vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>Vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  1 NA  3  5 NA NA 13</code></pre>
 </div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  1  3  5 13</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">length</span>(Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">length</span>(Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">length</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">length</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">length</span>(Vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">length</span>(Vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
@@ -802,7 +918,7 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>mean()</code>関数で<code>Vec2</code>の平均値を計算してみよう。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">mean</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">mean</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -817,7 +933,7 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </ul>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">mean</span>(Vec2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">mean</span>(Vec2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 5.5</code></pre>
 </div>
@@ -829,8 +945,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <section id="共通-要素の追加" class="slide level2">
 <h2>共通: 要素の追加</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb60-2"><a href="#cb60-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb66-2"><a href="#cb66-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 4 3 2 1</code></pre>
 </div>
@@ -839,8 +955,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の5番目の要素として、0を追加</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>my_vec5[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>my_vec5[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 4 3 2 1 0</code></pre>
 </div>
@@ -849,9 +965,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の6、7、8番目の要素として、-1、-2、-3を追加</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="co"># 6:8の代わりにc(6, 7, 8)もOK</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a>my_vec5[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
-<span id="cb64-3"><a href="#cb64-3"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># 6:8の代わりにc(6, 7, 8)もOK</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>my_vec5[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb70-3"><a href="#cb70-3"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1]  4  3  2  1  0 -1 -2 -3</code></pre>
 </div>
@@ -860,8 +976,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の11番目に10を入れたら?</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb66-2"><a href="#cb66-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA 10</code></pre>
 </div>
@@ -873,8 +989,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li>要素の追加と方法は同じ</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">6</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">6</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA -6</code></pre>
 </div>
@@ -883,8 +999,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li>複数の要素を置換する場合</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>my_vec5[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>)</span>
-<span id="cb70-2"><a href="#cb70-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>my_vec5[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>)</span>
+<span id="cb76-2"><a href="#cb76-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6</code></pre>
 </div>
@@ -893,15 +1009,12 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の要素の中から0より小さい要素に-1を掛けて置換する。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb72-2"><a href="#cb72-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb78-2"><a href="#cb78-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1] 4 3 2 1 0 1 2 3 4 5 6</code></pre>
 </div>
 </div>
-</section>
-<section id="課題" class="slide level2">
-<h2>課題</h2>
 
 
 <img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
