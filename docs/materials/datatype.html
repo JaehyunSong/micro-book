@@ -382,7 +382,6 @@
 <ul class="collapse">
 <li><a href="#naとnullの違い" class="nav-link" data-scroll-target="#naとnullの違い"><code>NA</code>と<code>NULL</code>の違い</a></li>
 <li><a href="#欠損値を含むベクトルの計算" class="nav-link" data-scroll-target="#欠損値を含むベクトルの計算">欠損値を含むベクトルの計算</a></li>
-<li><a href="#欠損値を含むベクトルの計算１" class="nav-link" data-scroll-target="#欠損値を含むベクトルの計算１">欠損値を含むベクトルの計算（１）</a></li>
 </ul></li>
 <li><a href="#教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
 </ul>
@@ -857,22 +856,18 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </section>
 <section id="欠損値を含むベクトルの計算" class="level3">
 <h3 class="anchored" data-anchor-id="欠損値を含むベクトルの計算">欠損値を含むベクトルの計算</h3>
-<p>ベクトルに欠損値が含まれている場合、平均値（<code>mean()</code>）、標準偏差（<code>sd()</code>）などの計算ができないことに注意 * <code>NA</code>が含まれているベクトルの平均値、標準偏差、分散などは<code>NA</code>と出力される * <code>length()</code>などは機能する</p>
+<p>　ベクトルに欠損値が含まれている場合、平均値（<code>mean()</code>）、標準偏差（<code>sd()</code>）などの計算ができず、以下のように結果として<code>NA</code>が返ってくる。</p>
 <div class="cell">
 <div class="sourceCode" id="cb91"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_vec)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
-</section>
-<section id="欠損値を含むベクトルの計算１" class="level3">
-<h3 class="anchored" data-anchor-id="欠損値を含むベクトルの計算１">欠損値を含むベクトルの計算（１）</h3>
-<ul>
-<li><strong>方法1:</strong> データから欠損値を除外する
+<p>　ここで欠損値を以外の要素のみを使って計算する方法としては以下の2つの方法がある<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
+<p><strong>方法1:</strong> データから欠損値を除外する。</p>
 <ul>
 <li><code>!</code>演算子は否定を意味する（第3回参照）</li>
 <li>ちなみに、<code>NA_vec == NA</code>、<code>NA_vec != NA</code>は使用不可</li>
-</ul></li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb93"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(NA_vec) <span class="co"># 各要素がNAか否かを判定</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -892,13 +887,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <pre><code>[1] 3.6</code></pre>
 </div>
 </div>
-<ul>
-<li><strong>方法2:</strong> 関数内に<code>na.rm = TRUE</code>を追加する
-<ul>
-<li><code>na.rm</code>は<code>mean()</code>関数の<ruby>仮引数<rp>(</rp><rt>かりひきすう</rt><rp>)</rp></ruby>であり、<code>TRUE</code>は<ruby>仮引数<rp>(</rp><rt>じつひきすう</rt><rp>)</rp></ruby>と呼ぶ。合わせて<ruby>引数<rp>(</rp><rt>ひきすう</rt><rp>)</rp></ruby></li>
-<li>通常、関数には様々な引数が用意されている。Rコンソール上で<code>?関数名</code>を入力するとヘルプが読める（例: <code>?mean</code>）</li>
-</ul></li>
-</ul>
+<p><strong>方法2:</strong> 関数内に<code>na.rm = TRUE</code>を追加する。</p>
+<p>　<code>mean()</code>関数の場合、<code>na.rm</code>という引数が用意されており、これを<code>TRUE</code>にすると、欠損値を除外した平均値が求められる（既定値は<code>FALSE</code>）。通常、関数には様々な引数が用意されている。Rコンソール上で<code>?関数名</code>を入力するとヘルプが読める（<code>mean()</code>関数のヘルプは<code>?mean</code>で読める）。</p>
 <div class="cell">
 <div class="sourceCode" id="cb101"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NA_vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
@@ -915,6 +905,12 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </ul>
 
 
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>注</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>欠損値を統計的処理を用いて補完することもでき、これを「多重代入法（multiple imputation）」と呼ぶ。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 </main> <!-- /main -->
 <script type="application/javascript">
