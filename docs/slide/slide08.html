@@ -19,6 +19,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -354,49 +417,270 @@
 </section>
 <section id="データ構造の種類" class="slide level2">
 <h2>データ構造の種類</h2>
+<p>本講義で使うデータ構造は主にベクトル (vector) とデータ・フレーム (data.frame) とその拡張版のティブル (tibble) のみであるため、行列 (matrix) 、配列 (array) 、リスト (array) の説明は割愛する。</p>
 <ul>
-<li>vector</li>
-<li>matrix
+<li><strong>ベクトル (vector)</strong></li>
+<li>行列 (matrix)
 <ul>
-<li>array</li>
+<li>配列 (array)</li>
+<li>行列は層 (layer) が1つのみの配列</li>
 </ul></li>
-<li><strong>data.frame</strong> / <strong>tibble</strong></li>
-<li>list</li>
-</ul>
-</section>
-<section id="ベクトル" class="slide level2">
-<h2>ベクトル</h2>
+<li><strong>データ・フレーム (data.frame)</strong>
 <ul>
-<li>vector</li>
-<li>Rにおけるデータの最小単位</li>
-<li>長さは1以上、一つのベクトル内の全ての要素は同じデータ型</li>
-</ul>
-</section>
-<section id="行列" class="slide level2">
-<h2>行列</h2>
+<li><strong>ティブル (tibble)</strong>: データ・フレームの拡張版</li>
+</ul></li>
+<li>リスト (list)
 <ul>
-<li>matrix</li>
-<li>numeric型、またはcomplex型のベクトルを積み重ねたもの</li>
-</ul>
-</section>
-<section id="配列" class="slide level2">
-<h2>配列</h2>
-<ul>
-<li>array</li>
-<li>matrixを更に積み重ねたもの
-<ul>
-<li>つまり、matrixは層（layer）が1つのみの配列</li>
+<li>他にもRには数百、数千種類のデータ構造があるが、その中身は実質リスト構造である場合が多い。</li>
 </ul></li>
 </ul>
 </section>
+<section id="ベクトル-vector" class="slide level2">
+<h2>ベクトル (vector)</h2>
+<p><strong>同じデータ型が一つ以上</strong>格納されているオブジェクト</p>
+<ul>
+<li>Rにおけるデータの最小単位
+<ul>
+<li>Rには数百、数千種類のデータ構造が存在するが、その最小単位はベクトルである。</li>
+</ul></li>
+<li>長さは1以上</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>myVec1 <span class="ot">&lt;-</span> <span class="st">"R is fun!"</span>      <span class="co"># 長さ1のcharacter型ベクトル</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>myVec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>) <span class="co"># 長さ5のnumeric型ベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>一つのベクトル内の全ての要素は同じデータ型
+<ul>
+<li>優先順位はcharacter型 &gt; numeric型 &gt; logical型</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># 長さ6のベクトルであるが、2つのデータ型が混在しているため、character型が優先</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>myVec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>myVec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "A" "B" "C" "1" "2" "3"</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># 長さ4のベクトルであるが、2つのデータ型が混在しているため、numeric型が優先される </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># 参考1) TRUEは1に、FALSEは0に変換される。</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># 参考2) logical -&gt; characterの場合、TRUEは"TRUE"に、FALSEは"FALSE"に</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>myVec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>myVec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 10 20  1  0</code></pre>
+</div>
+</div>
+</section>
+<section id="ベクトルの操作-復習" class="slide level2">
+<h2>ベクトルの操作 (復習)</h2>
+<p>データ型、長さなど</p>
+<ul>
+<li><code>class(オブジェクト名)</code>: データ型</li>
+<li><code>length(オブジェクト名)</code>: ベクトルの長さ（要素数）</li>
+<li><code>nchar(オブジェクト名)</code>: Character型の場合、各要素の文字数</li>
+</ul>
+<p>要素の抽出</p>
+<ul>
+<li><code>オブジェクト名[n]</code>: <code>n</code>番目の要素を抽出</li>
+<li><code>オブジェクト名[n:k]</code>: <code>n</code>番目から<code>k</code>番目の要素を抽出</li>
+<li><code>オブジェクト名[c(i, j, k, ...)]</code>: <code>i</code>、<code>j</code>、<code>k</code>、…番目の要素を抽出</li>
+<li><code>オブジェクト名[c(TRUE, FALSE, TRUE, ...)]</code>: <code>TRUE</code>に対応する位置の要素を抽出</li>
+</ul>
+</section>
+<section id="numeric型ベクトルの演算-復習" class="slide level2">
+<h2>Numeric型ベクトルの演算 (復習)</h2>
+<ul>
+<li><strong>ケース1:</strong> 同じ長さのベクトル同士
+<ul>
+<li>同じ位置の要素同士の演算</li>
+</ul></li>
+<li><strong>ケース2:</strong> 異なる長さのベクトル同士
+<ul>
+<li>短い方のベクトルがリサイクルされる</li>
+</ul></li>
+</ul>
+</section>
+<section id="行列-matrix" class="slide level2">
+<h2>行列 (matrix)</h2>
+<ul>
+<li>numeric型、またはcomplex型の縦ベクトルを横に並べたデータ構造</li>
+<li>3 <span class="math inline">\(\times\)</span> 4の行列の例</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>my_mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>my_mat1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
+</div>
+</div>
+<ul>
+<li>長さ3のnumeric型<strong>縦</strong>ベクトルが4つ並んでいる模様</li>
+<li>長さ4のnumeric型<strong>横</strong>ベクトルが3つ積まれているとも読めるが、データ分析では一般的に縦ベクトルの集合として行列を捉える。</li>
+</ul>
+</section>
+<section id="行列の作成" class="slide level2">
+<h2>行列の作成</h2>
+<ul>
+<li><code>matrix()</code>関数を使用
+<ul>
+<li>第1引数としてnumericまたはcomplex型ベクトル、<code>nrow</code>引数で行列の行数を指定</li>
+<li>要素が入る順番に注意</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:65%;">
+<p><span class="math display">\[
+\begin{bmatrix}
+5 &amp; 2 &amp; 9 &amp; 6 \\
+5 &amp; 4 &amp; -8 &amp; 2 \\
+-3 &amp; 3 &amp; 0 &amp; 7
+\end{bmatrix}
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>my_mat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, </span>
+<span id="cb8-2"><a href="#cb8-2"></a>                    <span class="dv">9</span>, <span class="sc">-</span><span class="dv">8</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">7</span>), </span>
+<span id="cb8-3"><a href="#cb8-3"></a>                  <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>my_mat2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    5    2    9    6
+[2,]    5    4   -8    2
+[3,]   -3    3    0    7</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:30%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/08/matrix.png" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="行列の操作" class="slide level2">
+<h2>行列の操作</h2>
+<p>本講義では使用しないため、説明は割愛する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">class</span>(my_mat1) <span class="co"># my_mat1のデータ構造</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "matrix" "array" </code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">dim</span>(my_mat1)   <span class="co"># 行列の行数と列数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3 4</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">nrow</span>(my_mat1)  <span class="co"># 行列の行数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ncol</span>(my_mat1)  <span class="co"># 行列の列数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>my_mat1[<span class="dv">1</span>, ]   <span class="co"># my_matの1「行」目を抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1]  1  4  7 10</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>my_mat1[, <span class="dv">3</span>]   <span class="co"># my_matの3「列」目を抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 7 8 9</code></pre>
+</div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>my_mat1[<span class="dv">2</span>, <span class="dv">4</span>]  <span class="co"># my_matの2「行」、4「列」目を抽出</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+</section>
+<section id="行列の演算" class="slide level2">
+<h2>行列の演算</h2>
+<p>本講義では使用しないため、説明は割愛する。</p>
+<ul>
+<li>線形代数を勉強する人には便利な演算子</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">演算子/関数</th>
+<th style="text-align: left;">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>+</code></td>
+<td style="text-align: left;">行列の足し算</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>-</code></td>
+<td style="text-align: left;">行列の引き算</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>%*%</code></td>
+<td style="text-align: left;">行列の掛け算</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>/</code></td>
+<td style="text-align: left;">行列の割り算</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>*</code></td>
+<td style="text-align: left;">行列のアダマール積 (Hadamard product)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>t(オブジェクト名)</code></td>
+<td style="text-align: left;">行列の転置</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>qr(オブジェクト名)$rank</code></td>
+<td style="text-align: left;">行列の階数</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>solve(オブジェクト名)</code></td>
+<td style="text-align: left;">逆行列</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>eigen(オブジェクト名)</code></td>
+<td style="text-align: left;">行列の固有値</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="配列-array" class="slide level2">
+<h2>配列 (array)</h2>
+<p>行列を重ねたもの</p>
+<ul>
+<li>行列は層 (layer) が1つのみの配列</li>
+<li>3次元のデータ構造であり、要素抽出の際、<code>[x, y, z]</code>で指定する必要がある。
+<ul>
+<li>配列から行列を抽出したら、あとは行列の同じ操作</li>
+<li>3番目の<code>z</code>が配列の層 (layer)を意味する</li>
+</ul></li>
+<li>各層の行列の大きさは全て同じ</li>
+</ul>
+
+<img data-src="Figs/08/array.png" width="182" class="r-stretch quarto-figure-center"></section>
 <section id="データフレーム" class="slide level2">
 <h2>データフレーム</h2>
 <ul>
 <li>表形式データ</li>
 <li>縦ベクトルを横に並べたもの</li>
-<li>一つ一つの列はベクトルであるため、一つの列は同じデータ型</li>
+<li>一つ一つの列はベクトルであるため、一つの列は同じデータ型
+<ul>
+<li>全列が同じデータ型である必要はない。</li>
+</ul></li>
+<li>詳しい操作方法は次回以降（データ・ハンドリング）の講義で解説</li>
 </ul>
-</section>
+
+<img data-src="Figs/08/df.png" width="138" class="r-stretch quarto-figure-center"></section>
 <section id="リスト" class="slide level2">
 <h2>リスト</h2>
 <ul>
@@ -624,6 +908,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

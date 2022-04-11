@@ -10,3 +10,4 @@ subtitle: "データ構造"
 ```{=html}
 <iframe class="slide-deck" src="../slide/slide08.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 ```
+
