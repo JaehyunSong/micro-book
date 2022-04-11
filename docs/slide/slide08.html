@@ -414,6 +414,42 @@
 
 <section id="データ構造とは" class="slide level2">
 <h2>データ構造とは</h2>
+<ul>
+<li><strong>データ構造 (data structure):</strong> 一つ以上のベクトルの集合
+<ul>
+<li>ベクトルはRにおけるデータの最小単位
+<ul>
+<li><code>"Cat"</code>や<code>5</code>も長さ1のベクトルであり、原子ベクトル (atomic vector) とも呼ばれ、中でもnumeric型の長さ1のベクトルはスカラー (scalar) とも呼ばれる。</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>行列構造</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/08/matrix1.png" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p>データ・フレーム構造</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/08/df.png" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="データ構造の種類" class="slide level2">
 <h2>データ構造の種類</h2>
@@ -446,8 +482,8 @@
 <li>長さは1以上</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>myVec1 <span class="ot">&lt;-</span> <span class="st">"R is fun!"</span>      <span class="co"># 長さ1のcharacter型ベクトル</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>myVec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>) <span class="co"># 長さ5のnumeric型ベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="st">"R is fun!"</span>      <span class="co"># 長さ1のcharacter型ベクトル</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>) <span class="co"># 長さ5のnumeric型ベクトル</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>一つのベクトル内の全ての要素は同じデータ型
@@ -457,16 +493,16 @@
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># 長さ6のベクトルであるが、2つのデータ型が混在しているため、character型が優先</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>myVec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>myVec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>my_vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] "A" "B" "C" "1" "2" "3"</code></pre>
 </div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># 長さ4のベクトルであるが、2つのデータ型が混在しているため、numeric型が優先される </span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co"># 参考1) TRUEは1に、FALSEは0に変換される。</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co"># 参考2) logical -&gt; characterの場合、TRUEは"TRUE"に、FALSEは"FALSE"に</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>myVec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a>myVec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4"></a>my_vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>my_vec4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 10 20  1  0</code></pre>
 </div>
@@ -559,7 +595,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/08/matrix.png" width="400"></p>
+<p><img data-src="Figs/08/matrix2.png" width="400"></p>
 </figure>
 </div>
 </div>
@@ -668,8 +704,8 @@
 </ul>
 
 <img data-src="Figs/08/array.png" width="182" class="r-stretch quarto-figure-center"></section>
-<section id="データフレーム" class="slide level2">
-<h2>データフレーム</h2>
+<section id="データフレーム-紹介" class="slide level2">
+<h2>データフレーム: 紹介</h2>
 <ul>
 <li>表形式データ</li>
 <li>縦ベクトルを横に並べたもの</li>
@@ -681,13 +717,452 @@
 </ul>
 
 <img data-src="Figs/08/df.png" width="138" class="r-stretch quarto-figure-center"></section>
+<section id="データフレームの作成-1" class="slide level2">
+<h2>データ・フレームの作成 (1)</h2>
+<p>自分で作成する場合</p>
+<ul>
+<li><code>data.frame()</code>、または<code>tibble()</code>関数を使用
+<ul>
+<li><code>tibble()</code>関数を使う前に{tidyverse}パッケージを読み込む</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="データフレームの作成-2" class="slide level2">
+<h2>データ・フレームの作成 (2)</h2>
+<p>データ・フレームを直接作成する方法</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>my_df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Name       =</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kangaku"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>),</span>
+<span id="cb25-2"><a href="#cb25-2"></a>                 <span class="at">Foundation =</span> <span class="fu">c</span>(<span class="dv">1886</span>, <span class="dv">1889</span>, <span class="dv">1875</span>, <span class="dv">1900</span>),</span>
+<span id="cb25-3"><a href="#cb25-3"></a>                 <span class="at">Students   =</span> <span class="fu">c</span>(<span class="dv">27736</span>, <span class="dv">23671</span>, <span class="dv">25974</span>, <span class="dv">32467</span>))</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a>my_df1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  Name        Foundation Students
+  &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;
+1 Kansai            1886    27736
+2 Kangaku           1889    23671
+3 Doshisha          1875    25974
+4 Ritsumeikan       1900    32467</code></pre>
+</div>
+</div>
+</section>
+<section id="データフレームの作成-3" class="slide level2">
+<h2>データ・フレームの作成 (3)</h2>
+<p>ベクトルから作成する方法</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>Name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Tokyo"</span>, <span class="st">"Nagoya"</span>, <span class="st">"Osaka"</span>, <span class="st">"Fukuoka"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a>Food <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Monja"</span>, <span class="st">"Tebasaki"</span>, <span class="st">"Takoyaki"</span>, <span class="st">"Ramen"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3"></a>Pop  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1396</span>, <span class="dv">755</span>, <span class="dv">882</span>, <span class="dv">511</span>)</span>
+<span id="cb27-4"><a href="#cb27-4"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2194</span>, <span class="dv">5173</span>, <span class="dv">1899</span>, <span class="dv">4987</span>)</span>
+<span id="cb27-5"><a href="#cb27-5"></a></span>
+<span id="cb27-6"><a href="#cb27-6"></a>my_df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(Name, Pop, Area, Food)</span>
+<span id="cb27-7"><a href="#cb27-7"></a></span>
+<span id="cb27-8"><a href="#cb27-8"></a>my_df2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  Name      Pop  Area Food    
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+1 Tokyo    1396  2194 Monja   
+2 Nagoya    755  5173 Tebasaki
+3 Osaka     882  1899 Takoyaki
+4 Fukuoka   511  4987 Ramen   </code></pre>
+</div>
+</div>
+</section>
+<section id="データフレームの作成-4" class="slide level2">
+<h2>データ・フレームの作成 (4)</h2>
+<p>表形式ファイルの読み込み</p>
+<ul>
+<li><code>read_csv()</code>を使用する前に{tidyverse}を読み込んでおく（今回は読み込み済み）。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>my_df3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/BuildingData.csv"</span>) <span class="co"># 第6回のデータ</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>my_df3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 47 × 5
+      ID Pref   Finance Over65 Turnout
+   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1     1 北海道   0.462   32.3    58.8
+ 2     2 青森県   0.358   33.7    52.9
+ 3     3 岩手県   0.372   33.8    60.4
+ 4     4 宮城県   0.626   28.4    55.9
+ 5     5 秋田県   0.322   37.6    58.2
+ 6     6 山形県   0.379   34.0    64.3
+ 7     7 福島県   0.545   31.8    58.0
+ 8     8 茨城県   0.656   30.3    52.5
+ 9     9 栃木県   0.648   29.6    53.1
+10    10 群馬県   0.638   30.9    53.9
+# … with 37 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="データフレームの確認-1" class="slide level2">
+<h2>データ・フレームの確認 (1)</h2>
+<ul>
+<li><code>class()</code>: データ構造の確認</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">class</span>(my_df3) <span class="co"># my_df2のデータ構造</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
+</div>
+</div>
+<ul>
+<li><code>is.data.frame()</code>: データ・フレームか否かを判定</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">is.data.frame</span>(my_df3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li><code>nrow()</code>: データ・フレームの行数</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">nrow</span>(my_df1) <span class="co"># my_df1の行数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<ul>
+<li><code>ncol()</code>: データ・フレームの列数</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ncol</span>(my_df2) <span class="co"># my_df2の列数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</section>
+<section id="データフレームの確認-2" class="slide level2">
+<h2>データフレームの確認 (2)</h2>
+<ul>
+<li><code>head()</code>: <strong>最初</strong>の6行のみ出力</li>
+<li><code>tail()</code>: <strong>最後</strong>の6行を出力
+<ul>
+<li><code>n = 5</code>を追加すると、最初 (最後) の5行を出力（任意の数字）</li>
+</ul></li>
+<li><code>names()</code>: 変数名のみ出力</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1"><code>head()</code></a></li><li><a href="#tabset-1-2"><code>tail()</code></a></li><li><a href="#tabset-1-3"><code>names()</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">head</span>(my_df3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+     ID Pref   Finance Over65 Turnout
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1     1 北海道   0.462   32.3    58.8
+2     2 青森県   0.358   33.7    52.9
+3     3 岩手県   0.372   33.8    60.4
+4     4 宮城県   0.626   28.4    55.9
+5     5 秋田県   0.322   37.6    58.2
+6     6 山形県   0.379   34.0    64.3</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">head</span>(my_df3, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+      ID Pref   Finance Over65 Turnout
+   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1     1 北海道   0.462   32.3    58.8
+ 2     2 青森県   0.358   33.7    52.9
+ 3     3 岩手県   0.372   33.8    60.4
+ 4     4 宮城県   0.626   28.4    55.9
+ 5     5 秋田県   0.322   37.6    58.2
+ 6     6 山形県   0.379   34.0    64.3
+ 7     7 福島県   0.545   31.8    58.0
+ 8     8 茨城県   0.656   30.3    52.5
+ 9     9 栃木県   0.648   29.6    53.1
+10    10 群馬県   0.638   30.9    53.9</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">tail</span>(my_df3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+     ID Pref     Finance Over65 Turnout
+  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1    42 長崎県     0.348   33.2    56.9
+2    43 熊本県     0.427   31.7    56.4
+3    44 大分県     0.395   33.5    57.3
+4    45 宮崎県     0.358   32.9    53.7
+5    46 鹿児島県   0.353   32.7    57.7
+6    47 沖縄県     0.375   22.7    54.9</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">tail</span>(my_df3, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+     ID Pref     Finance Over65 Turnout
+  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1    45 宮崎県     0.358   32.9    53.7
+2    46 鹿児島県   0.353   32.7    57.7
+3    47 沖縄県     0.375   22.7    54.9</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">names</span>(my_df3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "ID"      "Pref"    "Finance" "Over65"  "Turnout"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="データフレーム-行の抽出" class="slide level2">
+<h2>データ・フレーム: 行の抽出</h2>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>my_df3[<span class="dv">27</span>, ]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+     ID Pref   Finance Over65 Turnout
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1    27 大阪府   0.792   27.7    56.2</code></pre>
+</div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">class</span>(my_df3[<span class="dv">27</span>, ])</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>my_df3[<span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">27</span>, <span class="dv">40</span>), ]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+     ID Pref   Finance Over65 Turnout
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1    13 東京都   1.15    23.3    57.2
+2    27 大阪府   0.792   27.7    56.2
+3    40 福岡県   0.658   28.2    52.1</code></pre>
+</div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">class</span>(my_df3[<span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">27</span>, <span class="dv">40</span>), ])</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="データフレーム-列の抽出-1" class="slide level2">
+<h2>データ・フレーム: 列の抽出 (1)</h2>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>my_df3[, <span class="dv">2</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 47 × 1
+   Pref  
+   &lt;chr&gt; 
+ 1 北海道
+ 2 青森県
+ 3 岩手県
+ 4 宮城県
+ 5 秋田県
+ 6 山形県
+ 7 福島県
+ 8 茨城県
+ 9 栃木県
+10 群馬県
+# … with 37 more rows</code></pre>
+</div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">class</span>(my_df3[, <span class="dv">2</span>])</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>my_df3[, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 47 × 3
+   Pref   Over65 Turnout
+   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 北海道   32.3    58.8
+ 2 青森県   33.7    52.9
+ 3 岩手県   33.8    60.4
+ 4 宮城県   28.4    55.9
+ 5 秋田県   37.6    58.2
+ 6 山形県   34.0    64.3
+ 7 福島県   31.8    58.0
+ 8 茨城県   30.3    52.5
+ 9 栃木県   29.6    53.1
+10 群馬県   30.9    53.9
+# … with 37 more rows</code></pre>
+</div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">class</span>(my_df3[, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>)])</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="データフレーム-列の抽出-1-1" class="slide level2">
+<h2>データ・フレーム: 列の抽出 (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>my_df3<span class="sc">$</span>Pref</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] "北海道"   "青森県"   "岩手県"   "宮城県"   "秋田県"   "山形県"  
+ [7] "福島県"   "茨城県"   "栃木県"   "群馬県"   "埼玉県"   "千葉県"  
+[13] "東京都"   "神奈川県" "新潟県"   "富山県"   "石川県"   "福井県"  
+[19] "山梨県"   "長野県"   "岐阜県"   "静岡県"   "愛知県"   "三重県"  
+[25] "滋賀県"   "京都府"   "大阪府"   "兵庫県"   "奈良県"   "和歌山県"
+[31] "鳥取県"   "島根県"   "岡山県"   "広島県"   "山口県"   "徳島県"  
+[37] "香川県"   "愛媛県"   "高知県"   "福岡県"   "佐賀県"   "長崎県"  
+[43] "熊本県"   "大分県"   "宮崎県"   "鹿児島県" "沖縄県"  </code></pre>
+</div>
+</div>
+<p>返り値はデータ・フレームでなく、ベクトル</p>
+<ul>
+<li>データ構造がベクトルの場合、<code>class()</code>はデータ型が出力される。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">class</span>(my_df3<span class="sc">$</span>Pref)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</section>
+<section id="データフレーム-抽出方法の比較" class="slide level2">
+<h2>データ・フレーム: 抽出方法の比較</h2>
+<p>抽出方法によって返り値のデータ構造が異なる。</p>
+<ul>
+<li><code>[]</code>を用いた抽出は返り値がデータ・フレーム</li>
+<li><code>$</code>を用いた抽出は返り値がベクトル</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">コード</th>
+<th style="text-align: left;">意味</th>
+<th style="text-align: left;">返り値</th>
+<th style="text-align: left;">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>データ・フレーム名[i, ]</code></td>
+<td style="text-align: left;"><code>i</code>番目の行を抽出</td>
+<td style="text-align: left;">データ・フレーム</td>
+<td style="text-align: left;"><code>i</code>は任意のベクトル</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>データ・フレーム名[, i]</code></td>
+<td style="text-align: left;"><code>i</code>番目の列を抽出</td>
+<td style="text-align: left;">データ・フレーム</td>
+<td style="text-align: left;"><code>i</code>は任意のベクトル</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>データ・フレーム名$列名</code></td>
+<td style="text-align: left;">当該列を抽出</td>
+<td style="text-align: left;"><strong>ベクトル</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="リスト" class="slide level2">
 <h2>リスト</h2>
 <ul>
-<li>あらゆるデータ構造が格納できるデータ型</li>
+<li>あらゆるデータ構造が格納できるデータ型
+<ul>
 <li>Rに存在する多くのオブジェクトはリストであるため、Rでデータを自由自在に操るためにはリストの知識が必須</li>
 <li>ただし、本講義ではリストは使わない。</li>
+</ul></li>
 </ul>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">作成</a></li><li><a href="#tabset-2-2">中身</a></li><li><a href="#tabset-2-3">抽出 (1)</a></li><li><a href="#tabset-2-4">抽出 (2)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Vector1 =</span> my_vec1,</span>
+<span id="cb69-2"><a href="#cb69-2"></a>                <span class="at">Vector2 =</span> my_vec4,</span>
+<span id="cb69-3"><a href="#cb69-3"></a>                <span class="at">Matrix  =</span> my_mat1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>my_list</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>$Vector1
+[1] "R is fun!"
+
+$Vector2
+[1] 10 20  1  0
+
+$Matrix
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<p><code>リスト名[[i]]</code>の場合、リストの<code>i</code>番目要素が抽出される。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>my_list[[<span class="dv">2</span>]]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 10 20  1  0</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-4">
+<p>要素に名前がついてある場合、<code>リスト名$要素名</code>でも抽出可能</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>my_list<span class="sc">$</span>Matrix</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 <img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
