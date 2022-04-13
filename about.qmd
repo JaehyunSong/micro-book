@@ -59,9 +59,8 @@ knitr::opts_chunk$set(fig.align = "center",
 ```{r}
 #| echo: false
 #| message: false
-#| cache: true
 #| fig-width: 10
-#| fig-height: 6
+#| fig-height: 5.75
 pacman::p_load(tidyverse, ggforce)
 
 ggplot() +
