@@ -481,6 +481,6 @@ my_vec2
 
 ---
 
-# 教科書
+## 教科書
 
 * 『私たちのR: ベストプラクティスの探求』[第8章: データ型](https://www.jaysong.net/RBook/datatype.html)
