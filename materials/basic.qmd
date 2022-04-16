@@ -406,6 +406,7 @@ library(tidyverse)
 
 ```{r}
 #| message: false
+# 以下のデータはサポートページの「データ集」から入手可能
 my_data <- read_csv("Data/Pref_Vote.csv")
 ```
 

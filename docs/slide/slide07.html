@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.19">
+  <meta name="generator" content="quarto-0.9.260">
+
   <meta name="author" content="宋(そん)&nbsp;&nbsp;財泫(じぇひょん)">
   <title> MicroAnalysis@Kandai - ミクロ政治データ分析実習</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +11,6 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -84,7 +82,6 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
   <link href="../Figs/favicon.png" rel="icon" type="image/png">
   <script src="../site_libs/clipboard/clipboard.min.js"></script>
   <script src="../site_libs/quarto-html/tabby.min.js"></script>
@@ -92,7 +89,7 @@
   <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
   <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
   <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
 
   <script type="text/javascript">
@@ -318,12 +315,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -448,22 +439,22 @@
 <li>オブジェクトがベクトルの場合はデータ<strong>型</strong>が出力され、ベクトル以外の場合はデータ<strong>構造</strong>が出力される。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>my_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>my_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ramen"</span>, <span class="st">"Soba"</span>, <span class="st">"Udon"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>my_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">class</span>(my_vec1) <span class="co"># my_vec1のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">class</span>(my_vec1) <span class="co"># my_vec1のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">class</span>(my_vec2) <span class="co"># my_vec2のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">class</span>(my_vec2) <span class="co"># my_vec2のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">class</span>(my_vec3) <span class="co"># my_vec3のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">class</span>(my_vec3) <span class="co"># my_vec3のデータ型は?</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
 </div>
@@ -477,9 +468,9 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>logi_vec1 <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">==</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>logi_vec1 <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">==</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>logi_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
@@ -488,8 +479,8 @@
 <li><code>logi_vec1</code>のデータ型の確認</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">class</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">class</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
 </div>
@@ -501,8 +492,8 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">is.logical</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">is.logical</span>(logi_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
@@ -516,13 +507,13 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>logi_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>logi_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>ただし、このように直接logical型ベクトルを作成することは非常に稀であり、通常、論理演算子の計算から得られた結果で作成する。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>my_vec4 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>my_vec4 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>logi_vec3 <span class="ot">&lt;-</span> my_vec4 <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="co"># my_vec4の要素は3で割り切れるか</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -532,8 +523,8 @@
 <li>何かの条件（=論理演算子）に合致する要素のみを抽出する際に使用</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>my_vec4[logi_vec3]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>my_vec4[logi_vec3]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  3  6  9 12 15</code></pre>
 </div>
 </div>
@@ -542,9 +533,9 @@
 <li>Logical型ベクトルを作成せず、<code>[]</code>内に直接打ち込んでも良い</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># my_vec4の要素の中から3で割り切れる要素（=3の倍数）を抽出する。</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># my_vec4の要素の中から3で割り切れる要素（=3の倍数）を抽出する。</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>my_vec4[my_vec4 <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  3  6  9 12 15</code></pre>
 </div>
 </div>
@@ -565,9 +556,9 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>char_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>)</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>char_vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2"></a>char_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Kansai"         "Kwansei-gakuin" "Doshisha"       "Ritsumeikan"   </code></pre>
 </div>
 </div>
@@ -576,8 +567,8 @@
 <li><code>char_vec1</code>のデータ型の確認</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">class</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">class</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
@@ -589,8 +580,8 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">is.character</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">is.character</span>(char_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
@@ -605,12 +596,12 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">length</span>(char_vec1) <span class="co"># char_vec1の長さ</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">length</span>(char_vec1) <span class="co"># char_vec1の長さ</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">nchar</span>(char_vec1)  <span class="co"># char_vec1の各要素の文字数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">nchar</span>(char_vec1)  <span class="co"># char_vec1の各要素の文字数</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  6 14  8 11</code></pre>
 </div>
 </div>
@@ -621,10 +612,10 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># 各要素の後にUniversityを付ける（スペースあり）</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># 各要素の後にUniversityを付ける（スペースあり）</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a>char_vec2 <span class="ot">&lt;-</span> <span class="fu">paste</span>(char_vec1, <span class="st">"Univeristy"</span>)</span>
 <span id="cb30-3"><a href="#cb30-3"></a>char_vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Kansai Univeristy"         "Kwansei-gakuin Univeristy"
 [3] "Doshisha Univeristy"       "Ritsumeikan Univeristy"   </code></pre>
 </div>
@@ -647,7 +638,7 @@
 <div class="column" style="width:45%;">
 <p><code>大学名</code>がcharacter型の場合</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   大学名         学生数
   &lt;chr&gt;           &lt;dbl&gt;
@@ -665,7 +656,7 @@
 <li>順番は関西-関学-同志社-立命館</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   大学名         学生数
   &lt;fct&gt;           &lt;dbl&gt;
@@ -687,7 +678,7 @@
 <li>アルファベット順になる。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   大学名         学生数
   &lt;chr&gt;           &lt;dbl&gt;
@@ -705,7 +696,7 @@
 <li>予め指定した順番で表示される。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   大学名         学生数
   &lt;fct&gt;           &lt;dbl&gt;
@@ -763,13 +754,13 @@
 <li>Character型からfactor型へ</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>char_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ritsumeikan"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Kansai"</span>, <span class="st">"Doshisha"</span>)</span>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>char_vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ritsumeikan"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Kansai"</span>, <span class="st">"Doshisha"</span>)</span>
 <span id="cb36-2"><a href="#cb36-2"></a>char_vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Ritsumeikan"    "Kwansei-gakuin" "Kansai"         "Doshisha"      </code></pre>
 </div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">class</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">class</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
@@ -780,8 +771,8 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">sort</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">sort</span>(char_vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Doshisha"       "Kansai"         "Kwansei-gakuin" "Ritsumeikan"   </code></pre>
 </div>
 </div>
@@ -796,15 +787,15 @@
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>fct_vec1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(char_vec3, </span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>fct_vec1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(char_vec3, </span>
 <span id="cb42-2"><a href="#cb42-2"></a>                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kansai"</span>, <span class="st">"Kwansei-gakuin"</span>, <span class="st">"Doshisha"</span>, <span class="st">"Ritsumeikan"</span>))</span>
 <span id="cb42-3"><a href="#cb42-3"></a>fct_vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] Ritsumeikan    Kwansei-gakuin Kansai         Doshisha      
 Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">class</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">class</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
 </div>
@@ -812,8 +803,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li>要素をソートしてみると、予め指定した順番になる。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">sort</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">sort</span>(fct_vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] Kansai         Kwansei-gakuin Doshisha       Ritsumeikan   
 Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </div>
@@ -873,36 +864,36 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <section id="naとnull-1" class="slide level2">
 <h2>NAとNULL (1)</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>)</span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>Vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>)</span>
 <span id="cb48-2"><a href="#cb48-2"></a>Vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">13</span>)</span>
 <span id="cb48-3"><a href="#cb48-3"></a>Vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NULL</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="dv">13</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>Vec1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  2  3  5  7 11 13</code></pre>
 </div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>Vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>Vec2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  1 NA  3  5 NA NA 13</code></pre>
 </div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>Vec3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  3  5 13</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">length</span>(Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">length</span>(Vec1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">length</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">length</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">length</span>(Vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">length</span>(Vec3)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
@@ -918,8 +909,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>mean()</code>関数で<code>Vec2</code>の平均値を計算してみよう。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">mean</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">mean</span>(Vec2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
@@ -933,8 +924,8 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 </ul>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">mean</span>(Vec2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">mean</span>(Vec2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.5</code></pre>
 </div>
 </div>
@@ -945,9 +936,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <section id="共通-要素の追加" class="slide level2">
 <h2>共通: 要素の追加</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>my_vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
 <span id="cb66-2"><a href="#cb66-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 4 3 2 1</code></pre>
 </div>
 </div>
@@ -955,9 +946,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の5番目の要素として、0を追加</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>my_vec5[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>my_vec5[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb68-2"><a href="#cb68-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 4 3 2 1 0</code></pre>
 </div>
 </div>
@@ -965,10 +956,10 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の6、7、8番目の要素として、-1、-2、-3を追加</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># 6:8の代わりにc(6, 7, 8)もOK</span></span>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># 6:8の代わりにc(6, 7, 8)もOK</span></span>
 <span id="cb70-2"><a href="#cb70-2"></a>my_vec5[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
 <span id="cb70-3"><a href="#cb70-3"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  4  3  2  1  0 -1 -2 -3</code></pre>
 </div>
 </div>
@@ -976,9 +967,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の11番目に10を入れたら?</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb72-2"><a href="#cb72-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA 10</code></pre>
 </div>
 </div>
@@ -989,9 +980,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li>要素の追加と方法は同じ</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">6</span></span>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>my_vec5[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">6</span></span>
 <span id="cb74-2"><a href="#cb74-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code> [1]  4  3  2  1  0 -1 -2 -3 NA NA -6</code></pre>
 </div>
 </div>
@@ -999,9 +990,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li>複数の要素を置換する場合</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb76"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>my_vec5[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>)</span>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>my_vec5[<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>)</span>
 <span id="cb76-2"><a href="#cb76-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code> [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6</code></pre>
 </div>
 </div>
@@ -1009,9 +1000,9 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 <li><code>my_vec5</code>の要素の中から0より小さい要素に-1を掛けて置換する。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> my_vec5[my_vec5 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
 <span id="cb78-2"><a href="#cb78-2"></a>my_vec5</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code> [1] 4 3 2 1 0 1 2 3 4 5 6</code></pre>
 </div>
 </div>
@@ -1026,20 +1017,19 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+    <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+    <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+    <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -1053,11 +1043,10 @@ Levels: Kansai Kwansei-gakuin Doshisha Ritsumeikan</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: true,
 

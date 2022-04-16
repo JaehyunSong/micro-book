@@ -1,132 +1,137 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.19">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title> MicroAnalysis@Kandai - 本講義について</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
 
-  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="site_libs/clipboard/clipboard.min.js"></script>
-  <meta name="quarto:offset" content="./">
-  <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-  <script src="site_libs/quarto-search/fuse.min.js"></script>
-  <script src="site_libs/quarto-search/quarto-search.js"></script>
-  <link href="./Figs/favicon.png" rel="icon" type="image/png">
-  <script src="site_libs/quarto-html/quarto.js"></script>
-  <script src="site_libs/quarto-html/popper.min.js"></script>
-  <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-  <script src="site_libs/quarto-html/anchor.min.js"></script>
-  <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
-  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-  <script id="quarto-search-options" type="application/json">{
-    "location": "navbar",
-    "copy-button": false,
-    "collapse-after": 2,
-    "panel-placement": "end",
-    "type": "overlay",
-    "limit": 20,
-    "language": {
-      "search-no-results-text": "No results",
-      "search-matching-documents-text": "matching documents",
-      "search-copy-link-title": "Copy link to search",
-      "search-hide-matches-text": "Hide additional matches",
-      "search-more-match-text": "more match in this document",
-      "search-more-matches-text": "more matches in this document",
-      "search-clear-button-title": "Clear",
-      "search-detached-cancel-button-title": "Cancel",
-      "search-submit-button-title": "Submit"
-    }
-  }</script>
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.260">
 
-  <script type="text/javascript">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
-  </script>
+
+<title> MicroAnalysis@Kandai - 本講義について</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./Figs/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
+</script>
+
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-  <link rel="stylesheet" href="styles.css">
+
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
+
+<body class="nav-fixed">
+
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
@@ -146,22 +151,28 @@
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-rの使い方" role="button" data-bs-toggle="dropdown" aria-expanded="false">Rの使い方</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-rの使い方">    
         <li>
-    <a class="dropdown-item" href="./intro/install.html">Rの導入</a>
+    <a class="dropdown-item" href="./intro/install.html">
+ <span class="dropdown-text">Rの導入</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/rstudio.html">RStudioの設定</a>
+    <a class="dropdown-item" href="./intro/rstudio.html">
+ <span class="dropdown-text">RStudioの設定</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/project.html">プロジェクト管理</a>
+    <a class="dropdown-item" href="./intro/project.html">
+ <span class="dropdown-text">プロジェクト管理</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/file.html">ファイル管理</a>
+    <a class="dropdown-item" href="./intro/file.html">
+ <span class="dropdown-text">ファイル管理</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/packages.html">パッケージ</a>
+    <a class="dropdown-item" href="./intro/packages.html">
+ <span class="dropdown-text">パッケージ</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./intro/homework.html">課題の取り組み方</a>
+    <a class="dropdown-item" href="./intro/homework.html">
+ <span class="dropdown-text">課題の取り組み方</span></a>
   </li>  
     </ul>
   </li>
@@ -169,46 +180,60 @@
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">講義資料</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./materials/introduction.html">第1回講義資料</a>
+    <a class="dropdown-item" href="./materials/introduction.html">
+ <span class="dropdown-text">第1回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/install.html">第2回講義資料</a>
+    <a class="dropdown-item" href="./materials/install.html">
+ <span class="dropdown-text">第2回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/basic.html">第3回講義資料</a>
+    <a class="dropdown-item" href="./materials/basic.html">
+ <span class="dropdown-text">第3回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/programming.html">第4回講義資料</a>
+    <a class="dropdown-item" href="./materials/programming.html">
+ <span class="dropdown-text">第4回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/rmarkdown.html">第5回講義資料</a>
+    <a class="dropdown-item" href="./materials/rmarkdown.html">
+ <span class="dropdown-text">第5回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/data_collection.html">第6回講義資料</a>
+    <a class="dropdown-item" href="./materials/data_collection.html">
+ <span class="dropdown-text">第6回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/datatype.html">第7回講義資料</a>
+    <a class="dropdown-item" href="./materials/datatype.html">
+ <span class="dropdown-text">第7回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/datastructure.html">第8回講義資料</a>
+    <a class="dropdown-item" href="./materials/datastructure.html">
+ <span class="dropdown-text">第8回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/handling1.html">第9回講義資料</a>
+    <a class="dropdown-item" href="./materials/handling1.html">
+ <span class="dropdown-text">第9回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/handling2.html">第10回講義資料</a>
+    <a class="dropdown-item" href="./materials/handling2.html">
+ <span class="dropdown-text">第10回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/handling3.html">第11回講義資料</a>
+    <a class="dropdown-item" href="./materials/handling3.html">
+ <span class="dropdown-text">第11回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/visualization1.html">第12回講義資料</a>
+    <a class="dropdown-item" href="./materials/visualization1.html">
+ <span class="dropdown-text">第12回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/visualization2.html">第13回講義資料</a>
+    <a class="dropdown-item" href="./materials/visualization2.html">
+ <span class="dropdown-text">第13回講義資料</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./materials/visualization3.html">第14回講義資料</a>
+    <a class="dropdown-item" href="./materials/visualization3.html">
+ <span class="dropdown-text">第14回講義資料</span></a>
   </li>  
     </ul>
   </li>
@@ -216,28 +241,36 @@
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="button" data-bs-toggle="dropdown" aria-expanded="false">課題</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
         <li>
-    <a class="dropdown-item" href="./HW/HW05.html">第5回課題</a>
+    <a class="dropdown-item" href="./HW/HW05.html">
+ <span class="dropdown-text">第5回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW07.html">第7回課題</a>
+    <a class="dropdown-item" href="./HW/HW07.html">
+ <span class="dropdown-text">第7回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW08.html">第8回課題</a>
+    <a class="dropdown-item" href="./HW/HW08.html">
+ <span class="dropdown-text">第8回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW09.html">第9回課題</a>
+    <a class="dropdown-item" href="./HW/HW09.html">
+ <span class="dropdown-text">第9回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW10.html">第10回課題</a>
+    <a class="dropdown-item" href="./HW/HW10.html">
+ <span class="dropdown-text">第10回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW11.html">第11回課題</a>
+    <a class="dropdown-item" href="./HW/HW11.html">
+ <span class="dropdown-text">第11回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW13.html">第13回課題</a>
+    <a class="dropdown-item" href="./HW/HW13.html">
+ <span class="dropdown-text">第13回課題</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./HW/HW14.html">第14回課題</a>
+    <a class="dropdown-item" href="./HW/HW14.html">
+ <span class="dropdown-text">第14回課題</span></a>
   </li>  
     </ul>
   </li>
@@ -247,12 +280,12 @@
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/"><i class="bi-terminal" role="img">
+    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/"><i class="bi bi-terminal" role="img">
 </i> 
  </a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.jaysong.net/RBook/"><i class="bi-book" role="img">
+    <a class="nav-link" href="https://www.jaysong.net/RBook/"><i class="bi bi-book" role="img">
 </i> 
  </a>
   </li>  
@@ -268,25 +301,41 @@
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-<h2 id="toc-title">目次</h2>
-<ul>
-<li><a href="#概要" class="nav-link active" data-scroll-target="#概要">概要</a></li>
-<li><a href="#オフィスアワー" class="nav-link" data-scroll-target="#オフィスアワー">オフィス・アワー</a></li>
-<li><a href="#講義内容" class="nav-link" data-scroll-target="#講義内容">講義内容</a></li>
-<li><a href="#本講義の位置づけ" class="nav-link" data-scroll-target="#本講義の位置づけ">本講義の位置づけ</a></li>
-<li><a href="#前提知識" class="nav-link" data-scroll-target="#前提知識">前提知識</a></li>
-<li><a href="#教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
-<li><a href="#参考書" class="nav-link" data-scroll-target="#参考書">参考書</a></li>
-<li><a href="#成績評価" class="nav-link" data-scroll-target="#成績評価">成績評価</a></li>
-<li><a href="#注意事項" class="nav-link" data-scroll-target="#注意事項">注意事項</a></li>
-<li><a href="#参考-マクロ政治データ分析実習の内容-予定" class="nav-link" data-scroll-target="#参考-マクロ政治データ分析実習の内容-予定">参考) マクロ政治データ分析実習の内容 (予定)</a></li>
-</ul>
+    <h2 id="toc-title">目次</h2>
+   
+  <ul>
+  <li><a href="#概要" id="toc-概要" class="nav-link active" data-scroll-target="#概要">概要</a></li>
+  <li><a href="#オフィスアワー" id="toc-オフィスアワー" class="nav-link" data-scroll-target="#オフィスアワー">オフィス・アワー</a></li>
+  <li><a href="#講義内容" id="toc-講義内容" class="nav-link" data-scroll-target="#講義内容">講義内容</a></li>
+  <li><a href="#本講義の位置づけ" id="toc-本講義の位置づけ" class="nav-link" data-scroll-target="#本講義の位置づけ">本講義の位置づけ</a></li>
+  <li><a href="#前提知識" id="toc-前提知識" class="nav-link" data-scroll-target="#前提知識">前提知識</a></li>
+  <li><a href="#教科書" id="toc-教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
+  <li><a href="#参考書" id="toc-参考書" class="nav-link" data-scroll-target="#参考書">参考書</a></li>
+  <li><a href="#成績評価" id="toc-成績評価" class="nav-link" data-scroll-target="#成績評価">成績評価</a></li>
+  <li><a href="#注意事項" id="toc-注意事項" class="nav-link" data-scroll-target="#注意事項">注意事項</a></li>
+  <li><a href="#参考-マクロ政治データ分析実習の内容-予定" id="toc-参考-マクロ政治データ分析実習の内容-予定" class="nav-link" data-scroll-target="#参考-マクロ政治データ分析実習の内容-予定">参考) マクロ政治データ分析実習の内容 (予定)</a></li>
+  </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<header id="title-block-header">
-<h1 class="title display-7">本講義について</h1>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">本講義について</h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
 </header>
 
 <section id="概要" class="level2">
@@ -537,13 +586,13 @@
 <li>コードは以下のように背景に色が付けられている部分である。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello!"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello!"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>コードの中で<code>#</code>で始まる内容はコメントであり、分析に影響を与えない。ただし、<code>"</code>や<code>'</code>で囲まれた<code>#</code>はコメントではない。また、行の途中から<code>#</code>が入る場合、<code>#</code>以降は実行されない。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hello!を出力するコード</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hello!を出力するコード</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello!"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># "や'内の#はコメントではない</span></span>
@@ -555,7 +604,7 @@
 <li>出力結果は以下のように背景なし&amp;等幅フォントで出力される。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Hello!"</code></pre>
 </div>
 </div>
@@ -579,13 +628,14 @@
 
 
 </section>
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>注</h2>
+
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">注</h2>
 
 <ol>
 <li id="fn1" role="doc-endnote"><p>ただし、パッケージ名を{}で囲むのは一般的な表記ではないことを断っておきたい。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section>
-</main> <!-- /main -->
+</section></div></main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
@@ -670,13 +720,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
     <a class="nav-link" href="https://www.jaysong.net">
-      <i class="bi-house-fill" role="img">
+      <i class="bi bi-house-fill" role="img">
 </i> 
     </a>
   </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/JaehyunSong">
-      <i class="bi-github" role="img">
+      <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
@@ -684,6 +734,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 </body></html>

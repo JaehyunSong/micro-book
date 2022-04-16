@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.19">
+  <meta name="generator" content="quarto-0.9.260">
+
   <meta name="author" content="宋(そん)&nbsp;&nbsp;財泫(じぇひょん)">
   <title> MicroAnalysis@Kandai - ミクロ政治データ分析実習</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +11,6 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -84,7 +82,6 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
   <link href="../Figs/favicon.png" rel="icon" type="image/png">
   <script src="../site_libs/clipboard/clipboard.min.js"></script>
   <script src="../site_libs/quarto-html/tabby.min.js"></script>
@@ -92,7 +89,7 @@
   <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
   <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
   <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
 
   <script type="text/javascript">
@@ -318,12 +315,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -426,12 +417,12 @@
 <p>データの構造は基本的に「<strong>四角形</strong>」</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="qwbvznocwm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="moefgdclel" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qwbvznocwm .gt_table {
+#moefgdclel .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -456,7 +447,7 @@
   border-left-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_heading {
+#moefgdclel .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -468,7 +459,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_title {
+#moefgdclel .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -480,7 +471,7 @@
   border-bottom-width: 0;
 }
 
-#qwbvznocwm .gt_subtitle {
+#moefgdclel .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -492,13 +483,13 @@
   border-top-width: 0;
 }
 
-#qwbvznocwm .gt_bottom_border {
+#moefgdclel .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_col_headings {
+#moefgdclel .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -513,7 +504,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_col_heading {
+#moefgdclel .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -533,7 +524,7 @@
   overflow-x: hidden;
 }
 
-#qwbvznocwm .gt_column_spanner_outer {
+#moefgdclel .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -545,15 +536,15 @@
   padding-right: 4px;
 }
 
-#qwbvznocwm .gt_column_spanner_outer:first-child {
+#moefgdclel .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qwbvznocwm .gt_column_spanner_outer:last-child {
+#moefgdclel .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qwbvznocwm .gt_column_spanner {
+#moefgdclel .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -565,7 +556,7 @@
   width: 100%;
 }
 
-#qwbvznocwm .gt_group_heading {
+#moefgdclel .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -590,7 +581,7 @@
   vertical-align: middle;
 }
 
-#qwbvznocwm .gt_empty_group_heading {
+#moefgdclel .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -605,15 +596,15 @@
   vertical-align: middle;
 }
 
-#qwbvznocwm .gt_from_md > :first-child {
+#moefgdclel .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qwbvznocwm .gt_from_md > :last-child {
+#moefgdclel .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qwbvznocwm .gt_row {
+#moefgdclel .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -632,7 +623,7 @@
   overflow-x: hidden;
 }
 
-#qwbvznocwm .gt_stub {
+#moefgdclel .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -645,7 +636,7 @@
   padding-right: 5px;
 }
 
-#qwbvznocwm .gt_stub_row_group {
+#moefgdclel .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -659,11 +650,11 @@
   vertical-align: top;
 }
 
-#qwbvznocwm .gt_row_group_first td {
+#moefgdclel .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qwbvznocwm .gt_summary_row {
+#moefgdclel .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -673,16 +664,16 @@
   padding-right: 5px;
 }
 
-#qwbvznocwm .gt_first_summary_row {
+#moefgdclel .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_first_summary_row.thick {
+#moefgdclel .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qwbvznocwm .gt_last_summary_row {
+#moefgdclel .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,7 +683,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_grand_summary_row {
+#moefgdclel .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -702,7 +693,7 @@
   padding-right: 5px;
 }
 
-#qwbvznocwm .gt_first_grand_summary_row {
+#moefgdclel .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -712,11 +703,11 @@
   border-top-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_striped {
+#moefgdclel .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qwbvznocwm .gt_table_body {
+#moefgdclel .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -725,7 +716,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_footnotes {
+#moefgdclel .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -739,7 +730,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_footnote {
+#moefgdclel .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -748,7 +739,7 @@
   padding-right: 5px;
 }
 
-#qwbvznocwm .gt_sourcenotes {
+#moefgdclel .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -762,7 +753,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qwbvznocwm .gt_sourcenote {
+#moefgdclel .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -770,60 +761,60 @@
   padding-right: 5px;
 }
 
-#qwbvznocwm .gt_left {
+#moefgdclel .gt_left {
   text-align: left;
 }
 
-#qwbvznocwm .gt_center {
+#moefgdclel .gt_center {
   text-align: center;
 }
 
-#qwbvznocwm .gt_right {
+#moefgdclel .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qwbvznocwm .gt_font_normal {
+#moefgdclel .gt_font_normal {
   font-weight: normal;
 }
 
-#qwbvznocwm .gt_font_bold {
+#moefgdclel .gt_font_bold {
   font-weight: bold;
 }
 
-#qwbvznocwm .gt_font_italic {
+#moefgdclel .gt_font_italic {
   font-style: italic;
 }
 
-#qwbvznocwm .gt_super {
+#moefgdclel .gt_super {
   font-size: 65%;
 }
 
-#qwbvznocwm .gt_footnote_marks {
+#moefgdclel .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#qwbvznocwm .gt_asterisk {
+#moefgdclel .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qwbvznocwm .gt_slash_mark {
+#moefgdclel .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#qwbvznocwm .gt_fraction_numerator {
+#moefgdclel .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#qwbvznocwm .gt_fraction_denominator {
+#moefgdclel .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2104,7 +2095,7 @@
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/BuildingData.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/BuildingData.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">gt</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -2771,7 +2762,7 @@
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Finance, <span class="at">y =</span> Turnout)) <span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"財政力指数"</span>, </span>
@@ -2788,7 +2779,7 @@
 
 </div><div class="column" style="width:49%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Over65, <span class="at">y =</span> Turnout)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"65歳以上人口の割合"</span>, </span>
@@ -2807,9 +2798,9 @@
 <div id="tabset-1-3">
 <p>線形回帰分析は後期の「マクロ政治データ分析実習」で</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Turnout <span class="sc">~</span> Finance <span class="sc">+</span> Over65, <span class="at">data =</span> df)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Turnout <span class="sc">~</span> Finance <span class="sc">+</span> Over65, <span class="at">data =</span> df)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">summary</span>(fit)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = Turnout ~ Finance + Over65, data = df)
@@ -2819,12 +2810,10 @@ Residuals:
 -7.2182 -1.6627  0.1581  1.5689  7.1454 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 57.31951    8.20293   6.988 1.19e-08 ***
-Finance     -4.40402    3.52987  -1.248    0.219    
-Over65       0.04544    0.21608   0.210    0.834    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 57.31951    8.20293   6.988 1.19e-08
+Finance     -4.40402    3.52987  -1.248    0.219
+Over65       0.04544    0.21608   0.210    0.834
 
 Residual standard error: 2.923 on 44 degrees of freedom
 Multiple R-squared:  0.09674,   Adjusted R-squared:  0.05568 
@@ -2834,7 +2823,7 @@ F-statistic: 2.356 on 2 and 44 DF,  p-value: 0.1066</code></pre>
 </div>
 <div id="tabset-1-4">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">prediction</span>(fit, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">Finance =</span> <span class="fu">seq</span>(<span class="fl">0.3</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>))) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">prediction</span>(fit, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">Finance =</span> <span class="fu">seq</span>(<span class="fl">0.3</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>))) <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">summary</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">rename</span>(<span class="st">"Finance"</span> <span class="ot">=</span> <span class="st">"at(Finance)"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -2864,20 +2853,19 @@ F-statistic: 2.356 on 2 and 44 DF,  p-value: 0.1066</code></pre>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+    <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+    <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+    <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -2891,11 +2879,10 @@ F-statistic: 2.356 on 2 and 44 DF,  p-value: 0.1066</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: true,
 
