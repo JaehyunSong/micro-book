@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.260">
+  <meta name="generator" content="quarto-0.9.305">
 
   <meta name="author" content="宋(そん)&nbsp;&nbsp;財泫(じぇひょん)">
   <title> MicroAnalysis@Kandai - ミクロ政治データ分析実習</title>
@@ -585,7 +585,7 @@
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>100ABC <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error: &lt;text&gt;:1:4:  想定外のシンボルです 
+<pre><code>Error: &lt;text&gt;:1:4: unexpected symbol
 1: 100ABC
        ^</code></pre>
 </div>
@@ -593,7 +593,7 @@
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>Smile<span class="sc">^</span><span class="er">^</span> <span class="er">&lt;</span><span class="sc">-</span> <span class="st">"マクドでスマイルを頼んでみたい！"</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error: &lt;text&gt;:1:7:  予想外の '^' です 
+<pre><code>Error: &lt;text&gt;:1:7: unexpected '^'
 1: Smile^^
           ^</code></pre>
 </div>
@@ -601,7 +601,7 @@
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>Weather_2022<span class="sc">/</span><span class="dv">03</span><span class="sc">/</span><span class="dv">30</span> <span class="ot">&lt;-</span> <span class="st">"最高気温22度"</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in Weather_2022/3/30 &lt;- "最高気温22度":  オブジェクト 'Weather_2022' がありません </code></pre>
+<pre><code>Error in Weather_2022/3/30 &lt;- "最高気温22度": object 'Weather_2022' not found</code></pre>
 </div>
 </div>
 <p><strong>ただし</strong>、<code>_</code>と<code>.</code>は使用可能であり、<code>.</code>より<code>_</code>を推奨</p>
@@ -640,7 +640,7 @@
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="cf">for</span> <span class="ot">&lt;-</span> <span class="st">"フォー！"</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error: &lt;text&gt;:1:5:  想定外の付値です 
+<pre><code>Error: &lt;text&gt;:1:5: unexpected assignment
 1: for &lt;-
         ^</code></pre>
 </div>
@@ -810,13 +810,14 @@
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-    <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-    <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-    <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-    <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-    <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-    <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
+
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
@@ -1076,7 +1077,10 @@
         button.blur();
         // flash "checked"
         button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
         setTimeout(function() {
+          button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
         // clear code selection

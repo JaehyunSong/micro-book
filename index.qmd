@@ -16,8 +16,8 @@
 
 * 最終更新日: `r format(Sys.Date(), "%Y年%m月%d日")`
 * 開発環境
-   * macOS 12.3 "Monterey"
-   * Firefox 98.0.2
+   * macOS 12.3.1 "Monterey"
+   * Firefox 99.0.1
    * `r version$version.string`
    * RStudio 2022.02.0+442 "Prairie Trillium"
    * Quarto `r quarto::quarto_inspect()$quarto$version`

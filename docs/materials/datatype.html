@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.260">
+<meta name="generator" content="quarto-0.9.305">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -668,8 +668,8 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>num_vec3 <span class="sc">*</span> num_vec5 <span class="co"># c(11*1, 7*2, 5*3, 3*1, 2*2)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in num_vec3 * num_vec5: 長いオブジェクトの長さが短いオブジェクトの長さの
-倍数になっていません</code></pre>
+<pre><code>Warning in num_vec3 * num_vec5: longer object length is not a multiple of
+shorter object length</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11 14 15  3  4</code></pre>
@@ -1057,7 +1057,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.blur();
     // flash "checked"
     button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
     setTimeout(function() {
+      button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection

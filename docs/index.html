@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.260">
+<meta name="generator" content="quarto-0.9.305">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -274,14 +274,14 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>最終更新日: 2022年04月16日</li>
+<li>最終更新日: 2022年04月25日</li>
 <li>開発環境
 <ul>
-<li>macOS 12.3 “Monterey”</li>
-<li>Firefox 98.0.2</li>
-<li>R version 4.1.2 (2021-11-01)</li>
+<li>macOS 12.3.1 “Monterey”</li>
+<li>Firefox 99.0.1</li>
+<li>R version 4.2.0 (2022-04-22)</li>
 <li>RStudio 2022.02.0+442 “Prairie Trillium”</li>
-<li>Quarto 0.9.260</li>
+<li>Quarto 0.9.305</li>
 <li>R package {quarto} 1.1</li>
 </ul></li>
 </ul>
@@ -312,7 +312,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.blur();
     // flash "checked"
     button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
     setTimeout(function() {
+      button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
