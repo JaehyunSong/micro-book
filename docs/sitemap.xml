@@ -1,246 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-<!--  created with free sitemap generation system www.sitemapxml.jp  --> 
-<url>
-  <loc>https://www.jaysong.net/micro-book/</loc>
-  <priority>1.0</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/index.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/about.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/intro/install.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/intro/rstudio.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/intro/project.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/intro/file.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/intro/packages.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/intro/homework.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/introduction.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/install.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/basic.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/programming.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/rmarkdown.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/data_collection.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/datatype.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/datastructure.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/handling1.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/handling2.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/handling3.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/visualization1.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/visualization2.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/visualization3.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW05.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW07.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW08.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW09.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW10.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW11.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW13.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/HW14.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/data.html</loc>
-  <priority>0.8</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide01.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide02.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide03.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide04.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide05.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide06.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide07.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide08.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide09.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide10.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide11.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide12.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide13.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/slide/slide14.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/HW/Data/MicroAnalysis_HW05.html</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-<url>
-  <loc>https://www.jaysong.net/micro-book/materials/Data/Pref_Vote.csv</loc>
-  <priority>0.7</priority>
-  <lastmod>2022-04-21T10:55:15+09:00</lastmod>
-</url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/visualization3.html</loc>
+    <lastmod>2022-04-25T01:54:57.324Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/visualization2.html</loc>
+    <lastmod>2022-04-25T01:54:57.603Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/visualization1.html</loc>
+    <lastmod>2022-04-25T01:54:57.859Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/rmarkdown.html</loc>
+    <lastmod>2022-04-25T01:55:02.634Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/install.html</loc>
+    <lastmod>2022-04-25T01:55:02.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/handling2.html</loc>
+    <lastmod>2022-04-25T01:55:03.054Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/programming.html</loc>
+    <lastmod>2022-04-25T01:55:03.238Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/handling3.html</loc>
+    <lastmod>2022-04-25T01:55:03.440Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/handling1.html</loc>
+    <lastmod>2022-04-25T01:55:03.656Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/datatype.html</loc>
+    <lastmod>2022-04-25T01:55:17.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/introduction.html</loc>
+    <lastmod>2022-04-25T01:55:17.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/basic.html</loc>
+    <lastmod>2022-04-25T01:55:19.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/data_collection.html</loc>
+    <lastmod>2022-04-25T01:55:19.984Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/materials/datastructure.html</loc>
+    <lastmod>2022-04-25T01:55:35.267Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide14.html</loc>
+    <lastmod>2022-04-25T01:55:35.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide01.html</loc>
+    <lastmod>2022-04-25T01:55:38.185Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide03.html</loc>
+    <lastmod>2022-04-25T01:55:53.749Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide02.html</loc>
+    <lastmod>2022-04-25T01:55:56.178Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide12.html</loc>
+    <lastmod>2022-04-25T01:55:56.349Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide06.html</loc>
+    <lastmod>2022-04-25T01:55:59.687Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide07.html</loc>
+    <lastmod>2022-04-25T01:56:17.079Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide13.html</loc>
+    <lastmod>2022-04-25T01:56:17.259Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide05.html</loc>
+    <lastmod>2022-04-25T01:56:18.317Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide11.html</loc>
+    <lastmod>2022-04-25T01:56:18.490Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide10.html</loc>
+    <lastmod>2022-04-25T01:56:18.681Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide04.html</loc>
+    <lastmod>2022-04-25T01:56:28.761Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide09.html</loc>
+    <lastmod>2022-04-25T01:56:28.945Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/slide/slide08.html</loc>
+    <lastmod>2022-04-25T01:56:44.041Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW05.html</loc>
+    <lastmod>2022-04-25T01:56:44.253Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW11.html</loc>
+    <lastmod>2022-04-25T01:56:44.894Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW10.html</loc>
+    <lastmod>2022-04-25T01:56:45.540Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW07.html</loc>
+    <lastmod>2022-04-25T01:56:46.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW13.html</loc>
+    <lastmod>2022-04-25T01:56:46.796Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW14.html</loc>
+    <lastmod>2022-04-25T01:56:47.452Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW09.html</loc>
+    <lastmod>2022-04-25T01:56:48.102Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/HW/HW08.html</loc>
+    <lastmod>2022-04-25T01:56:48.723Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/intro/file.html</loc>
+    <lastmod>2022-04-25T01:56:49.690Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/intro/homework.html</loc>
+    <lastmod>2022-04-25T01:56:50.582Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/intro/install.html</loc>
+    <lastmod>2022-04-25T01:56:51.485Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/intro/packages.html</loc>
+    <lastmod>2022-04-25T01:56:52.469Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/intro/project.html</loc>
+    <lastmod>2022-04-25T01:56:53.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/intro/rstudio.html</loc>
+    <lastmod>2022-04-25T01:56:54.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/index.html</loc>
+    <lastmod>2022-04-25T01:57:00.491Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/about.html</loc>
+    <lastmod>2022-04-25T01:56:58.266Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jaysong.net/micro-book/data.html</loc>
+    <lastmod>2022-04-25T01:56:58.466Z</lastmod>
+  </url>
 </urlset>
