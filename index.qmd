@@ -22,7 +22,7 @@ title: ""
    * macOS 12.3.1 "Monterey"
    * Firefox 99.0.1
    * `r version$version.string`
-   * RStudio 2022.02.0+442 "Prairie Trillium"
+   * RStudio 2022.02.1+461 "Prairie Trillium"
    * Quarto `r quarto::quarto_inspect()$quarto$version`
    * R package {quarto} `r packageVersion("quarto")`
 :::
