@@ -1,7 +1,17 @@
 ---
 title: "第9回講義資料"
 subtitle: "データハンドリング (1)"
+toc: true
 ---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(dev       = "ragg_png",
+                      dpi       = 300,
+                      fig.align = "center",
+                      echo      = TRUE,
+                      tidy      = TRUE)
+```
 
 ## スライド
 
@@ -10,3 +20,429 @@ subtitle: "データハンドリング (1)"
 ```{=html}
 <iframe class="slide-deck" src="../slide/slide09.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 ```
+
+## Tidyverseとパイプ演算子
+
+### Tidyverseとは
+
+```{r}
+#| echo: false
+#| out-width: "500px"
+knitr::include_graphics("https://www.tidyverse.org/images/tidyverse-default.png")
+```
+
+　Tidyverse（たいでぃばーす）とはデータサイエンスのために考案された、強い信念と思想に基づいた**Rパッケージの集合**である。具体的には{dplyr}、{tidyr}、{readr}、{ggplot2}など数十パッケージで構成されており、Tidyverseに属するパッケージは思想、文法およびデータ構造（tidy data; 整然データ）を共有しる。また、ベクトルやデータフレーム、関数などのオブジェクトを**パイプ演算子** (`%>%`)で繋ぐという点が特徴である。これらのパッケージ群は{tidyverse}をインストールすることで導入可能であり、NIIオンライン分析システムでは既に導入済みである。
+
+　2010年代中盤以降、Rの書き方はtidyverseな書き方が的着しているため、Rのコードを作成する際は`library(tidyverse)`から始めよう。
+
+### パイプ演算子
+
+　Tidyverseにおいてオブジェクトはパイプ演算子（`%>%`）で繋がっている。なぜパイプ演算子を使うのだろうか。一般的なプログラミング言語に共通する書き方は**書き方と読み方が逆**という特徴を持つ。たとえば、「ベクトルXの和を出力する」コードは`print(sum(X))`であり、`print`、`sum`、`X`の順で書く。このコードの読み方には二通りがある。
+
+1. 読み方1: `X`を`sum()`し、`print()`する。
+2. 読み方2: `print()`する内容は`sum()`で、`sum()`は`X`に対して行う。
+
+　1は人間にとって自然な読み方であるが、書き方と逆である。一方、2は書き方と順番は一致するものの、直感的ではない。しかし、Tidyverseな書き方、つまりパイプ演算子を用いた書き方は**書き方と読み方が一致**するメリットがある。たとえば、先ほどのコードはパイプ演算子を使うと`X %>% sum() %>% print()`と書く。
+
+　このパイプ演算子、実はごく簡単な仕組みである。`%>%`の左側のオブジェクトを右側オブジェクトの最初の引数として渡すだけであり、`X %>% 関数(Y)`は`関数(X, Y)`と同じだ。つまり、`X %>% sum(na.rm = TRUE)`は`sum(X, na.rm = TRUE)`と同じコードである。
+
+:::: {.columns}
+
+::: {.column width="45%"}
+#### 既存の書き方
+
+```{r}
+X <- c(2, 3, 5, NA, 11)
+print(sum(X, na.rm = TRUE))
+```
+:::
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="45%"}
+#### Tidyverseな書き方
+
+```{r}
+#| message: false
+library(tidyverse)
+X %>% sum(na.rm = TRUE) %>% print()
+```
+:::
+
+::::
+
+　`%>%`演算子はパイプ左側オブジェクトを右側オブジェクトの最初の引数として渡すと説明したたが、第二、三、...引数として渡すことも可能である。ただし、この場合はパイプ左側のオブジェクトが入る箇所に`.`と記入する必要がある。詳細は割愛するが、線形回帰分析の関数`lm()`は最初の引数が数式（formula型）であるため、データフレームを`lm()`に渡すためには、`lm()`内に`data = .`と書く必要がある。これは`.`の箇所にパイプ左側のオブジェクトが入ることを意味する。
+
+```{r}
+#| eval: false
+my_data %>% 
+  lm(y ~ x1 + x2 + x3, data = .)
+```
+
+　このパイプ演算子、実はRデフォルトで提供されているものでなく、{magrittr}というパッケージが提供する演算子である。しかし、2021年5月リリースされたR 4.1以降、R内蔵演算子としてパイプ演算子（`|>`）が追加されるようになった[^pipe-nii]。使い方は`%>%`と同じである。ただし、第一引数以外に使う位置指定子（place holder）が異なる。`%>%`の位置指定子は`.`であり、`|>`の位置指定子は`_`である[^place-holder]。本講義ではパイプ演算子として`%>%`を使用するが、`|>`を使っても同じ結果が得られる。
+
+[^pipe-nii]: NIIオンライン分析システムのRバージョンは4.1.2であるため、使用可能である。
+
+[^place-holder]: ただし、R 4.2.0以上のバージョンが必要である。
+
+## {dplyr}とは
+
+```{r}
+#| echo: false
+#| out-width: "250px"
+knitr::include_graphics("https://www.tidyverse.org/blog/2020/06/dplyr-1-0-0/dplyr.png")
+```
+
+　{dplyr}はTidyverseパッケージ群のコア・パッケージの一つである、表形式データ (データフレームやtibble)を操作するパッケージである。{dplyr}を使えば、第8回の講義で解説した行・列の抽出も簡単に可能となる。{dplyr}を使うためには別途`library(dplyr)`を実行する必要はなく、{tidyverse}を読み込む際に自動的に読み込まれる。
+
+　まずは本講義に使用するデータを読み込んでみよう。サポートページから`Micro09.csv`をダウンロードし、プロジェクト・フォルダーにアップロードする。宋はプロジェクト・フォルダー内に`Data`という名のフォルダーを作成し、そこにデータをアップロードした。
+
+```{r}
+#| message: false
+library(tidyverse) # tidyverseの読み込み
+# Dataフォルダー内のMicro09.csvを読み込み、dfという名のオブジェクトとして作業環境に格納
+df <- read_csv("Data/Micro09.csv")
+```
+
+　読み込んだデータを出力してみよう。
+
+```{r}
+df
+```
+
+　`dim()`関数を使うと`df`は186行、18列のデータであることが分かる。
+
+```{r}
+dim(df)
+```
+
+　また、18個の変数名のみを出力するためには`names()`関数を使う。
+
+```{r}
+names(df)
+```
+
+　この実習用データは186カ国の社会経済・政治体制のデータであり、18個の変数で構成されている。詳細は以下の通りである。
+
+|変数名|説明||変数名|説明|
+|---|---|---|---|---|
+|`Country`|国名||`OECD`|OECD加盟有無|
+|`Population`|人口||`HDI_2018`|人間開発指数 (2018年)|
+|`Area`|面積( $\text{km}^2$ )||`Polity_Score`|政治体制のスコア|
+|`GDP`|国内総生産（ドル）||`Polity_Type`|政治体制|
+|`PPP`|購買力平価国内総生産||`FH_PR`|政治的自由|
+|`GDP_per_capita`|一人当たりGDP||`FH_CL`|市民的自由|
+|`PPP_per_capita`|一人当たりPPP||`FH_Total`|`FH_PR` + `FH_CL`|
+|`G7`|G7加盟有無||`FH_Status`|自由の状態|
+|`G20`|G20加盟有無||`Continent`|大陸|
+
+## 列の抽出
+
+　データフレームから特定の**列**（column）を抽出する際は`select()`関数を使用する。`select()`関数の第一引数はデータフレームのオブジェクト名であり、第二引数以降では抽出する列名を記入する。第一引数がデータフレームであるため、パイプ演算子を使うことが可能である。
+
+:::: {.columns}
+
+::: {.column width="45%"}
+#### パイプを使わない書き方
+
+```r
+select(データ, 変数名1, 変数名2, ...)
+```
+:::
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="45%"}
+#### パイプを使う書き方
+
+```r
+データ %>%
+  select(変数名1, 変数名2, ...)
+```
+:::
+
+::::
+
+::: {.callout-important}
+## 注意: `select()`関数は複数ある!
+
+`select()`関数は{dplyr}だけでなく、{MASS}からも提供されるが、別の関数である。
+
+* {MASS}もデータ分析において頻繁に使われるパッケージであるため、`select()`だけだと、どのパッケージの`select()`か分からなくなる場合がある。
+* エラーが生じる場合は、`dplyr::select()`など、パッケージ名を指定すること
+:::
+
+　それではいくつかの例を紹介しよう。まずは`df`から`Country`、`Population`、`HDI_2018`列を抽出してみよう。
+
+```{r}
+df %>%                                  # dfから
+  select(Country, Population, HDI_2018) # Country, Population, HDI_2018のみ抽出する
+```
+
+　この操作を第8回で紹介した方法で行う場合、以下のようなコードとなる。どちらの方が可読性が良いかは一目瞭然だろう。
+
+:::: {.columns}
+
+::: {.column width="45%"}
+#### 既存の書き方
+
+```{r}
+df[, c("Country", "Population", "HDI_2018")]
+```
+:::
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="45%"}
+#### Tidyverseな書き方
+
+```{r}
+df %>%
+  select(Country, Population, HDI_2018)
+```
+:::
+
+::::
+
+　注意すべき点として、この時点では抽出・出力されただけだということだ。抽出したデータを引き続き使うためには、代入演算子（`<-`）を使って、抽出した結果を別途のオブジェクトとして格納する必要がある[^obj-overwrite]。たとえば、`df`から3つの変数を抽出したものを`df2`という名で作業環境内に格納するためには以下のように入力する。
+
+[^obj-overwrite]: 既存のオブジェクトに上書きすることも可能だが、あまり推奨しない。
+
+```r
+df2 <- df %>%
+  select(Country, Population, HDI_2018)
+```
+
+::: {.callout-important}
+## 課題では格納が必要な場合もある
+
+課題の問題には「出力せよ」だけでなく、「格納した上で出力せよ」といった形式もある。加工したデータを引き続き使うためには格納が必須であるため、問題文を注意深く読むこと。
+:::
+
+　`select()`関数のもう一つの特徴は、変数名の変更と抽出を**同時**に行えることだ。抽出する際、`新しい変数名 = 既存の変数名`と記入すれば、抽出と同時に変数名も変更できる。たとえば、`df`から`Country`、`Population`、`HDI_2018`を抽出し、`HDI_2018`の変数名を`HDI`に変更したい場合は以下のように書く。
+
+```{r}
+df %>%
+  select(Country, Population, HDI = HDI_2018)
+```
+
+　抽出は行わず、変数名のみを変更したい場合は`rename()`関数を使用する。使い方は`select()`関数と同じである。たとえば、`df`の`Population`を`Jinko`に、`Area`を`Menseki`に変更し、18列は温存する場合は以下のように書く。
+
+```{r}
+df %>%
+  rename(Jinko = Population, Menseki = Area)
+```
+
+　18の変数の中から17個を抽出したい場合は`select()`内に17つの変数名を入れれば良いが、これは非効率的である。`select()`関数は変数名の前に`!` (推奨)、または`-`を付けることで、特定の列を除外することができる。また、2つ以上の変数を除外する場合、変数名を`c()`や、後述する`:`でまとめることもできる。。
+
+　たとえば、`df`から`Population`と`Area`、`GDP`、`PPP`列を除外するコードは以下の通りである。
+
+```{r}
+df %>%
+  select(!c(Population, Area, GDP, PPP))
+```
+
+　以上の例だと、`Population`から`PPP`は連続して位置する変数であるが、{dplyr}では`:`演算子を使うと、XXからYYまでといった選択ができる。たとえば、「`Population`から`PPP`まで」は「`Population:PPP`」と表記する。つまり、上記のコードは以下のように書くこともできる。
+
+```{r}
+df %>%
+  select(!c(Population:PPP))
+```
+
+　むろん、`:`は否定演算子じゃなくても使える。`df`の`Country`〜`PPP`, `HDI_2018`列を抽出するコードは以下の通りである。
+
+```{r}
+df %>%
+  select(Country:PPP, HDI_2018)
+```
+
+　以下では変数を選択するより洗練された方法について解説する。変数名が特定の文字列で始まる列を選択する関数として`starts_with()`がある。たとえば、`df`から`Country`, `"FH"`で始まる列を抽出する場合は以下のように書く。
+
+```{r}
+df %>%
+  select(Country, starts_with("FH"))
+```
+
+　`starts_with()`の前に`!`を付けると該当する列が除外される。たとえば、`"GDP"`と`"PPP"`で始まる列を除外する場合は`starts_with()`内にcharacter型ベクトルを入れる。
+
+```{r}
+df %>%
+  select(!starts_with(c("GDP", "PPP")))
+```
+
+　`starts_with()`に似たような機能をする関数として特定の文字列で終わる列を選択する`ends_with()`と特定の文字列を含む列を選択する`contains()`がある。これらの使い方は`starts_with()`と同じだ。
+
+　続いて、列の順番を変更する方法を紹介する。実は`select()`関数は書かれた順番で列を抽出する。たとえば、`G7`から`OECD`列を`Country`と`Population`の間へ移動する場合は以下のように書く。
+
+```{r}
+df %>%
+  select(Country, G7:OECD,
+         Population:PPP_per_capita, HDI_2018:Continent)
+```
+
+　しかし、いくら`:`演算子があるとはいえ、全ての変数名を書く必要がある。抽出と同時に順番を変更するなら`select()`が便利だが、順番のみを変更するなら`relocate()`関数がおすすめである。`relocate()`関数は移動する変数を指定し、`.after`または`.before`で移動先を指定する必要がある。
+
+```{r}
+#| eval: false
+# 特定の変数の後ろへ移動
+データ %>%
+  relocate(移動したい変数名, .after = 変更先)
+# 特定の変数の前へ移動
+データ %>%
+  relocate(移動したい変数名, .before = 変更先)
+```
+
+　たとえば、`G7`から`OECD`列を`Country`の後ろへ移動させる場合は以下のように書く。
+
+```{r}
+df %>%
+  relocate(G7:OECD, .after = Country) # .before = PopulationもOK
+```
+
+## 行の抽出
+
+　**列**の抽出は`select()`関数を使うが、**行**の抽出には`filter()`関数を使う。行の抽出は基本的に、**指定された条件に合致する行を抽出する**ことを意味する。したがって、`filter()`関数を使うためには論理演算子（`==`、`>`、`&`など）の理解が必須だ。
+
+　`filter()`関数の使い方は以下の通りである。パイプを使わずデータオブジェクト名を`filter()`の第一引数として使っても良い。
+
+```{r}
+#| eval: false
+データ %>%
+  filter(条件1, 条件2, ...)
+```
+
+　たとえば、`df`から`Continent`の値が`"Europe"`である行を抽出し、`Country`〜`PPP`, `HDI_2018`列を抽出し、`HDI_2018`は`HDI`に変更するコードは以下の通りである。行の抽出と列の抽出を同時に行っているため、`filter()`関数と`select()`関数を組み合わせる必要がある。
+
+```{r}
+df %>%
+  filter(Continent == "Oceania") %>%
+  select(Country:PPP, HDI = HDI_2018)
+```
+
+　ただし、`filter()`と`select()`の順番に注意しよう。`filter()`が3行目、`select()`が2行目に位置する場合、以下のコードは走らない。なぜなら、`select()`関数を通すことで`Continent`列が除外されるからだ。
+
+　`filter()`内の条件式は二つ以上でも使える。たとえば、二つの条件を**同時に満たす**行を抽出するとしよう。この場合はAND演算子（`&`）を使う。たとえば、`df`から`Continent`が`"Asia"` (条件1)、`HDI_2018`が0.8以上 (条件2)の行を抽出し、`Country`と`HDI_2018`列を抽出する場合、以下のように書く。
+
+```{r}
+df %>%
+  filter(Continent == "Asia" & HDI_2018 >= 0.8) %>%
+  select(Country, HDI_2018)
+```
+
+　二つの条件式を`&`で繋いだことに注意されたい。`filter()`関数で複数の条件式を使う場合は`,`、`&`、`|`のいずれかを使うが、`,`と`&`は同じ（=AND演算子）である。混乱を避けるために`&`の使用を推奨するが、`,`を使っても良い。
+
+　もう一つの演算子はOR演算子（`|`）である。これは2つ以上の条件のうち、**一つ以上の条件を満たす**行を抽出することを意味する。たとえば、`df`から`Continent`が`"Asia"`（条件1）か`"Oceania"`（条件2）の行を抽出し、`Country`と`HDI_2018`、`Continent`列を抽出する場合、以下のように書く。
+
+```{r}
+df %>%
+  filter(Continent == "Asia" | Continent == "Oceania") %>%
+  select(Country, HDI_2018, Continent)
+```
+
+　AND演算子とOR演算子は同時に使うこともできる。たとえば、`df`から`Continent`が`"Asia"`（条件1）か`"Oceania"`（条件2）でありながら、`HDI_2018`が0.9以上 (条件3)の行を抽出し、`Country`と`HDI_2018`、`Continent`列を抽出する場合は以下のようになる。ただし、AND演算子とOR演算子を同時に使用する場合は適切な箇所にカッコ（`()`）を付ける必要がある。
+
+```{r}
+df %>%
+  filter((Continent == "Asia" | Continent == "Oceania"), 
+         HDI_2018 >= 0.9) %>%
+  select(Country, HDI_2018, Continent)
+```
+
+　実は上記のコード、もう少し効率化することもできる。そのためには`%in%`演算子を使う必要があるが、`==`を用いる複数の条件式がOR演算子で繋がっている場合、大変便利な演算子である。たとえば、`Continent`の値が`c("Asia", "Oceainia")`のいずれかに該当するかどうかを判定する場合は、これまで`(Continent == "Asia" | Continent == "Oceania")`と書いたが、これは`Continent %in% c("Asia", "Oceania")`と同じコードである。したがって、上記のコードは以下のように簡素化することもできる。
+
+```{r}
+df %>%
+  filter(Continent %in% c("Asia", "Oceania"), 
+         HDI_2018 >= 0.9) %>%
+  select(Country, HDI_2018, Continent)
+```
+
+## 欠損値の扱い
+
+　データには欠損値が含まれていることが多く、Rでは欠損値を`NA`と表記する。欠損値が含まれている場合、多重代入法（multiple imputation）などの処理を施すことも可能だが、これはかなり高度の知識を要する。多重代入法を使わない場合は、欠損値を含むケースを除外することが有効である。なぜなら欠損値を含まれている場合、関数が使えないケースも多いからだ[^na]。たとえば、一人あたり購買力平価GDP（`PPP_per_capita`）には欠損値が含まれている。この場合、平均値を計算する`mean()`関数はそのまま使えない。
+
+```{r}
+mean(df$PPP_per_capita)
+```
+
+　この場合、`mean()`関数内に`na.rm = TRUE`を付けて欠損していない値の平均値を求めるように指定するか、予め欠損値が含まれているケースを除外する必要がある。ここでは後者について説明する。
+
+[^na]: 関数によっては欠損値が含まれているケースを自動的に除外してくれる場合もある。
+
+　まず、`df`の`PPP`が欠損している行を抽出し、`Country`から`PPP`列まで出力してみよう。`PPP`が欠損している場合は`NA`の値を取るため、`filter()`内に`PPP == NA`と条件式を書けば動くかも知れない。
+
+```{r}
+df %>%
+  filter(PPP == NA) %>%
+  select(Country:PPP)
+```
+
+　いや、そうでもなかった。実はある値が`NA`か否かを判定するために`==`演算子は使えない。代わりに`is.na()`関数を使用する。
+
+```{r}
+df %>%
+  filter(is.na(PPP)) %>%
+  select(Country:PPP)
+```
+
+　しかし、我々が本当にやりたいことは`PPP`が欠損している行のみ抽出するのではなく、 `PPP`が欠損している行を**除外**することだ。ここでも否定を意味する`!`が使える。
+
+```{r}
+df %>%
+  filter(!is.na(PPP)) %>%
+  select(Country:PPP)
+```
+
+　このように`PPP`が欠損していない行だけが抽出された。また、より簡単な方法として`drop_na()`関数を使うこともできる。これは`()`内で指定した変数が欠損している行をすべて除外する関数であり、複数の変数を同時に指定できるので便利である。たとえば、`df`から`PPP`と`Polity_Score`が欠損していない行だけを抽出し、`Country`から`PPP`、そして`Polity_Score`列を残してみよう。
+
+```{r}
+df %>%
+  drop_na(PPP, Polity_Score) %>%
+  select(Country:PPP, Polity_Score)
+```
+
+## 行のソート
+
+　最後に行のソート（並び替え）について解説する。行のソートには`arrange()`関数を使用する。第一引数はデータフレームのオブジェクトであり、第二引数以降は並び替えの基準となる変数名である。ソートは基本的には昇順、つまり値が小さい行が上に表示される。
+
+　たとえば、`df`から`Continent`の値が`"Africa"`の行のみを抽出し、`Polity_Score`が小さい国[^polity]を上位にする。そして、`Country`と`PPP_per_capita`、`Polity_Score`列のみ残すコードは以下の通りである。
+
+[^polity]: Polity Scoreが高いほど、より民主主義に近いことを意味する。
+
+```{r}
+df %>%
+  filter(Continent == "Africa") %>%
+  arrange(Polity_Score) %>%
+  select(Country, PPP_per_capita, Polity_Score)
+```
+
+　もし、`Polity_Score`が高い国を上位にしたい場合は、変数名を`desc()`関数で囲む。
+
+```{r}
+df %>%
+  filter(Continent == "Africa") %>%
+  arrange(desc(Polity_Score)) %>%
+  select(Country, PPP_per_capita, Polity_Score)
+```
+
+　しかし、`Polity_Score`が同点の場合はどうなるだろうか。この場合、第2の基準となる変数を指定すると、第1基準が同点の場合、第2基準変数の値に応じてソートされる。以下は、`Polity_Score`が高い国を上位にし、同点の場合は`PPP_per_capita`が高い国を上位にするコード（さらに、変数名も変更）である。
+
+```{r}
+df %>%
+  filter(Continent == "Africa") %>%
+  arrange(desc(Polity_Score), desc(PPP_per_capita)) %>%
+  select(Country, PPP = PPP_per_capita, Polity = Polity_Score)
+```
+
+## 教科書
+
+* パイプ演算子: 教科書[第12.2章](https://www.jaysong.net/RBook/datahandling1.html#handling1-pipe)
+* 列の抽出: 教科書[第12.3章](https://www.jaysong.net/RBook/datahandling1.html#handling1-select)
+* 行の抽出: 教科書[第12.4章](https://www.jaysong.net/RBook/datahandling1.html#handling1-filter)
+* 行のソート: 教科書[第12.5章](https://www.jaysong.net/RBook/datahandling1.html#handling1-arrange)

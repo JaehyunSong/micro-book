@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.305">
+<meta name="generator" content="quarto-0.9.421">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -15,6 +15,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -62,11 +125,12 @@ gtag('js', new Date());
 gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -179,14 +243,6 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
         <li>
     <a class="dropdown-item" href="../HW/HW05.html">
  <span class="dropdown-text">第5回課題</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../HW/HW07.html">
- <span class="dropdown-text">第7回課題</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../HW/HW08.html">
- <span class="dropdown-text">第8回課題</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../HW/HW09.html">
@@ -319,7 +375,26 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">目次</h2>
+   
+  <ul>
+  <li><a href="#スライド" id="toc-スライド" class="nav-link active" data-scroll-target="#スライド">スライド</a></li>
+  <li><a href="#tidyverseとパイプ演算子" id="toc-tidyverseとパイプ演算子" class="nav-link" data-scroll-target="#tidyverseとパイプ演算子">Tidyverseとパイプ演算子</a>
+  <ul class="collapse">
+  <li><a href="#tidyverseとは" id="toc-tidyverseとは" class="nav-link" data-scroll-target="#tidyverseとは">Tidyverseとは</a></li>
+  <li><a href="#パイプ演算子" id="toc-パイプ演算子" class="nav-link" data-scroll-target="#パイプ演算子">パイプ演算子</a></li>
+  </ul></li>
+  <li><a href="#dplyrとは" id="toc-dplyrとは" class="nav-link" data-scroll-target="#dplyrとは">{dplyr}とは</a></li>
+  <li><a href="#列の抽出" id="toc-列の抽出" class="nav-link" data-scroll-target="#列の抽出">列の抽出</a></li>
+  <li><a href="#行の抽出" id="toc-行の抽出" class="nav-link" data-scroll-target="#行の抽出">行の抽出</a></li>
+  <li><a href="#欠損値の扱い" id="toc-欠損値の扱い" class="nav-link" data-scroll-target="#欠損値の扱い">欠損値の扱い</a></li>
+  <li><a href="#行のソート" id="toc-行のソート" class="nav-link" data-scroll-target="#行のソート">行のソート</a></li>
+  <li><a href="#教科書" id="toc-教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -346,12 +421,829 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="スライド">スライド</h2>
 <p><a href="../slide/slide09.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a></p>
 <iframe class="slide-deck" src="../slide/slide09.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+</section>
+<section id="tidyverseとパイプ演算子" class="level2">
+<h2 class="anchored" data-anchor-id="tidyverseとパイプ演算子">Tidyverseとパイプ演算子</h2>
+<section id="tidyverseとは" class="level3">
+<h3 class="anchored" data-anchor-id="tidyverseとは">Tidyverseとは</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.tidyverse.org/images/tidyverse-default.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>　Tidyverse（たいでぃばーす）とはデータサイエンスのために考案された、強い信念と思想に基づいた<strong>Rパッケージの集合</strong>である。具体的には{dplyr}、{tidyr}、{readr}、{ggplot2}など数十パッケージで構成されており、Tidyverseに属するパッケージは思想、文法およびデータ構造（tidy data; 整然データ）を共有しる。また、ベクトルやデータフレーム、関数などのオブジェクトを<strong>パイプ演算子</strong> (<code>%&gt;%</code>)で繋ぐという点が特徴である。これらのパッケージ群は{tidyverse}をインストールすることで導入可能であり、NIIオンライン分析システムでは既に導入済みである。</p>
+<p>　2010年代中盤以降、Rの書き方はtidyverseな書き方が的着しているため、Rのコードを作成する際は<code>library(tidyverse)</code>から始めよう。</p>
+</section>
+<section id="パイプ演算子" class="level3">
+<h3 class="anchored" data-anchor-id="パイプ演算子">パイプ演算子</h3>
+<p>　Tidyverseにおいてオブジェクトはパイプ演算子（<code>%&gt;%</code>）で繋がっている。なぜパイプ演算子を使うのだろうか。一般的なプログラミング言語に共通する書き方は<strong>書き方と読み方が逆</strong>という特徴を持つ。たとえば、「ベクトルXの和を出力する」コードは<code>print(sum(X))</code>であり、<code>print</code>、<code>sum</code>、<code>X</code>の順で書く。このコードの読み方には二通りがある。</p>
+<ol type="1">
+<li>読み方1: <code>X</code>を<code>sum()</code>し、<code>print()</code>する。</li>
+<li>読み方2: <code>print()</code>する内容は<code>sum()</code>で、<code>sum()</code>は<code>X</code>に対して行う。</li>
+</ol>
+<p>　1は人間にとって自然な読み方であるが、書き方と逆である。一方、2は書き方と順番は一致するものの、直感的ではない。しかし、Tidyverseな書き方、つまりパイプ演算子を用いた書き方は<strong>書き方と読み方が一致</strong>するメリットがある。たとえば、先ほどのコードはパイプ演算子を使うと<code>X %&gt;% sum() %&gt;% print()</code>と書く。</p>
+<p>　このパイプ演算子、実はごく簡単な仕組みである。<code>%&gt;%</code>の左側のオブジェクトを右側オブジェクトの最初の引数として渡すだけであり、<code>X %&gt;% 関数(Y)</code>は<code>関数(X, Y)</code>と同じだ。つまり、<code>X %&gt;% sum(na.rm = TRUE)</code>は<code>sum(X, na.rm = TRUE)</code>と同じコードである。</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<section id="既存の書き方" class="level4">
+<h4 class="anchored" data-anchor-id="既存の書き方">既存の書き方</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">11</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sum</span>(X, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21</code></pre>
+</div>
+</div>
+</section>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<section id="tidyverseな書き方" class="level4">
+<h4 class="anchored" data-anchor-id="tidyverseな書き方">Tidyverseな書き方</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21</code></pre>
+</div>
+</div>
+</section>
+</div>
+</div>
+<p>　<code>%&gt;%</code>演算子はパイプ左側オブジェクトを右側オブジェクトの最初の引数として渡すと説明したたが、第二、三、…引数として渡すことも可能である。ただし、この場合はパイプ左側のオブジェクトが入る箇所に<code>.</code>と記入する必要がある。詳細は割愛するが、線形回帰分析の関数<code>lm()</code>は最初の引数が数式（formula型）であるため、データフレームを<code>lm()</code>に渡すためには、<code>lm()</code>内に<code>data = .</code>と書く必要がある。これは<code>.</code>の箇所にパイプ左側のオブジェクトが入ることを意味する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> .)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>　このパイプ演算子、実はRデフォルトで提供されているものでなく、{magrittr}というパッケージが提供する演算子である。しかし、2021年5月リリースされたR 4.1以降、R内蔵演算子としてパイプ演算子（<code>|&gt;</code>）が追加されるようになった<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。使い方は<code>%&gt;%</code>と同じである。ただし、第一引数以外に使う位置指定子（place holder）が異なる。<code>%&gt;%</code>の位置指定子は<code>.</code>であり、<code>|&gt;</code>の位置指定子は<code>_</code>である<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。本講義ではパイプ演算子として<code>%&gt;%</code>を使用するが、<code>|&gt;</code>を使っても同じ結果が得られる。</p>
+</section>
+</section>
+<section id="dplyrとは" class="level2">
+<h2 class="anchored" data-anchor-id="dplyrとは">{dplyr}とは</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.tidyverse.org/blog/2020/06/dplyr-1-0-0/dplyr.png" class="img-fluid figure-img" width="250"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>　{dplyr}はTidyverseパッケージ群のコア・パッケージの一つである、表形式データ (データフレームやtibble)を操作するパッケージである。{dplyr}を使えば、第8回の講義で解説した行・列の抽出も簡単に可能となる。{dplyr}を使うためには別途<code>library(dplyr)</code>を実行する必要はなく、{tidyverse}を読み込む際に自動的に読み込まれる。</p>
+<p>　まずは本講義に使用するデータを読み込んでみよう。サポートページから<code>Micro09.csv</code>をダウンロードし、プロジェクト・フォルダーにアップロードする。宋はプロジェクト・フォルダー内に<code>Data</code>という名のフォルダーを作成し、そこにデータをアップロードした。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># tidyverseの読み込み</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataフォルダー内のMicro09.csvを読み込み、dfという名のオブジェクトとして作業環境に格納</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro09.csv"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>　読み込んだデータを出力してみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 18
+   Country  Population   Area    GDP     PPP GDP_per_capita PPP_per_capita    G7
+   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;
+ 1 Afghani…   38928346 6.53e5 1.91e4  8.27e4           491.          2125.     0
+ 2 Albania     2877797 2.74e4 1.53e4  3.97e4          5309.         13781.     0
+ 3 Algeria    43851044 2.38e6 1.70e5  4.97e5          3876.         11324.     0
+ 4 Andorra       77265 4.7 e2 3.15e3 NA              40821.            NA      0
+ 5 Angola     32866272 1.25e6 9.46e4  2.19e5          2879.          6649.     0
+ 6 Antigua…      97929 4.4 e2 1.73e3  2.08e3         17643.         21267.     0
+ 7 Argenti…   45195774 2.74e6 4.50e5  1.04e6          9949.         22938.     0
+ 8 Armenia     2963243 2.85e4 1.37e4  3.84e4          4614.         12974.     0
+ 9 Austral…   25499884 7.68e6 1.39e6  1.28e6         54615.         50001.     0
+10 Austria     9006398 8.24e4 4.46e5  5.03e5         49555.         55824.     0
+# … with 176 more rows, and 10 more variables: G20 &lt;dbl&gt;, OECD &lt;dbl&gt;,
+#   HDI_2018 &lt;dbl&gt;, Polity_Score &lt;dbl&gt;, Polity_Type &lt;chr&gt;, FH_PR &lt;dbl&gt;,
+#   FH_CL &lt;dbl&gt;, FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>　<code>dim()</code>関数を使うと<code>df</code>は186行、18列のデータであることが分かる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 186  18</code></pre>
+</div>
+</div>
+<p>　また、18個の変数名のみを出力するためには<code>names()</code>関数を使う。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Country"        "Population"     "Area"           "GDP"           
+ [5] "PPP"            "GDP_per_capita" "PPP_per_capita" "G7"            
+ [9] "G20"            "OECD"           "HDI_2018"       "Polity_Score"  
+[13] "Polity_Type"    "FH_PR"          "FH_CL"          "FH_Total"      
+[17] "FH_Status"      "Continent"     </code></pre>
+</div>
+</div>
+<p>　この実習用データは186カ国の社会経済・政治体制のデータであり、18個の変数で構成されている。詳細は以下の通りである。</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>説明</th>
+<th></th>
+<th>変数名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Country</code></td>
+<td>国名</td>
+<td></td>
+<td><code>OECD</code></td>
+<td>OECD加盟有無</td>
+</tr>
+<tr class="even">
+<td><code>Population</code></td>
+<td>人口</td>
+<td></td>
+<td><code>HDI_2018</code></td>
+<td>人間開発指数 (2018年)</td>
+</tr>
+<tr class="odd">
+<td><code>Area</code></td>
+<td>面積( <span class="math inline">\(\text{km}^2\)</span> )</td>
+<td></td>
+<td><code>Polity_Score</code></td>
+<td>政治体制のスコア</td>
+</tr>
+<tr class="even">
+<td><code>GDP</code></td>
+<td>国内総生産（ドル）</td>
+<td></td>
+<td><code>Polity_Type</code></td>
+<td>政治体制</td>
+</tr>
+<tr class="odd">
+<td><code>PPP</code></td>
+<td>購買力平価国内総生産</td>
+<td></td>
+<td><code>FH_PR</code></td>
+<td>政治的自由</td>
+</tr>
+<tr class="even">
+<td><code>GDP_per_capita</code></td>
+<td>一人当たりGDP</td>
+<td></td>
+<td><code>FH_CL</code></td>
+<td>市民的自由</td>
+</tr>
+<tr class="odd">
+<td><code>PPP_per_capita</code></td>
+<td>一人当たりPPP</td>
+<td></td>
+<td><code>FH_Total</code></td>
+<td><code>FH_PR</code> + <code>FH_CL</code></td>
+</tr>
+<tr class="even">
+<td><code>G7</code></td>
+<td>G7加盟有無</td>
+<td></td>
+<td><code>FH_Status</code></td>
+<td>自由の状態</td>
+</tr>
+<tr class="odd">
+<td><code>G20</code></td>
+<td>G20加盟有無</td>
+<td></td>
+<td><code>Continent</code></td>
+<td>大陸</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="列の抽出" class="level2">
+<h2 class="anchored" data-anchor-id="列の抽出">列の抽出</h2>
+<p>　データフレームから特定の<strong>列</strong>（column）を抽出する際は<code>select()</code>関数を使用する。<code>select()</code>関数の第一引数はデータフレームのオブジェクト名であり、第二引数以降では抽出する列名を記入する。第一引数がデータフレームであるため、パイプ演算子を使うことが可能である。</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<section id="パイプを使わない書き方" class="level4">
+<h4 class="anchored" data-anchor-id="パイプを使わない書き方">パイプを使わない書き方</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(データ, 変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<section id="パイプを使う書き方" class="level4">
+<h4 class="anchored" data-anchor-id="パイプを使う書き方">パイプを使う書き方</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+注意: <code>select()</code>関数は複数ある!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>select()</code>関数は{dplyr}だけでなく、{MASS}からも提供されるが、別の関数である。</p>
+<ul>
+<li>{MASS}もデータ分析において頻繁に使われるパッケージであるため、<code>select()</code>だけだと、どのパッケージの<code>select()</code>か分からなくなる場合がある。</li>
+<li>エラーが生じる場合は、<code>dplyr::select()</code>など、パッケージ名を指定すること</li>
+</ul>
+</div>
+</div>
+<p>　それではいくつかの例を紹介しよう。まずは<code>df</code>から<code>Country</code>、<code>Population</code>、<code>HDI_2018</code>列を抽出してみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span>                                  <span class="co"># dfから</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, Population, HDI_2018) <span class="co"># Country, Population, HDI_2018のみ抽出する</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 3
+   Country             Population HDI_2018
+   &lt;chr&gt;                    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Afghanistan           38928346    0.496
+ 2 Albania                2877797    0.791
+ 3 Algeria               43851044    0.759
+ 4 Andorra                  77265    0.857
+ 5 Angola                32866272    0.574
+ 6 Antigua and Barbuda      97929    0.776
+ 7 Argentina             45195774    0.83 
+ 8 Armenia                2963243    0.76 
+ 9 Australia             25499884    0.938
+10 Austria                9006398    0.914
+# … with 176 more rows</code></pre>
+</div>
+</div>
+<p>　この操作を第8回で紹介した方法で行う場合、以下のようなコードとなる。どちらの方が可読性が良いかは一目瞭然だろう。</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<section id="既存の書き方-1" class="level4">
+<h4 class="anchored" data-anchor-id="既存の書き方-1">既存の書き方</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Population"</span>, <span class="st">"HDI_2018"</span>)]</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 3
+   Country             Population HDI_2018
+   &lt;chr&gt;                    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Afghanistan           38928346    0.496
+ 2 Albania                2877797    0.791
+ 3 Algeria               43851044    0.759
+ 4 Andorra                  77265    0.857
+ 5 Angola                32866272    0.574
+ 6 Antigua and Barbuda      97929    0.776
+ 7 Argentina             45195774    0.83 
+ 8 Armenia                2963243    0.76 
+ 9 Australia             25499884    0.938
+10 Austria                9006398    0.914
+# … with 176 more rows</code></pre>
+</div>
+</div>
+</section>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<section id="tidyverseな書き方-1" class="level4">
+<h4 class="anchored" data-anchor-id="tidyverseな書き方-1">Tidyverseな書き方</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, Population, HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 3
+   Country             Population HDI_2018
+   &lt;chr&gt;                    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Afghanistan           38928346    0.496
+ 2 Albania                2877797    0.791
+ 3 Algeria               43851044    0.759
+ 4 Andorra                  77265    0.857
+ 5 Angola                32866272    0.574
+ 6 Antigua and Barbuda      97929    0.776
+ 7 Argentina             45195774    0.83 
+ 8 Armenia                2963243    0.76 
+ 9 Australia             25499884    0.938
+10 Austria                9006398    0.914
+# … with 176 more rows</code></pre>
+</div>
+</div>
+</section>
+</div>
+</div>
+<p>　注意すべき点として、この時点では抽出・出力されただけだということだ。抽出したデータを引き続き使うためには、代入演算子（<code>&lt;-</code>）を使って、抽出した結果を別途のオブジェクトとして格納する必要がある<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。たとえば、<code>df</code>から3つの変数を抽出したものを<code>df2</code>という名で作業環境内に格納するためには以下のように入力する。</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, Population, HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+課題では格納が必要な場合もある
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>課題の問題には「出力せよ」だけでなく、「格納した上で出力せよ」といった形式もある。加工したデータを引き続き使うためには格納が必須であるため、問題文を注意深く読むこと。</p>
+</div>
+</div>
+<p>　<code>select()</code>関数のもう一つの特徴は、変数名の変更と抽出を<strong>同時</strong>に行えることだ。抽出する際、<code>新しい変数名 = 既存の変数名</code>と記入すれば、抽出と同時に変数名も変更できる。たとえば、<code>df</code>から<code>Country</code>、<code>Population</code>、<code>HDI_2018</code>を抽出し、<code>HDI_2018</code>の変数名を<code>HDI</code>に変更したい場合は以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, Population, <span class="at">HDI =</span> HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 3
+   Country             Population   HDI
+   &lt;chr&gt;                    &lt;dbl&gt; &lt;dbl&gt;
+ 1 Afghanistan           38928346 0.496
+ 2 Albania                2877797 0.791
+ 3 Algeria               43851044 0.759
+ 4 Andorra                  77265 0.857
+ 5 Angola                32866272 0.574
+ 6 Antigua and Barbuda      97929 0.776
+ 7 Argentina             45195774 0.83 
+ 8 Armenia                2963243 0.76 
+ 9 Australia             25499884 0.938
+10 Austria                9006398 0.914
+# … with 176 more rows</code></pre>
+</div>
+</div>
+<p>　抽出は行わず、変数名のみを変更したい場合は<code>rename()</code>関数を使用する。使い方は<code>select()</code>関数と同じである。たとえば、<code>df</code>の<code>Population</code>を<code>Jinko</code>に、<code>Area</code>を<code>Menseki</code>に変更し、18列は温存する場合は以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Jinko =</span> Population, <span class="at">Menseki =</span> Area)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 18
+   Country      Jinko Menseki    GDP     PPP GDP_per_capita PPP_per_capita    G7
+   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;
+ 1 Afghanistan 3.89e7  652860 1.91e4  8.27e4           491.          2125.     0
+ 2 Albania     2.88e6   27400 1.53e4  3.97e4          5309.         13781.     0
+ 3 Algeria     4.39e7 2381740 1.70e5  4.97e5          3876.         11324.     0
+ 4 Andorra     7.73e4     470 3.15e3 NA              40821.            NA      0
+ 5 Angola      3.29e7 1246700 9.46e4  2.19e5          2879.          6649.     0
+ 6 Antigua an… 9.79e4     440 1.73e3  2.08e3         17643.         21267.     0
+ 7 Argentina   4.52e7 2736690 4.50e5  1.04e6          9949.         22938.     0
+ 8 Armenia     2.96e6   28470 1.37e4  3.84e4          4614.         12974.     0
+ 9 Australia   2.55e7 7682300 1.39e6  1.28e6         54615.         50001.     0
+10 Austria     9.01e6   82409 4.46e5  5.03e5         49555.         55824.     0
+# … with 176 more rows, and 10 more variables: G20 &lt;dbl&gt;, OECD &lt;dbl&gt;,
+#   HDI_2018 &lt;dbl&gt;, Polity_Score &lt;dbl&gt;, Polity_Type &lt;chr&gt;, FH_PR &lt;dbl&gt;,
+#   FH_CL &lt;dbl&gt;, FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>　18の変数の中から17個を抽出したい場合は<code>select()</code>内に17つの変数名を入れれば良いが、これは非効率的である。<code>select()</code>関数は変数名の前に<code>!</code> (推奨)、または<code>-</code>を付けることで、特定の列を除外することができる。また、2つ以上の変数を除外する場合、変数名を<code>c()</code>や、後述する<code>:</code>でまとめることもできる。。</p>
+<p>　たとえば、<code>df</code>から<code>Population</code>と<code>Area</code>、<code>GDP</code>、<code>PPP</code>列を除外するコードは以下の通りである。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(Population, Area, GDP, PPP))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 14
+   Country GDP_per_capita PPP_per_capita    G7   G20  OECD HDI_2018 Polity_Score
+   &lt;chr&gt;            &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Afghan…           491.          2125.     0     0     0    0.496           -1
+ 2 Albania          5309.         13781.     0     0     0    0.791            9
+ 3 Algeria          3876.         11324.     0     0     0    0.759            2
+ 4 Andorra         40821.            NA      0     0     0    0.857           NA
+ 5 Angola           2879.          6649.     0     0     0    0.574           -2
+ 6 Antigu…         17643.         21267.     0     0     0    0.776           NA
+ 7 Argent…          9949.         22938.     0     1     0    0.83             9
+ 8 Armenia          4614.         12974.     0     0     0    0.76             7
+ 9 Austra…         54615.         50001.     0     1     1    0.938           10
+10 Austria         49555.         55824.     0     0     1    0.914           10
+# … with 176 more rows, and 6 more variables: Polity_Type &lt;chr&gt;, FH_PR &lt;dbl&gt;,
+#   FH_CL &lt;dbl&gt;, FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>　以上の例だと、<code>Population</code>から<code>PPP</code>は連続して位置する変数であるが、{dplyr}では<code>:</code>演算子を使うと、XXからYYまでといった選択ができる。たとえば、「<code>Population</code>から<code>PPP</code>まで」は「<code>Population:PPP</code>」と表記する。つまり、上記のコードは以下のように書くこともできる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(Population<span class="sc">:</span>PPP))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 14
+   Country GDP_per_capita PPP_per_capita    G7   G20  OECD HDI_2018 Polity_Score
+   &lt;chr&gt;            &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Afghan…           491.          2125.     0     0     0    0.496           -1
+ 2 Albania          5309.         13781.     0     0     0    0.791            9
+ 3 Algeria          3876.         11324.     0     0     0    0.759            2
+ 4 Andorra         40821.            NA      0     0     0    0.857           NA
+ 5 Angola           2879.          6649.     0     0     0    0.574           -2
+ 6 Antigu…         17643.         21267.     0     0     0    0.776           NA
+ 7 Argent…          9949.         22938.     0     1     0    0.83             9
+ 8 Armenia          4614.         12974.     0     0     0    0.76             7
+ 9 Austra…         54615.         50001.     0     1     1    0.938           10
+10 Austria         49555.         55824.     0     0     1    0.914           10
+# … with 176 more rows, and 6 more variables: Polity_Type &lt;chr&gt;, FH_PR &lt;dbl&gt;,
+#   FH_CL &lt;dbl&gt;, FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>　むろん、<code>:</code>は否定演算子じゃなくても使える。<code>df</code>の<code>Country</code>〜<code>PPP</code>, <code>HDI_2018</code>列を抽出するコードは以下の通りである。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country<span class="sc">:</span>PPP, HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 6
+   Country             Population    Area      GDP      PPP HDI_2018
+   &lt;chr&gt;                    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Afghanistan           38928346  652860   19101.   82737.    0.496
+ 2 Albania                2877797   27400   15278.   39658.    0.791
+ 3 Algeria               43851044 2381740  169988.  496572.    0.759
+ 4 Andorra                  77265     470    3154.      NA     0.857
+ 5 Angola                32866272 1246700   94635.  218533.    0.574
+ 6 Antigua and Barbuda      97929     440    1728.    2083.    0.776
+ 7 Argentina             45195774 2736690  449663. 1036721.    0.83 
+ 8 Armenia                2963243   28470   13673.   38446.    0.76 
+ 9 Australia             25499884 7682300 1392681. 1275027.    0.938
+10 Austria                9006398   82409  446315.  502771.    0.914
+# … with 176 more rows</code></pre>
+</div>
+</div>
+<p>　以下では変数を選択するより洗練された方法について解説する。変数名が特定の文字列で始まる列を選択する関数として<code>starts_with()</code>がある。たとえば、<code>df</code>から<code>Country</code>, <code>"FH"</code>で始まる列を抽出する場合は以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, <span class="fu">starts_with</span>(<span class="st">"FH"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 5
+   Country             FH_PR FH_CL FH_Total FH_Status
+   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    
+ 1 Afghanistan            13    14       27 NF       
+ 2 Albania                27    40       67 PF       
+ 3 Algeria                10    24       34 NF       
+ 4 Andorra                39    55       94 F        
+ 5 Angola                 11    21       32 NF       
+ 6 Antigua and Barbuda    33    52       85 F        
+ 7 Argentina              35    50       85 F        
+ 8 Armenia                21    32       53 PF       
+ 9 Australia              40    57       97 F        
+10 Austria                37    56       93 F        
+# … with 176 more rows</code></pre>
+</div>
+</div>
+<p>　<code>starts_with()</code>の前に<code>!</code>を付けると該当する列が除外される。たとえば、<code>"GDP"</code>と<code>"PPP"</code>で始まる列を除外する場合は<code>starts_with()</code>内にcharacter型ベクトルを入れる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">!</span><span class="fu">starts_with</span>(<span class="fu">c</span>(<span class="st">"GDP"</span>, <span class="st">"PPP"</span>)))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 14
+   Country Population   Area    G7   G20  OECD HDI_2018 Polity_Score Polity_Type
+   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;      
+ 1 Afghan…   38928346 6.53e5     0     0     0    0.496           -1 Closed Ano…
+ 2 Albania    2877797 2.74e4     0     0     0    0.791            9 Democracy  
+ 3 Algeria   43851044 2.38e6     0     0     0    0.759            2 Open Anocr…
+ 4 Andorra      77265 4.7 e2     0     0     0    0.857           NA &lt;NA&gt;       
+ 5 Angola    32866272 1.25e6     0     0     0    0.574           -2 Closed Ano…
+ 6 Antigu…      97929 4.4 e2     0     0     0    0.776           NA &lt;NA&gt;       
+ 7 Argent…   45195774 2.74e6     0     1     0    0.83             9 Democracy  
+ 8 Armenia    2963243 2.85e4     0     0     0    0.76             7 Democracy  
+ 9 Austra…   25499884 7.68e6     0     1     1    0.938           10 Full Democ…
+10 Austria    9006398 8.24e4     0     0     1    0.914           10 Full Democ…
+# … with 176 more rows, and 5 more variables: FH_PR &lt;dbl&gt;, FH_CL &lt;dbl&gt;,
+#   FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>　<code>starts_with()</code>に似たような機能をする関数として特定の文字列で終わる列を選択する<code>ends_with()</code>と特定の文字列を含む列を選択する<code>contains()</code>がある。これらの使い方は<code>starts_with()</code>と同じだ。</p>
+<p>　続いて、列の順番を変更する方法を紹介する。実は<code>select()</code>関数は書かれた順番で列を抽出する。たとえば、<code>G7</code>から<code>OECD</code>列を<code>Country</code>と<code>Population</code>の間へ移動する場合は以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, G7<span class="sc">:</span>OECD, Population<span class="sc">:</span>PPP_per_capita, HDI_2018<span class="sc">:</span>Continent)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 18
+   Country        G7   G20  OECD Population   Area    GDP     PPP GDP_per_capita
+   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+ 1 Afghanistan     0     0     0   38928346 6.53e5 1.91e4  8.27e4           491.
+ 2 Albania         0     0     0    2877797 2.74e4 1.53e4  3.97e4          5309.
+ 3 Algeria         0     0     0   43851044 2.38e6 1.70e5  4.97e5          3876.
+ 4 Andorra         0     0     0      77265 4.7 e2 3.15e3 NA              40821.
+ 5 Angola          0     0     0   32866272 1.25e6 9.46e4  2.19e5          2879.
+ 6 Antigua an…     0     0     0      97929 4.4 e2 1.73e3  2.08e3         17643.
+ 7 Argentina       0     1     0   45195774 2.74e6 4.50e5  1.04e6          9949.
+ 8 Armenia         0     0     0    2963243 2.85e4 1.37e4  3.84e4          4614.
+ 9 Australia       0     1     1   25499884 7.68e6 1.39e6  1.28e6         54615.
+10 Austria         0     0     1    9006398 8.24e4 4.46e5  5.03e5         49555.
+# … with 176 more rows, and 9 more variables: PPP_per_capita &lt;dbl&gt;,
+#   HDI_2018 &lt;dbl&gt;, Polity_Score &lt;dbl&gt;, Polity_Type &lt;chr&gt;, FH_PR &lt;dbl&gt;,
+#   FH_CL &lt;dbl&gt;, FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>　しかし、いくら<code>:</code>演算子があるとはいえ、全ての変数名を書く必要がある。抽出と同時に順番を変更するなら<code>select()</code>が便利だが、順番のみを変更するなら<code>relocate()</code>関数がおすすめである。<code>relocate()</code>関数は移動する変数を指定し、<code>.after</code>または<code>.before</code>で移動先を指定する必要がある。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 特定の変数の後ろへ移動</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(移動したい変数名, <span class="at">.after =</span> 変更先)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 特定の変数の前へ移動</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(移動したい変数名, <span class="at">.before =</span> 変更先)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>　たとえば、<code>G7</code>から<code>OECD</code>列を<code>Country</code>の後ろへ移動させる場合は以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(G7<span class="sc">:</span>OECD, <span class="at">.after =</span> Country)  <span class="co"># .before = PopulationもOK</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 18
+   Country        G7   G20  OECD Population   Area    GDP     PPP GDP_per_capita
+   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+ 1 Afghanistan     0     0     0   38928346 6.53e5 1.91e4  8.27e4           491.
+ 2 Albania         0     0     0    2877797 2.74e4 1.53e4  3.97e4          5309.
+ 3 Algeria         0     0     0   43851044 2.38e6 1.70e5  4.97e5          3876.
+ 4 Andorra         0     0     0      77265 4.7 e2 3.15e3 NA              40821.
+ 5 Angola          0     0     0   32866272 1.25e6 9.46e4  2.19e5          2879.
+ 6 Antigua an…     0     0     0      97929 4.4 e2 1.73e3  2.08e3         17643.
+ 7 Argentina       0     1     0   45195774 2.74e6 4.50e5  1.04e6          9949.
+ 8 Armenia         0     0     0    2963243 2.85e4 1.37e4  3.84e4          4614.
+ 9 Australia       0     1     1   25499884 7.68e6 1.39e6  1.28e6         54615.
+10 Austria         0     0     1    9006398 8.24e4 4.46e5  5.03e5         49555.
+# … with 176 more rows, and 9 more variables: PPP_per_capita &lt;dbl&gt;,
+#   HDI_2018 &lt;dbl&gt;, Polity_Score &lt;dbl&gt;, Polity_Type &lt;chr&gt;, FH_PR &lt;dbl&gt;,
+#   FH_CL &lt;dbl&gt;, FH_Total &lt;dbl&gt;, FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="行の抽出" class="level2">
+<h2 class="anchored" data-anchor-id="行の抽出">行の抽出</h2>
+<p>　<strong>列</strong>の抽出は<code>select()</code>関数を使うが、<strong>行</strong>の抽出には<code>filter()</code>関数を使う。行の抽出は基本的に、<strong>指定された条件に合致する行を抽出する</strong>ことを意味する。したがって、<code>filter()</code>関数を使うためには論理演算子（<code>==</code>、<code>&gt;</code>、<code>&amp;</code>など）の理解が必須だ。</p>
+<p>　<code>filter()</code>関数の使い方は以下の通りである。パイプを使わずデータオブジェクト名を<code>filter()</code>の第一引数として使っても良い。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(条件1, 条件2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>　たとえば、<code>df</code>から<code>Continent</code>の値が<code>"Europe"</code>である行を抽出し、<code>Country</code>〜<code>PPP</code>, <code>HDI_2018</code>列を抽出し、<code>HDI_2018</code>は<code>HDI</code>に変更するコードは以下の通りである。行の抽出と列の抽出を同時に行っているため、<code>filter()</code>関数と<code>select()</code>関数を組み合わせる必要がある。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Oceania"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country<span class="sc">:</span>PPP, <span class="at">HDI =</span> HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+  Country          Population    Area      GDP      PPP   HDI
+  &lt;chr&gt;                 &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+1 Australia          25499884 7682300 1392681. 1275027. 0.938
+2 Fiji                 896445   18270    5536.   12496. 0.724
+3 New Zealand         4842780  263820  206929.  204260. 0.921
+4 Papua New Guinea    8947024  452860   24970.   37319. 0.543</code></pre>
+</div>
+</div>
+<p>　ただし、<code>filter()</code>と<code>select()</code>の順番に注意しよう。<code>filter()</code>が3行目、<code>select()</code>が2行目に位置する場合、以下のコードは走らない。なぜなら、<code>select()</code>関数を通すことで<code>Continent</code>列が除外されるからだ。</p>
+<p>　<code>filter()</code>内の条件式は二つ以上でも使える。たとえば、二つの条件を<strong>同時に満たす</strong>行を抽出するとしよう。この場合はAND演算子（<code>&amp;</code>）を使う。たとえば、<code>df</code>から<code>Continent</code>が<code>"Asia"</code> (条件1)、<code>HDI_2018</code>が0.8以上 (条件2)の行を抽出し、<code>Country</code>と<code>HDI_2018</code>列を抽出する場合、以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Asia"</span> <span class="sc">&amp;</span> HDI_2018 <span class="sc">&gt;=</span> <span class="fl">0.8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13 × 2
+   Country              HDI_2018
+   &lt;chr&gt;                   &lt;dbl&gt;
+ 1 Bahrain                 0.838
+ 2 Brunei                  0.845
+ 3 Israel                  0.906
+ 4 Japan                   0.915
+ 5 Kazakhstan              0.817
+ 6 South Korea             0.906
+ 7 Kuwait                  0.808
+ 8 Malaysia                0.804
+ 9 Oman                    0.834
+10 Qatar                   0.848
+11 Saudi Arabia            0.857
+12 Singapore               0.935
+13 United Arab Emirates    0.866</code></pre>
+</div>
+</div>
+<p>　二つの条件式を<code>&amp;</code>で繋いだことに注意されたい。<code>filter()</code>関数で複数の条件式を使う場合は<code>,</code>、<code>&amp;</code>、<code>|</code>のいずれかを使うが、<code>,</code>と<code>&amp;</code>は同じ（=AND演算子）である。混乱を避けるために<code>&amp;</code>の使用を推奨するが、<code>,</code>を使っても良い。</p>
+<p>　もう一つの演算子はOR演算子（<code>|</code>）である。これは2つ以上の条件のうち、<strong>一つ以上の条件を満たす</strong>行を抽出することを意味する。たとえば、<code>df</code>から<code>Continent</code>が<code>"Asia"</code>（条件1）か<code>"Oceania"</code>（条件2）の行を抽出し、<code>Country</code>と<code>HDI_2018</code>、<code>Continent</code>列を抽出する場合、以下のように書く。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Asia"</span> <span class="sc">|</span> Continent <span class="sc">==</span> <span class="st">"Oceania"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, HDI_2018, Continent)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 46 × 3
+   Country     HDI_2018 Continent
+   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;    
+ 1 Afghanistan    0.496 Asia     
+ 2 Australia      0.938 Oceania  
+ 3 Bahrain        0.838 Asia     
+ 4 Bangladesh     0.614 Asia     
+ 5 Bhutan         0.617 Asia     
+ 6 Brunei         0.845 Asia     
+ 7 Burma          0.584 Asia     
+ 8 Cambodia       0.581 Asia     
+ 9 China          0.758 Asia     
+10 Fiji           0.724 Oceania  
+# … with 36 more rows</code></pre>
+</div>
+</div>
+<p>　AND演算子とOR演算子は同時に使うこともできる。たとえば、<code>df</code>から<code>Continent</code>が<code>"Asia"</code>（条件1）か<code>"Oceania"</code>（条件2）でありながら、<code>HDI_2018</code>が0.9以上 (条件3)の行を抽出し、<code>Country</code>と<code>HDI_2018</code>、<code>Continent</code>列を抽出する場合は以下のようになる。ただし、AND演算子とOR演算子を同時に使用する場合は適切な箇所にカッコ（<code>()</code>）を付ける必要がある。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>((Continent <span class="sc">==</span> <span class="st">"Asia"</span> <span class="sc">|</span> Continent <span class="sc">==</span> <span class="st">"Oceania"</span>), HDI_2018 <span class="sc">&gt;=</span> <span class="fl">0.9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, HDI_2018, Continent)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Country     HDI_2018 Continent
+  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;    
+1 Australia      0.938 Oceania  
+2 Israel         0.906 Asia     
+3 Japan          0.915 Asia     
+4 South Korea    0.906 Asia     
+5 New Zealand    0.921 Oceania  
+6 Singapore      0.935 Asia     </code></pre>
+</div>
+</div>
+<p>　実は上記のコード、もう少し効率化することもできる。そのためには<code>%in%</code>演算子を使う必要があるが、<code>==</code>を用いる複数の条件式がOR演算子で繋がっている場合、大変便利な演算子である。たとえば、<code>Continent</code>の値が<code>c("Asia", "Oceainia")</code>のいずれかに該当するかどうかを判定する場合は、これまで<code>(Continent == "Asia" | Continent == "Oceania")</code>と書いたが、これは<code>Continent %in% c("Asia", "Oceania")</code>と同じコードである。したがって、上記のコードは以下のように簡素化することもできる。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Asia"</span>, <span class="st">"Oceania"</span>), HDI_2018 <span class="sc">&gt;=</span> <span class="fl">0.9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, HDI_2018, Continent)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Country     HDI_2018 Continent
+  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;    
+1 Australia      0.938 Oceania  
+2 Israel         0.906 Asia     
+3 Japan          0.915 Asia     
+4 South Korea    0.906 Asia     
+5 New Zealand    0.921 Oceania  
+6 Singapore      0.935 Asia     </code></pre>
+</div>
+</div>
+</section>
+<section id="欠損値の扱い" class="level2">
+<h2 class="anchored" data-anchor-id="欠損値の扱い">欠損値の扱い</h2>
+<p>　データには欠損値が含まれていることが多く、Rでは欠損値を<code>NA</code>と表記する。欠損値が含まれている場合、多重代入法（multiple imputation）などの処理を施すことも可能だが、これはかなり高度の知識を要する。多重代入法を使わない場合は、欠損値を含むケースを除外することが有効である。なぜなら欠損値を含まれている場合、関数が使えないケースも多いからだ<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>。たとえば、一人あたり購買力平価GDP（<code>PPP_per_capita</code>）には欠損値が含まれている。この場合、平均値を計算する<code>mean()</code>関数はそのまま使えない。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>　この場合、<code>mean()</code>関数内に<code>na.rm = TRUE</code>を付けて欠損していない値の平均値を求めるように指定するか、予め欠損値が含まれているケースを除外する必要がある。ここでは後者について説明する。</p>
+<p>　まず、<code>df</code>の<code>PPP</code>が欠損している行を抽出し、<code>Country</code>から<code>PPP</code>列まで出力してみよう。<code>PPP</code>が欠損している場合は<code>NA</code>の値を取るため、<code>filter()</code>内に<code>PPP == NA</code>と条件式を書けば動くかも知れない。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(PPP <span class="sc">==</span> <span class="cn">NA</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country<span class="sc">:</span>PPP)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 5
+# … with 5 variables: Country &lt;chr&gt;, Population &lt;dbl&gt;, Area &lt;dbl&gt;, GDP &lt;dbl&gt;,
+#   PPP &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>　いや、そうでもなかった。実はある値が<code>NA</code>か否かを判定するために<code>==</code>演算子は使えない。代わりに<code>is.na()</code>関数を使用する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">is.na</span>(PPP)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country<span class="sc">:</span>PPP)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 5
+  Country        Population   Area     GDP   PPP
+  &lt;chr&gt;               &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 Andorra             77265    470   3154.    NA
+2 Cuba             11326616 106440 100023     NA
+3 Holy See              801      0     NA     NA
+4 Liechtenstein       38128    160   6553.    NA
+5 Monaco              39242      1   7188.    NA
+6 Somalia          15893222 627340    917.    NA
+7 Syria            17500658 183630  40405.    NA
+8 Western Sahara     597339 266000    909.    NA</code></pre>
+</div>
+</div>
+<p>　しかし、我々が本当にやりたいことは<code>PPP</code>が欠損している行のみ抽出するのではなく、 <code>PPP</code>が欠損している行を<strong>除外</strong>することだ。ここでも否定を意味する<code>!</code>が使える。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PPP)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country<span class="sc">:</span>PPP)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 178 × 5
+   Country             Population    Area      GDP      PPP
+   &lt;chr&gt;                    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Afghanistan           38928346  652860   19101.   82737.
+ 2 Albania                2877797   27400   15278.   39658.
+ 3 Algeria               43851044 2381740  169988.  496572.
+ 4 Angola                32866272 1246700   94635.  218533.
+ 5 Antigua and Barbuda      97929     440    1728.    2083.
+ 6 Argentina             45195774 2736690  449663. 1036721.
+ 7 Armenia                2963243   28470   13673.   38446.
+ 8 Australia             25499884 7682300 1392681. 1275027.
+ 9 Austria                9006398   82409  446315.  502771.
+10 Azerbaijan            10139177   82658   48048.  144556.
+# … with 168 more rows</code></pre>
+</div>
+</div>
+<p>　このように<code>PPP</code>が欠損していない行だけが抽出された。また、より簡単な方法として<code>drop_na()</code>関数を使うこともできる。これは<code>()</code>内で指定した変数が欠損している行をすべて除外する関数であり、複数の変数を同時に指定できるので便利である。たとえば、<code>df</code>から<code>PPP</code>と<code>Polity_Score</code>が欠損していない行だけを抽出し、<code>Country</code>から<code>PPP</code>、そして<code>Polity_Score</code>列を残してみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(PPP, Polity_Score) <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country<span class="sc">:</span>PPP, Polity_Score)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 155 × 6
+   Country     Population    Area      GDP      PPP Polity_Score
+   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Afghanistan   38928346  652860   19101.   82737.           -1
+ 2 Albania        2877797   27400   15278.   39658.            9
+ 3 Algeria       43851044 2381740  169988.  496572.            2
+ 4 Angola        32866272 1246700   94635.  218533.           -2
+ 5 Argentina     45195774 2736690  449663. 1036721.            9
+ 6 Armenia        2963243   28470   13673.   38446.            7
+ 7 Australia     25499884 7682300 1392681. 1275027.           10
+ 8 Austria        9006398   82409  446315.  502771.           10
+ 9 Azerbaijan    10139177   82658   48048.  144556.           -7
+10 Bahrain        1701575     760   38574.   74230.          -10
+# … with 145 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="行のソート" class="level2">
+<h2 class="anchored" data-anchor-id="行のソート">行のソート</h2>
+<p>　最後に行のソート（並び替え）について解説する。行のソートには<code>arrange()</code>関数を使用する。第一引数はデータフレームのオブジェクトであり、第二引数以降は並び替えの基準となる変数名である。ソートは基本的には昇順、つまり値が小さい行が上に表示される。</p>
+<p>　たとえば、<code>df</code>から<code>Continent</code>の値が<code>"Africa"</code>の行のみを抽出し、<code>Polity_Score</code>が小さい国<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>を上位にする。そして、<code>Country</code>と<code>PPP_per_capita</code>、<code>Polity_Score</code>列のみ残すコードは以下の通りである。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Africa"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Polity_Score) <span class="sc">%&gt;%</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, PPP_per_capita, Polity_Score)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 3
+   Country             PPP_per_capita Polity_Score
+   &lt;chr&gt;                        &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Eswatini                     8634.           -9
+ 2 Eritrea                      1860.           -7
+ 3 Equatorial Guinea           19458.           -6
+ 4 Cameroon                     3506.           -4
+ 5 Congo (Brazzaville)          3191.           -4
+ 6 Egypt                       11198.           -4
+ 7 Morocco                      7554.           -4
+ 8 Sudan                        4063.           -4
+ 9 Comoros                      3007.           -3
+10 Congo (Kinshasa)             1043.           -3
+# … with 44 more rows</code></pre>
+</div>
+</div>
+<p>　もし、<code>Polity_Score</code>が高い国を上位にしたい場合は、変数名を<code>desc()</code>関数で囲む。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Africa"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Polity_Score)) <span class="sc">%&gt;%</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, PPP_per_capita, Polity_Score)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 3
+   Country      PPP_per_capita Polity_Score
+   &lt;chr&gt;                 &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Mauritius            22637.           10
+ 2 Kenya                 4105.            9
+ 3 South Africa         12605.            9
+ 4 Botswana             17311.            8
+ 5 Ghana                 5097.            8
+ 6 Lesotho               3019.            8
+ 7 Benin                 3067.            7
+ 8 Liberia               1461.            7
+ 9 Nigeria               5018.            7
+10 Senegal               3248.            7
+# … with 44 more rows</code></pre>
+</div>
+</div>
+<p>　しかし、<code>Polity_Score</code>が同点の場合はどうなるだろうか。この場合、第2の基準となる変数を指定すると、第1基準が同点の場合、第2基準変数の値に応じてソートされる。以下は、<code>Polity_Score</code>が高い国を上位にし、同点の場合は<code>PPP_per_capita</code>が高い国を上位にするコード（さらに、変数名も変更）である。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Africa"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Polity_Score), <span class="fu">desc</span>(PPP_per_capita)) <span class="sc">%&gt;%</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, <span class="at">PPP =</span> PPP_per_capita, <span class="at">Polity =</span> Polity_Score)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 3
+   Country         PPP Polity
+   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Mauritius    22637.     10
+ 2 South Africa 12605.      9
+ 3 Kenya         4105.      9
+ 4 Botswana     17311.      8
+ 5 Ghana         5097.      8
+ 6 Lesotho       3019.      8
+ 7 Tunisia      10773.      7
+ 8 Nigeria       5018.      7
+ 9 Senegal       3248.      7
+10 Benin         3067.      7
+# … with 44 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="教科書" class="level2">
+<h2 class="anchored" data-anchor-id="教科書">教科書</h2>
+<ul>
+<li>パイプ演算子: 教科書<a href="https://www.jaysong.net/RBook/datahandling1.html#handling1-pipe">第12.2章</a></li>
+<li>列の抽出: 教科書<a href="https://www.jaysong.net/RBook/datahandling1.html#handling1-select">第12.3章</a></li>
+<li>行の抽出: 教科書<a href="https://www.jaysong.net/RBook/datahandling1.html#handling1-filter">第12.4章</a></li>
+<li>行のソート: 教科書<a href="https://www.jaysong.net/RBook/datahandling1.html#handling1-arrange">第12.5章</a></li>
+</ul>
 
 
 </section>
 
-</main> <!-- /main -->
-<script type="application/javascript">
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">注</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>NIIオンライン分析システムのRバージョンは4.1.2であるため、使用可能である。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>ただし、R 4.2.0以上のバージョンが必要である。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>既存のオブジェクトに上書きすることも可能だが、あまり推奨しない。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>関数によっては欠損値が含まれているケースを自動的に除外してくれる場合もある。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Polity Scoreが高いほど、より民主主義に近いことを意味する。<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
