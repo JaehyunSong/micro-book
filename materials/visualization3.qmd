@@ -1,6 +1,9 @@
 ---
 title: "第14回講義資料"
 subtitle: "可視化 (3)"
+toc: true
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

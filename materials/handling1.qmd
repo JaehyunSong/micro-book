@@ -2,6 +2,8 @@
 title: "第9回講義資料"
 subtitle: "データハンドリング (1)"
 toc: true
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ```{r}

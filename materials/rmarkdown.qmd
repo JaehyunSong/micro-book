@@ -2,7 +2,8 @@
 title: "第5回講義資料"
 subtitle: "R Markdownと再現可能な研究"
 toc: true
-toc-title: "目次"
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

@@ -1140,7 +1140,10 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 </section>
 <section id="特定の値を欠損値にコーディング場合" class="slide level2">
 <h2>特定の値を欠損値にコーディング場合</h2>
-<p>特定の値を欠損値とし、それ以外の値は元も値にする場合 * 主に<code>if_else()</code>を使用し、条件に合致した場合は<code>NA_real_</code>か<code>NA_character_</code>を、合致しない場合は元の変数のままにする。</p>
+<p>特定の値を欠損値とし、それ以外の値は元も値にする場合</p>
+<ul>
+<li>主に<code>if_else()</code>を使用し、条件に合致した場合は<code>NA_real_</code>か<code>NA_character_</code>を、合致しない場合は元の変数のままにする。</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>my_data <span class="sc">%&gt;%</span></span>
 <span id="cb73-2"><a href="#cb73-2"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">if_else</span>(Age <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA_real_</span>, Age),</span>

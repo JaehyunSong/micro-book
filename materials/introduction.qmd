@@ -1,6 +1,8 @@
 ---
 title: "第1回講義資料"
 subtitle: "ガイダンス"
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

@@ -1,6 +1,9 @@
 ---
 title: "第11回講義資料"
 subtitle: "データハンドリング (3)"
+toc: true
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

@@ -70,6 +70,244 @@
     "text": "新しいタブで開く"
   },
   {
+    "objectID": "materials/handling2.html#目標",
+    "href": "materials/handling2.html#目標",
+    "title": "第10回講義資料",
+    "section": "目標",
+    "text": "目標\n\n変数の記述統計量を計算する\n\n記述統計量: 平均値、中央値、標準偏差、分散、ケース数など\n\nグループごとに記述統計量を計算する\n\n例) 大陸ごとに政治的権利（FH_PR）と市民的自由（FH_CL）の平均値を計算する\n\n\n# A tibble: 5 × 3\n  Continent Politial_Right Civil_Liberty\n  <chr>              <dbl>         <dbl>\n1 Africa              15.8          25.8\n2 America             29.4          42.6\n3 Asia                14.7          24.2\n4 Europe              31.9          47.6\n5 Oceania             31.8          47.2"
+  },
+  {
+    "objectID": "materials/handling2.html#記述統計量",
+    "href": "materials/handling2.html#記述統計量",
+    "title": "第10回講義資料",
+    "section": "記述統計量",
+    "text": "記述統計量\n変数が持つ情報を要約した数値\n元の情報:\n\nMathScore <- c(82, 45, 69, 94, 88, 73, NA, 51, 90, 63)\n\n\n\nMathScoreを代表する値\n\n# 平均値\nmean(MathScore, na.rm = TRUE) \n\n[1] 72.77778\n\n# 中央値\nmedian(MathScore, na.rm = TRUE)\n\n[1] 73\n\n\n\n\n\nMathScoreのばらつきの具合\n\n# 不偏分散\nvar(MathScore, na.rm = TRUE)\n\n[1] 302.4444\n\n# 不偏標準偏差\nsd(MathScore, na.rm = TRUE)\n\n[1] 17.39093\n\n# 四分位範囲\nIQR(MathScore, na.rm = TRUE)\n\n[1] 25"
+  },
+  {
+    "objectID": "materials/handling2.html#summariseの使い方",
+    "href": "materials/handling2.html#summariseの使い方",
+    "title": "第10回講義資料",
+    "section": "summarise()の使い方",
+    "text": "summarise()の使い方\nsummarise(): 記述統計量を計算する{dplyr}の関数\nデータフレーム %>%\n  summarise(記述統計の関数(変数名, ...))\n記述統計の関数の例\n\nmean(): 平均値\nmedian(): 中央値\nsd(): 不偏標準偏差\nvar(): 不偏分散\nIQR(): 四分位範囲\nmin()、max(): 最小値と最大値\nn(): ケース数（引数不要）\nその他（教科書第13.1.2章）"
+  },
+  {
+    "objectID": "materials/handling2.html#記述統計量の計算1",
+    "href": "materials/handling2.html#記述統計量の計算1",
+    "title": "第10回講義資料",
+    "section": "記述統計量の計算（1）",
+    "text": "記述統計量の計算（1）\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro08.csv\") # 第8回の実習用データ\n\n例) dfのPopulationとAreaの平均値（mean()）を計算\n\ndf %>%\n  summarise(mean(Population),\n            mean(Area))\n\n# A tibble: 1 × 2\n  `mean(Population)` `mean(Area)`\n               <dbl>        <dbl>\n1          41737773.      696069."
+  },
+  {
+    "objectID": "materials/handling2.html#記述統計量の計算2",
+    "href": "materials/handling2.html#記述統計量の計算2",
+    "title": "第10回講義資料",
+    "section": "記述統計量の計算（2）",
+    "text": "記述統計量の計算（2）\nsummarise()内に異なる関数を使うことも可能\n例) dfのPopulationとAreaの平均値（mean()）と標準偏差（sd()）を計算\n\ndf %>%\n  summarise(mean(Population),\n            sd(Population),\n            mean(Area),\n            sd(Area))\n\n# A tibble: 1 × 4\n  `mean(Population)` `sd(Population)` `mean(Area)` `sd(Area)`\n               <dbl>            <dbl>        <dbl>      <dbl>\n1          41737773.       151270298.      696069.   1872412."
+  },
+  {
+    "objectID": "materials/handling2.html#出力された結果をより見やすく",
+    "href": "materials/handling2.html#出力された結果をより見やすく",
+    "title": "第10回講義資料",
+    "section": "出力された結果をより見やすく",
+    "text": "出力された結果をより見やすく\nsummarise()内に出力される結果の列名 = 関数()を指定\n例) dfのPopulationとAreaの平均値（mean()）と標準偏差（sd()）を計算し、結果の列名をMean_Pop、SD_Popなどとする\n\nPop_Area_df <- df %>%\n  summarise(Mean_Pop  = mean(Population),\n            SD_Pop    = sd(Population),\n            Mean_Area = mean(Area),\n            SD_Area   = sd(Area))\nPop_Area_df\n\n# A tibble: 1 × 4\n   Mean_Pop     SD_Pop Mean_Area  SD_Area\n      <dbl>      <dbl>     <dbl>    <dbl>\n1 41737773. 151270298.   696069. 1872412."
+  },
+  {
+    "objectID": "materials/handling2.html#グループごとの記述統計量1",
+    "href": "materials/handling2.html#グループごとの記述統計量1",
+    "title": "第10回講義資料",
+    "section": "グループごとの記述統計量（1）",
+    "text": "グループごとの記述統計量（1）\n{dplyr}を使わずに大陸ごとのPPP_per_capitaの平均値を計算する例\n\nPPP_per_capitaは欠損値が含まれているため、na.rm = TRUEを指定（指定しないと結果はNAとなる）\n\n\nmean(df$PPP_per_capita[df$Continent == \"Africa\"], na.rm = TRUE)\n\n[1] 5667.087\n\nmean(df$PPP_per_capita[df$Continent == \"America\"], na.rm = TRUE)\n\n[1] 18100.29\n\nmean(df$PPP_per_capita[df$Continent == \"Asia\"], na.rm = TRUE)\n\n[1] 22728.13\n\nmean(df$PPP_per_capita[df$Continent == \"Europe\"], na.rm = TRUE)\n\n[1] 37782.59\n\nmean(df$PPP_per_capita[df$Continent == \"Oceania\"], na.rm = TRUE)\n\n[1] 27572.65"
+  },
+  {
+    "objectID": "materials/handling2.html#グループごとの記述統計量2",
+    "href": "materials/handling2.html#グループごとの記述統計量2",
+    "title": "第10回講義資料",
+    "section": "グループごとの記述統計量（2）",
+    "text": "グループごとの記述統計量（2）\n{dplyr}のgroup_by()を使用\n\nデータフレーム名 %>%\n  group_by(グループ化する変数名) %>%\n  summarise(...)\n\n例) dfのContinentでデータをグループ化し、PPP_per_capitaの平均値を計算\n\n# PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE))\n\n# A tibble: 5 × 2\n  Continent Mean_PPP\n  <chr>        <dbl>\n1 Africa       5667.\n2 America     18100.\n3 Asia        22728.\n4 Europe      37783.\n5 Oceania     27573."
+  },
+  {
+    "objectID": "materials/handling2.html#複数の変数でグルーピング",
+    "href": "materials/handling2.html#複数の変数でグルーピング",
+    "title": "第10回講義資料",
+    "section": "複数の変数でグルーピング",
+    "text": "複数の変数でグルーピング\n例) dfのContinentとG20でデータをグループ化し、HDI_2018の平均値を計算\n\ndf %>%\n  group_by(Continent, G20) %>%\n  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE))\n\n`summarise()` has grouped output by 'Continent'. You can override using the\n`.groups` argument.\n\n\n# A tibble: 10 × 3\n# Groups:   Continent [5]\n   Continent   G20 Mean_HDI\n   <chr>     <dbl>    <dbl>\n 1 Africa        0    0.550\n 2 Africa        1    0.705\n 3 America       0    0.727\n 4 America       1    0.84 \n 5 Asia          0    0.710\n 6 Asia          1    0.798\n 7 Europe        0    0.859\n 8 Europe        1    0.877\n 9 Oceania       0    0.729\n10 Oceania       1    0.938"
+  },
+  {
+    "objectID": "materials/handling2.html#グルービング後のsummarise",
+    "href": "materials/handling2.html#グルービング後のsummarise",
+    "title": "第10回講義資料",
+    "section": "グルービング後のsummarise()",
+    "text": "グルービング後のsummarise()\n謎のメッセージが出力される\n## `summarise()` has grouped output by 'Continent'. You can override using \nthe `.groups` argument.\nとりあえず、group_by()の後にsummarise()を使う場合、summarise()の最後に.groups = \"drop\"を追加する。\n\n理由は割愛するが、詳細は教科書第13.2章を参照\n多くの場合、メッセージが出力されるだけで、問題が生じることはあまりない。\nしかし、複数の変数でグルーピングしたり、記述統計量が複数計算される関数（quantile()など）を使う場合、問題が生じる可能性あり\n\n特にsummarise()の後に更にパイプ（%>%）を使って計算を続ける場合\n\nとりあえず、.groups = \"drop\"をしておけば安全"
+  },
+  {
+    "objectID": "materials/handling2.html#groups-dropを追加する",
+    "href": "materials/handling2.html#groups-dropを追加する",
+    "title": "第10回講義資料",
+    "section": ".groups = \"drop\"を追加する",
+    "text": ".groups = \"drop\"を追加する\n謎のメッセージが出力されなくなる\n\ndf %>%\n  group_by(Continent, G20) %>%\n  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE),\n            .groups  = \"drop\")\n\n# A tibble: 10 × 3\n   Continent   G20 Mean_HDI\n   <chr>     <dbl>    <dbl>\n 1 Africa        0    0.550\n 2 Africa        1    0.705\n 3 America       0    0.727\n 4 America       1    0.84 \n 5 Asia          0    0.710\n 6 Asia          1    0.798\n 7 Europe        0    0.859\n 8 Europe        1    0.877\n 9 Oceania       0    0.729\n10 Oceania       1    0.938"
+  },
+  {
+    "objectID": "materials/handling2.html#便利な関数-グループごとのケース数を計算",
+    "href": "materials/handling2.html#便利な関数-グループごとのケース数を計算",
+    "title": "第10回講義資料",
+    "section": "便利な関数) グループごとのケース数を計算",
+    "text": "便利な関数) グループごとのケース数を計算\nsummarise()の中にn()を使用\n\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE),\n            SD_PPP   = sd(PPP_per_capita, na.rm = TRUE),\n            Cases    = n())\n\n# A tibble: 5 × 4\n  Continent Mean_PPP SD_PPP Cases\n  <chr>        <dbl>  <dbl> <int>\n1 Africa       5667.  6015.    54\n2 America     18100. 12601.    36\n3 Asia        22728. 24067.    42\n4 Europe      37783. 21276.    50\n5 Oceania     27573. 21984.     4"
+  },
+  {
+    "objectID": "materials/handling2.html#おまけ-効率的な方法",
+    "href": "materials/handling2.html#おまけ-効率的な方法",
+    "title": "第10回講義資料",
+    "section": "おまけ: 効率的な方法",
+    "text": "おまけ: 効率的な方法\nacross()関数を利用: 詳細は教科書第13.1章を参照\n例) dfのPopulationからPPP列まで平均値と標準偏差を計算し、結果の変数名は元の変数名_Mean、元の変数名_SDとする\n\ndf %>%\n  summarise(across(Population:PPP,\n                   .fns = list(Mean = ~mean(.x, na.rm = TRUE),\n                               SD   = ~mean(.x, na.rm = TRUE))))\n\n# A tibble: 1 × 8\n  Population_Mean Population_SD Area_Mean Area_SD GDP_Mean  GDP_SD PPP_Mean\n            <dbl>         <dbl>     <dbl>   <dbl>    <dbl>   <dbl>    <dbl>\n1       41737773.     41737773.   696069. 696069.  473031. 473031.  717953.\n# … with 1 more variable: PPP_SD <dbl>"
+  },
+  {
+    "objectID": "materials/handling2.html#変数の計算",
+    "href": "materials/handling2.html#変数の計算",
+    "title": "第10回講義資料",
+    "section": "変数の計算",
+    "text": "変数の計算\nmutate(): データフレームの変数を用いた計算を行い、新しい列として追加\n\n新しい列名として既存の列名を指定すると上書きされる\n新しく追加された列は最後に位置する（指定可能）\n\n\nデータフレーム名 %>%\n  mutate(新しい列名 = 計算式)\n\n例) dfのPopulationをAreaで割り（=人口密度）、Densityという名の列として追加する\n\n\n\n{dplyr}を使わない方法\n\ndf$Density <- df$Population / df$Area\n\n\n\n\n\n\n{dplyr}を使う方法\n\ndf %>%\n  mutate(Density = Population / Area)"
+  },
+  {
+    "objectID": "materials/handling2.html#dplyrの例",
+    "href": "materials/handling2.html#dplyrの例",
+    "title": "第10回講義資料",
+    "section": "{dplyr}の例",
+    "text": "{dplyr}の例\n例) dfのPopulationをAreaで割り（人口密度）、Densityという名の列として追加する\n\n新しく追加された列は最後に位置する\n\nただし、上書きの場合、位置はそのまま\n\n\n\ndf %>%\n  mutate(Density = Population / Area) %>%\n  print(n = 5) # 最初の5行のみ出力\n\n# A tibble: 186 × 19\n  Country   Population   Area    GDP     PPP GDP_per_capita PPP_per_capita    G7\n  <chr>          <dbl>  <dbl>  <dbl>   <dbl>          <dbl>          <dbl> <dbl>\n1 Afghanis…   38928346 6.53e5 1.91e4  82737.           491.          2125.     0\n2 Albania      2877797 2.74e4 1.53e4  39658.          5309.         13781.     0\n3 Algeria     43851044 2.38e6 1.70e5 496572.          3876.         11324.     0\n4 Andorra        77265 4.7 e2 3.15e3     NA          40821.            NA      0\n5 Angola      32866272 1.25e6 9.46e4 218533.          2879.          6649.     0\n# … with 181 more rows, and 11 more variables: G20 <dbl>, OECD <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>,\n#   Density <dbl>"
+  },
+  {
+    "objectID": "materials/handling2.html#新しい列の位置指定",
+    "href": "materials/handling2.html#新しい列の位置指定",
+    "title": "第10回講義資料",
+    "section": "新しい列の位置指定",
+    "text": "新しい列の位置指定\nmutate()内に.after、または.beforeを指定\n\nrelocate()関数と同じ仕組み（第9回）\n\n例) PopulationをAreaで割り、Densityという名の新しい列Areaの後に追加する。\n\ndf %>%\n  mutate(Density = Population / Area, \n         .after  = Area)\n\n# A tibble: 186 × 19\n   Country             Population    Area Density     GDP     PPP GDP_per_capita\n   <chr>                    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>          <dbl>\n 1 Afghanistan           38928346  652860   59.6   1.91e4  8.27e4           491.\n 2 Albania                2877797   27400  105.    1.53e4  3.97e4          5309.\n 3 Algeria               43851044 2381740   18.4   1.70e5  4.97e5          3876.\n 4 Andorra                  77265     470  164.    3.15e3 NA              40821.\n 5 Angola                32866272 1246700   26.4   9.46e4  2.19e5          2879.\n 6 Antigua and Barbuda      97929     440  223.    1.73e3  2.08e3         17643.\n 7 Argentina             45195774 2736690   16.5   4.50e5  1.04e6          9949.\n 8 Armenia                2963243   28470  104.    1.37e4  3.84e4          4614.\n 9 Australia             25499884 7682300    3.32  1.39e6  1.28e6         54615.\n10 Austria                9006398   82409  109.    4.46e5  5.03e5         49555.\n# … with 176 more rows, and 12 more variables: PPP_per_capita <dbl>, G7 <dbl>,\n#   G20 <dbl>, OECD <dbl>, HDI_2018 <dbl>, Polity_Score <dbl>,\n#   Polity_Type <chr>, FH_PR <dbl>, FH_CL <dbl>, FH_Total <dbl>,\n#   FH_Status <chr>, Continent <chr>"
+  },
+  {
+    "objectID": "materials/handling2.html#変数の計算いろいろ1",
+    "href": "materials/handling2.html#変数の計算いろいろ1",
+    "title": "第10回講義資料",
+    "section": "変数の計算いろいろ（1）",
+    "text": "変数の計算いろいろ（1）\n各国が世界人口に占める割合を計算し、降順で出力\n\ndfのPopulationの合計をTotal_Popという列として追加する。\nPopulationをTotal_Popで割り、100を掛ける。結果はShare_Popという名の列としてPopulation後に追加する。\nCountryからShare_Popまでの列のみ残す。\nTotal_Pop列を除外する。\nShare_Popが大きい順で行を並び替える"
+  },
+  {
+    "objectID": "materials/handling2.html#変数の計算いろいろ1-1",
+    "href": "materials/handling2.html#変数の計算いろいろ1-1",
+    "title": "第10回講義資料",
+    "section": "変数の計算いろいろ（1）",
+    "text": "変数の計算いろいろ（1）\n\ndf %>% \n  # Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK\n  mutate(Total_Pop = sum(Population),\n         Share_Pop = Population / Total_Pop * 100,\n         .after    = Population) %>%\n  select(Country:Share_Pop) %>%\n  select(!Total_Pop) %>%\n  arrange(desc(Share_Pop))\n\n# A tibble: 186 × 3\n   Country       Population Share_Pop\n   <chr>              <dbl>     <dbl>\n 1 China         1447470092     18.6 \n 2 India         1380004385     17.8 \n 3 United States  334308644      4.31\n 4 Indonesia      273523615      3.52\n 5 Pakistan       220892340      2.85\n 6 Brazil         212559417      2.74\n 7 Nigeria        206139589      2.66\n 8 Bangladesh     164689383      2.12\n 9 Russia         145934462      1.88\n10 Mexico         128932753      1.66\n# … with 176 more rows"
+  },
+  {
+    "objectID": "materials/handling2.html#変数の計算いろいろ2",
+    "href": "materials/handling2.html#変数の計算いろいろ2",
+    "title": "第10回講義資料",
+    "section": "変数の計算いろいろ（2）",
+    "text": "変数の計算いろいろ（2）\nG7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。\n\ndfを利用する\nDevelopedという列を追加し、G7、G20、OECDのいずれかに加盟した国なら\"先進国\"、それ以外なら\"その他\"とする。\n人口密度をDensityという名の列として追加する。\nHDI_2018とPolity_Scoreのいずれかが欠損した行を除外する。\nDeveloped変数でデータをグルーピングする。\nHDI_2018、Polity_Score、Densityの平均値を求める。\ndf2という名前のオブジェクトとして作業環境内に格納する。"
+  },
+  {
+    "objectID": "materials/handling2.html#変数の計算いろいろ2-1",
+    "href": "materials/handling2.html#変数の計算いろいろ2-1",
+    "title": "第10回講義資料",
+    "section": "変数の計算いろいろ（2）",
+    "text": "変数の計算いろいろ（2）\n\ndf2 <- df %>%\n  mutate(Developed = G7 + G20 + OECD,\n         Developed = if_else(Developed > 1, \"先進国\", \"その他\"), # 上書き\n         Density   = Population / Area) %>%\n  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%\n  group_by(Developed) %>%\n  summarise(Density = mean(Density),\n            HDI     = mean(HDI_2018),\n            Polity  = mean(Polity_Score))\n\ndf2\n\n# A tibble: 2 × 4\n  Developed Density   HDI Polity\n  <chr>       <dbl> <dbl>  <dbl>\n1 その他       197. 0.695   3.92\n2 先進国       174. 0.892   7.91"
+  },
+  {
+    "objectID": "materials/handling2.html#summariseの結果を並び替えたい",
+    "href": "materials/handling2.html#summariseの結果を並び替えたい",
+    "title": "第10回講義資料",
+    "section": "summarise()の結果を並び替えたい",
+    "text": "summarise()の結果を並び替えたい\ndf2を\"先進国\" > \"その他\"の順番で表示させたい。\n\nsummarise()を行う場合、グルーピング変数のアルファベット順で表示される。\nただし、日本語の場合、50音順にはならない。\n\nひらがな、カタカナなら50音順になるが、漢字は \\(\\times\\)\n\nしたがって、summarise()の前にグルーピング変数をFactor型に変換する必要がある。\n\nFactor型: 順序付きの文字型"
+  },
+  {
+    "objectID": "materials/handling2.html#developedをfactor型に",
+    "href": "materials/handling2.html#developedをfactor型に",
+    "title": "第10回講義資料",
+    "section": "DevelopedをFactor型に",
+    "text": "DevelopedをFactor型に\n\ndf %>%\n  mutate(Developed = G7 + G20 + OECD,\n         Developed = if_else(Developed > 1, \"先進国\", \"その他\"), # 上書き\n         Density   = Population / Area) %>%\n  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%\n  group_by(Developed) %>%\n  # ここでなく、filter()前のmutate()内でやるのが効率的\n  mutate(Developed = factor(Developed, levels = c(\"先進国\", \"その他\"))) %>%\n  summarise(Density = mean(Density),\n            HDI     = mean(HDI_2018),\n            Polity  = mean(Polity_Score))\n\n# A tibble: 2 × 4\n  Developed Density   HDI Polity\n  <fct>       <dbl> <dbl>  <dbl>\n1 先進国       174. 0.892   7.91\n2 その他       197. 0.695   3.92"
+  },
+  {
+    "objectID": "materials/handling2.html#変数のリコーディング-2値の例",
+    "href": "materials/handling2.html#変数のリコーディング-2値の例",
+    "title": "第10回講義資料",
+    "section": "変数のリコーディング: 2値の例",
+    "text": "変数のリコーディング: 2値の例\nmutate()内にif_else()を使用（または、ifelse()）\n\ndfのOECDが1なら\"OECD加盟国\"、それ以外なら\"OECD非加盟国\"に変換し、OECD_Jという列として追加\n\n\ndf %>%\n  mutate(OECD_J = if_else(OECD == 1, \"OECD加盟国\", \"OECD非加盟国\"))\n\n例) 変換前\n\ndf %>%\n  group_by(OECD) %>%\n  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),\n            HDI = mean(HDI_2018, na.rm = TRUE),\n            FH  = mean(FH_Total, na.rm = TRUE))\n\n# A tibble: 2 × 4\n   OECD    PPP   HDI    FH\n  <dbl>  <dbl> <dbl> <dbl>\n1     0 14229. 0.667  49.9\n2     1 46000. 0.894  89.1"
+  },
+  {
+    "objectID": "materials/handling2.html#変数のリコーディング-2値の例-1",
+    "href": "materials/handling2.html#変数のリコーディング-2値の例-1",
+    "title": "第10回講義資料",
+    "section": "変数のリコーディング: 2値の例",
+    "text": "変数のリコーディング: 2値の例\n例) 変換後\n\ndf %>%\n  mutate(OECD_J = if_else(OECD == 1, \"OECD加盟国\", \"OECD非加盟国\")) %>%\n  group_by(OECD = OECD_J) %>% # 「=」で列名の変更が可能\n  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),\n            HDI = mean(HDI_2018, na.rm = TRUE),\n            FH  = mean(FH_Total, na.rm = TRUE))\n\n# A tibble: 2 × 4\n  OECD            PPP   HDI    FH\n  <chr>         <dbl> <dbl> <dbl>\n1 OECD加盟国   46000. 0.894  89.1\n2 OECD非加盟国 14229. 0.667  49.9"
+  },
+  {
+    "objectID": "materials/handling2.html#変数のリコーディング-3値以上の例",
+    "href": "materials/handling2.html#変数のリコーディング-3値以上の例",
+    "title": "第10回講義資料",
+    "section": "変数のリコーディング: 3値以上の例",
+    "text": "変数のリコーディング: 3値以上の例\nmutate()内にcase_when()を使用\n\nデータフレーム名 %>%\n  mutate(新しい変数名 = case_when(条件1 ~ 新しい値,\n                                条件2 ~ 新しい値,\n                                ...\n                                TRUE ~ 新しい値))\n\n\nTRUE ~ 新しい値は「上記の条件全てが満たされない場合の値」を意味する"
+  },
+  {
+    "objectID": "materials/handling2.html#変数のリコーディング-3値以上の例-1",
+    "href": "materials/handling2.html#変数のリコーディング-3値以上の例-1",
+    "title": "第10回講義資料",
+    "section": "変数のリコーディング: 3値以上の例",
+    "text": "変数のリコーディング: 3値以上の例\n例) dfのContinentを日本語にし、Continent_Jとして追加\n\ndf %>%\n  mutate(Continent_J = case_when(Continent == \"Africa\"  ~ \"アフリカ\",\n                                 Continent == \"America\" ~ \"アメリカ\",\n                                 Continent == \"Asia\"    ~ \"アジア\",\n                                 Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                 TRUE                   ~ \"オセアニア\")) %>%\n  group_by(大陸 = Continent_J) %>%\n  # 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）\n  summarise(OECD加盟国比率 = mean(OECD),\n            国家数        = n())\n\n# A tibble: 5 × 3\n  大陸       OECD加盟国比率 国家数\n  <chr>               <dbl>  <int>\n1 アジア             0.0714     42\n2 アフリカ           0          54\n3 アメリカ           0.139      36\n4 オセアニア         0.5         4\n5 ヨーロッパ         0.54       50"
+  },
+  {
+    "objectID": "materials/handling2.html#変数のリコーディング-応用",
+    "href": "materials/handling2.html#変数のリコーディング-応用",
+    "title": "第10回講義資料",
+    "section": "変数のリコーディング: 応用",
+    "text": "変数のリコーディング: 応用\n例) ContinentがAP列を追加し、\"Asia\"か\"Oceania\"、\"America\"なら1、以外は0\n方法1: if_else()の利用\n\ndf %>%\n  mutate(AP = if_else(Continent %in% c(\"Asia\", \"America\", \"Oceania\"),\n                      1, 0))\n\n方法2: case_when()の利用\n\ndf %>%\n  mutate(AP = case_when(Continent == \"Asia\"    ~ 1, \n                        Continent == \"America\" ~ 1, \n                        Continent == \"Oceania\" ~ 1,\n                        TRUE                   ~ 0))\n\n方法3: case_when() + %in%の利用\n\ndf %>%\n  mutate(AP = case_when(Continent %in% c(\"Asia\", \"America\", \"Oceania\") ~ 1, \n                        TRUE                                           ~ 0))"
+  },
+  {
+    "objectID": "materials/handling2.html#注意-欠損値を指定する場合",
+    "href": "materials/handling2.html#注意-欠損値を指定する場合",
+    "title": "第10回講義資料",
+    "section": "注意) 欠損値を指定する場合",
+    "text": "注意) 欠損値を指定する場合\n世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。\n例) my_dataの例\n\nYoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。\nHighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。\n\n\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9"
+  },
+  {
+    "objectID": "materials/handling2.html#注意-欠損値を指定する場合-1",
+    "href": "materials/handling2.html#注意-欠損値を指定する場合-1",
+    "title": "第10回講義資料",
+    "section": "注意) 欠損値を指定する場合",
+    "text": "注意) 欠損値を指定する場合\n注意: 条件 ~ NAではエラーが発生する。\n\nif_else()も同様。ただし、ifelse()はNAで作動\n\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\nError in `mutate()`:\n! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age <=\n  39 ~ 1, TRUE ~ 0)`.\nCaused by error in `` names(message) <- `*vtmp*` ``:\n! 'names' attribute [1] must be the same length as the vector [0]"
+  },
+  {
+    "objectID": "materials/handling2.html#注意-欠損値を指定する場合-2",
+    "href": "materials/handling2.html#注意-欠損値を指定する場合-2",
+    "title": "第10回講義資料",
+    "section": "注意) 欠損値を指定する場合",
+    "text": "注意) 欠損値を指定する場合\nNAでなく、生成される列のデータ型に応じてNA_real_（numeric型）、またはNA_character_（character型）を使用（logical型ならNAのままでOK）\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA_character_,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\n# A tibble: 10 × 5\n      ID   Age HighEduc YoungAge HighEduc2\n   <int> <dbl>    <dbl>    <dbl> <chr>    \n 1     1    32        1        1 大卒以上 \n 2     2    35        0        1 大卒未満 \n 3     3    57        0        0 大卒未満 \n 4     4   999        1       NA 大卒以上 \n 5     5    74        0        0 大卒未満 \n 6     6    66        9        0 <NA>     \n 7     7   999        1       NA 大卒以上 \n 8     8    49        1        0 大卒以上 \n 9     9    78        9        0 <NA>     \n10    10    67        9        0 <NA>"
+  },
+  {
+    "objectID": "materials/handling2.html#特定の値を欠損値にコーディング場合",
+    "href": "materials/handling2.html#特定の値を欠損値にコーディング場合",
+    "title": "第10回講義資料",
+    "section": "特定の値を欠損値にコーディング場合",
+    "text": "特定の値を欠損値にコーディング場合\n特定の値を欠損値とし、それ以外の値は元も値にする場合 * 主にif_else()を使用し、条件に合致した場合はNA_real_かNA_character_を、合致しない場合は元の変数のままにする。\n\nmy_data %>%\n  mutate(Age      = if_else(Age == 999, NA_real_, Age),\n         HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
+  },
+  {
+    "objectID": "materials/handling2.html#特定の値を欠損値にコーディング場合-1",
+    "href": "materials/handling2.html#特定の値を欠損値にコーディング場合-1",
+    "title": "第10回講義資料",
+    "section": "特定の値を欠損値にコーディング場合",
+    "text": "特定の値を欠損値にコーディング場合\nif_else()でなく、case_when()を使うことも可能\n\n欠損を意味する値が複数の場合、case_when()を使うか、OR演算子（| / %in%）を用いたif_else()を使用する。\n\n\nmy_data %>%\n  mutate(Age      = case_when(Age == 999 ~ NA_real_, \n                              TRUE       ~ Age),\n         HighEduc = case_when(HighEduc == 9 ~ NA_real_, \n                              TRUE          ~ HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
+  },
+  {
+    "objectID": "materials/handling2.html#特定の値を欠損値にコーディング場合-2",
+    "href": "materials/handling2.html#特定の値を欠損値にコーディング場合-2",
+    "title": "第10回講義資料",
+    "section": "特定の値を欠損値にコーディング場合",
+    "text": "特定の値を欠損値にコーディング場合\n{naniar}パッケージのreplace_with_na()関数を利用\n\n引数はリスト型オブジェクトであり、リストの中には変数名 = 欠損値の値\n欠損値の値が複数の場合、変数名 = c(値1, 値2, ...)\n似たような関数として{expss}のna_if()関数\n\n\nlibrary(naniar) # 事前に install.package(naniar) でインストール\nmy_data %>%\n  # Ageは999、HighEducは9が欠損値\n  replace_with_na(list(Age = 999, HighEduc = 9))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
+  },
+  {
+    "objectID": "materials/handling2.html#教科書",
+    "href": "materials/handling2.html#教科書",
+    "title": "第10回講義資料",
+    "section": "教科書",
+    "text": "教科書\n\nデータのグルーピングと要約: 教科書第13.1章と第13.2章\n変数の計算: 教科書第13.3章と第13.4章\nFactor型変数の扱い: 教科書第14章\n\nFactor型については可視化の時にも解説する。詳しい内容は教科書を参照すること"
+  },
+  {
     "objectID": "materials/programming.html",
     "href": "materials/programming.html",
     "title": "第4回講義資料",
@@ -1148,6 +1386,251 @@
     "text": "課題\n今回以降の練習はR Markdownを利用する。\n\n今回課題用のプロジェクトを作成する。\nLMSの「第5回課題」から「問題ファイル（.Rmd形式）」ダウンロードし、プロジェクトのフォルダーにアップローロする。\nプロジェクトからRStudioを起動し、.Rmdファイルを開く\nKnitし、結果を確認する。\n本講義のサポートページの「課題 > 第5回課題」へアクセス\nサンプルのような体裁になるように問題ファイルを修正する。\n\n学籍番号・氏名は自分の学籍番号・氏名に直すこと。\n\n完成後、生成された.htmlファイルをダウンロードし、関大LMSに提出する。\n\nダウンロード方法はサポートページの「Rの使い方 > ファイル管理」を参照すること\n\n期限は2022年5月18日（水）の23時59分とする。\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
+    "objectID": "slide/slide10.html#section",
+    "href": "slide/slide10.html#section",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "データのグルーピングと要約"
+  },
+  {
+    "objectID": "slide/slide10.html#目標",
+    "href": "slide/slide10.html#目標",
+    "title": "ミクロ政治データ分析実習",
+    "section": "目標",
+    "text": "目標\n\n変数の記述統計量を計算する\n\n記述統計量: 平均値、中央値、標準偏差、分散、ケース数など\n\nグループごとに記述統計量を計算する\n\n例) 大陸ごとに政治的権利（FH_PR）と市民的自由（FH_CL）の平均値を計算する\n\n\n# A tibble: 5 × 3\n  Continent Politial_Right Civil_Liberty\n  <chr>              <dbl>         <dbl>\n1 Africa              15.8          25.8\n2 America             29.4          42.6\n3 Asia                14.7          24.2\n4 Europe              31.9          47.6\n5 Oceania             31.8          47.2"
+  },
+  {
+    "objectID": "slide/slide10.html#記述統計量",
+    "href": "slide/slide10.html#記述統計量",
+    "title": "ミクロ政治データ分析実習",
+    "section": "記述統計量",
+    "text": "記述統計量\n変数が持つ情報を要約した数値\n元の情報:\n\nMathScore <- c(82, 45, 69, 94, 88, 73, NA, 51, 90, 63)\n\n\n\nMathScoreを代表する値\n\n# 平均値\nmean(MathScore, na.rm = TRUE) \n\n[1] 72.77778\n\n# 中央値\nmedian(MathScore, na.rm = TRUE)\n\n[1] 73\n\n\n\n\n\nMathScoreのばらつきの具合\n\n# 不偏分散\nvar(MathScore, na.rm = TRUE)\n\n[1] 302.4444\n\n# 不偏標準偏差\nsd(MathScore, na.rm = TRUE)\n\n[1] 17.39093\n\n# 四分位範囲\nIQR(MathScore, na.rm = TRUE)\n\n[1] 25"
+  },
+  {
+    "objectID": "slide/slide10.html#summariseの使い方",
+    "href": "slide/slide10.html#summariseの使い方",
+    "title": "ミクロ政治データ分析実習",
+    "section": "summarise()の使い方",
+    "text": "summarise()の使い方\nsummarise(): 記述統計量を計算する{dplyr}の関数\nデータフレーム %>%\n  summarise(記述統計の関数(変数名, ...))\n記述統計の関数の例\n\nmean(): 平均値\nmedian(): 中央値\nsd(): 不偏標準偏差\nvar(): 不偏分散\nIQR(): 四分位範囲\nmin()、max(): 最小値と最大値\nn(): ケース数（引数不要）\nその他（教科書第13.1.2章）"
+  },
+  {
+    "objectID": "slide/slide10.html#記述統計量の計算1",
+    "href": "slide/slide10.html#記述統計量の計算1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "記述統計量の計算（1）",
+    "text": "記述統計量の計算（1）\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro08.csv\") # 第8回の実習用データ\n\n例) dfのPopulationとAreaの平均値（mean()）を計算\n\ndf %>%\n  summarise(mean(Population),\n            mean(Area))\n\n# A tibble: 1 × 2\n  `mean(Population)` `mean(Area)`\n               <dbl>        <dbl>\n1          41737773.      696069."
+  },
+  {
+    "objectID": "slide/slide10.html#記述統計量の計算2",
+    "href": "slide/slide10.html#記述統計量の計算2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "記述統計量の計算（2）",
+    "text": "記述統計量の計算（2）\nsummarise()内に異なる関数を使うことも可能\n例) dfのPopulationとAreaの平均値（mean()）と標準偏差（sd()）を計算\n\ndf %>%\n  summarise(mean(Population),\n            sd(Population),\n            mean(Area),\n            sd(Area))\n\n# A tibble: 1 × 4\n  `mean(Population)` `sd(Population)` `mean(Area)` `sd(Area)`\n               <dbl>            <dbl>        <dbl>      <dbl>\n1          41737773.       151270298.      696069.   1872412."
+  },
+  {
+    "objectID": "slide/slide10.html#出力された結果をより見やすく",
+    "href": "slide/slide10.html#出力された結果をより見やすく",
+    "title": "ミクロ政治データ分析実習",
+    "section": "出力された結果をより見やすく",
+    "text": "出力された結果をより見やすく\nsummarise()内に出力される結果の列名 = 関数()を指定\n例) dfのPopulationとAreaの平均値（mean()）と標準偏差（sd()）を計算し、結果の列名をMean_Pop、SD_Popなどとする\n\nPop_Area_df <- df %>%\n  summarise(Mean_Pop  = mean(Population),\n            SD_Pop    = sd(Population),\n            Mean_Area = mean(Area),\n            SD_Area   = sd(Area))\nPop_Area_df\n\n# A tibble: 1 × 4\n   Mean_Pop     SD_Pop Mean_Area  SD_Area\n      <dbl>      <dbl>     <dbl>    <dbl>\n1 41737773. 151270298.   696069. 1872412."
+  },
+  {
+    "objectID": "slide/slide10.html#グループごとの記述統計量1",
+    "href": "slide/slide10.html#グループごとの記述統計量1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "グループごとの記述統計量（1）",
+    "text": "グループごとの記述統計量（1）\n{dplyr}を使わずに大陸ごとのPPP_per_capitaの平均値を計算する例\n\nPPP_per_capitaは欠損値が含まれているため、na.rm = TRUEを指定（指定しないと結果はNAとなる）\n\n\nmean(df$PPP_per_capita[df$Continent == \"Africa\"], na.rm = TRUE)\n\n[1] 5667.087\n\nmean(df$PPP_per_capita[df$Continent == \"America\"], na.rm = TRUE)\n\n[1] 18100.29\n\nmean(df$PPP_per_capita[df$Continent == \"Asia\"], na.rm = TRUE)\n\n[1] 22728.13\n\nmean(df$PPP_per_capita[df$Continent == \"Europe\"], na.rm = TRUE)\n\n[1] 37782.59\n\nmean(df$PPP_per_capita[df$Continent == \"Oceania\"], na.rm = TRUE)\n\n[1] 27572.65"
+  },
+  {
+    "objectID": "slide/slide10.html#グループごとの記述統計量2",
+    "href": "slide/slide10.html#グループごとの記述統計量2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "グループごとの記述統計量（2）",
+    "text": "グループごとの記述統計量（2）\n{dplyr}のgroup_by()を使用\n\nデータフレーム名 %>%\n  group_by(グループ化する変数名) %>%\n  summarise(...)\n\n例) dfのContinentでデータをグループ化し、PPP_per_capitaの平均値を計算\n\n# PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE))\n\n# A tibble: 5 × 2\n  Continent Mean_PPP\n  <chr>        <dbl>\n1 Africa       5667.\n2 America     18100.\n3 Asia        22728.\n4 Europe      37783.\n5 Oceania     27573."
+  },
+  {
+    "objectID": "slide/slide10.html#複数の変数でグルーピング",
+    "href": "slide/slide10.html#複数の変数でグルーピング",
+    "title": "ミクロ政治データ分析実習",
+    "section": "複数の変数でグルーピング",
+    "text": "複数の変数でグルーピング\n例) dfのContinentとG20でデータをグループ化し、HDI_2018の平均値を計算\n\ndf %>%\n  group_by(Continent, G20) %>%\n  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE))\n\n`summarise()` has grouped output by 'Continent'. You can override using the\n`.groups` argument.\n\n\n# A tibble: 10 × 3\n# Groups:   Continent [5]\n   Continent   G20 Mean_HDI\n   <chr>     <dbl>    <dbl>\n 1 Africa        0    0.550\n 2 Africa        1    0.705\n 3 America       0    0.727\n 4 America       1    0.84 \n 5 Asia          0    0.710\n 6 Asia          1    0.798\n 7 Europe        0    0.859\n 8 Europe        1    0.877\n 9 Oceania       0    0.729\n10 Oceania       1    0.938"
+  },
+  {
+    "objectID": "slide/slide10.html#グルービング後のsummarise",
+    "href": "slide/slide10.html#グルービング後のsummarise",
+    "title": "ミクロ政治データ分析実習",
+    "section": "グルービング後のsummarise()",
+    "text": "グルービング後のsummarise()\n謎のメッセージが出力される\n## `summarise()` has grouped output by 'Continent'. You can override using \nthe `.groups` argument.\nとりあえず、group_by()の後にsummarise()を使う場合、summarise()の最後に.groups = \"drop\"を追加する。\n\n理由は割愛するが、詳細は教科書第13.2章を参照\n多くの場合、メッセージが出力されるだけで、問題が生じることはあまりない。\nしかし、複数の変数でグルーピングしたり、記述統計量が複数計算される関数（quantile()など）を使う場合、問題が生じる可能性あり\n\n特にsummarise()の後に更にパイプ（%>%）を使って計算を続ける場合\n\nとりあえず、.groups = \"drop\"をしておけば安全"
+  },
+  {
+    "objectID": "slide/slide10.html#groups-dropを追加する",
+    "href": "slide/slide10.html#groups-dropを追加する",
+    "title": "ミクロ政治データ分析実習",
+    "section": ".groups = \"drop\"を追加する",
+    "text": ".groups = \"drop\"を追加する\n謎のメッセージが出力されなくなる\n\ndf %>%\n  group_by(Continent, G20) %>%\n  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE),\n            .groups  = \"drop\")\n\n# A tibble: 10 × 3\n   Continent   G20 Mean_HDI\n   <chr>     <dbl>    <dbl>\n 1 Africa        0    0.550\n 2 Africa        1    0.705\n 3 America       0    0.727\n 4 America       1    0.84 \n 5 Asia          0    0.710\n 6 Asia          1    0.798\n 7 Europe        0    0.859\n 8 Europe        1    0.877\n 9 Oceania       0    0.729\n10 Oceania       1    0.938"
+  },
+  {
+    "objectID": "slide/slide10.html#便利な関数-グループごとのケース数を計算",
+    "href": "slide/slide10.html#便利な関数-グループごとのケース数を計算",
+    "title": "ミクロ政治データ分析実習",
+    "section": "便利な関数) グループごとのケース数を計算",
+    "text": "便利な関数) グループごとのケース数を計算\nsummarise()の中にn()を使用\n\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE),\n            SD_PPP   = sd(PPP_per_capita, na.rm = TRUE),\n            Cases    = n())\n\n# A tibble: 5 × 4\n  Continent Mean_PPP SD_PPP Cases\n  <chr>        <dbl>  <dbl> <int>\n1 Africa       5667.  6015.    54\n2 America     18100. 12601.    36\n3 Asia        22728. 24067.    42\n4 Europe      37783. 21276.    50\n5 Oceania     27573. 21984.     4"
+  },
+  {
+    "objectID": "slide/slide10.html#おまけ-効率的な方法",
+    "href": "slide/slide10.html#おまけ-効率的な方法",
+    "title": "ミクロ政治データ分析実習",
+    "section": "おまけ: 効率的な方法",
+    "text": "おまけ: 効率的な方法\nacross()関数を利用: 詳細は教科書第13.1章を参照\n例) dfのPopulationからPPP列まで平均値と標準偏差を計算し、結果の変数名は元の変数名_Mean、元の変数名_SDとする\n\ndf %>%\n  summarise(across(Population:PPP,\n                   .fns = list(Mean = ~mean(.x, na.rm = TRUE),\n                               SD   = ~mean(.x, na.rm = TRUE))))\n\n# A tibble: 1 × 8\n  Population_Mean Population_SD Area_Mean Area_SD GDP_Mean  GDP_SD PPP_Mean\n            <dbl>         <dbl>     <dbl>   <dbl>    <dbl>   <dbl>    <dbl>\n1       41737773.     41737773.   696069. 696069.  473031. 473031.  717953.\n# … with 1 more variable: PPP_SD <dbl>"
+  },
+  {
+    "objectID": "slide/slide10.html#section-1",
+    "href": "slide/slide10.html#section-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "変数の計算"
+  },
+  {
+    "objectID": "slide/slide10.html#変数の計算",
+    "href": "slide/slide10.html#変数の計算",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数の計算",
+    "text": "変数の計算\nmutate(): データフレームの変数を用いた計算を行い、新しい列として追加\n\n新しい列名として既存の列名を指定すると上書きされる\n新しく追加された列は最後に位置する（指定可能）\n\n\nデータフレーム名 %>%\n  mutate(新しい列名 = 計算式)\n\n例) dfのPopulationをAreaで割り（=人口密度）、Densityという名の列として追加する\n\n\n{dplyr}を使わない方法\n\ndf$Density <- df$Population / df$Area\n\n\n\n\n{dplyr}を使う方法\n\ndf %>%\n  mutate(Density = Population / Area)"
+  },
+  {
+    "objectID": "slide/slide10.html#dplyrの例",
+    "href": "slide/slide10.html#dplyrの例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{dplyr}の例",
+    "text": "{dplyr}の例\n例) dfのPopulationをAreaで割り（人口密度）、Densityという名の列として追加する\n\n新しく追加された列は最後に位置する\n\nただし、上書きの場合、位置はそのまま\n\n\n\ndf %>%\n  mutate(Density = Population / Area) %>%\n  print(n = 5) # 最初の5行のみ出力\n\n# A tibble: 186 × 19\n  Country   Population   Area    GDP     PPP GDP_per_capita PPP_per_capita    G7\n  <chr>          <dbl>  <dbl>  <dbl>   <dbl>          <dbl>          <dbl> <dbl>\n1 Afghanis…   38928346 6.53e5 1.91e4  82737.           491.          2125.     0\n2 Albania      2877797 2.74e4 1.53e4  39658.          5309.         13781.     0\n3 Algeria     43851044 2.38e6 1.70e5 496572.          3876.         11324.     0\n4 Andorra        77265 4.7 e2 3.15e3     NA          40821.            NA      0\n5 Angola      32866272 1.25e6 9.46e4 218533.          2879.          6649.     0\n# … with 181 more rows, and 11 more variables: G20 <dbl>, OECD <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>,\n#   Density <dbl>"
+  },
+  {
+    "objectID": "slide/slide10.html#新しい列の位置指定",
+    "href": "slide/slide10.html#新しい列の位置指定",
+    "title": "ミクロ政治データ分析実習",
+    "section": "新しい列の位置指定",
+    "text": "新しい列の位置指定\nmutate()内に.after、または.beforeを指定\n\nrelocate()関数と同じ仕組み（第9回）\n\n例) PopulationをAreaで割り、Densityという名の新しい列Areaの後に追加する。\n\ndf %>%\n  mutate(Density = Population / Area, \n         .after  = Area)\n\n# A tibble: 186 × 19\n   Country             Population    Area Density     GDP     PPP GDP_per_capita\n   <chr>                    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>          <dbl>\n 1 Afghanistan           38928346  652860   59.6   1.91e4  8.27e4           491.\n 2 Albania                2877797   27400  105.    1.53e4  3.97e4          5309.\n 3 Algeria               43851044 2381740   18.4   1.70e5  4.97e5          3876.\n 4 Andorra                  77265     470  164.    3.15e3 NA              40821.\n 5 Angola                32866272 1246700   26.4   9.46e4  2.19e5          2879.\n 6 Antigua and Barbuda      97929     440  223.    1.73e3  2.08e3         17643.\n 7 Argentina             45195774 2736690   16.5   4.50e5  1.04e6          9949.\n 8 Armenia                2963243   28470  104.    1.37e4  3.84e4          4614.\n 9 Australia             25499884 7682300    3.32  1.39e6  1.28e6         54615.\n10 Austria                9006398   82409  109.    4.46e5  5.03e5         49555.\n# … with 176 more rows, and 12 more variables: PPP_per_capita <dbl>, G7 <dbl>,\n#   G20 <dbl>, OECD <dbl>, HDI_2018 <dbl>, Polity_Score <dbl>,\n#   Polity_Type <chr>, FH_PR <dbl>, FH_CL <dbl>, FH_Total <dbl>,\n#   FH_Status <chr>, Continent <chr>"
+  },
+  {
+    "objectID": "slide/slide10.html#変数の計算いろいろ1",
+    "href": "slide/slide10.html#変数の計算いろいろ1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数の計算いろいろ（1）",
+    "text": "変数の計算いろいろ（1）\n各国が世界人口に占める割合を計算し、降順で出力\n\ndfのPopulationの合計をTotal_Popという列として追加する。\nPopulationをTotal_Popで割り、100を掛ける。結果はShare_Popという名の列としてPopulation後に追加する。\nCountryからShare_Popまでの列のみ残す。\nTotal_Pop列を除外する。\nShare_Popが大きい順で行を並び替える"
+  },
+  {
+    "objectID": "slide/slide10.html#変数の計算いろいろ1-1",
+    "href": "slide/slide10.html#変数の計算いろいろ1-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数の計算いろいろ（1）",
+    "text": "変数の計算いろいろ（1）\n\ndf %>% \n  # Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK\n  mutate(Total_Pop = sum(Population),\n         Share_Pop = Population / Total_Pop * 100,\n         .after    = Population) %>%\n  select(Country:Share_Pop) %>%\n  select(!Total_Pop) %>%\n  arrange(desc(Share_Pop))\n\n# A tibble: 186 × 3\n   Country       Population Share_Pop\n   <chr>              <dbl>     <dbl>\n 1 China         1447470092     18.6 \n 2 India         1380004385     17.8 \n 3 United States  334308644      4.31\n 4 Indonesia      273523615      3.52\n 5 Pakistan       220892340      2.85\n 6 Brazil         212559417      2.74\n 7 Nigeria        206139589      2.66\n 8 Bangladesh     164689383      2.12\n 9 Russia         145934462      1.88\n10 Mexico         128932753      1.66\n# … with 176 more rows"
+  },
+  {
+    "objectID": "slide/slide10.html#変数の計算いろいろ2",
+    "href": "slide/slide10.html#変数の計算いろいろ2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数の計算いろいろ（2）",
+    "text": "変数の計算いろいろ（2）\nG7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。\n\ndfを利用する\nDevelopedという列を追加し、G7、G20、OECDのいずれかに加盟した国なら\"先進国\"、それ以外なら\"その他\"とする。\n人口密度をDensityという名の列として追加する。\nHDI_2018とPolity_Scoreのいずれかが欠損した行を除外する。\nDeveloped変数でデータをグルーピングする。\nHDI_2018、Polity_Score、Densityの平均値を求める。\ndf2という名前のオブジェクトとして作業環境内に格納する。"
+  },
+  {
+    "objectID": "slide/slide10.html#変数の計算いろいろ2-1",
+    "href": "slide/slide10.html#変数の計算いろいろ2-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数の計算いろいろ（2）",
+    "text": "変数の計算いろいろ（2）\n\ndf2 <- df %>%\n  mutate(Developed = G7 + G20 + OECD,\n         Developed = if_else(Developed > 1, \"先進国\", \"その他\"), # 上書き\n         Density   = Population / Area) %>%\n  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%\n  group_by(Developed) %>%\n  summarise(Density = mean(Density),\n            HDI     = mean(HDI_2018),\n            Polity  = mean(Polity_Score))\n\ndf2\n\n# A tibble: 2 × 4\n  Developed Density   HDI Polity\n  <chr>       <dbl> <dbl>  <dbl>\n1 その他       197. 0.695   3.92\n2 先進国       174. 0.892   7.91"
+  },
+  {
+    "objectID": "slide/slide10.html#summariseの結果を並び替えたい",
+    "href": "slide/slide10.html#summariseの結果を並び替えたい",
+    "title": "ミクロ政治データ分析実習",
+    "section": "summarise()の結果を並び替えたい",
+    "text": "summarise()の結果を並び替えたい\ndf2を\"先進国\" > \"その他\"の順番で表示させたい。\n\nsummarise()を行う場合、グルーピング変数のアルファベット順で表示される。\nただし、日本語の場合、50音順にはならない。\n\nひらがな、カタカナなら50音順になるが、漢字は \\(\\times\\)\n\nしたがって、summarise()の前にグルーピング変数をFactor型に変換する必要がある。\n\nFactor型: 順序付きの文字型"
+  },
+  {
+    "objectID": "slide/slide10.html#developedをfactor型に",
+    "href": "slide/slide10.html#developedをfactor型に",
+    "title": "ミクロ政治データ分析実習",
+    "section": "DevelopedをFactor型に",
+    "text": "DevelopedをFactor型に\n\ndf %>%\n  mutate(Developed = G7 + G20 + OECD,\n         Developed = if_else(Developed > 1, \"先進国\", \"その他\"), # 上書き\n         Density   = Population / Area) %>%\n  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%\n  group_by(Developed) %>%\n  # ここでなく、filter()前のmutate()内でやるのが効率的\n  mutate(Developed = factor(Developed, levels = c(\"先進国\", \"その他\"))) %>%\n  summarise(Density = mean(Density),\n            HDI     = mean(HDI_2018),\n            Polity  = mean(Polity_Score))\n\n# A tibble: 2 × 4\n  Developed Density   HDI Polity\n  <fct>       <dbl> <dbl>  <dbl>\n1 先進国       174. 0.892   7.91\n2 その他       197. 0.695   3.92"
+  },
+  {
+    "objectID": "slide/slide10.html#変数のリコーディング-2値の例",
+    "href": "slide/slide10.html#変数のリコーディング-2値の例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数のリコーディング: 2値の例",
+    "text": "変数のリコーディング: 2値の例\nmutate()内にif_else()を使用（または、ifelse()）\n\ndfのOECDが1なら\"OECD加盟国\"、それ以外なら\"OECD非加盟国\"に変換し、OECD_Jという列として追加\n\n\ndf %>%\n  mutate(OECD_J = if_else(OECD == 1, \"OECD加盟国\", \"OECD非加盟国\"))\n\n例) 変換前\n\ndf %>%\n  group_by(OECD) %>%\n  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),\n            HDI = mean(HDI_2018, na.rm = TRUE),\n            FH  = mean(FH_Total, na.rm = TRUE))\n\n# A tibble: 2 × 4\n   OECD    PPP   HDI    FH\n  <dbl>  <dbl> <dbl> <dbl>\n1     0 14229. 0.667  49.9\n2     1 46000. 0.894  89.1"
+  },
+  {
+    "objectID": "slide/slide10.html#変数のリコーディング-2値の例-1",
+    "href": "slide/slide10.html#変数のリコーディング-2値の例-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数のリコーディング: 2値の例",
+    "text": "変数のリコーディング: 2値の例\n例) 変換後\n\ndf %>%\n  mutate(OECD_J = if_else(OECD == 1, \"OECD加盟国\", \"OECD非加盟国\")) %>%\n  group_by(OECD = OECD_J) %>% # 「=」で列名の変更が可能\n  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),\n            HDI = mean(HDI_2018, na.rm = TRUE),\n            FH  = mean(FH_Total, na.rm = TRUE))\n\n# A tibble: 2 × 4\n  OECD            PPP   HDI    FH\n  <chr>         <dbl> <dbl> <dbl>\n1 OECD加盟国   46000. 0.894  89.1\n2 OECD非加盟国 14229. 0.667  49.9"
+  },
+  {
+    "objectID": "slide/slide10.html#変数のリコーディング-3値以上の例",
+    "href": "slide/slide10.html#変数のリコーディング-3値以上の例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数のリコーディング: 3値以上の例",
+    "text": "変数のリコーディング: 3値以上の例\nmutate()内にcase_when()を使用\n\nデータフレーム名 %>%\n  mutate(新しい変数名 = case_when(条件1 ~ 新しい値,\n                                条件2 ~ 新しい値,\n                                ...\n                                TRUE ~ 新しい値))\n\n\nTRUE ~ 新しい値は「上記の条件全てが満たされない場合の値」を意味する"
+  },
+  {
+    "objectID": "slide/slide10.html#変数のリコーディング-3値以上の例-1",
+    "href": "slide/slide10.html#変数のリコーディング-3値以上の例-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数のリコーディング: 3値以上の例",
+    "text": "変数のリコーディング: 3値以上の例\n例) dfのContinentを日本語にし、Continent_Jとして追加\n\ndf %>%\n  mutate(Continent_J = case_when(Continent == \"Africa\"  ~ \"アフリカ\",\n                                 Continent == \"America\" ~ \"アメリカ\",\n                                 Continent == \"Asia\"    ~ \"アジア\",\n                                 Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                 TRUE                   ~ \"オセアニア\")) %>%\n  group_by(大陸 = Continent_J) %>%\n  # 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）\n  summarise(OECD加盟国比率 = mean(OECD),\n            国家数        = n())\n\n# A tibble: 5 × 3\n  大陸       OECD加盟国比率 国家数\n  <chr>               <dbl>  <int>\n1 アジア             0.0714     42\n2 アフリカ           0          54\n3 アメリカ           0.139      36\n4 オセアニア         0.5         4\n5 ヨーロッパ         0.54       50"
+  },
+  {
+    "objectID": "slide/slide10.html#変数のリコーディング-応用",
+    "href": "slide/slide10.html#変数のリコーディング-応用",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数のリコーディング: 応用",
+    "text": "変数のリコーディング: 応用\n例) ContinentがAP列を追加し、\"Asia\"か\"Oceania\"、\"America\"なら1、以外は0\n方法1: if_else()の利用\n\ndf %>%\n  mutate(AP = if_else(Continent %in% c(\"Asia\", \"America\", \"Oceania\"),\n                      1, 0))\n\n方法2: case_when()の利用\n\ndf %>%\n  mutate(AP = case_when(Continent == \"Asia\"    ~ 1, \n                        Continent == \"America\" ~ 1, \n                        Continent == \"Oceania\" ~ 1,\n                        TRUE                   ~ 0))\n\n方法3: case_when() + %in%の利用\n\ndf %>%\n  mutate(AP = case_when(Continent %in% c(\"Asia\", \"America\", \"Oceania\") ~ 1, \n                        TRUE                                           ~ 0))"
+  },
+  {
+    "objectID": "slide/slide10.html#注意-欠損値を指定する場合",
+    "href": "slide/slide10.html#注意-欠損値を指定する場合",
+    "title": "ミクロ政治データ分析実習",
+    "section": "注意) 欠損値を指定する場合",
+    "text": "注意) 欠損値を指定する場合\n世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。\n例) my_dataの例\n\nYoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。\nHighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。\n\n\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9"
+  },
+  {
+    "objectID": "slide/slide10.html#注意-欠損値を指定する場合-1",
+    "href": "slide/slide10.html#注意-欠損値を指定する場合-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "注意) 欠損値を指定する場合",
+    "text": "注意) 欠損値を指定する場合\n注意: 条件 ~ NAではエラーが発生する。\n\nif_else()も同様。ただし、ifelse()はNAで作動\n\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\nError in `mutate()`:\n! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age <=\n  39 ~ 1, TRUE ~ 0)`.\nCaused by error in `` names(message) <- `*vtmp*` ``:\n! 'names' attribute [1] must be the same length as the vector [0]"
+  },
+  {
+    "objectID": "slide/slide10.html#注意-欠損値を指定する場合-2",
+    "href": "slide/slide10.html#注意-欠損値を指定する場合-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "注意) 欠損値を指定する場合",
+    "text": "注意) 欠損値を指定する場合\nNAでなく、生成される列のデータ型に応じてNA_real_（numeric型）、またはNA_character_（character型）を使用（logical型ならNAのままでOK）\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA_character_,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\n# A tibble: 10 × 5\n      ID   Age HighEduc YoungAge HighEduc2\n   <int> <dbl>    <dbl>    <dbl> <chr>    \n 1     1    32        1        1 大卒以上 \n 2     2    35        0        1 大卒未満 \n 3     3    57        0        0 大卒未満 \n 4     4   999        1       NA 大卒以上 \n 5     5    74        0        0 大卒未満 \n 6     6    66        9        0 <NA>     \n 7     7   999        1       NA 大卒以上 \n 8     8    49        1        0 大卒以上 \n 9     9    78        9        0 <NA>     \n10    10    67        9        0 <NA>"
+  },
+  {
+    "objectID": "slide/slide10.html#特定の値を欠損値にコーディング場合",
+    "href": "slide/slide10.html#特定の値を欠損値にコーディング場合",
+    "title": "ミクロ政治データ分析実習",
+    "section": "特定の値を欠損値にコーディング場合",
+    "text": "特定の値を欠損値にコーディング場合\n特定の値を欠損値とし、それ以外の値は元も値にする場合\n\n主にif_else()を使用し、条件に合致した場合はNA_real_かNA_character_を、合致しない場合は元の変数のままにする。\n\n\nmy_data %>%\n  mutate(Age      = if_else(Age == 999, NA_real_, Age),\n         HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
+  },
+  {
+    "objectID": "slide/slide10.html#特定の値を欠損値にコーディング場合-1",
+    "href": "slide/slide10.html#特定の値を欠損値にコーディング場合-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "特定の値を欠損値にコーディング場合",
+    "text": "特定の値を欠損値にコーディング場合\nif_else()でなく、case_when()を使うことも可能\n\n欠損を意味する値が複数の場合、case_when()を使うか、OR演算子（| / %in%）を用いたif_else()を使用する。\n\n\nmy_data %>%\n  mutate(Age      = case_when(Age == 999 ~ NA_real_, \n                              TRUE       ~ Age),\n         HighEduc = case_when(HighEduc == 9 ~ NA_real_, \n                              TRUE          ~ HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
+  },
+  {
+    "objectID": "slide/slide10.html#特定の値を欠損値にコーディング場合-2",
+    "href": "slide/slide10.html#特定の値を欠損値にコーディング場合-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "特定の値を欠損値にコーディング場合",
+    "text": "特定の値を欠損値にコーディング場合\n{naniar}パッケージのreplace_with_na()関数を利用\n\n引数はリスト型オブジェクトであり、リストの中には変数名 = 欠損値の値\n欠損値の値が複数の場合、変数名 = c(値1, 値2, ...)\n似たような関数として{expss}のna_if()関数\n\n\nlibrary(naniar) # 事前に install.package(naniar) でインストール\nmy_data %>%\n  # Ageは999、HighEducは9が欠損値\n  replace_with_na(list(Age = 999, HighEduc = 9))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
     "objectID": "slide/slide04.html#プログラミングの基礎概念",
     "href": "slide/slide04.html#プログラミングの基礎概念",
     "title": "ミクロ政治データ分析実習",
@@ -1937,257 +2420,5 @@
     "title": "実習用データ集",
     "section": "データ説明",
     "text": "データ説明\n\nPref_Vote.csv\n\n\n\n\n\n\n\n\n変数名\n説明\n詳細\n\n\n\n\nID\n都道府県のID\n\n\n\nPref\n都道府県名\n\n\n\nZaisei\n財政力指数\n2020年\n\n\nYoung\n30歳未満人口の割合\n2020年 (%)\n\n\nOlder\n65歳以上人口の割合\n2020年 (%)\n\n\nJimin\n自民党の得票率\n2019参院選比例区; (%)\n\n\nRikken\n立憲民主党の得票率\n2019参院選比例区; (%)\n\n\nKokumin\n国民民主党の得票率\n2019参院選比例区; (%)\n\n\nKomei\n公明党の得票率\n2019参院選比例区; (%)\n\n\nIshin\n維新の得票率\n2019参院選比例区; (%)\n\n\nKyosan\n共産党の得票率\n2019参院選比例区; (%)\n\n\nShamin\n社民党の得票率\n2019参院選比例区; (%)\n\n\nReiwa\nれいわ新選組の得票率\n2019参院選比例区; (%)\n\n\nNHK\nNHKから国民を守る党の得票率\n2019参院選比例区; (%)\n\n\nRegion2\n地域区分\n1 = 東日本; 2 = 西日本\n\n\nRegion6\n地域区分\n1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄"
-  },
-  {
-    "objectID": "slide/slide10.html#section",
-    "href": "slide/slide10.html#section",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "データのグルーピングと要約"
-  },
-  {
-    "objectID": "slide/slide10.html#目標",
-    "href": "slide/slide10.html#目標",
-    "title": "ミクロ政治データ分析実習",
-    "section": "目標",
-    "text": "目標\n\n変数の記述統計量を計算する\n\n記述統計量: 平均値、中央値、標準偏差、分散、ケース数など\n\nグループごとに記述統計量を計算する\n\n例) 大陸ごとに政治的権利（FH_PR）と市民的自由（FH_CL）の平均値を計算する\n\n\n# A tibble: 5 × 3\n  Continent Politial_Right Civil_Liberty\n  <chr>              <dbl>         <dbl>\n1 Africa              15.8          25.8\n2 America             29.4          42.6\n3 Asia                14.7          24.2\n4 Europe              31.9          47.6\n5 Oceania             31.8          47.2"
-  },
-  {
-    "objectID": "slide/slide10.html#記述統計量",
-    "href": "slide/slide10.html#記述統計量",
-    "title": "ミクロ政治データ分析実習",
-    "section": "記述統計量",
-    "text": "記述統計量\n変数が持つ情報を要約した数値\n元の情報:\n\nMathScore <- c(82, 45, 69, 94, 88, 73, NA, 51, 90, 63)\n\n\n\nMathScoreを代表する値\n\n# 平均値\nmean(MathScore, na.rm = TRUE) \n\n[1] 72.77778\n\n# 中央値\nmedian(MathScore, na.rm = TRUE)\n\n[1] 73\n\n\n\n\n\nMathScoreのばらつきの具合\n\n# 不偏分散\nvar(MathScore, na.rm = TRUE)\n\n[1] 302.4444\n\n# 不偏標準偏差\nsd(MathScore, na.rm = TRUE)\n\n[1] 17.39093\n\n# 四分位範囲\nIQR(MathScore, na.rm = TRUE)\n\n[1] 25"
-  },
-  {
-    "objectID": "slide/slide10.html#summariseの使い方",
-    "href": "slide/slide10.html#summariseの使い方",
-    "title": "ミクロ政治データ分析実習",
-    "section": "summarise()の使い方",
-    "text": "summarise()の使い方\nsummarise(): 記述統計量を計算する{dplyr}の関数\nデータフレーム %>%\n  summarise(記述統計の関数(変数名, ...))\n記述統計の関数の例\n\nmean(): 平均値\nmedian(): 中央値\nsd(): 不偏標準偏差\nvar(): 不偏分散\nIQR(): 四分位範囲\nmin()、max(): 最小値と最大値\nn(): ケース数（引数不要）\nその他（教科書第13.1.2章）"
-  },
-  {
-    "objectID": "slide/slide10.html#記述統計量の計算1",
-    "href": "slide/slide10.html#記述統計量の計算1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "記述統計量の計算（1）",
-    "text": "記述統計量の計算（1）\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro08.csv\") # 第8回の実習用データ\n\n例) dfのPopulationとAreaの平均値（mean()）を計算\n\ndf %>%\n  summarise(mean(Population),\n            mean(Area))\n\n# A tibble: 1 × 2\n  `mean(Population)` `mean(Area)`\n               <dbl>        <dbl>\n1          41737773.      696069."
-  },
-  {
-    "objectID": "slide/slide10.html#記述統計量の計算2",
-    "href": "slide/slide10.html#記述統計量の計算2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "記述統計量の計算（2）",
-    "text": "記述統計量の計算（2）\nsummarise()内に異なる関数を使うことも可能\n例) dfのPopulationとAreaの平均値（mean()）と標準偏差（sd()）を計算\n\ndf %>%\n  summarise(mean(Population),\n            sd(Population),\n            mean(Area),\n            sd(Area))\n\n# A tibble: 1 × 4\n  `mean(Population)` `sd(Population)` `mean(Area)` `sd(Area)`\n               <dbl>            <dbl>        <dbl>      <dbl>\n1          41737773.       151270298.      696069.   1872412."
-  },
-  {
-    "objectID": "slide/slide10.html#出力された結果をより見やすく",
-    "href": "slide/slide10.html#出力された結果をより見やすく",
-    "title": "ミクロ政治データ分析実習",
-    "section": "出力された結果をより見やすく",
-    "text": "出力された結果をより見やすく\nsummarise()内に出力される結果の列名 = 関数()を指定\n例) dfのPopulationとAreaの平均値（mean()）と標準偏差（sd()）を計算し、結果の列名をMean_Pop、SD_Popなどとする\n\nPop_Area_df <- df %>%\n  summarise(Mean_Pop  = mean(Population),\n            SD_Pop    = sd(Population),\n            Mean_Area = mean(Area),\n            SD_Area   = sd(Area))\nPop_Area_df\n\n# A tibble: 1 × 4\n   Mean_Pop     SD_Pop Mean_Area  SD_Area\n      <dbl>      <dbl>     <dbl>    <dbl>\n1 41737773. 151270298.   696069. 1872412."
-  },
-  {
-    "objectID": "slide/slide10.html#グループごとの記述統計量1",
-    "href": "slide/slide10.html#グループごとの記述統計量1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "グループごとの記述統計量（1）",
-    "text": "グループごとの記述統計量（1）\n{dplyr}を使わずに大陸ごとのPPP_per_capitaの平均値を計算する例\n\nPPP_per_capitaは欠損値が含まれているため、na.rm = TRUEを指定（指定しないと結果はNAとなる）\n\n\nmean(df$PPP_per_capita[df$Continent == \"Africa\"], na.rm = TRUE)\n\n[1] 5667.087\n\nmean(df$PPP_per_capita[df$Continent == \"America\"], na.rm = TRUE)\n\n[1] 18100.29\n\nmean(df$PPP_per_capita[df$Continent == \"Asia\"], na.rm = TRUE)\n\n[1] 22728.13\n\nmean(df$PPP_per_capita[df$Continent == \"Europe\"], na.rm = TRUE)\n\n[1] 37782.59\n\nmean(df$PPP_per_capita[df$Continent == \"Oceania\"], na.rm = TRUE)\n\n[1] 27572.65"
-  },
-  {
-    "objectID": "slide/slide10.html#グループごとの記述統計量2",
-    "href": "slide/slide10.html#グループごとの記述統計量2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "グループごとの記述統計量（2）",
-    "text": "グループごとの記述統計量（2）\n{dplyr}のgroup_by()を使用\n\nデータフレーム名 %>%\n  group_by(グループ化する変数名) %>%\n  summarise(...)\n\n例) dfのContinentでデータをグループ化し、PPP_per_capitaの平均値を計算\n\n# PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE))\n\n# A tibble: 5 × 2\n  Continent Mean_PPP\n  <chr>        <dbl>\n1 Africa       5667.\n2 America     18100.\n3 Asia        22728.\n4 Europe      37783.\n5 Oceania     27573."
-  },
-  {
-    "objectID": "slide/slide10.html#複数の変数でグルーピング",
-    "href": "slide/slide10.html#複数の変数でグルーピング",
-    "title": "ミクロ政治データ分析実習",
-    "section": "複数の変数でグルーピング",
-    "text": "複数の変数でグルーピング\n例) dfのContinentとG20でデータをグループ化し、HDI_2018の平均値を計算\n\ndf %>%\n  group_by(Continent, G20) %>%\n  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE))\n\n`summarise()` has grouped output by 'Continent'. You can override using the\n`.groups` argument.\n\n\n# A tibble: 10 × 3\n# Groups:   Continent [5]\n   Continent   G20 Mean_HDI\n   <chr>     <dbl>    <dbl>\n 1 Africa        0    0.550\n 2 Africa        1    0.705\n 3 America       0    0.727\n 4 America       1    0.84 \n 5 Asia          0    0.710\n 6 Asia          1    0.798\n 7 Europe        0    0.859\n 8 Europe        1    0.877\n 9 Oceania       0    0.729\n10 Oceania       1    0.938"
-  },
-  {
-    "objectID": "slide/slide10.html#グルービング後のsummarise",
-    "href": "slide/slide10.html#グルービング後のsummarise",
-    "title": "ミクロ政治データ分析実習",
-    "section": "グルービング後のsummarise()",
-    "text": "グルービング後のsummarise()\n謎のメッセージが出力される\n## `summarise()` has grouped output by 'Continent'. You can override using \nthe `.groups` argument.\nとりあえず、group_by()の後にsummarise()を使う場合、summarise()の最後に.groups = \"drop\"を追加する。\n\n理由は割愛するが、詳細は教科書第13.2章を参照\n多くの場合、メッセージが出力されるだけで、問題が生じることはあまりない。\nしかし、複数の変数でグルーピングしたり、記述統計量が複数計算される関数（quantile()など）を使う場合、問題が生じる可能性あり\n\n特にsummarise()の後に更にパイプ（%>%）を使って計算を続ける場合\n\nとりあえず、.groups = \"drop\"をしておけば安全"
-  },
-  {
-    "objectID": "slide/slide10.html#groups-dropを追加する",
-    "href": "slide/slide10.html#groups-dropを追加する",
-    "title": "ミクロ政治データ分析実習",
-    "section": ".groups = \"drop\"を追加する",
-    "text": ".groups = \"drop\"を追加する\n謎のメッセージが出力されなくなる\n\ndf %>%\n  group_by(Continent, G20) %>%\n  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE),\n            .groups  = \"drop\")\n\n# A tibble: 10 × 3\n   Continent   G20 Mean_HDI\n   <chr>     <dbl>    <dbl>\n 1 Africa        0    0.550\n 2 Africa        1    0.705\n 3 America       0    0.727\n 4 America       1    0.84 \n 5 Asia          0    0.710\n 6 Asia          1    0.798\n 7 Europe        0    0.859\n 8 Europe        1    0.877\n 9 Oceania       0    0.729\n10 Oceania       1    0.938"
-  },
-  {
-    "objectID": "slide/slide10.html#グループごとのケース数を計算",
-    "href": "slide/slide10.html#グループごとのケース数を計算",
-    "title": "ミクロ政治データ分析実習",
-    "section": "グループごとのケース数を計算",
-    "text": "グループごとのケース数を計算\nsummarise()の中にn()を使用\n\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE),\n            SD_PPP   = sd(PPP_per_capita, na.rm = TRUE),\n            Cases    = n())\n\n# A tibble: 5 × 4\n  Continent Mean_PPP SD_PPP Cases\n  <chr>        <dbl>  <dbl> <int>\n1 Africa       5667.  6015.    54\n2 America     18100. 12601.    36\n3 Asia        22728. 24067.    42\n4 Europe      37783. 21276.    50\n5 Oceania     27573. 21984.     4"
-  },
-  {
-    "objectID": "slide/slide10.html#おまけ-効率的な方法",
-    "href": "slide/slide10.html#おまけ-効率的な方法",
-    "title": "ミクロ政治データ分析実習",
-    "section": "おまけ: 効率的な方法",
-    "text": "おまけ: 効率的な方法\nacross()関数を利用: 詳細は教科書第13.1章を参照\n例) dfのPopulationからPPP列まで平均値と標準偏差を計算し、結果の変数名は元の変数名_Mean、元の変数名_SDとする\n\ndf %>%\n  summarise(across(Population:PPP,\n                   .fns = list(Mean = ~mean(.x, na.rm = TRUE),\n                               SD   = ~mean(.x, na.rm = TRUE))))\n\n# A tibble: 1 × 8\n  Population_Mean Population_SD Area_Mean Area_SD GDP_Mean  GDP_SD PPP_Mean\n            <dbl>         <dbl>     <dbl>   <dbl>    <dbl>   <dbl>    <dbl>\n1       41737773.     41737773.   696069. 696069.  473031. 473031.  717953.\n# … with 1 more variable: PPP_SD <dbl>"
-  },
-  {
-    "objectID": "slide/slide10.html#section-1",
-    "href": "slide/slide10.html#section-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "変数の計算"
-  },
-  {
-    "objectID": "slide/slide10.html#変数の計算",
-    "href": "slide/slide10.html#変数の計算",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数の計算",
-    "text": "変数の計算\nmutate(): データフレームの変数を用いた計算を行い、新しい列として追加\n\n新しい列名として既存の列名を指定すると上書きされる\n新しく追加された列は最後に位置する（指定可能）\n\n\nデータフレーム名 %>%\n  mutate(新しい列名 = 計算式)\n\n例) dfのPopulationをAreaで割り（=人口密度）、Densityという名の列として追加する\n\n\n{dplyr}を使わない方法\n\ndf$Density <- df$Population / df$Area\n\n\n\n\n{dplyr}を使う方法\n\ndf %>%\n  mutate(Density = Population / Area)"
-  },
-  {
-    "objectID": "slide/slide10.html#dplyrの例",
-    "href": "slide/slide10.html#dplyrの例",
-    "title": "ミクロ政治データ分析実習",
-    "section": "{dplyr}の例",
-    "text": "{dplyr}の例\n例) dfのPopulationをAreaで割り（人口密度）、Densityという名の列として追加する\n\n新しく追加された列は最後に位置する\n\nただし、上書きの場合、位置はそのまま\n\n\n\ndf %>%\n  mutate(Density = Population / Area) %>%\n  print(n = 5) # 最初の5行のみ出力\n\n# A tibble: 186 × 19\n  Country   Population   Area    GDP     PPP GDP_per_capita PPP_per_capita    G7\n  <chr>          <dbl>  <dbl>  <dbl>   <dbl>          <dbl>          <dbl> <dbl>\n1 Afghanis…   38928346 6.53e5 1.91e4  82737.           491.          2125.     0\n2 Albania      2877797 2.74e4 1.53e4  39658.          5309.         13781.     0\n3 Algeria     43851044 2.38e6 1.70e5 496572.          3876.         11324.     0\n4 Andorra        77265 4.7 e2 3.15e3     NA          40821.            NA      0\n5 Angola      32866272 1.25e6 9.46e4 218533.          2879.          6649.     0\n# … with 181 more rows, and 11 more variables: G20 <dbl>, OECD <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>,\n#   Density <dbl>"
-  },
-  {
-    "objectID": "slide/slide10.html#新しい列の位置指定",
-    "href": "slide/slide10.html#新しい列の位置指定",
-    "title": "ミクロ政治データ分析実習",
-    "section": "新しい列の位置指定",
-    "text": "新しい列の位置指定\nmutate()内に.after、または.beforeを指定\n\nrelocate()関数と同じ仕組み（第9回）\n\n例) PopulationをAreaで割り、Densityという名の新しい列Areaの後に追加する。\n\ndf %>%\n  mutate(Density = Population / Area, \n         .after  = Area)\n\n# A tibble: 186 × 19\n   Country             Population    Area Density     GDP     PPP GDP_per_capita\n   <chr>                    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>          <dbl>\n 1 Afghanistan           38928346  652860   59.6   1.91e4  8.27e4           491.\n 2 Albania                2877797   27400  105.    1.53e4  3.97e4          5309.\n 3 Algeria               43851044 2381740   18.4   1.70e5  4.97e5          3876.\n 4 Andorra                  77265     470  164.    3.15e3 NA              40821.\n 5 Angola                32866272 1246700   26.4   9.46e4  2.19e5          2879.\n 6 Antigua and Barbuda      97929     440  223.    1.73e3  2.08e3         17643.\n 7 Argentina             45195774 2736690   16.5   4.50e5  1.04e6          9949.\n 8 Armenia                2963243   28470  104.    1.37e4  3.84e4          4614.\n 9 Australia             25499884 7682300    3.32  1.39e6  1.28e6         54615.\n10 Austria                9006398   82409  109.    4.46e5  5.03e5         49555.\n# … with 176 more rows, and 12 more variables: PPP_per_capita <dbl>, G7 <dbl>,\n#   G20 <dbl>, OECD <dbl>, HDI_2018 <dbl>, Polity_Score <dbl>,\n#   Polity_Type <chr>, FH_PR <dbl>, FH_CL <dbl>, FH_Total <dbl>,\n#   FH_Status <chr>, Continent <chr>"
-  },
-  {
-    "objectID": "slide/slide10.html#変数の計算いろいろ1",
-    "href": "slide/slide10.html#変数の計算いろいろ1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数の計算いろいろ（1）",
-    "text": "変数の計算いろいろ（1）\n各国が世界人口に占める割合を計算し、降順で出力\n\ndfのPopulationの合計をTotal_Popという列として追加する。\nPopulationをTotal_Popで割り、100を掛ける。結果はShare_Popという名の列としてPopulation後に追加する。\nCountryからShare_Popまでの列のみ残す。\nTotal_Pop列を除外する。\nShare_Popが大きい順で行を並び替える"
-  },
-  {
-    "objectID": "slide/slide10.html#変数の計算いろいろ1-1",
-    "href": "slide/slide10.html#変数の計算いろいろ1-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数の計算いろいろ（1）",
-    "text": "変数の計算いろいろ（1）\n\ndf %>% \n  # Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK\n  mutate(Total_Pop = sum(Population),\n         Share_Pop = Population / Total_Pop * 100,\n         .after    = Population) %>%\n  select(Country:Share_Pop) %>%\n  select(!Total_Pop) %>%\n  arrange(desc(Share_Pop))\n\n# A tibble: 186 × 3\n   Country       Population Share_Pop\n   <chr>              <dbl>     <dbl>\n 1 China         1447470092     18.6 \n 2 India         1380004385     17.8 \n 3 United States  334308644      4.31\n 4 Indonesia      273523615      3.52\n 5 Pakistan       220892340      2.85\n 6 Brazil         212559417      2.74\n 7 Nigeria        206139589      2.66\n 8 Bangladesh     164689383      2.12\n 9 Russia         145934462      1.88\n10 Mexico         128932753      1.66\n# … with 176 more rows"
-  },
-  {
-    "objectID": "slide/slide10.html#変数の計算いろいろ2",
-    "href": "slide/slide10.html#変数の計算いろいろ2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数の計算いろいろ（2）",
-    "text": "変数の計算いろいろ（2）\nG7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。\n\ndfを利用する\nDevelopedという列を追加し、G7、G20、OECDのいずれかに加盟した国なら\"先進国\"、それ以外なら\"その他\"とする。\n人口密度をDensityという名の列として追加する。\nHDI_2018とPolity_Scoreのいずれかが欠損した行を除外する。\nDeveloped変数でデータをグルーピングする。\nHDI_2018、Polity_Score、Densityの平均値を求める。\ndf2という名前のオブジェクトとして作業環境内に格納する。"
-  },
-  {
-    "objectID": "slide/slide10.html#変数の計算いろいろ2-1",
-    "href": "slide/slide10.html#変数の計算いろいろ2-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数の計算いろいろ（2）",
-    "text": "変数の計算いろいろ（2）\n\ndf2 <- df %>%\n  mutate(Developed = G7 + G20 + OECD,\n         Developed = if_else(Developed > 1, \"先進国\", \"その他\"), # 上書き\n         Density   = Population / Area) %>%\n  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%\n  group_by(Developed) %>%\n  summarise(Density = mean(Density),\n            HDI     = mean(HDI_2018),\n            Polity  = mean(Polity_Score))\n\ndf2\n\n# A tibble: 2 × 4\n  Developed Density   HDI Polity\n  <chr>       <dbl> <dbl>  <dbl>\n1 その他       197. 0.695   3.92\n2 先進国       174. 0.892   7.91"
-  },
-  {
-    "objectID": "slide/slide10.html#summariseの結果を並び替えたい",
-    "href": "slide/slide10.html#summariseの結果を並び替えたい",
-    "title": "ミクロ政治データ分析実習",
-    "section": "summarise()の結果を並び替えたい",
-    "text": "summarise()の結果を並び替えたい\ndf2を\"先進国\" > \"その他\"の順番で表示させたい。\n\nsummarise()を行う場合、グルーピング変数のアルファベット順で表示される。\nただし、日本語の場合、50音順にはならない。\n\nひらがな、カタカナなら50音順になるが、漢字は \\(\\times\\)\n\nしたがって、summarise()の前にグルーピング変数をFactor型に変換する必要がある。\n\nFactor型: 順序付きの文字型"
-  },
-  {
-    "objectID": "slide/slide10.html#developedをfactor型に",
-    "href": "slide/slide10.html#developedをfactor型に",
-    "title": "ミクロ政治データ分析実習",
-    "section": "DevelopedをFactor型に",
-    "text": "DevelopedをFactor型に\n\ndf %>%\n  mutate(Developed = G7 + G20 + OECD,\n         Developed = if_else(Developed > 1, \"先進国\", \"その他\"), # 上書き\n         Density   = Population / Area) %>%\n  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%\n  group_by(Developed) %>%\n  # ここでなく、filter()前のmutate()内でやるのが効率的\n  mutate(Developed = factor(Developed, levels = c(\"先進国\", \"その他\"))) %>%\n  summarise(Density = mean(Density),\n            HDI     = mean(HDI_2018),\n            Polity  = mean(Polity_Score))\n\n# A tibble: 2 × 4\n  Developed Density   HDI Polity\n  <fct>       <dbl> <dbl>  <dbl>\n1 先進国       174. 0.892   7.91\n2 その他       197. 0.695   3.92"
-  },
-  {
-    "objectID": "slide/slide10.html#変数のリコーディング-2値の例",
-    "href": "slide/slide10.html#変数のリコーディング-2値の例",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数のリコーディング: 2値の例",
-    "text": "変数のリコーディング: 2値の例\nmutate()内にif_else()を使用（または、ifelse()）\n\ndfのOECDが1なら\"OECD加盟国\"、それ以外なら\"OECD非加盟国\"に変換し、OECD_Jという列として追加\n\n\ndf %>%\n  mutate(OECD_J = if_else(OECD == 1, \"OECD加盟国\", \"OECD非加盟国\"))\n\n例) 変換前\n\ndf %>%\n  group_by(OECD) %>%\n  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),\n            HDI = mean(HDI_2018, na.rm = TRUE),\n            FH  = mean(FH_Total, na.rm = TRUE))\n\n# A tibble: 2 × 4\n   OECD    PPP   HDI    FH\n  <dbl>  <dbl> <dbl> <dbl>\n1     0 14229. 0.667  49.9\n2     1 46000. 0.894  89.1"
-  },
-  {
-    "objectID": "slide/slide10.html#変数のリコーディング-2値の例-1",
-    "href": "slide/slide10.html#変数のリコーディング-2値の例-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数のリコーディング: 2値の例",
-    "text": "変数のリコーディング: 2値の例\n例) 変換後\n\ndf %>%\n  mutate(OECD_J = if_else(OECD == 1, \"OECD加盟国\", \"OECD非加盟国\")) %>%\n  group_by(OECD = OECD_J) %>% # 「=」で列名の変更が可能\n  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),\n            HDI = mean(HDI_2018, na.rm = TRUE),\n            FH  = mean(FH_Total, na.rm = TRUE))\n\n# A tibble: 2 × 4\n  OECD            PPP   HDI    FH\n  <chr>         <dbl> <dbl> <dbl>\n1 OECD加盟国   46000. 0.894  89.1\n2 OECD非加盟国 14229. 0.667  49.9"
-  },
-  {
-    "objectID": "slide/slide10.html#変数のリコーディング-3値以上の例",
-    "href": "slide/slide10.html#変数のリコーディング-3値以上の例",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数のリコーディング: 3値以上の例",
-    "text": "変数のリコーディング: 3値以上の例\nmutate()内にcase_when()を使用\n\nデータフレーム名 %>%\n  mutate(新しい変数名 = case_when(条件1 ~ 新しい値,\n                                条件2 ~ 新しい値,\n                                ...\n                                TRUE ~ 新しい値))\n\n\nTRUE ~ 新しい値は「上記の条件全てが満たされない場合の値」を意味する"
-  },
-  {
-    "objectID": "slide/slide10.html#変数のリコーディング-3値以上の例-1",
-    "href": "slide/slide10.html#変数のリコーディング-3値以上の例-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数のリコーディング: 3値以上の例",
-    "text": "変数のリコーディング: 3値以上の例\n例) dfのContinentを日本語にし、Continent_Jとして追加\n\ndf %>%\n  mutate(Continent_J = case_when(Continent == \"Africa\"  ~ \"アフリカ\",\n                                 Continent == \"America\" ~ \"アメリカ\",\n                                 Continent == \"Asia\"    ~ \"アジア\",\n                                 Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                 TRUE                   ~ \"オセアニア\")) %>%\n  group_by(大陸 = Continent_J) %>%\n  # 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）\n  summarise(OECD加盟国比率 = mean(OECD),\n            国家数        = n())\n\n# A tibble: 5 × 3\n  大陸       OECD加盟国比率 国家数\n  <chr>               <dbl>  <int>\n1 アジア             0.0714     42\n2 アフリカ           0          54\n3 アメリカ           0.139      36\n4 オセアニア         0.5         4\n5 ヨーロッパ         0.54       50"
-  },
-  {
-    "objectID": "slide/slide10.html#変数のリコーディング-応用",
-    "href": "slide/slide10.html#変数のリコーディング-応用",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数のリコーディング: 応用",
-    "text": "変数のリコーディング: 応用\n例) ContinentがAP列を追加し、\"Asia\"か\"Oceania\"、\"America\"なら1、以外は0\n方法1: if_else()の利用\n\ndf %>%\n  mutate(AP = if_else(Continent %in% c(\"Asia\", \"America\", \"Oceania\"),\n                      1, 0))\n\n方法2: case_when()の利用\n\ndf %>%\n  mutate(AP = case_when(Continent == \"Asia\"    ~ 1, \n                        Continent == \"America\" ~ 1, \n                        Continent == \"Oceania\" ~ 1,\n                        TRUE                   ~ 0))\n\n方法3: case_when() + %in%の利用\n\ndf %>%\n  mutate(AP = case_when(Continent %in% c(\"Asia\", \"America\", \"Oceania\") ~ 1, \n                        TRUE                                           ~ 0))"
-  },
-  {
-    "objectID": "slide/slide10.html#注意-欠損値を指定する場合",
-    "href": "slide/slide10.html#注意-欠損値を指定する場合",
-    "title": "ミクロ政治データ分析実習",
-    "section": "注意) 欠損値を指定する場合",
-    "text": "注意) 欠損値を指定する場合\n世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。\n例) my_dataの例\n\nYoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。\nHighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。\n\n\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9"
-  },
-  {
-    "objectID": "slide/slide10.html#注意-欠損値を指定する場合-1",
-    "href": "slide/slide10.html#注意-欠損値を指定する場合-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "注意) 欠損値を指定する場合",
-    "text": "注意) 欠損値を指定する場合\n注意: 条件 ~ NAではエラーが発生する。\n\nif_else()も同様。ただし、ifelse()はNAで作動\n\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\nError in `mutate()`:\n! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age <=\n  39 ~ 1, TRUE ~ 0)`.\nCaused by error in `` names(message) <- `*vtmp*` ``:\n! 'names' attribute [1] must be the same length as the vector [0]"
-  },
-  {
-    "objectID": "slide/slide10.html#注意-欠損値を指定する場合-2",
-    "href": "slide/slide10.html#注意-欠損値を指定する場合-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "注意) 欠損値を指定する場合",
-    "text": "注意) 欠損値を指定する場合\nNAでなく、生成される列のデータ型に応じてNA_real_（numeric型）、またはNA_character_（character型）を使用（logical型ならNAのままでOK）\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA_character_,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\n# A tibble: 10 × 5\n      ID   Age HighEduc YoungAge HighEduc2\n   <int> <dbl>    <dbl>    <dbl> <chr>    \n 1     1    32        1        1 大卒以上 \n 2     2    35        0        1 大卒未満 \n 3     3    57        0        0 大卒未満 \n 4     4   999        1       NA 大卒以上 \n 5     5    74        0        0 大卒未満 \n 6     6    66        9        0 <NA>     \n 7     7   999        1       NA 大卒以上 \n 8     8    49        1        0 大卒以上 \n 9     9    78        9        0 <NA>     \n10    10    67        9        0 <NA>"
-  },
-  {
-    "objectID": "slide/slide10.html#特定の値を欠損値にコーディング場合",
-    "href": "slide/slide10.html#特定の値を欠損値にコーディング場合",
-    "title": "ミクロ政治データ分析実習",
-    "section": "特定の値を欠損値にコーディング場合",
-    "text": "特定の値を欠損値にコーディング場合\n特定の値を欠損値とし、それ以外の値は元も値にする場合 * 主にif_else()を使用し、条件に合致した場合はNA_real_かNA_character_を、合致しない場合は元の変数のままにする。\n\nmy_data %>%\n  mutate(Age      = if_else(Age == 999, NA_real_, Age),\n         HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
-  },
-  {
-    "objectID": "slide/slide10.html#特定の値を欠損値にコーディング場合-1",
-    "href": "slide/slide10.html#特定の値を欠損値にコーディング場合-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "特定の値を欠損値にコーディング場合",
-    "text": "特定の値を欠損値にコーディング場合\nif_else()でなく、case_when()を使うことも可能\n\n欠損を意味する値が複数の場合、case_when()を使うか、OR演算子（| / %in%）を用いたif_else()を使用する。\n\n\nmy_data %>%\n  mutate(Age      = case_when(Age == 999 ~ NA_real_, \n                              TRUE       ~ Age),\n         HighEduc = case_when(HighEduc == 9 ~ NA_real_, \n                              TRUE          ~ HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
-  },
-  {
-    "objectID": "slide/slide10.html#特定の値を欠損値にコーディング場合-2",
-    "href": "slide/slide10.html#特定の値を欠損値にコーディング場合-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "特定の値を欠損値にコーディング場合",
-    "text": "特定の値を欠損値にコーディング場合\n{naniar}パッケージのreplace_with_na()関数を利用\n\n引数はリスト型オブジェクトであり、リストの中には変数名 = 欠損値の値\n欠損値の値が複数の場合、変数名 = c(値1, 値2, ...)\n似たような関数として{expss}のna_if()関数\n\n\nlibrary(naniar) # 事前に install.package(naniar) でインストール\nmy_data %>%\n  # Ageは999、HighEducは9が欠損値\n  replace_with_na(list(Age = 999, HighEduc = 9))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
-  },
-  {
-    "objectID": "slide/slide10.html#便利な関数-グループごとのケース数を計算",
-    "href": "slide/slide10.html#便利な関数-グループごとのケース数を計算",
-    "title": "ミクロ政治データ分析実習",
-    "section": "便利な関数) グループごとのケース数を計算",
-    "text": "便利な関数) グループごとのケース数を計算\nsummarise()の中にn()を使用\n\ndf %>%\n  group_by(Continent) %>%\n  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE),\n            SD_PPP   = sd(PPP_per_capita, na.rm = TRUE),\n            Cases    = n())\n\n# A tibble: 5 × 4\n  Continent Mean_PPP SD_PPP Cases\n  <chr>        <dbl>  <dbl> <int>\n1 Africa       5667.  6015.    54\n2 America     18100. 12601.    36\n3 Asia        22728. 24067.    42\n4 Europe      37783. 21276.    50\n5 Oceania     27573. 21984.     4"
   }
 ]

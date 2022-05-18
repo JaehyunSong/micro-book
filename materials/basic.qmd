@@ -2,7 +2,8 @@
 title: "第3回講義資料"
 subtitle: "Rの基本的な操作"
 toc: true
-toc-title: "目次"
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

@@ -1,6 +1,8 @@
 ---
 title: "第6回講義資料"
 subtitle: "データ収集"
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

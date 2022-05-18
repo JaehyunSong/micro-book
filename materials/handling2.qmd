@@ -1,6 +1,9 @@
 ---
 title: "第10回講義資料"
 subtitle: "データハンドリング (2)"
+toc: true
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド
@@ -10,3 +13,645 @@ subtitle: "データハンドリング (2)"
 ```{=html}
 <iframe class="slide-deck" src="../slide/slide10.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 ```
+
+## 目標
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(dev       = "ragg_png",
+                      dpi       = 300,
+                      fig.align = "center",
+                      echo      = TRUE)
+pacman::p_load(naniar)
+```
+
+* 変数の記述統計量を計算する
+   * 記述統計量: 平均値、中央値、標準偏差、分散、ケース数など
+* グループごとに記述統計量を計算する
+
+**例)** 大陸ごとに政治的権利（`FH_PR`）と市民的自由（`FH_CL`）の平均値を計算する
+
+```{r}
+#| message: false
+#| echo: false
+library(tidyverse)
+df <- read_csv("Data/Micro09.csv")
+df %>% 
+  group_by(Continent) %>%
+  summarise(Politial_Right = mean(FH_PR, na.rm = TRUE),
+            Civil_Liberty  = mean(FH_CL, na.rm = TRUE))
+```
+
+<!--- --->
+
+## 記述統計量
+
+変数が持つ情報を要約した数値
+
+元の情報: 
+```{r}
+MathScore <- c(82, 45, 69, 94, 88, 73, NA, 51, 90, 63)
+```
+
+:::: {.columns}
+
+::: {.column width="45%"}
+`MathScore`を代表する値
+
+```{r}
+# 平均値
+mean(MathScore, na.rm = TRUE) 
+# 中央値
+median(MathScore, na.rm = TRUE)
+```
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+`MathScore`のばらつきの具合
+
+```{r}
+# 不偏分散
+var(MathScore, na.rm = TRUE)
+# 不偏標準偏差
+sd(MathScore, na.rm = TRUE)
+# 四分位範囲
+IQR(MathScore, na.rm = TRUE)
+```
+:::
+
+::::
+
+<!--- --->
+
+## `summarise()`の使い方
+
+`summarise()`: 記述統計量を計算する{dplyr}の関数
+
+```r
+データフレーム %>%
+  summarise(記述統計の関数(変数名, ...))
+```
+
+記述統計の関数の例
+
+* `mean()`: 平均値
+* `median()`: 中央値
+* `sd()`: 不偏標準偏差
+* `var()`: 不偏分散
+* `IQR()`: 四分位範囲
+* `min()`、`max()`: 最小値と最大値
+* `n()`: ケース数（引数不要）
+* その他（教科書[第13.1.2章](https://www.jaysong.net/RBook/datahandling2.html#summarise%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0)）
+
+<!--- --->
+
+## 記述統計量の計算（1）
+
+```{r}
+#| eval: false
+library(tidyverse)
+df <- read_csv("Data/Micro08.csv") # 第8回の実習用データ
+```
+
+**例)** `df`の`Population`と`Area`の平均値（`mean()`）を計算
+
+```{r}
+df %>%
+  summarise(mean(Population),
+            mean(Area))
+```
+
+<!--- --->
+
+## 記述統計量の計算（2）
+
+`summarise()`内に異なる関数を使うことも可能
+
+**例)** `df`の`Population`と`Area`の平均値（`mean()`）と標準偏差（`sd()`）を計算
+
+```{r}
+df %>%
+  summarise(mean(Population),
+            sd(Population),
+            mean(Area),
+            sd(Area))
+```
+
+<!--- --->
+
+## 出力された結果をより見やすく
+
+`summarise()`内に`出力される結果の列名 = 関数()`を指定
+
+**例)** `df`の`Population`と`Area`の平均値（`mean()`）と標準偏差（`sd()`）を計算し、結果の列名を`Mean_Pop`、`SD_Pop`などとする
+
+```{r}
+Pop_Area_df <- df %>%
+  summarise(Mean_Pop  = mean(Population),
+            SD_Pop    = sd(Population),
+            Mean_Area = mean(Area),
+            SD_Area   = sd(Area))
+Pop_Area_df
+```
+
+<!--- --->
+
+## グループごとの記述統計量（1）
+
+{dplyr}を使わずに大陸ごとの`PPP_per_capita`の平均値を計算する例
+
+* `PPP_per_capita`は欠損値が含まれているため、`na.rm = TRUE`を指定（指定しないと結果は`NA`となる）
+
+```{r}
+mean(df$PPP_per_capita[df$Continent == "Africa"], na.rm = TRUE)
+mean(df$PPP_per_capita[df$Continent == "America"], na.rm = TRUE)
+mean(df$PPP_per_capita[df$Continent == "Asia"], na.rm = TRUE)
+mean(df$PPP_per_capita[df$Continent == "Europe"], na.rm = TRUE)
+mean(df$PPP_per_capita[df$Continent == "Oceania"], na.rm = TRUE)
+```
+
+<!--- --->
+
+## グループごとの記述統計量（2）
+
+{dplyr}の`group_by()`を使用
+
+```{r}
+#| eval: false
+#| code-line-numbers: "2"
+データフレーム名 %>%
+  group_by(グループ化する変数名) %>%
+  summarise(...)
+```
+
+**例)** `df`の`Continent`でデータをグループ化し、`PPP_per_capita`の平均値を計算
+
+```{r}
+# PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加
+df %>%
+  group_by(Continent) %>%
+  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE))
+```
+<!--- --->
+
+## 複数の変数でグルーピング
+
+**例)** `df`の`Continent`と`G20`でデータをグループ化し、`HDI_2018`の平均値を計算
+
+```{r}
+#| message: true
+df %>%
+  group_by(Continent, G20) %>%
+  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE))
+```
+
+<!--- --->
+
+## グルービング後の`summarise()`
+
+謎のメッセージが出力される
+
+```
+## `summarise()` has grouped output by 'Continent'. You can override using 
+the `.groups` argument.
+```
+
+とりあえず、`group_by()`の後に`summarise()`を使う場合、`summarise()`の最後に`.groups = "drop"`を追加する。
+
+* 理由は割愛するが、詳細は教科書[第13.2章](https://www.jaysong.net/RBook/datahandling2.html#handling2-group)を参照
+* 多くの場合、メッセージが出力されるだけで、問題が生じることはあまりない。
+* しかし、複数の変数でグルーピングしたり、記述統計量が複数計算される関数（`quantile()`など）を使う場合、問題が生じる可能性あり
+  * 特に`summarise()`の後に更にパイプ（`%>%`）を使って計算を続ける場合
+* とりあえず、`.groups = "drop"`をしておけば安全
+
+<!--- --->
+
+## `.groups = "drop"`を追加する
+
+謎のメッセージが出力されなくなる
+
+```{r}
+df %>%
+  group_by(Continent, G20) %>%
+  summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE),
+            .groups  = "drop")
+```
+
+<!--- --->
+
+## 便利な関数) グループごとのケース数を計算
+
+`summarise()`の中に`n()`を使用
+
+```{r}
+#| code-line-numbers: "5"
+df %>%
+  group_by(Continent) %>%
+  summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE),
+            SD_PPP   = sd(PPP_per_capita, na.rm = TRUE),
+            Cases    = n())
+```
+
+<!--- --->
+
+## おまけ: 効率的な方法
+
+`across()`関数を利用: 詳細は教科書[第13.1章](https://www.jaysong.net/RBook/datahandling2.html#handling2-summarise)を参照
+
+**例)** `df`の`Population`から`PPP`列まで平均値と標準偏差を計算し、結果の変数名は`元の変数名_Mean`、`元の変数名_SD`とする
+
+```{r}
+df %>%
+  summarise(across(Population:PPP,
+                   .fns = list(Mean = ~mean(.x, na.rm = TRUE),
+                               SD   = ~mean(.x, na.rm = TRUE))))
+```
+
+<!--- --->
+
+## 変数の計算
+
+`mutate()`: データフレームの変数を用いた計算を行い、新しい列として追加
+
+* 新しい列名として既存の列名を指定すると上書きされる
+* 新しく追加された列は最後に位置する（指定可能）
+
+```{r}
+#| eval: false
+データフレーム名 %>%
+  mutate(新しい列名 = 計算式)
+```
+
+**例)** `df`の`Population`を`Area`で割り（=人口密度）、`Density`という名の列として追加する
+
+:::: {.columns}
+
+::: {.column width="48%"}
+#### {dplyr}を使わない方法
+
+```{r}
+#| eval: false
+df$Density <- df$Population / df$Area
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+#### {dplyr}を使う方法
+
+```{r}
+#| eval: false
+df %>%
+  mutate(Density = Population / Area)
+```
+:::
+
+::::
+
+<!--- --->
+
+## {dplyr}の例
+
+**例)** `df`の`Population`を`Area`で割り（人口密度）、`Density`という名の列として追加する
+
+* 新しく追加された列は最後に位置する
+   * ただし、上書きの場合、位置はそのまま
+
+```{r}
+#| code-line-numbers: "2"
+df %>%
+  mutate(Density = Population / Area) %>%
+  print(n = 5) # 最初の5行のみ出力
+```
+
+<!--- --->
+
+## 新しい列の位置指定
+
+`mutate()`内に`.after`、または`.before`を指定
+
+* `relocate()`関数と同じ仕組み（第9回）
+
+**例)** `Population`を`Area`で割り、`Density`という名の新しい列`Area`の後に追加する。
+
+```{r}
+#| code-line-numbers: "3"
+df %>%
+  mutate(Density = Population / Area, 
+         .after  = Area)
+```
+
+<!--- --->
+
+## 変数の計算いろいろ（1）
+
+各国が世界人口に占める割合を計算し、降順で出力
+
+1. `df`の`Population`の合計を`Total_Pop`という列として追加する。
+2. `Population`を`Total_Pop`で割り、100を掛ける。結果は`Share_Pop`という名の列として`Population`後に追加する。
+3. `Country`から`Share_Pop`までの列のみ残す。
+4. `Total_Pop`列を除外する。
+5. `Share_Pop`が大きい順で行を並び替える
+
+<!--- --->
+
+## 変数の計算いろいろ（1）
+
+```{r}
+df %>% 
+  # Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK
+  mutate(Total_Pop = sum(Population),
+         Share_Pop = Population / Total_Pop * 100,
+         .after    = Population) %>%
+  select(Country:Share_Pop) %>%
+  select(!Total_Pop) %>%
+  arrange(desc(Share_Pop))
+```
+
+<!--- --->
+
+## 変数の計算いろいろ（2）
+
+G7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。
+
+1. `df`を利用する
+2. `Developed`という列を追加し、`G7`、`G20`、`OECD`のいずれかに加盟した国なら`"先進国"`、それ以外なら`"その他"`とする。
+3. 人口密度を`Density`という名の列として追加する。
+3. `HDI_2018`と`Polity_Score`のいずれかが欠損した行を除外する。
+4. `Developed`変数でデータをグルーピングする。
+5. `HDI_2018`、`Polity_Score`、`Density`の平均値を求める。
+6. `df2`という名前のオブジェクトとして作業環境内に格納する。
+
+<!--- --->
+
+## 変数の計算いろいろ（2）
+
+```{r}
+df2 <- df %>%
+  mutate(Developed = G7 + G20 + OECD,
+         Developed = if_else(Developed > 1, "先進国", "その他"), # 上書き
+         Density   = Population / Area) %>%
+  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%
+  group_by(Developed) %>%
+  summarise(Density = mean(Density),
+            HDI     = mean(HDI_2018),
+            Polity  = mean(Polity_Score))
+
+df2
+```
+
+<!--- --->
+
+## `summarise()`の結果を並び替えたい
+
+`df2`を`"先進国"` > `"その他"`の順番で表示させたい。
+
+* `summarise()`を行う場合、グルーピング変数のアルファベット順で表示される。
+* ただし、日本語の場合、50音順にはならない。
+   * ひらがな、カタカナなら50音順になるが、漢字は $\times$
+* したがって、`summarise()`の前にグルーピング変数を**Factor型に変換**する必要がある。
+   * Factor型: 順序付きの文字型
+
+<!--- --->
+
+## `Developed`をFactor型に
+
+```{r}
+#| code-line-numbers: "8"
+df %>%
+  mutate(Developed = G7 + G20 + OECD,
+         Developed = if_else(Developed > 1, "先進国", "その他"), # 上書き
+         Density   = Population / Area) %>%
+  filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%
+  group_by(Developed) %>%
+  # ここでなく、filter()前のmutate()内でやるのが効率的
+  mutate(Developed = factor(Developed, levels = c("先進国", "その他"))) %>%
+  summarise(Density = mean(Density),
+            HDI     = mean(HDI_2018),
+            Polity  = mean(Polity_Score))
+```
+
+<!--- --->
+
+## 変数のリコーディング: 2値の例
+
+`mutate()`内に`if_else()`を使用（または、`ifelse()`）
+
+* `df`の`OECD`が`1`なら`"OECD加盟国"`、それ以外なら`"OECD非加盟国"`に変換し、`OECD_J`という列として追加
+
+```{r}
+#| eval: false
+df %>%
+  mutate(OECD_J = if_else(OECD == 1, "OECD加盟国", "OECD非加盟国"))
+```
+
+**例)** 変換前
+
+```{r}
+df %>%
+  group_by(OECD) %>%
+  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),
+            HDI = mean(HDI_2018, na.rm = TRUE),
+            FH  = mean(FH_Total, na.rm = TRUE))
+```
+
+<!--- --->
+
+## 変数のリコーディング: 2値の例
+
+**例)** 変換後
+
+```{r}
+#| code-line-numbers: "2"
+df %>%
+  mutate(OECD_J = if_else(OECD == 1, "OECD加盟国", "OECD非加盟国")) %>%
+  group_by(OECD = OECD_J) %>% # 「=」で列名の変更が可能
+  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),
+            HDI = mean(HDI_2018, na.rm = TRUE),
+            FH  = mean(FH_Total, na.rm = TRUE))
+```
+
+<!--- --->
+
+## 変数のリコーディング: 3値以上の例
+
+`mutate()`内に`case_when()`を使用
+
+```{r}
+#| eval: false
+データフレーム名 %>%
+  mutate(新しい変数名 = case_when(条件1 ~ 新しい値,
+                                条件2 ~ 新しい値,
+                                ...
+                                TRUE ~ 新しい値))
+```
+
+* `TRUE ~ 新しい値`は「上記の条件全てが満たされ**ない**場合の値」を意味する
+
+<!--- --->
+
+## 変数のリコーディング: 3値以上の例
+
+**例)** `df`の`Continent`を日本語にし、`Continent_J`として追加
+
+```{r}
+df %>%
+  mutate(Continent_J = case_when(Continent == "Africa"  ~ "アフリカ",
+                                 Continent == "America" ~ "アメリカ",
+                                 Continent == "Asia"    ~ "アジア",
+                                 Continent == "Europe"  ~ "ヨーロッパ",
+                                 TRUE                   ~ "オセアニア")) %>%
+  group_by(大陸 = Continent_J) %>%
+  # 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）
+  summarise(OECD加盟国比率 = mean(OECD),
+            国家数        = n())
+```
+
+<!--- --->
+
+## 変数のリコーディング: 応用
+
+**例)** `Continent`が`AP`列を追加し、`"Asia"`か`"Oceania"`、`"America"`なら1、以外は0
+
+**方法1**: `if_else()`の利用
+
+```{r}
+#| eval: false
+df %>%
+  mutate(AP = if_else(Continent %in% c("Asia", "America", "Oceania"),
+                      1, 0))
+```
+
+**方法2**: `case_when()`の利用
+
+```{r}
+#| eval: false
+df %>%
+  mutate(AP = case_when(Continent == "Asia"    ~ 1, 
+                        Continent == "America" ~ 1, 
+                        Continent == "Oceania" ~ 1,
+                        TRUE                   ~ 0))
+```
+
+**方法3**: `case_when()` + `%in%`の利用
+
+```{r}
+#| eval: false
+df %>%
+  mutate(AP = case_when(Continent %in% c("Asia", "America", "Oceania") ~ 1, 
+                        TRUE                                           ~ 0))
+```
+
+<!--- --->
+
+## 注意) 欠損値を指定する場合
+
+世論調査などの場合、欠損値が`NA`でなく、`9`や`99`、`""`などの場合がある。
+
+**例)** `my_data`の例
+
+* `YoungAge`変数を作成し、`Age`が39以下なら`1`、それ以外は`0`にする。ただし、999なら`NA`とする。
+* `HighEduc2`変数を作成し、`HighEduc`が1なら`"大卒以上"`、それ以外は`"大卒未満"`にする。ただし、9なら`NA`とする。
+
+```{r}
+#| echo: false
+my_data <- tibble(ID       = 1:10,
+                  Age      = c(32, 35, 57, 999, 74, 66, 999, 49, 78, 67),
+                  HighEduc = c(1, 0, 0, 1, 0, 9, 1, 1, 9, 9))
+my_data
+```
+
+<!--- --->
+
+## 注意) 欠損値を指定する場合
+
+**注意:** `条件 ~ NA`ではエラーが発生する。
+
+* `if_else()`も同様。ただし、`ifelse()`は`NA`で作動
+
+```{r}
+#| error: true
+my_data %>%
+  mutate(YoungAge  = case_when(Age == 999 ~ NA,
+                               Age <=  39 ~ 1,
+                               TRUE       ~ 0),
+         HighEduc2 = case_when(HighEduc == 9 ~ NA,
+                               HighEduc == 1 ~ "大卒以上",
+                               TRUE          ~ "大卒未満"))
+```
+
+<!--- --->
+
+## 注意) 欠損値を指定する場合
+
+`NA`でなく、**生成される列のデータ型**に応じて`NA_real_`（numeric型）、または`NA_character_`（character型）を使用（logical型なら`NA`のままでOK）
+
+```{r}
+#| error: true
+#| code-line-numbers: "2,5"
+my_data %>%
+  mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,
+                               Age <=  39 ~ 1,
+                               TRUE       ~ 0),
+         HighEduc2 = case_when(HighEduc == 9 ~ NA_character_,
+                               HighEduc == 1 ~ "大卒以上",
+                               TRUE          ~ "大卒未満"))
+```
+
+<!--- --->
+
+## 特定の値を欠損値にコーディング場合
+
+特定の値を欠損値とし、それ以外の値は元も値にする場合
+* 主に`if_else()`を使用し、条件に合致した場合は`NA_real_`か`NA_character_`を、合致しない場合は元の変数のままにする。
+
+```{r}
+my_data %>%
+  mutate(Age      = if_else(Age == 999, NA_real_, Age),
+         HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))
+```
+
+<!--- --->
+
+## 特定の値を欠損値にコーディング場合
+
+`if_else()`でなく、`case_when()`を使うことも可能
+
+* 欠損を意味する値が複数の場合、`case_when()`を使うか、OR演算子（`|` / `%in%`）を用いた`if_else()`を使用する。
+
+```{r}
+my_data %>%
+  mutate(Age      = case_when(Age == 999 ~ NA_real_, 
+                              TRUE       ~ Age),
+         HighEduc = case_when(HighEduc == 9 ~ NA_real_, 
+                              TRUE          ~ HighEduc))
+```
+
+<!--- --->
+
+## 特定の値を欠損値にコーディング場合
+
+{naniar}パッケージの`replace_with_na()`関数を利用
+
+* 引数はリスト型オブジェクトであり、リストの中には`変数名 = 欠損値の値`
+* 欠損値の値が複数の場合、`変数名 = c(値1, 値2, ...)`
+* 似たような関数として{expss}の`na_if()`関数
+
+```{r}
+library(naniar) # 事前に install.package(naniar) でインストール
+my_data %>%
+  # Ageは999、HighEducは9が欠損値
+  replace_with_na(list(Age = 999, HighEduc = 9))
+```
+
+## 教科書
+
+* データのグルーピングと要約: 教科書[第13.1章](https://www.jaysong.net/RBook/datahandling2.html#handling2-summarise)と[第13.2章](https://www.jaysong.net/RBook/datahandling2.html#handling2-group)
+* 変数の計算: 教科書[第13.3章](https://www.jaysong.net/RBook/datahandling2.html#handling2-mutate)と[第13.4章](https://www.jaysong.net/RBook/datahandling2.html#handling2-rowwise)
+* Factor型変数の扱い: 教科書[第14章](https://www.jaysong.net/RBook/factor.html)
+   * Factor型については可視化の時にも解説する。詳しい内容は教科書を参照すること

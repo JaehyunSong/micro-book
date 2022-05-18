@@ -1,6 +1,8 @@
 ---
 title: "第4回講義資料"
 subtitle: "プログラミングの基本的な概念"
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド

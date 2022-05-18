@@ -1,6 +1,9 @@
 ---
 title: "第13回講義資料"
 subtitle: "可視化 (2)"
+toc: true
+link-external-icon: true
+link-external-newwindow: true
 ---
 
 ## スライド
