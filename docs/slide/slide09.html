@@ -502,27 +502,41 @@
 </section>
 <section id="との比較" class="slide level2">
 <h2><code>%&gt;%</code>と<code>|&gt;</code>の比較</h2>
+<div class="columns">
+<div class="column" style="width:49%;">
 <h4 id="渡す先が第一引数の場合">渡す先が第一引数の場合</h4>
+<ul>
+<li>{magrittr}のパイプ（<code>%&gt;%</code>）、R内蔵のパイプ（native pipe; <code>|&gt;</code>）の使い方は同じ</li>
+</ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>X <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="fu">sum</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">print</span>()  <span class="co"># {magrittr}のパイプ演算子</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>X <span class="sc">|&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="fu">sum</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="fu">print</span>()  <span class="co"># R内蔵のパイプ演算子</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># {magrittr}のパイプ演算子</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>X <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">sum</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="fu">print</span>()</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># R内蔵のパイプ演算子</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>X <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="fu">sum</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="fu">print</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
 <h4 id="渡す先が第一引数でない場合">渡す先が第一引数でない場合</h4>
 <ul>
-<li>実引数として渡す箇所に<code>.</code> (tidyverse)、<code>_</code>を入力
+<li>実引数として渡す箇所に<code>.</code> (tidyverse)、<code>_</code> (native pipe)を入力
 <ul>
 <li>ただし、<code>_</code>はR 4.2.0以上から使用可能 (NIIオンライン分析システムはR 4.1.2)</li>
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>my_data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> .)</span>
-<span id="cb6-3"><a href="#cb6-3"></a>my_data <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> _)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># {magrittr}のパイプ演算子</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>my_data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> .)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># R内蔵のパイプ演算子</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>my_data <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> _)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 <!--- --->
 </section>
@@ -542,7 +556,9 @@
 <li>{tidyverse}はパッケージを集めたパッケージであり、{dplyr}もその一部</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <!--- --->
 </section>
 <section id="実習用データ" class="slide level2">
@@ -679,11 +695,22 @@
 <section id="列の選択抽出-書き方" class="slide level2">
 <h2>列の選択（抽出）: 書き方</h2>
 <p><code>select()</code>関数を使用</p>
-<p>パイプを使わない書き方</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">select</span>(データ, 変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>パイプを使う書き方</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>データ <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">select</span>(変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<h4 id="パイプを使わない書き方">パイプを使わない書き方</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">select</span>(データ, 変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<h4 id="パイプを使う書き方">パイプを使う書き方</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="fu">select</span>(変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <div class="callout callout-important no-icon callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -719,8 +746,10 @@
 </div>
 </div>
 <p>この時点では抽出・出力されただけ。抽出した結果を<code>df2</code>という名で作業環境内に格納するためには</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">select</span>(Country, Population, HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>    <span class="fu">select</span>(Country, Population, HDI_2018)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-important no-icon callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -765,8 +794,10 @@
 <section id="抽出せず変数名のみ変更" class="slide level2">
 <h2>抽出せず、変数名のみ変更</h2>
 <p><code>rename()</code>関数を使用</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>データ <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">rename</span>(新しい変数名 <span class="ot">=</span> 既存の変数名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>    <span class="fu">rename</span>(新しい変数名 <span class="ot">=</span> 既存の変数名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><strong>例)</strong> <code>Population</code>を<code>Jinko</code>に、<code>Area</code>を<code>Menseki</code>に変更</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -921,11 +952,12 @@
 <h2>列の順番変更: <code>relocate()</code>使用</h2>
 <p><code>relocate()</code>の使い方</p>
 <ul>
-<li><code>.after = XXX</code>: <code>XXX</code>の後ろへ移動</li>
-<li><code>.before = XXX</code>: <code>XXX</code>の前へ移動</li>
+<li><code>.after = XXX</code>: <code>XXX</code>列の後ろへ移動 / <code>.before = YYY</code>: <code>YYY</code>列の前へ移動</li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>データ <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">relocate</span>(移動したい変数名, <span class="at">.after =</span> 変更先)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>    <span class="fu">relocate</span>(移動したい変数名, <span class="at">.after =</span> 変更先)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><strong>例)</strong> <code>G7</code>から<code>OECD</code>列を<code>Country</code>の後ろへ移動</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -960,10 +992,14 @@
 <h2>行の抽出: 書き方</h2>
 <p><code>filter()</code>関数を使用</p>
 <p>パイプを使わない書き方</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">filter</span>(データ, 条件1, 条件2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">filter</span>(データ, 条件1, 条件2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>パイプを使う書き方</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>データ <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">filter</span>(条件1, 条件2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>    <span class="fu">filter</span>(条件1, 条件2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <!--- --->
 </section>
 <section id="行の抽出-例" class="slide level2">
@@ -1182,9 +1218,14 @@
 <h2>行のソート: 書き方</h2>
 <p><code>arrange()</code>関数を使用</p>
 <p>パイプを使わない書き方</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">arrange</span>(データ, 変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">arrange</span>(データ, 変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>パイプを使う書き方</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>データ <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>    <span class="fu">arrange</span>(変数名1, 変数名2, ...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>基本的には昇順 (値が小さい行が先にくる)</p>
 <ul>
 <li>降順にする場合は<code>desc(変数名)</code></li>

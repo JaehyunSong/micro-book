@@ -1306,7 +1306,7 @@
     "href": "slide/slide09.html#との比較",
     "title": "ミクロ政治データ分析実習",
     "section": "%>%と|>の比較",
-    "text": "%>%と|>の比較\n渡す先が第一引数の場合\n\nX %>%\n    sum(na.rm = TRUE) %>%\n    print()  # {magrittr}のパイプ演算子\nX |>\n    sum(na.rm = TRUE) |>\n    print()  # R内蔵のパイプ演算子\n\n渡す先が第一引数でない場合\n\n実引数として渡す箇所に. (tidyverse)、_を入力\n\nただし、_はR 4.2.0以上から使用可能 (NIIオンライン分析システムはR 4.1.2)\n\n\n\nmy_data %>% \n  lm(y ~ x1 + x2 + x3, data = .)\nmy_data |>\n  lm(y ~ x1 + x2 + x3, data = _)"
+    "text": "%>%と|>の比較\n\n\n渡す先が第一引数の場合\n\n{magrittr}のパイプ（%>%）、R内蔵のパイプ（native pipe; |>）の使い方は同じ\n\n\n# {magrittr}のパイプ演算子\nX %>%\n    sum(na.rm = TRUE) %>%\n    print()\n# R内蔵のパイプ演算子\nX |>\n    sum(na.rm = TRUE) |>\n    print()\n\n\n\n\n渡す先が第一引数でない場合\n\n実引数として渡す箇所に. (tidyverse)、_ (native pipe)を入力\n\nただし、_はR 4.2.0以上から使用可能 (NIIオンライン分析システムはR 4.1.2)\n\n\n\n# {magrittr}のパイプ演算子\nmy_data %>% \n  lm(y ~ x1 + x2 + x3, data = .)\n# R内蔵のパイプ演算子\nmy_data |>\n  lm(y ~ x1 + x2 + x3, data = _)"
   },
   {
     "objectID": "slide/slide09.html#section-1",
@@ -1320,7 +1320,7 @@
     "href": "slide/slide09.html#dplyrとは",
     "title": "ミクロ政治データ分析実習",
     "section": "{dplyr}とは",
-    "text": "{dplyr}とは\n\n\n表形式データ (データフレームやtibble)を操作するパッケージ\n第8回の講義で解説した行・列の抽出も簡単に可能\n{tidyverse}を読み込む際に自動的に読み込まれる\n\n{tidyverse}はパッケージを集めたパッケージであり、{dplyr}もその一部\n\n\nlibrary(tidyverse)"
+    "text": "{dplyr}とは\n\n\n表形式データ (データフレームやtibble)を操作するパッケージ\n第8回の講義で解説した行・列の抽出も簡単に可能\n{tidyverse}を読み込む際に自動的に読み込まれる\n\n{tidyverse}はパッケージを集めたパッケージであり、{dplyr}もその一部\n\n\n\nlibrary(tidyverse)"
   },
   {
     "objectID": "slide/slide09.html#実習用データ",
@@ -1348,14 +1348,14 @@
     "href": "slide/slide09.html#列の選択抽出-書き方",
     "title": "ミクロ政治データ分析実習",
     "section": "列の選択（抽出）: 書き方",
-    "text": "列の選択（抽出）: 書き方\nselect()関数を使用\nパイプを使わない書き方\nselect(データ, 変数名1, 変数名2, ...)\nパイプを使う書き方\nデータ %>%\n  select(変数名1, 変数名2, ...)\n\n\n\n注意: select()関数は複数ある!\n\n\nselect()関数は{dplyr}だけでなく、{MASS}からも提供されるが、別の関数である。\n\n{MASS}もデータ分析において頻繁に使われるパッケージであるため、select()だけだと、どのパッケージのselect()か分からなくなる場合がある。\nエラーが生じる場合は、dplyr::select()など、パッケージ名を指定すること"
+    "text": "列の選択（抽出）: 書き方\nselect()関数を使用\n\n\nパイプを使わない書き方\n\nselect(データ, 変数名1, 変数名2, ...)\n\n\n\n\nパイプを使う書き方\n\nデータ %>%\n    select(変数名1, 変数名2, ...)\n\n\n\n\n\n\n注意: select()関数は複数ある!\n\n\nselect()関数は{dplyr}だけでなく、{MASS}からも提供されるが、別の関数である。\n\n{MASS}もデータ分析において頻繁に使われるパッケージであるため、select()だけだと、どのパッケージのselect()か分からなくなる場合がある。\nエラーが生じる場合は、dplyr::select()など、パッケージ名を指定すること"
   },
   {
     "objectID": "slide/slide09.html#列の選択抽出-例",
     "href": "slide/slide09.html#列の選択抽出-例",
     "title": "ミクロ政治データ分析実習",
     "section": "列の選択（抽出）: 例",
-    "text": "列の選択（抽出）: 例\ndfからCountry、Population、HDI_2018列を抽出し、最初の5行のみ出力\n\ndf %>%                                      # dfから\n  select(Country, Population, HDI_2018) %>% # Country, Population, HDI_2018のみ抽出して\n  head(n = 5)                               # 最初の5行を出力する\n\n# A tibble: 5 × 3\n  Country     Population HDI_2018\n  <chr>            <dbl>    <dbl>\n1 Afghanistan   38928346    0.496\n2 Albania        2877797    0.791\n3 Algeria       43851044    0.759\n4 Andorra          77265    0.857\n5 Angola        32866272    0.574\n\n\nこの時点では抽出・出力されただけ。抽出した結果をdf2という名で作業環境内に格納するためには\ndf2 <- df %>%\n  select(Country, Population, HDI_2018)\n\n\n\n課題では格納が必要な場合もある\n\n\n課題の問題には「出力せよ」だけでなく、「格納した上で出力せよ」といった形式もある。加工したデータを引き続き使うためには格納が必須であるため、問題文を注意深く読むこと。"
+    "text": "列の選択（抽出）: 例\ndfからCountry、Population、HDI_2018列を抽出し、最初の5行のみ出力\n\ndf %>%                                      # dfから\n  select(Country, Population, HDI_2018) %>% # Country, Population, HDI_2018のみ抽出して\n  head(n = 5)                               # 最初の5行を出力する\n\n# A tibble: 5 × 3\n  Country     Population HDI_2018\n  <chr>            <dbl>    <dbl>\n1 Afghanistan   38928346    0.496\n2 Albania        2877797    0.791\n3 Algeria       43851044    0.759\n4 Andorra          77265    0.857\n5 Angola        32866272    0.574\n\n\nこの時点では抽出・出力されただけ。抽出した結果をdf2という名で作業環境内に格納するためには\n\ndf2 <- df %>%\n    select(Country, Population, HDI_2018)\n\n\n\n\n課題では格納が必要な場合もある\n\n\n課題の問題には「出力せよ」だけでなく、「格納した上で出力せよ」といった形式もある。加工したデータを引き続き使うためには格納が必須であるため、問題文を注意深く読むこと。"
   },
   {
     "objectID": "slide/slide09.html#列の選択と変数名の変更",
@@ -1369,7 +1369,7 @@
     "href": "slide/slide09.html#抽出せず変数名のみ変更",
     "title": "ミクロ政治データ分析実習",
     "section": "抽出せず、変数名のみ変更",
-    "text": "抽出せず、変数名のみ変更\nrename()関数を使用\nデータ %>%\n  rename(新しい変数名 = 既存の変数名)\n例) PopulationをJinkoに、AreaをMensekiに変更\n\ndf %>%\n    rename(Jinko = Population, Menseki = Area)\n\n# A tibble: 186 × 18\n   Country      Jinko Menseki    GDP     PPP GDP_per_capita PPP_per_capita    G7\n   <chr>        <dbl>   <dbl>  <dbl>   <dbl>          <dbl>          <dbl> <dbl>\n 1 Afghanistan 3.89e7  652860 1.91e4  8.27e4           491.          2125.     0\n 2 Albania     2.88e6   27400 1.53e4  3.97e4          5309.         13781.     0\n 3 Algeria     4.39e7 2381740 1.70e5  4.97e5          3876.         11324.     0\n 4 Andorra     7.73e4     470 3.15e3 NA              40821.            NA      0\n 5 Angola      3.29e7 1246700 9.46e4  2.19e5          2879.          6649.     0\n 6 Antigua an… 9.79e4     440 1.73e3  2.08e3         17643.         21267.     0\n 7 Argentina   4.52e7 2736690 4.50e5  1.04e6          9949.         22938.     0\n 8 Armenia     2.96e6   28470 1.37e4  3.84e4          4614.         12974.     0\n 9 Australia   2.55e7 7682300 1.39e6  1.28e6         54615.         50001.     0\n10 Austria     9.01e6   82409 4.46e5  5.03e5         49555.         55824.     0\n# … with 176 more rows, and 10 more variables: G20 <dbl>, OECD <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>"
+    "text": "抽出せず、変数名のみ変更\nrename()関数を使用\n\nデータ %>%\n    rename(新しい変数名 = 既存の変数名)\n\n例) PopulationをJinkoに、AreaをMensekiに変更\n\ndf %>%\n    rename(Jinko = Population, Menseki = Area)\n\n# A tibble: 186 × 18\n   Country      Jinko Menseki    GDP     PPP GDP_per_capita PPP_per_capita    G7\n   <chr>        <dbl>   <dbl>  <dbl>   <dbl>          <dbl>          <dbl> <dbl>\n 1 Afghanistan 3.89e7  652860 1.91e4  8.27e4           491.          2125.     0\n 2 Albania     2.88e6   27400 1.53e4  3.97e4          5309.         13781.     0\n 3 Algeria     4.39e7 2381740 1.70e5  4.97e5          3876.         11324.     0\n 4 Andorra     7.73e4     470 3.15e3 NA              40821.            NA      0\n 5 Angola      3.29e7 1246700 9.46e4  2.19e5          2879.          6649.     0\n 6 Antigua an… 9.79e4     440 1.73e3  2.08e3         17643.         21267.     0\n 7 Argentina   4.52e7 2736690 4.50e5  1.04e6          9949.         22938.     0\n 8 Armenia     2.96e6   28470 1.37e4  3.84e4          4614.         12974.     0\n 9 Australia   2.55e7 7682300 1.39e6  1.28e6         54615.         50001.     0\n10 Austria     9.01e6   82409 4.46e5  5.03e5         49555.         55824.     0\n# … with 176 more rows, and 10 more variables: G20 <dbl>, OECD <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>"
   },
   {
     "objectID": "slide/slide09.html#列の除外",
@@ -1404,7 +1404,7 @@
     "href": "slide/slide09.html#列の順番変更-relocate使用",
     "title": "ミクロ政治データ分析実習",
     "section": "列の順番変更: relocate()使用",
-    "text": "列の順番変更: relocate()使用\nrelocate()の使い方\n\n.after = XXX: XXXの後ろへ移動\n.before = XXX: XXXの前へ移動\n\nデータ %>%\n  relocate(移動したい変数名, .after = 変更先)\n例) G7からOECD列をCountryの後ろへ移動\n\ndf %>%\n    relocate(G7:OECD, .after = Country)  # .before = PopulationもOK\n\n# A tibble: 186 × 18\n   Country        G7   G20  OECD Population   Area    GDP     PPP GDP_per_capita\n   <chr>       <dbl> <dbl> <dbl>      <dbl>  <dbl>  <dbl>   <dbl>          <dbl>\n 1 Afghanistan     0     0     0   38928346 6.53e5 1.91e4  8.27e4           491.\n 2 Albania         0     0     0    2877797 2.74e4 1.53e4  3.97e4          5309.\n 3 Algeria         0     0     0   43851044 2.38e6 1.70e5  4.97e5          3876.\n 4 Andorra         0     0     0      77265 4.7 e2 3.15e3 NA              40821.\n 5 Angola          0     0     0   32866272 1.25e6 9.46e4  2.19e5          2879.\n 6 Antigua an…     0     0     0      97929 4.4 e2 1.73e3  2.08e3         17643.\n 7 Argentina       0     1     0   45195774 2.74e6 4.50e5  1.04e6          9949.\n 8 Armenia         0     0     0    2963243 2.85e4 1.37e4  3.84e4          4614.\n 9 Australia       0     1     1   25499884 7.68e6 1.39e6  1.28e6         54615.\n10 Austria         0     0     1    9006398 8.24e4 4.46e5  5.03e5         49555.\n# … with 176 more rows, and 9 more variables: PPP_per_capita <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>"
+    "text": "列の順番変更: relocate()使用\nrelocate()の使い方\n\n.after = XXX: XXX列の後ろへ移動 / .before = YYY: YYY列の前へ移動\n\n\nデータ %>%\n    relocate(移動したい変数名, .after = 変更先)\n\n例) G7からOECD列をCountryの後ろへ移動\n\ndf %>%\n    relocate(G7:OECD, .after = Country)  # .before = PopulationもOK\n\n# A tibble: 186 × 18\n   Country        G7   G20  OECD Population   Area    GDP     PPP GDP_per_capita\n   <chr>       <dbl> <dbl> <dbl>      <dbl>  <dbl>  <dbl>   <dbl>          <dbl>\n 1 Afghanistan     0     0     0   38928346 6.53e5 1.91e4  8.27e4           491.\n 2 Albania         0     0     0    2877797 2.74e4 1.53e4  3.97e4          5309.\n 3 Algeria         0     0     0   43851044 2.38e6 1.70e5  4.97e5          3876.\n 4 Andorra         0     0     0      77265 4.7 e2 3.15e3 NA              40821.\n 5 Angola          0     0     0   32866272 1.25e6 9.46e4  2.19e5          2879.\n 6 Antigua an…     0     0     0      97929 4.4 e2 1.73e3  2.08e3         17643.\n 7 Argentina       0     1     0   45195774 2.74e6 4.50e5  1.04e6          9949.\n 8 Armenia         0     0     0    2963243 2.85e4 1.37e4  3.84e4          4614.\n 9 Australia       0     1     1   25499884 7.68e6 1.39e6  1.28e6         54615.\n10 Austria         0     0     1    9006398 8.24e4 4.46e5  5.03e5         49555.\n# … with 176 more rows, and 9 more variables: PPP_per_capita <dbl>,\n#   HDI_2018 <dbl>, Polity_Score <dbl>, Polity_Type <chr>, FH_PR <dbl>,\n#   FH_CL <dbl>, FH_Total <dbl>, FH_Status <chr>, Continent <chr>"
   },
   {
     "objectID": "slide/slide09.html#section-2",
@@ -1418,7 +1418,7 @@
     "href": "slide/slide09.html#行の抽出-書き方",
     "title": "ミクロ政治データ分析実習",
     "section": "行の抽出: 書き方",
-    "text": "行の抽出: 書き方\nfilter()関数を使用\nパイプを使わない書き方\nfilter(データ, 条件1, 条件2, ...)\nパイプを使う書き方\nデータ %>%\n  filter(条件1, 条件2, ...)"
+    "text": "行の抽出: 書き方\nfilter()関数を使用\nパイプを使わない書き方\n\nfilter(データ, 条件1, 条件2, ...)\n\nパイプを使う書き方\n\nデータ %>%\n    filter(条件1, 条件2, ...)"
   },
   {
     "objectID": "slide/slide09.html#行の抽出-例",
@@ -1488,7 +1488,7 @@
     "href": "slide/slide09.html#行のソート-書き方",
     "title": "ミクロ政治データ分析実習",
     "section": "行のソート: 書き方",
-    "text": "行のソート: 書き方\narrange()関数を使用\nパイプを使わない書き方\narrange(データ, 変数名1, 変数名2, ...)\nパイプを使う書き方\nデータ %>% arrange(変数名1, 変数名2, ...)\n基本的には昇順 (値が小さい行が先にくる)\n\n降順にする場合はdesc(変数名)\n変数名1を基準にソートし、同点の場合は変数名2を基準に"
+    "text": "行のソート: 書き方\narrange()関数を使用\nパイプを使わない書き方\n\narrange(データ, 変数名1, 変数名2, ...)\n\nパイプを使う書き方\n\nデータ %>%\n    arrange(変数名1, 変数名2, ...)\n\n基本的には昇順 (値が小さい行が先にくる)\n\n降順にする場合はdesc(変数名)\n変数名1を基準にソートし、同点の場合は変数名2を基準に"
   },
   {
     "objectID": "slide/slide09.html#行のソート-例",
