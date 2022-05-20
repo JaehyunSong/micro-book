@@ -381,12 +381,9 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#スライド" id="toc-スライド" class="nav-link active" data-scroll-target="#スライド">スライド</a></li>
-  <li><a href="#目標" id="toc-目標" class="nav-link" data-scroll-target="#目標">目標</a></li>
   <li><a href="#記述統計量" id="toc-記述統計量" class="nav-link" data-scroll-target="#記述統計量">記述統計量</a></li>
-  <li><a href="#summariseの使い方" id="toc-summariseの使い方" class="nav-link" data-scroll-target="#summariseの使い方"><code>summarise()</code>の使い方</a></li>
-  <li><a href="#記述統計量の計算1" id="toc-記述統計量の計算1" class="nav-link" data-scroll-target="#記述統計量の計算1">記述統計量の計算（1）</a></li>
-  <li><a href="#記述統計量の計算2" id="toc-記述統計量の計算2" class="nav-link" data-scroll-target="#記述統計量の計算2">記述統計量の計算（2）</a></li>
-  <li><a href="#出力された結果をより見やすく" id="toc-出力された結果をより見やすく" class="nav-link" data-scroll-target="#出力された結果をより見やすく">出力された結果をより見やすく</a></li>
+  <li><a href="#グルーピング" id="toc-グルーピング" class="nav-link" data-scroll-target="#グルーピング">グルーピング</a>
+  <ul class="collapse">
   <li><a href="#グループごとの記述統計量1" id="toc-グループごとの記述統計量1" class="nav-link" data-scroll-target="#グループごとの記述統計量1">グループごとの記述統計量（1）</a></li>
   <li><a href="#グループごとの記述統計量2" id="toc-グループごとの記述統計量2" class="nav-link" data-scroll-target="#グループごとの記述統計量2">グループごとの記述統計量（2）</a></li>
   <li><a href="#複数の変数でグルーピング" id="toc-複数の変数でグルーピング" class="nav-link" data-scroll-target="#複数の変数でグルーピング">複数の変数でグルーピング</a></li>
@@ -394,13 +391,21 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
   <li><a href="#groups-dropを追加する" id="toc-groups-dropを追加する" class="nav-link" data-scroll-target="#groups-dropを追加する"><code>.groups = "drop"</code>を追加する</a></li>
   <li><a href="#便利な関数-グループごとのケース数を計算" id="toc-便利な関数-グループごとのケース数を計算" class="nav-link" data-scroll-target="#便利な関数-グループごとのケース数を計算">便利な関数) グループごとのケース数を計算</a></li>
   <li><a href="#おまけ-効率的な方法" id="toc-おまけ-効率的な方法" class="nav-link" data-scroll-target="#おまけ-効率的な方法">おまけ: 効率的な方法</a></li>
-  <li><a href="#変数の計算" id="toc-変数の計算" class="nav-link" data-scroll-target="#変数の計算">変数の計算</a></li>
+  </ul></li>
+  <li><a href="#変数の計算" id="toc-変数の計算" class="nav-link" data-scroll-target="#変数の計算">変数の計算</a>
+  <ul class="collapse">
   <li><a href="#dplyrの例" id="toc-dplyrの例" class="nav-link" data-scroll-target="#dplyrの例">{dplyr}の例</a></li>
   <li><a href="#新しい列の位置指定" id="toc-新しい列の位置指定" class="nav-link" data-scroll-target="#新しい列の位置指定">新しい列の位置指定</a></li>
+  </ul></li>
+  <li><a href="#応用" id="toc-応用" class="nav-link" data-scroll-target="#応用">応用</a>
+  <ul class="collapse">
   <li><a href="#変数の計算いろいろ1" id="toc-変数の計算いろいろ1" class="nav-link" data-scroll-target="#変数の計算いろいろ1">変数の計算いろいろ（1）</a></li>
   <li><a href="#変数の計算いろいろ1-1" id="toc-変数の計算いろいろ1-1" class="nav-link" data-scroll-target="#変数の計算いろいろ1-1">変数の計算いろいろ（1）</a></li>
   <li><a href="#変数の計算いろいろ2" id="toc-変数の計算いろいろ2" class="nav-link" data-scroll-target="#変数の計算いろいろ2">変数の計算いろいろ（2）</a></li>
   <li><a href="#変数の計算いろいろ2-1" id="toc-変数の計算いろいろ2-1" class="nav-link" data-scroll-target="#変数の計算いろいろ2-1">変数の計算いろいろ（2）</a></li>
+  </ul></li>
+  <li><a href="#名目変数の扱い方" id="toc-名目変数の扱い方" class="nav-link" data-scroll-target="#名目変数の扱い方">名目変数の扱い方</a>
+  <ul class="collapse">
   <li><a href="#summariseの結果を並び替えたい" id="toc-summariseの結果を並び替えたい" class="nav-link" data-scroll-target="#summariseの結果を並び替えたい"><code>summarise()</code>の結果を並び替えたい</a></li>
   <li><a href="#developedをfactor型に" id="toc-developedをfactor型に" class="nav-link" data-scroll-target="#developedをfactor型に"><code>Developed</code>をFactor型に</a></li>
   <li><a href="#変数のリコーディング-2値の例" id="toc-変数のリコーディング-2値の例" class="nav-link" data-scroll-target="#変数のリコーディング-2値の例">変数のリコーディング: 2値の例</a></li>
@@ -408,12 +413,16 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
   <li><a href="#変数のリコーディング-3値以上の例" id="toc-変数のリコーディング-3値以上の例" class="nav-link" data-scroll-target="#変数のリコーディング-3値以上の例">変数のリコーディング: 3値以上の例</a></li>
   <li><a href="#変数のリコーディング-3値以上の例-1" id="toc-変数のリコーディング-3値以上の例-1" class="nav-link" data-scroll-target="#変数のリコーディング-3値以上の例-1">変数のリコーディング: 3値以上の例</a></li>
   <li><a href="#変数のリコーディング-応用" id="toc-変数のリコーディング-応用" class="nav-link" data-scroll-target="#変数のリコーディング-応用">変数のリコーディング: 応用</a></li>
+  </ul></li>
+  <li><a href="#欠損値の扱い方" id="toc-欠損値の扱い方" class="nav-link" data-scroll-target="#欠損値の扱い方">欠損値の扱い方</a>
+  <ul class="collapse">
   <li><a href="#注意-欠損値を指定する場合" id="toc-注意-欠損値を指定する場合" class="nav-link" data-scroll-target="#注意-欠損値を指定する場合">注意) 欠損値を指定する場合</a></li>
   <li><a href="#注意-欠損値を指定する場合-1" id="toc-注意-欠損値を指定する場合-1" class="nav-link" data-scroll-target="#注意-欠損値を指定する場合-1">注意) 欠損値を指定する場合</a></li>
   <li><a href="#注意-欠損値を指定する場合-2" id="toc-注意-欠損値を指定する場合-2" class="nav-link" data-scroll-target="#注意-欠損値を指定する場合-2">注意) 欠損値を指定する場合</a></li>
   <li><a href="#特定の値を欠損値にコーディング場合" id="toc-特定の値を欠損値にコーディング場合" class="nav-link" data-scroll-target="#特定の値を欠損値にコーディング場合">特定の値を欠損値にコーディング場合</a></li>
   <li><a href="#特定の値を欠損値にコーディング場合-1" id="toc-特定の値を欠損値にコーディング場合-1" class="nav-link" data-scroll-target="#特定の値を欠損値にコーディング場合-1">特定の値を欠損値にコーディング場合</a></li>
   <li><a href="#特定の値を欠損値にコーディング場合-2" id="toc-特定の値を欠損値にコーディング場合-2" class="nav-link" data-scroll-target="#特定の値を欠損値にコーディング場合-2">特定の値を欠損値にコーディング場合</a></li>
+  </ul></li>
   <li><a href="#教科書" id="toc-教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
   </ul>
 </nav>
@@ -445,40 +454,18 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <p><a href="../slide/slide10.html" class="btn btn-primary btn-sm" target="_blank" role="button"><i class="bi bi-window"></i> 新しいタブで開く</a></p>
 <iframe class="slide-deck" src="../slide/slide10.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 </section>
-<section id="目標" class="level2">
-<h2 class="anchored" data-anchor-id="目標">目標</h2>
-<ul>
-<li>変数の記述統計量を計算する
-<ul>
-<li>記述統計量: 平均値、中央値、標準偏差、分散、ケース数など</li>
-</ul></li>
-<li>グループごとに記述統計量を計算する</li>
-</ul>
-<p><strong>例)</strong> 大陸ごとに政治的権利（<code>FH_PR</code>）と市民的自由（<code>FH_CL</code>）の平均値を計算する</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 3
-  Continent Politial_Right Civil_Liberty
-  &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
-1 Africa              15.8          25.8
-2 America             29.4          42.6
-3 Asia                14.7          24.2
-4 Europe              31.9          47.6
-5 Oceania             31.8          47.2</code></pre>
-</div>
-</div>
-<!--- --->
-</section>
 <section id="記述統計量" class="level2">
 <h2 class="anchored" data-anchor-id="記述統計量">記述統計量</h2>
-<p>変数が持つ情報を要約した数値</p>
-<p>元の情報:</p>
+<p>　記述統計量（descriptive statistics）とはある<strong>変数が持つ情報を要約した数値</strong>である。例えば、10人の学生の数学成績が格納されている以下のようなnumeric型ベクトルがあるとしよう。7番目の学生は試験を受けたものの、ポンコツな教師が解答用紙を紛失して欠損値となっている。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>MathScore <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">82</span>, <span class="dv">45</span>, <span class="dv">69</span>, <span class="dv">94</span>, <span class="dv">88</span>, <span class="dv">73</span>, <span class="cn">NA</span>, <span class="dv">51</span>, <span class="dv">90</span>, <span class="dv">63</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>MathScore <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">82</span>, <span class="dv">45</span>, <span class="dv">69</span>, <span class="dv">94</span>, <span class="dv">88</span>, <span class="dv">73</span>, <span class="cn">NA</span>, <span class="dv">51</span>, <span class="dv">90</span>, <span class="dv">63</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>MathScore</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 82 45 69 94 88 73 NA 51 90 63</code></pre>
 </div>
-<div class="columns">
-<div class="column" style="width:45%;">
-<p><code>MathScore</code>を代表する値</p>
+</div>
+<p>　このクラスの数学成績について語る時、「うちのクラスの数学成績は82、45、69、94、…、63点ですよ」という人はいないだろう。数人のクラスならまだしも、数十人のクラスならあり得ない。我々は普段、「うちのクラスの数学成績はだいたいYY点ですよ」とか、「真ん中の成績はXX点ですよ」と言うだろう。また、クラス内の成績の格差/ばらつきを語るときも標準偏差や範囲（「できる子とできない子の点差は49点ですよ」）を言うのが普通である。このように元の長い情報を一つの数値として要約したものが記述統計量である。</p>
+<p>　たとえば、<code>MathScore</code>を代表する値（=代表値）としては平均値（mean）、中央値（median）、最頻値（mode）などがある。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 平均値</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(MathScore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) </span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -491,10 +478,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <pre><code>[1] 73</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:45%;">
-<p><code>MathScore</code>のばらつきの具合</p>
+<p>　また、<code>MathScore</code>の格差、ばらつきの具合としては分散（variance）、標準偏差（standard deviation）、四分位範囲（interquartile range）、範囲（range）がある。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 不偏分散</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(MathScore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -511,17 +495,44 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 範囲</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(MathScore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(MathScore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 49</code></pre>
 </div>
 </div>
+<p>　今回は{dplyr}パッケージを用いて変数の記述統計量を計算する方法を紹介する。まず、今回の実習用データを読み込む。第9回に使用したデータと同じデータを使う。</p>
+<div class="cell" data-layout-align="center">
+
 </div>
-<!--- --->
-</section>
-<section id="summariseの使い方" class="level2">
-<h2 class="anchored" data-anchor-id="summariseの使い方"><code>summarise()</code>の使い方</h2>
-<p><code>summarise()</code>: 記述統計量を計算する{dplyr}の関数</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>データフレーム <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(記述統計の関数(変数名, ...))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>記述統計の関数の例</p>
+<p>　記述統計を計算する関数は<code>summarise()</code>である。使い方は以下の通りである。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>データフレーム <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(記述統計の関数(変数名, ...))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>　たとえば、<code>Population</code>列の平均値を計算する場合は、</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(Population))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  `mean(Population)`
+               &lt;dbl&gt;
+1          41737773.</code></pre>
+</div>
+</div>
+<p>と入力する。<code>HDI_2018</code>のように欠損値が含まれている変数なら<code>na.rm = TRUE</code>を忘れないようにしよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  `mean(HDI_2018, na.rm = TRUE)`
+                           &lt;dbl&gt;
+1                          0.713</code></pre>
+</div>
+</div>
+<p>　平均値を計算する<code>mean()</code>以外にも様々な変数が使える。ここでは代表的な記述統計量の関数を紹介する。他にも様々な記述統計量があるが、詳細は教科書<a href="https://www.jaysong.net/RBook/datahandling2.html#summarise%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0">第13.1.2章</a>を参照されたい。</p>
 <ul>
 <li><code>mean()</code>: 平均値</li>
 <li><code>median()</code>: 中央値</li>
@@ -529,41 +540,14 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <li><code>var()</code>: 不偏分散</li>
 <li><code>IQR()</code>: 四分位範囲</li>
 <li><code>min()</code>、<code>max()</code>: 最小値と最大値</li>
-<li><code>n()</code>: ケース数（引数不要）</li>
-<li>その他（教科書<a href="https://www.jaysong.net/RBook/datahandling2.html#summarise%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0">第13.1.2章</a>）</li>
 </ul>
-<!--- --->
-</section>
-<section id="記述統計量の計算1" class="level2">
-<h2 class="anchored" data-anchor-id="記述統計量の計算1">記述統計量の計算（1）</h2>
+<p>　<code>summarise()</code>内には一つの変数、あるいは一つの記述統計量のみ書く必要はない。<code>()</code>内にいくらでも書ける。たとえば、<code>df</code>の<code>Population</code>と<code>Area</code>の平均値（<code>mean()</code>）と標準偏差（<code>sd()</code>）を計算する場合、計4つの記述統計量を計算することとなる。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro08.csv"</span>) <span class="co"># 第8回の実習用データ</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>例)</strong> <code>df</code>の<code>Population</code>と<code>Area</code>の平均値（<code>mean()</code>）を計算</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(Population),</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mean</span>(Area))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  `mean(Population)` `mean(Area)`
-               &lt;dbl&gt;        &lt;dbl&gt;
-1          41737773.      696069.</code></pre>
-</div>
-</div>
-<!--- --->
-</section>
-<section id="記述統計量の計算2" class="level2">
-<h2 class="anchored" data-anchor-id="記述統計量の計算2">記述統計量の計算（2）</h2>
-<p><code>summarise()</code>内に異なる関数を使うことも可能</p>
-<p><strong>例)</strong> <code>df</code>の<code>Population</code>と<code>Area</code>の平均値（<code>mean()</code>）と標準偏差（<code>sd()</code>）を計算</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(Population),</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sd</span>(Population),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mean</span>(Area),</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sd</span>(Area))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(Population), <span class="co"># Populationの平均値</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sd</span>(Population),   <span class="co"># Populationの不偏標準偏差</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mean</span>(Area),       <span class="co"># Areaの平均値</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sd</span>(Area))         <span class="co"># Areaの不偏標準偏差</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   `mean(Population)` `sd(Population)` `mean(Area)` `sd(Area)`
@@ -571,19 +555,13 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 1          41737773.       151270298.      696069.   1872412.</code></pre>
 </div>
 </div>
-<!--- --->
-</section>
-<section id="出力された結果をより見やすく" class="level2">
-<h2 class="anchored" data-anchor-id="出力された結果をより見やすく">出力された結果をより見やすく</h2>
-<p><code>summarise()</code>内に<code>出力される結果の列名 = 関数()</code>を指定</p>
-<p><strong>例)</strong> <code>df</code>の<code>Population</code>と<code>Area</code>の平均値（<code>mean()</code>）と標準偏差（<code>sd()</code>）を計算し、結果の列名を<code>Mean_Pop</code>、<code>SD_Pop</code>などとする</p>
+<p>　出力結果はデータフレーム（tibble）形式で表示されるが、列名が長く、非常に読みにくい。この列名を修正するためには<code>summarise()</code>の後に<code>rename()</code>を使うことで修正することもできるが、<code>summarise()</code>内で指定することもできる。たとえば、<code>df</code>の<code>Population</code>と<code>Area</code>の平均値（<code>mean()</code>）と標準偏差（<code>sd()</code>）を計算し、結果の列名を<code>Mean_Pop</code>、<code>SD_Pop</code>などとする。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Pop_Area_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_Pop  =</span> <span class="fu">mean</span>(Population),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD_Pop    =</span> <span class="fu">sd</span>(Population),</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Mean_Area =</span> <span class="fu">mean</span>(Area),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD_Area   =</span> <span class="fu">sd</span>(Area))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>Pop_Area_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_Pop  =</span> <span class="fu">mean</span>(Population),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD_Pop    =</span> <span class="fu">sd</span>(Population),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Mean_Area =</span> <span class="fu">mean</span>(Area),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD_Area   =</span> <span class="fu">sd</span>(Area))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
    Mean_Pop     SD_Pop Mean_Area  SD_Area
@@ -591,52 +569,53 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 1 41737773. 151270298.   696069. 1872412.</code></pre>
 </div>
 </div>
-<!--- --->
+<p>　<code>出力される列名 = 記述統計の関数()</code>を指定することで、このように出力結果が読みやすくなる。</p>
 </section>
-<section id="グループごとの記述統計量1" class="level2">
-<h2 class="anchored" data-anchor-id="グループごとの記述統計量1">グループごとの記述統計量（1）</h2>
+<section id="グルーピング" class="level2">
+<h2 class="anchored" data-anchor-id="グルーピング">グルーピング</h2>
+<section id="グループごとの記述統計量1" class="level3">
+<h3 class="anchored" data-anchor-id="グループごとの記述統計量1">グループごとの記述統計量（1）</h3>
 <p>{dplyr}を使わずに大陸ごとの<code>PPP_per_capita</code>の平均値を計算する例</p>
 <ul>
 <li><code>PPP_per_capita</code>は欠損値が含まれているため、<code>na.rm = TRUE</code>を指定（指定しないと結果は<code>NA</code>となる）</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Africa"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Africa"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5667.087</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"America"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"America"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18100.29</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Asia"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Asia"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22728.13</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Europe"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Europe"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 37782.59</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Oceania"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>PPP_per_capita[df<span class="sc">$</span>Continent <span class="sc">==</span> <span class="st">"Oceania"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 27572.65</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="グループごとの記述統計量2" class="level2">
-<h2 class="anchored" data-anchor-id="グループごとの記述統計量2">グループごとの記述統計量（2）</h2>
+<section id="グループごとの記述統計量2" class="level3">
+<h3 class="anchored" data-anchor-id="グループごとの記述統計量2">グループごとの記述統計量（2）</h3>
 <p>{dplyr}の<code>group_by()</code>を使用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>データフレーム名 <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">group_by</span>(グループ化する変数名) <span class="sc">%&gt;%</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">summarise</span>(...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>データフレーム名 <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">group_by</span>(グループ化する変数名) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">summarise</span>(...)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>例)</strong> <code>df</code>の<code>Continent</code>でデータをグループ化し、<code>PPP_per_capita</code>の平均値を計算</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent) <span class="sc">%&gt;%</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   Continent Mean_PPP
@@ -648,15 +627,14 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 5 Oceania     27573.</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="複数の変数でグルーピング" class="level2">
-<h2 class="anchored" data-anchor-id="複数の変数でグルーピング">複数の変数でグルーピング</h2>
+<section id="複数の変数でグルーピング" class="level3">
+<h3 class="anchored" data-anchor-id="複数の変数でグルーピング">複数の変数でグルーピング</h3>
 <p><strong>例)</strong> <code>df</code>の<code>Continent</code>と<code>G20</code>でデータをグループ化し、<code>HDI_2018</code>の平均値を計算</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent, G20) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent, G20) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'Continent'. You can override using the
 `.groups` argument.</code></pre>
@@ -678,10 +656,9 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 10 Oceania       1    0.938</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="グルービング後のsummarise" class="level2">
-<h2 class="anchored" data-anchor-id="グルービング後のsummarise">グルービング後の<code>summarise()</code></h2>
+<section id="グルービング後のsummarise" class="level3">
+<h3 class="anchored" data-anchor-id="グルービング後のsummarise">グルービング後の<code>summarise()</code></h3>
 <p>謎のメッセージが出力される</p>
 <pre><code>## `summarise()` has grouped output by 'Continent'. You can override using 
 the `.groups` argument.</code></pre>
@@ -695,16 +672,15 @@ the `.groups` argument.</code></pre>
 </ul></li>
 <li>とりあえず、<code>.groups = "drop"</code>をしておけば安全</li>
 </ul>
-<!--- --->
 </section>
-<section id="groups-dropを追加する" class="level2">
-<h2 class="anchored" data-anchor-id="groups-dropを追加する"><code>.groups = "drop"</code>を追加する</h2>
+<section id="groups-dropを追加する" class="level3">
+<h3 class="anchored" data-anchor-id="groups-dropを追加する"><code>.groups = "drop"</code>を追加する</h3>
 <p>謎のメッセージが出力されなくなる</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent, G20) <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups  =</span> <span class="st">"drop"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent, G20) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups  =</span> <span class="st">"drop"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
    Continent   G20 Mean_HDI
@@ -721,17 +697,16 @@ the `.groups` argument.</code></pre>
 10 Oceania       1    0.938</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="便利な関数-グループごとのケース数を計算" class="level2">
-<h2 class="anchored" data-anchor-id="便利な関数-グループごとのケース数を計算">便利な関数) グループごとのケース数を計算</h2>
+<section id="便利な関数-グループごとのケース数を計算" class="level3">
+<h3 class="anchored" data-anchor-id="便利な関数-グループごとのケース数を計算">便利な関数) グループごとのケース数を計算</h3>
 <p><code>summarise()</code>の中に<code>n()</code>を使用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">group_by</span>(Continent) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">summarise</span>(<span class="at">Mean_PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb40-4"><a href="#cb40-4"></a>            <span class="at">SD_PPP   =</span> <span class="fu">sd</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb40-5"><a href="#cb40-5"></a>            <span class="at">Cases    =</span> <span class="fu">n</span>())</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">group_by</span>(Continent) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">summarise</span>(<span class="at">Mean_PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-4"><a href="#cb43-4"></a>            <span class="at">SD_PPP   =</span> <span class="fu">sd</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-5"><a href="#cb43-5"></a>            <span class="at">Cases    =</span> <span class="fu">n</span>())</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
   Continent Mean_PPP SD_PPP Cases
@@ -743,17 +718,16 @@ the `.groups` argument.</code></pre>
 5 Oceania     27573. 21984.     4</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="おまけ-効率的な方法" class="level2">
-<h2 class="anchored" data-anchor-id="おまけ-効率的な方法">おまけ: 効率的な方法</h2>
+<section id="おまけ-効率的な方法" class="level3">
+<h3 class="anchored" data-anchor-id="おまけ-効率的な方法">おまけ: 効率的な方法</h3>
 <p><code>across()</code>関数を利用: 詳細は教科書<a href="https://www.jaysong.net/RBook/datahandling2.html#handling2-summarise">第13.1章</a>を参照</p>
 <p><strong>例)</strong> <code>df</code>の<code>Population</code>から<code>PPP</code>列まで平均値と標準偏差を計算し、結果の変数名は<code>元の変数名_Mean</code>、<code>元の変数名_SD</code>とする</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Population<span class="sc">:</span>PPP,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">Mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">SD   =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Population<span class="sc">:</span>PPP,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">Mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">SD   =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 8
   Population_Mean Population_SD Area_Mean Area_SD GDP_Mean  GDP_SD PPP_Mean
@@ -762,7 +736,7 @@ the `.groups` argument.</code></pre>
 # … with 1 more variable: PPP_SD &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<!--- --->
+</section>
 </section>
 <section id="変数の計算" class="level2">
 <h2 class="anchored" data-anchor-id="変数の計算">変数の計算</h2>
@@ -772,8 +746,8 @@ the `.groups` argument.</code></pre>
 <li>新しく追加された列は最後に位置する（指定可能）</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>データフレーム名 <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(新しい列名 <span class="ot">=</span> 計算式)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>データフレーム名 <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(新しい列名 <span class="ot">=</span> 計算式)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>例)</strong> <code>df</code>の<code>Population</code>を<code>Area</code>で割り（=人口密度）、<code>Density</code>という名の列として追加する</p>
 <div class="columns">
@@ -781,7 +755,7 @@ the `.groups` argument.</code></pre>
 <section id="dplyrを使わない方法" class="level4">
 <h4 class="anchored" data-anchor-id="dplyrを使わない方法">{dplyr}を使わない方法</h4>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Density <span class="ot">&lt;-</span> df<span class="sc">$</span>Population <span class="sc">/</span> df<span class="sc">$</span>Area</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Density <span class="ot">&lt;-</span> df<span class="sc">$</span>Population <span class="sc">/</span> df<span class="sc">$</span>Area</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </div><div class="column" style="width:4%;">
@@ -790,16 +764,14 @@ the `.groups` argument.</code></pre>
 <section id="dplyrを使う方法" class="level4">
 <h4 class="anchored" data-anchor-id="dplyrを使う方法">{dplyr}を使う方法</h4>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Density =</span> Population <span class="sc">/</span> Area)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Density =</span> Population <span class="sc">/</span> Area)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </div>
 </div>
-<!--- --->
-</section>
-<section id="dplyrの例" class="level2">
-<h2 class="anchored" data-anchor-id="dplyrの例">{dplyr}の例</h2>
+<section id="dplyrの例" class="level3">
+<h3 class="anchored" data-anchor-id="dplyrの例">{dplyr}の例</h3>
 <p><strong>例)</strong> <code>df</code>の<code>Population</code>を<code>Area</code>で割り（人口密度）、<code>Density</code>という名の列として追加する</p>
 <ul>
 <li>新しく追加された列は最後に位置する
@@ -808,9 +780,9 @@ the `.groups` argument.</code></pre>
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">mutate</span>(<span class="at">Density =</span> Population <span class="sc">/</span> Area) <span class="sc">%&gt;%</span></span>
-<span id="cb47-3"><a href="#cb47-3"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="co"># 最初の5行のみ出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">mutate</span>(<span class="at">Density =</span> Population <span class="sc">/</span> Area) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="co"># 最初の5行のみ出力</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 186 × 19
   Country   Population   Area    GDP     PPP GDP_per_capita PPP_per_capita    G7
@@ -826,19 +798,18 @@ the `.groups` argument.</code></pre>
 #   Density &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="新しい列の位置指定" class="level2">
-<h2 class="anchored" data-anchor-id="新しい列の位置指定">新しい列の位置指定</h2>
+<section id="新しい列の位置指定" class="level3">
+<h3 class="anchored" data-anchor-id="新しい列の位置指定">新しい列の位置指定</h3>
 <p><code>mutate()</code>内に<code>.after</code>、または<code>.before</code>を指定</p>
 <ul>
 <li><code>relocate()</code>関数と同じ仕組み（第9回）</li>
 </ul>
 <p><strong>例)</strong> <code>Population</code>を<code>Area</code>で割り、<code>Density</code>という名の新しい列<code>Area</code>の後に追加する。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">mutate</span>(<span class="at">Density =</span> Population <span class="sc">/</span> Area, </span>
-<span id="cb49-3"><a href="#cb49-3"></a>         <span class="at">.after  =</span> Area)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="fu">mutate</span>(<span class="at">Density =</span> Population <span class="sc">/</span> Area, </span>
+<span id="cb52-3"><a href="#cb52-3"></a>         <span class="at">.after  =</span> Area)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 186 × 19
    Country             Population    Area Density     GDP     PPP GDP_per_capita
@@ -859,10 +830,12 @@ the `.groups` argument.</code></pre>
 #   FH_Status &lt;chr&gt;, Continent &lt;chr&gt;</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="変数の計算いろいろ1" class="level2">
-<h2 class="anchored" data-anchor-id="変数の計算いろいろ1">変数の計算いろいろ（1）</h2>
+</section>
+<section id="応用" class="level2">
+<h2 class="anchored" data-anchor-id="応用">応用</h2>
+<section id="変数の計算いろいろ1" class="level3">
+<h3 class="anchored" data-anchor-id="変数の計算いろいろ1">変数の計算いろいろ（1）</h3>
 <p>各国が世界人口に占める割合を計算し、降順で出力</p>
 <ol type="1">
 <li><code>df</code>の<code>Population</code>の合計を<code>Total_Pop</code>という列として追加する。</li>
@@ -871,19 +844,18 @@ the `.groups` argument.</code></pre>
 <li><code>Total_Pop</code>列を除外する。</li>
 <li><code>Share_Pop</code>が大きい順で行を並び替える</li>
 </ol>
-<!--- --->
 </section>
-<section id="変数の計算いろいろ1-1" class="level2">
-<h2 class="anchored" data-anchor-id="変数の計算いろいろ1-1">変数の計算いろいろ（1）</h2>
+<section id="変数の計算いろいろ1-1" class="level3">
+<h3 class="anchored" data-anchor-id="変数の計算いろいろ1-1">変数の計算いろいろ（1）</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Total_Pop =</span> <span class="fu">sum</span>(Population),</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Share_Pop =</span> Population <span class="sc">/</span> Total_Pop <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">.after    =</span> Population) <span class="sc">%&gt;%</span></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country<span class="sc">:</span>Share_Pop) <span class="sc">%&gt;%</span></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>Total_Pop) <span class="sc">%&gt;%</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Share_Pop))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Total_Pop =</span> <span class="fu">sum</span>(Population),</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Share_Pop =</span> Population <span class="sc">/</span> Total_Pop <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">.after    =</span> Population) <span class="sc">%&gt;%</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country<span class="sc">:</span>Share_Pop) <span class="sc">%&gt;%</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>Total_Pop) <span class="sc">%&gt;%</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Share_Pop))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 186 × 3
    Country       Population Share_Pop
@@ -901,10 +873,9 @@ the `.groups` argument.</code></pre>
 # … with 176 more rows</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="変数の計算いろいろ2" class="level2">
-<h2 class="anchored" data-anchor-id="変数の計算いろいろ2">変数の計算いろいろ（2）</h2>
+<section id="変数の計算いろいろ2" class="level3">
+<h3 class="anchored" data-anchor-id="変数の計算いろいろ2">変数の計算いろいろ（2）</h3>
 <p>G7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。</p>
 <ol type="1">
 <li><code>df</code>を利用する</li>
@@ -915,22 +886,21 @@ the `.groups` argument.</code></pre>
 <li><code>HDI_2018</code>、<code>Polity_Score</code>、<code>Density</code>の平均値を求める。</li>
 <li><code>df2</code>という名前のオブジェクトとして作業環境内に格納する。</li>
 </ol>
-<!--- --->
 </section>
-<section id="変数の計算いろいろ2-1" class="level2">
-<h2 class="anchored" data-anchor-id="変数の計算いろいろ2-1">変数の計算いろいろ（2）</h2>
+<section id="変数の計算いろいろ2-1" class="level3">
+<h3 class="anchored" data-anchor-id="変数の計算いろいろ2-1">変数の計算いろいろ（2）</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Developed =</span> G7 <span class="sc">+</span> G20 <span class="sc">+</span> OECD,</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Developed =</span> <span class="fu">if_else</span>(Developed <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">"先進国"</span>, <span class="st">"その他"</span>), <span class="co"># 上書き</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Density   =</span> Population <span class="sc">/</span> Area) <span class="sc">%&gt;%</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(HDI_2018), <span class="sc">!</span><span class="fu">is.na</span>(Polity_Score)) <span class="sc">%&gt;%</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Developed) <span class="sc">%&gt;%</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Density =</span> <span class="fu">mean</span>(Density),</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">HDI     =</span> <span class="fu">mean</span>(HDI_2018),</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">Polity  =</span> <span class="fu">mean</span>(Polity_Score))</span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Developed =</span> G7 <span class="sc">+</span> G20 <span class="sc">+</span> OECD,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Developed =</span> <span class="fu">if_else</span>(Developed <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">"先進国"</span>, <span class="st">"その他"</span>), <span class="co"># 上書き</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Density   =</span> Population <span class="sc">/</span> Area) <span class="sc">%&gt;%</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(HDI_2018), <span class="sc">!</span><span class="fu">is.na</span>(Polity_Score)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Developed) <span class="sc">%&gt;%</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Density =</span> <span class="fu">mean</span>(Density),</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">HDI     =</span> <span class="fu">mean</span>(HDI_2018),</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">Polity  =</span> <span class="fu">mean</span>(Polity_Score))</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   Developed Density   HDI Polity
@@ -939,10 +909,12 @@ the `.groups` argument.</code></pre>
 2 先進国       174. 0.892   7.91</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="summariseの結果を並び替えたい" class="level2">
-<h2 class="anchored" data-anchor-id="summariseの結果を並び替えたい"><code>summarise()</code>の結果を並び替えたい</h2>
+</section>
+<section id="名目変数の扱い方" class="level2">
+<h2 class="anchored" data-anchor-id="名目変数の扱い方">名目変数の扱い方</h2>
+<section id="summariseの結果を並び替えたい" class="level3">
+<h3 class="anchored" data-anchor-id="summariseの結果を並び替えたい"><code>summarise()</code>の結果を並び替えたい</h3>
 <p><code>df2</code>を<code>"先進国"</code> &gt; <code>"その他"</code>の順番で表示させたい。</p>
 <ul>
 <li><code>summarise()</code>を行う場合、グルーピング変数のアルファベット順で表示される。</li>
@@ -955,22 +927,21 @@ the `.groups` argument.</code></pre>
 <li>Factor型: 順序付きの文字型</li>
 </ul></li>
 </ul>
-<!--- --->
 </section>
-<section id="developedをfactor型に" class="level2">
-<h2 class="anchored" data-anchor-id="developedをfactor型に"><code>Developed</code>をFactor型に</h2>
+<section id="developedをfactor型に" class="level3">
+<h3 class="anchored" data-anchor-id="developedをfactor型に"><code>Developed</code>をFactor型に</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">mutate</span>(<span class="at">Developed =</span> G7 <span class="sc">+</span> G20 <span class="sc">+</span> OECD,</span>
-<span id="cb55-3"><a href="#cb55-3"></a>         <span class="at">Developed =</span> <span class="fu">if_else</span>(Developed <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">"先進国"</span>, <span class="st">"その他"</span>), <span class="co"># 上書き</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>         <span class="at">Density   =</span> Population <span class="sc">/</span> Area) <span class="sc">%&gt;%</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(HDI_2018), <span class="sc">!</span><span class="fu">is.na</span>(Polity_Score)) <span class="sc">%&gt;%</span></span>
-<span id="cb55-6"><a href="#cb55-6"></a>  <span class="fu">group_by</span>(Developed) <span class="sc">%&gt;%</span></span>
-<span id="cb55-7"><a href="#cb55-7"></a>  <span class="co"># ここでなく、filter()前のmutate()内でやるのが効率的</span></span>
-<span id="cb55-8"><a href="#cb55-8"></a>  <span class="fu">mutate</span>(<span class="at">Developed =</span> <span class="fu">factor</span>(Developed, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"先進国"</span>, <span class="st">"その他"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb55-9"><a href="#cb55-9"></a>  <span class="fu">summarise</span>(<span class="at">Density =</span> <span class="fu">mean</span>(Density),</span>
-<span id="cb55-10"><a href="#cb55-10"></a>            <span class="at">HDI     =</span> <span class="fu">mean</span>(HDI_2018),</span>
-<span id="cb55-11"><a href="#cb55-11"></a>            <span class="at">Polity  =</span> <span class="fu">mean</span>(Polity_Score))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="fu">mutate</span>(<span class="at">Developed =</span> G7 <span class="sc">+</span> G20 <span class="sc">+</span> OECD,</span>
+<span id="cb58-3"><a href="#cb58-3"></a>         <span class="at">Developed =</span> <span class="fu">if_else</span>(Developed <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">"先進国"</span>, <span class="st">"その他"</span>), <span class="co"># 上書き</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>         <span class="at">Density   =</span> Population <span class="sc">/</span> Area) <span class="sc">%&gt;%</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(HDI_2018), <span class="sc">!</span><span class="fu">is.na</span>(Polity_Score)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>  <span class="fu">group_by</span>(Developed) <span class="sc">%&gt;%</span></span>
+<span id="cb58-7"><a href="#cb58-7"></a>  <span class="co"># ここでなく、filter()前のmutate()内でやるのが効率的</span></span>
+<span id="cb58-8"><a href="#cb58-8"></a>  <span class="fu">mutate</span>(<span class="at">Developed =</span> <span class="fu">factor</span>(Developed, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"先進国"</span>, <span class="st">"その他"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb58-9"><a href="#cb58-9"></a>  <span class="fu">summarise</span>(<span class="at">Density =</span> <span class="fu">mean</span>(Density),</span>
+<span id="cb58-10"><a href="#cb58-10"></a>            <span class="at">HDI     =</span> <span class="fu">mean</span>(HDI_2018),</span>
+<span id="cb58-11"><a href="#cb58-11"></a>            <span class="at">Polity  =</span> <span class="fu">mean</span>(Polity_Score))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   Developed Density   HDI Polity
@@ -979,25 +950,24 @@ the `.groups` argument.</code></pre>
 2 その他       197. 0.695   3.92</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="変数のリコーディング-2値の例" class="level2">
-<h2 class="anchored" data-anchor-id="変数のリコーディング-2値の例">変数のリコーディング: 2値の例</h2>
+<section id="変数のリコーディング-2値の例" class="level3">
+<h3 class="anchored" data-anchor-id="変数のリコーディング-2値の例">変数のリコーディング: 2値の例</h3>
 <p><code>mutate()</code>内に<code>if_else()</code>を使用（または、<code>ifelse()</code>）</p>
 <ul>
 <li><code>df</code>の<code>OECD</code>が<code>1</code>なら<code>"OECD加盟国"</code>、それ以外なら<code>"OECD非加盟国"</code>に変換し、<code>OECD_J</code>という列として追加</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"OECD加盟国"</span>, <span class="st">"OECD非加盟国"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"OECD加盟国"</span>, <span class="st">"OECD非加盟国"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>例)</strong> 変換前</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(OECD) <span class="sc">%&gt;%</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">FH  =</span> <span class="fu">mean</span>(FH_Total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(OECD) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">FH  =</span> <span class="fu">mean</span>(FH_Total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
    OECD    PPP   HDI    FH
@@ -1006,18 +976,17 @@ the `.groups` argument.</code></pre>
 2     1 46000. 0.894  89.1</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="変数のリコーディング-2値の例-1" class="level2">
-<h2 class="anchored" data-anchor-id="変数のリコーディング-2値の例-1">変数のリコーディング: 2値の例</h2>
+<section id="変数のリコーディング-2値の例-1" class="level3">
+<h3 class="anchored" data-anchor-id="変数のリコーディング-2値の例-1">変数のリコーディング: 2値の例</h3>
 <p><strong>例)</strong> 変換後</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a>  <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"OECD加盟国"</span>, <span class="st">"OECD非加盟国"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb60-3"><a href="#cb60-3"></a>  <span class="fu">group_by</span>(<span class="at">OECD =</span> OECD_J) <span class="sc">%&gt;%</span> <span class="co"># 「=」で列名の変更が可能</span></span>
-<span id="cb60-4"><a href="#cb60-4"></a>  <span class="fu">summarise</span>(<span class="at">PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb60-5"><a href="#cb60-5"></a>            <span class="at">HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb60-6"><a href="#cb60-6"></a>            <span class="at">FH  =</span> <span class="fu">mean</span>(FH_Total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"OECD加盟国"</span>, <span class="st">"OECD非加盟国"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a>  <span class="fu">group_by</span>(<span class="at">OECD =</span> OECD_J) <span class="sc">%&gt;%</span> <span class="co"># 「=」で列名の変更が可能</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>  <span class="fu">summarise</span>(<span class="at">PPP =</span> <span class="fu">mean</span>(PPP_per_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb63-5"><a href="#cb63-5"></a>            <span class="at">HDI =</span> <span class="fu">mean</span>(HDI_2018, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb63-6"><a href="#cb63-6"></a>            <span class="at">FH  =</span> <span class="fu">mean</span>(FH_Total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   OECD            PPP   HDI    FH
@@ -1026,37 +995,35 @@ the `.groups` argument.</code></pre>
 2 OECD非加盟国 14229. 0.667  49.9</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="変数のリコーディング-3値以上の例" class="level2">
-<h2 class="anchored" data-anchor-id="変数のリコーディング-3値以上の例">変数のリコーディング: 3値以上の例</h2>
+<section id="変数のリコーディング-3値以上の例" class="level3">
+<h3 class="anchored" data-anchor-id="変数のリコーディング-3値以上の例">変数のリコーディング: 3値以上の例</h3>
 <p><code>mutate()</code>内に<code>case_when()</code>を使用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>データフレーム名 <span class="sc">%&gt;%</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(新しい変数名 <span class="ot">=</span> <span class="fu">case_when</span>(条件1 <span class="sc">~</span> 新しい値,</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>                                条件2 <span class="sc">~</span> 新しい値,</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>                                ...</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> 新しい値))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>データフレーム名 <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(新しい変数名 <span class="ot">=</span> <span class="fu">case_when</span>(条件1 <span class="sc">~</span> 新しい値,</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                                条件2 <span class="sc">~</span> 新しい値,</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>                                ...</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> 新しい値))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><code>TRUE ~ 新しい値</code>は「上記の条件全てが満たされ<strong>ない</strong>場合の値」を意味する</li>
 </ul>
-<!--- --->
 </section>
-<section id="変数のリコーディング-3値以上の例-1" class="level2">
-<h2 class="anchored" data-anchor-id="変数のリコーディング-3値以上の例-1">変数のリコーディング: 3値以上の例</h2>
+<section id="変数のリコーディング-3値以上の例-1" class="level3">
+<h3 class="anchored" data-anchor-id="変数のリコーディング-3値以上の例-1">変数のリコーディング: 3値以上の例</h3>
 <p><strong>例)</strong> <code>df</code>の<code>Continent</code>を日本語にし、<code>Continent_J</code>として追加</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Continent_J =</span> <span class="fu">case_when</span>(Continent <span class="sc">==</span> <span class="st">"Africa"</span>  <span class="sc">~</span> <span class="st">"アフリカ"</span>,</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                                 Continent <span class="sc">==</span> <span class="st">"America"</span> <span class="sc">~</span> <span class="st">"アメリカ"</span>,</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>                                 Continent <span class="sc">==</span> <span class="st">"Asia"</span>    <span class="sc">~</span> <span class="st">"アジア"</span>,</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>                                 Continent <span class="sc">==</span> <span class="st">"Europe"</span>  <span class="sc">~</span> <span class="st">"ヨーロッパ"</span>,</span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span>                   <span class="sc">~</span> <span class="st">"オセアニア"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(大陸 <span class="ot">=</span> Continent_J) <span class="sc">%&gt;%</span></span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）</span></span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(OECD加盟国比率 <span class="ot">=</span> <span class="fu">mean</span>(OECD),</span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>            国家数        <span class="ot">=</span> <span class="fu">n</span>())</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Continent_J =</span> <span class="fu">case_when</span>(Continent <span class="sc">==</span> <span class="st">"Africa"</span>  <span class="sc">~</span> <span class="st">"アフリカ"</span>,</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>                                 Continent <span class="sc">==</span> <span class="st">"America"</span> <span class="sc">~</span> <span class="st">"アメリカ"</span>,</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                                 Continent <span class="sc">==</span> <span class="st">"Asia"</span>    <span class="sc">~</span> <span class="st">"アジア"</span>,</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>                                 Continent <span class="sc">==</span> <span class="st">"Europe"</span>  <span class="sc">~</span> <span class="st">"ヨーロッパ"</span>,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span>                   <span class="sc">~</span> <span class="st">"オセアニア"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(大陸 <span class="ot">=</span> Continent_J) <span class="sc">%&gt;%</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）</span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(OECD加盟国比率 <span class="ot">=</span> <span class="fu">mean</span>(OECD),</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>            国家数        <span class="ot">=</span> <span class="fu">n</span>())</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   大陸       OECD加盟国比率 国家数
@@ -1068,35 +1035,36 @@ the `.groups` argument.</code></pre>
 5 ヨーロッパ         0.54       50</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="変数のリコーディング-応用" class="level2">
-<h2 class="anchored" data-anchor-id="変数のリコーディング-応用">変数のリコーディング: 応用</h2>
+<section id="変数のリコーディング-応用" class="level3">
+<h3 class="anchored" data-anchor-id="変数のリコーディング-応用">変数のリコーディング: 応用</h3>
 <p><strong>例)</strong> <code>Continent</code>が<code>AP</code>列を追加し、<code>"Asia"</code>か<code>"Oceania"</code>、<code>"America"</code>なら1、以外は0</p>
 <p><strong>方法1</strong>: <code>if_else()</code>の利用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AP =</span> <span class="fu">if_else</span>(Continent <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Asia"</span>, <span class="st">"America"</span>, <span class="st">"Oceania"</span>),</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                      <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AP =</span> <span class="fu">if_else</span>(Continent <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Asia"</span>, <span class="st">"America"</span>, <span class="st">"Oceania"</span>),</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                      <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>方法2</strong>: <code>case_when()</code>の利用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AP =</span> <span class="fu">case_when</span>(Continent <span class="sc">==</span> <span class="st">"Asia"</span>    <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>                        Continent <span class="sc">==</span> <span class="st">"America"</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                        Continent <span class="sc">==</span> <span class="st">"Oceania"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>                        <span class="cn">TRUE</span>                   <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AP =</span> <span class="fu">case_when</span>(Continent <span class="sc">==</span> <span class="st">"Asia"</span>    <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                        Continent <span class="sc">==</span> <span class="st">"America"</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>                        Continent <span class="sc">==</span> <span class="st">"Oceania"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>                        <span class="cn">TRUE</span>                   <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>方法3</strong>: <code>case_when()</code> + <code>%in%</code>の利用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AP =</span> <span class="fu">case_when</span>(Continent <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Asia"</span>, <span class="st">"America"</span>, <span class="st">"Oceania"</span>) <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>                        <span class="cn">TRUE</span>                                           <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AP =</span> <span class="fu">case_when</span>(Continent <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Asia"</span>, <span class="st">"America"</span>, <span class="st">"Oceania"</span>) <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>                        <span class="cn">TRUE</span>                                           <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
 </section>
-<section id="注意-欠損値を指定する場合" class="level2">
-<h2 class="anchored" data-anchor-id="注意-欠損値を指定する場合">注意) 欠損値を指定する場合</h2>
+</section>
+<section id="欠損値の扱い方" class="level2">
+<h2 class="anchored" data-anchor-id="欠損値の扱い方">欠損値の扱い方</h2>
+<section id="注意-欠損値を指定する場合" class="level3">
+<h3 class="anchored" data-anchor-id="注意-欠損値を指定する場合">注意) 欠損値を指定する場合</h3>
 <p>世論調査などの場合、欠損値が<code>NA</code>でなく、<code>9</code>や<code>99</code>、<code>""</code>などの場合がある。</p>
 <p><strong>例)</strong> <code>my_data</code>の例</p>
 <ul>
@@ -1120,22 +1088,21 @@ the `.groups` argument.</code></pre>
 10    10    67        9</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="注意-欠損値を指定する場合-1" class="level2">
-<h2 class="anchored" data-anchor-id="注意-欠損値を指定する場合-1">注意) 欠損値を指定する場合</h2>
+<section id="注意-欠損値を指定する場合-1" class="level3">
+<h3 class="anchored" data-anchor-id="注意-欠損値を指定する場合-1">注意) 欠損値を指定する場合</h3>
 <p><strong>注意:</strong> <code>条件 ~ NA</code>ではエラーが発生する。</p>
 <ul>
 <li><code>if_else()</code>も同様。ただし、<code>ifelse()</code>は<code>NA</code>で作動</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
-<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `mutate()`:
 ! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age &lt;=
@@ -1144,19 +1111,18 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 ! 'names' attribute [1] must be the same length as the vector [0]</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="注意-欠損値を指定する場合-2" class="level2">
-<h2 class="anchored" data-anchor-id="注意-欠損値を指定する場合-2">注意) 欠損値を指定する場合</h2>
+<section id="注意-欠損値を指定する場合-2" class="level3">
+<h3 class="anchored" data-anchor-id="注意-欠損値を指定する場合-2">注意) 欠損値を指定する場合</h3>
 <p><code>NA</code>でなく、<strong>生成される列のデータ型</strong>に応じて<code>NA_real_</code>（numeric型）、または<code>NA_character_</code>（character型）を使用（logical型なら<code>NA</code>のままでOK）</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>,</span>
-<span id="cb71-3"><a href="#cb71-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb71-4"><a href="#cb71-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb71-5"><a href="#cb71-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb71-6"><a href="#cb71-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
-<span id="cb71-7"><a href="#cb71-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>,</span>
+<span id="cb74-3"><a href="#cb74-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb74-4"><a href="#cb74-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb74-5"><a href="#cb74-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb74-6"><a href="#cb74-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
+<span id="cb74-7"><a href="#cb74-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
       ID   Age HighEduc YoungAge HighEduc2
@@ -1173,15 +1139,14 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67        9        0 &lt;NA&gt;     </code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="特定の値を欠損値にコーディング場合" class="level2">
-<h2 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合">特定の値を欠損値にコーディング場合</h2>
+<section id="特定の値を欠損値にコーディング場合" class="level3">
+<h3 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合">特定の値を欠損値にコーディング場合</h3>
 <p>特定の値を欠損値とし、それ以外の値は元も値にする場合 * 主に<code>if_else()</code>を使用し、条件に合致した場合は<code>NA_real_</code>か<code>NA_character_</code>を、合致しない場合は元の変数のままにする。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">if_else</span>(Age <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA_real_</span>, Age),</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc =</span> <span class="fu">if_else</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span>, <span class="cn">NA_real_</span>, HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">if_else</span>(Age <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA_real_</span>, Age),</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc =</span> <span class="fu">if_else</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span>, <span class="cn">NA_real_</span>, HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1198,20 +1163,19 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67       NA</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="特定の値を欠損値にコーディング場合-1" class="level2">
-<h2 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合-1">特定の値を欠損値にコーディング場合</h2>
+<section id="特定の値を欠損値にコーディング場合-1" class="level3">
+<h3 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合-1">特定の値を欠損値にコーディング場合</h3>
 <p><code>if_else()</code>でなく、<code>case_when()</code>を使うことも可能</p>
 <ul>
 <li>欠損を意味する値が複数の場合、<code>case_when()</code>を使うか、OR演算子（<code>|</code> / <code>%in%</code>）を用いた<code>if_else()</code>を使用する。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span>       <span class="sc">~</span> Age),</span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span>          <span class="sc">~</span> HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span>       <span class="sc">~</span> Age),</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span>          <span class="sc">~</span> HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1228,10 +1192,9 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67       NA</code></pre>
 </div>
 </div>
-<!--- --->
 </section>
-<section id="特定の値を欠損値にコーディング場合-2" class="level2">
-<h2 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合-2">特定の値を欠損値にコーディング場合</h2>
+<section id="特定の値を欠損値にコーディング場合-2" class="level3">
+<h3 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合-2">特定の値を欠損値にコーディング場合</h3>
 <p>{naniar}パッケージの<code>replace_with_na()</code>関数を利用</p>
 <ul>
 <li>引数はリスト型オブジェクトであり、リストの中には<code>変数名 = 欠損値の値</code></li>
@@ -1239,10 +1202,10 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 <li>似たような関数として{expss}の<code>na_if()</code>関数</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar) <span class="co"># 事前に install.package(naniar) でインストール</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ageは999、HighEducは9が欠損値</span></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_with_na</span>(<span class="fu">list</span>(<span class="at">Age =</span> <span class="dv">999</span>, <span class="at">HighEduc =</span> <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar) <span class="co"># 事前に install.package(naniar) でインストール</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ageは999、HighEducは9が欠損値</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_with_na</span>(<span class="fu">list</span>(<span class="at">Age =</span> <span class="dv">999</span>, <span class="at">HighEduc =</span> <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1259,6 +1222,7 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67       NA</code></pre>
 </div>
 </div>
+</section>
 </section>
 <section id="教科書" class="level2">
 <h2 class="anchored" data-anchor-id="教科書">教科書</h2>

@@ -14,8 +14,6 @@ link-external-newwindow: true
 <iframe class="slide-deck" src="../slide/slide10.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 ```
 
-## 目標
-
 ```{r}
 #| include: false
 knitr::opts_chunk$set(dev       = "ragg_png",
@@ -25,38 +23,18 @@ knitr::opts_chunk$set(dev       = "ragg_png",
 pacman::p_load(naniar)
 ```
 
-* 変数の記述統計量を計算する
-   * 記述統計量: 平均値、中央値、標準偏差、分散、ケース数など
-* グループごとに記述統計量を計算する
-
-**例)** 大陸ごとに政治的権利（`FH_PR`）と市民的自由（`FH_CL`）の平均値を計算する
-
-```{r}
-#| message: false
-#| echo: false
-library(tidyverse)
-df <- read_csv("Data/Micro09.csv")
-df %>% 
-  group_by(Continent) %>%
-  summarise(Politial_Right = mean(FH_PR, na.rm = TRUE),
-            Civil_Liberty  = mean(FH_CL, na.rm = TRUE))
-```
-
-<!--- --->
-
 ## 記述統計量
 
-変数が持つ情報を要約した数値
+　記述統計量（descriptive statistics）とはある**変数が持つ情報を要約した数値**である。例えば、10人の学生の数学成績が格納されている以下のようなnumeric型ベクトルがあるとしよう。7番目の学生は試験を受けたものの、ポンコツな教師が解答用紙を紛失して欠損値となっている。
 
-元の情報: 
 ```{r}
 MathScore <- c(82, 45, 69, 94, 88, 73, NA, 51, 90, 63)
+MathScore
 ```
 
-:::: {.columns}
+　このクラスの数学成績について語る時、「うちのクラスの数学成績は82、45、69、94、...、63点ですよ」という人はいないだろう。数人のクラスならまだしも、数十人のクラスならあり得ない。我々は普段、「うちのクラスの数学成績はだいたいYY点ですよ」とか、「真ん中の成績はXX点ですよ」と言うだろう。また、クラス内の成績の格差/ばらつきを語るときも標準偏差や範囲（「できる子とできない子の点差は49点ですよ」）を言うのが普通である。このように元の長い情報を一つの数値として要約したものが記述統計量である。
 
-::: {.column width="45%"}
-`MathScore`を代表する値
+　たとえば、`MathScore`を代表する値（=代表値）としては平均値（mean）、中央値（median）、最頻値（mode）などがある。
 
 ```{r}
 # 平均値
@@ -64,13 +42,8 @@ mean(MathScore, na.rm = TRUE)
 # 中央値
 median(MathScore, na.rm = TRUE)
 ```
-:::
 
-::: {.column width="10%"}
-:::
-
-::: {.column width="45%"}
-`MathScore`のばらつきの具合
+　また、`MathScore`の格差、ばらつきの具合としては分散（variance）、標準偏差（standard deviation）、四分位範囲（interquartile range）、範囲（range）がある。
 
 ```{r}
 # 不偏分散
@@ -79,23 +52,42 @@ var(MathScore, na.rm = TRUE)
 sd(MathScore, na.rm = TRUE)
 # 四分位範囲
 IQR(MathScore, na.rm = TRUE)
+# 範囲
+max(MathScore, na.rm = TRUE) - min(MathScore, na.rm = TRUE)
 ```
-:::
 
-::::
+　今回は{dplyr}パッケージを用いて変数の記述統計量を計算する方法を紹介する。まず、今回の実習用データを読み込む。第9回に使用したデータと同じデータを使う。
 
-<!--- --->
+```{r}
+#| message: false
+#| echo: false
+library(tidyverse)
+df <- read_csv("Data/Micro09.csv")
+```
 
-## `summarise()`の使い方
+　記述統計を計算する関数は`summarise()`である。使い方は以下の通りである。
 
-`summarise()`: 記述統計量を計算する{dplyr}の関数
-
-```r
+```{r}
+#| eval: false
 データフレーム %>%
   summarise(記述統計の関数(変数名, ...))
 ```
 
-記述統計の関数の例
+　たとえば、`Population`列の平均値を計算する場合は、
+
+```{r}
+df %>%
+  summarise(mean(Population))
+```
+
+と入力する。`HDI_2018`のように欠損値が含まれている変数なら`na.rm = TRUE`を忘れないようにしよう。
+
+```{r}
+df %>%
+  summarise(mean(HDI_2018, na.rm = TRUE))
+```
+
+　平均値を計算する`mean()`以外にも様々な変数が使える。ここでは代表的な記述統計量の関数を紹介する。他にも様々な記述統計量があるが、詳細は教科書[第13.1.2章](https://www.jaysong.net/RBook/datahandling2.html#summarise%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0)を参照されたい。
 
 * `mean()`: 平均値
 * `median()`: 中央値
@@ -103,63 +95,32 @@ IQR(MathScore, na.rm = TRUE)
 * `var()`: 不偏分散
 * `IQR()`: 四分位範囲
 * `min()`、`max()`: 最小値と最大値
-* `n()`: ケース数（引数不要）
-* その他（教科書[第13.1.2章](https://www.jaysong.net/RBook/datahandling2.html#summarise%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0)）
 
-<!--- --->
-
-## 記述統計量の計算（1）
-
-```{r}
-#| eval: false
-library(tidyverse)
-df <- read_csv("Data/Micro08.csv") # 第8回の実習用データ
-```
-
-**例)** `df`の`Population`と`Area`の平均値（`mean()`）を計算
+　`summarise()`内には一つの変数、あるいは一つの記述統計量のみ書く必要はない。`()`内にいくらでも書ける。たとえば、`df`の`Population`と`Area`の平均値（`mean()`）と標準偏差（`sd()`）を計算する場合、計4つの記述統計量を計算することとなる。
 
 ```{r}
 df %>%
-  summarise(mean(Population),
-            mean(Area))
+  summarise(mean(Population), # Populationの平均値
+            sd(Population),   # Populationの不偏標準偏差
+            mean(Area),       # Areaの平均値
+            sd(Area))         # Areaの不偏標準偏差
 ```
 
-<!--- --->
-
-## 記述統計量の計算（2）
-
-`summarise()`内に異なる関数を使うことも可能
-
-**例)** `df`の`Population`と`Area`の平均値（`mean()`）と標準偏差（`sd()`）を計算
+　出力結果はデータフレーム（tibble）形式で表示されるが、列名が長く、非常に読みにくい。この列名を修正するためには`summarise()`の後に`rename()`を使うことで修正することもできるが、`summarise()`内で指定することもできる。たとえば、`df`の`Population`と`Area`の平均値（`mean()`）と標準偏差（`sd()`）を計算し、結果の列名を`Mean_Pop`、`SD_Pop`などとする。
 
 ```{r}
 df %>%
-  summarise(mean(Population),
-            sd(Population),
-            mean(Area),
-            sd(Area))
-```
-
-<!--- --->
-
-## 出力された結果をより見やすく
-
-`summarise()`内に`出力される結果の列名 = 関数()`を指定
-
-**例)** `df`の`Population`と`Area`の平均値（`mean()`）と標準偏差（`sd()`）を計算し、結果の列名を`Mean_Pop`、`SD_Pop`などとする
-
-```{r}
-Pop_Area_df <- df %>%
   summarise(Mean_Pop  = mean(Population),
             SD_Pop    = sd(Population),
             Mean_Area = mean(Area),
             SD_Area   = sd(Area))
-Pop_Area_df
 ```
 
-<!--- --->
+　`出力される列名 = 記述統計の関数()`を指定することで、このように出力結果が読みやすくなる。
 
-## グループごとの記述統計量（1）
+## グルーピング
+
+### グループごとの記述統計量（1）
 
 {dplyr}を使わずに大陸ごとの`PPP_per_capita`の平均値を計算する例
 
@@ -173,9 +134,9 @@ mean(df$PPP_per_capita[df$Continent == "Europe"], na.rm = TRUE)
 mean(df$PPP_per_capita[df$Continent == "Oceania"], na.rm = TRUE)
 ```
 
-<!--- --->
 
-## グループごとの記述統計量（2）
+
+### グループごとの記述統計量（2）
 
 {dplyr}の`group_by()`を使用
 
@@ -195,9 +156,9 @@ df %>%
   group_by(Continent) %>%
   summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE))
 ```
-<!--- --->
 
-## 複数の変数でグルーピング
+
+### 複数の変数でグルーピング
 
 **例)** `df`の`Continent`と`G20`でデータをグループ化し、`HDI_2018`の平均値を計算
 
@@ -208,9 +169,9 @@ df %>%
   summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE))
 ```
 
-<!--- --->
 
-## グルービング後の`summarise()`
+
+### グルービング後の`summarise()`
 
 謎のメッセージが出力される
 
@@ -227,9 +188,9 @@ the `.groups` argument.
   * 特に`summarise()`の後に更にパイプ（`%>%`）を使って計算を続ける場合
 * とりあえず、`.groups = "drop"`をしておけば安全
 
-<!--- --->
 
-## `.groups = "drop"`を追加する
+
+### `.groups = "drop"`を追加する
 
 謎のメッセージが出力されなくなる
 
@@ -240,9 +201,9 @@ df %>%
             .groups  = "drop")
 ```
 
-<!--- --->
 
-## 便利な関数) グループごとのケース数を計算
+
+### 便利な関数) グループごとのケース数を計算
 
 `summarise()`の中に`n()`を使用
 
@@ -255,9 +216,9 @@ df %>%
             Cases    = n())
 ```
 
-<!--- --->
 
-## おまけ: 効率的な方法
+
+### おまけ: 効率的な方法
 
 `across()`関数を利用: 詳細は教科書[第13.1章](https://www.jaysong.net/RBook/datahandling2.html#handling2-summarise)を参照
 
@@ -269,8 +230,6 @@ df %>%
                    .fns = list(Mean = ~mean(.x, na.rm = TRUE),
                                SD   = ~mean(.x, na.rm = TRUE))))
 ```
-
-<!--- --->
 
 ## 変数の計算
 
@@ -313,9 +272,7 @@ df %>%
 
 ::::
 
-<!--- --->
-
-## {dplyr}の例
+### {dplyr}の例
 
 **例)** `df`の`Population`を`Area`で割り（人口密度）、`Density`という名の列として追加する
 
@@ -329,9 +286,7 @@ df %>%
   print(n = 5) # 最初の5行のみ出力
 ```
 
-<!--- --->
-
-## 新しい列の位置指定
+### 新しい列の位置指定
 
 `mutate()`内に`.after`、または`.before`を指定
 
@@ -346,9 +301,9 @@ df %>%
          .after  = Area)
 ```
 
-<!--- --->
+## 応用
 
-## 変数の計算いろいろ（1）
+### 変数の計算いろいろ（1）
 
 各国が世界人口に占める割合を計算し、降順で出力
 
@@ -358,9 +313,7 @@ df %>%
 4. `Total_Pop`列を除外する。
 5. `Share_Pop`が大きい順で行を並び替える
 
-<!--- --->
-
-## 変数の計算いろいろ（1）
+### 変数の計算いろいろ（1）
 
 ```{r}
 df %>% 
@@ -373,9 +326,9 @@ df %>%
   arrange(desc(Share_Pop))
 ```
 
-<!--- --->
 
-## 変数の計算いろいろ（2）
+
+### 変数の計算いろいろ（2）
 
 G7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。
 
@@ -387,9 +340,7 @@ G7、G20、OECDのいずれかに加盟している国を「先進国」、そ�
 5. `HDI_2018`、`Polity_Score`、`Density`の平均値を求める。
 6. `df2`という名前のオブジェクトとして作業環境内に格納する。
 
-<!--- --->
-
-## 変数の計算いろいろ（2）
+### 変数の計算いろいろ（2）
 
 ```{r}
 df2 <- df %>%
@@ -405,9 +356,9 @@ df2 <- df %>%
 df2
 ```
 
-<!--- --->
+## 名目変数の扱い方
 
-## `summarise()`の結果を並び替えたい
+### `summarise()`の結果を並び替えたい
 
 `df2`を`"先進国"` > `"その他"`の順番で表示させたい。
 
@@ -417,9 +368,7 @@ df2
 * したがって、`summarise()`の前にグルーピング変数を**Factor型に変換**する必要がある。
    * Factor型: 順序付きの文字型
 
-<!--- --->
-
-## `Developed`をFactor型に
+### `Developed`をFactor型に
 
 ```{r}
 #| code-line-numbers: "8"
@@ -436,9 +385,7 @@ df %>%
             Polity  = mean(Polity_Score))
 ```
 
-<!--- --->
-
-## 変数のリコーディング: 2値の例
+### 変数のリコーディング: 2値の例
 
 `mutate()`内に`if_else()`を使用（または、`ifelse()`）
 
@@ -460,9 +407,7 @@ df %>%
             FH  = mean(FH_Total, na.rm = TRUE))
 ```
 
-<!--- --->
-
-## 変数のリコーディング: 2値の例
+### 変数のリコーディング: 2値の例
 
 **例)** 変換後
 
@@ -476,9 +421,7 @@ df %>%
             FH  = mean(FH_Total, na.rm = TRUE))
 ```
 
-<!--- --->
-
-## 変数のリコーディング: 3値以上の例
+### 変数のリコーディング: 3値以上の例
 
 `mutate()`内に`case_when()`を使用
 
@@ -493,9 +436,7 @@ df %>%
 
 * `TRUE ~ 新しい値`は「上記の条件全てが満たされ**ない**場合の値」を意味する
 
-<!--- --->
-
-## 変数のリコーディング: 3値以上の例
+### 変数のリコーディング: 3値以上の例
 
 **例)** `df`の`Continent`を日本語にし、`Continent_J`として追加
 
@@ -512,9 +453,7 @@ df %>%
             国家数        = n())
 ```
 
-<!--- --->
-
-## 変数のリコーディング: 応用
+### 変数のリコーディング: 応用
 
 **例)** `Continent`が`AP`列を追加し、`"Asia"`か`"Oceania"`、`"America"`なら1、以外は0
 
@@ -547,9 +486,9 @@ df %>%
                         TRUE                                           ~ 0))
 ```
 
-<!--- --->
+## 欠損値の扱い方
 
-## 注意) 欠損値を指定する場合
+### 注意) 欠損値を指定する場合
 
 世論調査などの場合、欠損値が`NA`でなく、`9`や`99`、`""`などの場合がある。
 
@@ -566,9 +505,7 @@ my_data <- tibble(ID       = 1:10,
 my_data
 ```
 
-<!--- --->
-
-## 注意) 欠損値を指定する場合
+### 注意) 欠損値を指定する場合
 
 **注意:** `条件 ~ NA`ではエラーが発生する。
 
@@ -585,9 +522,7 @@ my_data %>%
                                TRUE          ~ "大卒未満"))
 ```
 
-<!--- --->
-
-## 注意) 欠損値を指定する場合
+### 注意) 欠損値を指定する場合
 
 `NA`でなく、**生成される列のデータ型**に応じて`NA_real_`（numeric型）、または`NA_character_`（character型）を使用（logical型なら`NA`のままでOK）
 
@@ -603,9 +538,7 @@ my_data %>%
                                TRUE          ~ "大卒未満"))
 ```
 
-<!--- --->
-
-## 特定の値を欠損値にコーディング場合
+### 特定の値を欠損値にコーディング場合
 
 特定の値を欠損値とし、それ以外の値は元も値にする場合
 * 主に`if_else()`を使用し、条件に合致した場合は`NA_real_`か`NA_character_`を、合致しない場合は元の変数のままにする。
@@ -616,9 +549,7 @@ my_data %>%
          HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))
 ```
 
-<!--- --->
-
-## 特定の値を欠損値にコーディング場合
+### 特定の値を欠損値にコーディング場合
 
 `if_else()`でなく、`case_when()`を使うことも可能
 
@@ -632,9 +563,7 @@ my_data %>%
                               TRUE          ~ HighEduc))
 ```
 
-<!--- --->
-
-## 特定の値を欠損値にコーディング場合
+### 特定の値を欠損値にコーディング場合
 
 {naniar}パッケージの`replace_with_na()`関数を利用
 
