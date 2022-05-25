@@ -699,22 +699,22 @@ LMSからダウンロードした課題用データ（<code>Micro_HW10.csv</code
 ## 10   331         1      1    35         3      4        7 Male     Middle     
 ## # … with 1,001 more rows</code></pre>
 <p><strong>問題11:</strong>
-<code>df1</code>の<code>Education_C</code>の値ごとに<code>Ideology</code>の平均値、標準偏差、最小値、最大値を計算し、それぞれ<code>Mean</code>、<code>SD</code>、<code>Min</code>、<code>Max</code>という列として出力する。各グループに属するケース数も<code>N</code>という名の列として出力すること。以上の結果は<code>df2</code>という名のオブジェクトとして格納し、<code>df2</code>を出力すること。</p>
+<code>df1</code>の<code>Education_C</code>の値ごとに<code>Ideology</code>の平均値、標準偏差、最小値、最大値を計算し、それぞれ<code>Mean</code>、<code>SD</code>、<code>Min</code>、<code>Max</code>という列として出力する。各グループに属するケース数も<code>N</code>という名の列として出力すること。出力される結果に置いて<code>Education_C</code>列の名前は<code>Education</code>に修正する。以上の結果は<code>df2</code>という名のオブジェクトとして格納し、<code>df2</code>を出力すること。</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># この行を削除し、コードを入力</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 6
-##   Education_C  Mean    SD   Min   Max     N
-##   &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 Low          5.58  2.11     0    10   156
-## 2 Middle       5.41  1.93     0    10   654
-## 3 High         4.98  2.06     0    10   201</code></pre>
+##   Education  Mean    SD   Min   Max     N
+##   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 Low        5.58  2.11     0    10   156
+## 2 Middle     5.41  1.93     0    10   654
+## 3 High       4.98  2.06     0    10   201</code></pre>
 <p><strong>問題12:</strong>
-<code>df1</code>の性別（<code>Gender_C</code>）ごとの世帯収入（<code>Income</code>）の平均値、標準偏差、最小値、最大値を計算し、それぞれ<code>Mean</code>、<code>SD</code>、<code>Min</code>、<code>Max</code>という列として出力する。各グループに属するケース数も<code>N</code>という名の列として出力すること。以上の結果は<code>df3</code>という名のオブジェクトとして格納し、<code>df3</code>を出力すること。</p>
+<code>df1</code>の性別（<code>Gender_C</code>）ごとの世帯収入（<code>Income</code>）の平均値、標準偏差、最小値、最大値を計算し、それぞれ<code>Mean</code>、<code>SD</code>、<code>Min</code>、<code>Max</code>という列として出力する。各グループに属するケース数も<code>N</code>という名の列として出力すること。出力される結果に置いて<code>Gender_C</code>列の名前は<code>Gender</code>に修正する。以上の結果は<code>df3</code>という名のオブジェクトとして格納し、<code>df3</code>を出力すること。</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># この行を削除し、コードを入力</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 6
-##   Gender_C  Mean    SD   Min   Max     N
-##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 Female    4.40  2.55     1    10   499
-## 2 Male      4.36  2.45     1    10   512</code></pre>
+##   Gender  Mean    SD   Min   Max     N
+##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 Female  4.40  2.55     1    10   499
+## 2 Male    4.36  2.45     1    10   512</code></pre>
 
 
 

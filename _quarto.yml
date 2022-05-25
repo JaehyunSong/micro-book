@@ -68,8 +68,6 @@ website:
       contents:
         - text: "第5回課題"
           href: HW/HW05.qmd
-        - text: "第9回課題"
-          href: HW/HW09.qmd
         - text: "第10回課題"
           href: HW/HW10.qmd
         - text: "第11回課題"
