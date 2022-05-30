@@ -120,11 +120,15 @@ df %>%
 
 ## グルーピング
 
-### グループごとの記述統計量（1）
+　特定の変数の記述統計量を計算する場合は`mean()`や`sd()`などの関数のみを使った方が効率的なケースが多い。しかし、グループごとに記述統計量を計算する場合は、{dplyr}パッケージが大変便利である。{dplyr}を使わずに大陸ごとの`PPP_per_capita`の平均値を計算するとしよう。たとえば、`Continent`の値が`"Africa"`である国の`PPP_per_capita`の平均値を計算する場合は以下のように書く。
 
-{dplyr}を使わずに大陸ごとの`PPP_per_capita`の平均値を計算する例
+```{r}
+# PPP_per_capitaは欠損値が含まれているため、na.rm = TRUEを指定
+#（指定しないと、結果はNAとなる）
+mean(df$PPP_per_capita[df$Continent == "Africa"], na.rm = TRUE)
+```
 
-* `PPP_per_capita`は欠損値が含まれているため、`na.rm = TRUE`を指定（指定しないと結果は`NA`となる）
+　これを全ての大陸に対して同じ計算を行う場合、以下のようなコードになる。
 
 ```{r}
 mean(df$PPP_per_capita[df$Continent == "Africa"], na.rm = TRUE)
@@ -134,21 +138,16 @@ mean(df$PPP_per_capita[df$Continent == "Europe"], na.rm = TRUE)
 mean(df$PPP_per_capita[df$Continent == "Oceania"], na.rm = TRUE)
 ```
 
-
-
-### グループごとの記述統計量（2）
-
-{dplyr}の`group_by()`を使用
+　たった5行のコードであるが、一行一行がかなり長く、可読性も優れているとは言えない。ここで{dplyr}の`group_by()`関数が力を発揮する。
 
 ```{r}
 #| eval: false
-#| code-line-numbers: "2"
 データフレーム名 %>%
   group_by(グループ化する変数名) %>%
   summarise(...)
 ```
 
-**例)** `df`の`Continent`でデータをグループ化し、`PPP_per_capita`の平均値を計算
+　たとえば、`df`の`Continent`でデータをグループ化し、`PPP_per_capita`の平均値を計算する場合、`summarise()`の前に`group_by(Continent)`を使いしてパイプをつなぐことで`Continent`の値ごとに`PPP_per_capita`の平均値が計算される。
 
 ```{r}
 # PPP_per_capitaが欠損している国もあるので、na.rm = TRUEを追加
@@ -157,10 +156,7 @@ df %>%
   summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE))
 ```
 
-
-### 複数の変数でグルーピング
-
-**例)** `df`の`Continent`と`G20`でデータをグループ化し、`HDI_2018`の平均値を計算
+　コードが3行になっただけではなく、可読性も大きく改善されていることが分かる。`group_by()`関数は二つ以上の変数でグルーピングすることもできる。たとえば、`df`の`Continent`と`G20`でデータをグループ化し、`HDI_2018`の平均値を計算してみよう。
 
 ```{r}
 #| message: true
@@ -169,30 +165,30 @@ df %>%
   summarise(Mean_HDI = mean(HDI_2018, na.rm = TRUE))
 ```
 
+　`Continent`の値は5種類、`G20`の値は2種類であるため、計10個のグループができる。ちなみにこれを{dplyr}を使わず行うなら以下のようなコードになる。
 
+```{r}
+#| eval: false
+mean(df$HDI_2018[df$Continent == "Africa" & df$G20 == 0], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Africa" & df$G20 == 1], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "America" & df$G20 == 0], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "America" & df$G20 == 1], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Asia" & df$G20 == 0], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Asia" & df$G20 == 1], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Europe" & df$G20 == 0], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Europe" & df$G20 == 1], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Oceania" & df$G20 == 0], na.rm = TRUE)
+mean(df$HDI_2018[df$Continent == "Oceania" & df$G20 == 1], na.rm = TRUE)
+```
 
-### グルービング後の`summarise()`
-
-謎のメッセージが出力される
+　{dplyr}の素晴らしさが分かるだろう。次の内容に進む前に、以下のような謎のメッセージが出力されたのではないだろうか。
 
 ```
 ## `summarise()` has grouped output by 'Continent'. You can override using 
 the `.groups` argument.
 ```
 
-とりあえず、`group_by()`の後に`summarise()`を使う場合、`summarise()`の最後に`.groups = "drop"`を追加する。
-
-* 理由は割愛するが、詳細は教科書[第13.2章](https://www.jaysong.net/RBook/datahandling2.html#handling2-group)を参照
-* 多くの場合、メッセージが出力されるだけで、問題が生じることはあまりない。
-* しかし、複数の変数でグルーピングしたり、記述統計量が複数計算される関数（`quantile()`など）を使う場合、問題が生じる可能性あり
-  * 特に`summarise()`の後に更にパイプ（`%>%`）を使って計算を続ける場合
-* とりあえず、`.groups = "drop"`をしておけば安全
-
-
-
-### `.groups = "drop"`を追加する
-
-謎のメッセージが出力されなくなる
+　このメッセージの理由は教科書[第13.2章](https://www.jaysong.net/RBook/datahandling2.html#handling2-group)に譲るが、この気持ち悪いメッセージをなくすためには、とりあえず、`group_by()`の後に`summarise()`を使う場合、`summarise()`の最後に`.groups = "drop"`を追加する。
 
 ```{r}
 df %>%
@@ -201,14 +197,11 @@ df %>%
             .groups  = "drop")
 ```
 
+　これで謎のメッセージが出力されなくなっただろう。
 
-
-### 便利な関数) グループごとのケース数を計算
-
-`summarise()`の中に`n()`を使用
+　グルーピングを行う場合、各グループに属するケース数を調べたい場合もあろう。たとえば、大陸ごとに`PPP_per_capita`の平均値と標準偏差を出すだけでなく、各大陸に属する国数も表示したいとする。この時に使う関数が`n()`である。`()`内に別途の引数は不要である。
 
 ```{r}
-#| code-line-numbers: "5"
 df %>%
   group_by(Continent) %>%
   summarise(Mean_PPP = mean(PPP_per_capita, na.rm = TRUE),
@@ -216,13 +209,21 @@ df %>%
             Cases    = n())
 ```
 
+　最後に、詳細は解説しないが、`across()`関数を利用することで、複数の変数に対して複数の記述統計量をより短いコードで計算することができる。たとえば、`df`の`Population`から`PPP`列まで平均値と標準偏差を計算し、結果の変数名は`元の変数名_Mean`、`元の変数名_SD`とするコードを書いてみよう。
 
+```{r}
+df %>%
+  summarise(Population_Mean = mean(Population, na.rm = TRUE),
+            Population_SD   = sd(Population, na.rm = TRUE),
+            Area_Mean       = mean(Area, na.rm = TRUE),
+            Area_SD         = sd(Area, na.rm = TRUE),
+            GDP_Mean        = mean(GDP, na.rm = TRUE),
+            GDP_SD          = sd(GDP, na.rm = TRUE),
+            PPP_Mean        = mean(PPP, na.rm = TRUE),
+            PPP_SD          = sd(PPP, na.rm = TRUE),)
+```
 
-### おまけ: 効率的な方法
-
-`across()`関数を利用: 詳細は教科書[第13.1章](https://www.jaysong.net/RBook/datahandling2.html#handling2-summarise)を参照
-
-**例)** `df`の`Population`から`PPP`列まで平均値と標準偏差を計算し、結果の変数名は`元の変数名_Mean`、`元の変数名_SD`とする
+　以上の作業は、`across()`関数を使う場合、以下のようにたった4行でできる。
 
 ```{r}
 df %>%
@@ -230,6 +231,8 @@ df %>%
                    .fns = list(Mean = ~mean(.x, na.rm = TRUE),
                                SD   = ~mean(.x, na.rm = TRUE))))
 ```
+
+　`across()`関数の詳細については教科書[第13.1章](https://www.jaysong.net/RBook/datahandling2.html#handling2-summarise)を参照されたい。ただし、無名関数（ラムダ式）の知識が必要である（そこまで難しいものではない）。
 
 ## 変数の計算
 
