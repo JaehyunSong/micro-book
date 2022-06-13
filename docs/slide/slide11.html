@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.442">
+<link href="../Figs/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.519">
 
   <meta name="author" content="宋(そん)&nbsp;&nbsp;財泫(じぇひょん)">
   <title> MicroAnalysis@Kandai - ミクロ政治データ分析実習</title>
@@ -17,16 +24,71 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="../Figs/favicon.png" rel="icon" type="image/png">
-  <script src="../site_libs/clipboard/clipboard.min.js"></script>
-  <script src="../site_libs/quarto-html/tabby.min.js"></script>
-  <script src="../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
 
   <script type="text/javascript">
@@ -339,11 +401,1082 @@
   <p class="date">2022年 6月 24日</p>
 </section>
 
-<section class="slide level2">
+<section id="section" class="slide level2">
+<h2></h2>
+<p><span class="sec-title">{dplyr}: データの結合</span></p>
+<!--- --->
+</section>
+<section id="データの結合-行" class="slide level2">
+<h2>データの結合: 行</h2>
+<p><code>bind_rows()</code>を利用: 変数名が一致する必要がある</p>
+<ul>
+<li>以下の例はいずれのdata.frameも<code>ID</code>、<code>Name</code>、<code>Score</code>で構成されている。
+<ul>
+<li><code>ID</code>、<code>Name</code>、<code>Score</code>の順番は一致しなくても良い（上のdata.frameの順番に調整される）。</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>結合前</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>Data1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID  Name Score
+1  1 Aさん    77
+2  2 Bさん    89
+3  3 Cさん    41</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>Data2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID  Name Score
+1  4 Xさん    98
+2  5 Yさん    78</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
 
+</div><div class="column" style="width:48%;">
+<p><strong>結合後</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">bind_rows</span>(Data1, Data2)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID  Name Score
+1  1 Aさん    77
+2  2 Bさん    89
+3  3 Cさん    41
+4  4 Xさん    98
+5  5 Yさん    78</code></pre>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="データの結合-行-1" class="slide level2">
+<h2>データの結合: 行</h2>
+<p>結合前のデータ識別変数の追加</p>
+<ul>
+<li>結合するデータを<code>list()</code>でまとめ、<code>.id</code>引数を追加する</li>
+<li><code>list()</code>の内部では<code>"識別変数の値" = 結合するデータ</code>と定義</li>
+</ul>
+<p><strong>例)</strong> 結合後、<code>Class</code>という列を追加し、元々<code>Data1</code>だった行は<code>"1組"</code>、<code>Data2</code>だった行には<code>"2組"</code>を格納する。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">bind_rows</span>(<span class="fu">list</span>(<span class="st">"1組"</span> <span class="ot">=</span> Data1, <span class="st">"2組"</span> <span class="ot">=</span> Data2),</span>
+<span id="cb7-2"><a href="#cb7-2"></a>          <span class="at">.id =</span> <span class="st">"Class"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Class ID  Name Score
+1   1組  1 Aさん    77
+2   1組  2 Bさん    89
+3   1組  3 Cさん    41
+4   2組  4 Xさん    98
+5   2組  5 Yさん    78</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="データの結合-列" class="slide level2">
+<h2>データの結合: 列</h2>
+<p><code>*_join()</code>: 結合に使う識別用の変数（<strong>キー変数</strong>）が必要（以下では<code>City</code>）</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>結合前</strong></p>
+<div class="cell" data-layout-align="center">
 
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>Data1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   City Pop Area
+1 Tokyo 927 2194
+2 Osaka 148  828
+3 Kochi  76 7104</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
 
-<img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+</div><div class="column" style="width:48%;">
+<p><strong>結合前</strong></p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>Data2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   City     Food
+1 Kochi   Katsuo
+2 Osaka Takoyaki
+3 Tokyo    Ramen</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><strong>結合後</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">left_join</span>(Data1, Data2, <span class="at">by =</span> <span class="st">"City"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   City Pop Area     Food
+1 Tokyo 927 2194    Ramen
+2 Osaka 148  828 Takoyaki
+3 Kochi  76 7104   Katsuo</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="列結合に使う関数" class="slide level2">
+<h2>列結合に使う関数</h2>
+<p>識別子は両データに含まれているが、一致しないケースがある。 * どのデータの識別子を優先するか</p>
+<ol type="1">
+<li><code>left_join()</code>
+<ul>
+<li>左側のデータの識別子を優先する</li>
+<li>空欄は欠損値として埋められる</li>
+</ul></li>
+<li><code>right_join()</code>
+<ul>
+<li>右側のデータの識別子を優先する</li>
+<li>空欄は欠損値として埋められる</li>
+</ul></li>
+<li><code>inner_join()</code>
+<ul>
+<li>両データの識別子に共通する行のみを残して結合</li>
+</ul></li>
+<li><code>full_join()</code>
+<ul>
+<li>両データの識別子に存在する行すべて結合</li>
+<li>空欄は欠損値として埋められる</li>
+</ul></li>
+</ol>
+<!--- --->
+</section>
+<section id="left_joinの仕組み" class="slide level2">
+<h2><code>left_join()</code>の仕組み</h2>
+<p><code>left_join(データ1, データ2, by = "識別用変数名")</code></p>
+<ul>
+<li>データ1を温存する</li>
+<li>欠損しているセルは欠損値（<code>NA</code>）で埋められる</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/Merge_Left.png" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/left-join.gif"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="right_joinの仕組み" class="slide level2">
+<h2><code>right_join()</code>の仕組み</h2>
+<p><code>right_join(データ1, データ2, by = "識別用変数名")</code></p>
+<ul>
+<li>データ2を温存する</li>
+<li>欠損しているセルは欠損値（<code>NA</code>）で埋められる</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/Merge_Right.png" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/right-join.gif"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="inner_joinの仕組み" class="slide level2">
+<h2><code>inner_join()</code>の仕組み</h2>
+<p><code>inner_join(データ1, データ2, by = "識別用変数名")</code></p>
+<ul>
+<li>データ1とデータ2で識別子が共通する行のみ結合</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/Merge_Inner.png" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/inner-join.gif"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="full_joinの仕組み" class="slide level2">
+<h2><code>full_join()</code>の仕組み</h2>
+<p><code>full_join(データ1, データ2, by = "識別用変数名")</code></p>
+<ul>
+<li>データ1とデータ2をすべて温存</li>
+<li>欠損しているセルは欠損値（<code>NA</code>）で埋められる</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/Merge_Full.png" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/full-join.gif"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="比較-1" class="slide level2">
+<h2>比較 (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Pref  =</span> <span class="fu">c</span>(<span class="st">"東京"</span>, <span class="st">"大阪"</span>, <span class="st">"京都"</span>),</span>
+<span id="cb15-2"><a href="#cb15-2"></a>              <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="dv">4</span>, <span class="fl">4.2</span>))</span>
+<span id="cb15-3"><a href="#cb15-3"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Pref  =</span> <span class="fu">c</span>(<span class="st">"東京"</span>, <span class="st">"大阪"</span>, <span class="st">"高知"</span>),</span>
+<span id="cb15-4"><a href="#cb15-4"></a>              <span class="at">N     =</span> <span class="fu">c</span>(<span class="dv">3220</span>, <span class="dv">1325</span>, <span class="dv">111</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Pref  Score
+  &lt;chr&gt; &lt;dbl&gt;
+1 東京    3.5
+2 大阪    4  
+3 京都    4.2</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Pref      N
+  &lt;chr&gt; &lt;dbl&gt;
+1 東京   3220
+2 大阪   1325
+3 高知    111</code></pre>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="比較-2" class="slide level2">
+<h2>比較 (2)</h2>
+<p><code>by = "識別用の変数名"</code>は複数用いることも可能（例: 都道府県名&amp;年度で結合）</p>
+<ul>
+<li><code>by = c("識別用の変数名1", "識別用の変数名2")</code></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">left_join</span>(df1, df2, <span class="at">by =</span> <span class="st">"Pref"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Pref  Score     N
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 東京    3.5  3220
+2 大阪    4    1325
+3 京都    4.2    NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">right_join</span>(df1, df2, <span class="at">by =</span> <span class="st">"Pref"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Pref  Score     N
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 東京    3.5  3220
+2 大阪    4    1325
+3 高知   NA     111</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">inner_join</span>(df1, df2, <span class="at">by =</span> <span class="st">"Pref"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  Pref  Score     N
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 東京    3.5  3220
+2 大阪    4    1325</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">full_join</span>(df1, df2, <span class="at">by =</span> <span class="st">"Pref"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  Pref  Score     N
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 東京    3.5  3220
+2 大阪    4    1325
+3 京都    4.2    NA
+4 高知   NA     111</code></pre>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><span class="sec-title">{tidyr}: 整然データ構造</span></p>
+<!--- --->
+</section>
+<section id="整然データ構造とは" class="slide level2">
+<h2>整然データ構造とは</h2>
+<p>Tidy data: Hadley Wickhamが提唱した<strong>データ分析に適したデータ構造</strong></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li><strong>整然データ</strong>、簡潔データと呼ばれる</li>
+<li>パソコンにとって読みやすいデータ <span class="math inline">\(\neq\)</span> 人間にとって読みやすいデータ</li>
+<li>{tidyr}パッケージは雑然データを整然データへ変形するパッケージ</li>
+<li>次回紹介する{ggplot2}は整然データを前提として開発されたパッケージ</li>
+</ul>
+<h3 id="つの原則">4つの原則</h3>
+<ol type="1">
+<li>1つの列は、1つの変数を表す</li>
+<li>1つの行は、1つの観測を表す</li>
+<li>1つのセルは、1つの値を表す</li>
+<li>1つの表は、1つの観測単位をもつ</li>
+</ol>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:28%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/TidyingUp.jpg" width="300"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="原則1-1列1変数" class="slide level2">
+<h2>原則1: 1列1変数</h2>
+<ul>
+<li>1列には1つの変数のみ
+<ul>
+<li>3人の被験者に対し、薬を飲む前後の数学成績を測定した場合</li>
+<li>薬を飲む前: Control / 薬を飲んだ後: Treatment</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/TidyData1.png" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="原則2-1行1観察" class="slide level2">
+<h2>原則2: 1行1観察</h2>
+<ul>
+<li>1観察 <span class="math inline">\(\neq\)</span> 1値
+<ul>
+<li>観察: 観察単位ごとに測定された<strong>値の集合</strong></li>
+<li>観察単位: 人、企業、国、時間など</li>
+</ul></li>
+<li>以下の例の場合、観察単位は「人 <span class="math inline">\(\times\)</span> 時間 」</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/TidyData2.png" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="原則3-1セル1値" class="slide level2">
+<h2>原則3: 1セル1値</h2>
+<ul>
+<li>この原則に反するケースは多くない</li>
+<li><strong>例外)</strong> 1セルに<code>2020年8月24日</code>という値がある場合
+<ul>
+<li>分析の目的によっては年月日を全て異なるセルに割り当てる必要もある</li>
+<li>このままで問題とならないケースも</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/TidyData3.png" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="原則4-1表1単位" class="slide level2">
+<h2>原則4: 1表1単位</h2>
+<ul>
+<li>政府統計: 日本を代表する雑然データ
+<ul>
+<li>データの中身は良いが、構造が…</li>
+<li>表に「国」、「都道府県」、「市区町村」、「行政区」の単位が混在</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/TidyData4.png" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="原則4-1表1単位-1" class="slide level2">
+<h2>原則4: 1表1単位</h2>
+<ul>
+<li>「1表1単位」原則を満たさない場合、<code>filter()</code>関数等で、異なる単位の行を除外
+<ul>
+<li>以降、解説する{tidyr}でなく、{dplyr}で対応可能</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/TidyData5.png" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="tidyrパッケージ" class="slide level2">
+<h2>{tidyr}パッケージ</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/10/tidyr.png" width="200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>雑然データから整然データへ変形をサポートするパッケージ</p>
+<ul>
+<li><code>pivot_longer()</code>: Wide型データからLong型データへ
+<ul>
+<li>原則1・2に反するデータを整然データへ変換 (最も頻繁に使われる)</li>
+</ul></li>
+<li><code>pivot_wider()</code>: Long型データからWide型データへ
+<ul>
+<li>人間には雑然データの方が読みやすい場合がある（原則1の例）</li>
+</ul></li>
+<li><code>separate()</code>: セルの分割（「年月日」から「年」、「月」、「日」へ）
+<ul>
+<li>原則3に反するデータを整然データへ変換</li>
+</ul></li>
+<li>原則4に反するデータは単位がずれている行を<code>filter()</code>などで除外</li>
+</ul>
+<!--- --->
+</section>
+<section id="実習用データ" class="slide level2">
+<h2>実習用データ</h2>
+<p><code>Micro10.csv</code>: 日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数</p>
+<ul>
+<li>サポートページからダウンロード</li>
+<li>データ出典:<a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins University Center for Systems Science and Engineering</a></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro10.csv"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2"></a>COVID_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 7
+  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
+  &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+1 Japan     126476461         2743         3918         4485         4163
+2 Korea      51269185          516          699          629          587
+3 Mongolia    3278290          634          680          653          785
+4 Taiwan     23816775          595          539          635          670
+# … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="このデータの問題点" class="slide level2">
+<h2>このデータの問題点</h2>
+<ul>
+<li>観察単位は? 測定した変数は?
+<ul>
+<li>観察単位: 地域 <span class="math inline">\(\times\)</span> 時間</li>
+<li>変数: 新規感染者数</li>
+</ul></li>
+<li>新規感染者数が5列にわたって格納されている</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table style="width:100%;">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Population</th>
+<th style="text-align: right;">2021/05/24</th>
+<th style="text-align: right;">2021/05/25</th>
+<th style="text-align: right;">2021/05/26</th>
+<th style="text-align: right;">2021/05/27</th>
+<th style="text-align: right;">2021/05/28</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: right;">2743</td>
+<td style="text-align: right;">3918</td>
+<td style="text-align: right;">4485</td>
+<td style="text-align: right;">4163</td>
+<td style="text-align: right;">3701</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: right;">516</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">629</td>
+<td style="text-align: right;">587</td>
+<td style="text-align: right;">533</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: right;">634</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">653</td>
+<td style="text-align: right;">785</td>
+<td style="text-align: right;">769</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: right;">595</td>
+<td style="text-align: right;">539</td>
+<td style="text-align: right;">635</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">554</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="wide型からlong型へ" class="slide level2">
+<h2>Wide型からLong型へ</h2>
+<ul>
+<li>整然な<code>COVID_df</code>の構造は?
+<ul>
+<li>5列を1列にまとめるため、縦に長くなる</li>
+<li>WideからLongへ</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Population</th>
+<th style="text-align: left;">Date</th>
+<th style="text-align: right;">New_Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: left;">2021/05/24</td>
+<td style="text-align: right;">2743</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: left;">2021/05/25</td>
+<td style="text-align: right;">3918</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: left;">2021/05/26</td>
+<td style="text-align: right;">4485</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: left;">2021/05/27</td>
+<td style="text-align: right;">4163</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: left;">2021/05/28</td>
+<td style="text-align: right;">3701</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: left;">2021/05/24</td>
+<td style="text-align: right;">516</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: left;">2021/05/25</td>
+<td style="text-align: right;">699</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: left;">2021/05/26</td>
+<td style="text-align: right;">629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: left;">2021/05/27</td>
+<td style="text-align: right;">587</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: left;">2021/05/28</td>
+<td style="text-align: right;">533</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: left;">2021/05/24</td>
+<td style="text-align: right;">634</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: left;">2021/05/25</td>
+<td style="text-align: right;">680</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: left;">2021/05/26</td>
+<td style="text-align: right;">653</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: left;">2021/05/27</td>
+<td style="text-align: right;">785</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: left;">2021/05/28</td>
+<td style="text-align: right;">769</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: left;">2021/05/24</td>
+<td style="text-align: right;">595</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: left;">2021/05/25</td>
+<td style="text-align: right;">539</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: left;">2021/05/26</td>
+<td style="text-align: right;">635</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: left;">2021/05/27</td>
+<td style="text-align: right;">670</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: left;">2021/05/28</td>
+<td style="text-align: right;">554</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="pivot_longer-wide-to-long" class="slide level2">
+<h2><code>pivot_longer()</code>: Wide to Long</h2>
+<ul>
+<li><code>cols</code>は<code>dplyr::select()</code>と同じ使い方
+<ul>
+<li><code>c()</code>で個別の変数名を指定することも、<code>:</code>や<code>starts_with()</code>を使うこともOK</li>
+<li><strong>注意:</strong> 変数名が数字で始まったり、記号が含まれている場合、変数名を<code>`</code>か<code>"</code>で囲む
+<ul>
+<li>列名が日付の場合、数字で始まったり、記号（<code>/</code>や<code>-</code>など）が含まれるケースが多い</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> 変数が格納されている列,</span>
+<span id="cb30-3"><a href="#cb30-3"></a>               <span class="at">names_to  =</span> <span class="st">"元の列名が入る変数名"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4"></a>               <span class="at">values_to =</span> <span class="st">"変数の値が入る変数名"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
+<section id="pivot_longer-wideからlongへ" class="slide level2">
+<h2><code>pivot_longer()</code>: WideからLongへ</h2>
+<ul>
+<li><code>cols = starts_with("2020")</code>もOK</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="2-4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>COVID_Long <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb31-4"><a href="#cb31-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5"></a>COVID_Long</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 4
+   Country  Population Date       New_Cases
+   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+ 1 Japan     126476461 2021/05/24      2743
+ 2 Japan     126476461 2021/05/25      3918
+ 3 Japan     126476461 2021/05/26      4485
+ 4 Japan     126476461 2021/05/27      4163
+ 5 Japan     126476461 2021/05/28      3701
+ 6 Korea      51269185 2021/05/24       516
+ 7 Korea      51269185 2021/05/25       699
+ 8 Korea      51269185 2021/05/26       629
+ 9 Korea      51269185 2021/05/27       587
+10 Korea      51269185 2021/05/28       533
+11 Mongolia    3278290 2021/05/24       634
+12 Mongolia    3278290 2021/05/25       680
+13 Mongolia    3278290 2021/05/26       653
+14 Mongolia    3278290 2021/05/27       785
+15 Mongolia    3278290 2021/05/28       769
+16 Taiwan     23816775 2021/05/24       595
+17 Taiwan     23816775 2021/05/25       539
+18 Taiwan     23816775 2021/05/26       635
+19 Taiwan     23816775 2021/05/27       670
+20 Taiwan     23816775 2021/05/28       554</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="pivot_wider-longからwideへ" class="slide level2">
+<h2><code>pivot_wider()</code>: LongからWideへ</h2>
+<ul>
+<li>Long型をWide型へ戻す関数
+<ul>
+<li>人間にとってはLong型よりWide型の方が読みやすいケースも多い</li>
+<li>1列に2つの変数が入っている場合もある</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>COVID_Long <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3"></a>              <span class="at">values_from =</span> <span class="st">"New_Cases"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 7
+  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
+  &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+1 Japan     126476461         2743         3918         4485         4163
+2 Korea      51269185          516          699          629          587
+3 Mongolia    3278290          634          680          653          785
+4 Taiwan     23816775          595          539          635          670
+# … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="separate-列の分割" class="slide level2">
+<h2><code>separate()</code>: 列の分割</h2>
+<p><code>COVID_Long</code>の<code>Date</code>列を<code>Year</code>、<code>Month</code>、<code>Day</code>に分けたい</p>
+<ul>
+<li><strong>例)</strong> <code>Date</code>列を<code>"/"</code>を基準に分割する</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"分割する列名"</span>,</span>
+<span id="cb35-3"><a href="#cb35-3"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"分割後の列名1"</span>, <span class="st">"分割後の列名2"</span>, ...),</span>
+<span id="cb35-4"><a href="#cb35-4"></a>           <span class="at">sep  =</span> <span class="st">"分割する基準"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
+<section id="separate-列の分割-1" class="slide level2">
+<h2><code>separate()</code>: 列の分割</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>COVID_Long <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb36-3"><a href="#cb36-3"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>),</span>
+<span id="cb36-4"><a href="#cb36-4"></a>           <span class="at">sep  =</span> <span class="st">"/"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 6
+   Country  Population Year  Month Day   New_Cases
+   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 Japan     126476461 2021  05    24         2743
+ 2 Japan     126476461 2021  05    25         3918
+ 3 Japan     126476461 2021  05    26         4485
+ 4 Japan     126476461 2021  05    27         4163
+ 5 Japan     126476461 2021  05    28         3701
+ 6 Korea      51269185 2021  05    24          516
+ 7 Korea      51269185 2021  05    25          699
+ 8 Korea      51269185 2021  05    26          629
+ 9 Korea      51269185 2021  05    27          587
+10 Korea      51269185 2021  05    28          533
+11 Mongolia    3278290 2021  05    24          634
+12 Mongolia    3278290 2021  05    25          680
+13 Mongolia    3278290 2021  05    26          653
+14 Mongolia    3278290 2021  05    27          785
+15 Mongolia    3278290 2021  05    28          769
+16 Taiwan     23816775 2021  05    24          595
+17 Taiwan     23816775 2021  05    25          539
+18 Taiwan     23816775 2021  05    26          635
+19 Taiwan     23816775 2021  05    27          670
+20 Taiwan     23816775 2021  05    28          554</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="列の分割番外編-特定の記号がない場合" class="slide level2">
+<h2>列の分割（番外編）: 特定の記号がない場合</h2>
+<p><strong>例)</strong> <code>City_Data</code>の<code>City</code>列が「都道府県名+市区町村」</p>
+<ul>
+<li>「最初の3文字」と「残り」で分割することは出来ない（神奈川、和歌山、鹿児島）</li>
+<li>任意の2文字の後に「都」、「道」、「府」、「県」が付くか、任意の3文字の後に「県」が付く箇所を見つけて分割
+<ul>
+<li>かなり複雑</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  City                Pop
+  &lt;chr&gt;             &lt;dbl&gt;
+1 北海道音威子府村    693
+2 大阪府高槻市     347424
+3 広島県府中市      36471
+4 鹿児島県指宿市    38207</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="列の分割番外編-特定の記号がない場合続" class="slide level2">
+<h2>列の分割（番外編）: 特定の記号がない場合（続）</h2>
+<p><strong>正則表現（regular expression）</strong>の知識が必要</p>
+<ul>
+<li>テキスト分析に興味があるなら必須（前期・後期含めて、本講義では解説しない）</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>City_Data <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>   <span class="co"># 任意の2文字の後に「都道府県」のいずれかが来るか、</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>   <span class="co"># 任意の3文字の後に「県」が来たら、そこまでをブロック1、残りをブロック2とする</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>   <span class="co"># Cityの値を「ブロック1-ブロック2」に置換する</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a>   <span class="fu">mutate</span>(<span class="at">City =</span> <span class="fu">str_replace</span>(City, <span class="st">"^(.{2}[都道府県]|.{3}県)(.+)"</span>, </span>
+<span id="cb39-6"><a href="#cb39-6"></a>                             <span class="st">"</span><span class="sc">\\</span><span class="st">1-</span><span class="sc">\\</span><span class="st">2"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a>   <span class="co"># 「-」を基準に列を分割</span></span>
+<span id="cb39-8"><a href="#cb39-8"></a>   <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"City"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Pref"</span>, <span class="st">"City"</span>), <span class="at">sep  =</span> <span class="st">"-"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  Pref     City          Pop
+  &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;
+1 北海道   音威子府村    693
+2 大阪府   高槻市     347424
+3 広島県   府中市      36471
+4 鹿児島県 指宿市      38207</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="tidyrとdplyrの組み合わせ" class="slide level2">
+<h2>{tidyr}と{dplyr}の組み合わせ</h2>
+<p>{tidyr}と{dplyr}を組み合わせることも可能</p>
+<ul>
+<li><strong>例)</strong> 100万人当たりの新規感染者数を計算し、国ごとに平均値を計算</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb41-3"><a href="#cb41-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb41-4"><a href="#cb41-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a>   <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb41-7"><a href="#cb41-7"></a>   <span class="fu">summarise</span>(<span class="at">New_Case_per_1M =</span> <span class="fu">mean</span>(New_Case_per_1M))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  Country  New_Case_per_1M
+  &lt;chr&gt;              &lt;dbl&gt;
+1 Japan               30.1
+2 Korea               11.6
+3 Mongolia           215. 
+4 Taiwan              25.1</code></pre>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p><span class="sec-title">まとめ</span></p>
+<!--- --->
+</section>
+<section id="データハンドリングに慣れるためには" class="slide level2">
+<h2>データハンドリングに慣れるためには</h2>
+<ul>
+<li>とりあえず、たくさんのデータをいじってみる</li>
+<li>たくさんのエラーメッセージに出会うこと</li>
+<li>パイプ（<code>%&gt;%</code>）を使いすぎないように
+<ul>
+<li>中級以上になると、自分が書いたコードの結果が予想できるため、たくさんのパイプを使っても問題は大きくない</li>
+<li>一方、初心者の場合、パイプを使いすぎず、2〜3回ごとに別途のオブジェクトとして保存したり、結果を確認していくこと</li>
+<li>パイプが多すぎるとどこがエラーの原因かの特定が困難に（慣れたらすぐに見つかるが）</li>
+</ul></li>
+</ul>
+<!--- --->
+</section>
+<section id="長過ぎるコードブロックの例" class="slide level2">
+<h2>長過ぎるコードブロックの例</h2>
+<p>慣れたらこれくらいは長い方ではないが…</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb43-3"><a href="#cb43-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb43-4"><a href="#cb43-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>,</span>
+<span id="cb43-6"><a href="#cb43-6"></a>          <span class="at">Country         =</span> <span class="fu">case_when</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>    <span class="sc">~</span> <span class="st">"日本"</span>,</span>
+<span id="cb43-7"><a href="#cb43-7"></a>                                      Country <span class="sc">==</span> <span class="st">"Korea"</span>    <span class="sc">~</span> <span class="st">"韓国"</span>,</span>
+<span id="cb43-8"><a href="#cb43-8"></a>                                      Country <span class="sc">==</span> <span class="st">"Mongolia"</span> <span class="sc">~</span> <span class="st">"モンゴル"</span>,</span>
+<span id="cb43-9"><a href="#cb43-9"></a>                                      <span class="cn">TRUE</span>                  <span class="sc">~</span> <span class="st">"台湾"</span>),</span>
+<span id="cb43-10"><a href="#cb43-10"></a>          <span class="at">Country         =</span> <span class="fu">factor</span>(Country, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"日本"</span>, <span class="st">"韓国"</span>,</span>
+<span id="cb43-11"><a href="#cb43-11"></a>                                                       <span class="st">"モンゴル"</span>, <span class="st">"台湾"</span>)),</span>
+<span id="cb43-12"><a href="#cb43-12"></a>          <span class="at">Date            =</span> <span class="fu">as.Date</span>(Date)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-13"><a href="#cb43-13"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> New_Case_per_1M, </span>
+<span id="cb43-14"><a href="#cb43-14"></a>              <span class="at">group =</span> Country, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb43-15"><a href="#cb43-15"></a>   <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日付"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, <span class="at">color =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
+<span id="cb43-17"><a href="#cb43-17"></a>   <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%b %d"</span>) <span class="sc">+</span></span>
+<span id="cb43-18"><a href="#cb43-18"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb43-19"><a href="#cb43-19"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
+<section id="来週以降の内容" class="slide level2">
+<h2>来週以降の内容</h2>
+<p>次回からは{ggplot2}を利用したデータの可視化方法を紹介</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide11_files/figure-revealjs/unnamed-chunk-43-1.png" width="3000"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="課題" class="slide level2">
+<h2>課題</h2>
+<ol type="1">
+<li>今回講義用のプロジェクトを作成する。</li>
+<li>LMSから<strong>2つ</strong>のデータ（<code>.csv</code>）、問題ファイル（<code>.Rmd</code>）とサンプルファイル（<code>.html</code>）をダウンロードし、プロジェクトのフォルダーに保存する。
+<ul>
+<li><strong>ファイル名は変更しない</strong>こと</li>
+</ul></li>
+<li>プロジェクトを開き、<code>.Rmd</code>ファイルを開く</li>
+<li>サンプルファイルと同じ結果が得られるようにR Markdown文書を作成する。</li>
+<li>随時Knitし、結果を確認する。
+<ul>
+<li>Knitできないファイルは評価できない</li>
+</ul></li>
+<li><code>.Rmd</code>ファイルを関大LMSに提出する。</li>
+<li><strong>期限は2021年6月19日（土）の23時59分とする。</strong>
+<ul>
+<li>時間に余裕を持って取り組むこと。期限直前に取り組み始めてPCトラブルがあっても期限延長はない</li>
+</ul></li>
+<li>答案は次回の講義までに公開する。</li>
+</ol>
+
+<p><img src="Figs/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://www.jaysong.net/micro-book" class="uri">https://www.jaysong.net/micro-book</a></p>
 </div>
 </section>
@@ -560,6 +1693,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
