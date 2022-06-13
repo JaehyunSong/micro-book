@@ -383,14 +383,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
   <li><a href="#変数の計算" id="toc-変数の計算" class="nav-link" data-scroll-target="#変数の計算">変数の計算</a></li>
   <li><a href="#応用" id="toc-応用" class="nav-link" data-scroll-target="#応用">応用</a></li>
   <li><a href="#名目変数の扱い方" id="toc-名目変数の扱い方" class="nav-link" data-scroll-target="#名目変数の扱い方">名目変数の扱い方</a></li>
-  <li><a href="#欠損値の扱い方" id="toc-欠損値の扱い方" class="nav-link" data-scroll-target="#欠損値の扱い方">欠損値の扱い方</a>
-  <ul class="collapse">
-  <li><a href="#注意-欠損値を指定する場合" id="toc-注意-欠損値を指定する場合" class="nav-link" data-scroll-target="#注意-欠損値を指定する場合">注意) 欠損値を指定する場合</a></li>
-  <li><a href="#注意-欠損値を指定する場合-1" id="toc-注意-欠損値を指定する場合-1" class="nav-link" data-scroll-target="#注意-欠損値を指定する場合-1">注意) 欠損値を指定する場合</a></li>
-  <li><a href="#特定の値を欠損値にコーディング場合" id="toc-特定の値を欠損値にコーディング場合" class="nav-link" data-scroll-target="#特定の値を欠損値にコーディング場合">特定の値を欠損値にコーディング場合</a></li>
-  <li><a href="#特定の値を欠損値にコーディング場合-1" id="toc-特定の値を欠損値にコーディング場合-1" class="nav-link" data-scroll-target="#特定の値を欠損値にコーディング場合-1">特定の値を欠損値にコーディング場合</a></li>
-  <li><a href="#特定の値を欠損値にコーディング場合-2" id="toc-特定の値を欠損値にコーディング場合-2" class="nav-link" data-scroll-target="#特定の値を欠損値にコーディング場合-2">特定の値を欠損値にコーディング場合</a></li>
-  </ul></li>
+  <li><a href="#欠損値の扱い方" id="toc-欠損値の扱い方" class="nav-link" data-scroll-target="#欠損値の扱い方">欠損値の扱い方</a></li>
   <li><a href="#教科書" id="toc-教科書" class="nav-link" data-scroll-target="#教科書">教科書</a></li>
   </ul>
 </nav>
@@ -1097,16 +1090,8 @@ the `.groups` argument.</code></pre>
 <pre><code>[1] 3.1</code></pre>
 </div>
 </div>
-<ul>
-<li><code>YoungAge</code>変数を作成し、<code>Age</code>が39以下なら<code>1</code>、それ以外は<code>0</code>にする。ただし、999なら<code>NA</code>とする。</li>
-<li><code>HighEduc2</code>変数を作成し、<code>HighEduc</code>が1なら<code>"大卒以上"</code>、それ以外は<code>"大卒未満"</code>にする。ただし、9なら<code>NA</code>とする。</li>
-</ul>
-<section id="注意-欠損値を指定する場合" class="level3">
-<h3 class="anchored" data-anchor-id="注意-欠損値を指定する場合">注意) 欠損値を指定する場合</h3>
-<p><strong>注意:</strong> <code>条件 ~ NA</code>ではエラーが発生する。</p>
-<ul>
-<li><code>if_else()</code>も同様。ただし、<code>ifelse()</code>は<code>NA</code>で作動</li>
-</ul>
+<p>　回答者の平均年齢は245.6歳（!!）、学歴の平均値は3.1となっている。医学の発展によって人間の寿命が伸びたとしても、最大値が1のはずの<code>HighEduc</code>の平均値が3.1ということはナンセンスである。<strong>データ分析の前に欠損値の確認と処理は必須であり、これを怠ると研究結果に大きな歪みな生じかねない。</strong>とりわけ、欠損値が<code>NA</code>でなく、<code>9</code>や<code>999</code>、<code>""</code>などになっているケースはより注意が必要である。今回の実習データは既に欠損値の処理済み、つまり、欠損している値は<code>NA</code>になっている。ここでは上の<code>my_data</code>の使って考えてみよう。</p>
+<p>　まず、<code>YoungAge</code>変数を作成し、<code>Age</code>が39<strong>以下</strong>なら<code>1</code>、それ以外は<code>0</code>にする。ただし、999なら<code>NA</code>とする。続いて、<code>HighEduc2</code>変数を作成し、<code>HighEduc</code>が1なら<code>"大卒以上"</code>、それ以外は<code>"大卒未満"</code>にする。ただし、9なら<code>NA</code>とする。この作業を行うには<code>mutate()</code>内に<code>case_when()</code>を使えば良いだろう。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
@@ -1123,18 +1108,15 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 ! 'names' attribute [1] must be the same length as the vector [0]</code></pre>
 </div>
 </div>
-</section>
-<section id="注意-欠損値を指定する場合-1" class="level3">
-<h3 class="anchored" data-anchor-id="注意-欠損値を指定する場合-1">注意) 欠損値を指定する場合</h3>
-<p><code>NA</code>でなく、<strong>生成される列のデータ型</strong>に応じて<code>NA_real_</code>（numeric型）、または<code>NA_character_</code>（character型）を使用（logical型なら<code>NA</code>のままでOK）</p>
+<p>　エラーが返ってきた。なぜだろう。問題は<code>NA</code>である。確かにRにおいて欠損値は<code>NA</code>のみである。しかし、{tidyverse}の世界は、同じ<code>NA</code>でもnumeric型の<code>NA</code>とcharcter型の<code>NA</code>は区別される。上のコードの場合、<code>YoungAge</code>はnumeric型、<code>HighEduc2</code>はcharacter型変数になるだろう。<code>case_when()</code>は<code>if_else()</code>などを使う場合、<code>NA</code>でなく、<strong>生成される列のデータ型</strong>に応じて<code>NA_real_</code>（numeric型）、または<code>NA_character_</code>（character型）を使用（logical型なら<code>NA</code>のままでOK）する必要がある。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="#cb90-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>,</span>
-<span id="cb90-3"><a href="#cb90-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb90-4"><a href="#cb90-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb90-5"><a href="#cb90-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb90-6"><a href="#cb90-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
-<span id="cb90-7"><a href="#cb90-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>,</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
       ID   Age HighEduc YoungAge HighEduc2
@@ -1151,10 +1133,7 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67        9        0 &lt;NA&gt;     </code></pre>
 </div>
 </div>
-</section>
-<section id="特定の値を欠損値にコーディング場合" class="level3">
-<h3 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合">特定の値を欠損値にコーディング場合</h3>
-<p>特定の値を欠損値とし、それ以外の値は元も値にする場合 * 主に<code>if_else()</code>を使用し、条件に合致した場合は<code>NA_real_</code>か<code>NA_character_</code>を、合致しない場合は元の変数のままにする。</p>
+<p>　もう一つの例として特定の値を欠損値とし、それ以外の値は元も値にする場合を考えよう。つまり、<code>Age</code>と<code>HighEduc</code>列においてそれぞれ999、9を<code>NA</code>にし、そのまま上書きするものである。例えば<code>Age</code>は<code>Age</code>の値が999なら（<code>Age == 999</code>）、<code>NA_real_</code>を返し、それ以外の場合は既存の<code>Age</code>の値を取る。この作業は以下のコードで実行できる。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
 <span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">if_else</span>(Age <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA_real_</span>, Age),</span>
@@ -1175,19 +1154,13 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67       NA</code></pre>
 </div>
 </div>
-</section>
-<section id="特定の値を欠損値にコーディング場合-1" class="level3">
-<h3 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合-1">特定の値を欠損値にコーディング場合</h3>
-<p><code>if_else()</code>でなく、<code>case_when()</code>を使うことも可能</p>
-<ul>
-<li>欠損を意味する値が複数の場合、<code>case_when()</code>を使うか、OR演算子（<code>|</code> / <code>%in%</code>）を用いた<code>if_else()</code>を使用する。</li>
-</ul>
+<p>　欠損を意味する値が複数の場合もある。<code>my_data</code>の<code>Age</code>は<code>999</code>のみが欠損値であるが、世論調査によっては<code>888</code>、<code>999</code>、<code>-1</code>のように複数の欠損値が存在するケースがある。この場合は<code>case_when()</code>を使うか、<code>if_else()</code>関数内にOR演算子（<code>|</code> / <code>%in%</code>）を使えば良い。</p>
+<p>　最後に欠損値処理に特化した{naniar}パッケージの<code>replace_with_na()</code>関数を紹介する。引数はリスト型オブジェクトであり、リストの各要素は<code>変数名 = 欠損値の値</code>となる。たとえば、<code>Age</code>の欠損値は<code>999</code>だから<code>Age = 999</code>である。これは条件式ではないため、<code>==</code>でなく、<code>=</code>を使う。欠損値の値が複数ある場合は、<code>変数名 = c(値1, 値2, ...)</code>のように書く。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span>       <span class="sc">~</span> Age),</span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">HighEduc =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span>          <span class="sc">~</span> HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar) <span class="co"># 事前に install.package(naniar) でインストール</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ageは999、HighEducは9が欠損値</span></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_with_na</span>(<span class="fu">list</span>(<span class="at">Age =</span> <span class="dv">999</span>, <span class="at">HighEduc =</span> <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1204,37 +1177,7 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 10    10    67       NA</code></pre>
 </div>
 </div>
-</section>
-<section id="特定の値を欠損値にコーディング場合-2" class="level3">
-<h3 class="anchored" data-anchor-id="特定の値を欠損値にコーディング場合-2">特定の値を欠損値にコーディング場合</h3>
-<p>{naniar}パッケージの<code>replace_with_na()</code>関数を利用</p>
-<ul>
-<li>引数はリスト型オブジェクトであり、リストの中には<code>変数名 = 欠損値の値</code></li>
-<li>欠損値の値が複数の場合、<code>変数名 = c(値1, 値2, ...)</code></li>
-<li>似たような関数として{expss}の<code>na_if()</code>関数</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar) <span class="co"># 事前に install.package(naniar) でインストール</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ageは999、HighEducは9が欠損値</span></span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_with_na</span>(<span class="fu">list</span>(<span class="at">Age =</span> <span class="dv">999</span>, <span class="at">HighEduc =</span> <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-      ID   Age HighEduc
-   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;
- 1     1    32        1
- 2     2    35        0
- 3     3    57        0
- 4     4    NA        1
- 5     5    74        0
- 6     6    66       NA
- 7     7    NA        1
- 8     8    49        1
- 9     9    78       NA
-10    10    67       NA</code></pre>
-</div>
-</div>
-</section>
+<p>　他にも似たような関数として{expss}の<code>na_if()</code>関数などがあるが、自分が使いやすいものを使えば良い。</p>
 </section>
 <section id="教科書" class="level2">
 <h2 class="anchored" data-anchor-id="教科書">教科書</h2>

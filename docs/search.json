@@ -109,7 +109,7 @@
     "href": "materials/handling2.html#欠損値の扱い方",
     "title": "第10回講義資料",
     "section": "欠損値の扱い方",
-    "text": "欠損値の扱い方\n　世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。たとえば、以下のようなmy_dataというデータがあるとしよう。\n\nmy_data <- tibble(ID       = 1:10,\n                  Age      = c(32, 35, 57, 999, 74, 66, 999, 49, 78, 67),\n                  HighEduc = c(1, 0, 0, 1, 0, 9, 1, 1, 9, 9))\nmy_data\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9\n\n\n　IDは回答者の識別番号、Ageは回答者の年齢、HighEducは回答者が大卒以上なら1、それ以外は0を意味する。そして、年齢を回答しなかった回答者の年齢は999、学歴については9となっている。ここで回答者の年齢と学歴の平均値を出せばどうなるだろうか。\n\nmean(my_data$Age)\n\n[1] 245.6\n\nmean(my_data$HighEduc)\n\n[1] 3.1\n\n\n\nYoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。\nHighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。\n\n\n注意) 欠損値を指定する場合\n注意: 条件 ~ NAではエラーが発生する。\n\nif_else()も同様。ただし、ifelse()はNAで作動\n\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\nError in `mutate()`:\n! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age <=\n  39 ~ 1, TRUE ~ 0)`.\nCaused by error in `` names(message) <- `*vtmp*` ``:\n! 'names' attribute [1] must be the same length as the vector [0]\n\n\n\n\n注意) 欠損値を指定する場合\nNAでなく、生成される列のデータ型に応じてNA_real_（numeric型）、またはNA_character_（character型）を使用（logical型ならNAのままでOK）\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA_character_,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\n# A tibble: 10 × 5\n      ID   Age HighEduc YoungAge HighEduc2\n   <int> <dbl>    <dbl>    <dbl> <chr>    \n 1     1    32        1        1 大卒以上 \n 2     2    35        0        1 大卒未満 \n 3     3    57        0        0 大卒未満 \n 4     4   999        1       NA 大卒以上 \n 5     5    74        0        0 大卒未満 \n 6     6    66        9        0 <NA>     \n 7     7   999        1       NA 大卒以上 \n 8     8    49        1        0 大卒以上 \n 9     9    78        9        0 <NA>     \n10    10    67        9        0 <NA>     \n\n\n\n\n特定の値を欠損値にコーディング場合\n特定の値を欠損値とし、それ以外の値は元も値にする場合 * 主にif_else()を使用し、条件に合致した場合はNA_real_かNA_character_を、合致しない場合は元の変数のままにする。\n\nmy_data %>%\n  mutate(Age      = if_else(Age == 999, NA_real_, Age),\n         HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA\n\n\n\n\n特定の値を欠損値にコーディング場合\nif_else()でなく、case_when()を使うことも可能\n\n欠損を意味する値が複数の場合、case_when()を使うか、OR演算子（| / %in%）を用いたif_else()を使用する。\n\n\nmy_data %>%\n  mutate(Age      = case_when(Age == 999 ~ NA_real_, \n                              TRUE       ~ Age),\n         HighEduc = case_when(HighEduc == 9 ~ NA_real_, \n                              TRUE          ~ HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA\n\n\n\n\n特定の値を欠損値にコーディング場合\n{naniar}パッケージのreplace_with_na()関数を利用\n\n引数はリスト型オブジェクトであり、リストの中には変数名 = 欠損値の値\n欠損値の値が複数の場合、変数名 = c(値1, 値2, ...)\n似たような関数として{expss}のna_if()関数\n\n\nlibrary(naniar) # 事前に install.package(naniar) でインストール\nmy_data %>%\n  # Ageは999、HighEducは9が欠損値\n  replace_with_na(list(Age = 999, HighEduc = 9))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA"
+    "text": "欠損値の扱い方\n　世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。たとえば、以下のようなmy_dataというデータがあるとしよう。\n\nmy_data <- tibble(ID       = 1:10,\n                  Age      = c(32, 35, 57, 999, 74, 66, 999, 49, 78, 67),\n                  HighEduc = c(1, 0, 0, 1, 0, 9, 1, 1, 9, 9))\nmy_data\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9\n\n\n　IDは回答者の識別番号、Ageは回答者の年齢、HighEducは回答者が大卒以上なら1、それ以外は0を意味する。そして、年齢を回答しなかった回答者の年齢は999、学歴については9となっている。ここで回答者の年齢と学歴の平均値を出せばどうなるだろうか。\n\nmean(my_data$Age)\n\n[1] 245.6\n\nmean(my_data$HighEduc)\n\n[1] 3.1\n\n\n　回答者の平均年齢は245.6歳（!!）、学歴の平均値は3.1となっている。医学の発展によって人間の寿命が伸びたとしても、最大値が1のはずのHighEducの平均値が3.1ということはナンセンスである。データ分析の前に欠損値の確認と処理は必須であり、これを怠ると研究結果に大きな歪みな生じかねない。とりわけ、欠損値がNAでなく、9や999、\"\"などになっているケースはより注意が必要である。今回の実習データは既に欠損値の処理済み、つまり、欠損している値はNAになっている。ここでは上のmy_dataの使って考えてみよう。\n　まず、YoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。続いて、HighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。この作業を行うにはmutate()内にcase_when()を使えば良いだろう。\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\nError in `mutate()`:\n! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age <=\n  39 ~ 1, TRUE ~ 0)`.\nCaused by error in `` names(message) <- `*vtmp*` ``:\n! 'names' attribute [1] must be the same length as the vector [0]\n\n\n　エラーが返ってきた。なぜだろう。問題はNAである。確かにRにおいて欠損値はNAのみである。しかし、{tidyverse}の世界は、同じNAでもnumeric型のNAとcharcter型のNAは区別される。上のコードの場合、YoungAgeはnumeric型、HighEduc2はcharacter型変数になるだろう。case_when()はif_else()などを使う場合、NAでなく、生成される列のデータ型に応じてNA_real_（numeric型）、またはNA_character_（character型）を使用（logical型ならNAのままでOK）する必要がある。\n\nmy_data %>%\n  mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,\n                               Age <=  39 ~ 1,\n                               TRUE       ~ 0),\n         HighEduc2 = case_when(HighEduc == 9 ~ NA_character_,\n                               HighEduc == 1 ~ \"大卒以上\",\n                               TRUE          ~ \"大卒未満\"))\n\n# A tibble: 10 × 5\n      ID   Age HighEduc YoungAge HighEduc2\n   <int> <dbl>    <dbl>    <dbl> <chr>    \n 1     1    32        1        1 大卒以上 \n 2     2    35        0        1 大卒未満 \n 3     3    57        0        0 大卒未満 \n 4     4   999        1       NA 大卒以上 \n 5     5    74        0        0 大卒未満 \n 6     6    66        9        0 <NA>     \n 7     7   999        1       NA 大卒以上 \n 8     8    49        1        0 大卒以上 \n 9     9    78        9        0 <NA>     \n10    10    67        9        0 <NA>     \n\n\n　もう一つの例として特定の値を欠損値とし、それ以外の値は元も値にする場合を考えよう。つまり、AgeとHighEduc列においてそれぞれ999、9をNAにし、そのまま上書きするものである。例えばAgeはAgeの値が999なら（Age == 999）、NA_real_を返し、それ以外の場合は既存のAgeの値を取る。この作業は以下のコードで実行できる。\n\nmy_data %>%\n  mutate(Age      = if_else(Age == 999, NA_real_, Age),\n         HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA\n\n\n　欠損を意味する値が複数の場合もある。my_dataのAgeは999のみが欠損値であるが、世論調査によっては888、999、-1のように複数の欠損値が存在するケースがある。この場合はcase_when()を使うか、if_else()関数内にOR演算子（| / %in%）を使えば良い。\n　最後に欠損値処理に特化した{naniar}パッケージのreplace_with_na()関数を紹介する。引数はリスト型オブジェクトであり、リストの各要素は変数名 = 欠損値の値となる。たとえば、Ageの欠損値は999だからAge = 999である。これは条件式ではないため、==でなく、=を使う。欠損値の値が複数ある場合は、変数名 = c(値1, 値2, ...)のように書く。\n\nlibrary(naniar) # 事前に install.package(naniar) でインストール\nmy_data %>%\n  # Ageは999、HighEducは9が欠損値\n  replace_with_na(list(Age = 999, HighEduc = 9))\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4    NA        1\n 5     5    74        0\n 6     6    66       NA\n 7     7    NA        1\n 8     8    49        1\n 9     9    78       NA\n10    10    67       NA\n\n\n　他にも似たような関数として{expss}のna_if()関数などがあるが、自分が使いやすいものを使えば良い。"
   },
   {
     "objectID": "materials/handling2.html#教科書",
@@ -2272,7 +2272,7 @@
     "href": "slide/slide11.html#列結合に使う関数",
     "title": "ミクロ政治データ分析実習",
     "section": "列結合に使う関数",
-    "text": "列結合に使う関数\n識別子は両データに含まれているが、一致しないケースがある。 * どのデータの識別子を優先するか\n\nleft_join()\n\n左側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\nright_join()\n\n右側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\ninner_join()\n\n両データの識別子に共通する行のみを残して結合\n\nfull_join()\n\n両データの識別子に存在する行すべて結合\n空欄は欠損値として埋められる"
+    "text": "列結合に使う関数\n識別子は両データに含まれているが、一致しないケースがある。\n\nどのデータの識別子を優先するか\n\n\nleft_join()\n\n左側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\nright_join()\n\n右側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\ninner_join()\n\n両データの識別子に共通する行のみを残して結合\n\nfull_join()\n\n両データの識別子に存在する行すべて結合\n空欄は欠損値として埋められる"
   },
   {
     "objectID": "slide/slide11.html#left_joinの仕組み",
@@ -2504,5 +2504,229 @@
     "title": "ミクロ政治データ分析実習",
     "section": "列の分割（番外編）: 特定の記号がない場合（続）",
     "text": "列の分割（番外編）: 特定の記号がない場合（続）\n正則表現（regular expression）の知識が必要\n\nテキスト分析に興味があるなら必須（前期・後期含めて、本講義では解説しない）\n\n\nCity_Data %>%\n   # 任意の2文字の後に「都道府県」のいずれかが来るか、\n   # 任意の3文字の後に「県」が来たら、そこまでをブロック1、残りをブロック2とする\n   # Cityの値を「ブロック1-ブロック2」に置換する\n   mutate(City = str_replace(City, \"^(.{2}[都道府県]|.{3}県)(.+)\", \n                             \"\\\\1-\\\\2\")) %>%\n   # 「-」を基準に列を分割\n   separate(col  = \"City\", into = c(\"Pref\", \"City\"), sep  = \"-\")\n\n# A tibble: 4 × 3\n  Pref     City          Pop\n  <chr>    <chr>       <dbl>\n1 北海道   音威子府村    693\n2 大阪府   高槻市     347424\n3 広島県   府中市      36471\n4 鹿児島県 指宿市      38207"
+  },
+  {
+    "objectID": "materials/handling3.html#データの結合-行",
+    "href": "materials/handling3.html#データの結合-行",
+    "title": "第11回講義資料",
+    "section": "データの結合: 行",
+    "text": "データの結合: 行\nbind_rows()を利用: 変数名が一致する必要がある\n\n以下の例はいずれのdata.frameもID、Name、Scoreで構成されている。\n\nID、Name、Scoreの順番は一致しなくても良い（上のdata.frameの順番に調整される）。\n\n\n\n\n結合前\n\nData1\n\n  ID  Name Score\n1  1 Aさん    77\n2  2 Bさん    89\n3  3 Cさん    41\n\nData2\n\n  ID  Name Score\n1  4 Xさん    98\n2  5 Yさん    78\n\n\n\n\n\n結合後\n\nbind_rows(Data1, Data2)\n\n  ID  Name Score\n1  1 Aさん    77\n2  2 Bさん    89\n3  3 Cさん    41\n4  4 Xさん    98\n5  5 Yさん    78"
+  },
+  {
+    "objectID": "materials/handling3.html#データの結合-行-1",
+    "href": "materials/handling3.html#データの結合-行-1",
+    "title": "第11回講義資料",
+    "section": "データの結合: 行",
+    "text": "データの結合: 行\n結合前のデータ識別変数の追加\n\n結合するデータをlist()でまとめ、.id引数を追加する\nlist()の内部では\"識別変数の値\" = 結合するデータと定義\n\n例) 結合後、Classという列を追加し、元々Data1だった行は\"1組\"、Data2だった行には\"2組\"を格納する。\n\nbind_rows(list(\"1組\" = Data1, \"2組\" = Data2),\n          .id = \"Class\")\n\n  Class ID  Name Score\n1   1組  1 Aさん    77\n2   1組  2 Bさん    89\n3   1組  3 Cさん    41\n4   2組  4 Xさん    98\n5   2組  5 Yさん    78"
+  },
+  {
+    "objectID": "materials/handling3.html#データの結合-列",
+    "href": "materials/handling3.html#データの結合-列",
+    "title": "第11回講義資料",
+    "section": "データの結合: 列",
+    "text": "データの結合: 列\n*_join(): 結合に使う識別用の変数（キー変数）が必要（以下ではCity）\n\n\n結合前\n\n\n\n\nData1\n\n   City Pop Area\n1 Tokyo 927 2194\n2 Osaka 148  828\n3 Kochi  76 7104\n\n\n\n\n\n結合前\n\n\n\n\nData2\n\n   City     Food\n1 Kochi   Katsuo\n2 Osaka Takoyaki\n3 Tokyo    Ramen\n\n\n\n\n結合後\n\nleft_join(Data1, Data2, by = \"City\")\n\n   City Pop Area     Food\n1 Tokyo 927 2194    Ramen\n2 Osaka 148  828 Takoyaki\n3 Kochi  76 7104   Katsuo"
+  },
+  {
+    "objectID": "materials/handling3.html#列結合に使う関数",
+    "href": "materials/handling3.html#列結合に使う関数",
+    "title": "第11回講義資料",
+    "section": "列結合に使う関数",
+    "text": "列結合に使う関数\n識別子は両データに含まれているが、一致しないケースがある。 * どのデータの識別子を優先するか\n\nleft_join()\n\n左側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\nright_join()\n\n右側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\ninner_join()\n\n両データの識別子に共通する行のみを残して結合\n\nfull_join()\n\n両データの識別子に存在する行すべて結合\n空欄は欠損値として埋められる"
+  },
+  {
+    "objectID": "materials/handling3.html#left_joinの仕組み",
+    "href": "materials/handling3.html#left_joinの仕組み",
+    "title": "第11回講義資料",
+    "section": "left_join()の仕組み",
+    "text": "left_join()の仕組み\nleft_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ1を温存する\n欠損しているセルは欠損値（NA）で埋められる"
+  },
+  {
+    "objectID": "materials/handling3.html#right_joinの仕組み",
+    "href": "materials/handling3.html#right_joinの仕組み",
+    "title": "第11回講義資料",
+    "section": "right_join()の仕組み",
+    "text": "right_join()の仕組み\nright_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ2を温存する\n欠損しているセルは欠損値（NA）で埋められる"
+  },
+  {
+    "objectID": "materials/handling3.html#inner_joinの仕組み",
+    "href": "materials/handling3.html#inner_joinの仕組み",
+    "title": "第11回講義資料",
+    "section": "inner_join()の仕組み",
+    "text": "inner_join()の仕組み\ninner_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ1とデータ2で識別子が共通する行のみ結合"
+  },
+  {
+    "objectID": "materials/handling3.html#full_joinの仕組み",
+    "href": "materials/handling3.html#full_joinの仕組み",
+    "title": "第11回講義資料",
+    "section": "full_join()の仕組み",
+    "text": "full_join()の仕組み\nfull_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ1とデータ2をすべて温存\n欠損しているセルは欠損値（NA）で埋められる"
+  },
+  {
+    "objectID": "materials/handling3.html#比較-1",
+    "href": "materials/handling3.html#比較-1",
+    "title": "第11回講義資料",
+    "section": "比較 (1)",
+    "text": "比較 (1)\n\ndf1 <- tibble(Pref  = c(\"東京\", \"大阪\", \"京都\"),\n              Score = c(3.5, 4, 4.2))\ndf2 <- tibble(Pref  = c(\"東京\", \"大阪\", \"高知\"),\n              N     = c(3220, 1325, 111))\n\n\n\n\ndf1\n\n# A tibble: 3 × 2\n  Pref  Score\n  <chr> <dbl>\n1 東京    3.5\n2 大阪    4  \n3 京都    4.2\n\n\n\n\n\n\ndf2\n\n# A tibble: 3 × 2\n  Pref      N\n  <chr> <dbl>\n1 東京   3220\n2 大阪   1325\n3 高知    111"
+  },
+  {
+    "objectID": "materials/handling3.html#比較-2",
+    "href": "materials/handling3.html#比較-2",
+    "title": "第11回講義資料",
+    "section": "比較 (2)",
+    "text": "比較 (2)\nby = \"識別用の変数名\"は複数用いることも可能（例: 都道府県名&年度で結合）\n\nby = c(\"識別用の変数名1\", \"識別用の変数名2\")\n\n\n\n\nleft_join(df1, df2, by = \"Pref\")\n\n# A tibble: 3 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n3 京都    4.2    NA\n\nright_join(df1, df2, by = \"Pref\")\n\n# A tibble: 3 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n3 高知   NA     111\n\n\n\n\n\n\ninner_join(df1, df2, by = \"Pref\")\n\n# A tibble: 2 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n\nfull_join(df1, df2, by = \"Pref\")\n\n# A tibble: 4 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n3 京都    4.2    NA\n4 高知   NA     111"
+  },
+  {
+    "objectID": "materials/handling3.html#section",
+    "href": "materials/handling3.html#section",
+    "title": "第11回講義資料",
+    "section": "",
+    "text": "{tidyr}: 整然データ構造"
+  },
+  {
+    "objectID": "materials/handling3.html#整然データ構造とは",
+    "href": "materials/handling3.html#整然データ構造とは",
+    "title": "第11回講義資料",
+    "section": "整然データ構造とは",
+    "text": "整然データ構造とは\nTidy data: Hadley Wickhamが提唱したデータ分析に適したデータ構造\n\n\n\n整然データ、簡潔データと呼ばれる\nパソコンにとって読みやすいデータ \\(\\neq\\) 人間にとって読みやすいデータ\n{tidyr}パッケージは雑然データを整然データへ変形するパッケージ\n次回紹介する{ggplot2}は整然データを前提として開発されたパッケージ\n\n\n4つの原則\n\n1つの列は、1つの変数を表す\n1つの行は、1つの観測を表す\n1つのセルは、1つの値を表す\n1つの表は、1つの観測単位をもつ"
+  },
+  {
+    "objectID": "materials/handling3.html#原則1-1列1変数",
+    "href": "materials/handling3.html#原則1-1列1変数",
+    "title": "第11回講義資料",
+    "section": "原則1: 1列1変数",
+    "text": "原則1: 1列1変数\n\n1列には1つの変数のみ\n\n3人の被験者に対し、薬を飲む前後の数学成績を測定した場合\n薬を飲む前: Control / 薬を飲んだ後: Treatment"
+  },
+  {
+    "objectID": "materials/handling3.html#原則2-1行1観察",
+    "href": "materials/handling3.html#原則2-1行1観察",
+    "title": "第11回講義資料",
+    "section": "原則2: 1行1観察",
+    "text": "原則2: 1行1観察\n\n1観察 \\(\\neq\\) 1値\n\n観察: 観察単位ごとに測定された値の集合\n観察単位: 人、企業、国、時間など\n\n以下の例の場合、観察単位は「人 \\(\\times\\) 時間 」"
+  },
+  {
+    "objectID": "materials/handling3.html#原則3-1セル1値",
+    "href": "materials/handling3.html#原則3-1セル1値",
+    "title": "第11回講義資料",
+    "section": "原則3: 1セル1値",
+    "text": "原則3: 1セル1値\n\nこの原則に反するケースは多くない\n例外) 1セルに2020年8月24日という値がある場合\n\n分析の目的によっては年月日を全て異なるセルに割り当てる必要もある\nこのままで問題とならないケースも"
+  },
+  {
+    "objectID": "materials/handling3.html#原則4-1表1単位",
+    "href": "materials/handling3.html#原則4-1表1単位",
+    "title": "第11回講義資料",
+    "section": "原則4: 1表1単位",
+    "text": "原則4: 1表1単位\n\n政府統計: 日本を代表する雑然データ\n\nデータの中身は良いが、構造が…\n表に「国」、「都道府県」、「市区町村」、「行政区」の単位が混在"
+  },
+  {
+    "objectID": "materials/handling3.html#原則4-1表1単位-1",
+    "href": "materials/handling3.html#原則4-1表1単位-1",
+    "title": "第11回講義資料",
+    "section": "原則4: 1表1単位",
+    "text": "原則4: 1表1単位\n\n「1表1単位」原則を満たさない場合、filter()関数等で、異なる単位の行を除外\n\n以降、解説する{tidyr}でなく、{dplyr}で対応可能"
+  },
+  {
+    "objectID": "materials/handling3.html#tidyrパッケージ",
+    "href": "materials/handling3.html#tidyrパッケージ",
+    "title": "第11回講義資料",
+    "section": "{tidyr}パッケージ",
+    "text": "{tidyr}パッケージ\n\n\n\n\n\n\n\n\n\n雑然データから整然データへ変形をサポートするパッケージ\n\npivot_longer(): Wide型データからLong型データへ\n\n原則1・2に反するデータを整然データへ変換 (最も頻繁に使われる)\n\npivot_wider(): Long型データからWide型データへ\n\n人間には雑然データの方が読みやすい場合がある（原則1の例）\n\nseparate(): セルの分割（「年月日」から「年」、「月」、「日」へ）\n\n原則3に反するデータを整然データへ変換\n\n原則4に反するデータは単位がずれている行をfilter()などで除外"
+  },
+  {
+    "objectID": "materials/handling3.html#実習用データ",
+    "href": "materials/handling3.html#実習用データ",
+    "title": "第11回講義資料",
+    "section": "実習用データ",
+    "text": "実習用データ\nMicro10.csv: 日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数\n\nサポートページからダウンロード\nデータ出典:Johns Hopkins University Center for Systems Science and Engineering\n\n\nCOVID_df <- read_csv(\"Data/Micro10.csv\")\nCOVID_df\n\n# A tibble: 4 × 7\n  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`\n  <chr>         <dbl>        <dbl>        <dbl>        <dbl>        <dbl>\n1 Japan     126476461         2743         3918         4485         4163\n2 Korea      51269185          516          699          629          587\n3 Mongolia    3278290          634          680          653          785\n4 Taiwan     23816775          595          539          635          670\n# … with 1 more variable: `2021/05/28` <dbl>"
+  },
+  {
+    "objectID": "materials/handling3.html#このデータの問題点",
+    "href": "materials/handling3.html#このデータの問題点",
+    "title": "第11回講義資料",
+    "section": "このデータの問題点",
+    "text": "このデータの問題点\n\n観察単位は? 測定した変数は?\n\n観察単位: 地域 \\(\\times\\) 時間\n変数: 新規感染者数\n\n新規感染者数が5列にわたって格納されている\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\nPopulation\n2021/05/24\n2021/05/25\n2021/05/26\n2021/05/27\n2021/05/28\n\n\n\n\nJapan\n126476461\n2743\n3918\n4485\n4163\n3701\n\n\nKorea\n51269185\n516\n699\n629\n587\n533\n\n\nMongolia\n3278290\n634\n680\n653\n785\n769\n\n\nTaiwan\n23816775\n595\n539\n635\n670\n554"
+  },
+  {
+    "objectID": "materials/handling3.html#wide型からlong型へ",
+    "href": "materials/handling3.html#wide型からlong型へ",
+    "title": "第11回講義資料",
+    "section": "Wide型からLong型へ",
+    "text": "Wide型からLong型へ\n\n整然なCOVID_dfの構造は?\n\n5列を1列にまとめるため、縦に長くなる\nWideからLongへ\n\n\n\n\n\n\n\nCountry\nPopulation\nDate\nNew_Cases\n\n\n\n\nJapan\n126476461\n2021/05/24\n2743\n\n\nJapan\n126476461\n2021/05/25\n3918\n\n\nJapan\n126476461\n2021/05/26\n4485\n\n\nJapan\n126476461\n2021/05/27\n4163\n\n\nJapan\n126476461\n2021/05/28\n3701\n\n\nKorea\n51269185\n2021/05/24\n516\n\n\nKorea\n51269185\n2021/05/25\n699\n\n\nKorea\n51269185\n2021/05/26\n629\n\n\nKorea\n51269185\n2021/05/27\n587\n\n\nKorea\n51269185\n2021/05/28\n533\n\n\nMongolia\n3278290\n2021/05/24\n634\n\n\nMongolia\n3278290\n2021/05/25\n680\n\n\nMongolia\n3278290\n2021/05/26\n653\n\n\nMongolia\n3278290\n2021/05/27\n785\n\n\nMongolia\n3278290\n2021/05/28\n769\n\n\nTaiwan\n23816775\n2021/05/24\n595\n\n\nTaiwan\n23816775\n2021/05/25\n539\n\n\nTaiwan\n23816775\n2021/05/26\n635\n\n\nTaiwan\n23816775\n2021/05/27\n670\n\n\nTaiwan\n23816775\n2021/05/28\n554"
+  },
+  {
+    "objectID": "materials/handling3.html#pivot_longer-wide-to-long",
+    "href": "materials/handling3.html#pivot_longer-wide-to-long",
+    "title": "第11回講義資料",
+    "section": "pivot_longer(): Wide to Long",
+    "text": "pivot_longer(): Wide to Long\n\ncolsはdplyr::select()と同じ使い方\n\nc()で個別の変数名を指定することも、:やstarts_with()を使うこともOK\n注意: 変数名が数字で始まったり、記号が含まれている場合、変数名を`か\"で囲む\n\n列名が日付の場合、数字で始まったり、記号（/や-など）が含まれるケースが多い\n\n\n\n\nデータ %>%\n  pivot_longer(cols      = 変数が格納されている列,\n               names_to  = \"元の列名が入る変数名\",\n               values_to = \"変数の値が入る変数名\")"
+  },
+  {
+    "objectID": "materials/handling3.html#pivot_longer-wideからlongへ",
+    "href": "materials/handling3.html#pivot_longer-wideからlongへ",
+    "title": "第11回講義資料",
+    "section": "pivot_longer(): WideからLongへ",
+    "text": "pivot_longer(): WideからLongへ\n\ncols = starts_with(\"2020\")もOK\n\n\nCOVID_Long <- COVID_df %>% \n  pivot_longer(cols      = \"2021/05/24\":\"2021/05/28\",\n               names_to  = \"Date\",\n               values_to = \"New_Cases\")\nCOVID_Long\n\n# A tibble: 20 × 4\n   Country  Population Date       New_Cases\n   <chr>         <dbl> <chr>          <dbl>\n 1 Japan     126476461 2021/05/24      2743\n 2 Japan     126476461 2021/05/25      3918\n 3 Japan     126476461 2021/05/26      4485\n 4 Japan     126476461 2021/05/27      4163\n 5 Japan     126476461 2021/05/28      3701\n 6 Korea      51269185 2021/05/24       516\n 7 Korea      51269185 2021/05/25       699\n 8 Korea      51269185 2021/05/26       629\n 9 Korea      51269185 2021/05/27       587\n10 Korea      51269185 2021/05/28       533\n11 Mongolia    3278290 2021/05/24       634\n12 Mongolia    3278290 2021/05/25       680\n13 Mongolia    3278290 2021/05/26       653\n14 Mongolia    3278290 2021/05/27       785\n15 Mongolia    3278290 2021/05/28       769\n16 Taiwan     23816775 2021/05/24       595\n17 Taiwan     23816775 2021/05/25       539\n18 Taiwan     23816775 2021/05/26       635\n19 Taiwan     23816775 2021/05/27       670\n20 Taiwan     23816775 2021/05/28       554"
+  },
+  {
+    "objectID": "materials/handling3.html#pivot_wider-longからwideへ",
+    "href": "materials/handling3.html#pivot_wider-longからwideへ",
+    "title": "第11回講義資料",
+    "section": "pivot_wider(): LongからWideへ",
+    "text": "pivot_wider(): LongからWideへ\n\nLong型をWide型へ戻す関数\n\n人間にとってはLong型よりWide型の方が読みやすいケースも多い\n1列に2つの変数が入っている場合もある\n\n\n\nCOVID_Long %>%\n  pivot_wider(names_from  = \"Date\",\n              values_from = \"New_Cases\")\n\n# A tibble: 4 × 7\n  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`\n  <chr>         <dbl>        <dbl>        <dbl>        <dbl>        <dbl>\n1 Japan     126476461         2743         3918         4485         4163\n2 Korea      51269185          516          699          629          587\n3 Mongolia    3278290          634          680          653          785\n4 Taiwan     23816775          595          539          635          670\n# … with 1 more variable: `2021/05/28` <dbl>"
+  },
+  {
+    "objectID": "materials/handling3.html#separate-列の分割",
+    "href": "materials/handling3.html#separate-列の分割",
+    "title": "第11回講義資料",
+    "section": "separate(): 列の分割",
+    "text": "separate(): 列の分割\nCOVID_LongのDate列をYear、Month、Dayに分けたい\n\n例) Date列を\"/\"を基準に分割する\n\n\nデータ %>%\n  separate(col  = \"分割する列名\",\n           into = c(\"分割後の列名1\", \"分割後の列名2\", ...),\n           sep  = \"分割する基準\")"
+  },
+  {
+    "objectID": "materials/handling3.html#separate-列の分割-1",
+    "href": "materials/handling3.html#separate-列の分割-1",
+    "title": "第11回講義資料",
+    "section": "separate(): 列の分割",
+    "text": "separate(): 列の分割\n\nCOVID_Long %>%\n  separate(col  = \"Date\",\n           into = c(\"Year\", \"Month\", \"Day\"),\n           sep  = \"/\")\n\n# A tibble: 20 × 6\n   Country  Population Year  Month Day   New_Cases\n   <chr>         <dbl> <chr> <chr> <chr>     <dbl>\n 1 Japan     126476461 2021  05    24         2743\n 2 Japan     126476461 2021  05    25         3918\n 3 Japan     126476461 2021  05    26         4485\n 4 Japan     126476461 2021  05    27         4163\n 5 Japan     126476461 2021  05    28         3701\n 6 Korea      51269185 2021  05    24          516\n 7 Korea      51269185 2021  05    25          699\n 8 Korea      51269185 2021  05    26          629\n 9 Korea      51269185 2021  05    27          587\n10 Korea      51269185 2021  05    28          533\n11 Mongolia    3278290 2021  05    24          634\n12 Mongolia    3278290 2021  05    25          680\n13 Mongolia    3278290 2021  05    26          653\n14 Mongolia    3278290 2021  05    27          785\n15 Mongolia    3278290 2021  05    28          769\n16 Taiwan     23816775 2021  05    24          595\n17 Taiwan     23816775 2021  05    25          539\n18 Taiwan     23816775 2021  05    26          635\n19 Taiwan     23816775 2021  05    27          670\n20 Taiwan     23816775 2021  05    28          554"
+  },
+  {
+    "objectID": "materials/handling3.html#列の分割番外編-特定の記号がない場合",
+    "href": "materials/handling3.html#列の分割番外編-特定の記号がない場合",
+    "title": "第11回講義資料",
+    "section": "列の分割（番外編）: 特定の記号がない場合",
+    "text": "列の分割（番外編）: 特定の記号がない場合\n例) City_DataのCity列が「都道府県名+市区町村」\n\n「最初の3文字」と「残り」で分割することは出来ない（神奈川、和歌山、鹿児島）\n任意の2文字の後に「都」、「道」、「府」、「県」が付くか、任意の3文字の後に「県」が付く箇所を見つけて分割\n\nかなり複雑\n\n\n\n\n# A tibble: 4 × 2\n  City                Pop\n  <chr>             <dbl>\n1 北海道音威子府村    693\n2 大阪府高槻市     347424\n3 広島県府中市      36471\n4 鹿児島県指宿市    38207"
+  },
+  {
+    "objectID": "materials/handling3.html#列の分割番外編-特定の記号がない場合続",
+    "href": "materials/handling3.html#列の分割番外編-特定の記号がない場合続",
+    "title": "第11回講義資料",
+    "section": "列の分割（番外編）: 特定の記号がない場合（続）",
+    "text": "列の分割（番外編）: 特定の記号がない場合（続）\n正則表現（regular expression）の知識が必要\n\nテキスト分析に興味があるなら必須（前期・後期含めて、本講義では解説しない）\n\n\nCity_Data %>%\n   # 任意の2文字の後に「都道府県」のいずれかが来るか、\n   # 任意の3文字の後に「県」が来たら、そこまでをブロック1、残りをブロック2とする\n   # Cityの値を「ブロック1-ブロック2」に置換する\n   mutate(City = str_replace(City, \"^(.{2}[都道府県]|.{3}県)(.+)\", \n                             \"\\\\1-\\\\2\")) %>%\n   # 「-」を基準に列を分割\n   separate(col  = \"City\", into = c(\"Pref\", \"City\"), sep  = \"-\")\n\n# A tibble: 4 × 3\n  Pref     City          Pop\n  <chr>    <chr>       <dbl>\n1 北海道   音威子府村    693\n2 大阪府   高槻市     347424\n3 広島県   府中市      36471\n4 鹿児島県 指宿市      38207"
+  },
+  {
+    "objectID": "materials/handling3.html#tidyrとdplyrの組み合わせ",
+    "href": "materials/handling3.html#tidyrとdplyrの組み合わせ",
+    "title": "第11回講義資料",
+    "section": "{tidyr}と{dplyr}の組み合わせ",
+    "text": "{tidyr}と{dplyr}の組み合わせ\n{tidyr}と{dplyr}を組み合わせることも可能\n\n例) 100万人当たりの新規感染者数を計算し、国ごとに平均値を計算\n\n\nCOVID_df %>% \n  pivot_longer(cols      = \"2021/05/24\":\"2021/05/28\",\n               names_to  = \"Date\",\n               values_to = \"New_Cases\") %>%\n   mutate(New_Case_per_1M = New_Cases / Population * 1000000) %>%\n   group_by(Country) %>%\n   summarise(New_Case_per_1M = mean(New_Case_per_1M))\n\n# A tibble: 4 × 2\n  Country  New_Case_per_1M\n  <chr>              <dbl>\n1 Japan               30.1\n2 Korea               11.6\n3 Mongolia           215. \n4 Taiwan              25.1"
+  },
+  {
+    "objectID": "materials/handling3.html#教科書",
+    "href": "materials/handling3.html#教科書",
+    "title": "第11回講義資料",
+    "section": "教科書",
+    "text": "教科書\n\nデータの結合: 『私たちのR: ベストプラクティスの探求』第13.5章\n整然データ構造: 『私たちのR: ベストプラクティスの探求』第15章"
+  },
+  {
+    "objectID": "materials/handling3.html#データの結合",
+    "href": "materials/handling3.html#データの結合",
+    "title": "第11回講義資料",
+    "section": "データの結合",
+    "text": "データの結合\n\n行の結合\nbind_rows()を利用: 変数名が一致する必要がある\n\n以下の例はいずれのdata.frameもID、Name、Scoreで構成されている。\n\nID、Name、Scoreの順番は一致しなくても良い（上のdata.frameの順番に調整される）。\n\n\n\n\n結合前\n\nData1\n\n  ID  Name Score\n1  1 Aさん    77\n2  2 Bさん    89\n3  3 Cさん    41\n\nData2\n\n  ID  Name Score\n1  4 Xさん    98\n2  5 Yさん    78\n\n\n\n\n\n結合後\n\nbind_rows(Data1, Data2)\n\n  ID  Name Score\n1  1 Aさん    77\n2  2 Bさん    89\n3  3 Cさん    41\n4  4 Xさん    98\n5  5 Yさん    78\n\n\n\n\n結合前のデータ識別変数の追加\n\n結合するデータをlist()でまとめ、.id引数を追加する\nlist()の内部では\"識別変数の値\" = 結合するデータと定義\n\n例) 結合後、Classという列を追加し、元々Data1だった行は\"1組\"、Data2だった行には\"2組\"を格納する。\n\nbind_rows(list(\"1組\" = Data1, \"2組\" = Data2),\n          .id = \"Class\")\n\n  Class ID  Name Score\n1   1組  1 Aさん    77\n2   1組  2 Bさん    89\n3   1組  3 Cさん    41\n4   2組  4 Xさん    98\n5   2組  5 Yさん    78\n\n\n\n\n列の結合\n*_join(): 結合に使う識別用の変数（キー変数）が必要（以下ではCity）\n\n\n結合前\n\n\n\n\nData1\n\n   City Pop Area\n1 Tokyo 927 2194\n2 Osaka 148  828\n3 Kochi  76 7104\n\n\n\n\n\n結合前\n\n\n\n\nData2\n\n   City     Food\n1 Kochi   Katsuo\n2 Osaka Takoyaki\n3 Tokyo    Ramen\n\n\n\n\n結合後\n\nleft_join(Data1, Data2, by = \"City\")\n\n   City Pop Area     Food\n1 Tokyo 927 2194    Ramen\n2 Osaka 148  828 Takoyaki\n3 Kochi  76 7104   Katsuo\n\n\n識別子は両データに含まれているが、一致しないケースがある。\n\nどのデータの識別子を優先するか\n\n\nleft_join()\n\n左側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\nright_join()\n\n右側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\ninner_join()\n\n両データの識別子に共通する行のみを残して結合\n\nfull_join()\n\n両データの識別子に存在する行すべて結合\n空欄は欠損値として埋められる\n\n\nleft_join()の仕組み\nleft_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ1を温存する\n欠損しているセルは欠損値（NA）で埋められる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nright_join()の仕組み\nright_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ2を温存する\n欠損しているセルは欠損値（NA）で埋められる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ninner_join()の仕組み\ninner_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ1とデータ2で識別子が共通する行のみ結合\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfull_join()の仕組み\nfull_join(データ1, データ2, by = \"識別用変数名\")\n\nデータ1とデータ2をすべて温存\n欠損しているセルは欠損値（NA）で埋められる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n比較 (1)\n\ndf1 <- tibble(Pref  = c(\"東京\", \"大阪\", \"京都\"),\n              Score = c(3.5, 4, 4.2))\ndf2 <- tibble(Pref  = c(\"東京\", \"大阪\", \"高知\"),\n              N     = c(3220, 1325, 111))\n\n\n\n\ndf1\n\n# A tibble: 3 × 2\n  Pref  Score\n  <chr> <dbl>\n1 東京    3.5\n2 大阪    4  \n3 京都    4.2\n\n\n\n\n\n\ndf2\n\n# A tibble: 3 × 2\n  Pref      N\n  <chr> <dbl>\n1 東京   3220\n2 大阪   1325\n3 高知    111\n\n\n\n\n比較 (2)\nby = \"識別用の変数名\"は複数用いることも可能（例: 都道府県名&年度で結合）\n\nby = c(\"識別用の変数名1\", \"識別用の変数名2\")\n\n\n\n\nleft_join(df1, df2, by = \"Pref\")\n\n# A tibble: 3 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n3 京都    4.2    NA\n\nright_join(df1, df2, by = \"Pref\")\n\n# A tibble: 3 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n3 高知   NA     111\n\n\n\n\n\n\ninner_join(df1, df2, by = \"Pref\")\n\n# A tibble: 2 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n\nfull_join(df1, df2, by = \"Pref\")\n\n# A tibble: 4 × 3\n  Pref  Score     N\n  <chr> <dbl> <dbl>\n1 東京    3.5  3220\n2 大阪    4    1325\n3 京都    4.2    NA\n4 高知   NA     111"
+  },
+  {
+    "objectID": "materials/handling3.html#整然データ構造",
+    "href": "materials/handling3.html#整然データ構造",
+    "title": "第11回講義資料",
+    "section": "整然データ構造",
+    "text": "整然データ構造\nTidy data: Hadley Wickhamが提唱したデータ分析に適したデータ構造\n\n\n\n整然データ、簡潔データと呼ばれる\nパソコンにとって読みやすいデータ \\(\\neq\\) 人間にとって読みやすいデータ\n{tidyr}パッケージは雑然データを整然データへ変形するパッケージ\n次回紹介する{ggplot2}は整然データを前提として開発されたパッケージ\n\n4つの原則\n\n1つの列は、1つの変数を表す\n1つの行は、1つの観測を表す\n1つのセルは、1つの値を表す\n1つの表は、1つの観測単位をもつ\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4つの原則\n原則1: 1列1変数\n\n1列には1つの変数のみ\n\n3人の被験者に対し、薬を飲む前後の数学成績を測定した場合\n薬を飲む前: Control / 薬を飲んだ後: Treatment\n\n\n\n\n\n\n\n\n\n\n\n原則2: 1行1観察\n\n1観察 \\(\\neq\\) 1値\n\n観察: 観察単位ごとに測定された値の集合\n観察単位: 人、企業、国、時間など\n\n以下の例の場合、観察単位は「人 \\(\\times\\) 時間 」\n\n\n\n\n\n\n\n\n\n\n原則3: 1セル1値\n\nこの原則に反するケースは多くない\n例外) 1セルに2020年8月24日という値がある場合\n\n分析の目的によっては年月日を全て異なるセルに割り当てる必要もある\nこのままで問題とならないケースも\n\n\n\n\n\n\n\n\n\n\n\n原則4: 1表1単位\n\n政府統計: 日本を代表する雑然データ\n\nデータの中身は良いが、構造が…\n表に「国」、「都道府県」、「市区町村」、「行政区」の単位が混在\n\n\n\n\n\n\n\n\n\n\n\n原則4: 1表1単位\n\n「1表1単位」原則を満たさない場合、filter()関数等で、異なる単位の行を除外\n\n以降、解説する{tidyr}でなく、{dplyr}で対応可能\n\n\n\n\n\n\n\n\n\n\n\n\n\n{tidyr}パッケージ\n\n\n\n\n\n\n\n\n\n雑然データから整然データへ変形をサポートするパッケージ\n\npivot_longer(): Wide型データからLong型データへ\n\n原則1・2に反するデータを整然データへ変換 (最も頻繁に使われる)\n\npivot_wider(): Long型データからWide型データへ\n\n人間には雑然データの方が読みやすい場合がある（原則1の例）\n\nseparate(): セルの分割（「年月日」から「年」、「月」、「日」へ）\n\n原則3に反するデータを整然データへ変換\n\n原則4に反するデータは単位がずれている行をfilter()などで除外\n\n実習用データ\nMicro10.csv: 日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数\n\nサポートページからダウンロード\nデータ出典:Johns Hopkins University Center for Systems Science and Engineering\n\n\nCOVID_df <- read_csv(\"Data/Micro10.csv\")\nCOVID_df\n\n# A tibble: 4 × 7\n  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`\n  <chr>         <dbl>        <dbl>        <dbl>        <dbl>        <dbl>\n1 Japan     126476461         2743         3918         4485         4163\n2 Korea      51269185          516          699          629          587\n3 Mongolia    3278290          634          680          653          785\n4 Taiwan     23816775          595          539          635          670\n# … with 1 more variable: `2021/05/28` <dbl>\n\n\nこのデータの問題点\n\n観察単位は? 測定した変数は?\n\n観察単位: 地域 \\(\\times\\) 時間\n変数: 新規感染者数\n\n新規感染者数が5列にわたって格納されている\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\nPopulation\n2021/05/24\n2021/05/25\n2021/05/26\n2021/05/27\n2021/05/28\n\n\n\n\nJapan\n126476461\n2743\n3918\n4485\n4163\n3701\n\n\nKorea\n51269185\n516\n699\n629\n587\n533\n\n\nMongolia\n3278290\n634\n680\n653\n785\n769\n\n\nTaiwan\n23816775\n595\n539\n635\n670\n554\n\n\n\n\n\nWide型からLong型へ\n\n整然なCOVID_dfの構造は?\n\n5列を1列にまとめるため、縦に長くなる\nWideからLongへ\n\n\n\n\n\n\n\nCountry\nPopulation\nDate\nNew_Cases\n\n\n\n\nJapan\n126476461\n2021/05/24\n2743\n\n\nJapan\n126476461\n2021/05/25\n3918\n\n\nJapan\n126476461\n2021/05/26\n4485\n\n\nJapan\n126476461\n2021/05/27\n4163\n\n\nJapan\n126476461\n2021/05/28\n3701\n\n\nKorea\n51269185\n2021/05/24\n516\n\n\nKorea\n51269185\n2021/05/25\n699\n\n\nKorea\n51269185\n2021/05/26\n629\n\n\nKorea\n51269185\n2021/05/27\n587\n\n\nKorea\n51269185\n2021/05/28\n533\n\n\nMongolia\n3278290\n2021/05/24\n634\n\n\nMongolia\n3278290\n2021/05/25\n680\n\n\nMongolia\n3278290\n2021/05/26\n653\n\n\nMongolia\n3278290\n2021/05/27\n785\n\n\nMongolia\n3278290\n2021/05/28\n769\n\n\nTaiwan\n23816775\n2021/05/24\n595\n\n\nTaiwan\n23816775\n2021/05/25\n539\n\n\nTaiwan\n23816775\n2021/05/26\n635\n\n\nTaiwan\n23816775\n2021/05/27\n670\n\n\nTaiwan\n23816775\n2021/05/28\n554\n\n\n\n\n\npivot_longer(): Wide to Long\n\ncolsはdplyr::select()と同じ使い方\n\nc()で個別の変数名を指定することも、:やstarts_with()を使うこともOK\n注意: 変数名が数字で始まったり、記号が含まれている場合、変数名を`か\"で囲む\n\n列名が日付の場合、数字で始まったり、記号（/や-など）が含まれるケースが多い\n\n\n\n\nデータ %>%\n  pivot_longer(cols      = 変数が格納されている列,\n               names_to  = \"元の列名が入る変数名\",\n               values_to = \"変数の値が入る変数名\")\n\npivot_longer(): WideからLongへ\n\ncols = starts_with(\"2020\")もOK\n\n\nCOVID_Long <- COVID_df %>% \n  pivot_longer(cols      = \"2021/05/24\":\"2021/05/28\",\n               names_to  = \"Date\",\n               values_to = \"New_Cases\")\nCOVID_Long\n\n# A tibble: 20 × 4\n   Country  Population Date       New_Cases\n   <chr>         <dbl> <chr>          <dbl>\n 1 Japan     126476461 2021/05/24      2743\n 2 Japan     126476461 2021/05/25      3918\n 3 Japan     126476461 2021/05/26      4485\n 4 Japan     126476461 2021/05/27      4163\n 5 Japan     126476461 2021/05/28      3701\n 6 Korea      51269185 2021/05/24       516\n 7 Korea      51269185 2021/05/25       699\n 8 Korea      51269185 2021/05/26       629\n 9 Korea      51269185 2021/05/27       587\n10 Korea      51269185 2021/05/28       533\n11 Mongolia    3278290 2021/05/24       634\n12 Mongolia    3278290 2021/05/25       680\n13 Mongolia    3278290 2021/05/26       653\n14 Mongolia    3278290 2021/05/27       785\n15 Mongolia    3278290 2021/05/28       769\n16 Taiwan     23816775 2021/05/24       595\n17 Taiwan     23816775 2021/05/25       539\n18 Taiwan     23816775 2021/05/26       635\n19 Taiwan     23816775 2021/05/27       670\n20 Taiwan     23816775 2021/05/28       554\n\n\npivot_wider(): LongからWideへ\n\nLong型をWide型へ戻す関数\n\n人間にとってはLong型よりWide型の方が読みやすいケースも多い\n1列に2つの変数が入っている場合もある\n\n\n\nCOVID_Long %>%\n  pivot_wider(names_from  = \"Date\",\n              values_from = \"New_Cases\")\n\n# A tibble: 4 × 7\n  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`\n  <chr>         <dbl>        <dbl>        <dbl>        <dbl>        <dbl>\n1 Japan     126476461         2743         3918         4485         4163\n2 Korea      51269185          516          699          629          587\n3 Mongolia    3278290          634          680          653          785\n4 Taiwan     23816775          595          539          635          670\n# … with 1 more variable: `2021/05/28` <dbl>\n\n\nseparate(): 列の分割\nCOVID_LongのDate列をYear、Month、Dayに分けたい\n\n例) Date列を\"/\"を基準に分割する\n\n\nデータ %>%\n  separate(col  = \"分割する列名\",\n           into = c(\"分割後の列名1\", \"分割後の列名2\", ...),\n           sep  = \"分割する基準\")\n\nseparate(): 列の分割\n\nCOVID_Long %>%\n  separate(col  = \"Date\",\n           into = c(\"Year\", \"Month\", \"Day\"),\n           sep  = \"/\")\n\n# A tibble: 20 × 6\n   Country  Population Year  Month Day   New_Cases\n   <chr>         <dbl> <chr> <chr> <chr>     <dbl>\n 1 Japan     126476461 2021  05    24         2743\n 2 Japan     126476461 2021  05    25         3918\n 3 Japan     126476461 2021  05    26         4485\n 4 Japan     126476461 2021  05    27         4163\n 5 Japan     126476461 2021  05    28         3701\n 6 Korea      51269185 2021  05    24          516\n 7 Korea      51269185 2021  05    25          699\n 8 Korea      51269185 2021  05    26          629\n 9 Korea      51269185 2021  05    27          587\n10 Korea      51269185 2021  05    28          533\n11 Mongolia    3278290 2021  05    24          634\n12 Mongolia    3278290 2021  05    25          680\n13 Mongolia    3278290 2021  05    26          653\n14 Mongolia    3278290 2021  05    27          785\n15 Mongolia    3278290 2021  05    28          769\n16 Taiwan     23816775 2021  05    24          595\n17 Taiwan     23816775 2021  05    25          539\n18 Taiwan     23816775 2021  05    26          635\n19 Taiwan     23816775 2021  05    27          670\n20 Taiwan     23816775 2021  05    28          554\n\n\n列の分割（番外編）: 特定の記号がない場合\n例) City_DataのCity列が「都道府県名+市区町村」\n\n「最初の3文字」と「残り」で分割することは出来ない（神奈川、和歌山、鹿児島）\n任意の2文字の後に「都」、「道」、「府」、「県」が付くか、任意の3文字の後に「県」が付く箇所を見つけて分割\n\nかなり複雑\n\n\n\n\n# A tibble: 4 × 2\n  City                Pop\n  <chr>             <dbl>\n1 北海道音威子府村    693\n2 大阪府高槻市     347424\n3 広島県府中市      36471\n4 鹿児島県指宿市    38207\n\n\n正則表現（regular expression）の知識が必要\n\nテキスト分析に興味があるなら必須（前期・後期含めて、本講義では解説しない）\n\n\nCity_Data %>%\n   # 任意の2文字の後に「都道府県」のいずれかが来るか、\n   # 任意の3文字の後に「県」が来たら、そこまでをブロック1、残りをブロック2とする\n   # Cityの値を「ブロック1-ブロック2」に置換する\n   mutate(City = str_replace(City, \"^(.{2}[都道府県]|.{3}県)(.+)\", \n                             \"\\\\1-\\\\2\")) %>%\n   # 「-」を基準に列を分割\n   separate(col  = \"City\", into = c(\"Pref\", \"City\"), sep  = \"-\")\n\n# A tibble: 4 × 3\n  Pref     City          Pop\n  <chr>    <chr>       <dbl>\n1 北海道   音威子府村    693\n2 大阪府   高槻市     347424\n3 広島県   府中市      36471\n4 鹿児島県 指宿市      38207\n\n\n\n\n{tidyr}と{dplyr}\n{tidyr}と{dplyr}を組み合わせることも可能\n\n例) 100万人当たりの新規感染者数を計算し、国ごとに平均値を計算\n\n\nCOVID_df %>% \n  pivot_longer(cols      = \"2021/05/24\":\"2021/05/28\",\n               names_to  = \"Date\",\n               values_to = \"New_Cases\") %>%\n   mutate(New_Case_per_1M = New_Cases / Population * 1000000) %>%\n   group_by(Country) %>%\n   summarise(New_Case_per_1M = mean(New_Case_per_1M))\n\n# A tibble: 4 × 2\n  Country  New_Case_per_1M\n  <chr>              <dbl>\n1 Japan               30.1\n2 Korea               11.6\n3 Mongolia           215. \n4 Taiwan              25.1"
   }
 ]
