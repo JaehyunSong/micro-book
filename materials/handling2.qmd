@@ -236,10 +236,7 @@ df %>%
 
 ## 変数の計算
 
-`mutate()`: データフレームの変数を用いた計算を行い、新しい列として追加
-
-* 新しい列名として既存の列名を指定すると上書きされる
-* 新しく追加された列は最後に位置する（指定可能）
+　以下では`mutate()`関数を利用して、データフレームの変数を用いた計算を行い、新しい列として追加する方法を紹介する。`mutate()`関数の使い方は以下の通りである。
 
 ```{r}
 #| eval: false
@@ -247,58 +244,29 @@ df %>%
   mutate(新しい列名 = 計算式)
 ```
 
-**例)** `df`の`Population`を`Area`で割り（=人口密度）、`Density`という名の列として追加する
+　ここで、`新しい列名`が既に存在するの列名である場合、既存の列が上書きされる。一方、データフレームに存在しない列名の場合、新しい列が最後の列として追加される[^mutate-position]。
 
-:::: {.columns}
+[^mutate-position]: `relocate()`同様、`.before`や`.after`で指定することもできる。
 
-::: {.column width="48%"}
-#### {dplyr}を使わない方法
+　ここでは、`df`の`Population`を`Area`で割り（=人口密度）、`Density`という名の列として追加してみよう。{dplyr}を使わずにこの処理を行う場合、以下のようなコードとなる。
 
 ```{r}
 #| eval: false
 df$Density <- df$Population / df$Area
 ```
-:::
 
-::: {.column width="4%"}
-:::
-
-::: {.column width="48%"}
-#### {dplyr}を使う方法
+　一方、{dplyr}の`mutate()`関数を使用する場合、以下のようなコードになる。
 
 ```{r}
-#| eval: false
 df %>%
   mutate(Density = Population / Area)
 ```
-:::
 
-::::
+　出力される画面に`Density`列が見当たらない。これは新しく追加された`Density`列が最後の列であり、画面に収まらないからである。むろん、`Density`列は問題なく追加されており、出力画面の下段に省略されている変数名に含まれていることが分かる。
 
-### {dplyr}の例
-
-**例)** `df`の`Population`を`Area`で割り（人口密度）、`Density`という名の列として追加する
-
-* 新しく追加された列は最後に位置する
-   * ただし、上書きの場合、位置はそのまま
+　もし、新しく追加される列の順番を指定したい場合は`relocate()` 同様、`.after`、または`.before`を指定すればよい。以下のコードは`Density`列を`Area`列の**後**に追加するコードである。
 
 ```{r}
-#| code-line-numbers: "2"
-df %>%
-  mutate(Density = Population / Area) %>%
-  print(n = 5) # 最初の5行のみ出力
-```
-
-### 新しい列の位置指定
-
-`mutate()`内に`.after`、または`.before`を指定
-
-* `relocate()`関数と同じ仕組み（第9回）
-
-**例)** `Population`を`Area`で割り、`Density`という名の新しい列`Area`の後に追加する。
-
-```{r}
-#| code-line-numbers: "3"
 df %>%
   mutate(Density = Population / Area, 
          .after  = Area)
@@ -306,44 +274,45 @@ df %>%
 
 ## 応用
 
-### 変数の計算いろいろ（1）
-
-各国が世界人口に占める割合を計算し、降順で出力
+　それでは前回と今回の内容を復習してみよう。最初の問題は「各国が世界人口に占める割合を計算し、降順で出力する」ことである。この問題を解くためには以下のような手順でデータをハンドリングする必要がある。
 
 1. `df`の`Population`の合計を`Total_Pop`という列として追加する。
+   * `mutate()`使用
 2. `Population`を`Total_Pop`で割り、100を掛ける。結果は`Share_Pop`という名の列として`Population`後に追加する。
-3. `Country`から`Share_Pop`までの列のみ残す。
-4. `Total_Pop`列を除外する。
-5. `Share_Pop`が大きい順で行を並び替える
+   * `mutate()`使用
+3. `Country`から`Share_Pop`までの列のみ残すが、`Total_Pop`列は除外する。
+   * `select()`使用
+4. `Share_Pop`が大きい順で行を並び替える
+   * `arrange()`使用
 
-### 変数の計算いろいろ（1）
+　以上の計算仮定の内、1と2は一つの`mutate()`関数内にまとめることができる。したがって、`データ %>% mutate() %>% select() %>% arrange()`の順番でコードを書く必要がある。
 
 ```{r}
 df %>% 
-  # Total_Popを作らずにShare_Pop作成時に直接sum(Population)を入れてもOK
-  mutate(Total_Pop = sum(Population),
-         Share_Pop = Population / Total_Pop * 100,
-         .after    = Population) %>%
-  select(Country:Share_Pop) %>%
-  select(!Total_Pop) %>%
-  arrange(desc(Share_Pop))
+  mutate(Total_Pop = sum(Population),              # 手順1
+         Share_Pop = Population / Total_Pop * 100, # 手順2
+         .after    = Population) %>%               # 手順2
+  select(Country:Share_Pop, -Total_Pop) %>%        # 手順3
+  arrange(desc(Share_Pop))                         # 手順4
 ```
 
+　次の問題は「G7、G20、OECDのいずれかに加盟している国を`"先進国"`、それ以外は`"その他"`とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する」ことである。
 
-
-### 変数の計算いろいろ（2）
-
-G7、G20、OECDのいずれかに加盟している国を「先進国」、それ以外は「その他」とし、二つのグループの人口密度、人間開発指数、民主主義度の平均値を出力する。
-
-1. `df`を利用する
-2. `Developed`という列を追加し、`G7`、`G20`、`OECD`のいずれかに加盟した国なら`"先進国"`、それ以外なら`"その他"`とする。
-3. 人口密度を`Density`という名の列として追加する。
+1. `df`の`Developed`という列を追加し、`G7`、`G20`、`OECD`のいずれかに加盟した国なら`"先進国"`、それ以外なら`"その他"`とする。
+   * `mutate()`使用
+2. 人口密度を`Density`という名の列として追加する。
+   * `mutate()`使用
 3. `HDI_2018`と`Polity_Score`のいずれかが欠損した行を除外する。
+   * `filter()`使用
 4. `Developed`変数でデータをグルーピングする。
+   * `group_by()`使用
 5. `HDI_2018`、`Polity_Score`、`Density`の平均値を求める。
+   * `summarise()`使用
 6. `df2`という名前のオブジェクトとして作業環境内に格納する。
+   * 代入演算子（`<-`）使用
+7. `df2`を出力する。
 
-### 変数の計算いろいろ（2）
+　今回も手順1と2は同じ`muate()`関数を使用するため、`新しいオブジェクト名 <- データ %>% mutate() %>% filter() %>% group_by() %>% summarise()`の順番でコードを各必要がある。
 
 ```{r}
 df2 <- df %>%
@@ -359,74 +328,65 @@ df2 <- df %>%
 df2
 ```
 
+　いきなり出てきた`if_else()`関数だが、これは何だろう。これから解説する。
+
 ## 名目変数の扱い方
 
-### `summarise()`の結果を並び替えたい
+　先ほどの`df2`だが、出力順番が`"その他"` $\rightarrow$ `"先進国"`になっている。これを`"先進国"` $\rightarrow$ `"その他"`の順番にするならどうすれば良いだろうか。`summarise()`を行う場合、グルーピング変数のアルファベット順で表示される。ただし、これはアルファベットや数字に限定される話であり、日本語の場合、50音順になるとは限らない。ひらがな、カタカナなら50音順になるが、漢字はそうではない。そもそも読み方が複数あるので、どの基準にすればもよく分からない。しかも、漢字は日本だけが使う文字でもないため、読み方も国によって異なるだろう。この場合、`summarise()`を使う前にグルーピング変数を**factor型に変換**する必要がある。
 
-`df2`を`"先進国"` > `"その他"`の順番で表示させたい。
-
-* `summarise()`を行う場合、グルーピング変数のアルファベット順で表示される。
-* ただし、日本語の場合、50音順にはならない。
-   * ひらがな、カタカナなら50音順になるが、漢字は $\times$
-* したがって、`summarise()`の前にグルーピング変数を**Factor型に変換**する必要がある。
-   * Factor型: 順序付きの文字型
-
-### `Developed`をFactor型に
+　ある変数をfactor型に変換する場合は`factor()`関数を使う。第一引数は元となる変数名であり、`levels =`に順番を指定する。スペルミスに注意すること。
 
 ```{r}
-#| code-line-numbers: "8"
 df %>%
   mutate(Developed = G7 + G20 + OECD,
-         Developed = if_else(Developed > 1, "先進国", "その他"), # 上書き
+         Developed = if_else(Developed > 1, "先進国", "その他"),
+         Developed = factor(Developed, levels = c("先進国", "その他")),
          Density   = Population / Area) %>%
   filter(!is.na(HDI_2018), !is.na(Polity_Score)) %>%
   group_by(Developed) %>%
-  # ここでなく、filter()前のmutate()内でやるのが効率的
-  mutate(Developed = factor(Developed, levels = c("先進国", "その他"))) %>%
   summarise(Density = mean(Density),
             HDI     = mean(HDI_2018),
             Polity  = mean(Polity_Score))
 ```
 
-### 変数のリコーディング: 2値の例
-
-`mutate()`内に`if_else()`を使用（または、`ifelse()`）
-
-* `df`の`OECD`が`1`なら`"OECD加盟国"`、それ以外なら`"OECD非加盟国"`に変換し、`OECD_J`という列として追加
+　それではこれまで放置してきた`if_else()`について解説しよう。`if_else()`は後ほど解説する`case_when()`や`recode()`のように変数のリコーディング（re-coding）に使う関数である。`if_else()`関数の使い方は以下の通りである。
 
 ```{r}
 #| eval: false
-df %>%
-  mutate(OECD_J = if_else(OECD == 1, "OECD加盟国", "OECD非加盟国"))
+if_else(条件式, TRUEの場合の戻り値, FALSEの場合の戻り値)
 ```
 
-**例)** 変換前
+　たとえば、`df`の`OECD`が`1`なら`"OECD加盟国"`、それ以外なら`"OECD非加盟国"`に変換し、`OECD_J`という列として追加する場合、以下のコードになる。リコーディングの場合、既存の変数を上書きするより、新しい列として追加することを推奨する。
+
+```{r}
+df <- df %>%
+  mutate(OECD_J = if_else(OECD == 1, "OECD加盟国", "OECD非加盟国"))
+
+df
+```
+
+　それではまず、`OECD`変数でデータをグルーピングし、`HDI_2018`と`FH_Total`の平均値を計算してみよう。
 
 ```{r}
 df %>%
   group_by(OECD) %>%
-  summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),
-            HDI = mean(HDI_2018, na.rm = TRUE),
+  summarise(HDI = mean(HDI_2018, na.rm = TRUE),
             FH  = mean(FH_Total, na.rm = TRUE))
 ```
 
-### 変数のリコーディング: 2値の例
-
-**例)** 変換後
+　続いて、`OECD`でなく、先ほど作成した`OECD_J`列でグルーピングしてみよう。
 
 ```{r}
-#| code-line-numbers: "2"
 df %>%
-  mutate(OECD_J = if_else(OECD == 1, "OECD加盟国", "OECD非加盟国")) %>%
-  group_by(OECD = OECD_J) %>% # 「=」で列名の変更が可能
+  group_by(OECD_J) %>%
   summarise(PPP = mean(PPP_per_capita, na.rm = TRUE),
             HDI = mean(HDI_2018, na.rm = TRUE),
             FH  = mean(FH_Total, na.rm = TRUE))
 ```
 
-### 変数のリコーディング: 3値以上の例
+　出力される結果の第1列が`OECD_J`になっているが、これを`OECD`に変更したい場合は`group_by(OECD_J)`を`group_by(OECD = OECD_J)`に変更すれば良い。
 
-`mutate()`内に`case_when()`を使用
+　`if_else()`は条件が一つのみの場合に使用する関数である。もし、条件式を複数使いたい場合はどうすれば良いだろうか。ここではまず、`mutate()`内に`case_when()`を使用する方法から紹介する。
 
 ```{r}
 #| eval: false
@@ -437,11 +397,7 @@ df %>%
                                 TRUE ~ 新しい値))
 ```
 
-* `TRUE ~ 新しい値`は「上記の条件全てが満たされ**ない**場合の値」を意味する
-
-### 変数のリコーディング: 3値以上の例
-
-**例)** `df`の`Continent`を日本語にし、`Continent_J`として追加
+　`TRUE ~ 新しい値`は「上記の条件全てが満たされ**ない**場合の値」を意味する。ここでは`df`の`Continent`列を日本語にし、`Continent_J`として追加してみよう。
 
 ```{r}
 df %>%
@@ -453,66 +409,76 @@ df %>%
   group_by(大陸 = Continent_J) %>%
   # 日本語は非推奨だが、一応使える（_と.を除く特殊記号不可）
   summarise(OECD加盟国比率 = mean(OECD),
-            国家数        = n())
+            国家数         = n())
 ```
 
-### 変数のリコーディング: 応用
-
-**例)** `Continent`が`AP`列を追加し、`"Asia"`か`"Oceania"`、`"America"`なら1、以外は0
-
-**方法1**: `if_else()`の利用
+　この「新しい値」は条件の数だけ存在する必要はない。たとえば、`Continent`列の値が`"Asia"`か`"Oceania"`、`"America"`なら`"Asia-Pafific"`に、それ以外は`"Others"`に変更し、その結果を`AP`という名の新しい列として追加するとしよう。
 
 ```{r}
-#| eval: false
 df %>%
-  mutate(AP = if_else(Continent %in% c("Asia", "America", "Oceania"),
-                      1, 0))
+  mutate(AP = case_when(Continent == "Africa"  ~ "Others",
+                        Continent == "America" ~ "Asia-Pacific",
+                        Continent == "Asia"    ~ "Asia-Pacific",
+                        Continent == "Europe"  ~ "Others",
+                        TRUE                   ~ "Asia-Pacific")) %>%
+  group_by(Continent = AP) %>%
+  summarise(Population = mean(Population),
+            Countries  = n())
 ```
 
-**方法2**: `case_when()`の利用
+　以上の例は戻り値が2種類、つまり、`"Asia-Pacific"`か`"Others"`のみである。実はこの場合、`if_else()`関数を使うこともできる。ここで便利な演算子が`%in%`演算子である。これは左側の値が右側のベクトルに含まれていれば`TRUE`、含まれていなければ`FALSE`が返ってくる関数である。たとえば、`df`の`Continent`列が`"Asia"`か`"Oceania"`、`"America"`のいずれかに該当するか確認してみよう。
 
 ```{r}
-#| eval: false
-df %>%
-  mutate(AP = case_when(Continent == "Asia"    ~ 1, 
-                        Continent == "America" ~ 1, 
-                        Continent == "Oceania" ~ 1,
-                        TRUE                   ~ 0))
+df$Continent %in% c("Asia", "Oceania", "America")
 ```
 
-**方法3**: `case_when()` + `%in%`の利用
+　これを`if_else()`関数の条件式として使用する。
 
 ```{r}
-#| eval: false
 df %>%
-  mutate(AP = case_when(Continent %in% c("Asia", "America", "Oceania") ~ 1, 
-                        TRUE                                           ~ 0))
+  mutate(AP = if_else(Continent %in% c("Asia", "America", "Oceania"), "Asia-Pacific", "Others")) %>%
+  group_by(Continent = AP) %>%
+  summarise(Population = mean(Population),
+            Countries  = n())
 ```
+
+　最後に`recode()`関数について解説する。これまで紹介した`if_else()`と`case_when()`は条件式を使うため、`==`、`!=`、`%in%`以外にも`>`や`<=`なども使える。ただし、書き方がやや複雑である。`recode()`は使う条件式が`==`のみの場合、`if_else()`や`case_when()`を代替可能な関数である。ここでは例だけ紹介しよう。
+
+```{r}
+df %>%
+  mutate(AP = recode(Continent,
+                     "Asia"    = "Asia-Pacific",
+                     "America" = "Asia-Pacific",
+                     "Oceania" = "Asia-Pacific",
+                     .default  = "Others")) %>%
+  group_by(Continent = AP) %>%
+  summarise(Population = mean(Population),
+            Countries  = n())
+```
+
+　`recode()`の第一引数はリコーディングする変数名であり、`.default`はいずれの条件にも該当しない場合の値を意味する。
 
 ## 欠損値の扱い方
 
-### 注意) 欠損値を指定する場合
-
-世論調査などの場合、欠損値が`NA`でなく、`9`や`99`、`""`などの場合がある。
-
-**例)** `my_data`の例
-
-* `YoungAge`変数を作成し、`Age`が39以下なら`1`、それ以外は`0`にする。ただし、999なら`NA`とする。
-* `HighEduc2`変数を作成し、`HighEduc`が1なら`"大卒以上"`、それ以外は`"大卒未満"`にする。ただし、9なら`NA`とする。
+　世論調査などの場合、欠損値が`NA`でなく、`9`や`99`、`""`などの場合がある。たとえば、以下のような`my_data`というデータがあるとしよう。
 
 ```{r}
-#| echo: false
 my_data <- tibble(ID       = 1:10,
                   Age      = c(32, 35, 57, 999, 74, 66, 999, 49, 78, 67),
                   HighEduc = c(1, 0, 0, 1, 0, 9, 1, 1, 9, 9))
 my_data
 ```
 
-### 注意) 欠損値を指定する場合
+　`ID`は回答者の識別番号、`Age`は回答者の年齢、`HighEduc`は回答者が大卒以上なら1、それ以外は0を意味する。そして、年齢を回答しなかった回答者の年齢は999、学歴については9となっている。ここで回答者の年齢と学歴の平均値を出せばどうなるだろうか。
 
-**注意:** `条件 ~ NA`ではエラーが発生する。
+```{r}
+mean(my_data$Age)
+mean(my_data$HighEduc)
+```
 
-* `if_else()`も同様。ただし、`ifelse()`は`NA`で作動
+　回答者の平均年齢は245.6歳（!!）、学歴の平均値は3.1となっている。医学の発展によって人間の寿命が伸びたとしても、最大値が1のはずの`HighEduc`の平均値が3.1ということはナンセンスである。**データ分析の前に欠損値の確認と処理は必須であり、これを怠ると研究結果に大きな歪みな生じかねない。**とりわけ、欠損値が`NA`でなく、`9`や`999`、`""`などになっているケースはより注意が必要である。今回の実習データは既に欠損値の処理済み、つまり、欠損している値は`NA`になっている。ここでは上の`my_data`の使って考えてみよう。
+
+　まず、`YoungAge`変数を作成し、`Age`が39**以下**なら`1`、それ以外は`0`にする。ただし、999なら`NA`とする。続いて、`HighEduc2`変数を作成し、`HighEduc`が1なら`"大卒以上"`、それ以外は`"大卒未満"`にする。ただし、9なら`NA`とする。この作業を行うには`mutate()`内に`case_when()`を使えば良いだろう。
 
 ```{r}
 #| error: true
@@ -525,13 +491,10 @@ my_data %>%
                                TRUE          ~ "大卒未満"))
 ```
 
-### 注意) 欠損値を指定する場合
-
-`NA`でなく、**生成される列のデータ型**に応じて`NA_real_`（numeric型）、または`NA_character_`（character型）を使用（logical型なら`NA`のままでOK）
+　エラーが返ってきた。なぜだろう。問題は`NA`である。確かにRにおいて欠損値は`NA`のみである。しかし、{tidyverse}の世界は、同じ`NA`でもnumeric型の`NA`とcharcter型の`NA`は区別される。上のコードの場合、`YoungAge`はnumeric型、`HighEduc2`はcharacter型変数になるだろう。`case_when()`は`if_else()`などを使う場合、`NA`でなく、**生成される列のデータ型**に応じて`NA_real_`（numeric型）、または`NA_character_`（character型）を使用（logical型なら`NA`のままでOK）する必要がある。
 
 ```{r}
 #| error: true
-#| code-line-numbers: "2,5"
 my_data %>%
   mutate(YoungAge  = case_when(Age == 999 ~ NA_real_,
                                Age <=  39 ~ 1,
@@ -541,10 +504,7 @@ my_data %>%
                                TRUE          ~ "大卒未満"))
 ```
 
-### 特定の値を欠損値にコーディング場合
-
-特定の値を欠損値とし、それ以外の値は元も値にする場合
-* 主に`if_else()`を使用し、条件に合致した場合は`NA_real_`か`NA_character_`を、合致しない場合は元の変数のままにする。
+　もう一つの例として特定の値を欠損値とし、それ以外の値は元も値にする場合を考えよう。つまり、`Age`と`HighEduc`列においてそれぞれ999、9を`NA`にし、そのまま上書きするものである。例えば`Age`は`Age`の値が999なら（`Age == 999`）、`NA_real_`を返し、それ以外の場合は既存の`Age`の値を取る。この作業は以下のコードで実行できる。
 
 ```{r}
 my_data %>%
@@ -552,27 +512,9 @@ my_data %>%
          HighEduc = if_else(HighEduc == 9, NA_real_, HighEduc))
 ```
 
-### 特定の値を欠損値にコーディング場合
+　欠損を意味する値が複数の場合もある。`my_data`の`Age`は`999`のみが欠損値であるが、世論調査によっては`888`、`999`、`-1`のように複数の欠損値が存在するケースがある。この場合は`case_when()`を使うか、`if_else()`関数内にOR演算子（`|` / `%in%`）を使えば良い。
 
-`if_else()`でなく、`case_when()`を使うことも可能
-
-* 欠損を意味する値が複数の場合、`case_when()`を使うか、OR演算子（`|` / `%in%`）を用いた`if_else()`を使用する。
-
-```{r}
-my_data %>%
-  mutate(Age      = case_when(Age == 999 ~ NA_real_, 
-                              TRUE       ~ Age),
-         HighEduc = case_when(HighEduc == 9 ~ NA_real_, 
-                              TRUE          ~ HighEduc))
-```
-
-### 特定の値を欠損値にコーディング場合
-
-{naniar}パッケージの`replace_with_na()`関数を利用
-
-* 引数はリスト型オブジェクトであり、リストの中には`変数名 = 欠損値の値`
-* 欠損値の値が複数の場合、`変数名 = c(値1, 値2, ...)`
-* 似たような関数として{expss}の`na_if()`関数
+　最後に欠損値処理に特化した{naniar}パッケージの`replace_with_na()`関数を紹介する。引数はリスト型オブジェクトであり、リストの各要素は`変数名 = 欠損値の値`となる。たとえば、`Age`の欠損値は`999`だから`Age = 999`である。これは条件式ではないため、`==`でなく、`=`を使う。欠損値の値が複数ある場合は、`変数名 = c(値1, 値2, ...)`のように書く。
 
 ```{r}
 library(naniar) # 事前に install.package(naniar) でインストール
@@ -580,6 +522,8 @@ my_data %>%
   # Ageは999、HighEducは9が欠損値
   replace_with_na(list(Age = 999, HighEduc = 9))
 ```
+
+　他にも似たような関数として{expss}の`na_if()`関数などがあるが、自分が使いやすいものを使えば良い。
 
 ## 教科書
 
