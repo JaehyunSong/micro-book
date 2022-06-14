@@ -410,7 +410,7 @@ knitr::include_graphics("Figs/10/tidyr.png")
 * `pivot_wider()`: Long型データ$\rightarrow$Wide型データ
 * `separate()`: セルの分割（例:「年月日」から「年」、「月」、「日」へ）
 
-　それでは、サポートページの「データ州」実習用データ（`Micro11.csv`）をダウンロードし、読み込んでみよう。このデータは日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数データであり、[Johns Hopkins University Center for Systems Science and Engineering](https://github.com/CSSEGISandData/COVID-19)から入手したものである。
+　それでは、サポートページの「データ州」実習用データ（`Micro11.csv`）をダウンロードし、読み込んでみよう。このデータは中国、日本、韓国、モンゴル、台湾（アルファベット順）の5日間COVID-19新規感染者数データであり、[Johns Hopkins University Center for Systems Science and Engineering](https://github.com/CSSEGISandData/COVID-19)から入手したものである。
 
 ```{r}
 #| message: false
@@ -432,14 +432,14 @@ COVID_df
                values_to = "変数の値が入る変数名")
 ```
 
-　我々がやりたい作業は`2021/05/24`列から`2021/05/28`列までの5列を1つの列としてまとめることである。まとめる列は`cols`引数で指定する。そして、これまで変数名だったもの（たとえば、`2021/05/25`など）が入る新しい列名と、値が入る新しい列名を、それぞれ`names_to`と`values_to`で指定する。ここでは時点は`Date`、新規感染者数は`New_Cases`という列として格納するとしよう。注意すべき点としては、これらの新しい変数名は`"`で囲むことである。
+　我々がやりたい作業は`2022/06/09`列から`2022/06/13`列までの5列を1つの列としてまとめることである。まとめる列は`cols`引数で指定する。そして、これまで変数名だったもの（たとえば、`2022/06/11`など）が入る新しい列名と、値が入る新しい列名を、それぞれ`names_to`と`values_to`で指定する。ここでは時点は`Date`、新規感染者数は`New_Cases`という列として格納するとしよう。注意すべき点としては、これらの新しい変数名は`"`で囲むことである。
 
 　ただし、`cols`の場合、`"`で囲んでも、囲まなくても良い。ただし、列名に記号が入っていたり、数字で始まる列名は`"`で囲む必要がある。また、`cols`では隣接した列を選択する`:`や`starts_with()`なども使用可能である。
 
 ```{r}
 COVID_Long <- COVID_df %>% 
-  # cols = starts_with("2020") でも良い
-  pivot_longer(cols      = "2021/05/24":"2021/05/28",
+  # cols = starts_with("2022") でも良い
+  pivot_longer(cols      = "2022/06/09":"2022/06/13",
                names_to  = "Date",
                values_to = "New_Cases")
 COVID_Long
@@ -499,18 +499,20 @@ City_Data %>%
 
 ### {tidyr}と{dplyr}
 
-{tidyr}と{dplyr}を組み合わせることも可能
-
-* **例)** 100万人当たりの新規感染者数を計算し、国ごとに平均値を計算
+　これまでの例で見てきたように、{tidyr}の各関数を通して得られた結果はいずれもdata.frame（厳密にはtibble）構造である。また、{tidyr}の各関数の第一引数はdata.frameである。これは{tidyr}と{dplyr}を組み合わせることが可能であることを意味する。つまり、{tidyr}の関数から{dplyr}の関数、またがその逆の方向でパイプ演算子を使うこともできる。たとえば、今回の実習データをlong型へ整形し、100万人当たりの新規感染者数を`New_Case_per_1M`という列として格納し、国・地域（`Country`）ごとに`New_Case_per_1M`の平均とを計算する作業を、全てパイプで繋ぐこともできる。
 
 ```{r}
 COVID_df %>% 
-  pivot_longer(cols      = "2021/05/24":"2021/05/28",
+  # Wide to Long
+  pivot_longer(cols      = "2022/06/09":"2022/06/13",
                names_to  = "Date",
                values_to = "New_Cases") %>%
-   mutate(New_Case_per_1M = New_Cases / Population * 1000000) %>%
-   group_by(Country) %>%
-   summarise(New_Case_per_1M = mean(New_Case_per_1M))
+  # 新規感染者数を人口であり、100万をかける
+  mutate(New_Case_per_1M = New_Cases / Population * 1000000) %>%
+  # Countryでグルーピング
+  group_by(Country) %>%
+  # New_Case_per_1Mの平均値を計算
+  summarise(New_Case_per_1M = mean(New_Case_per_1M))
 ```
 
 ## 教科書

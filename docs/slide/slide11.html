@@ -943,7 +943,7 @@
 </section>
 <section id="実習用データ" class="slide level2">
 <h2>実習用データ</h2>
-<p><code>Micro11.csv</code>: 日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数</p>
+<p><code>Micro11.csv</code>: 中国、日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数</p>
 <ul>
 <li>サポートページからダウンロード</li>
 <li>データ出典:<a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins University Center for Systems Science and Engineering</a></li>
@@ -952,14 +952,15 @@
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro11.csv"</span>)</span>
 <span id="cb28-2"><a href="#cb28-2"></a>COVID_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
+<pre><code># A tibble: 5 × 7
+  Country  Population `2022/06/09` `2022/06/10` `2022/06/11` `2022/06/12`
   &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-1 Japan     126476461         2743         3918         4485         4163
-2 Korea      51269185          516          699          629          587
-3 Mongolia    3278290          634          680          653          785
-4 Taiwan     23816775          595          539          635          670
-# … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
+1 China    1447470092          819          848         1114          990
+2 Japan     126476461        16788        15584        15338        13381
+3 Korea      51269185         9304         8428         7382         3828
+4 Mongolia    3278290            0            0            0            0
+5 Taiwan     23816775        72846        68293        79616        50567
+# … with 1 more variable: `2022/06/13` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <!--- --->
@@ -990,49 +991,58 @@
 <tr class="header">
 <th style="text-align: left;">Country</th>
 <th style="text-align: right;">Population</th>
-<th style="text-align: right;">2021/05/24</th>
-<th style="text-align: right;">2021/05/25</th>
-<th style="text-align: right;">2021/05/26</th>
-<th style="text-align: right;">2021/05/27</th>
-<th style="text-align: right;">2021/05/28</th>
+<th style="text-align: right;">2022/06/09</th>
+<th style="text-align: right;">2022/06/10</th>
+<th style="text-align: right;">2022/06/11</th>
+<th style="text-align: right;">2022/06/12</th>
+<th style="text-align: right;">2022/06/13</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1447470092</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">848</td>
+<td style="text-align: right;">1114</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">957</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Japan</td>
 <td style="text-align: right;">126476461</td>
-<td style="text-align: right;">2743</td>
-<td style="text-align: right;">3918</td>
-<td style="text-align: right;">4485</td>
-<td style="text-align: right;">4163</td>
-<td style="text-align: right;">3701</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: right;">516</td>
-<td style="text-align: right;">699</td>
-<td style="text-align: right;">629</td>
-<td style="text-align: right;">587</td>
-<td style="text-align: right;">533</td>
+<td style="text-align: right;">16788</td>
+<td style="text-align: right;">15584</td>
+<td style="text-align: right;">15338</td>
+<td style="text-align: right;">13381</td>
+<td style="text-align: right;">7942</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: right;">634</td>
-<td style="text-align: right;">680</td>
-<td style="text-align: right;">653</td>
-<td style="text-align: right;">785</td>
-<td style="text-align: right;">769</td>
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: right;">9304</td>
+<td style="text-align: right;">8428</td>
+<td style="text-align: right;">7382</td>
+<td style="text-align: right;">3828</td>
+<td style="text-align: right;">9768</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1055</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Taiwan</td>
 <td style="text-align: right;">23816775</td>
-<td style="text-align: right;">595</td>
-<td style="text-align: right;">539</td>
-<td style="text-align: right;">635</td>
-<td style="text-align: right;">670</td>
-<td style="text-align: right;">554</td>
+<td style="text-align: right;">72846</td>
+<td style="text-align: right;">68293</td>
+<td style="text-align: right;">79616</td>
+<td style="text-align: right;">50567</td>
+<td style="text-align: right;">45100</td>
 </tr>
 </tbody>
 </table>
@@ -1062,124 +1072,154 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">2743</td>
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1447470092</td>
+<td style="text-align: left;">2022/06/09</td>
+<td style="text-align: right;">819</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1447470092</td>
+<td style="text-align: left;">2022/06/10</td>
+<td style="text-align: right;">848</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1447470092</td>
+<td style="text-align: left;">2022/06/11</td>
+<td style="text-align: right;">1114</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1447470092</td>
+<td style="text-align: left;">2022/06/12</td>
+<td style="text-align: right;">990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1447470092</td>
+<td style="text-align: left;">2022/06/13</td>
+<td style="text-align: right;">957</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Japan</td>
 <td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">3918</td>
+<td style="text-align: left;">2022/06/09</td>
+<td style="text-align: right;">16788</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Japan</td>
 <td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">4485</td>
+<td style="text-align: left;">2022/06/10</td>
+<td style="text-align: right;">15584</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Japan</td>
 <td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">4163</td>
+<td style="text-align: left;">2022/06/11</td>
+<td style="text-align: right;">15338</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Japan</td>
 <td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">3701</td>
+<td style="text-align: left;">2022/06/12</td>
+<td style="text-align: right;">13381</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">126476461</td>
+<td style="text-align: left;">2022/06/13</td>
+<td style="text-align: right;">7942</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Korea</td>
+<td style="text-align: right;">51269185</td>
+<td style="text-align: left;">2022/06/09</td>
+<td style="text-align: right;">9304</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Korea</td>
 <td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">516</td>
+<td style="text-align: left;">2022/06/10</td>
+<td style="text-align: right;">8428</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Korea</td>
 <td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">699</td>
+<td style="text-align: left;">2022/06/11</td>
+<td style="text-align: right;">7382</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Korea</td>
 <td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">629</td>
+<td style="text-align: left;">2022/06/12</td>
+<td style="text-align: right;">3828</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Korea</td>
 <td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">587</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">533</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">634</td>
+<td style="text-align: left;">2022/06/13</td>
+<td style="text-align: right;">9768</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mongolia</td>
 <td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">680</td>
+<td style="text-align: left;">2022/06/09</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mongolia</td>
 <td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">653</td>
+<td style="text-align: left;">2022/06/10</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mongolia</td>
 <td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">785</td>
+<td style="text-align: left;">2022/06/11</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mongolia</td>
 <td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">769</td>
+<td style="text-align: left;">2022/06/12</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">595</td>
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">3278290</td>
+<td style="text-align: left;">2022/06/13</td>
+<td style="text-align: right;">1055</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Taiwan</td>
 <td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">539</td>
+<td style="text-align: left;">2022/06/09</td>
+<td style="text-align: right;">72846</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Taiwan</td>
 <td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">635</td>
+<td style="text-align: left;">2022/06/10</td>
+<td style="text-align: right;">68293</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Taiwan</td>
 <td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">670</td>
+<td style="text-align: left;">2022/06/11</td>
+<td style="text-align: right;">79616</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Taiwan</td>
 <td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">554</td>
+<td style="text-align: left;">2022/06/12</td>
+<td style="text-align: right;">50567</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: right;">23816775</td>
+<td style="text-align: left;">2022/06/13</td>
+<td style="text-align: right;">45100</td>
 </tr>
 </tbody>
 </table>
@@ -1210,38 +1250,29 @@
 <section id="pivot_longer-wideからlongへ" class="slide level2">
 <h2><code>pivot_longer()</code>: WideからLongへ</h2>
 <ul>
-<li><code>cols = starts_with("2020")</code>もOK</li>
+<li><code>cols = starts_with("2022")</code>もOK</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31" data-code-line-numbers="2-4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>COVID_Long <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2022/06/09"</span><span class="sc">:</span><span class="st">"2022/06/13"</span>,</span>
 <span id="cb31-3"><a href="#cb31-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb31-4"><a href="#cb31-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>)</span>
 <span id="cb31-5"><a href="#cb31-5"></a>COVID_Long</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 4
-   Country  Population Date       New_Cases
-   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
- 1 Japan     126476461 2021/05/24      2743
- 2 Japan     126476461 2021/05/25      3918
- 3 Japan     126476461 2021/05/26      4485
- 4 Japan     126476461 2021/05/27      4163
- 5 Japan     126476461 2021/05/28      3701
- 6 Korea      51269185 2021/05/24       516
- 7 Korea      51269185 2021/05/25       699
- 8 Korea      51269185 2021/05/26       629
- 9 Korea      51269185 2021/05/27       587
-10 Korea      51269185 2021/05/28       533
-11 Mongolia    3278290 2021/05/24       634
-12 Mongolia    3278290 2021/05/25       680
-13 Mongolia    3278290 2021/05/26       653
-14 Mongolia    3278290 2021/05/27       785
-15 Mongolia    3278290 2021/05/28       769
-16 Taiwan     23816775 2021/05/24       595
-17 Taiwan     23816775 2021/05/25       539
-18 Taiwan     23816775 2021/05/26       635
-19 Taiwan     23816775 2021/05/27       670
-20 Taiwan     23816775 2021/05/28       554</code></pre>
+<pre><code># A tibble: 25 × 4
+   Country Population Date       New_Cases
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+ 1 China   1447470092 2022/06/09       819
+ 2 China   1447470092 2022/06/10       848
+ 3 China   1447470092 2022/06/11      1114
+ 4 China   1447470092 2022/06/12       990
+ 5 China   1447470092 2022/06/13       957
+ 6 Japan    126476461 2022/06/09     16788
+ 7 Japan    126476461 2022/06/10     15584
+ 8 Japan    126476461 2022/06/11     15338
+ 9 Japan    126476461 2022/06/12     13381
+10 Japan    126476461 2022/06/13      7942
+# … with 15 more rows</code></pre>
 </div>
 </div>
 <!--- --->
@@ -1260,14 +1291,15 @@
 <span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb33-3"><a href="#cb33-3"></a>              <span class="at">values_from =</span> <span class="st">"New_Cases"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
+<pre><code># A tibble: 5 × 7
+  Country  Population `2022/06/09` `2022/06/10` `2022/06/11` `2022/06/12`
   &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-1 Japan     126476461         2743         3918         4485         4163
-2 Korea      51269185          516          699          629          587
-3 Mongolia    3278290          634          680          653          785
-4 Taiwan     23816775          595          539          635          670
-# … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
+1 China    1447470092          819          848         1114          990
+2 Japan     126476461        16788        15584        15338        13381
+3 Korea      51269185         9304         8428         7382         3828
+4 Mongolia    3278290            0            0            0            0
+5 Taiwan     23816775        72846        68293        79616        50567
+# … with 1 more variable: `2022/06/13` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <!--- --->
@@ -1294,29 +1326,20 @@
 <span id="cb36-3"><a href="#cb36-3"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>),</span>
 <span id="cb36-4"><a href="#cb36-4"></a>           <span class="at">sep  =</span> <span class="st">"/"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 6
-   Country  Population Year  Month Day   New_Cases
-   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 Japan     126476461 2021  05    24         2743
- 2 Japan     126476461 2021  05    25         3918
- 3 Japan     126476461 2021  05    26         4485
- 4 Japan     126476461 2021  05    27         4163
- 5 Japan     126476461 2021  05    28         3701
- 6 Korea      51269185 2021  05    24          516
- 7 Korea      51269185 2021  05    25          699
- 8 Korea      51269185 2021  05    26          629
- 9 Korea      51269185 2021  05    27          587
-10 Korea      51269185 2021  05    28          533
-11 Mongolia    3278290 2021  05    24          634
-12 Mongolia    3278290 2021  05    25          680
-13 Mongolia    3278290 2021  05    26          653
-14 Mongolia    3278290 2021  05    27          785
-15 Mongolia    3278290 2021  05    28          769
-16 Taiwan     23816775 2021  05    24          595
-17 Taiwan     23816775 2021  05    25          539
-18 Taiwan     23816775 2021  05    26          635
-19 Taiwan     23816775 2021  05    27          670
-20 Taiwan     23816775 2021  05    28          554</code></pre>
+<pre><code># A tibble: 25 × 6
+   Country Population Year  Month Day   New_Cases
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 China   1447470092 2022  06    09          819
+ 2 China   1447470092 2022  06    10          848
+ 3 China   1447470092 2022  06    11         1114
+ 4 China   1447470092 2022  06    12          990
+ 5 China   1447470092 2022  06    13          957
+ 6 Japan    126476461 2022  06    09        16788
+ 7 Japan    126476461 2022  06    10        15584
+ 8 Japan    126476461 2022  06    11        15338
+ 9 Japan    126476461 2022  06    12        13381
+10 Japan    126476461 2022  06    13         7942
+# … with 15 more rows</code></pre>
 </div>
 </div>
 <!--- --->
@@ -1379,20 +1402,21 @@
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2022/06/09"</span><span class="sc">:</span><span class="st">"2022/06/13"</span>,</span>
 <span id="cb41-3"><a href="#cb41-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb41-4"><a href="#cb41-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb41-5"><a href="#cb41-5"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb41-6"><a href="#cb41-6"></a>   <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
 <span id="cb41-7"><a href="#cb41-7"></a>   <span class="fu">summarise</span>(<span class="at">New_Case_per_1M =</span> <span class="fu">mean</span>(New_Case_per_1M))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
+<pre><code># A tibble: 5 × 2
   Country  New_Case_per_1M
   &lt;chr&gt;              &lt;dbl&gt;
-1 Japan               30.1
-2 Korea               11.6
-3 Mongolia           215. 
-4 Taiwan              25.1</code></pre>
+1 China              0.653
+2 Japan            109.   
+3 Korea            151.   
+4 Mongolia          64.4  
+5 Taiwan          2657.   </code></pre>
 </div>
 </div>
 <!--- --->
@@ -1421,7 +1445,7 @@
 <p>慣れたらこれくらいは長い方ではないが…</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2022/06/09"</span><span class="sc">:</span><span class="st">"2022/06/13"</span>,</span>
 <span id="cb43-3"><a href="#cb43-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb43-4"><a href="#cb43-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb43-5"><a href="#cb43-5"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>,</span>

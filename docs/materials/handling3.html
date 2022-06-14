@@ -923,19 +923,20 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <li><code>pivot_wider()</code>: Long型データ<span class="math inline">\(\rightarrow\)</span>Wide型データ</li>
 <li><code>separate()</code>: セルの分割（例:「年月日」から「年」、「月」、「日」へ）</li>
 </ul>
-<p>　それでは、サポートページの「データ州」実習用データ（<code>Micro11.csv</code>）をダウンロードし、読み込んでみよう。このデータは日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数データであり、<a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins University Center for Systems Science and Engineering</a>から入手したものである。</p>
+<p>　それでは、サポートページの「データ州」実習用データ（<code>Micro11.csv</code>）をダウンロードし、読み込んでみよう。このデータは中国、日本、韓国、モンゴル、台湾（アルファベット順）の5日間COVID-19新規感染者数データであり、<a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins University Center for Systems Science and Engineering</a>から入手したものである。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro11.csv"</span>)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>COVID_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
+<pre><code># A tibble: 5 × 7
+  Country  Population `2022/06/09` `2022/06/10` `2022/06/11` `2022/06/12`
   &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-1 Japan     126476461         2743         3918         4485         4163
-2 Korea      51269185          516          699          629          587
-3 Mongolia    3278290          634          680          653          785
-4 Taiwan     23816775          595          539          635          670
-# … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
+1 China    1447470092          819          848         1114          990
+2 Japan     126476461        16788        15584        15338        13381
+3 Korea      51269185         9304         8428         7382         3828
+4 Mongolia    3278290            0            0            0            0
+5 Taiwan     23816775        72846        68293        79616        50567
+# … with 1 more variable: `2022/06/13` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>　このデータは整然データだろうか、あるいは雑然データだろうか。まずは、本データの観察単位を明らかにする必要がある。これらのデータは「<strong>時点</strong>XにおけるY<strong>地域</strong>の<strong>新規感染者数</strong>と<strong>人口</strong>」を測定したものである。したがって、このデータの観察単位は「地域<span class="math inline">\(\times\)</span>時間」であり、測定されたものは新規感染者数と人口である。したがって、整然データであるためには、「地域名」、「時間」、「人口」、「新規感染者数」の4つの変数で構成される必要がある。一方、現在のデータでは新規感染者数が5列に渡って格納されており、計7列のデータである。</p>
@@ -947,39 +948,30 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"元の列名が入る変数名"</span>,</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"変数の値が入る変数名"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>　我々がやりたい作業は<code>2021/05/24</code>列から<code>2021/05/28</code>列までの5列を1つの列としてまとめることである。まとめる列は<code>cols</code>引数で指定する。そして、これまで変数名だったもの（たとえば、<code>2021/05/25</code>など）が入る新しい列名と、値が入る新しい列名を、それぞれ<code>names_to</code>と<code>values_to</code>で指定する。ここでは時点は<code>Date</code>、新規感染者数は<code>New_Cases</code>という列として格納するとしよう。注意すべき点としては、これらの新しい変数名は<code>"</code>で囲むことである。</p>
+<p>　我々がやりたい作業は<code>2022/06/09</code>列から<code>2022/06/13</code>列までの5列を1つの列としてまとめることである。まとめる列は<code>cols</code>引数で指定する。そして、これまで変数名だったもの（たとえば、<code>2022/06/11</code>など）が入る新しい列名と、値が入る新しい列名を、それぞれ<code>names_to</code>と<code>values_to</code>で指定する。ここでは時点は<code>Date</code>、新規感染者数は<code>New_Cases</code>という列として格納するとしよう。注意すべき点としては、これらの新しい変数名は<code>"</code>で囲むことである。</p>
 <p>　ただし、<code>cols</code>の場合、<code>"</code>で囲んでも、囲まなくても良い。ただし、列名に記号が入っていたり、数字で始まる列名は<code>"</code>で囲む必要がある。また、<code>cols</code>では隣接した列を選択する<code>:</code>や<code>starts_with()</code>なども使用可能である。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>COVID_Long <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cols = starts_with("2020") でも良い</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cols = starts_with("2022") でも良い</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2022/06/09"</span><span class="sc">:</span><span class="st">"2022/06/13"</span>,</span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>)</span>
 <span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>COVID_Long</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 4
-   Country  Population Date       New_Cases
-   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
- 1 Japan     126476461 2021/05/24      2743
- 2 Japan     126476461 2021/05/25      3918
- 3 Japan     126476461 2021/05/26      4485
- 4 Japan     126476461 2021/05/27      4163
- 5 Japan     126476461 2021/05/28      3701
- 6 Korea      51269185 2021/05/24       516
- 7 Korea      51269185 2021/05/25       699
- 8 Korea      51269185 2021/05/26       629
- 9 Korea      51269185 2021/05/27       587
-10 Korea      51269185 2021/05/28       533
-11 Mongolia    3278290 2021/05/24       634
-12 Mongolia    3278290 2021/05/25       680
-13 Mongolia    3278290 2021/05/26       653
-14 Mongolia    3278290 2021/05/27       785
-15 Mongolia    3278290 2021/05/28       769
-16 Taiwan     23816775 2021/05/24       595
-17 Taiwan     23816775 2021/05/25       539
-18 Taiwan     23816775 2021/05/26       635
-19 Taiwan     23816775 2021/05/27       670
-20 Taiwan     23816775 2021/05/28       554</code></pre>
+<pre><code># A tibble: 25 × 4
+   Country Population Date       New_Cases
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+ 1 China   1447470092 2022/06/09       819
+ 2 China   1447470092 2022/06/10       848
+ 3 China   1447470092 2022/06/11      1114
+ 4 China   1447470092 2022/06/12       990
+ 5 China   1447470092 2022/06/13       957
+ 6 Japan    126476461 2022/06/09     16788
+ 7 Japan    126476461 2022/06/10     15584
+ 8 Japan    126476461 2022/06/11     15338
+ 9 Japan    126476461 2022/06/12     13381
+10 Japan    126476461 2022/06/13      7942
+# … with 15 more rows</code></pre>
 </div>
 </div>
 <p>逆に、long型データをwide型データへ整形する際は<code>pivot_wider()</code>を使用する。雑然データはwide型データが多いとは既に説明したが、雑然データの方が<strong>人間にとっては</strong>読みやすい場合もある。上の新型コロナのデータもwide型の方が読みやすい人もいるだろう。データ分析に適したデータは整然データであるが、報告に適したデータとしては必ずしもこの関係は成立しない。図表を作成する際は常に読む側の立場から考える必要があろう。</p>
@@ -989,14 +981,15 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">"New_Cases"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
+<pre><code># A tibble: 5 × 7
+  Country  Population `2022/06/09` `2022/06/10` `2022/06/11` `2022/06/12`
   &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-1 Japan     126476461         2743         3918         4485         4163
-2 Korea      51269185          516          699          629          587
-3 Mongolia    3278290          634          680          653          785
-4 Taiwan     23816775          595          539          635          670
-# … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
+1 China    1447470092          819          848         1114          990
+2 Japan     126476461        16788        15584        15338        13381
+3 Korea      51269185         9304         8428         7382         3828
+4 Mongolia    3278290            0            0            0            0
+5 Taiwan     23816775        72846        68293        79616        50567
+# … with 1 more variable: `2022/06/13` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>　最後にセルの値を分割する<code>separate()</code>関数について解説する。たとえば、月や曜日ごとの新規感染者数をまとめようとした場合、時点の列が「YYYY年MM月DD日」になっていては困る。これらの年、月、日に分割する必要があろう。先ほど作成した<code>COVID_Long</code>の<code>Date</code>列を<code>Year</code>、<code>Month</code>、<code>Day</code>に分けてみよう。</p>
@@ -1014,29 +1007,20 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>),</span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep  =</span> <span class="st">"/"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 6
-   Country  Population Year  Month Day   New_Cases
-   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 Japan     126476461 2021  05    24         2743
- 2 Japan     126476461 2021  05    25         3918
- 3 Japan     126476461 2021  05    26         4485
- 4 Japan     126476461 2021  05    27         4163
- 5 Japan     126476461 2021  05    28         3701
- 6 Korea      51269185 2021  05    24          516
- 7 Korea      51269185 2021  05    25          699
- 8 Korea      51269185 2021  05    26          629
- 9 Korea      51269185 2021  05    27          587
-10 Korea      51269185 2021  05    28          533
-11 Mongolia    3278290 2021  05    24          634
-12 Mongolia    3278290 2021  05    25          680
-13 Mongolia    3278290 2021  05    26          653
-14 Mongolia    3278290 2021  05    27          785
-15 Mongolia    3278290 2021  05    28          769
-16 Taiwan     23816775 2021  05    24          595
-17 Taiwan     23816775 2021  05    25          539
-18 Taiwan     23816775 2021  05    26          635
-19 Taiwan     23816775 2021  05    27          670
-20 Taiwan     23816775 2021  05    28          554</code></pre>
+<pre><code># A tibble: 25 × 6
+   Country Population Year  Month Day   New_Cases
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 China   1447470092 2022  06    09          819
+ 2 China   1447470092 2022  06    10          848
+ 3 China   1447470092 2022  06    11         1114
+ 4 China   1447470092 2022  06    12          990
+ 5 China   1447470092 2022  06    13          957
+ 6 Japan    126476461 2022  06    09        16788
+ 7 Japan    126476461 2022  06    10        15584
+ 8 Japan    126476461 2022  06    11        15338
+ 9 Japan    126476461 2022  06    12        13381
+10 Japan    126476461 2022  06    13         7942
+# … with 15 more rows</code></pre>
 </div>
 </div>
 <p>　もし、区切りとなる記号が存在しない場合は、<strong>正則表現（regular expression）</strong>の知識が必要となる。テキスト分析に興味があるなら必須の知識であるが、本講義の射程外である。ここでは都道府県と市区町村を分けるサンプルコードのみ紹介する。</p>
@@ -1078,26 +1062,28 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </section>
 <section id="tidyrとdplyr" class="level3">
 <h3 class="anchored" data-anchor-id="tidyrとdplyr">{tidyr}と{dplyr}</h3>
-<p>{tidyr}と{dplyr}を組み合わせることも可能</p>
-<ul>
-<li><strong>例)</strong> 100万人当たりの新規感染者数を計算し、国ごとに平均値を計算</li>
-</ul>
+<p>　これまでの例で見てきたように、{tidyr}の各関数を通して得られた結果はいずれもdata.frame（厳密にはtibble）構造である。また、{tidyr}の各関数の第一引数はdata.frameである。これは{tidyr}と{dplyr}を組み合わせることが可能であることを意味する。つまり、{tidyr}の関数から{dplyr}の関数、またがその逆の方向でパイプ演算子を使うこともできる。たとえば、今回の実習データをlong型へ整形し、100万人当たりの新規感染者数を<code>New_Case_per_1M</code>という列として格納し、国・地域（<code>Country</code>）ごとに<code>New_Case_per_1M</code>の平均とを計算する作業を、全てパイプで繋ぐこともできる。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(<span class="at">New_Case_per_1M =</span> <span class="fu">mean</span>(New_Case_per_1M))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wide to Long</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2022/06/09"</span><span class="sc">:</span><span class="st">"2022/06/13"</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 新規感染者数を人口であり、100万をかける</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Countryでグルーピング</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># New_Case_per_1Mの平均値を計算</span></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">New_Case_per_1M =</span> <span class="fu">mean</span>(New_Case_per_1M))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
+<pre><code># A tibble: 5 × 2
   Country  New_Case_per_1M
   &lt;chr&gt;              &lt;dbl&gt;
-1 Japan               30.1
-2 Korea               11.6
-3 Mongolia           215. 
-4 Taiwan              25.1</code></pre>
+1 China              0.653
+2 Japan            109.   
+3 Korea            151.   
+4 Mongolia          64.4  
+5 Taiwan          2657.   </code></pre>
 </div>
 </div>
 </section>
