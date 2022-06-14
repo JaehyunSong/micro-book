@@ -17,10 +17,12 @@ toc-title: "目次"
 |:---:|:---|:---|
 |1|<a href = "materials/Data/Pref_Vote.csv" download>`Pref_Vote.csv`</a>|第3回講義で使用|
 |2|<a href = "materials/Data/BuildingData.csv" download>`BuildingData.csv`</a>|第8回講義で使用|
-|3|<a href = "materials/Data/Micro09.csv" download>`Micro09.csv`</a>|第9回講義で使用|
+|3|<a href = "materials/Data/Micro09.csv" download>`Micro09.csv`</a>|第9・10回講義で使用|
+|4|<a href = "materials/Data/Micro11.csv" download>`Micro11.csv`</a>|第11回講義で使用|
 
 : {tbl-colwidths="[10,30,60]"}
 
+<!---
 ## データ説明
 
 ### `Pref_Vote.csv`
@@ -45,3 +47,4 @@ toc-title: "目次"
 |`Region6`|地域区分|1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄|
 
 : {tbl-colwidths="[15,40,45]"}
+--->

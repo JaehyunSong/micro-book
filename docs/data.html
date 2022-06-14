@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.442">
+<meta name="generator" content="quarto-0.9.519">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,19 +17,20 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
 <link href="./Figs/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -230,10 +231,6 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
   <ul>
   <li><a href="#データの利用" id="toc-データの利用" class="nav-link active" data-scroll-target="#データの利用">データの利用</a></li>
   <li><a href="#データ一覧" id="toc-データ一覧" class="nav-link" data-scroll-target="#データ一覧">データ一覧</a></li>
-  <li><a href="#データ説明" id="toc-データ説明" class="nav-link" data-scroll-target="#データ説明">データ説明</a>
-  <ul class="collapse">
-  <li><a href="#pref_vote.csv" id="toc-pref_vote.csv" class="nav-link" data-scroll-target="#pref_vote.csv"><code>Pref_Vote.csv</code></a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -296,114 +293,43 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: center;">3</td>
 <td style="text-align: left;"><a href="materials/Data/Micro09.csv" download=""><code>Micro09.csv</code></a></td>
-<td style="text-align: left;">第9回講義で使用</td>
+<td style="text-align: left;">第9・10回講義で使用</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><a href="materials/Data/Micro11.csv" download=""><code>Micro11.csv</code></a></td>
+<td style="text-align: left;">第11回講義で使用</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="データ説明" class="level2">
-<h2 class="anchored" data-anchor-id="データ説明">データ説明</h2>
-<section id="pref_vote.csv" class="level3">
-<h3 class="anchored" data-anchor-id="pref_vote.csv"><code>Pref_Vote.csv</code></h3>
-<table class="table">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 40%">
-<col style="width: 45%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">変数名</th>
-<th style="text-align: left;">説明</th>
-<th style="text-align: left;">詳細</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>ID</code></td>
-<td style="text-align: left;">都道府県のID</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Pref</code></td>
-<td style="text-align: left;">都道府県名</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Zaisei</code></td>
-<td style="text-align: left;">財政力指数</td>
-<td style="text-align: left;">2020年</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Young</code></td>
-<td style="text-align: left;">30歳未満人口の割合</td>
-<td style="text-align: left;">2020年 (%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Older</code></td>
-<td style="text-align: left;">65歳以上人口の割合</td>
-<td style="text-align: left;">2020年 (%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Jimin</code></td>
-<td style="text-align: left;">自民党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Rikken</code></td>
-<td style="text-align: left;">立憲民主党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Kokumin</code></td>
-<td style="text-align: left;">国民民主党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Komei</code></td>
-<td style="text-align: left;">公明党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Ishin</code></td>
-<td style="text-align: left;">維新の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Kyosan</code></td>
-<td style="text-align: left;">共産党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Shamin</code></td>
-<td style="text-align: left;">社民党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Reiwa</code></td>
-<td style="text-align: left;">れいわ新選組の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>NHK</code></td>
-<td style="text-align: left;">NHKから国民を守る党の得票率</td>
-<td style="text-align: left;">2019参院選比例区; (%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>Region2</code></td>
-<td style="text-align: left;">地域区分</td>
-<td style="text-align: left;">1 = 東日本; 2 = 西日本</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>Region6</code></td>
-<td style="text-align: left;">地域区分</td>
-<td style="text-align: left;">1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄</td>
-</tr>
-</tbody>
-</table>
+<!---
+## データ説明
+
+### `Pref_Vote.csv`
+
+|変数名|説明|詳細|
+|:---|:---|:---|
+|`ID`     |都道府県のID||
+|`Pref`   |都道府県名||
+|`Zaisei` |財政力指数|2020年|
+|`Young`  |30歳未満人口の割合|2020年 (%)|
+|`Older`  |65歳以上人口の割合|2020年 (%)|
+|`Jimin`  |自民党の得票率|2019参院選比例区; (%)|
+|`Rikken` |立憲民主党の得票率|2019参院選比例区; (%)|
+|`Kokumin`|国民民主党の得票率|2019参院選比例区; (%)|
+|`Komei`  |公明党の得票率|2019参院選比例区; (%)|
+|`Ishin`  |維新の得票率|2019参院選比例区; (%)|
+|`Kyosan` |共産党の得票率|2019参院選比例区; (%)|
+|`Shamin` |社民党の得票率|2019参院選比例区; (%)|
+|`Reiwa`  |れいわ新選組の得票率|2019参院選比例区; (%)|
+|`NHK`    |NHKから国民を守る党の得票率|2019参院選比例区; (%)|
+|`Region2`|地域区分|1 = 東日本; 2 = 西日本|
+|`Region6`|地域区分|1 = 北海道・東北; 2 = 関東; 3 = 中部・北陸; 4 = 近畿; 5 = 中国・四国; 6 = 九州・沖縄|
+
+: {tbl-colwidths="[15,40,45]"}
+--->
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

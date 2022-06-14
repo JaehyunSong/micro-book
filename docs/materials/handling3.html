@@ -917,30 +917,15 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>雑然データから整然データへ変形をサポートするパッケージ</p>
+<p>　{tidyr}パッケージは雑然データから整然データへ変形をサポートするパッケージである。主に使う関数は以下の3つである。</p>
 <ul>
-<li><code>pivot_longer()</code>: Wide型データからLong型データへ
-<ul>
-<li>原則1・2に反するデータを整然データへ変換 (最も頻繁に使われる)</li>
-</ul></li>
-<li><code>pivot_wider()</code>: Long型データからWide型データへ
-<ul>
-<li>人間には雑然データの方が読みやすい場合がある（原則1の例）</li>
-</ul></li>
-<li><code>separate()</code>: セルの分割（「年月日」から「年」、「月」、「日」へ）
-<ul>
-<li>原則3に反するデータを整然データへ変換</li>
-</ul></li>
-<li>原則4に反するデータは単位がずれている行を<code>filter()</code>などで除外</li>
+<li><code>pivot_longer()</code>: Wide型データ<span class="math inline">\(\rightarrow\)</span>Long型データ</li>
+<li><code>pivot_wider()</code>: Long型データ<span class="math inline">\(\rightarrow\)</span>Wide型データ</li>
+<li><code>separate()</code>: セルの分割（例:「年月日」から「年」、「月」、「日」へ）</li>
 </ul>
-<p>実習用データ</p>
-<p><code>Micro10.csv</code>: 日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数</p>
-<ul>
-<li>サポートページからダウンロード</li>
-<li>データ出典:<a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins University Center for Systems Science and Engineering</a></li>
-</ul>
+<p>　それでは、サポートページの「データ州」実習用データ（<code>Micro11.csv</code>）をダウンロードし、読み込んでみよう。このデータは日本、韓国、モンゴル、台湾の5日間COVID-19新規感染者数データであり、<a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins University Center for Systems Science and Engineering</a>から入手したものである。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro10.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro11.csv"</span>)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>COVID_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 7
@@ -953,250 +938,24 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 # … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>このデータの問題点</p>
-<ul>
-<li>観察単位は? 測定した変数は?
-<ul>
-<li>観察単位: 地域 <span class="math inline">\(\times\)</span> 時間</li>
-<li>変数: 新規感染者数</li>
-</ul></li>
-<li>新規感染者数が5列にわたって格納されている</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped">
-<colgroup>
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Country</th>
-<th style="text-align: right;">Population</th>
-<th style="text-align: right;">2021/05/24</th>
-<th style="text-align: right;">2021/05/25</th>
-<th style="text-align: right;">2021/05/26</th>
-<th style="text-align: right;">2021/05/27</th>
-<th style="text-align: right;">2021/05/28</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: right;">2743</td>
-<td style="text-align: right;">3918</td>
-<td style="text-align: right;">4485</td>
-<td style="text-align: right;">4163</td>
-<td style="text-align: right;">3701</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: right;">516</td>
-<td style="text-align: right;">699</td>
-<td style="text-align: right;">629</td>
-<td style="text-align: right;">587</td>
-<td style="text-align: right;">533</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: right;">634</td>
-<td style="text-align: right;">680</td>
-<td style="text-align: right;">653</td>
-<td style="text-align: right;">785</td>
-<td style="text-align: right;">769</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: right;">595</td>
-<td style="text-align: right;">539</td>
-<td style="text-align: right;">635</td>
-<td style="text-align: right;">670</td>
-<td style="text-align: right;">554</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Wide型からLong型へ</p>
-<ul>
-<li>整然な<code>COVID_df</code>の構造は?
-<ul>
-<li>5列を1列にまとめるため、縦に長くなる</li>
-<li>WideからLongへ</li>
-</ul></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Country</th>
-<th style="text-align: right;">Population</th>
-<th style="text-align: left;">Date</th>
-<th style="text-align: right;">New_Cases</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">2743</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">3918</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">4485</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">4163</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">126476461</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">3701</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">516</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">699</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">629</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">587</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Korea</td>
-<td style="text-align: right;">51269185</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">533</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">634</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">680</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">653</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">785</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mongolia</td>
-<td style="text-align: right;">3278290</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">769</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/24</td>
-<td style="text-align: right;">595</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/25</td>
-<td style="text-align: right;">539</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/26</td>
-<td style="text-align: right;">635</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/27</td>
-<td style="text-align: right;">670</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Taiwan</td>
-<td style="text-align: right;">23816775</td>
-<td style="text-align: left;">2021/05/28</td>
-<td style="text-align: right;">554</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><code>pivot_longer()</code>: Wide to Long</p>
-<ul>
-<li><code>cols</code>は<code>dplyr::select()</code>と同じ使い方
-<ul>
-<li><code>c()</code>で個別の変数名を指定することも、<code>:</code>や<code>starts_with()</code>を使うこともOK</li>
-<li><strong>注意:</strong> 変数名が数字で始まったり、記号が含まれている場合、変数名を<code>`</code>か<code>"</code>で囲む
-<ul>
-<li>列名が日付の場合、数字で始まったり、記号（<code>/</code>や<code>-</code>など）が含まれるケースが多い</li>
-</ul></li>
-</ul></li>
-</ul>
+<p>　このデータは整然データだろうか、あるいは雑然データだろうか。まずは、本データの観察単位を明らかにする必要がある。これらのデータは「<strong>時点</strong>XにおけるY<strong>地域</strong>の<strong>新規感染者数</strong>と<strong>人口</strong>」を測定したものである。したがって、このデータの観察単位は「地域<span class="math inline">\(\times\)</span>時間」であり、測定されたものは新規感染者数と人口である。したがって、整然データであるためには、「地域名」、「時間」、「人口」、「新規感染者数」の4つの変数で構成される必要がある。一方、現在のデータでは新規感染者数が5列に渡って格納されており、計7列のデータである。</p>
+<p>　このデータを整然データに変えるには、7列のデータを4列のデータに変形する必要がある。2つのデータが同じ情報を持つのであれば、列が多いデータは行が少なく、行が多いデータは列が少なくなるはずである。ここで相対的な横長のデータをwide型、縦長のデータをlong型と呼ぶ。今回の場合はwide型データをlong型データへ変換する必要があり、多くの雑然データの扱いはwide型<span class="math inline">\(\rightarrow\)</span>long型の整形が必要となる。</p>
+<p>　ここで使う関数が<code>pivot_longer()</code>関数である。使い方は以下の通りである。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>データ <span class="sc">%&gt;%</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> 変数が格納されている列,</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"元の列名が入る変数名"</span>,</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"変数の値が入る変数名"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>pivot_longer()</code>: WideからLongへ</p>
-<ul>
-<li><code>cols = starts_with("2020")</code>もOK</li>
-</ul>
+<p>　我々がやりたい作業は<code>2021/05/24</code>列から<code>2021/05/28</code>列までの5列を1つの列としてまとめることである。まとめる列は<code>cols</code>引数で指定する。そして、これまで変数名だったもの（たとえば、<code>2021/05/25</code>など）が入る新しい列名と、値が入る新しい列名を、それぞれ<code>names_to</code>と<code>values_to</code>で指定する。ここでは時点は<code>Date</code>、新規感染者数は<code>New_Cases</code>という列として格納するとしよう。注意すべき点としては、これらの新しい変数名は<code>"</code>で囲むことである。</p>
+<p>　ただし、<code>cols</code>の場合、<code>"</code>で囲んでも、囲まなくても良い。ただし、列名に記号が入っていたり、数字で始まる列名は<code>"</code>で囲む必要がある。また、<code>cols</code>では隣接した列を選択する<code>:</code>や<code>starts_with()</code>なども使用可能である。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>COVID_Long <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
-<span id="cb48-3"><a href="#cb48-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
-<span id="cb48-4"><a href="#cb48-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>)</span>
-<span id="cb48-5"><a href="#cb48-5"></a>COVID_Long</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>COVID_Long <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cols = starts_with("2020") でも良い</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>COVID_Long</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 4
    Country  Population Date       New_Cases
@@ -1223,18 +982,12 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 20 Taiwan     23816775 2021/05/28       554</code></pre>
 </div>
 </div>
-<p><code>pivot_wider()</code>: LongからWideへ</p>
-<ul>
-<li>Long型をWide型へ戻す関数
-<ul>
-<li>人間にとってはLong型よりWide型の方が読みやすいケースも多い</li>
-<li>1列に2つの変数が入っている場合もある</li>
-</ul></li>
-</ul>
+<p>逆に、long型データをwide型データへ整形する際は<code>pivot_wider()</code>を使用する。雑然データはwide型データが多いとは既に説明したが、雑然データの方が<strong>人間にとっては</strong>読みやすい場合もある。上の新型コロナのデータもwide型の方が読みやすい人もいるだろう。データ分析に適したデータは整然データであるが、報告に適したデータとしては必ずしもこの関係は成立しない。図表を作成する際は常に読む側の立場から考える必要があろう。</p>
+<p>　この<code>pivot_wider()</code>関数の使い方は<code>pivot_longer()</code>の類似している。<code>names_to</code>と<code>values_to</code>がそれぞれ<code>naems_from</code>と<code>values_from</code>に変わっただけである。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>COVID_Long <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> <span class="st">"Date"</span>,</span>
-<span id="cb50-3"><a href="#cb50-3"></a>              <span class="at">values_from =</span> <span class="st">"New_Cases"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>COVID_Long <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">"New_Cases"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 7
   Country  Population `2021/05/24` `2021/05/25` `2021/05/26` `2021/05/27`
@@ -1246,23 +999,20 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 # … with 1 more variable: `2021/05/28` &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p><code>separate()</code>: 列の分割</p>
-<p><code>COVID_Long</code>の<code>Date</code>列を<code>Year</code>、<code>Month</code>、<code>Day</code>に分けたい</p>
-<ul>
-<li><strong>例)</strong> <code>Date</code>列を<code>"/"</code>を基準に分割する</li>
-</ul>
+<p>　最後にセルの値を分割する<code>separate()</code>関数について解説する。たとえば、月や曜日ごとの新規感染者数をまとめようとした場合、時点の列が「YYYY年MM月DD日」になっていては困る。これらの年、月、日に分割する必要があろう。先ほど作成した<code>COVID_Long</code>の<code>Date</code>列を<code>Year</code>、<code>Month</code>、<code>Day</code>に分けてみよう。</p>
+<p>　<code>col</code>は分割する列の名前を、<code>into</code>には分割後の列名を、<code>sep</code>は分割の区切りとなる記号などを指定する。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>データ <span class="sc">%&gt;%</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"分割する列名"</span>,</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"分割後の列名1"</span>, <span class="st">"分割後の列名2"</span>, ...),</span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep  =</span> <span class="st">"分割する基準"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>separate()</code>: 列の分割</p>
+<p>　<code>"2022/10/08"</code>の場合、<code>"/"</code>で分ければ、<code>"2022"</code>、<code>"10"</code>、<code>"08"</code>に分割されるだろう。これあらをそれぞれ、<code>Year</code>、<code>Month</code>、<code>Day</code>といった3つの列に分割してみよう。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>COVID_Long <span class="sc">%&gt;%</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"Date"</span>,</span>
-<span id="cb53-3"><a href="#cb53-3"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>),</span>
-<span id="cb53-4"><a href="#cb53-4"></a>           <span class="at">sep  =</span> <span class="st">"/"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>COVID_Long <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>),</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep  =</span> <span class="st">"/"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 6
    Country  Population Year  Month Day   New_Cases
@@ -1289,16 +1039,15 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 20 Taiwan     23816775 2021  05    28          554</code></pre>
 </div>
 </div>
-<p>列の分割（番外編）: 特定の記号がない場合</p>
-<p><strong>例)</strong> <code>City_Data</code>の<code>City</code>列が「都道府県名+市区町村」</p>
-<ul>
-<li>「最初の3文字」と「残り」で分割することは出来ない（神奈川、和歌山、鹿児島）</li>
-<li>任意の2文字の後に「都」、「道」、「府」、「県」が付くか、任意の3文字の後に「県」が付く箇所を見つけて分割
-<ul>
-<li>かなり複雑</li>
-</ul></li>
-</ul>
+<p>　もし、区切りとなる記号が存在しない場合は、<strong>正則表現（regular expression）</strong>の知識が必要となる。テキスト分析に興味があるなら必須の知識であるが、本講義の射程外である。ここでは都道府県と市区町村を分けるサンプルコードのみ紹介する。</p>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>City_Data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">City =</span> <span class="fu">c</span>(<span class="st">"北海道音威子府村"</span>,</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"大阪府高槻市"</span>,</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"広島県府中市"</span>,</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"鹿児島県指宿市"</span>),</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Pop  =</span> <span class="fu">c</span>(<span class="dv">693</span>, <span class="dv">347424</span>, <span class="dv">36471</span>, <span class="dv">38207</span>))</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>City_Data</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   City                Pop
@@ -1308,20 +1057,14 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 3 広島県府中市      36471
 4 鹿児島県指宿市    38207</code></pre>
 </div>
-</div>
-<p><strong>正則表現（regular expression）</strong>の知識が必要</p>
-<ul>
-<li>テキスト分析に興味があるなら必須（前期・後期含めて、本講義では解説しない）</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>City_Data <span class="sc">%&gt;%</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># 任意の2文字の後に「都道府県」のいずれかが来るか、</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>   <span class="co"># 任意の3文字の後に「県」が来たら、そこまでをブロック1、残りをブロック2とする</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Cityの値を「ブロック1-ブロック2」に置換する</span></span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">City =</span> <span class="fu">str_replace</span>(City, <span class="st">"^(.{2}[都道府県]|.{3}県)(.+)"</span>, </span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"</span><span class="sc">\\</span><span class="st">1-</span><span class="sc">\\</span><span class="st">2"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>   <span class="co"># 「-」を基準に列を分割</span></span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"City"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Pref"</span>, <span class="st">"City"</span>), <span class="at">sep  =</span> <span class="st">"-"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>City_Data <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># 任意の2文字の後に「都道府県」のいずれかが来るか、</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>   <span class="co"># 任意の3文字の後に「県」が来たら、そこまでをブロック1、残りをブロック2とする</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Cityの値を「ブロック1-ブロック2」に置換する</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">City =</span> <span class="fu">str_replace</span>(City, <span class="st">"^(.{2}[都道府県]|.{3}県)(.+)"</span>, </span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"</span><span class="sc">\\</span><span class="st">1-</span><span class="sc">\\</span><span class="st">2"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>   <span class="co"># 「-」を基準に列を分割</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">separate</span>(<span class="at">col  =</span> <span class="st">"City"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Pref"</span>, <span class="st">"City"</span>), <span class="at">sep  =</span> <span class="st">"-"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   Pref     City          Pop
@@ -1340,13 +1083,13 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <li><strong>例)</strong> 100万人当たりの新規感染者数を計算し、国ごとに平均値を計算</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(<span class="at">New_Case_per_1M =</span> <span class="fu">mean</span>(New_Case_per_1M))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2021/05/24"</span><span class="sc">:</span><span class="st">"2021/05/28"</span>,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(<span class="at">New_Case_per_1M =</span> <span class="fu">mean</span>(New_Case_per_1M))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   Country  New_Case_per_1M
