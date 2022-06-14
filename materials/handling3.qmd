@@ -77,15 +77,18 @@ bind_rows(list("1組" = Data1, "2組" = Data2),
 
 一方、データを横に結合することはいくつかのバリエーションがある。これらの作業は`*_join()`関数を使用する。ここで重要なのは結合に使う識別用の変数（**キー変数**）が必要ということであり、以下の例では`City`はキー変数である。
 
-:::: {.columns}
-
-::: {.column width=48%}
 ```{r}
 Data1 <- data.frame(City  = c("Tokyo", "Osaka", "Kochi"),
                     Pop   = c(927, 148, 76),
                     Area  = c(2194, 828, 7104))
+
+Data2 <- data.frame(City  = c("Kochi", "Osaka", "Tokyo"),
+                    Food  = c("Katsuo", "Takoyaki", "Ramen"))
 ```
 
+:::: {.columns}
+
+::: {.column width=48%}
 ```{r}
 Data1
 ```
@@ -95,11 +98,6 @@ Data1
 :::
 
 ::: {.column width=48%}
-```{r}
-Data2 <- data.frame(City  = c("Kochi", "Osaka", "Tokyo"),
-                    Food  = c("Katsuo", "Takoyaki", "Ramen"))
-```
-
 ```{r}
 Data2
 ```
@@ -115,15 +113,18 @@ left_join(Data1, Data2, by = "City")
 
 　ただし、キー変数は両データに含まれているが、一致しないケースがある。たとえば、以下の例では`City`と`Toshi`がキー変数である。
 
-:::: {.columns}
-
-::: {.column width=48%}
 ```{r}
 Data1 <- data.frame(City  = c("Tokyo", "Osaka", "Kochi"),
                     Pop   = c(927, 148, 76),
                     Area  = c(2194, 828, 7104))
+
+Data2 <- data.frame(Toshi    = c("Kochi", "Osaka", "Tokyo"),
+                    Tabemono = c("Katsuo", "Takoyaki", "Ramen"))
 ```
 
+:::: {.columns}
+
+::: {.column width=48%}
 ```{r}
 Data1
 ```
@@ -133,11 +134,6 @@ Data1
 :::
 
 ::: {.column width=48%}
-```{r}
-Data2 <- data.frame(Toshi    = c("Kochi", "Osaka", "Tokyo"),
-                    Tabemono = c("Katsuo", "Takoyaki", "Ramen"))
-```
-
 ```{r}
 Data2
 ```
