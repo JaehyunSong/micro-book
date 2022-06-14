@@ -2475,14 +2475,14 @@
     "href": "slide/slide11.html#長過ぎるコードブロックの例",
     "title": "ミクロ政治データ分析実習",
     "section": "長過ぎるコードブロックの例",
-    "text": "長過ぎるコードブロックの例\n慣れたらこれくらいは長い方ではないが…\n\nCOVID_df %>% \n  pivot_longer(cols      = \"2022/06/09\":\"2022/06/13\",\n               names_to  = \"Date\",\n               values_to = \"New_Cases\") %>%\n   mutate(New_Case_per_1M = New_Cases / Population * 1000000,\n          Country         = case_when(Country == \"Japan\"    ~ \"日本\",\n                                      Country == \"Korea\"    ~ \"韓国\",\n                                      Country == \"Mongolia\" ~ \"モンゴル\",\n                                      TRUE                  ~ \"台湾\"),\n          Country         = factor(Country, levels = c(\"日本\", \"韓国\",\n                                                       \"モンゴル\", \"台湾\")),\n          Date            = as.Date(Date)) %>%\n   ggplot(aes(x = Date, y = New_Case_per_1M, \n              group = Country, color = Country)) +\n   geom_line(size = 1.5) +\n   labs(x = \"日付\", y = \"100万人当たり新規感染者数 (人)\", color = \"国\") +\n   scale_x_date(date_labels = \"%b %d\") +\n   theme_minimal(base_size = 16) +\n   theme(legend.position = \"bottom\")"
+    "text": "長過ぎるコードブロックの例\n慣れたらこれくらいは長い方ではないが…\n\nCOVID_df %>% \n  pivot_longer(cols      = \"2022/06/09\":\"2022/06/13\",\n               names_to  = \"Date\",\n               values_to = \"New_Cases\") %>%\n  mutate(New_Case_per_1M = New_Cases / Population * 1000000,\n         Country         = recode(Country,\n                                  \"China\"    = \"中国\",\n                                  \"Japan\"    = \"日本\",\n                                  \"Korea\"    = \"韓国\",\n                                  \"Mongolia\" = \"モンゴル\",\n                                  \"Taiwan\"   = \"台湾\"),\n         Country         = factor(Country, levels = c(\"中国\", \"日本\", \"韓国\", \n                                                      \"モンゴル\", \"台湾\")),\n         Date            = as.Date(Date),\n         Date            = format(Date, \"%Y-%m-%d\")) %>%\n  ggplot(aes(x = Date, y = New_Case_per_1M, group = Country, color = Country)) +\n  geom_line(size = 2) +\n  labs(x = \"日付\", y = \"100万人当たり新規感染者数 (人)\", color = \"国\") +\n  theme_minimal(base_size = 16) +\n  theme(legend.position = \"bottom\")"
   },
   {
     "objectID": "slide/slide11.html#来週以降の内容",
     "href": "slide/slide11.html#来週以降の内容",
     "title": "ミクロ政治データ分析実習",
     "section": "来週以降の内容",
-    "text": "来週以降の内容\n次回からは{ggplot2}を利用したデータの可視化方法を紹介"
+    "text": "来週以降の内容\n次回からは{ggplot2}を利用したデータの可視化方法を紹介\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
     "objectID": "slide/slide11.html#課題",

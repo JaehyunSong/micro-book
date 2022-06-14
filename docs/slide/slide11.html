@@ -1448,21 +1448,22 @@
 <span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="st">"2022/06/09"</span><span class="sc">:</span><span class="st">"2022/06/13"</span>,</span>
 <span id="cb43-3"><a href="#cb43-3"></a>               <span class="at">names_to  =</span> <span class="st">"Date"</span>,</span>
 <span id="cb43-4"><a href="#cb43-4"></a>               <span class="at">values_to =</span> <span class="st">"New_Cases"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb43-5"><a href="#cb43-5"></a>   <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>,</span>
-<span id="cb43-6"><a href="#cb43-6"></a>          <span class="at">Country         =</span> <span class="fu">case_when</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>    <span class="sc">~</span> <span class="st">"日本"</span>,</span>
-<span id="cb43-7"><a href="#cb43-7"></a>                                      Country <span class="sc">==</span> <span class="st">"Korea"</span>    <span class="sc">~</span> <span class="st">"韓国"</span>,</span>
-<span id="cb43-8"><a href="#cb43-8"></a>                                      Country <span class="sc">==</span> <span class="st">"Mongolia"</span> <span class="sc">~</span> <span class="st">"モンゴル"</span>,</span>
-<span id="cb43-9"><a href="#cb43-9"></a>                                      <span class="cn">TRUE</span>                  <span class="sc">~</span> <span class="st">"台湾"</span>),</span>
-<span id="cb43-10"><a href="#cb43-10"></a>          <span class="at">Country         =</span> <span class="fu">factor</span>(Country, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"日本"</span>, <span class="st">"韓国"</span>,</span>
-<span id="cb43-11"><a href="#cb43-11"></a>                                                       <span class="st">"モンゴル"</span>, <span class="st">"台湾"</span>)),</span>
-<span id="cb43-12"><a href="#cb43-12"></a>          <span class="at">Date            =</span> <span class="fu">as.Date</span>(Date)) <span class="sc">%&gt;%</span></span>
-<span id="cb43-13"><a href="#cb43-13"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> New_Case_per_1M, </span>
-<span id="cb43-14"><a href="#cb43-14"></a>              <span class="at">group =</span> Country, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
-<span id="cb43-15"><a href="#cb43-15"></a>   <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb43-16"><a href="#cb43-16"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日付"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, <span class="at">color =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
-<span id="cb43-17"><a href="#cb43-17"></a>   <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%b %d"</span>) <span class="sc">+</span></span>
-<span id="cb43-18"><a href="#cb43-18"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
-<span id="cb43-19"><a href="#cb43-19"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-5"><a href="#cb43-5"></a>  <span class="fu">mutate</span>(<span class="at">New_Case_per_1M =</span> New_Cases <span class="sc">/</span> Population <span class="sc">*</span> <span class="dv">1000000</span>,</span>
+<span id="cb43-6"><a href="#cb43-6"></a>         <span class="at">Country         =</span> <span class="fu">recode</span>(Country,</span>
+<span id="cb43-7"><a href="#cb43-7"></a>                                  <span class="st">"China"</span>    <span class="ot">=</span> <span class="st">"中国"</span>,</span>
+<span id="cb43-8"><a href="#cb43-8"></a>                                  <span class="st">"Japan"</span>    <span class="ot">=</span> <span class="st">"日本"</span>,</span>
+<span id="cb43-9"><a href="#cb43-9"></a>                                  <span class="st">"Korea"</span>    <span class="ot">=</span> <span class="st">"韓国"</span>,</span>
+<span id="cb43-10"><a href="#cb43-10"></a>                                  <span class="st">"Mongolia"</span> <span class="ot">=</span> <span class="st">"モンゴル"</span>,</span>
+<span id="cb43-11"><a href="#cb43-11"></a>                                  <span class="st">"Taiwan"</span>   <span class="ot">=</span> <span class="st">"台湾"</span>),</span>
+<span id="cb43-12"><a href="#cb43-12"></a>         <span class="at">Country         =</span> <span class="fu">factor</span>(Country, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"中国"</span>, <span class="st">"日本"</span>, <span class="st">"韓国"</span>, </span>
+<span id="cb43-13"><a href="#cb43-13"></a>                                                      <span class="st">"モンゴル"</span>, <span class="st">"台湾"</span>)),</span>
+<span id="cb43-14"><a href="#cb43-14"></a>         <span class="at">Date            =</span> <span class="fu">as.Date</span>(Date),</span>
+<span id="cb43-15"><a href="#cb43-15"></a>         <span class="at">Date            =</span> <span class="fu">format</span>(Date, <span class="st">"%Y-%m-%d"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> New_Case_per_1M, <span class="at">group =</span> Country, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb43-17"><a href="#cb43-17"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb43-18"><a href="#cb43-18"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日付"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, <span class="at">color =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
+<span id="cb43-19"><a href="#cb43-19"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb43-20"><a href="#cb43-20"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--- --->
 </section>
@@ -1473,34 +1474,11 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide11_files/figure-revealjs/unnamed-chunk-43-1.png" width="3000"></p>
+<p><img data-src="slide11_files/figure-revealjs/ggplot2-sample-1.png" width="3000"></p>
 </figure>
 </div>
 </div>
 </div>
-<!--- --->
-</section>
-<section id="課題" class="slide level2">
-<h2>課題</h2>
-<ol type="1">
-<li>今回講義用のプロジェクトを作成する。</li>
-<li>LMSから<strong>2つ</strong>のデータ（<code>.csv</code>）、問題ファイル（<code>.Rmd</code>）とサンプルファイル（<code>.html</code>）をダウンロードし、プロジェクトのフォルダーに保存する。
-<ul>
-<li><strong>ファイル名は変更しない</strong>こと</li>
-</ul></li>
-<li>プロジェクトを開き、<code>.Rmd</code>ファイルを開く</li>
-<li>サンプルファイルと同じ結果が得られるようにR Markdown文書を作成する。</li>
-<li>随時Knitし、結果を確認する。
-<ul>
-<li>Knitできないファイルは評価できない</li>
-</ul></li>
-<li><code>.Rmd</code>ファイルを関大LMSに提出する。</li>
-<li><strong>期限は2021年6月19日（土）の23時59分とする。</strong>
-<ul>
-<li>時間に余裕を持って取り組むこと。期限直前に取り組み始めてPCトラブルがあっても期限延長はない</li>
-</ul></li>
-<li>答案は次回の講義までに公開する。</li>
-</ol>
 
 <p><img src="Figs/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
