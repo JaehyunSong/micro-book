@@ -12,7 +12,7 @@
 <meta name="author" content="情20-0170 関大太郎" />
 
 
-<title>「ミクロ政治データ分析実習」第10回課題</title>
+<title>「ミクロ政治データ分析実習」第11回課題</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -449,9 +449,9 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">「ミクロ政治データ分析実習」第10回課題</h1>
+<h1 class="title toc-ignore">「ミクロ政治データ分析実習」第11回課題</h1>
 <h4 class="author">情20-0170 関大太郎</h4>
-<h4 class="date">作成日: 2022年06月14日</h4>
+<h4 class="date">作成日: 2022年06月15日</h4>
 
 </div>
 
@@ -467,254 +467,398 @@ pre code {
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p><strong>問題2:</strong>
-LMSからダウンロードした課題用データ（<code>Micro_HW10.csv</code>）を読み込み、<code>raw_df</code>という名のオブジェクトとして格納し、出力すること。</p>
+LMSからダウンロードした課題用データ（<code>Micro_HW11_1.csv</code>と<code>Micro_HW11_2.csv</code>）を読み込み、それぞれ<code>raw_df1</code>、<code>raw_df2</code>という名のオブジェクトとして格納し、出力すること。</p>
 <ul>
 <li>データはプロジェクト・フォルダー内に<code>Data</code>というフォルダーを作成し、そこにアップロードしておくこと。</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## Rows: 1684 Columns: 12
+<pre><code>## Rows: 19 Columns: 4
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## dbl (12): ID, Quiz1, Quiz2, Quiz3, Quiz4, Quiz5, Quiz6, Gender, Age, Educ, I...
+## chr (2): Country, Freedom
+## dbl (2): Population, HDI
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>## # A tibble: 1,684 × 12
-##       ID Quiz1 Quiz2 Quiz3 Quiz4 Quiz5 Quiz6 Gender   Age  Educ Income Ideology
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1     3     4     3     1     1     1      1    73     3     99        4
-##  2     5     8     8     8     8     8     8      2    94     1     88        5
-##  3    11     8     8     8     8     8     1      2    57     3     99        6
-##  4    51     3     2     8     8     1     1      2    62     3     99        5
-##  5   104     3     2     4     8     8     1      1    50     4      8        4
-##  6   108     3     4     4     8     8     1      2    57     4      9        7
-##  7   124     3     1     2     1     1     1      1    78     1      4        8
-##  8   133     3     8     4     8     8     8      1    64     1      3        4
-##  9   139     3     4     4     8     1     1      2    57     3      3        3
-## 10   152     3     4     4     8     8     1      1    44     4      7       NA
-## # … with 1,674 more rows</code></pre>
+<pre><code>## # A tibble: 19 × 4
+##    Country        Population Freedom   HDI
+##    &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1 Argentina        45195774 F       0.845
+##  2 Australia        25499884 F       0.944
+##  3 Brazil          212559417 F       0.765
+##  4 Canada           37742154 F       0.929
+##  5 China          1447470092 NF      0.761
+##  6 France           68147691 F       0.901
+##  7 Germany          83783942 F       0.947
+##  8 India          1380004385 PF      0.645
+##  9 Indonesia       273523615 PF      0.718
+## 10 Italy            60461826 F       0.892
+## 11 Japan           126476461 F       0.919
+## 12 South Korea      51269185 F       0.916
+## 13 Mexico          128932753 PF      0.779
+## 14 Russia          145934462 NF      0.824
+## 15 Saudi Arabia     34813871 NF      0.854
+## 16 South Africa     59308690 F       0.709
+## 17 Turkey           84339067 NF      0.82 
+## 18 United Kingdom   68517621 F       0.932
+## 19 United States   334308644 F       0.926</code></pre>
+<pre><code>## Rows: 19 Columns: 365
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (1): Country
+## dbl (364): 2021/01/02, 2021/01/03, 2021/01/04, 2021/01/05, 2021/01/06, 2021/...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 19 × 365
+##    Country      `2021/01/02` `2021/01/03` `2021/01/04` `2021/01/05` `2021/01/06`
+##    &lt;chr&gt;               &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+##  1 Argentina            5240         5884         8222        13790        13441
+##  2 Australia              24           20           13           19           10
+##  3 Brazil              15353        17190        25039        58083        62507
+##  4 Canada               5814         9625         9717         7528         8911
+##  5 China                  82           77          122           96          144
+##  6 France               3466        12491         4084        20833        25186
+##  7 Germany             12690        10315         9847        11897        21237
+##  8 India               18177        16504        16375        18088        20346
+##  9 Indonesia            7203         6877         6753         7445         8854
+## 10 Italy               11825        14245        10798        15375        20326
+## 11 Japan                3071         3166         3343         4949         6049
+## 12 South Korea           651         1020          715          839          868
+## 13 Mexico               6359         5211         6464        11271        13345
+## 14 Russia              25938        23845        23015        23955        23902
+## 15 Saudi Arabia          101           82           94          104          118
+## 16 South Africa        15002        11859        12601        14410        21832
+## 17 Turkey              11180         9877        13695        14494        13830
+## 18 United King…        57877        55116        58919        61093        62554
+## 19 United Stat…       272279       203401       185502       232864       259763
+## # … with 359 more variables: `2021/01/07` &lt;dbl&gt;, `2021/01/08` &lt;dbl&gt;,
+## #   `2021/01/09` &lt;dbl&gt;, `2021/01/10` &lt;dbl&gt;, `2021/01/11` &lt;dbl&gt;,
+## #   `2021/01/12` &lt;dbl&gt;, `2021/01/13` &lt;dbl&gt;, `2021/01/14` &lt;dbl&gt;,
+## #   `2021/01/15` &lt;dbl&gt;, `2021/01/16` &lt;dbl&gt;, `2021/01/17` &lt;dbl&gt;,
+## #   `2021/01/18` &lt;dbl&gt;, `2021/01/19` &lt;dbl&gt;, `2021/01/20` &lt;dbl&gt;,
+## #   `2021/01/21` &lt;dbl&gt;, `2021/01/22` &lt;dbl&gt;, `2021/01/23` &lt;dbl&gt;,
+## #   `2021/01/24` &lt;dbl&gt;, `2021/01/25` &lt;dbl&gt;, `2021/01/26` &lt;dbl&gt;, …</code></pre>
 <p><strong>問題3:</strong>
-<code>raw_df</code>の大きさ（行数と列数）を出力する。</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## [1] 1684   12</code></pre>
-<p><strong>問題4:</strong>
-<code>raw_df</code>の変数名（列名）を出力する。</p>
+<code>raw_df1</code>と<code>raw_df2</code>の大きさ（行数と列数）を出力する。</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>##  [1] &quot;ID&quot;       &quot;Quiz1&quot;    &quot;Quiz2&quot;    &quot;Quiz3&quot;    &quot;Quiz4&quot;    &quot;Quiz5&quot;   
-##  [7] &quot;Quiz6&quot;    &quot;Gender&quot;   &quot;Age&quot;      &quot;Educ&quot;     &quot;Income&quot;   &quot;Ideology&quot;</code></pre>
-<p>各変数の詳細は以下の通りである。</p>
+<pre><code>## [1] 19  4</code></pre>
+<pre><code>## [1]  19 365</code></pre>
+<p><strong>問題4:</strong>
+<code>raw_df1</code>と<code>raw_df2</code>の変数名（列名）を出力する。</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
+<pre><code>## [1] &quot;Country&quot;    &quot;Population&quot; &quot;Freedom&quot;    &quot;HDI&quot;</code></pre>
+<pre><code>##   [1] &quot;Country&quot;    &quot;2021/01/02&quot; &quot;2021/01/03&quot; &quot;2021/01/04&quot; &quot;2021/01/05&quot;
+##   [6] &quot;2021/01/06&quot; &quot;2021/01/07&quot; &quot;2021/01/08&quot; &quot;2021/01/09&quot; &quot;2021/01/10&quot;
+##  [11] &quot;2021/01/11&quot; &quot;2021/01/12&quot; &quot;2021/01/13&quot; &quot;2021/01/14&quot; &quot;2021/01/15&quot;
+##  [16] &quot;2021/01/16&quot; &quot;2021/01/17&quot; &quot;2021/01/18&quot; &quot;2021/01/19&quot; &quot;2021/01/20&quot;
+##  [21] &quot;2021/01/21&quot; &quot;2021/01/22&quot; &quot;2021/01/23&quot; &quot;2021/01/24&quot; &quot;2021/01/25&quot;
+##  [26] &quot;2021/01/26&quot; &quot;2021/01/27&quot; &quot;2021/01/28&quot; &quot;2021/01/29&quot; &quot;2021/01/30&quot;
+##  [31] &quot;2021/01/31&quot; &quot;2021/02/01&quot; &quot;2021/02/02&quot; &quot;2021/02/03&quot; &quot;2021/02/04&quot;
+##  [36] &quot;2021/02/05&quot; &quot;2021/02/06&quot; &quot;2021/02/07&quot; &quot;2021/02/08&quot; &quot;2021/02/09&quot;
+##  [41] &quot;2021/02/10&quot; &quot;2021/02/11&quot; &quot;2021/02/12&quot; &quot;2021/02/13&quot; &quot;2021/02/14&quot;
+##  [46] &quot;2021/02/15&quot; &quot;2021/02/16&quot; &quot;2021/02/17&quot; &quot;2021/02/18&quot; &quot;2021/02/19&quot;
+##  [51] &quot;2021/02/20&quot; &quot;2021/02/21&quot; &quot;2021/02/22&quot; &quot;2021/02/23&quot; &quot;2021/02/24&quot;
+##  [56] &quot;2021/02/25&quot; &quot;2021/02/26&quot; &quot;2021/02/27&quot; &quot;2021/02/28&quot; &quot;2021/03/01&quot;
+##  [61] &quot;2021/03/02&quot; &quot;2021/03/03&quot; &quot;2021/03/04&quot; &quot;2021/03/05&quot; &quot;2021/03/06&quot;
+##  [66] &quot;2021/03/07&quot; &quot;2021/03/08&quot; &quot;2021/03/09&quot; &quot;2021/03/10&quot; &quot;2021/03/11&quot;
+##  [71] &quot;2021/03/12&quot; &quot;2021/03/13&quot; &quot;2021/03/14&quot; &quot;2021/03/15&quot; &quot;2021/03/16&quot;
+##  [76] &quot;2021/03/17&quot; &quot;2021/03/18&quot; &quot;2021/03/19&quot; &quot;2021/03/20&quot; &quot;2021/03/21&quot;
+##  [81] &quot;2021/03/22&quot; &quot;2021/03/23&quot; &quot;2021/03/24&quot; &quot;2021/03/25&quot; &quot;2021/03/26&quot;
+##  [86] &quot;2021/03/27&quot; &quot;2021/03/28&quot; &quot;2021/03/29&quot; &quot;2021/03/30&quot; &quot;2021/03/31&quot;
+##  [91] &quot;2021/04/01&quot; &quot;2021/04/02&quot; &quot;2021/04/03&quot; &quot;2021/04/04&quot; &quot;2021/04/05&quot;
+##  [96] &quot;2021/04/06&quot; &quot;2021/04/07&quot; &quot;2021/04/08&quot; &quot;2021/04/09&quot; &quot;2021/04/10&quot;
+## [101] &quot;2021/04/11&quot; &quot;2021/04/12&quot; &quot;2021/04/13&quot; &quot;2021/04/14&quot; &quot;2021/04/15&quot;
+## [106] &quot;2021/04/16&quot; &quot;2021/04/17&quot; &quot;2021/04/18&quot; &quot;2021/04/19&quot; &quot;2021/04/20&quot;
+## [111] &quot;2021/04/21&quot; &quot;2021/04/22&quot; &quot;2021/04/23&quot; &quot;2021/04/24&quot; &quot;2021/04/25&quot;
+## [116] &quot;2021/04/26&quot; &quot;2021/04/27&quot; &quot;2021/04/28&quot; &quot;2021/04/29&quot; &quot;2021/04/30&quot;
+## [121] &quot;2021/05/01&quot; &quot;2021/05/02&quot; &quot;2021/05/03&quot; &quot;2021/05/04&quot; &quot;2021/05/05&quot;
+## [126] &quot;2021/05/06&quot; &quot;2021/05/07&quot; &quot;2021/05/08&quot; &quot;2021/05/09&quot; &quot;2021/05/10&quot;
+## [131] &quot;2021/05/11&quot; &quot;2021/05/12&quot; &quot;2021/05/13&quot; &quot;2021/05/14&quot; &quot;2021/05/15&quot;
+## [136] &quot;2021/05/16&quot; &quot;2021/05/17&quot; &quot;2021/05/18&quot; &quot;2021/05/19&quot; &quot;2021/05/20&quot;
+## [141] &quot;2021/05/21&quot; &quot;2021/05/22&quot; &quot;2021/05/23&quot; &quot;2021/05/24&quot; &quot;2021/05/25&quot;
+## [146] &quot;2021/05/26&quot; &quot;2021/05/27&quot; &quot;2021/05/28&quot; &quot;2021/05/29&quot; &quot;2021/05/30&quot;
+## [151] &quot;2021/05/31&quot; &quot;2021/06/01&quot; &quot;2021/06/02&quot; &quot;2021/06/03&quot; &quot;2021/06/04&quot;
+## [156] &quot;2021/06/05&quot; &quot;2021/06/06&quot; &quot;2021/06/07&quot; &quot;2021/06/08&quot; &quot;2021/06/09&quot;
+## [161] &quot;2021/06/10&quot; &quot;2021/06/11&quot; &quot;2021/06/12&quot; &quot;2021/06/13&quot; &quot;2021/06/14&quot;
+## [166] &quot;2021/06/15&quot; &quot;2021/06/16&quot; &quot;2021/06/17&quot; &quot;2021/06/18&quot; &quot;2021/06/19&quot;
+## [171] &quot;2021/06/20&quot; &quot;2021/06/21&quot; &quot;2021/06/22&quot; &quot;2021/06/23&quot; &quot;2021/06/24&quot;
+## [176] &quot;2021/06/25&quot; &quot;2021/06/26&quot; &quot;2021/06/27&quot; &quot;2021/06/28&quot; &quot;2021/06/29&quot;
+## [181] &quot;2021/06/30&quot; &quot;2021/07/01&quot; &quot;2021/07/02&quot; &quot;2021/07/03&quot; &quot;2021/07/04&quot;
+## [186] &quot;2021/07/05&quot; &quot;2021/07/06&quot; &quot;2021/07/07&quot; &quot;2021/07/08&quot; &quot;2021/07/09&quot;
+## [191] &quot;2021/07/10&quot; &quot;2021/07/11&quot; &quot;2021/07/12&quot; &quot;2021/07/13&quot; &quot;2021/07/14&quot;
+## [196] &quot;2021/07/15&quot; &quot;2021/07/16&quot; &quot;2021/07/17&quot; &quot;2021/07/18&quot; &quot;2021/07/19&quot;
+## [201] &quot;2021/07/20&quot; &quot;2021/07/21&quot; &quot;2021/07/22&quot; &quot;2021/07/23&quot; &quot;2021/07/24&quot;
+## [206] &quot;2021/07/25&quot; &quot;2021/07/26&quot; &quot;2021/07/27&quot; &quot;2021/07/28&quot; &quot;2021/07/29&quot;
+## [211] &quot;2021/07/30&quot; &quot;2021/07/31&quot; &quot;2021/08/01&quot; &quot;2021/08/02&quot; &quot;2021/08/03&quot;
+## [216] &quot;2021/08/04&quot; &quot;2021/08/05&quot; &quot;2021/08/06&quot; &quot;2021/08/07&quot; &quot;2021/08/08&quot;
+## [221] &quot;2021/08/09&quot; &quot;2021/08/10&quot; &quot;2021/08/11&quot; &quot;2021/08/12&quot; &quot;2021/08/13&quot;
+## [226] &quot;2021/08/14&quot; &quot;2021/08/15&quot; &quot;2021/08/16&quot; &quot;2021/08/17&quot; &quot;2021/08/18&quot;
+## [231] &quot;2021/08/19&quot; &quot;2021/08/20&quot; &quot;2021/08/21&quot; &quot;2021/08/22&quot; &quot;2021/08/23&quot;
+## [236] &quot;2021/08/24&quot; &quot;2021/08/25&quot; &quot;2021/08/26&quot; &quot;2021/08/27&quot; &quot;2021/08/28&quot;
+## [241] &quot;2021/08/29&quot; &quot;2021/08/30&quot; &quot;2021/08/31&quot; &quot;2021/09/01&quot; &quot;2021/09/02&quot;
+## [246] &quot;2021/09/03&quot; &quot;2021/09/04&quot; &quot;2021/09/05&quot; &quot;2021/09/06&quot; &quot;2021/09/07&quot;
+## [251] &quot;2021/09/08&quot; &quot;2021/09/09&quot; &quot;2021/09/10&quot; &quot;2021/09/11&quot; &quot;2021/09/12&quot;
+## [256] &quot;2021/09/13&quot; &quot;2021/09/14&quot; &quot;2021/09/15&quot; &quot;2021/09/16&quot; &quot;2021/09/17&quot;
+## [261] &quot;2021/09/18&quot; &quot;2021/09/19&quot; &quot;2021/09/20&quot; &quot;2021/09/21&quot; &quot;2021/09/22&quot;
+## [266] &quot;2021/09/23&quot; &quot;2021/09/24&quot; &quot;2021/09/25&quot; &quot;2021/09/26&quot; &quot;2021/09/27&quot;
+## [271] &quot;2021/09/28&quot; &quot;2021/09/29&quot; &quot;2021/09/30&quot; &quot;2021/10/01&quot; &quot;2021/10/02&quot;
+## [276] &quot;2021/10/03&quot; &quot;2021/10/04&quot; &quot;2021/10/05&quot; &quot;2021/10/06&quot; &quot;2021/10/07&quot;
+## [281] &quot;2021/10/08&quot; &quot;2021/10/09&quot; &quot;2021/10/10&quot; &quot;2021/10/11&quot; &quot;2021/10/12&quot;
+## [286] &quot;2021/10/13&quot; &quot;2021/10/14&quot; &quot;2021/10/15&quot; &quot;2021/10/16&quot; &quot;2021/10/17&quot;
+## [291] &quot;2021/10/18&quot; &quot;2021/10/19&quot; &quot;2021/10/20&quot; &quot;2021/10/21&quot; &quot;2021/10/22&quot;
+## [296] &quot;2021/10/23&quot; &quot;2021/10/24&quot; &quot;2021/10/25&quot; &quot;2021/10/26&quot; &quot;2021/10/27&quot;
+## [301] &quot;2021/10/28&quot; &quot;2021/10/29&quot; &quot;2021/10/30&quot; &quot;2021/10/31&quot; &quot;2021/11/01&quot;
+## [306] &quot;2021/11/02&quot; &quot;2021/11/03&quot; &quot;2021/11/04&quot; &quot;2021/11/05&quot; &quot;2021/11/06&quot;
+## [311] &quot;2021/11/07&quot; &quot;2021/11/08&quot; &quot;2021/11/09&quot; &quot;2021/11/10&quot; &quot;2021/11/11&quot;
+## [316] &quot;2021/11/12&quot; &quot;2021/11/13&quot; &quot;2021/11/14&quot; &quot;2021/11/15&quot; &quot;2021/11/16&quot;
+## [321] &quot;2021/11/17&quot; &quot;2021/11/18&quot; &quot;2021/11/19&quot; &quot;2021/11/20&quot; &quot;2021/11/21&quot;
+## [326] &quot;2021/11/22&quot; &quot;2021/11/23&quot; &quot;2021/11/24&quot; &quot;2021/11/25&quot; &quot;2021/11/26&quot;
+## [331] &quot;2021/11/27&quot; &quot;2021/11/28&quot; &quot;2021/11/29&quot; &quot;2021/11/30&quot; &quot;2021/12/01&quot;
+## [336] &quot;2021/12/02&quot; &quot;2021/12/03&quot; &quot;2021/12/04&quot; &quot;2021/12/05&quot; &quot;2021/12/06&quot;
+## [341] &quot;2021/12/07&quot; &quot;2021/12/08&quot; &quot;2021/12/09&quot; &quot;2021/12/10&quot; &quot;2021/12/11&quot;
+## [346] &quot;2021/12/12&quot; &quot;2021/12/13&quot; &quot;2021/12/14&quot; &quot;2021/12/15&quot; &quot;2021/12/16&quot;
+## [351] &quot;2021/12/17&quot; &quot;2021/12/18&quot; &quot;2021/12/19&quot; &quot;2021/12/20&quot; &quot;2021/12/21&quot;
+## [356] &quot;2021/12/22&quot; &quot;2021/12/23&quot; &quot;2021/12/24&quot; &quot;2021/12/25&quot; &quot;2021/12/26&quot;
+## [361] &quot;2021/12/27&quot; &quot;2021/12/28&quot; &quot;2021/12/29&quot; &quot;2021/12/30&quot; &quot;2021/12/31&quot;</code></pre>
+<p><code>raw_df1</code>の詳細</p>
 <table>
 <colgroup>
 <col width="16%" />
-<col width="45%" />
-<col width="26%" />
-<col width="11%" />
+<col width="29%" />
+<col width="54%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left">変数名</th>
-<th align="left">説明</th>
+<th align="left">詳細</th>
 <th align="left">備考</th>
-<th align="left">欠損値</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>ID</code></td>
-<td align="left">回答者のID</td>
+<td align="left"><code>Country</code></td>
+<td align="left">国名</td>
 <td align="left"></td>
-<td align="left">なし</td>
 </tr>
 <tr class="even">
-<td align="left"><code>Quiz1</code></td>
-<td align="left">政治に関するクイズの回答 (1)</td>
-<td align="left">正解: 3</td>
-<td align="left">なし</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>Quiz2</code></td>
-<td align="left">政治に関するクイズの回答 (2)</td>
-<td align="left">正解: 4</td>
-<td align="left">なし</td>
-</tr>
-<tr class="even">
-<td align="left"><code>Quiz3</code></td>
-<td align="left">政治に関するクイズの回答 (3)</td>
-<td align="left">正解: 3</td>
-<td align="left">なし</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>Quiz4</code></td>
-<td align="left">政治に関するクイズの回答 (4)</td>
-<td align="left">正解: 1</td>
-<td align="left">なし</td>
-</tr>
-<tr class="even">
-<td align="left"><code>Quiz5</code></td>
-<td align="left">政治に関するクイズの回答 (5)</td>
-<td align="left">正解: 1</td>
-<td align="left">なし</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>Quiz6</code></td>
-<td align="left">政治に関するクイズの回答 (6)</td>
-<td align="left">正解: 1</td>
-<td align="left">なし</td>
-</tr>
-<tr class="even">
-<td align="left"><code>Gender</code></td>
-<td align="left">回答者の性別</td>
-<td align="left">1=男性 / 2=女性</td>
-<td align="left">なし</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>Age</code></td>
-<td align="left">回答者の年齢</td>
+<td align="left"><code>Population</code></td>
+<td align="left">人口</td>
 <td align="left"></td>
-<td align="left">なし</td>
-</tr>
-<tr class="even">
-<td align="left"><code>Educ</code></td>
-<td align="left">回答者の最終学歴</td>
-<td align="left">大きいほど高学歴</td>
-<td align="left">9</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>Income</code></td>
-<td align="left">回答者の世帯収入</td>
-<td align="left">大きいほど高収入</td>
-<td align="left">88 &amp; 99</td>
+<td align="left"><code>Freedom</code></td>
+<td align="left">フリーダム・ハウス指標</td>
+<td align="left">F = Free; PF = Partly Free; NF = Not Free</td>
 </tr>
 <tr class="even">
-<td align="left"><code>Ideology</code></td>
-<td align="left">回答者の政治的イデオロギー</td>
-<td align="left">大きいほど保守</td>
-<td align="left">88 &amp; 99</td>
+<td align="left"><code>HDI</code></td>
+<td align="left">人間開発指数</td>
+<td align="left">2019年</td>
+</tr>
+</tbody>
+</table>
+<p><code>raw_df2</code>の詳細</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">変数名</th>
+<th align="left">詳細</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Country</code></td>
+<td align="left">国名</td>
+</tr>
+<tr class="even">
+<td align="left">その他</td>
+<td align="left">当該日の新型コロナ新規感染者数</td>
 </tr>
 </tbody>
 </table>
 <p><strong>問題5:</strong>
-<code>df1</code>の<code>Quiz1</code>から<code>Quiz6</code>変数を正解なら1、それ以外は0になるように再コーディングし、既存の変数に上書きする。結果は<code>df1</code>という名のオブジェクトとして格納し、<code>df1</code>を出力すること。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,684 × 12
-##       ID Quiz1 Quiz2 Quiz3 Quiz4 Quiz5 Quiz6 Gender   Age  Educ Income Ideology
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1     1     1     1     1     1     1      1    73     3     99        4
-##  2     5     0     0     0     0     0     0      2    94     1     88        5
-##  3    11     0     0     0     0     0     1      2    57     3     99        6
-##  4    51     1     0     0     0     1     1      2    62     3     99        5
-##  5   104     1     0     0     0     0     1      1    50     4      8        4
-##  6   108     1     1     0     0     0     1      2    57     4      9        7
-##  7   124     1     0     0     1     1     1      1    78     1      4        8
-##  8   133     1     0     0     0     0     0      1    64     1      3        4
-##  9   139     1     1     0     0     1     1      2    57     3      3        3
-## 10   152     1     1     0     0     0     1      1    44     4      7       NA
-## # … with 1,674 more rows</code></pre>
-<p><strong>問題6:</strong>
-<code>df1</code>のクイズの正解数を政治知識として定義したい。<code>Quiz1</code>から<code>Quiz6</code>までの合計を計算し、<code>Knowledge</code>という列として追加する。追加された<code>Knowledge</code>列の位置は<code>Quiz1</code>の前とする。以上の結果を<code>df1</code>に上書きし、<code>df1</code>を出力する。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,684 × 13
-##       ID Knowledge Quiz1 Quiz2 Quiz3 Quiz4 Quiz5 Quiz6 Gender   Age  Educ Income
-##    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1     1         6     1     1     1     1     1     1      1    73     3     99
-##  2     5         0     0     0     0     0     0     0      2    94     1     88
-##  3    11         1     0     0     0     0     0     1      2    57     3     99
-##  4    51         3     1     0     0     0     1     1      2    62     3     99
-##  5   104         2     1     0     0     0     0     1      1    50     4      8
-##  6   108         3     1     1     0     0     0     1      2    57     4      9
-##  7   124         4     1     0     0     1     1     1      1    78     1      4
-##  8   133         1     1     0     0     0     0     0      1    64     1      3
-##  9   139         4     1     1     0     0     1     1      2    57     3      3
-## 10   152         3     1     1     0     0     0     1      1    44     4      7
-## # … with 1,674 more rows, and 1 more variable: Ideology &lt;dbl&gt;</code></pre>
-<p><strong>問題7:</strong>
-<code>df1</code>の<code>Quiz1</code>から<code>Quiz6</code>までの列を削除し、<code>Educ</code>の変数名を<code>Education</code>に変更する。以上の結果は<code>df1</code>に上書きし、<code>df1</code>を出力すること。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,684 × 7
-##       ID Knowledge Gender   Age Education Income Ideology
-##    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1         6      1    73         3     99        4
-##  2     5         0      2    94         1     88        5
-##  3    11         1      2    57         3     99        6
-##  4    51         3      2    62         3     99        5
-##  5   104         2      1    50         4      8        4
-##  6   108         3      2    57         4      9        7
-##  7   124         4      1    78         1      4        8
-##  8   133         1      1    64         1      3        4
-##  9   139         4      2    57         3      3        3
-## 10   152         3      1    44         4      7       NA
-## # … with 1,674 more rows</code></pre>
-<p><strong>問題8:</strong>
-<code>df1</code>の欠損値の処理を行う。<code>Education</code>、<code>Income</code>、<code>Ideology</code>は特定の値が欠損値を意味する（問題4の表を参照すること）。たとえば、<code>Education</code>の値が9の場合、これは欠損を意味する。各変数において欠損値を意味する値を<code>NA</code>（<code>NA_real_</code>）に変更する。以上の結果は<code>df1</code>に上書きし、<code>df1</code>を出力すること。</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,684 × 7
-##       ID Knowledge Gender   Age Education Income Ideology
-##    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1         6      1    73         3     NA        4
-##  2     5         0      2    94         1     NA        5
-##  3    11         1      2    57         3     NA        6
-##  4    51         3      2    62         3     NA        5
-##  5   104         2      1    50         4      8        4
-##  6   108         3      2    57         4      9        7
-##  7   124         4      1    78         1      4        8
-##  8   133         1      1    64         1      3        4
-##  9   139         4      2    57         3      3        3
-## 10   152         3      1    44         4      7       NA
-## # … with 1,674 more rows</code></pre>
-<p><strong>問題9:</strong>
-<code>df1</code>の<code>Eucation</code>、<code>Income</code>、<code>Ideology</code>のいずれかの変数が欠損している行を除外する。また、<code>Age</code>が90以下、<strong>かつ</strong><code>Income</code>が10以下の行を抽出する。以上の結果は<code>df1</code>に上書きし、<code>df1</code>を出力すること。</p>
+<code>raw_df1</code>の<code>Freedom</code>変数と<code>HDI</code>変数をリコーディングする。リコーディングした後、<code>raw_df1</code>を上書きし、<code>raw_df1</code>を出力すること。</p>
 <ul>
-<li>データの大きさが1011行、7列であることを確認すること。</li>
+<li><code>Freedom</code>変数
+<ol style="list-style-type: decimal">
+<li><code>Freedom</code>の値が<code>&quot;F&quot;</code>なら<code>&quot;Free&quot;</code>、それ以外は<code>&quot;Others&quot;</code>とし、<code>Freedom</code>列に上書きする。</li>
+<li><code>Freedom</code>変数をfactor化する。要素の順番は<code>&quot;Freedom&quot;</code>、<code>&quot;Others&quot;</code>の順とする。</li>
+</ol></li>
+<li><code>HDI</code>変数
+<ol style="list-style-type: decimal">
+<li><code>HID</code>の値が0.8以上なら<code>&quot;Very High&quot;</code>、0.7以上なら<code>&quot;High&quot;</code>、それ以外は<code>&quot;Middle&quot;</code>とし、<code>HDI</code>列に上書きする。</li>
+<li><code>HDI</code>変数をfactor化する。要素の順番は<code>&quot;Very High&quot;</code>、<code>&quot;High&quot;</code>、<code>&quot;Middle&quot;</code>の順とする。</li>
+</ol></li>
 </ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
+<pre><code>## # A tibble: 19 × 4
+##    Country        Population Freedom HDI      
+##    &lt;chr&gt;               &lt;dbl&gt; &lt;fct&gt;   &lt;fct&gt;    
+##  1 Argentina        45195774 Free    Very High
+##  2 Australia        25499884 Free    Very High
+##  3 Brazil          212559417 Free    High     
+##  4 Canada           37742154 Free    Very High
+##  5 China          1447470092 Others  High     
+##  6 France           68147691 Free    Very High
+##  7 Germany          83783942 Free    Very High
+##  8 India          1380004385 Others  Middle   
+##  9 Indonesia       273523615 Others  High     
+## 10 Italy            60461826 Free    Very High
+## 11 Japan           126476461 Free    Very High
+## 12 South Korea      51269185 Free    Very High
+## 13 Mexico          128932753 Others  High     
+## 14 Russia          145934462 Others  Very High
+## 15 Saudi Arabia     34813871 Others  Very High
+## 16 South Africa     59308690 Free    High     
+## 17 Turkey           84339067 Others  Very High
+## 18 United Kingdom   68517621 Free    Very High
+## 19 United States   334308644 Free    Very High</code></pre>
+<!-- 
+
+**【参考/解説】** `Freedom`のリコーディングは`if_else()`以外にも`case_when()`、`recode()`を使っても良い。
+
+--->
+<p><strong>問題6:</strong>
+<code>raw_df2</code>をlong型データへ整形し、<code>raw_df2</code>に上書きする。日付の列名は<code>Date</code>、新規感染者数の列名は<code>NewCases</code>とする。整形後の<code>raw_df2</code>を出力すること。</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
+<pre><code>## # A tibble: 6,916 × 3
+##    Country   Date       NewCases
+##    &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
+##  1 Argentina 2021/01/02     5240
+##  2 Argentina 2021/01/03     5884
+##  3 Argentina 2021/01/04     8222
+##  4 Argentina 2021/01/05    13790
+##  5 Argentina 2021/01/06    13441
+##  6 Argentina 2021/01/07    13835
+##  7 Argentina 2021/01/08    13346
+##  8 Argentina 2021/01/09    11057
+##  9 Argentina 2021/01/10     7808
+## 10 Argentina 2021/01/11     8704
+## # … with 6,906 more rows</code></pre>
+<p><strong>問題7:</strong>
+<code>raw_df2</code>の<code>Date</code>列と年（<code>Year</code>）、月（<code>Month</code>）、日（<code>Day</code>）に分割する。分割後、<code>raw_df2</code>に上書きし、<code>raw_df2</code>を出力すること。</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,011 × 7
-##       ID Knowledge Gender   Age Education Income Ideology
-##    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1   104         2      1    50         4      8        4
-##  2   108         3      2    57         4      9        7
-##  3   124         4      1    78         1      4        8
-##  4   133         1      1    64         1      3        4
-##  5   139         4      2    57         3      3        3
-##  6   209         2      2    61         2      5       10
-##  7   236         0      1    44         2      1        5
-##  8   311         0      2    67         2      3        2
-##  9   322         1      1    41         4      8        7
-## 10   331         1      1    35         3      4        7
-## # … with 1,001 more rows</code></pre>
-<p><strong>問題10:</strong>
-<code>df1</code>の<code>Gender</code>と<code>Education</code>をcharacter型変数に再コーディングする。<code>Gender</code>の値が1なら<code>&quot;Male&quot;</code>、それ以外は<code>&quot;Female&quot;</code>とする。また、<code>Education</code>の値が1なら<code>&quot;Low&quot;</code>、4なら<code>&quot;High&quot;</code>、それ以外は<code>&quot;Middle&quot;</code>とする。それぞれの変数名は<code>Gender_C</code>、<code>Education_C</code>と名付けて列を追加すること。最後に<code>Education_C</code>をfactor化し、要素の順番は<code>&quot;Low&quot;</code>、<code>&quot;Middle&quot;</code>、<code>&quot;High&quot;</code>とする。以上の結果は<code>df1</code>に上書きし、<code>df1</code>を出力すること。</p>
+<pre><code>## # A tibble: 6,916 × 5
+##    Country   Year  Month Day   NewCases
+##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;
+##  1 Argentina 2021  01    02        5240
+##  2 Argentina 2021  01    03        5884
+##  3 Argentina 2021  01    04        8222
+##  4 Argentina 2021  01    05       13790
+##  5 Argentina 2021  01    06       13441
+##  6 Argentina 2021  01    07       13835
+##  7 Argentina 2021  01    08       13346
+##  8 Argentina 2021  01    09       11057
+##  9 Argentina 2021  01    10        7808
+## 10 Argentina 2021  01    11        8704
+## # … with 6,906 more rows</code></pre>
+<p><strong>問題8:</strong>
+<code>raw_df2</code>を使い、月ごのと<code>NewCases</code>の<strong>合計</strong>を計算し、結果を<code>NewCases</code>列として出力する。<code>NewsCases</code>が高い月が上位に位置するようにソートすること。</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,011 × 9
-##       ID Knowledge Gender   Age Education Income Ideology Gender_C Education_C
-##    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;fct&gt;      
-##  1   104         2      1    50         4      8        4 Male     High       
-##  2   108         3      2    57         4      9        7 Female   High       
-##  3   124         4      1    78         1      4        8 Male     Low        
-##  4   133         1      1    64         1      3        4 Male     Low        
-##  5   139         4      2    57         3      3        3 Female   Middle     
-##  6   209         2      2    61         2      5       10 Female   Middle     
-##  7   236         0      1    44         2      1        5 Male     Middle     
-##  8   311         0      2    67         2      3        2 Female   Middle     
-##  9   322         1      1    41         4      8        7 Male     High       
-## 10   331         1      1    35         3      4        7 Male     Middle     
-## # … with 1,001 more rows</code></pre>
-<p><strong>問題11:</strong>
-<code>df1</code>の<code>Education_C</code>の値ごとに<code>Ideology</code>の平均値、標準偏差、最小値、最大値を計算し、それぞれ<code>Mean</code>、<code>SD</code>、<code>Min</code>、<code>Max</code>という列として出力する。各グループに属するケース数も<code>N</code>という名の列として出力すること。出力される結果に置いて<code>Education_C</code>列の名前は<code>Education</code>に修正する。以上の結果は<code>df2</code>という名のオブジェクトとして格納し、<code>df2</code>を出力すること。</p>
+<pre><code>## # A tibble: 12 × 2
+##    Month NewCases
+##    &lt;chr&gt;    &lt;dbl&gt;
+##  1 12    17436298
+##  2 04    15888981
+##  3 05    14599455
+##  4 01    13366267
+##  5 08    12045598
+##  6 09     9889881
+##  7 07     9228822
+##  8 03     8924379
+##  9 11     8577309
+## 10 10     7607929
+## 11 06     7373985
+## 12 02     7116346</code></pre>
+<p><strong>問題9:</strong>
+<code>raw_df1</code>と<code>raw_df2</code>を結合する。キー変数は<code>Country</code>である。結合したデータは<code>df</code>という名のオブジェクトとして格納し、dfを出力すること。</p>
+<ul>
+<li>結合後のデータの大きさが6916行、9列であることを確認すること。</li>
+</ul>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 3 × 6
-##   Education  Mean    SD   Min   Max     N
-##   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 Low        5.58  2.11     0    10   156
-## 2 Middle     5.41  1.93     0    10   654
-## 3 High       4.98  2.06     0    10   201</code></pre>
-<p><strong>問題12:</strong>
-<code>df1</code>の性別（<code>Gender_C</code>）ごとの世帯収入（<code>Income</code>）の平均値、標準偏差、最小値、最大値を計算し、それぞれ<code>Mean</code>、<code>SD</code>、<code>Min</code>、<code>Max</code>という列として出力する。各グループに属するケース数も<code>N</code>という名の列として出力すること。出力される結果に置いて<code>Gender_C</code>列の名前は<code>Gender</code>に修正する。以上の結果は<code>df3</code>という名のオブジェクトとして格納し、<code>df3</code>を出力すること。</p>
+<pre><code>## # A tibble: 6,916 × 8
+##    Country   Population Freedom HDI       Year  Month Day   NewCases
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;fct&gt;   &lt;fct&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;
+##  1 Argentina   45195774 Free    Very High 2021  01    02        5240
+##  2 Argentina   45195774 Free    Very High 2021  01    03        5884
+##  3 Argentina   45195774 Free    Very High 2021  01    04        8222
+##  4 Argentina   45195774 Free    Very High 2021  01    05       13790
+##  5 Argentina   45195774 Free    Very High 2021  01    06       13441
+##  6 Argentina   45195774 Free    Very High 2021  01    07       13835
+##  7 Argentina   45195774 Free    Very High 2021  01    08       13346
+##  8 Argentina   45195774 Free    Very High 2021  01    09       11057
+##  9 Argentina   45195774 Free    Very High 2021  01    10        7808
+## 10 Argentina   45195774 Free    Very High 2021  01    11        8704
+## # … with 6,906 more rows</code></pre>
+<p><strong>問題10:</strong>
+<code>df</code>を用い、<strong>100万人当たり</strong>新規感染者数を計算し、<code>NewCases_per_1M</code>という列として追加する。追加後、<code>df</code>を上書きし、<code>df</code>を出力すること。</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
-<pre><code>## # A tibble: 2 × 6
-##   Gender  Mean    SD   Min   Max     N
-##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 Female  4.40  2.55     1    10   499
-## 2 Male    4.36  2.45     1    10   512</code></pre>
+<pre><code>## # A tibble: 6,916 × 9
+##    Country   Population Freedom HDI   Year  Month Day   NewCases NewCases_per_1M
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;fct&gt;   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;           &lt;dbl&gt;
+##  1 Argentina   45195774 Free    Very… 2021  01    02        5240            116.
+##  2 Argentina   45195774 Free    Very… 2021  01    03        5884            130.
+##  3 Argentina   45195774 Free    Very… 2021  01    04        8222            182.
+##  4 Argentina   45195774 Free    Very… 2021  01    05       13790            305.
+##  5 Argentina   45195774 Free    Very… 2021  01    06       13441            297.
+##  6 Argentina   45195774 Free    Very… 2021  01    07       13835            306.
+##  7 Argentina   45195774 Free    Very… 2021  01    08       13346            295.
+##  8 Argentina   45195774 Free    Very… 2021  01    09       11057            245.
+##  9 Argentina   45195774 Free    Very… 2021  01    10        7808            173.
+## 10 Argentina   45195774 Free    Very… 2021  01    11        8704            193.
+## # … with 6,906 more rows</code></pre>
+<p><strong>問題11:</strong>
+<code>df</code>を用い、国ごとの100万人当たり新規感染者数の<strong>合計</strong>を計算し、少ない国が上位の行に位置するようにソートする。</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
+<pre><code>## # A tibble: 19 × 2
+##    Country        NewCases_per_1M
+##    &lt;chr&gt;                    &lt;dbl&gt;
+##  1 China                     17.4
+##  2 Saudi Arabia            5554. 
+##  3 South Korea            11170. 
+##  4 Japan                  11807. 
+##  5 Indonesia              12838. 
+##  6 Australia              15570. 
+##  7 India                  17794. 
+##  8 Mexico                 19720. 
+##  9 South Africa           40203. 
+## 10 Canada                 43112. 
+## 11 Russia                 49107. 
+## 12 Germany                64544. 
+## 13 Italy                  66096. 
+## 14 Brazil                 68630. 
+## 15 Turkey                 86101. 
+## 16 Argentina              89053. 
+## 17 United States         103095. 
+## 18 France                108305. 
+## 19 United Kingdom        152679.</code></pre>
+<p><strong>問題12:</strong>
+<code>df</code>を用い、政治的・市民的自由度（<code>Freedom</code>）ごとに100万人当たり新規感染者数の<strong>平均</strong>を計算し、<code>NewCases_per_1M</code>という名の列として出力する。また、<code>N</code>という列には該当する国の数を表示させる。</p>
+<ul>
+<li><code>n()</code>のみでは国数の計算ができないため、更に364
+(観測日数)で割る必要がある。</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   Freedom NewCases_per_1M     N
+##   &lt;fct&gt;             &lt;dbl&gt; &lt;dbl&gt;
+## 1 Free              177.     12
+## 2 Others             75.0     7</code></pre>
+<!-- 
+
+**【参考/解説】** `N = n() / 364`でなく、一旦、`N = n()`とし、次の行に`N = N / 364`で計算しても良い。
+
+--->
+<p><strong>問題13:</strong>
+<code>df</code>を用い、人間開発指数（<code>HDI</code>）ごとに100万人当たり新規感染者数の<strong>平均</strong>を計算し、<code>NewCases_per_1M</code>という名の列として出力する。また、<code>N</code>という列には該当する国の数を表示させる。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにRコード</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   HDI       NewCases_per_1M     N
+##   &lt;fct&gt;               &lt;dbl&gt; &lt;dbl&gt;
+## 1 Very High           170.     13
+## 2 High                 77.7     5
+## 3 Middle               48.9     1</code></pre>
 
 
 
