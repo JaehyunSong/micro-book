@@ -1,6 +1,7 @@
 ---
 title: "第12回講義資料"
 subtitle: "可視化 (1)"
+toc: true
 link-external-icon: true
 link-external-newwindow: true
 ---
@@ -11,4 +12,13 @@ link-external-newwindow: true
 
 ```{=html}
 <iframe class="slide-deck" src="../slide/slide12.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
+```
+
+```{r}
+#| include: false
+library(tidyverse)
+knitr::opts_chunk$set(dev       = "ragg_png",
+                      dpi       = 300,
+                      fig.align = "center",
+                      echo      = TRUE)
 ```

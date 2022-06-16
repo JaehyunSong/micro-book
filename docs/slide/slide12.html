@@ -24,6 +24,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
@@ -338,11 +401,778 @@
   <p class="date">2022年 7月 1日</p>
 </section>
 
-<section class="slide level2">
+<section id="section" class="slide level2">
+<h2></h2>
+<p><span class="sec-title">グラフィックの文法と{ggplot2}</span></p>
+<!--- --->
+</section>
+<section id="グラフを作成する方法" class="slide level2">
+<h2>グラフを作成する方法</h2>
+<p>代表的な可視化のパッケージ</p>
+<ul>
+<li>他にもインタラクティブ・プロットに特化した{plotly}、3次元グラフのための{rgl}、インタラクティブ地図の{leaflet}など多数あり</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:32%;">
+<h3 id="base-r">Base R</h3>
+<ul>
+<li>別途のパッケージを使わず、R内蔵関数で作図</li>
+<li>紙にペンでグラフを書くイメージ</li>
+<li>図が気に入らなかったら一からやり直し</li>
+<li>作成した図をオブジェクトとして保存することが出来ない</li>
+<li>最も自由度が高い</li>
+</ul>
+</div><div class="column" style="width:2%;">
 
+</div><div class="column" style="width:32%;">
+<h3 id="lattice">{lattice}</h3>
+<ul>
+<li>Deepayan Sarkarが開発</li>
+<li>{ggplot2}が登場する前には主流</li>
+<li>関数1つで可視化ができる（ただし、関数が長くなる）</li>
+</ul>
+</div><div class="column" style="width:2%;">
 
+</div><div class="column" style="width:32%;">
+<h3 id="ggplot2">{ggplot2}</h3>
+<ul>
+<li>Hadley Wickhamが大学院生の時に開発</li>
+<li>グラフィックの文法 (<strong>g</strong>rammer of <strong>g</strong>raphics)」の思想をR上で具現化</li>
+<li>グラフの様々な要素をそれぞれ1つの層 (layer)と捉え、積み重ねていく</li>
+</ul>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="base-rの例" class="slide level2">
+<h2>Base Rの例</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">コード</a></li><li><a href="#tabset-1-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro09.csv"</span>) <span class="co"># 第9回の実習用データ</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">plot</span>(<span class="at">x =</span> df<span class="sc">$</span>PPP_per_capita, <span class="at">y =</span> df<span class="sc">$</span>HDI_2018, <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb1-5"><a href="#cb1-5"></a>     <span class="at">col =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>     <span class="at">xlab =</span> <span class="st">"一人当たり購買力平価GDP (USD)"</span>, <span class="at">ylab =</span> <span class="st">"人間開発指数"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"OECD加盟国"</span>, <span class="st">"OECD非加盟国"</span>), </span>
+<span id="cb1-9"><a href="#cb1-9"></a>       <span class="at">col    =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-3-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="latticeの例" class="slide level2">
+<h2>{lattice}の例</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">コード</a></li><li><a href="#tabset-2-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">xyplot</span>(HDI_2018 <span class="sc">~</span> PPP_per_capita, <span class="at">data =</span> df,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>       <span class="at">group =</span> OECD, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">grid =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>       <span class="at">auto.key =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>       <span class="at">key =</span> <span class="fu">list</span>(<span class="at">title     =</span> <span class="st">"OECD加盟有無"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>                  <span class="at">cex.title =</span> <span class="dv">1</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>                  <span class="at">space     =</span> <span class="st">"right"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>                  <span class="at">points    =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="fu">c</span>(<span class="st">"magenta"</span>, <span class="st">"cyan"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9"></a>                                   <span class="at">pch =</span> <span class="dv">19</span>),</span>
+<span id="cb2-10"><a href="#cb2-10"></a>                  <span class="at">text      =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"加盟国"</span>, <span class="st">"非加盟国"</span>))), </span>
+<span id="cb2-11"><a href="#cb2-11"></a>       <span class="at">xlab =</span> <span class="st">"一人当たり購買力平価GDP (USD)"</span>, <span class="at">ylab =</span> <span class="st">"人間開発指数"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-5-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2の例" class="slide level2">
+<h2>{ggplot2}の例</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">コード</a></li><li><a href="#tabset-3-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>   <span class="fu">mutate</span>(<span class="at">OECD =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"加盟国"</span>, <span class="st">"非加盟国"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD), </span>
+<span id="cb3-5"><a href="#cb3-5"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人あたり購買力平価GDP (USD)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>        <span class="at">color =</span> <span class="st">"OECD加盟有無"</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-7-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="グラフィックの文法" class="slide level2">
+<h2>グラフィックの文法</h2>
+<p>Wilkinsonの「グラフィックの文法」</p>
+<div class="columns">
+<div class="column" style="width:75%;">
+<ul>
+<li>Wilkinson, Leland. 2005. <em>The Grammar of Graphics.</em> Springer.</li>
+<li>グラフを<strong>構造化</strong>された方法で記述し、<strong>レイヤー (layer; 層)を積み重ねる</strong>ことによってグラフを構築するフレームワーク</li>
+<li>グラフの構成要素の例
+<ul>
+<li>横軸と縦軸
+<ul>
+<li>目盛りの間隔、ラベルの大きさ</li>
+</ul></li>
+<li>点、線、面
+<ul>
+<li>色、太さ、形、透明度など</li>
+</ul></li>
+<li>凡例</li>
+<li>図のタイトル</li>
+</ul></li>
+<li>それぞれの構成要素を一つのレイヤーとして扱い、レイヤーを積み重ねていく</li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-<img src="Figs/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+</div><div class="column" style="width:20%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/11/The_Grammar_of_Graphics.jpg"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2とは" class="slide level2">
+<h2>{ggplot2}とは</h2>
+<p>Hadley Wickhamが大学院生の時に開発した可視化パッケージ</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/11/ggplot2_logo.png" width="175"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>g</strong>rammer of <strong>g</strong>raphicsの思想をR上で具現化したパッケージ</li>
+<li>図の構成要素それぞれに対応する関数が存在し、一つのレイヤーとして機能
+<ul>
+<li><code>ggplot()</code>: キャンバスを用意</li>
+<li><code>geom_point()</code>: 点 / <code>geom_line()</code>: 線 / <code>geom_bar()</code>: 棒</li>
+<li><code>scale_x_continuous()</code>: 連続変数の横軸</li>
+<li><code>scale_x_discrete()</code>: 離散変数の横軸など</li>
+</ul></li>
+<li>関数を覚える必要は全くない
+<ul>
+<li>{ggplot2}の仕組みだけを覚え、後はググりながらコーディング</li>
+</ul></li>
+</ul>
+<!--- --->
+</section>
+<section id="ggplot2のイメージ-1" class="slide level2">
+<h2>{ggplot2}のイメージ (1)</h2>
+<p>データの読み込み&amp;ハンドリング</p>
+<div class="cell" data-layout-align="center" data-mesage="false">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro09.csv"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># OECD変数をリコーディングし、OECD_Jへ</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>   <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"加盟国"</span>, <span class="st">"非加盟国"</span>)) </span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2のイメージ-2" class="slide level2">
+<h2>{ggplot2}のイメージ (2)</h2>
+<p>キャンバスの用意</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="sc">%&gt;%</span> <span class="co"># データdfをggplot()関数に渡し、作図の準備をする</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>   <span class="fu">ggplot</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-11-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2のイメージ-3" class="slide level2">
+<h2>{ggplot2}のイメージ (3)</h2>
+<p>キャンバス上に点を出力</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>   <span class="co"># 点を出力する。点の横軸上の位置はPPP_per_capita、縦軸上の位置はHDI_2018に対応</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>   <span class="co"># OECD_Jの値に応じて色分けする。</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="co">#&lt;&lt;</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-12-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2のイメージ-4" class="slide level2">
+<h2>{ggplot2}のイメージ (4)</h2>
+<p>ラベルの修正</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="4,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,  </span>
+<span id="cb7-5"><a href="#cb7-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-13-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2のイメージ-5" class="slide level2">
+<h2>{ggplot2}のイメージ (5)</h2>
+<p>テーマ変更</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="co"># Black and Whiteテーマを使い、文字サイズは12</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-14-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2のイメージ-6" class="slide level2">
+<h2>{ggplot2}のイメージ (6)</h2>
+<p>凡例の位置調整</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="co"># 凡例を図の下段に</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-15-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ggplot2で図が出来上がるまで" class="slide level2">
+<h2>{ggplot2}で図が出来上がるまで</h2>
+<p>レイヤーを積み重ねるイメージ</p>
+<ul>
+<li>図の核心部は<strong>幾何オブジェクト</strong>（<code>geom_*()</code>）と<strong>マッピング</strong>（<code>aes()</code>）</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/11/Layer.png" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><span class="sec-title">グラフの構成要素</span></p>
+<!--- --->
+</section>
+<section id="ggplot2の必須要素" class="slide level2">
+<h2>{ggplot2}の必須要素</h2>
+<p>以下の要素があればグラフはとりあえず出来上がる</p>
+<ol type="1">
+<li><strong>データ</strong>（Data）</li>
+<li><strong>幾何オブジェクト</strong>（Geometry Object）: <code>geom_*()</code>関数
+<ul>
+<li>散布図、棒グラフ、折れ線グラフ、…</li>
+</ul></li>
+<li><strong>マッピング</strong>（Mapping）: <code>aes()</code>関数
+<ul>
+<li>散布図の場合、点の位置（横軸と縦軸）</li>
+<li>棒グラフの場合、棒の位置（横軸）と高さ（縦軸）</li>
+<li>折れ線グラフの場合、線の傾きが変化する点の位置（横軸と縦軸）</li>
+</ul></li>
+<li><strong>座標</strong>系（Coordinate System）: <code>coord_*()</code>関数
+<ul>
+<li>デカルト座標系（直交座標系）、極座標系など</li>
+<li>座標系の上限の下限など</li>
+<li>座標系は{ggplot2}が自動的に設定してくれるが、カスタマイズ可</li>
+</ul></li>
+</ol>
+<p>凡例の位置、フォント、点の大きさ、軸ラベルの修正などは任意</p>
+<!--- --->
+</section>
+<section id="ggplot2の必須要素-1" class="slide level2">
+<h2>{ggplot2}の必須要素</h2>
+<p>座標系はデータ/幾何オブジェクトに応じて自動的に作成される（カスタマイズ可）</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/11/Structure.png" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="書き方" class="slide level2">
+<h2>書き方</h2>
+<ul>
+<li><strong>注意:</strong> レイヤーの積み重ねは<code>%&gt;%</code>でなく<code>+</code>を使用
+<ul>
+<li>オブジェクトを<strong>渡す</strong>のではなく、レイヤーを<strong>足す</strong>という意味</li>
+</ul></li>
+<li>可視化は<code>ggplot()</code>からスタート</li>
+<li>幾何オブジェクトは<code>geom_</code>で始まる関数</li>
+<li>幾何オブジェクト内には<code>mapping =</code>でマッピングが必要。
+<ul>
+<li>第一引数であるため、<code>mapping =</code>は省略し、<code>aes()</code>からスタートでOK</li>
+</ul></li>
+<li><code>aes()</code>の中にはグラフ上に出力される点、線、面などがデータのどの変数に対応するかを記述</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>   幾何オブジェクト関数(<span class="at">mapping =</span> <span class="fu">aes</span>(マッピング))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
+<section id="データ" class="slide level2">
+<h2>データ</h2>
+<ul>
+<li>使用するデータ構造はdata.frame、またはtibble</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:32%;">
+<h3 id="データの指定-1">データの指定 (1)</h3>
+<ul>
+<li><code>data</code>引数にdata.frame (tibble)オブジェクト名を指定</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:32%;">
+<h3 id="データの指定-2">データの指定 (2)</h3>
+<ul>
+<li><code>data</code>引数は第一引数であるため、省略されることも多い</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(データ名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:32%;">
+<h3 id="データの指定-3">データの指定 (3)</h3>
+<ul>
+<li><code>data</code>引数は第一引数であるため、パイプ演算子 (<code>%&gt;%</code>)で渡すことも可能</li>
+<li><code>データ名</code>と<code>ggplot()</code>の間に{dplyr}、{tidyr}などの各種関数も使用可能</li>
+<li>この方法を推奨</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>データ名 <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>   <span class="fu">ggplot</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="幾何オブジェクト" class="slide level2">
+<h2>幾何オブジェクト</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>データ名 <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>   幾何オブジェクト関数()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>指定されたデータを使ってどのような図を作成するか</p>
+<ul>
+<li>散布図: <code>geom_point()</code></li>
+<li>棒グラフ: <code>geom_bar()</code></li>
+<li>折れ線グラフ: <code>geom_line()</code></li>
+<li>ヒストグラム: <code>geom_histogram()</code></li>
+<li>箱ひげ図: <code>geom_boxplot()</code></li>
+<li>その他</li>
+</ul>
+<p>{ggplot2}が提供する幾何オブジェクトも数十種類があり、ユーザーが開発・公開した幾何オブジェクトなどもある</p>
+<ul>
+<li>非巡回有向グラフ作成のための{ggdag}、ネットワークの可視化のための{ggnetwork}など</li>
+</ul>
+<!--- --->
+</section>
+<section id="マッピング" class="slide level2">
+<h2>マッピング</h2>
+<p>グラフ上の<strong>点、線、面などの情報をデータと変数に対応</strong>させる</p>
+<ul>
+<li>プロット上に出力されるデータの具体的な在り方を指定する</li>
+<li>散布図の例) 各点の横軸と縦軸における位置情報</li>
+<li><code>geom_*()</code>内の<code>aes()</code>関数で指定
+<ul>
+<li>グラフに複数の幾何オブジェクトが存在し、マッピング情報が同じなら<code>ggplot()</code>内で指定することも可能</li>
+</ul></li>
+</ul>
+<p><strong>例)</strong> <code>geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J))</code></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">幾何オブジェクト</th>
+<th style="text-align: left;">マッピング情報</th>
+<th style="text-align: left;">引数</th>
+<th style="text-align: left;">対応する変数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>geom_point()</code></td>
+<td style="text-align: left;">点の横軸上の位置</td>
+<td style="text-align: left;"><code>x</code></td>
+<td style="text-align: left;"><code>PPP_per_capita</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>geom_point()</code></td>
+<td style="text-align: left;">点の縦軸上の位置</td>
+<td style="text-align: left;"><code>y</code></td>
+<td style="text-align: left;"><code>HDI_2018</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>geom_point()</code></td>
+<td style="text-align: left;">点の色</td>
+<td style="text-align: left;"><code>color</code></td>
+<td style="text-align: left;"><code>OECD_J</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>点、線、面が持てる情報は他にも色々
+<ul>
+<li>大きさ (<code>size</code>)、線の種類 (<code>linetype</code>)、透明度 (<code>alpha</code>)、面の色 (<code>fill</code>)、点の形 (<code>shape</code>)、グループ (<code>group</code>)など</li>
+</ul></li>
+</ul>
+<!--- --->
+</section>
+<section id="マッピング時の注意" class="slide level2">
+<h2>マッピング時の注意</h2>
+<p><code>aes()</code>の中で指定するか、外で指定するかで挙動が変わる。</p>
+<ul>
+<li><code>aes()</code>の<strong>中</strong>で<code>color</code>を指定する場合、<strong>それぞれの点</strong>が指定された変数の値に応じて色分けされる、</li>
+<li><code>aes()</code>の<strong>外</strong>で<code>color</code>を指定する場合、<strong>全ての点</strong>に適用される。</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1"><code>aes()</code>の中 (コード)</a></li><li><a href="#tabset-4-2"><code>aes()</code>の中 (結果)</a></li><li><a href="#tabset-4-3"><code>aes()</code>の外 (コード)</a></li><li><a href="#tabset-4-4"><code>aes()</code>の外 (結果)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-4-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-24-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-3">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-4-4">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-26-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="座標系" class="slide level2">
+<h2>座標系</h2>
+<ul>
+<li>直交座標系の拡大・縮小: <code>coord_cartesian()</code>
+<ul>
+<li>最もよく使う座標系（デフォルト）</li>
+</ul></li>
+<li>横軸と縦軸の交換: <code>coord_flip()</code></li>
+<li>横軸と縦軸比の固定: <code>coord_fixed()</code></li>
+<li>極座標系 (polar coordinates system)へ変換: <code>coord_polar()</code>
+<ul>
+<li>円グラフを作成する際に使われるが、<strong>円グラフは邪悪なる存在</strong>のケースが多いため、省略</li>
+</ul></li>
+</ul>
+<!--- --->
+</section>
+<section id="直交座標系拡大の例" class="slide level2">
+<h2>直交座標系拡大の例</h2>
+<p>横軸を30000〜90000、縦軸を0.7〜1にする</p>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">コード</a></li><li><a href="#tabset-5-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J), </span>
+<span id="cb17-4"><a href="#cb17-4"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP"</span>, <span class="at">y =</span> <span class="st">"人間開発指数"</span>, <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>   <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">30000</span>, <span class="dv">90000</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-5-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-28-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="スケール-scale" class="slide level2">
+<h2>スケール (Scale)</h2>
+<p>マッピング要素のカスタマイズ</p>
+<ul>
+<li>横/縦軸の目盛り変更、色分けの色を指定など</li>
+<li><code>scale_*_*()</code>関数を使用
+<ul>
+<li><code>scale_マッピング要素_対応する変数のタイプ()</code></li>
+</ul></li>
+<li>詳細は次週以降</li>
+</ul>
+<!--- --->
+</section>
+<section id="ファセット-facet" class="slide level2">
+<h2>ファセット (Facet)</h2>
+<p>グラフを2つ以上の面で分割</p>
+<ul>
+<li>例) <code>FH_Stauts</code>の棒グラフを大陸ごとに出力</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># データの用意</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># 参考) 「\n」は図内の改行を意味する。</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>   <span class="fu">mutate</span>(<span class="at">FH_Status =</span> <span class="fu">case_when</span>(FH_Status <span class="sc">==</span> <span class="st">"F"</span>  <span class="sc">~</span> <span class="st">"自由"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5"></a>                                FH_Status <span class="sc">==</span> <span class="st">"PF"</span> <span class="sc">~</span> <span class="st">"部分的に</span><span class="sc">\n</span><span class="st">自由"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>                                <span class="cn">TRUE</span>              <span class="sc">~</span> <span class="st">"不自由"</span>),</span>
+<span id="cb18-7"><a href="#cb18-7"></a>          <span class="at">FH_Status =</span> <span class="fu">factor</span>(FH_Status,</span>
+<span id="cb18-8"><a href="#cb18-8"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"自由"</span>, <span class="st">"部分的に</span><span class="sc">\n</span><span class="st">自由"</span>, <span class="st">"不自由"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>   <span class="fu">drop_na</span>(FH_Status)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
+<section id="ファセット分割なし" class="slide level2">
+<h2>ファセット分割なし</h2>
+<p>同じ大陸内の<code>FH_Stauts</code>の分布を確認するには不向き</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Status, <span class="at">fill =</span> Continent),</span>
+<span id="cb19-4"><a href="#cb19-4"></a>            <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス評価"</span>, <span class="at">y =</span> <span class="st">"国家数"</span>, <span class="at">fill =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-30-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="ファセット分割あり" class="slide level2">
+<h2>ファセット分割あり</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Status),</span>
+<span id="cb20-4"><a href="#cb20-4"></a>            <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス評価"</span>, <span class="at">y =</span> <span class="st">"国家数"</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>   <span class="fu">facet_wrap</span>(<span class="sc">~</span> Continent, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="co">#&lt;&lt;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>   <span class="fu">theme_bw</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-31-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p><span class="sec-title">良いグラフとは</span></p>
+<!--- --->
+</section>
+<section id="意識すべきところ" class="slide level2">
+<h2>意識すべきところ</h2>
+<ul>
+<li>データ・インク比</li>
+<li>カラーユニバーサルデザイン</li>
+<li>円グラフは邪悪なる存在</li>
+<li>3次元グラフは更に邪悪なる存在</li>
+<li>3次元円グラフは概念レベルで駆逐すべき存在</li>
+</ul>
+<h3 id="参考図書-日本語">参考図書 (日本語)</h3>
+<p>1と4は{ggplot2}の教科書としても優れている</p>
+<ol type="1">
+<li>Hadley Wickham・Garrett Grolemund(著), 黒川利明(訳). 2017. 『<a href="https://www.amazon.co.jp/dp/487311814X">Rではじめるデータサイエンス</a>』オライリージャパン.</li>
+<li>藤俊久仁・渡部良一. 2019. 『<a href="https://www.amazon.co.jp/dp/B07VK43YC7">データビジュアライゼーションの教科書</a>』秀和システム.</li>
+<li>永田ゆかり. 2020. 『<a href="https://www.amazon.co.jp/dp/B08BHZ4HT3/">データ視覚化のデザイン</a>』SBクリエイティブ.</li>
+<li>キーラン・ヒーリー(著), 瓜生真也・江口哲史・三村喬生(訳). 2021.『<a href="https://www.amazon.co.jp/dp/4065164044/">データ分析のためのデータ可視化入門</a>』講談社.<strong>(おすすめ!)</strong></li>
+</ol>
+<!--- --->
+</section>
+<section id="データインク比-data-ink-ratio" class="slide level2">
+<h2>データ・インク比 (Data-ink ratio)</h2>
+<p>Edward R. Tufte. 2001. <em>The Visual Display of Quantitative Information (2nd Ed).</em> Graphics Press.</p>
+<p><span class="math display">\[
+\textrm{データ・インク比} = \frac{\textsf{データの情報を含むインクの量}}{\textsf{グラフの出力に使用されたインクの総量}}
+\]</span></p>
+<ul>
+<li>良いグラフとはデータ・インク比を最大化したグラフ</li>
+<li>グラフにおいて情報損失なしに除去できる要素が占める割合を1から引いたもの</li>
+<li>色分けにも注意</li>
+</ul>
+<!--- --->
+</section>
+<section id="色分けに注意-1" class="slide level2">
+<h2>色分けに注意 (1)</h2>
+<p>.center[<img data-src="Figs/11/Dataink_ratio1.png" alt=":scale 100%">]</p>
+<!--- --->
+</section>
+<section id="色分けに注意-2" class="slide level2">
+<h2>色分けに注意 (2)</h2>
+<p>.center[<img data-src="Figs/11/Dataink_ratio2.png" alt=":scale 100%">]</p>
+<!--- --->
+</section>
+<section id="やり過ぎにも注意" class="slide level2">
+<h2>やり過ぎにも注意</h2>
+<p>.center[<img data-src="Figs/11/Dataink_ratio3.png" alt=":scale 90%">]</p>
+<!--- --->
+</section>
+<section id="カラーユニバーサルデザイン" class="slide level2">
+<h2>カラーユニバーサルデザイン</h2>
+<p>色分けを行う際には注意が必要</p>
+<ul>
+<li>P型およびD型色弱の場合、緑と赤の認識が困難
+<ul>
+<li>日本の場合、男性の5%、女性の0.2%</li>
+<li>フランス・北欧の場合、男性の約10%</li>
+</ul></li>
+<li>色覚シミュレーターで確認可能
+<ul>
+<li>macOS用の<a href="https://michelf.ca/projects/sim-daltonism/">Sim Daltonism</a>を使用した第二色盲 (deuteranopia)の例</li>
+<li>Linux/Windowsなら<a href="https://colororacle.org/">Color Oracle</a>など</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p>.pull-left[ .center[<img data-src="Figs/11/ColorUniversal1.png">]] .pull-right[ .center[<img data-src="Figs/11/ColorUniversal2.png">]]</p>
+<p>自分が好きな色でなく、誰にも見やすい色を使う</p>
+<!--- --->
+</section>
+<section id="次元グラフについて-1" class="slide level2">
+<h2>3次元グラフについて (1)</h2>
+<p>.center[<img data-src="Figs/11/3D_Plot1.png" alt=":scale 80%">]</p>
+<!--- --->
+</section>
+<section id="次元グラフについて-2" class="slide level2">
+<h2>3次元グラフについて (2)</h2>
+<p>.center[<img data-src="Figs/11/3D_Plot2.jpg" alt=":scale 50%">]</p>
+<!--- --->
+</section>
+<section id="次元グラフについて-3" class="slide level2">
+<h2>3次元グラフについて (3)</h2>
+<p>.center[<img data-src="Figs/11/3D_Plot3.png" alt=":scale 90%">]</p>
+
+<p><img src="Figs/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://www.jaysong.net/micro-book" class="uri">https://www.jaysong.net/micro-book</a></p>
 </div>
 </section>
@@ -559,6 +1389,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

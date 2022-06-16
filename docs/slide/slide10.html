@@ -1065,7 +1065,18 @@ the `.groups` argument.</code></pre>
 <li><code>YoungAge</code>変数を作成し、<code>Age</code>が39以下なら<code>1</code>、それ以外は<code>0</code>にする。ただし、999なら<code>NA</code>とする。</li>
 <li><code>HighEduc2</code>変数を作成し、<code>HighEduc</code>が1なら<code>"大卒以上"</code>、それ以外は<code>"大卒未満"</code>にする。ただし、9なら<code>NA</code>とする。</li>
 </ul>
+<div class="columns">
+<div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID       =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb68-2"><a href="#cb68-2"></a>                  <span class="at">Age      =</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">35</span>, <span class="dv">57</span>, <span class="dv">999</span>, <span class="dv">74</span>, </span>
+<span id="cb68-3"><a href="#cb68-3"></a>                               <span class="dv">66</span>, <span class="dv">999</span>, <span class="dv">49</span>, <span class="dv">78</span>, <span class="dv">67</span>),</span>
+<span id="cb68-4"><a href="#cb68-4"></a>                  <span class="at">HighEduc =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>,</span>
+<span id="cb68-5"><a href="#cb68-5"></a>                               <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>my_data</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1082,6 +1093,8 @@ the `.groups` argument.</code></pre>
 10    10    67        9</code></pre>
 </div>
 </div>
+</div>
+</div>
 <!--- --->
 </section>
 <section id="注意-欠損値を指定する場合-1" class="slide level2">
@@ -1091,13 +1104,13 @@ the `.groups` argument.</code></pre>
 <li><code>if_else()</code>も同様。ただし、<code>ifelse()</code>は<code>NA</code>で作動</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
-<span id="cb69-3"><a href="#cb69-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb69-4"><a href="#cb69-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb69-5"><a href="#cb69-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
-<span id="cb69-6"><a href="#cb69-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
-<span id="cb69-7"><a href="#cb69-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb71-3"><a href="#cb71-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb71-4"><a href="#cb71-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb71-5"><a href="#cb71-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb71-6"><a href="#cb71-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
+<span id="cb71-7"><a href="#cb71-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `mutate()`:
 ! Problem while computing `YoungAge = case_when(Age == 999 ~ NA, Age &lt;=
@@ -1112,13 +1125,13 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 <h2>注意) 欠損値を指定する場合</h2>
 <p><code>NA</code>でなく、<strong>生成される列のデータ型</strong>に応じて<code>NA_real_</code>（numeric型）、または<code>NA_character_</code>（character型）を使用（logical型なら<code>NA</code>のままでOK）</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb71" data-code-line-numbers="2,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>,</span>
-<span id="cb71-3"><a href="#cb71-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb71-4"><a href="#cb71-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb71-5"><a href="#cb71-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb71-6"><a href="#cb71-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
-<span id="cb71-7"><a href="#cb71-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73" data-code-line-numbers="2,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a>  <span class="fu">mutate</span>(<span class="at">YoungAge  =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>,</span>
+<span id="cb73-3"><a href="#cb73-3"></a>                               Age <span class="sc">&lt;=</span>  <span class="dv">39</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb73-4"><a href="#cb73-4"></a>                               <span class="cn">TRUE</span>       <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb73-5"><a href="#cb73-5"></a>         <span class="at">HighEduc2 =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb73-6"><a href="#cb73-6"></a>                               HighEduc <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"大卒以上"</span>,</span>
+<span id="cb73-7"><a href="#cb73-7"></a>                               <span class="cn">TRUE</span>          <span class="sc">~</span> <span class="st">"大卒未満"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
       ID   Age HighEduc YoungAge HighEduc2
@@ -1144,9 +1157,9 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 <li>主に<code>if_else()</code>を使用し、条件に合致した場合は<code>NA_real_</code>か<code>NA_character_</code>を、合致しない場合は元の変数のままにする。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="#cb73-2"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">if_else</span>(Age <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA_real_</span>, Age),</span>
-<span id="cb73-3"><a href="#cb73-3"></a>         <span class="at">HighEduc =</span> <span class="fu">if_else</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span>, <span class="cn">NA_real_</span>, HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">if_else</span>(Age <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA_real_</span>, Age),</span>
+<span id="cb75-3"><a href="#cb75-3"></a>         <span class="at">HighEduc =</span> <span class="fu">if_else</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span>, <span class="cn">NA_real_</span>, HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1172,11 +1185,11 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 <li>欠損を意味する値が複数の場合、<code>case_when()</code>を使うか、OR演算子（<code>|</code> / <code>%in%</code>）を用いた<code>if_else()</code>を使用する。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb75-2"><a href="#cb75-2"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
-<span id="cb75-3"><a href="#cb75-3"></a>                              <span class="cn">TRUE</span>       <span class="sc">~</span> Age),</span>
-<span id="cb75-4"><a href="#cb75-4"></a>         <span class="at">HighEduc =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
-<span id="cb75-5"><a href="#cb75-5"></a>                              <span class="cn">TRUE</span>          <span class="sc">~</span> HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb77-2"><a href="#cb77-2"></a>  <span class="fu">mutate</span>(<span class="at">Age      =</span> <span class="fu">case_when</span>(Age <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
+<span id="cb77-3"><a href="#cb77-3"></a>                              <span class="cn">TRUE</span>       <span class="sc">~</span> Age),</span>
+<span id="cb77-4"><a href="#cb77-4"></a>         <span class="at">HighEduc =</span> <span class="fu">case_when</span>(HighEduc <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
+<span id="cb77-5"><a href="#cb77-5"></a>                              <span class="cn">TRUE</span>          <span class="sc">~</span> HighEduc))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc
@@ -1204,10 +1217,10 @@ Caused by error in `` names(message) &lt;- `*vtmp*` ``:
 <li>似たような関数として{expss}の<code>na_if()</code>関数</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a><span class="fu">library</span>(naniar) <span class="co"># 事前に install.package(naniar) でインストール</span></span>
-<span id="cb77-2"><a href="#cb77-2"></a>my_data <span class="sc">%&gt;%</span></span>
-<span id="cb77-3"><a href="#cb77-3"></a>  <span class="co"># Ageは999、HighEducは9が欠損値</span></span>
-<span id="cb77-4"><a href="#cb77-4"></a>  <span class="fu">replace_with_na</span>(<span class="fu">list</span>(<span class="at">Age =</span> <span class="dv">999</span>, <span class="at">HighEduc =</span> <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">library</span>(naniar) <span class="co"># 事前に install.package(naniar) でインストール</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a>my_data <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="#cb79-3"></a>  <span class="co"># Ageは999、HighEducは9が欠損値</span></span>
+<span id="cb79-4"><a href="#cb79-4"></a>  <span class="fu">replace_with_na</span>(<span class="fu">list</span>(<span class="at">Age =</span> <span class="dv">999</span>, <span class="at">HighEduc =</span> <span class="dv">9</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       ID   Age HighEduc

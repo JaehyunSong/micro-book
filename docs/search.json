@@ -1404,7 +1404,7 @@
     "href": "slide/slide10.html#注意-欠損値を指定する場合",
     "title": "ミクロ政治データ分析実習",
     "section": "注意) 欠損値を指定する場合",
-    "text": "注意) 欠損値を指定する場合\n世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。\n例) my_dataの例\n\nYoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。\nHighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。\n\n\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9"
+    "text": "注意) 欠損値を指定する場合\n世論調査などの場合、欠損値がNAでなく、9や99、\"\"などの場合がある。\n例) my_dataの例\n\nYoungAge変数を作成し、Ageが39以下なら1、それ以外は0にする。ただし、999ならNAとする。\nHighEduc2変数を作成し、HighEducが1なら\"大卒以上\"、それ以外は\"大卒未満\"にする。ただし、9ならNAとする。\n\n\n\n\nmy_data <- tibble(ID       = 1:10,\n                  Age      = c(32, 35, 57, 999, 74, \n                               66, 999, 49, 78, 67),\n                  HighEduc = c(1, 0, 0, 1, 0,\n                               9, 1, 1, 9, 9))\n\n\n\nmy_data\n\n# A tibble: 10 × 3\n      ID   Age HighEduc\n   <int> <dbl>    <dbl>\n 1     1    32        1\n 2     2    35        0\n 3     3    57        0\n 4     4   999        1\n 5     5    74        0\n 6     6    66        9\n 7     7   999        1\n 8     8    49        1\n 9     9    78        9\n10    10    67        9"
   },
   {
     "objectID": "slide/slide10.html#注意-欠損値を指定する場合-1",
@@ -2735,5 +2735,313 @@
     "title": "「ミクロ政治データ分析実習」第11回課題",
     "section": "",
     "text": "課題用ファイル、課題用データ (1)、課題用データ (2)\n\nStep2: NIIオンライン分析システムを起動し、課題用のプロジェクトを作成する。\nStep3: プロジェクト・フォルダー内にDataフォルダーを作成する。\nStep4: プロジェクト・フォルダーに課題用ファイル（Micro_HW11.Rmd）をアップロードする。\nStep5: Dataフォルダーに課題用データ（Micro_HW11_1.csvとMicro_HW11_2.csv）をアップロードする。\nStep6: 課題用ファイル（Micro_HW11.Rmd）を開き、一旦、Knitしてみる。\nStep7: 以下のボタンをクリックし、サンプルファイルを確認する。\n サンプルファイルの表示\nStep8: サンプルファイルと同じ結果が得られるように課題用ファイルを修正する。\n\n提出者の学籍番号・氏名の修正を忘れないこと。\nチャンク内の# この行を削除し、コードを入力の部分を削除し、コードを入力する。\n\nStep9: 完成したら出力物（.htmlファイル）を自分のPCにダウンロードする。\nStep10: ダウンロードしたファイルをLMSに提出する。提出する前にダウンロードしたファイルを開き、正しくダウンロードされているかを確認すること。\n注意: 課題の取り組み方が分からない場合、オフィスアワーなどを利用し担当教員と相談すること。"
+  },
+  {
+    "objectID": "slide/slide12.html#section",
+    "href": "slide/slide12.html#section",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "グラフィックの文法と{ggplot2}"
+  },
+  {
+    "objectID": "slide/slide12.html#グラフを作成する方法",
+    "href": "slide/slide12.html#グラフを作成する方法",
+    "title": "ミクロ政治データ分析実習",
+    "section": "グラフを作成する方法",
+    "text": "グラフを作成する方法\n代表的な可視化のパッケージ\n\n他にもインタラクティブ・プロットに特化した{plotly}、3次元グラフのための{rgl}、インタラクティブ地図の{leaflet}など多数あり\n\n\n\nBase R\n\n別途のパッケージを使わず、R内蔵関数で作図\n紙にペンでグラフを書くイメージ\n図が気に入らなかったら一からやり直し\n作成した図をオブジェクトとして保存することが出来ない\n最も自由度が高い\n\n\n\n\n{lattice}\n\nDeepayan Sarkarが開発\n{ggplot2}が登場する前には主流\n関数1つで可視化ができる（ただし、関数が長くなる）\n\n\n\n\n{ggplot2}\n\nHadley Wickhamが大学院生の時に開発\nグラフィックの文法 (grammer of graphics)」の思想をR上で具現化\nグラフの様々な要素をそれぞれ1つの層 (layer)と捉え、積み重ねていく"
+  },
+  {
+    "objectID": "slide/slide12.html#base-rの例コード",
+    "href": "slide/slide12.html#base-rの例コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Base Rの例（コード）",
+    "text": "Base Rの例（コード）\n\ndf: 第9回の実習用データ (Micro09.csv)\n\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")\n\nplot(x = df$PPP_per_capita, y = df$HDI_2018, pch = 19, \n     col = ifelse(df$OECD == 1, \"red\", \"blue\"),\n     xlab = \"一人当たり購買力平価GDP (USD)\", ylab = \"人間開発指数\")\nlegend(\"bottomright\", pch = 19,\n       legend = c(\"OECD加盟国\", \"OECD非加盟国\"), \n       col    = c(\"red\", \"blue\"))"
+  },
+  {
+    "objectID": "slide/slide12.html#base-rの例結果",
+    "href": "slide/slide12.html#base-rの例結果",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Base Rの例（結果）",
+    "text": "Base Rの例（結果）"
+  },
+  {
+    "objectID": "slide/slide12.html#latticeの例コード",
+    "href": "slide/slide12.html#latticeの例コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{lattice}の例（コード）",
+    "text": "{lattice}の例（コード）\n\nlibrary(lattice)\nxyplot(HDI_2018 ~ PPP_per_capita, data = df,\n       group = OECD, pch = 19, grid = TRUE,\n       auto.key = TRUE,\n       key = list(title     = \"OECD加盟有無\",\n                  cex.title = 1,\n                  space     = \"right\",\n                  points    = list(col = c(\"magenta\", \"cyan\"),\n                                   pch = 19),\n                  text      = list(c(\"加盟国\", \"非加盟国\"))), \n       xlab = \"一人当たり購買力平価GDP (USD)\", ylab = \"人間開発指数\")"
+  },
+  {
+    "objectID": "slide/slide12.html#latticeの例結果",
+    "href": "slide/slide12.html#latticeの例結果",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{lattice}の例（結果）",
+    "text": "{lattice}の例（結果）"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2の例コード",
+    "href": "slide/slide12.html#ggplot2の例コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}の例（コード）",
+    "text": "{ggplot2}の例（コード）\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"加盟国\", \"非加盟国\")) %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD), \n              size = 2) +\n   labs(x = \"一人あたり購買力平価GDP (USD)\", y = \"人間開発指数\",\n        color = \"OECD加盟有無\") +\n   theme_bw(base_size = 16)"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2の例結果",
+    "href": "slide/slide12.html#ggplot2の例結果",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}の例（結果）",
+    "text": "{ggplot2}の例（結果）"
+  },
+  {
+    "objectID": "slide/slide12.html#グラフィックの文法",
+    "href": "slide/slide12.html#グラフィックの文法",
+    "title": "ミクロ政治データ分析実習",
+    "section": "グラフィックの文法",
+    "text": "グラフィックの文法\nWilkinsonの「グラフィックの文法」\n\n\n\nWilkinson, Leland. 2005. The Grammar of Graphics. Springer.\nグラフを構造化された方法で記述し、レイヤー (layer; 層)を積み重ねることによってグラフを構築するフレームワーク\nグラフの構成要素の例\n\n横軸と縦軸\n\n目盛りの間隔、ラベルの大きさ\n\n点、線、面\n\n色、太さ、形、透明度など\n\n凡例\n図のタイトル\n\nそれぞれの構成要素を一つのレイヤーとして扱い、レイヤーを積み重ねていく"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2とは",
+    "href": "slide/slide12.html#ggplot2とは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}とは",
+    "text": "{ggplot2}とは\nHadley Wickhamが大学院生の時に開発した可視化パッケージ\n\n\n\n\n\n\n\n\n\n\ngrammer of graphicsの思想をR上で具現化したパッケージ\n図の構成要素それぞれに対応する関数が存在し、一つのレイヤーとして機能\n\nggplot(): キャンバスを用意\ngeom_point(): 点 / geom_line(): 線 / geom_bar(): 棒\nscale_x_continuous(): 連続変数の横軸\nscale_x_discrete(): 離散変数の横軸など\n\n関数を覚える必要は全くない\n\n{ggplot2}の仕組みだけを覚え、後はググりながらコーディング"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2のイメージ-1",
+    "href": "slide/slide12.html#ggplot2のイメージ-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}のイメージ (1)",
+    "text": "{ggplot2}のイメージ (1)\nデータの読み込み&ハンドリング\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")\n\ndf <- df %>% # OECD変数をリコーディングし、OECD_Jへ\n   mutate(OECD_J = if_else(OECD == 1, \"加盟国\", \"非加盟国\"))"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2のイメージ-2",
+    "href": "slide/slide12.html#ggplot2のイメージ-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}のイメージ (2)",
+    "text": "{ggplot2}のイメージ (2)\nキャンバスの用意\n\ndf %>% # データdfをggplot()関数に渡し、作図の準備をする\n   ggplot()"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2のイメージ-3",
+    "href": "slide/slide12.html#ggplot2のイメージ-3",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}のイメージ (3)",
+    "text": "{ggplot2}のイメージ (3)\nキャンバス上に点を出力\n\ndf %>%\n   ggplot() +\n   # 点を出力する。点の横軸上の位置はPPP_per_capita、縦軸上の位置はHDI_2018に対応\n   # OECD_Jの値に応じて色分けする。\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) #<<"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2のイメージ-4",
+    "href": "slide/slide12.html#ggplot2のイメージ-4",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}のイメージ (4)",
+    "text": "{ggplot2}のイメージ (4)\nラベルの修正\n\ndf %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\",  \n        color = \"OECD\")"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2のイメージ-5",
+    "href": "slide/slide12.html#ggplot2のイメージ-5",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}のイメージ (5)",
+    "text": "{ggplot2}のイメージ (5)\nテーマ変更\n\ndf %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\",\n        color = \"OECD\") +\n   theme_bw(base_size = 12) # Black and Whiteテーマを使い、文字サイズは12"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2のイメージ-6",
+    "href": "slide/slide12.html#ggplot2のイメージ-6",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}のイメージ (6)",
+    "text": "{ggplot2}のイメージ (6)\n凡例の位置調整\n\ndf %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\",\n        color = \"OECD\") +\n   theme_bw(base_size = 12) +\n   theme(legend.position = \"bottom\") # 凡例を図の下段に"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2で図が出来上がるまで",
+    "href": "slide/slide12.html#ggplot2で図が出来上がるまで",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}で図が出来上がるまで",
+    "text": "{ggplot2}で図が出来上がるまで\nレイヤーを積み重ねるイメージ\n\n図の核心部は幾何オブジェクト（geom_*()）とマッピング（aes()）"
+  },
+  {
+    "objectID": "slide/slide12.html#section-1",
+    "href": "slide/slide12.html#section-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "グラフの構成要素"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2の必須要素",
+    "href": "slide/slide12.html#ggplot2の必須要素",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}の必須要素",
+    "text": "{ggplot2}の必須要素\n以下の要素があればグラフはとりあえず出来上がる\n\nデータ（Data）\n幾何オブジェクト（Geometry Object）: geom_*()関数\n\n散布図、棒グラフ、折れ線グラフ、…\n\nマッピング（Mapping）: aes()関数\n\n散布図の場合、点の位置（横軸と縦軸）\n棒グラフの場合、棒の位置（横軸）と高さ（縦軸）\n折れ線グラフの場合、線の傾きが変化する点の位置（横軸と縦軸）\n\n座標系（Coordinate System）: coord_*()関数\n\nデカルト座標系（直交座標系）、極座標系など\n座標系の上限の下限など\n座標系は{ggplot2}が自動的に設定してくれるが、カスタマイズ可\n\n\n凡例の位置、フォント、点の大きさ、軸ラベルの修正などは任意"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2の必須要素-1",
+    "href": "slide/slide12.html#ggplot2の必須要素-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}の必須要素",
+    "text": "{ggplot2}の必須要素\n座標系はデータ/幾何オブジェクトに応じて自動的に作成される（カスタマイズ可）"
+  },
+  {
+    "objectID": "slide/slide12.html#書き方",
+    "href": "slide/slide12.html#書き方",
+    "title": "ミクロ政治データ分析実習",
+    "section": "書き方",
+    "text": "書き方\n\n注意: レイヤーの積み重ねは%>%でなく+を使用\n\nオブジェクトを渡すのではなく、レイヤーを足すという意味\n\n可視化はggplot()からスタート\n幾何オブジェクトはgeom_で始まる関数\n幾何オブジェクト内にはmapping =でマッピングが必要。\n\n第一引数であるため、mapping =は省略し、aes()からスタートでOK\n\naes()の中にはグラフ上に出力される点、線、面などがデータのどの変数に対応するかを記述\n\n\nggplot(data = データ) +\n   幾何オブジェクト関数(mapping = aes(マッピング))"
+  },
+  {
+    "objectID": "slide/slide12.html#データ",
+    "href": "slide/slide12.html#データ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ",
+    "text": "データ\n\n使用するデータ構造はdata.frame、またはtibble\n\n\n\nデータの指定 (1)\n\ndata引数にdata.frame (tibble)オブジェクト名を指定\n\n\nggplot(data = データ名)\n\n\n\n\nデータの指定 (2)\n\ndata引数は第一引数であるため、省略されることも多い\n\n\nggplot(データ名)\n\n\n\n\nデータの指定 (3)\n\ndata引数は第一引数であるため、パイプ演算子 (%>%)で渡すことも可能\nデータ名とggplot()の間に{dplyr}、{tidyr}などの各種関数も使用可能\nこの方法を推奨\n\n\nデータ名 %>%\n   ggplot()"
+  },
+  {
+    "objectID": "slide/slide12.html#幾何オブジェクト",
+    "href": "slide/slide12.html#幾何オブジェクト",
+    "title": "ミクロ政治データ分析実習",
+    "section": "幾何オブジェクト",
+    "text": "幾何オブジェクト\n\nデータ名 %>%\n   ggplot() +\n   幾何オブジェクト関数()\n\n指定されたデータを使ってどのような図を作成するか\n\n散布図: geom_point()\n棒グラフ: geom_bar()\n折れ線グラフ: geom_line()\nヒストグラム: geom_histogram()\n箱ひげ図: geom_boxplot()\nその他\n\n{ggplot2}が提供する幾何オブジェクトも数十種類があり、ユーザーが開発・公開した幾何オブジェクトなどもある\n\n非巡回有向グラフ作成のための{ggdag}、ネットワークの可視化のための{ggnetwork}など"
+  },
+  {
+    "objectID": "slide/slide12.html#マッピング",
+    "href": "slide/slide12.html#マッピング",
+    "title": "ミクロ政治データ分析実習",
+    "section": "マッピング",
+    "text": "マッピング\nグラフ上の点、線、面などの情報をデータと変数に対応させる\n\nプロット上に出力されるデータの具体的な在り方を指定する\n散布図の例) 各点の横軸と縦軸における位置情報\ngeom_*()内のaes()関数で指定\n\nグラフに複数の幾何オブジェクトが存在し、マッピング情報が同じならggplot()内で指定することも可能\n\n\n例) geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J))\n\n\n\n幾何オブジェクト\nマッピング情報\n引数\n対応する変数\n\n\n\n\ngeom_point()\n点の横軸上の位置\nx\nPPP_per_capita\n\n\ngeom_point()\n点の縦軸上の位置\ny\nHDI_2018\n\n\ngeom_point()\n点の色\ncolor\nOECD_J\n\n\n\n\n点、線、面が持てる情報は他にも色々\n\n大きさ (size)、線の種類 (linetype)、透明度 (alpha)、面の色 (fill)、点の形 (shape)、グループ (group)など"
+  },
+  {
+    "objectID": "slide/slide12.html#マッピング時の注意",
+    "href": "slide/slide12.html#マッピング時の注意",
+    "title": "ミクロ政治データ分析実習",
+    "section": "マッピング時の注意",
+    "text": "マッピング時の注意\naes()の中で指定するか、外で指定するかで挙動が変わる。\n\naes()の中でcolorを指定する場合、それぞれの点が指定された変数の値に応じて色分けされる、\naes()の外でcolorを指定する場合、全ての点に適用される。\n\n\naes()の中 (コード)aes()の中 (結果)aes()の外 (コード)aes()の外 (結果)\n\n\n\nggplot(df) +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(df) +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018), color = \"red\") +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\")"
+  },
+  {
+    "objectID": "slide/slide12.html#座標系",
+    "href": "slide/slide12.html#座標系",
+    "title": "ミクロ政治データ分析実習",
+    "section": "座標系",
+    "text": "座標系\n\n直交座標系の拡大・縮小: coord_cartesian()\n\n最もよく使う座標系（デフォルト）\n\n横軸と縦軸の交換: coord_flip()\n横軸と縦軸比の固定: coord_fixed()\n極座標系 (polar coordinates system)へ変換: coord_polar()\n\n円グラフを作成する際に使われるが、円グラフは邪悪なる存在のケースが多いため、省略"
+  },
+  {
+    "objectID": "slide/slide12.html#直交座標系拡大の例",
+    "href": "slide/slide12.html#直交座標系拡大の例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "直交座標系拡大の例",
+    "text": "直交座標系拡大の例\n横軸を30000〜90000、縦軸を0.7〜1にする\n\nコード結果\n\n\n\ndf %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J), \n              size = 2) +\n   labs(x = \"一人当たり購買力平価基準GDP\", y = \"人間開発指数\", color = \"OECD\") +\n   coord_cartesian(xlim = c(30000, 90000), ylim = c(0.7, 1)) +\n   theme_bw()"
+  },
+  {
+    "objectID": "slide/slide12.html#スケール-scale",
+    "href": "slide/slide12.html#スケール-scale",
+    "title": "ミクロ政治データ分析実習",
+    "section": "スケール (Scale)",
+    "text": "スケール (Scale)\nマッピング要素のカスタマイズ\n\n横/縦軸の目盛り変更、色分けの色を指定など\nscale_*_*()関数を使用\n\nscale_マッピング要素_対応する変数のタイプ()\n\n詳細は次週以降"
+  },
+  {
+    "objectID": "slide/slide12.html#ファセット-facet",
+    "href": "slide/slide12.html#ファセット-facet",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ファセット (Facet)",
+    "text": "ファセット (Facet)\nグラフを2つ以上の面で分割\n\n例) FH_Stautsの棒グラフを大陸ごとに出力\n\n\n# データの用意\n# 参考) 「\\n」は図内の改行を意味する。\ndf <- df %>%\n   mutate(FH_Status = case_when(FH_Status == \"F\"  ~ \"自由\",\n                                FH_Status == \"PF\" ~ \"部分的に\\n自由\",\n                                TRUE              ~ \"不自由\"),\n          FH_Status = factor(FH_Status,\n                             levels = c(\"自由\", \"部分的に\\n自由\", \"不自由\"))) %>%\n   drop_na(FH_Status)"
+  },
+  {
+    "objectID": "slide/slide12.html#ファセット分割なし",
+    "href": "slide/slide12.html#ファセット分割なし",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ファセット分割なし",
+    "text": "ファセット分割なし\n同じ大陸内のFH_Stautsの分布を確認するには不向き\n\ndf %>%\n   ggplot() +\n   geom_bar(aes(x = FH_Status, fill = Continent),\n            position = position_dodge2(1/2)) +\n   labs(x = \"フリーダムハウス評価\", y = \"国家数\", fill = \"大陸\") +\n   theme_bw(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide12.html#ファセット分割あり",
+    "href": "slide/slide12.html#ファセット分割あり",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ファセット分割あり",
+    "text": "ファセット分割あり\n\ndf %>%\n   ggplot() +\n   geom_bar(aes(x = FH_Status),\n            position = position_dodge2(1/2)) +\n   labs(x = \"フリーダムハウス評価\", y = \"国家数\") +\n   facet_wrap(~ Continent, ncol = 5) + #<<\n   theme_bw(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide12.html#section-2",
+    "href": "slide/slide12.html#section-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "良いグラフとは"
+  },
+  {
+    "objectID": "slide/slide12.html#意識すべきところ",
+    "href": "slide/slide12.html#意識すべきところ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "意識すべきところ",
+    "text": "意識すべきところ\n\nデータ・インク比\nカラーユニバーサルデザイン\n円グラフは邪悪なる存在\n3次元グラフは更に邪悪なる存在\n3次元円グラフは概念レベルで駆逐すべき存在\n\n参考図書 (日本語)\n1と4は{ggplot2}の教科書としても優れている\n\nHadley Wickham・Garrett Grolemund(著), 黒川利明(訳). 2017. 『Rではじめるデータサイエンス』オライリージャパン.\n藤俊久仁・渡部良一. 2019. 『データビジュアライゼーションの教科書』秀和システム.\n永田ゆかり. 2020. 『データ視覚化のデザイン』SBクリエイティブ.\nキーラン・ヒーリー(著), 瓜生真也・江口哲史・三村喬生(訳). 2021.『データ分析のためのデータ可視化入門』講談社.(おすすめ!)"
+  },
+  {
+    "objectID": "slide/slide12.html#データインク比-data-ink-ratio",
+    "href": "slide/slide12.html#データインク比-data-ink-ratio",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ・インク比 (Data-ink ratio)",
+    "text": "データ・インク比 (Data-ink ratio)\nEdward R. Tufte. 2001. The Visual Display of Quantitative Information (2nd Ed). Graphics Press.\n\\[\n\\textrm{データ・インク比} = \\frac{\\textsf{データの情報を含むインクの量}}{\\textsf{グラフの出力に使用されたインクの総量}}\n\\]\n\n良いグラフとはデータ・インク比を最大化したグラフ\nグラフにおいて情報損失なしに除去できる要素が占める割合を1から引いたもの\n色分けにも注意"
+  },
+  {
+    "objectID": "slide/slide12.html#色分けに注意-1",
+    "href": "slide/slide12.html#色分けに注意-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "色分けに注意 (1)",
+    "text": "色分けに注意 (1)\n.center[]"
+  },
+  {
+    "objectID": "slide/slide12.html#色分けに注意-2",
+    "href": "slide/slide12.html#色分けに注意-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "色分けに注意 (2)",
+    "text": "色分けに注意 (2)\n.center[]"
+  },
+  {
+    "objectID": "slide/slide12.html#やり過ぎにも注意",
+    "href": "slide/slide12.html#やり過ぎにも注意",
+    "title": "ミクロ政治データ分析実習",
+    "section": "やり過ぎにも注意",
+    "text": "やり過ぎにも注意\n.center[]"
+  },
+  {
+    "objectID": "slide/slide12.html#カラーユニバーサルデザイン",
+    "href": "slide/slide12.html#カラーユニバーサルデザイン",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カラーユニバーサルデザイン",
+    "text": "カラーユニバーサルデザイン\n色分けを行う際には注意が必要\n\nP型およびD型色弱の場合、緑と赤の認識が困難\n\n日本の場合、男性の5%、女性の0.2%\nフランス・北欧の場合、男性の約10%\n\n色覚シミュレーターで確認可能\n\nmacOS用のSim Daltonismを使用した第二色盲 (deuteranopia)の例\nLinux/WindowsならColor Oracleなど\n\n\n\n\n\n.pull-left[ .center[]] .pull-right[ .center[]]\n自分が好きな色でなく、誰にも見やすい色を使う"
+  },
+  {
+    "objectID": "slide/slide12.html#次元グラフについて-1",
+    "href": "slide/slide12.html#次元グラフについて-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "3次元グラフについて (1)",
+    "text": "3次元グラフについて (1)\n.center[]"
+  },
+  {
+    "objectID": "slide/slide12.html#次元グラフについて-2",
+    "href": "slide/slide12.html#次元グラフについて-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "3次元グラフについて (2)",
+    "text": "3次元グラフについて (2)\n.center[]"
+  },
+  {
+    "objectID": "slide/slide12.html#次元グラフについて-3",
+    "href": "slide/slide12.html#次元グラフについて-3",
+    "title": "ミクロ政治データ分析実習",
+    "section": "3次元グラフについて (3)",
+    "text": "3次元グラフについて (3)\n.center[]\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
+    "objectID": "slide/slide12.html#base-rの例",
+    "href": "slide/slide12.html#base-rの例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "Base Rの例",
+    "text": "Base Rの例\n\nコード結果\n\n\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\") # 第9回の実習用データ\n\nplot(x = df$PPP_per_capita, y = df$HDI_2018, pch = 19, \n     col = ifelse(df$OECD == 1, \"red\", \"blue\"),\n     xlab = \"一人当たり購買力平価GDP (USD)\", ylab = \"人間開発指数\")\nlegend(\"bottomright\", pch = 19,\n       legend = c(\"OECD加盟国\", \"OECD非加盟国\"), \n       col    = c(\"red\", \"blue\"))"
+  },
+  {
+    "objectID": "slide/slide12.html#latticeの例",
+    "href": "slide/slide12.html#latticeの例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{lattice}の例",
+    "text": "{lattice}の例\n\nコード結果\n\n\n\nlibrary(lattice)\nxyplot(HDI_2018 ~ PPP_per_capita, data = df,\n       group = OECD, pch = 19, grid = TRUE,\n       auto.key = TRUE,\n       key = list(title     = \"OECD加盟有無\",\n                  cex.title = 1,\n                  space     = \"right\",\n                  points    = list(col = c(\"magenta\", \"cyan\"),\n                                   pch = 19),\n                  text      = list(c(\"加盟国\", \"非加盟国\"))), \n       xlab = \"一人当たり購買力平価GDP (USD)\", ylab = \"人間開発指数\")"
+  },
+  {
+    "objectID": "slide/slide12.html#ggplot2の例",
+    "href": "slide/slide12.html#ggplot2の例",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}の例",
+    "text": "{ggplot2}の例\n\nコード結果\n\n\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"加盟国\", \"非加盟国\")) %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD), \n              size = 2) +\n   labs(x = \"一人あたり購買力平価GDP (USD)\", y = \"人間開発指数\",\n        color = \"OECD加盟有無\") +\n   theme_bw(base_size = 16)"
   }
 ]
