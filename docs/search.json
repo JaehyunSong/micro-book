@@ -2979,49 +2979,49 @@
     "href": "slide/slide12.html#色分けに注意-1",
     "title": "ミクロ政治データ分析実習",
     "section": "色分けに注意 (1)",
-    "text": "色分けに注意 (1)\n.center[]"
+    "text": "色分けに注意 (1)\n\nインドの新規感染者数が多いことを伝えたい\nどの線がインド?"
   },
   {
     "objectID": "slide/slide12.html#色分けに注意-2",
     "href": "slide/slide12.html#色分けに注意-2",
     "title": "ミクロ政治データ分析実習",
     "section": "色分けに注意 (2)",
-    "text": "色分けに注意 (2)\n.center[]"
+    "text": "色分けに注意 (2)\n\n情報の損失はあるものの、主張が伝えやすい"
   },
   {
     "objectID": "slide/slide12.html#やり過ぎにも注意",
     "href": "slide/slide12.html#やり過ぎにも注意",
     "title": "ミクロ政治データ分析実習",
     "section": "やり過ぎにも注意",
-    "text": "やり過ぎにも注意\n.center[]"
+    "text": "やり過ぎにも注意\n\nどの図も同じ情報量を持ち、データ・インク比は右の方が優れているが…"
   },
   {
     "objectID": "slide/slide12.html#カラーユニバーサルデザイン",
     "href": "slide/slide12.html#カラーユニバーサルデザイン",
     "title": "ミクロ政治データ分析実習",
     "section": "カラーユニバーサルデザイン",
-    "text": "カラーユニバーサルデザイン\n色分けを行う際には注意が必要\n\nP型およびD型色弱の場合、緑と赤の認識が困難\n\n日本の場合、男性の5%、女性の0.2%\nフランス・北欧の場合、男性の約10%\n\n色覚シミュレーターで確認可能\n\nmacOS用のSim Daltonismを使用した第二色盲 (deuteranopia)の例\nLinux/WindowsならColor Oracleなど\n\n\n\n\n\n.pull-left[ .center[]] .pull-right[ .center[]]\n自分が好きな色でなく、誰にも見やすい色を使う"
+    "text": "カラーユニバーサルデザイン\n色分けを行う際には注意が必要\n\nP型およびD型色弱の場合、緑と赤の認識が困難\n\n日本の場合、男性の5%、女性の0.2%\nフランス・北欧の場合、男性の約10%\n\n色覚シミュレーターで確認可能\n\nmacOS用のSim Daltonismを使用した第二色盲 (deuteranopia)の例（Linux/WindowsならColor Oracleなど）\n\n自分が好きな色でなく、誰にも見やすい色を使う"
   },
   {
     "objectID": "slide/slide12.html#次元グラフについて-1",
     "href": "slide/slide12.html#次元グラフについて-1",
     "title": "ミクロ政治データ分析実習",
     "section": "3次元グラフについて (1)",
-    "text": "3次元グラフについて (1)\n.center[]"
+    "text": "3次元グラフについて (1)"
   },
   {
     "objectID": "slide/slide12.html#次元グラフについて-2",
     "href": "slide/slide12.html#次元グラフについて-2",
     "title": "ミクロ政治データ分析実習",
     "section": "3次元グラフについて (2)",
-    "text": "3次元グラフについて (2)\n.center[]"
+    "text": "3次元グラフについて (2)"
   },
   {
     "objectID": "slide/slide12.html#次元グラフについて-3",
     "href": "slide/slide12.html#次元グラフについて-3",
     "title": "ミクロ政治データ分析実習",
     "section": "3次元グラフについて (3)",
-    "text": "3次元グラフについて (3)\n.center[]\n\n\n\nhttps://www.jaysong.net/micro-book"
+    "text": "3次元グラフについて (3)\n\n2次元グラフにすると…\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
     "objectID": "slide/slide12.html#base-rの例",
