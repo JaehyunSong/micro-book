@@ -13,3 +13,646 @@ link-external-newwindow: true
 ```{=html}
 <iframe class="slide-deck" src="../slide/slide13.html" width="100%" style="aspect-ratio: 16 / 9.2;"></iframe>
 ```
+
+```{r}
+#| include: false
+library(tidyverse)
+knitr::opts_chunk$set(dev       = "ragg_png",
+                      dpi       = 300,
+                      fig.align = "center",
+                      echo      = TRUE)
+df <- read_csv("Data/Micro09.csv")
+```
+
+
+<!--- --->
+
+## グラフ作成の手順
+
+　{ggplot2}を用いた作図は以下の手順で行われる。
+
+1. 作成したいグラフを決める
+2. 作成したいグラフの完成図を想像する or 描いてみる
+3. グラフ上の要素（点、線、面）が持つ情報を考える
+4. 3の情報が一つの変数（列）と対応するような整然データを作成する
+5. {ggplot2}で作図
+6. 図のカスタマイズ
+7. 図の保存
+
+　今回は第9回の実習用データ（`Micro09.csv`）を使用する。{tidyverse}パッケージを読み込んだ後、`read_csv()`関数でデータを読み込む。
+
+```{r}
+#| message: false
+library(tidyverse)
+df <- read_csv("Data/Micro09.csv")
+```
+
+## 棒グラフ
+
+棒グラフを作成する際に必要な**最低限**の情報
+
+:::: {.columns}
+
+::: {.column width=49%}
+* `x`: 棒の横軸上の位置 (大陸)
+* `y`: 棒の高さ (人間開発指数の平均値)
+
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 4
+df %>%
+   group_by(Continent) %>%
+   summarise(HDI = mean(HDI_2018, na.rm = TRUE)) %>%
+   ggplot() +
+   geom_bar(aes(x = Continent, y = HDI), stat = "identity") +
+   labs(y = "Human Development Index") +
+   theme_bw(base_size   = 14)
+```
+:::
+
+::: {.column width=2%}
+:::
+
+::: {.column width=49%}
+* `y`: 棒の縦軸上の位置 (大陸)
+* `x`: 棒の長さ (人間開発指数の平均値)
+
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 4
+df %>%
+   group_by(Continent) %>%
+   summarise(HDI = mean(HDI_2018, na.rm = TRUE)) %>%
+   ggplot() +
+   geom_bar(aes(y = Continent, x = HDI), stat = "identity") +
+   labs(x = "Human Development Index") +
+   theme_bw(base_size   = 14)
+```
+:::
+
+::::
+
+<!--- --->
+
+## データの用意
+
+第9回講義のデータ (`Micro09.csv`) を使用
+
+* {dplyr}を使用し、大陸 (`Continent`)ごとの人間開発指数 (`HDI_2018`)の平均値を計算し、`df2`という名で格納
+
+```{r}
+df2 <- df %>%
+   group_by(Continent) %>%
+   summarise(HDI = mean(HDI_2018, na.rm = TRUE))
+
+df2
+```
+
+<!--- --->
+
+## とりあえず作図してみよう
+
+* 使用する幾何オブジェクト: `geom_bar()`
+* マッピング要素 (幾何オブジェクト内に`aes()`)
+   * 棒の横軸上の位置は大陸 (`Continent`)を意味する
+   * 棒の高さは人間開発指数の平均値 (`HDI`)を意味する
+* `geom_bar()`内に`stat = "identity"`を忘れないこと
+
+```{r}
+#| fig-width: 5
+#| fig-height: 2.8
+#| code-line-numbers: "3,4"
+bar_plot1 <- df2 %>%
+  ggplot() +
+  geom_bar(aes(x = Continent, y = HDI), 
+           stat = "identity")
+
+bar_plot1
+```
+
+<!--- --->
+
+## 日本語の使用 (1)
+
+**Step1:** `df2`の`Continent`列を日本語にリコーディング
+
+```{r}
+df2 <- df2 %>%
+   mutate(Continent_J = case_when(Continent == "Asia"    ~ "アジア",
+                                  Continent == "Africa"  ~ "アフリカ",
+                                  Continent == "America" ~ "アメリカ",
+                                  Continent == "Europe"  ~ "ヨーロッパ",
+                                  TRUE                   ~ "オセアニア"))
+
+df2
+```
+
+**Step2:** 図のラベルを修正 (`labs()`)
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.2
+#| code-line-numbers: "4"
+df2 %>%
+   ggplot() +
+   geom_bar(aes(x = Continent_J, y = HDI), stat = "identity") +
+   labs(x = "大陸", y = "人間開発指数の平均値")
+```
+
+<!--- --->
+
+## 文字化けが生じる場合
+
+NIIオンライン分析システムを使用する場合、文字化けは生じない
+
+* `theme_*()`レイヤーを追加し、`base_family = "日本語フォント"`を指定
+* `theme_gray()`: {ggplot2}の基本テーマ
+   * 他にも`theme_bw()`、`theme_minimal()`など
+* macOSの場合、`"HiraginoSans-W3"`、Windowsの場合、`"Yu Gothic"`を指定
+
+```{r}
+#| eval: false
+#| code-line-numbers: "5"
+df2 %>%
+   ggplot() +
+   geom_bar(aes(x = Continent_J, y = HDI), stat = "identity") +
+   labs(x = "大陸", y = "人間開発指数の平均値") +
+   theme_gray(base_family = "HiraginoSans-W3")
+```
+
+<!--- --->
+
+## 棒の並び替え
+
+アルファベット順に並べ替えたい場合
+
+* `Continet_J`列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順とする
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.5
+#| code-line-numbers: "2-4"
+df2 %>%
+   mutate(Continent_J = factor(Continent_J, 
+                               levels = c("アフリカ", "アメリカ", "アジア", 
+                                          "ヨーロッパ", "オセアニア"))) %>% 
+   ggplot() +
+   geom_bar(aes(x = Continent_J, y = HDI), stat = "identity") +
+   labs(x = "大陸", y = "人間開発指数の平均値") +
+   theme_bw() # Black and Whiteテーマも使ってみよう
+```
+
+<!--- --->
+
+## 便利な関数: `fct_inorder()`
+
+{forcats}の`fct_inorder()`関数（{forcats}は{tidyverse}の一部）
+
+* factor化を行い、各要素順番を**表で登場した順番**とする
+
+`df2`の中身
+
+```{r}
+df2
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.5
+#| code-line-numbers: "2"
+df2 %>%
+   mutate(Continent_J = fct_inorder(Continent_J)) %>%
+   ggplot() +
+   geom_bar(aes(x = Continent_J, y = HDI), 
+            stat = "identity") +
+   labs(x = "大陸", y = "人間開発指数の平均値")
+```
+
+<!--- --->
+
+## ケース数の棒グラフ
+
+各政治体制に属する国家数を計算
+
+```{r}
+df3 <- df %>%
+   drop_na(Polity_Type) %>%
+   mutate(Polity_Type = factor(Polity_Type,
+                               levels = c("Autocracy", "Closed Anocracy",
+                                          "Open Anocracy", "Democracy",
+                                          "Full Democracy"))) %>%
+   group_by(Polity_Type) %>%
+   summarise(N = n())
+
+df3
+```
+
+<!--- --->
+
+## 作図
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.5
+df3 %>%
+   ggplot() +
+   geom_bar(aes(x = Polity_Type, y = N), stat = "identity")
+```
+
+<!--- --->
+
+## 棒が持つ情報
+
+* 政治体制のタイプ (`x = Polity_Type`)
+* 国家数 (`y = N`)
+
+**例)** さらに大陸の情報を持たせ、色分けしたい
+
+* 大陸の列が必要
+
+```{r}
+df4 <- df %>%
+   drop_na(Polity_Type) %>%
+   mutate(Polity_Type = factor(Polity_Type,
+                               levels = c("Autocracy", "Closed Anocracy",
+                                          "Open Anocracy", "Democracy",
+                                          "Full Democracy"))) %>%
+   group_by(Polity_Type, Continent) %>%
+   summarise(N       = n(),
+             .groups = "drop")
+```
+
+<!--- --->
+
+## データ
+
+```{r}
+df4
+```
+
+<!--- --->
+
+## 次元の追加
+
+`aes()`内に`fill = Continent`を追加
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| code-line-numbers: "3"
+df4 %>%
+  ggplot() +
+  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = "identity")
+```
+
+<!--- --->
+
+## 棒の位置をずらす
+
+`geom_bar()`内に`position = "dodge"`を指定（`aes()`の外）
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| code-line-numbers: "4"
+df4 %>%
+  ggplot() +
+  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = "identity",
+           position = "dodge")
+```
+
+<!--- --->
+
+## 凡例の位置調整
+
+`theme()`内に`legend.position = "bottom"`を指定
+
+* デフォルトは`"right"`（`"top"`は上段; `"none"`は削除）
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| code-line-numbers: "5"
+df4 %>%
+  ggplot() +
+  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = "identity",
+           position = "dodge") +
+  theme(legend.position = "bottom")
+```
+
+<!--- --->
+
+## もう一つの方法: マッピングの交換
+
+* 前ページの場合、「ある政治体制内の大陸の分布」を知ることに特化
+* 「ある大陸内の政治体制の分布」を見るには? $\rightarrow$ `x`と`fill`を交換
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| code-line-numbers: "3"
+df4 %>%
+  ggplot() +
+  geom_bar(aes(x = Continent, y = N, fill = Polity_Type), stat = "identity",
+           position = "dodge") +
+  labs(x = "Continent", y = "Number of Countries", fill = "Polity Type")
+```
+
+<!--- --->
+
+## もう一つの方法: ファセット分割
+
+* 色分けを出来る限り抑えたい
+* `facet_wrap(~ 分割の基準となる変数名)`
+
+```{r}
+#| fig-width: 7
+#| fig-height: 2.5
+#| code-line-numbers: "4"
+bar_plot2 <- df4 %>%
+  ggplot() +
+  geom_bar(aes(x = Polity_Type, y = N), stat = "identity") +
+  facet_wrap(~ Continent, ncol = 5) # ncol/nrowで列/行数の指定が可能
+
+bar_plot2
+```
+
+<!--- --->
+
+## 値ラベルの回転
+
+値ラベルが長すぎる場合、ラベルを回転することで重複を避ける
+
+* 覚える必要はなく、必要に応じてググる（`theme()`レイヤーはかなり複雑）
+
+以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。
+
+```{r}
+#| fig-width: 7
+#| fig-height: 2.5
+#| code-line-numbers: "3"
+bar_plot3 <- bar_plot2 +
+   theme_minimal() + # テーマを変えてみよう
+   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転
+
+bar_plot3
+```
+
+<!--- --->
+
+## マッピング交換でも解決可能
+
+`x`と`y`を交換しても良い
+
+```{r}
+#| code-line-numbers: "3"
+#| fig-width: 8
+#| fig-height: 3.25
+bar_plot4 <- df4 %>%
+  ggplot() +
+  geom_bar(aes(x = N, y = Polity_Type), stat = "identity") +
+  labs(x = "Number of Countries", y = "Poltiy Type") +
+  facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割
+  theme_minimal(base_size = 12)       # フォントサイズの調整も可能
+
+bar_plot4
+```
+
+<!--- --->
+
+## ベクトルとビットマップ
+
+ベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。
+
+* 本講義では高解像度の`.png`形式の保存方法について解説する。
+
+:::: {.columns}
+
+::: {.column width=49%}
+### ベクトル画像
+
+* `.pdf`、`.svg`など
+   * 推奨は**PDF**形式
+* 拡大しても図が綺麗なまま
+* 複雑な図であれば、ファイルのサイズが大きくなる
+
+```{r}
+#| echo: false
+#| out-width: "300px"
+knitr::include_graphics("Figs/12/PDF_Example.png")
+```
+:::
+
+::: {.column width=2%}
+:::
+
+::: {.column width=49%}
+### ビットマップ画像
+
+* `.png`、`.bmp`、`.jpg`（= `.jpeg`）など
+   * 推奨は**PNG**形式
+* 拡大すると図がカクカクする
+   * 高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意
+* 図が複雑でも、ファイルサイズが比較的安定
+
+```{r}
+#| echo: false
+#| out-width: "300px"
+knitr::include_graphics("Figs/12/PNG_Example.png")
+```
+:::
+
+::::
+
+<!--- --->
+
+## 図の保存
+
+`bar_plot3`を保存する例
+
+* `ggsave()`関数を利用
+* 作業フォルダー内の`Figs`フォルダに`Figure1.png`という名で保存
+   * 予め`Figs`フォルダーを作成しておくこと
+* 図のサイズは幅6インチ、高さ3インチ
+* 保存形式はPNG形式 & 解像度は400
+   * 画面表示のみなら最低150、印刷目的なら最低300
+* {ragg}パッケージをインストールしておく（文字化け防止）
+
+```{r}
+#| eval: false
+ggsave(filename = "Figs/Figure1.png", # 保存先とファイル名
+       plot     = bar_plot3,          # 保存する図のオブジェクト名
+       width    = 6,                  # 図の幅 (インチ)
+       height   = 3,                  # 図の高さ (インチ)
+       dpi      = 400,                # 解像度
+       device   = ragg::agg_png)      # 文字化け防止
+```
+
+<!--- --->
+
+## 変数の分布を確認する方法
+
+### 変数が一つの場合
+
+* 変数が**離散変数**の場合: 棒グラフ
+   * 性別、国、都道府県など、数値が意味を持たないか変数
+   * 順位など取りうる値が有限
+* 変数が**連続変数**の場合: ヒストグラム、箱ひげ図
+   * 気温、成績、所得、身長、体重、人間開発指数、...
+   * 取りうる値が無限個
+
+### 変数が2つの場合
+
+* **連続変数**と**連続変数**: 散布図
+* **順序付き離散変数**と**連続変数**: 折れ線グラフ
+* **離散変数**と**離散変数**: モザイク図
+
+### 変数が3つ以上の場合
+
+* 次元を追加する形で対応
+
+<!--- --->
+
+## ヒストグラムの棒が持つ情報
+
+棒の横軸上の位置と高さ
+
+* {ggplot2}の場合、ヒストグラムを出力する変数を`x`にマッピングするだけで、自動的にヒストグラムを生成
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.5
+#| warning: false
+#| message: false
+df %>%
+   ggplot() +
+   geom_histogram(aes(x = HDI_2018), binwidth = 0.05) +
+   labs(x = "人間開発指数 (2018年)", y = "国家数") +
+   theme_gray(base_size   = 12)
+```
+
+<!--- --->
+
+## ヒストグラムの作成
+
+`geom_histogram()`を使用: マッピングは`x`のみ
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.5
+#| warning: false
+#| message: false
+df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム
+```
+
+<!--- --->
+
+## 棒の数を調整する
+
+`geom_histogram()`内、`aes()`の外に`bins`引数を指定
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.5
+#| warning: false
+#| message: false
+df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする
+```
+
+<!--- --->
+
+## 棒の幅を調整する
+
+`geom_histogram()`内、`aes()`の外に`binwidth`引数を指定
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.5
+#| warning: false
+#| message: false
+df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする
+```
+
+<!--- --->
+
+## 棒の枠線を入れる
+
+`geom_histogram()`内、`aes()`の外に`color`引数を指定
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| warning: false
+#| message: false
+hist_plot1 <- df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = "white") +
+  labs(x = "Human Development Index (2018)", y = "Number of Countries")
+hist_plot1
+```
+
+<!--- --->
+
+## 横軸のスケール調整
+
+`scale_x_continuous()`を使用 (`x`を`y`に変えると縦軸修正)
+
+* `breaks`引数: 目盛りの位置 / `labels`引数: 目盛りのラベル
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| warning: false
+#| message: false
+#| code-line-numbers: "2,3"
+hist_plot2 <- hist_plot1 +
+   scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),
+                      labels = seq(0.4, 1.0, by = 0.1))
+```
+
+<!--- --->
+
+## 次元の追加（ファセット分割）
+
+大陸ごとの`HDI_2018`のヒストグラム: ファセット分割を使用
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3.4
+#| warning: false
+#| message: false
+#| code-line-numbers: "2"
+hist_plot1 +
+   facet_wrap(~Continent, ncol = 6)
+```
+
+<!--- --->
+
+## 次元の追加 (色分け)
+
+`position = "identity"`と`alpha = 0.5`で可能であるが、非推奨
+
+* `alpha = 1`の場合、棒が不透明であるため、0.5程度に調整
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| warning: false
+#| message: false
+#| code-line-numbers: "4,5"
+df %>%
+   mutate(OECD = if_else(OECD == 1, "OECD Members", "Others")) %>%
+   ggplot() +
+   geom_histogram(aes(x = HDI_2018, fill = OECD), position = "identity",
+                  binwidth = 0.05, color = "white", alpha = 0.5)
+```
