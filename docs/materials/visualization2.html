@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.587">
+<meta name="generator" content="quarto-0.9.305">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,20 +80,19 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
 <link href="../Figs/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -131,7 +130,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -408,6 +407,8 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 
 
 
+
+
 <div class="quarto-title-meta">
 
     
@@ -454,7 +455,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 <p>　この棒から分かるのは「ある<strong>人</strong>の<strong>成績</strong>」である。成績は棒の高さで分かり、それが誰の成績なのかは棒の横軸上の位置から分かる。つまり、棒グラフには棒の横軸上の位置、高さといった2つの次元で構成され、それぞれ人と成績に対応する。この位置と高さは棒グラフを作成する際に必要な<strong>最低限</strong>の情報である。むろん、以下の <a href="#fig-bar-comparison-2">図&nbsp;1 (b)</a> のように位置を縦軸上の位置に、人間開発指数の平均値を棒の長さとして定義することできる。いずれにせよ、以下のような棒グラフを作成するためには「大陸」と「人間開発指数の平均値」といった2つの変数が必要だ。</p>
-<div id="fig-bar-comparison" class="cell quarto-layout-panel">
+<div class="cell quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
@@ -609,7 +610,8 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </section>
 <section id="次元の追加" class="level3">
 <h3 class="anchored" data-anchor-id="次元の追加">次元の追加</h3>
-<p>各政治体制に属する国家数を計算</p>
+<p>　通常の棒グラフはX軸とY軸のみで構成される2次元グラフである。棒グラフ上の棒には「<strong>ある大陸</strong> (X軸) の<strong>HDIの平均値</strong> (Y軸)」といった2つの情報が含まれている。つまり、一部の例外を除き、グラフの次元数は情報量を意味し、これは{ggplot2}の幾何オブジェクト内の<code>aes()</code>内で指定する引数の数でもある。以下では次元を増やす方法について紹介する。</p>
+<p>　まず、各政治体制（<code>Polity_Type</code>）に属する国家数の棒グラフを作ってみよう。作図に必要なdata.frameを<code>df3</code>として用意しておく。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">drop_na</span>(Polity_Type) <span class="sc">%&gt;%</span></span>
@@ -632,8 +634,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 5 Full Democracy     31</code></pre>
 </div>
 </div>
-<!--- --->
-<p>作図</p>
+<p>　棒グラフの作り方はこれまでのやり方と同じである。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -646,16 +647,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>棒が持つ情報</p>
-<ul>
-<li>政治体制のタイプ (<code>x = Polity_Type</code>)</li>
-<li>国家数 (<code>y = N</code>)</li>
-</ul>
-<p><strong>例)</strong> さらに大陸の情報を持たせ、色分けしたい</p>
-<ul>
-<li>大陸の列が必要</li>
-</ul>
+<p>　この棒グラフが持つ情報は2つである。まず、<code>x</code>で指定した政治体制のタイプ (<code>Polity_Type</code>)、そして<code>y</code>で指定した国家数 (<code>N</code>)だ。ここに更にもう一つの次元を使いすると使用。たとえば、もう一つの次元として大陸（<code>Continent</code>）を使いするとしよう。この場合、作図に使用するデータには大陸の変数（列）も必要だ。一方、先ほど作成した<code>df3</code>には大陸の情報がない。まずは、政治体制<span class="math inline">\(\times\)</span>大陸ごとの国家数を計算し、<code>df4</code>として格納しておく。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">drop_na</span>(Polity_Type) <span class="sc">%&gt;%</span></span>
@@ -694,9 +686,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 20 Full Democracy  Oceania       2</code></pre>
 </div>
 </div>
-<!--- --->
-<p>次元の追加</p>
-<p><code>aes()</code>内に<code>fill = Continent</code>を追加</p>
+<p>　次元を追加するときには<code>aes()</code>内に引数を追加すれば良い。棒グラフの棒に更に情報を持たせるのであれば、どうすれば良いだろうか。棒は点・線・面のうち、面に該当する。面であるならば、面の色（<code>fill</code>）、枠線の色（<code>color</code>）、枠線のタイプ（<code>linetype</code>）、透明度（<code>alpha</code>）などがある。<code>x</code>と<code>y</code>のみと構成された多くの図において、もう一つの次元を追加するのであれば、定番は色である。棒グラフの場合、面の色と枠線の色をそれぞれ指定することができるが、ここでは面の色（<code>fill</code>）にマッピングする。やり方は<code>aes()</code>内に<code>fill = Continent</code>を追加するだけだ。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df4 <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -709,9 +699,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>棒の位置をずらす</p>
-<p><code>geom_bar()</code>内に<code>position = "dodge"</code>を指定（<code>aes()</code>の外）</p>
+<p>　このような図を想像した人もいれば、少し違うと思う人もいるだろう。沖積されている形の棒グラフは世の中でそこそこ見るものであるが、実は分かりにくい図でもある。たとえば、民主主義（Democracy）の国の中で最も国家数が多い大陸はどこだろうか。この図ではどの大陸もだいたい同じ国家数にも見える。したがって、色分けした棒グラフは通所湯、棒の位置をずらす必要がある。ずらす方法は<code>geom_bar()</code>内に<code>position = "dodge"</code>を指定するだけだ。注意する点は<code>aes()</code>の中でなく、外に指定することだ。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df4 <span class="sc">%&gt;%</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -725,12 +713,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>凡例の位置調整</p>
-<p><code>theme()</code>内に<code>legend.position = "bottom"</code>を指定</p>
-<ul>
-<li>デフォルトは<code>"right"</code>（<code>"top"</code>は上段; <code>"none"</code>は削除）</li>
-</ul>
+<p>　あとは図を少しずつ調整してだけであるが、ここでは凡例の位置を変更する方法について紹介する。グラフ全体の見た目などを細かく調整するレイヤーは<code>theme()</code>である。この<code>theme()</code>内に<code>legend.position = "bottom"</code>を指定すると、凡例が図の下段へ移動する。デフォルトは<code>"right"</code>であり、 　<code>"top"</code>は上段、<code>"none"</code>は削除を意味する。<code>"left"</code>も可能だが、あまり使われない。この<code>theme()</code>はかなり奥深く、コンソール上で<code>?theme</code>を入力してみれば分かるだろうが、引数の数も数十種類以上だ。これをすべて覚えて使う人は少数だろう。多分、これは{ggplot2}の開発者にとっても同じはずである。必要に応じてヘルプやインターネット検索を活用すれば良い。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df4 <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -745,18 +728,15 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>もう一つの方法: マッピングの交換</p>
-<ul>
-<li>前ページの場合、「ある政治体制内の大陸の分布」を知ることに特化</li>
-<li>「ある大陸内の政治体制の分布」を見るには? <span class="math inline">\(\rightarrow\)</span> <code>x</code>と<code>fill</code>を交換</li>
-</ul>
+<p>　続いて、全く同じ情報を持つグラフでありながら、だいぶ印象が変わるものを紹介しよう。これまで作成した棒グラフは「ある政治体制内の大陸の分布」を知ることに特化している。つまり、「権威主義国家内にはアフリカがXカ国、アジアが…」といったメッセージを伝えるに効果的である。一方、「ある大陸内の政治体制の分布」を見るにはどうすれば良いだろうか。つまり、「アフリカには権威主義がXカ国、民主主義が…」のメッセージを伝えることである。いずれも必要な変数は同じはずである。異なるのはマッピングだけである。たとえば、<code>x</code>と<code>fill</code>を交換してみよう。厳密に言えば棒を並び替えただけなのに、かなり印象が変わってくる。可視化は「伝えたいメッセージを効果的に伝える」ことが重要であり、そのためには試行錯誤が必要だろう。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df4 <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Continent, <span class="at">y =</span> N, <span class="at">fill =</span> Polity_Type), <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
-<span id="cb21-4"><a href="#cb21-4"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Continent"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>, <span class="at">fill =</span> <span class="st">"Polity Type"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df4 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Continent, <span class="at">y =</span> N, <span class="at">fill =</span> Polity_Type), <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Continent"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>, <span class="at">fill =</span> <span class="st">"Polity Type"</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -765,12 +745,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>もう一つの方法: ファセット分割</p>
-<ul>
-<li>色分けを出来る限り抑えたい</li>
-<li><code>facet_wrap(~ 分割の基準となる変数名)</code></li>
-</ul>
+<p>　最後に次元を追加するもう一つの方法として、ファセット（facet）分割について紹介する。これは色分けを出来る限り抑えたい時に効果的である。特に白黒印刷の場合、識別可能な色は白・グレー・黒の3つくらいだろう。しかし、色の種類は増えると、白黒印刷では識別するのが難しくなる。この場合、プロットの面（=ファセット）を分割することで色の増加が抑制できる。使い方は<code>facet_wrap(~ 分割の基準となる変数名)</code>のレイヤーを入れるだけだ。<code>df4</code>を使い、政治体制ごとの国家数の棒グラフを作成する。ただし、それぞれの棒グラフは大陸ごとに独立したファセットを持つとする。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>bar_plot2 <span class="ot">&lt;-</span> df4 <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -833,7 +808,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <section id="図の保存" class="level2">
 <h2 class="anchored" data-anchor-id="図の保存">図の保存</h2>
 <p>　作成した図をファイルとして保存する時には、まずベクトルとビットマップ、どのフォーマットで保存するかを考える必要がある。ベクトル画像（ <a href="#fig-pdf-png-1">図&nbsp;2 (a)</a> ）の拡張子は<code>.pdf</code>（推奨）、<code>.svg</code>などがあり、これらのファイルは図をいくら拡大しても図が綺麗なままだという利点がある。また、複雑な図（例えば、点が数百万個ある散布図など）でないなら、ファイルサイズも比較的小さい。ビットマップ画像（ <a href="#fig-pdf-png-2">図&nbsp;2 (b)</a> ）の拡張子は<code>.png</code>（推奨）、<code>.bmp</code>、<code>.jpg</code>（= <code>.jpeg</code>）などがあり、図がいくら複雑でもファイルサイズが安定するといったメリットがある。しかし、拡大すると図がカクカクする場合がある。高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意する必要がある。基本的にベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。ビートマップ画像はどのソフトでも確実に埋め込める。</p>
-<div id="fig-pdf-png" class="cell quarto-layout-panel">
+<div class="cell quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
@@ -1033,7 +1008,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </section>
 
 </main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
