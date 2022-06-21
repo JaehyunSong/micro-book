@@ -304,35 +304,23 @@ bar_plot2 <- df4 %>%
 bar_plot2
 ```
 
-<!--- --->
-
-値ラベルの回転
-
-値ラベルが長すぎる場合、ラベルを回転することで重複を避ける
-
-* 覚える必要はなく、必要に応じてググる（`theme()`レイヤーはかなり複雑）
-
-以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。
+　ただし、この`bar_plot2`は値のラベルが重なっており、非常に読みにくい。この場合、ラベルを回転すると読みやすくなるだろう。横軸の目盛りラベルを修正するためには`theme()`レイヤーを追加し、`axis.text.x`を指定する必要がある。しかし、`theme()`レイヤーの中身はかなり複雑であるため、これを覚える必要はない。必要に応じてググればよいだろう。今後、ラベルの回転が必要な場合は以下のコードから`angle`だけを修正すれば良い。以下の例は35度回転の例である。
 
 ```{r}
-#| fig-width: 7
-#| fig-height: 2.5
+#| fig-width: 8
+#| fig-height: 4
 #| code-line-numbers: "3"
 bar_plot3 <- bar_plot2 +
+   labs(x = "Number of Countries", y = "Poltiy Type") + # ラベル修正
    theme_minimal() + # テーマを変えてみよう
    theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転
 
 bar_plot3
 ```
 
-<!--- --->
-
-マッピング交換でも解決可能
-
-`x`と`y`を交換しても良い
+　もう一つの方法としてマッピング交換が考えられる。今の横軸を縦軸にすれば、長い文字列でも問題なく出力できるだろう。
 
 ```{r}
-#| code-line-numbers: "3"
 #| fig-width: 8
 #| fig-height: 3.25
 bar_plot4 <- df4 %>%
@@ -379,34 +367,17 @@ ggsave(filename = "Figs/Figure1.png", # 保存先とファイル名
 
 ## ヒストグラム
 
-## 変数の分布
+### 変数の分布
 
-### 変数が一つの場合
+　ヒストグラムは**連続変数**（=間隔尺度と比率尺度）の分布を確認する普遍的な可視化方法です。実習用データの例だと、大陸（`Continent`）列は**離散変数**（=名目尺度と順序尺度）であり、名目変数の分布は「アジアはXXカ国、アフリカはXXカ国、...」といった形で示され、これまで見てきた棒グラフで可視化する事ができる。一方、変数が連続変数の場合はヒストグラムと箱ひげ図が頻繁に使われる。
 
-* 変数が**離散変数**の場合: 棒グラフ
-   * 性別、国、都道府県など、数値が意味を持たないか変数
-   * 順位など取りうる値が有限
-* 変数が**連続変数**の場合: ヒストグラム、箱ひげ図
-   * 気温、成績、所得、身長、体重、人間開発指数、...
-   * 取りうる値が無限個
+　以上の例はあくまでも**一つ**の変数の分布を確認するものである。変数が2つになると、分布よりも2つの変数間の**関係**を確認することとなる。これは次回に紹介する散布図（連続変数$\times$連続変数）と折れ線グラフ（順序変数$\times$連続変数）で可視化することができる[^relation]。
 
-### 変数が2つの場合
-
-* **連続変数**と**連続変数**: 散布図
-* **順序付き離散変数**と**連続変数**: 折れ線グラフ
-* **離散変数**と**離散変数**: モザイク図
-
-### 変数が3つ以上の場合
-
-* 次元を追加する形で対応
-
-<!--- --->
+[^relation]: 他にも離散変数$\times$離散変数に使用するモザイク図がある。モザイク図については[教科書の第20.16章](https://www.jaysong.net/RBook/visualization4.html#visual4-mosaic)を参照すること。また、名目尺度$\times$連続変数は棒グラフが有効である。大陸ごとの人間開発指数の平均値を示した棒グラフがその例である。
 
 ### ヒストグラムの作成
 
-棒の横軸上の位置と高さ
-
-* {ggplot2}の場合、ヒストグラムを出力する変数を`x`にマッピングするだけで、自動的にヒストグラムを生成
+　ヒストグラムの見た目は棒グラフと非常に似ている。棒グラフとヒストグラムの違いは棒と棒の間に隙間があるかないかである。棒グラフの場合は隙間がある。横軸が大陸の棒グラフの場合、アフリカとアジアの間の値というものは存在しない。なぜなら、名目尺度はそもそも数字でないか、数値であってもその数値の値に意味がないからだ。また、順序変数の場合、1位と2位の間の値は存在しない。つまり、1.5位といった順位は存在しない。一方、人間開発指数のような連続変数は0.1と0.2の間には無数の値が存在する。棒を並べるとしたら隙間なく棒を並べる必要があろう。
 
 ```{r}
 #| echo: false
@@ -421,11 +392,7 @@ df %>%
    theme_gray(base_size   = 12)
 ```
 
-<!--- --->
-
-ヒストグラムの作成
-
-`geom_histogram()`を使用: マッピングは`x`のみ
+　それでも見た目は棒グラフと非常に似ているため、それぞれの棒には棒の横軸上の位置と高さという情報が含まれている。ただし、{ggplot2}を使ったヒストグラムの作成は非常に簡単である。{ggplot2}では`geom_histogram()`を使用するが、ヒストグラムを出力する変数を`x`にマッピングするだけで、棒の高さは自動的に計算される。つまり、`y`に対してマッピングを行う必要はなく、`x`のみで十分である。それでは`df`内の人間開発指数（`HDI_2018`）のヒストグラムを作成してみよう。
 
 ```{r}
 #| fig-width: 8
@@ -437,15 +404,41 @@ df %>%
   geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム
 ```
 
-<!--- --->
+　ヒストグラムは連続変数の分布を素早く確認することが目的である。たとえば、分布において峰がいくつか、峰がある場合、どの辺が最も度数/密度が高いかを素早く判断できれば良いヒストグラムと言えよう。棒の数を調整する。
 
-棒の数を調整する
+　以下の3つのヒストグラムを比較してみよう。 @fig-hist-comparison-1 はヒストグラムが非常にギザギザしている。峰が10個くらいはありそうだ。一方、 @fig-hist-comparison-2 だと0.5と0.8周辺に大きな2つの峰があるように見える。最後に @fig-hist-comparison-3 では0.8周辺に1つの峰が確認できる。
 
-`geom_histogram()`内、`aes()`の外に`bins`引数を指定
+```{r fig-hist-comparison}
+#| fig-cap: 2つのヒストグラム
+#| fig-subcap: 
+#|   - "棒の幅が狭いヒストグラム"
+#|   - "棒の幅が中程度のヒストグラム"
+#|   - "棒の幅が広いヒストグラム"
+#| layout-ncol: 3
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+#| warning: false
+df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018), bins = 50, color = "white")
+
+df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018), bins = 10, color = "white")
+
+df %>%
+  ggplot() +
+  geom_histogram(aes(x = HDI_2018), bins = 5, color = "white")
+```
+
+　この3つの図の中で、良い図はなんだろうか。まず、 @fig-hist-comparison-3 はあまりにも多くの情報が失われている。たとえば、0.5周辺の峰という情報がない。一方、 @fig-hist-comparison-2 は情報が多すぎる。その意味で @fig-hist-comparison-2 が適切だろう。しかし、これは作図する側の人が決めるものであり、いくつかの図を出して比較してみるのが良いだろう。以上の3つの図は、ヒストグラムの棒の数を調整したものである。棒の数は`geom_histogram()`内、`aes()`の外に`bins`引数を指定することで変更することができる。たとえば、 @fig-hist-comparison-2 は棒が10本のヒストグラムである[^bins]。これを再現するためには`bins = 10`を指定すれば良い。ちなみに、デフォルトは`bins = 30`となっている。
+
+[^bins]: ちなみに、 @fig-hist-comparison-1 は50本、 @fig-hist-comparison-3 は5本である。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3.5
+#| fig-height: 4
 #| warning: false
 #| message: false
 df %>%
@@ -453,15 +446,11 @@ df %>%
   geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする
 ```
 
-<!--- --->
-
-棒の幅を調整する
-
-`geom_histogram()`内、`aes()`の外に`binwidth`引数を指定
+　棒の本数が少ないことは、棒の幅が広いことを意味する。これは棒の数でなく、棒の幅から見た目を調整することもできることを意味し、`geom_histogram()`内、`aes()`の外に`binwidth`引数を指定することで調整可能である。注意点としては`bins`と`binswidth`は片方のみ指定可能で両方指定することは出来ないことだ。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3.5
+#| fig-height: 4
 #| warning: false
 #| message: false
 df %>%
@@ -469,72 +458,59 @@ df %>%
   geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする
 ```
 
-<!--- --->
-
-棒の枠線を入れる
-
-`geom_histogram()`内、`aes()`の外に`color`引数を指定
+　ヒストグラムをより見やすくするコツとして、棒の枠線を追加することも考えられる。データ・インク比の観点から見ると枠線という視覚情報が追加されるので余計なものかも知れないが、枠線を入れるかどうかは作図する側が判断すれば良い。棒の枠線は`geom_histogram()`内、`aes()`の外に`color`引数を指定可能であり、棒の面の色が黒に近いので枠線は白（`"white"`）に指定してみよう。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3
+#| fig-height: 4
 #| warning: false
 #| message: false
 hist_plot1 <- df %>%
   ggplot() +
   geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = "white") +
   labs(x = "Human Development Index (2018)", y = "Number of Countries")
+
 hist_plot1
 ```
 
-<!--- --->
+　最後に、横軸の目盛りを変更してみよう。今は目盛りが0.4、0.6、0.8、1.0の0.2kあん描くとなっている。この目盛りを調整するレイヤーはX軸の場合は`scale_x_*()`、Y軸の場合は`scale_y_*()`を使う。`*`の箇所には各軸の尺度を指定する。ヒストグラムは横軸も縦軸も連続した値であるので、`scale_x_continuous()`、`scale_y_continuous()`を使う。ここではX軸の目盛りを変更するので`scale_x_continuous()`を使ってみよう。必要な引数は目盛りの位置を指定する`breaks`引数、目盛りのラベルを意味する`labels`引数だ。それぞれ長さ1以上のベクトルを指定すれば良いが、`breaks`と`labels`に使用する実引数（=ベクトル）の長さは同じ長さである必要がある。また、`labels`にはcharacter型ベクトルを指定することもできる。
 
-横軸のスケール調整
-
-`scale_x_continuous()`を使用 (`x`を`y`に変えると縦軸修正)
-
-* `breaks`引数: 目盛りの位置 / `labels`引数: 目盛りのラベル
+　先ほど作成した`hist_plot1`に目盛り変更のレイヤを追加してみよう。目盛りは0.4から1.0まで0.1間隔で付け、目盛りラベルもそれぞれ対応する値を指定する。公差0.1の等差数列ベクトルなので`seq()`関数が便利だろう。目盛り調整済みのヒストグラムは`hist_plot2`として格納、出力してみよう。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3
+#| fig-height: 4
 #| warning: false
 #| message: false
 #| code-line-numbers: "2,3"
 hist_plot2 <- hist_plot1 +
    scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),
                       labels = seq(0.4, 1.0, by = 0.1))
-```
 
-<!--- --->
+hist_plot2
+```
 
 ### 次元の追加
 
-ファセット分割
+　ヒストグラムにもう一つの次元を追加する場合、棒グラフと同じ技が使える。つまり、面の色分け、またはファセット分割である。棒グラフと異なる点は色分けよりもファセット分割の方が圧倒的に推奨される点だ。
 
-大陸ごとの`HDI_2018`のヒストグラム: ファセット分割を使用
+　まずはファセット分割から見よう。`hist_plot2`のヒストグラムは大陸（`Continent`）ごとに分ける場合、棒グラフと同様`facet_wrap(~Continent)`で分割できる。今回は2行3列で出力してみよう。`facet_wrap()`内に`nrow = 2`、または`ncol = 3`を追加するだけだ。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3.4
+#| fig-height: 4
 #| warning: false
 #| message: false
 #| code-line-numbers: "2"
-hist_plot1 +
-   facet_wrap(~Continent, ncol = 6)
+hist_plot2 +
+   facet_wrap(~Continent, nrow = 2)
 ```
 
-<!--- --->
-
-色分け
-
-`position = "identity"`と`alpha = 0.5`で可能であるが、非推奨
-
-* `alpha = 1`の場合、棒が不透明であるため、0.5程度に調整
+　それでは色分けの例を見てみよう。棒グラフと同様、`aes()`内に`fill`を指定すれば良いが、注意すべき点としては棒グラフのように`position = "identity"`を追加する必要がある点だ。それでは`df`の`OECD`をリコーディング（1なら`"OECD Members"`、それ以外は`"Others"`）し、`OECD`の値ごとにヒストグラムの色分けをしてみよう。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3
+#| fig-height: 4
 #| warning: false
 #| message: false
 #| code-line-numbers: "4,5"
@@ -542,5 +518,42 @@ df %>%
    mutate(OECD = if_else(OECD == 1, "OECD Members", "Others")) %>%
    ggplot() +
    geom_histogram(aes(x = HDI_2018, fill = OECD), position = "identity",
-                  binwidth = 0.05, color = "white", alpha = 0.5)
+                  binwidth = 0.05, color = "white") +
+   labs(x = "Human Development Index (2018)", y = "Number of Countries",
+        fill = "")
 ```
+
+　このヒストグラムには深刻な問題がある。それはOECD加盟国の棒が非加盟国の棒の後ろに存在するため、一部の棒が消えているということだ。これを避けるためには棒をやや透明にする必要がある。透明度の調整は`alpha`で引数で行う。今回は全ての棒に対して適用するので`aes()`の外側に`alpha`を指定する。`alpha`が1なら不透明、0なら透明となる。今回は`alpha = 0.5`程度に調整してみよう。
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+#| code-line-numbers: "4,5"
+df %>%
+   mutate(OECD = if_else(OECD == 1, "OECD Members", "Others")) %>%
+   ggplot() +
+   geom_histogram(aes(x = HDI_2018, fill = OECD), position = "identity",
+                  binwidth = 0.05, color = "white", alpha = 0.5) +
+   labs(x = "Human Development Index (2018)", y = "Number of Countries",
+        fill = "")
+```
+
+　このように非加盟国の棒の後ろに加盟国の棒が隠されていることが分かる。人によってはこのような色分けヒストグラムでも良いと思うかも知れない。しかし、色分けのヒストグラムはせいぜい2色までが限界である。もし、3色以上ならどうなるだろうか。たとえば、大陸（`Continent`）の値ごとに色分けをすればどうなるだろうか。
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+#| code-line-numbers: "4,5"
+df %>%
+   ggplot() +
+   geom_histogram(aes(x = HDI_2018, fill = Continent), position = "identity",
+                  binwidth = 0.05, color = "white", alpha = 0.5) +
+   labs(x = "Human Development Index (2018)", y = "Number of Countries",
+        fill = "")
+```
+
+　我々はこのヒストグラムから一体どのような情報が読み取れるだろうか。

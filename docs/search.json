@@ -14,6 +14,34 @@
     "text": "新しいタブで開く"
   },
   {
+    "objectID": "materials/visualization2.html#グラフ作成の手順",
+    "href": "materials/visualization2.html#グラフ作成の手順",
+    "title": "第13回講義資料",
+    "section": "グラフ作成の手順",
+    "text": "グラフ作成の手順\n　{ggplot2}を用いた作図は以下の手順で行われる。\n\n作成したいグラフを決める\n作成したいグラフの完成図を想像する or 描いてみる\nグラフ上の要素（点、線、面）が持つ情報を考える\n3の情報が一つの変数（列）と対応するような整然データを作成する\n{ggplot2}で作図\n図のカスタマイズ\n図の保存\n\n　今回は第9回の実習用データ（Micro09.csv）を使用する。{tidyverse}パッケージを読み込んだ後、read_csv()関数でデータを読み込む。\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")"
+  },
+  {
+    "objectID": "materials/visualization2.html#棒グラフ",
+    "href": "materials/visualization2.html#棒グラフ",
+    "title": "第13回講義資料",
+    "section": "棒グラフ",
+    "text": "棒グラフ\n　まずは、棒グラフについて解説する。ここに紙と鉛筆があるとし、棒グラフを描くとしよう。棒グラフは適当なもので良い。棒グラフには通常、2つ以上の棒が並んでいる。それぞれの棒から我々は何が分かるだろうか。\n\n\n\n\n\n\n\n\n\n　この棒から分かるのは「ある人の成績」である。成績は棒の高さで分かり、それが誰の成績なのかは棒の横軸上の位置から分かる。つまり、棒グラフには棒の横軸上の位置、高さといった2つの次元で構成され、それぞれ人と成績に対応する。この位置と高さは棒グラフを作成する際に必要な最低限の情報である。むろん、以下の 図 1 (b) のように位置を縦軸上の位置に、人間開発指数の平均値を棒の長さとして定義することできる。いずれにせよ、以下のような棒グラフを作成するためには「大陸」と「人間開発指数の平均値」といった2つの変数が必要だ。\n\n\n\n\n\n\n\n(a) xが大陸、yが人間開発指数\n\n\n\n\n\n\n\n(b) yが大陸、xが人間開発指数\n\n\n\n\n図 1: 2つの棒グラフ\n\n\n\n棒グラフの作成\n　それではデータを作成してみよう。{dplyr}を使用し、大陸 (Continent)ごとの人間開発指数 (HDI_2018)の平均値を計算し、df2という名で格納しておく。\n\ndf2 <- df %>%\n   group_by(Continent) %>%\n   summarise(HDI = mean(HDI_2018, na.rm = TRUE))\n\ndf2\n\n# A tibble: 5 × 2\n  Continent   HDI\n  <chr>     <dbl>\n1 Africa    0.553\n2 America   0.742\n3 Asia      0.723\n4 Europe    0.861\n5 Oceania   0.782\n\n\n　棒グラフに必要な2つの変数が揃った。ただし、データがこの2つの変数のみで構成される必要はない。含まれていれば問題ない。それでは作図に移ろう。棒グラフを作成するときに使用する幾何オブジェクトgeom_bar()である。また、aes()内に指定するマッピングは棒の横軸上の位置を意味するxと棒の高さを意味するyである。そして、棒の横軸上の位置は大陸 (Continent)、棒の高さは人間開発指数の平均値 (HDI)なので、マッピングはx = Continent, y = HDIとなる。もし、図 1 (b) のような図を作成するなら、xとyを逆にすれば良い。最後に、geom_bar()内、かつaes()の外にstat = \"identity\"と描く。stat引数は初心者には難しい引数なので、ここでは説明を割愛する。\n　それでは図を作成しbar_plot1という名のオブジェクトとして格納しておこう。格納された図を出力する場合はオブジェクト名のみ入力すれば良い。\n\nbar_plot1 <- df2 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = HDI), stat = \"identity\")\n\nbar_plot1\n\n\n\n\n\n\n\n\n　もし、論文・レポートの使用言語が日本語であるなら図表も日本語にする必要がある。bar_plot1を日本語にする場合、修正が必要な箇所は大陸名とそれぞれの軸のタイトルである。まず、df2のContinent列を日本語にリコーディングし、Continent_Jという名の列として追加する。\n\ndf2 <- df2 %>%\n   mutate(Continent_J = case_when(Continent == \"Asia\"    ~ \"アジア\",\n                                  Continent == \"Africa\"  ~ \"アフリカ\",\n                                  Continent == \"America\" ~ \"アメリカ\",\n                                  Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                  TRUE                   ~ \"オセアニア\"))\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n　作図の際、Continentの代わりにContinent_Jを使用する。また、X軸とY軸のタイトルを修正するためにlabs()レイヤーを追加し、軸のタイトルを指定する。\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")\n\n\n\n\n\n\n\n\n　NIIオンライン分析システムを使用する場合、以上のような図が得られるはずである。しかし、自分のPCにインストールしたR/RStudioを使用する場合、文字化けは生じる可能性がある。この場合、theme_*()レイヤーを追加し、引数としてbase_family = \"日本語フォント\"を指定する必要がある。theme_*()はtheme_で始まる関数の総称であり、theme_gray()（{ggplot2}のデフォルトテーマ）、theme_bw()、theme_minimal()などがある。日本語フォントは好きなものを使えば良いが、macOSの場合は\"HiraginoSans-W3\"、Windowsの場合は\"Yu Gothic\"が無難だろう。以下のコードはmacOSで文字化けが生じた場合のコードの改善例である。\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_gray(base_family = \"HiraginoSans-W3\")\n\n　先ほどのグラフを見ると、大陸がアジア、アフリカ、アメリカ、オセアニア、ヨーロッパ順となっている。これをアルファベット順に並べ替える、つまり、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニアの順番にするにはどうすれば良いだろうか。答えはContinet_J列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順にすることだ。df2をggplot()関数に渡す前にmutate()を入れ、そこでContinent_J列をfactor化すれば良い。\n\ndf2 %>%\n   mutate(Continent_J = factor(Continent_J, \n                               levels = c(\"アフリカ\", \"アメリカ\", \"アジア\", \n                                          \"ヨーロッパ\", \"オセアニア\"))) %>% \n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_bw() # Black and Whiteテーマも使ってみよう\n\n\n\n\n\n\n\n\n　ただし、df2を見ると表の順番はアルファベット順になっている。\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n　このように表で表示されている順番は作図の際の順番は一致しない場合がある。この順番を調整するためには、当該変数を予めfactor化しておく必要がある。\n　ここで一つ便利な関数を紹介しよう。それはfct_inorder()関数だ。この関数は{forcats}パッケージに含まれている関数であり、{tidyverse}を読み込む際、一緒に読み込まれるので{tidyverse}を読み込んだら別途読み込む必要はない。このfct_inorder()は()内の変数をfactor化し、各要素順番を表で登場した順番にしてくれる関数だ。現在、df2はアルファベット順になっているので、この表の順番通りにContinent_Jの要素の順番が固定される。\n\ndf2 %>%\n   mutate(Continent_J = fct_inorder(Continent_J)) %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), \n            stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")\n\n\n\n\n\n\n\n\n\n\n\n次元の追加\n　通常の棒グラフはX軸とY軸のみで構成される2次元グラフである。棒グラフ上の棒には「ある大陸 (X軸) のHDIの平均値 (Y軸)」といった2つの情報が含まれている。つまり、一部の例外を除き、グラフの次元数は情報量を意味し、これは{ggplot2}の幾何オブジェクト内のaes()内で指定する引数の数でもある。以下では次元を増やす方法について紹介する。\n　まず、各政治体制（Polity_Type）に属する国家数の棒グラフを作ってみよう。作図に必要なdata.frameをdf3として用意しておく。\n\ndf3 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type) %>%\n   summarise(N = n())\n\ndf3\n\n# A tibble: 5 × 2\n  Polity_Type         N\n  <fct>           <int>\n1 Autocracy          19\n2 Closed Anocracy    23\n3 Open Anocracy      20\n4 Democracy          65\n5 Full Democracy     31\n\n\n　棒グラフの作り方はこれまでのやり方と同じである。\n\ndf3 %>%\n   ggplot() +\n   geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\")\n\n\n\n\n\n\n\n\n　この棒グラフが持つ情報は2つである。まず、xで指定した政治体制のタイプ (Polity_Type)、そしてyで指定した国家数 (N)だ。ここに更にもう一つの次元を使いすると使用。たとえば、もう一つの次元として大陸（Continent）を使いするとしよう。この場合、作図に使用するデータには大陸の変数（列）も必要だ。一方、先ほど作成したdf3には大陸の情報がない。まずは、政治体制\\(\\times\\)大陸ごとの国家数を計算し、df4として格納しておく。\n\ndf4 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type, Continent) %>%\n   summarise(N       = n(),\n             .groups = \"drop\")\n\ndf4\n\n# A tibble: 20 × 3\n   Polity_Type     Continent     N\n   <fct>           <chr>     <int>\n 1 Autocracy       Africa        3\n 2 Autocracy       Asia         14\n 3 Autocracy       Europe        2\n 4 Closed Anocracy Africa       14\n 5 Closed Anocracy America       2\n 6 Closed Anocracy Asia          6\n 7 Closed Anocracy Europe        1\n 8 Open Anocracy   Africa       12\n 9 Open Anocracy   America       4\n10 Open Anocracy   Europe        2\n11 Open Anocracy   Oceania       2\n12 Democracy       Africa       18\n13 Democracy       America      16\n14 Democracy       Asia         15\n15 Democracy       Europe       16\n16 Full Democracy  Africa        1\n17 Full Democracy  America       5\n18 Full Democracy  Asia          3\n19 Full Democracy  Europe       20\n20 Full Democracy  Oceania       2\n\n\n　次元を追加するときにはaes()内に引数を追加すれば良い。棒グラフの棒に更に情報を持たせるのであれば、どうすれば良いだろうか。棒は点・線・面のうち、面に該当する。面であるならば、面の色（fill）、枠線の色（color）、枠線のタイプ（linetype）、透明度（alpha）などがある。xとyのみと構成された多くの図において、もう一つの次元を追加するのであれば、定番は色である。棒グラフの場合、面の色と枠線の色をそれぞれ指定することができるが、ここでは面の色（fill）にマッピングする。やり方はaes()内にfill = Continentを追加するだけだ。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\")\n\n\n\n\n\n\n\n\n　このような図を想像した人もいれば、少し違うと思う人もいるだろう。沖積されている形の棒グラフは世の中でそこそこ見るものであるが、実は分かりにくい図でもある。たとえば、民主主義（Democracy）の国の中で最も国家数が多い大陸はどこだろうか。この図ではどの大陸もだいたい同じ国家数にも見える。したがって、色分けした棒グラフは通所湯、棒の位置をずらす必要がある。ずらす方法はgeom_bar()内にposition = \"dodge\"を指定するだけだ。注意する点はaes()の中でなく、外に指定することだ。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\")\n\n\n\n\n\n\n\n\n　あとは図を少しずつ調整してだけであるが、ここでは凡例の位置を変更する方法について紹介する。グラフ全体の見た目などを細かく調整するレイヤーはtheme()である。このtheme()内にlegend.position = \"bottom\"を指定すると、凡例が図の下段へ移動する。デフォルトは\"right\"であり、 　\"top\"は上段、\"none\"は削除を意味する。\"left\"も可能だが、あまり使われない。このtheme()はかなり奥深く、コンソール上で?themeを入力してみれば分かるだろうが、引数の数も数十種類以上だ。これをすべて覚えて使う人は少数だろう。多分、これは{ggplot2}の開発者にとっても同じはずである。必要に応じてヘルプやインターネット検索を活用すれば良い。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\") +\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n　続いて、全く同じ情報を持つグラフでありながら、だいぶ印象が変わるものを紹介しよう。これまで作成した棒グラフは「ある政治体制内の大陸の分布」を知ることに特化している。つまり、「権威主義国家内にはアフリカがXカ国、アジアが…」といったメッセージを伝えるに効果的である。一方、「ある大陸内の政治体制の分布」を見るにはどうすれば良いだろうか。つまり、「アフリカには権威主義がXカ国、民主主義が…」のメッセージを伝えることである。いずれも必要な変数は同じはずである。異なるのはマッピングだけである。たとえば、xとfillを交換してみよう。厳密に言えば棒を並び替えただけなのに、かなり印象が変わってくる。可視化は「伝えたいメッセージを効果的に伝える」ことが重要であり、そのためには試行錯誤が必要だろう。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = N, fill = Polity_Type), stat = \"identity\",\n           position = \"dodge\", color = \"white\") +\n  theme_bw() +\n  labs(x = \"Continent\", y = \"Number of Countries\", fill = \"Polity Type\") +\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n　最後に次元を追加するもう一つの方法として、ファセット（facet）分割について紹介する。これは色分けを出来る限り抑えたい時に効果的である。特に白黒印刷の場合、識別可能な色は白・グレー・黒の3つくらいだろう。しかし、色の種類は増えると、白黒印刷では識別するのが難しくなる。この場合、プロットの面（=ファセット）を分割することで色の増加が抑制できる。使い方はfacet_wrap(~ 分割の基準となる変数名)のレイヤーを入れるだけだ。df4を使い、政治体制ごとの国家数の棒グラフを作成する。ただし、それぞれの棒グラフは大陸ごとに独立したファセットを持つとする。\n\nbar_plot2 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\") +\n  facet_wrap(~ Continent, ncol = 5) # ncol/nrowで列/行数の指定が可能\n\nbar_plot2\n\n\n\n\n\n\n\n\n　ただし、このbar_plot2は値のラベルが重なっており、非常に読みにくい。この場合、ラベルを回転すると読みやすくなるだろう。横軸の目盛りラベルを修正するためにはtheme()レイヤーを追加し、axis.text.xを指定する必要がある。しかし、theme()レイヤーの中身はかなり複雑であるため、これを覚える必要はない。必要に応じてググればよいだろう。今後、ラベルの回転が必要な場合は以下のコードからangleだけを修正すれば良い。以下の例は35度回転の例である。\n\nbar_plot3 <- bar_plot2 +\n   labs(x = \"Number of Countries\", y = \"Poltiy Type\") + # ラベル修正\n   theme_minimal() + # テーマを変えてみよう\n   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転\n\nbar_plot3\n\n\n\n\n\n\n\n\n　もう一つの方法としてマッピング交換が考えられる。今の横軸を縦軸にすれば、長い文字列でも問題なく出力できるだろう。\n\nbar_plot4 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = N, y = Polity_Type), stat = \"identity\") +\n  labs(x = \"Number of Countries\", y = \"Poltiy Type\") +\n  facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割\n  theme_minimal(base_size = 12)       # フォントサイズの調整も可能\n\nbar_plot4"
+  },
+  {
+    "objectID": "materials/visualization2.html#図の保存",
+    "href": "materials/visualization2.html#図の保存",
+    "title": "第13回講義資料",
+    "section": "図の保存",
+    "text": "図の保存\n　作成した図をファイルとして保存する時には、まずベクトルとビットマップ、どのフォーマットで保存するかを考える必要がある。ベクトル画像（ 図 2 (a) ）の拡張子は.pdf（推奨）、.svgなどがあり、これらのファイルは図をいくら拡大しても図が綺麗なままだという利点がある。また、複雑な図（例えば、点が数百万個ある散布図など）でないなら、ファイルサイズも比較的小さい。ビットマップ画像（ 図 2 (b) ）の拡張子は.png（推奨）、.bmp、.jpg（= .jpeg）などがあり、図がいくら複雑でもファイルサイズが安定するといったメリットがある。しかし、拡大すると図がカクカクする場合がある。高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意する必要がある。基本的にベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。ビートマップ画像はどのソフトでも確実に埋め込める。\n\n\n\n\n\n\n\n(a) ベクトル画像\n\n\n\n\n\n\n\n(b) ビットマップ画像\n\n\n\n\n図 2: ベクトル vs. ビットマップ\n\n\n　ここではbar_plot3を高解像度の.png形式で保存する方法について解説する。{ggplot2}で作図した図の保存にはggsave()関数が便利だ。たとえば、作業フォルダー内のFigsフォルダにFigure1.pngという名でbar_plot3を保存するとしよう。ただし、予め作業フォルダー内にFigsフォルダーを作成しておく必要がある。図のサイズは幅6インチ、高さ3インチとし、解像度（DPI）は400とする。解像度が高いほどファイルサイズは大きくなるため、適切な解像度を選ぶのが重要だ。モニター画面に表示するだけなら最低150、印刷目的なら最低300はほしい。また、図の保存時、文字化けを防いでくれる{ragg}パッケージがあるが、これも予めインストールしておこう（NIIオンライン分析システムでは導入済み）。ggsave()の使い方の例は以下の通りである。\n\nggsave(filename = \"Figs/Figure1.png\", # 保存先とファイル名\n       plot     = bar_plot3,          # 保存する図のオブジェクト名\n       width    = 6,                  # 図の幅 (インチ)\n       height   = 3,                  # 図の高さ (インチ)\n       dpi      = 400,                # 解像度\n       device   = ragg::agg_png)      # 文字化け防止"
+  },
+  {
+    "objectID": "materials/visualization2.html#ヒストグラム",
+    "href": "materials/visualization2.html#ヒストグラム",
+    "title": "第13回講義資料",
+    "section": "ヒストグラム",
+    "text": "ヒストグラム\n\n変数の分布\n　ヒストグラムは連続変数（=間隔尺度と比率尺度）の分布を確認する普遍的な可視化方法です。実習用データの例だと、大陸（Continent）列は離散変数（=名目尺度と順序尺度）であり、名目変数の分布は「アジアはXXカ国、アフリカはXXカ国、…」といった形で示され、これまで見てきた棒グラフで可視化する事ができる。一方、変数が連続変数の場合はヒストグラムと箱ひげ図が頻繁に使われる。\n　以上の例はあくまでも一つの変数の分布を確認するものである。変数が2つになると、分布よりも2つの変数間の関係を確認することとなる。これは次回に紹介する散布図（連続変数\\(\\times\\)連続変数）と折れ線グラフ（順序変数\\(\\times\\)連続変数）で可視化することができる1。\n\n\nヒストグラムの作成\n　ヒストグラムの見た目は棒グラフと非常に似ている。棒グラフとヒストグラムの違いは棒と棒の間に隙間があるかないかである。棒グラフの場合は隙間がある。横軸が大陸の棒グラフの場合、アフリカとアジアの間の値というものは存在しない。なぜなら、名目尺度はそもそも数字でないか、数値であってもその数値の値に意味がないからだ。また、順序変数の場合、1位と2位の間の値は存在しない。つまり、1.5位といった順位は存在しない。一方、人間開発指数のような連続変数は0.1と0.2の間には無数の値が存在する。棒を並べるとしたら隙間なく棒を並べる必要があろう。\n\n\n\n\n\n\n\n\n\n　それでも見た目は棒グラフと非常に似ているため、それぞれの棒には棒の横軸上の位置と高さという情報が含まれている。ただし、{ggplot2}を使ったヒストグラムの作成は非常に簡単である。{ggplot2}ではgeom_histogram()を使用するが、ヒストグラムを出力する変数をxにマッピングするだけで、棒の高さは自動的に計算される。つまり、yに対してマッピングを行う必要はなく、xのみで十分である。それではdf内の人間開発指数（HDI_2018）のヒストグラムを作成してみよう。\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム\n\n\n\n\n\n\n\n\n　ヒストグラムは連続変数の分布を素早く確認することが目的である。たとえば、分布において峰がいくつか、峰がある場合、どの辺が最も度数/密度が高いかを素早く判断できれば良いヒストグラムと言えよう。棒の数を調整する。\n　以下の3つのヒストグラムを比較してみよう。 図 3 (a) はヒストグラムが非常にギザギザしている。峰が10個くらいはありそうだ。一方、 図 3 (b) だと0.5と0.8周辺に大きな2つの峰があるように見える。最後に 図 3 (c) では0.8周辺に1つの峰が確認できる。\n\n\n\n\n\n\n\n(a) 棒の幅が狭いヒストグラム\n\n\n\n\n\n\n\n(b) 棒の幅が中程度のヒストグラム\n\n\n\n\n\n\n\n(c) 棒の幅が広いヒストグラム\n\n\n\n\n図 3: 2つのヒストグラム\n\n\n　この3つの図の中で、良い図はなんだろうか。まず、 図 3 (c) はあまりにも多くの情報が失われている。たとえば、0.5周辺の峰という情報がない。一方、 図 3 (b) は情報が多すぎる。その意味で 図 3 (b) が適切だろう。しかし、これは作図する側の人が決めるものであり、いくつかの図を出して比較してみるのが良いだろう。以上の3つの図は、ヒストグラムの棒の数を調整したものである。棒の数はgeom_histogram()内、aes()の外にbins引数を指定することで変更することができる。たとえば、 図 3 (b) は棒が10本のヒストグラムである2。これを再現するためにはbins = 10を指定すれば良い。ちなみに、デフォルトはbins = 30となっている。\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする\n\n\n\n\n\n\n\n\n　棒の本数が少ないことは、棒の幅が広いことを意味する。これは棒の数でなく、棒の幅から見た目を調整することもできることを意味し、geom_histogram()内、aes()の外にbinwidth引数を指定することで調整可能である。注意点としてはbinsとbinswidthは片方のみ指定可能で両方指定することは出来ないことだ。\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする\n\n\n\n\n\n\n\n\n　ヒストグラムをより見やすくするコツとして、棒の枠線を追加することも考えられる。データ・インク比の観点から見ると枠線という視覚情報が追加されるので余計なものかも知れないが、枠線を入れるかどうかは作図する側が判断すれば良い。棒の枠線はgeom_histogram()内、aes()の外にcolor引数を指定可能であり、棒の面の色が黒に近いので枠線は白（\"white\"）に指定してみよう。\n\nhist_plot1 <- df %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = \"white\") +\n  labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\")\n\nhist_plot1\n\n\n\n\n\n\n\n\n　最後に、横軸の目盛りを変更してみよう。今は目盛りが0.4、0.6、0.8、1.0の0.2kあん描くとなっている。この目盛りを調整するレイヤーはX軸の場合はscale_x_*()、Y軸の場合はscale_y_*()を使う。*の箇所には各軸の尺度を指定する。ヒストグラムは横軸も縦軸も連続した値であるので、scale_x_continuous()、scale_y_continuous()を使う。ここではX軸の目盛りを変更するのでscale_x_continuous()を使ってみよう。必要な引数は目盛りの位置を指定するbreaks引数、目盛りのラベルを意味するlabels引数だ。それぞれ長さ1以上のベクトルを指定すれば良いが、breaksとlabelsに使用する実引数（=ベクトル）の長さは同じ長さである必要がある。また、labelsにはcharacter型ベクトルを指定することもできる。\n　先ほど作成したhist_plot1に目盛り変更のレイヤを追加してみよう。目盛りは0.4から1.0まで0.1間隔で付け、目盛りラベルもそれぞれ対応する値を指定する。公差0.1の等差数列ベクトルなのでseq()関数が便利だろう。目盛り調整済みのヒストグラムはhist_plot2として格納、出力してみよう。\n\nhist_plot2 <- hist_plot1 +\n   scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),\n                      labels = seq(0.4, 1.0, by = 0.1))\n\nhist_plot2\n\n\n\n\n\n\n\n\n\n\n次元の追加\n　ヒストグラムにもう一つの次元を追加する場合、棒グラフと同じ技が使える。つまり、面の色分け、またはファセット分割である。棒グラフと異なる点は色分けよりもファセット分割の方が圧倒的に推奨される点だ。\n　まずはファセット分割から見よう。hist_plot2のヒストグラムは大陸（Continent）ごとに分ける場合、棒グラフと同様facet_wrap(~Continent)で分割できる。今回は2行3列で出力してみよう。facet_wrap()内にnrow = 2、またはncol = 3を追加するだけだ。\n\nhist_plot2 +\n   facet_wrap(~Continent, nrow = 2)\n\n\n\n\n\n\n\n\n　それでは色分けの例を見てみよう。棒グラフと同様、aes()内にfillを指定すれば良いが、注意すべき点としては棒グラフのようにposition = \"identity\"を追加する必要がある点だ。それではdfのOECDをリコーディング（1なら\"OECD Members\"、それ以外は\"Others\"）し、OECDの値ごとにヒストグラムの色分けをしてみよう。\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"OECD Members\", \"Others\")) %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = OECD), position = \"identity\",\n                  binwidth = 0.05, color = \"white\") +\n   labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\",\n        fill = \"\")\n\n\n\n\n\n\n\n\n　このヒストグラムには深刻な問題がある。それはOECD加盟国の棒が非加盟国の棒の後ろに存在するため、一部の棒が消えているということだ。これを避けるためには棒をやや透明にする必要がある。透明度の調整はalphaで引数で行う。今回は全ての棒に対して適用するのでaes()の外側にalphaを指定する。alphaが1なら不透明、0なら透明となる。今回はalpha = 0.5程度に調整してみよう。\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"OECD Members\", \"Others\")) %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = OECD), position = \"identity\",\n                  binwidth = 0.05, color = \"white\", alpha = 0.5) +\n   labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\",\n        fill = \"\")\n\n\n\n\n\n\n\n\n　このように非加盟国の棒の後ろに加盟国の棒が隠されていることが分かる。人によってはこのような色分けヒストグラムでも良いと思うかも知れない。しかし、色分けのヒストグラムはせいぜい2色までが限界である。もし、3色以上ならどうなるだろうか。たとえば、大陸（Continent）の値ごとに色分けをすればどうなるだろうか。\n\ndf %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = Continent), position = \"identity\",\n                  binwidth = 0.05, color = \"white\", alpha = 0.5) +\n   labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\",\n        fill = \"\")\n\n\n\n\n\n\n\n\n　我々はこのヒストグラムから一体どのような情報が読み取れるだろうか。"
+  },
+  {
     "objectID": "materials/visualization1.html",
     "href": "materials/visualization1.html",
     "title": "第12回講義資料",
@@ -1293,6 +1321,265 @@
     "title": "ミクロ政治データ分析実習",
     "section": "共通: 要素の置換",
     "text": "共通: 要素の置換\n\n要素の追加と方法は同じ\n\n\nmy_vec5[11] <- -6\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 NA NA -6\n\n\n\n複数の要素を置換する場合\n\n\nmy_vec5[9:10] <- c(-4, -5)\nmy_vec5\n\n [1]  4  3  2  1  0 -1 -2 -3 -4 -5 -6\n\n\n\nmy_vec5の要素の中から0より小さい要素に-1を掛けて置換する。\n\n\nmy_vec5[my_vec5 < 0] <- my_vec5[my_vec5 < 0] * -1\nmy_vec5\n\n [1] 4 3 2 1 0 1 2 3 4 5 6\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
+  },
+  {
+    "objectID": "slide/slide13.html#section",
+    "href": "slide/slide13.html#section",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "代表的な5種類のグラフ"
+  },
+  {
+    "objectID": "slide/slide13.html#named-graphs-5ng",
+    "href": "slide/slide13.html#named-graphs-5ng",
+    "title": "ミクロ政治データ分析実習",
+    "section": "5 Named Graphs (5NG)",
+    "text": "5 Named Graphs (5NG)\n\n棒グラフ (bar plot)\n\ngeom_bar()\n\nヒストグラム (histogram)\n\ngeom_histogram()\n\n箱ひげ図 (box plot / box-and-whisker plot)\n\ngeom_box()\n\n散布図 (scatter plot)\n\ngeom_point()\n\n折れ線グラフ (line plot)\n\ngeom_line()"
+  },
+  {
+    "objectID": "slide/slide13.html#グラフ作成の手順",
+    "href": "slide/slide13.html#グラフ作成の手順",
+    "title": "ミクロ政治データ分析実習",
+    "section": "グラフ作成の手順",
+    "text": "グラフ作成の手順\n\n作成したいグラフを決める\n作成したいグラフの完成図を想像する or 描いてみる\nグラフ上の要素（点、線、面）が持つ情報を考える\n3の情報が一つの変数（列）と対応するような整然データを作成する\n{ggplot2}で作図\n図のカスタマイズ\n図の保存"
+  },
+  {
+    "objectID": "slide/slide13.html#section-1",
+    "href": "slide/slide13.html#section-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "棒グラフ"
+  },
+  {
+    "objectID": "slide/slide13.html#棒グラフの必須要素",
+    "href": "slide/slide13.html#棒グラフの必須要素",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒グラフの必須要素",
+    "text": "棒グラフの必須要素\n棒グラフを作成する際に必要な最低限の情報\n\n\n\n\n\n\nx: 棒の横軸上の位置 (大陸)\ny: 棒の高さ (人間開発指数の平均値)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ny: 棒の縦軸上の位置 (大陸)\nx: 棒の長さ (人間開発指数の平均値)"
+  },
+  {
+    "objectID": "slide/slide13.html#データの用意",
+    "href": "slide/slide13.html#データの用意",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データの用意",
+    "text": "データの用意\n第9回講義のデータ (Micro09.csv) を使用\n\n{dplyr}を使用し、大陸 (Continent)ごとの人間開発指数 (HDI_2018)の平均値を計算し、df2という名で格納\n\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")\n\ndf2 <- df %>%\n   group_by(Continent) %>%\n   summarise(HDI = mean(HDI_2018, na.rm = TRUE))\n\ndf2\n\n# A tibble: 5 × 2\n  Continent   HDI\n  <chr>     <dbl>\n1 Africa    0.553\n2 America   0.742\n3 Asia      0.723\n4 Europe    0.861\n5 Oceania   0.782"
+  },
+  {
+    "objectID": "slide/slide13.html#とりあえず作図してみよう",
+    "href": "slide/slide13.html#とりあえず作図してみよう",
+    "title": "ミクロ政治データ分析実習",
+    "section": "とりあえず作図してみよう",
+    "text": "とりあえず作図してみよう\n\n使用する幾何オブジェクト: geom_bar()\nマッピング要素 (幾何オブジェクト内にaes())\n\n棒の横軸上の位置は大陸 (Continent)を意味する\n棒の高さは人間開発指数の平均値 (HDI)を意味する\n\ngeom_bar()内にstat = \"identity\"を忘れないこと\n\n\n\nコード\n\nbar_plot1 <- df2 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = HDI), \n           stat = \"identity\")\n\n\n\n\n結果\n\nbar_plot1"
+  },
+  {
+    "objectID": "slide/slide13.html#日本語の使用-1",
+    "href": "slide/slide13.html#日本語の使用-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "日本語の使用 (1)",
+    "text": "日本語の使用 (1)\nStep1: df2のContinent列を日本語にリコーディング\n\ndf2 <- df2 %>%\n   mutate(Continent_J = case_when(Continent == \"Asia\"    ~ \"アジア\",\n                                  Continent == \"Africa\"  ~ \"アフリカ\",\n                                  Continent == \"America\" ~ \"アメリカ\",\n                                  Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                  TRUE                   ~ \"オセアニア\"))\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア"
+  },
+  {
+    "objectID": "slide/slide13.html#日本語の使用-2",
+    "href": "slide/slide13.html#日本語の使用-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "日本語の使用 (2)",
+    "text": "日本語の使用 (2)\nStep2: 図のラベルを修正 (labs())\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")"
+  },
+  {
+    "objectID": "slide/slide13.html#文字化けが生じる場合",
+    "href": "slide/slide13.html#文字化けが生じる場合",
+    "title": "ミクロ政治データ分析実習",
+    "section": "文字化けが生じる場合",
+    "text": "文字化けが生じる場合\nNIIオンライン分析システムを使用する場合、文字化けは生じない\n\ntheme_*()レイヤーを追加し、base_family = \"日本語フォント\"を指定\ntheme_gray(): {ggplot2}の基本テーマ\n\n他にもtheme_bw()、theme_minimal()など\n\nmacOSの場合、\"HiraginoSans-W3\"、Windowsの場合、\"Yu Gothic\"を指定\n\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_gray(base_family = \"HiraginoSans-W3\")"
+  },
+  {
+    "objectID": "slide/slide13.html#棒の並び替え",
+    "href": "slide/slide13.html#棒の並び替え",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒の並び替え",
+    "text": "棒の並び替え\nアルファベット順に並べ替えたい場合\n\nコード結果\n\n\n\nContinet_J列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順とする\n\n\ndf2 %>%\n   mutate(Continent_J = factor(Continent_J, \n                               levels = c(\"アフリカ\", \"アメリカ\", \"アジア\", \n                                          \"ヨーロッパ\", \"オセアニア\"))) %>% \n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_bw() # Black and Whiteテーマも使ってみよう"
+  },
+  {
+    "objectID": "slide/slide13.html#便利な関数-fct_inorder",
+    "href": "slide/slide13.html#便利な関数-fct_inorder",
+    "title": "ミクロ政治データ分析実習",
+    "section": "便利な関数: fct_inorder()",
+    "text": "便利な関数: fct_inorder()\n{forcats}のfct_inorder()関数（{forcats}は{tidyverse}の一部）\n\nfactor化を行い、各要素順番を表で登場した順番とする\n\n\n\ndf2の中身\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n\n\n\n\ndf2 %>%\n   mutate(Continent_J = fct_inorder(Continent_J)) %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), \n            stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")"
+  },
+  {
+    "objectID": "slide/slide13.html#section-2",
+    "href": "slide/slide13.html#section-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "次元の追加"
+  },
+  {
+    "objectID": "slide/slide13.html#ケース数の棒グラフ",
+    "href": "slide/slide13.html#ケース数の棒グラフ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ケース数の棒グラフ",
+    "text": "ケース数の棒グラフ\n各政治体制に属する国家数を計算\n\ndf3 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type) %>%\n   summarise(N = n())\n\ndf3\n\n# A tibble: 5 × 2\n  Polity_Type         N\n  <fct>           <int>\n1 Autocracy          19\n2 Closed Anocracy    23\n3 Open Anocracy      20\n4 Democracy          65\n5 Full Democracy     31"
+  },
+  {
+    "objectID": "slide/slide13.html#作図",
+    "href": "slide/slide13.html#作図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "作図",
+    "text": "作図\n\ndf3 %>%\n   ggplot() +\n   geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\")"
+  },
+  {
+    "objectID": "slide/slide13.html#棒が持つ情報",
+    "href": "slide/slide13.html#棒が持つ情報",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒が持つ情報",
+    "text": "棒が持つ情報\n\n政治体制のタイプ (x = Polity_Type)\n国家数 (y = N)\n\n例) さらに大陸の情報を持たせ、色分けしたい\n\n大陸の列が必要\n\n\ndf4 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type, Continent) %>%\n   summarise(N       = n(),\n             .groups = \"drop\")"
+  },
+  {
+    "objectID": "slide/slide13.html#データ",
+    "href": "slide/slide13.html#データ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データ",
+    "text": "データ\n\ndf4\n\n# A tibble: 20 × 3\n   Polity_Type     Continent     N\n   <fct>           <chr>     <int>\n 1 Autocracy       Africa        3\n 2 Autocracy       Asia         14\n 3 Autocracy       Europe        2\n 4 Closed Anocracy Africa       14\n 5 Closed Anocracy America       2\n 6 Closed Anocracy Asia          6\n 7 Closed Anocracy Europe        1\n 8 Open Anocracy   Africa       12\n 9 Open Anocracy   America       4\n10 Open Anocracy   Europe        2\n11 Open Anocracy   Oceania       2\n12 Democracy       Africa       18\n13 Democracy       America      16\n14 Democracy       Asia         15\n15 Democracy       Europe       16\n16 Full Democracy  Africa        1\n17 Full Democracy  America       5\n18 Full Democracy  Asia          3\n19 Full Democracy  Europe       20\n20 Full Democracy  Oceania       2"
+  },
+  {
+    "objectID": "slide/slide13.html#次元の追加",
+    "href": "slide/slide13.html#次元の追加",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加",
+    "text": "次元の追加\naes()内にfill = Continentを追加\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\")"
+  },
+  {
+    "objectID": "slide/slide13.html#棒の位置をずらす",
+    "href": "slide/slide13.html#棒の位置をずらす",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒の位置をずらす",
+    "text": "棒の位置をずらす\ngeom_bar()内にposition = \"dodge\"を指定（aes()の外）\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\")"
+  },
+  {
+    "objectID": "slide/slide13.html#凡例の位置調整",
+    "href": "slide/slide13.html#凡例の位置調整",
+    "title": "ミクロ政治データ分析実習",
+    "section": "凡例の位置調整",
+    "text": "凡例の位置調整\ntheme()内にlegend.position = \"bottom\"を指定\n\nデフォルトは\"right\"（\"top\"は上段; \"none\"は削除）\n\n\nコード結果\n\n\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\") +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "slide/slide13.html#もう一つの方法-マッピングの交換",
+    "href": "slide/slide13.html#もう一つの方法-マッピングの交換",
+    "title": "ミクロ政治データ分析実習",
+    "section": "もう一つの方法: マッピングの交換",
+    "text": "もう一つの方法: マッピングの交換\n\n前ページの場合、「ある政治体制内の大陸の分布」を知ることに特化\n「ある大陸内の政治体制の分布」を見るには? \\(\\rightarrow\\) xとfillを交換\n\n\nコード結果\n\n\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = N, fill = Polity_Type), stat = \"identity\",\n           position = \"dodge\") +\n  labs(x = \"Continent\", y = \"Number of Countries\", fill = \"Polity Type\")"
+  },
+  {
+    "objectID": "slide/slide13.html#もう一つの方法-ファセット分割",
+    "href": "slide/slide13.html#もう一つの方法-ファセット分割",
+    "title": "ミクロ政治データ分析実習",
+    "section": "もう一つの方法: ファセット分割",
+    "text": "もう一つの方法: ファセット分割\n\n色分けを出来る限り抑えたい\nfacet_wrap(~ 分割の基準となる変数名)\n\n\nコード結果\n\n\n\nbar_plot2 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\") +\n  facet_wrap(~ Continent, ncol = 5) # ncol/nrowで列/行数の指定が可能\n\n\n\n\nbar_plot2"
+  },
+  {
+    "objectID": "slide/slide13.html#値ラベルの回転",
+    "href": "slide/slide13.html#値ラベルの回転",
+    "title": "ミクロ政治データ分析実習",
+    "section": "値ラベルの回転",
+    "text": "値ラベルの回転\n値ラベルが長すぎる場合、ラベルを回転することで重複を避ける\n\n覚える必要はなく、必要に応じてググる（theme()レイヤーはかなり複雑）\n\n\nコード結果\n\n\n\n# 以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。\nbar_plot3 <- bar_plot2 +\n   theme_minimal() + # テーマを変えてみよう\n   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転\n\n\n\n\nbar_plot3"
+  },
+  {
+    "objectID": "slide/slide13.html#マッピング交換でも解決可能",
+    "href": "slide/slide13.html#マッピング交換でも解決可能",
+    "title": "ミクロ政治データ分析実習",
+    "section": "マッピング交換でも解決可能",
+    "text": "マッピング交換でも解決可能\nxとyを交換しても良い\n\nコード結果\n\n\n\nbar_plot4 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = N, y = Polity_Type), stat = \"identity\") +\n  labs(x = \"Number of Countries\", y = \"Poltiy Type\") +\n  facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割\n  theme_minimal(base_size = 12)       # フォントサイズの調整も可能\n\n\n\n\nbar_plot4"
+  },
+  {
+    "objectID": "slide/slide13.html#section-3",
+    "href": "slide/slide13.html#section-3",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "図の保存"
+  },
+  {
+    "objectID": "slide/slide13.html#ベクトルとビットマップ",
+    "href": "slide/slide13.html#ベクトルとビットマップ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ベクトルとビットマップ",
+    "text": "ベクトルとビットマップ\nベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。\n\n本講義では高解像度の.png形式の保存方法について解説する。\n\n\n\nベクトル画像\n\n.pdf、.svgなど\n\n推奨はPDF形式\n\n拡大しても図が綺麗なまま\n複雑な図であれば、ファイルのサイズが大きくなる\n\n\n\n\n\n\n\n\n\n\n\n\n\nビットマップ画像\n\n.png、.bmp、.jpg（= .jpeg）など\n\n推奨はPNG形式\n\n拡大すると図がカクカクする\n\n高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意\n\n図が複雑でも、ファイルサイズが比較的安定"
+  },
+  {
+    "objectID": "slide/slide13.html#図の保存",
+    "href": "slide/slide13.html#図の保存",
+    "title": "ミクロ政治データ分析実習",
+    "section": "図の保存",
+    "text": "図の保存\nbar_plot3を保存する例\n\nggsave()関数を利用\n作業フォルダー内のFigsフォルダにFigure1.pngという名で保存\n\n予めFigsフォルダーを作成しておくこと\n\n図のサイズは幅6インチ、高さ3インチ\n保存形式はPNG形式 & 解像度は400\n\n画面表示のみなら最低150、印刷目的なら最低300\n\n{ragg}パッケージをインストールしておく（文字化け防止）\n\n\nggsave(filename = \"Figs/Figure1.png\", # 保存先とファイル名\n       plot     = bar_plot3,          # 保存する図のオブジェクト名\n       width    = 6,                  # 図の幅 (インチ)\n       height   = 3,                  # 図の高さ (インチ)\n       dpi      = 400,                # 解像度\n       device   = ragg::agg_png)      # 文字化け防止"
+  },
+  {
+    "objectID": "slide/slide13.html#section-4",
+    "href": "slide/slide13.html#section-4",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "ヒストグラム"
+  },
+  {
+    "objectID": "slide/slide13.html#変数の分布を確認する方法",
+    "href": "slide/slide13.html#変数の分布を確認する方法",
+    "title": "ミクロ政治データ分析実習",
+    "section": "変数の分布を確認する方法",
+    "text": "変数の分布を確認する方法\n変数が一つの場合\n\n変数が離散変数の場合: 棒グラフ\n\n性別、国、都道府県など、数値が意味を持たないか変数\n順位など取りうる値が有限\n\n変数が連続変数の場合: ヒストグラム、箱ひげ図\n\n気温、成績、所得、身長、体重、人間開発指数、…\n取りうる値が無限個\n\n\n変数が2つの場合\n\n連続変数と連続変数: 散布図\n順序付き離散変数と連続変数: 折れ線グラフ\n離散変数と離散変数: モザイク図\n\n変数が3つ以上の場合\n\n次元を追加する形で対応"
+  },
+  {
+    "objectID": "slide/slide13.html#ヒストグラムの棒が持つ情報",
+    "href": "slide/slide13.html#ヒストグラムの棒が持つ情報",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ヒストグラムの棒が持つ情報",
+    "text": "ヒストグラムの棒が持つ情報\n棒の横軸上の位置と高さ\n\n{ggplot2}の場合、ヒストグラムを出力する変数をxにマッピングするだけで、自動的にヒストグラムを生成"
+  },
+  {
+    "objectID": "slide/slide13.html#ヒストグラムの作成",
+    "href": "slide/slide13.html#ヒストグラムの作成",
+    "title": "ミクロ政治データ分析実習",
+    "section": "ヒストグラムの作成",
+    "text": "ヒストグラムの作成\ngeom_histogram()を使用: マッピングはxのみ\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム"
+  },
+  {
+    "objectID": "slide/slide13.html#棒の数を調整する",
+    "href": "slide/slide13.html#棒の数を調整する",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒の数を調整する",
+    "text": "棒の数を調整する\ngeom_histogram()内、aes()の外にbins引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする"
+  },
+  {
+    "objectID": "slide/slide13.html#棒の幅を調整する",
+    "href": "slide/slide13.html#棒の幅を調整する",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒の幅を調整する",
+    "text": "棒の幅を調整する\ngeom_histogram()内、aes()の外にbinwidth引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする"
+  },
+  {
+    "objectID": "slide/slide13.html#棒の枠線を入れる",
+    "href": "slide/slide13.html#棒の枠線を入れる",
+    "title": "ミクロ政治データ分析実習",
+    "section": "棒の枠線を入れる",
+    "text": "棒の枠線を入れる\ngeom_histogram()内、aes()の外にcolor引数を指定\n\nhist_plot1 <- df %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = \"white\") +\n  labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\")\nhist_plot1"
+  },
+  {
+    "objectID": "slide/slide13.html#横軸のスケール調整",
+    "href": "slide/slide13.html#横軸のスケール調整",
+    "title": "ミクロ政治データ分析実習",
+    "section": "横軸のスケール調整",
+    "text": "横軸のスケール調整\nscale_x_continuous()を使用 (xをyに変えると縦軸修正)\n\nbreaks引数: 目盛りの位置 / labels引数: 目盛りのラベル\n\n\nコード結果\n\n\n\nhist_plot2 <- hist_plot1 +\n   scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),\n                      labels = seq(0.4, 1.0, by = 0.1))\n\n\n\n\nhist_plot2"
+  },
+  {
+    "objectID": "slide/slide13.html#次元の追加ファセット分割",
+    "href": "slide/slide13.html#次元の追加ファセット分割",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加（ファセット分割）",
+    "text": "次元の追加（ファセット分割）\n大陸ごとのHDI_2018のヒストグラム: ファセット分割を使用\n\nhist_plot1 +\n   facet_wrap(~Continent, ncol = 6)"
+  },
+  {
+    "objectID": "slide/slide13.html#次元の追加-色分け",
+    "href": "slide/slide13.html#次元の追加-色分け",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加 (色分け)",
+    "text": "次元の追加 (色分け)\nposition = \"identity\"とalpha = 0.5で可能であるが、非推奨\n\nalpha = 1の場合、棒が不透明であるため、0.5程度に調整\n\n\nコード結果\n\n\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"OECD Members\", \"Others\")) %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = OECD), position = \"identity\",\n                  binwidth = 0.05, color = \"white\", alpha = 0.5)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   },
   {
     "objectID": "slide/slide05.html#r-markdownとは",
@@ -2678,7 +2965,7 @@
     "href": "index.html",
     "title": "<img src='/Figs/logo.png' height='20' style='vertical-align:baseline;'> MicroAnalysis@Kandai",
     "section": "",
-    "text": "アイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年06月16日\n開発環境\n\nmacOS 12.4 “Monterey”\nFirefox 101.0.1\nR version 4.2.0 (2022-04-22)\nRStudio 2022.02.3+492 “Prairie Trillium”\nQuarto 0.9.587\nR package {quarto} 1.1"
+    "text": "アイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年06月21日\n開発環境\n\nmacOS 12.4 “Monterey”\nFirefox 101.0.1\nR version 4.2.0 (2022-04-22)\nRStudio 2022.02.3+492 “Prairie Trillium”\nQuarto 0.9.587\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html",
@@ -2763,614 +3050,5 @@
     "title": "実習用データ集",
     "section": "データ一覧",
     "text": "データ一覧\n\n\n\n\n\n\n\n\n\nファイル名\n備考\n\n\n\n\n1\nPref_Vote.csv\n第3回講義で使用\n\n\n2\nBuildingData.csv\n第8回講義で使用\n\n\n3\nMicro09.csv\n第9・10回講義で使用\n\n\n4\nMicro11.csv\n第11回講義で使用"
-  },
-  {
-    "objectID": "slide/slide13.html#section",
-    "href": "slide/slide13.html#section",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "代表的な5種類のグラフ"
-  },
-  {
-    "objectID": "slide/slide13.html#named-graphs-5ng",
-    "href": "slide/slide13.html#named-graphs-5ng",
-    "title": "ミクロ政治データ分析実習",
-    "section": "5 Named Graphs (5NG)",
-    "text": "5 Named Graphs (5NG)\n\n棒グラフ (bar plot)\n\ngeom_bar()\n\nヒストグラム (histogram)\n\ngeom_histogram()\n\n箱ひげ図 (box plot / box-and-whisker plot)\n\ngeom_box()\n\n散布図 (scatter plot)\n\ngeom_point()\n\n折れ線グラフ (line plot)\n\ngeom_line()"
-  },
-  {
-    "objectID": "slide/slide13.html#グラフ作成の手順",
-    "href": "slide/slide13.html#グラフ作成の手順",
-    "title": "ミクロ政治データ分析実習",
-    "section": "グラフ作成の手順",
-    "text": "グラフ作成の手順\n\n作成したいグラフを決める\n作成したいグラフの完成図を想像する or 描いてみる\nグラフ上の要素（点、線、面）が持つ情報を考える\n3の情報が一つの変数（列）と対応するような整然データを作成する\n{ggplot2}で作図\n図のカスタマイズ\n図の保存"
-  },
-  {
-    "objectID": "slide/slide13.html#section-1",
-    "href": "slide/slide13.html#section-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "棒グラフ"
-  },
-  {
-    "objectID": "slide/slide13.html#棒グラフの必須要素",
-    "href": "slide/slide13.html#棒グラフの必須要素",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒グラフの必須要素",
-    "text": "棒グラフの必須要素\n棒グラフを作成する際に必要な最低限の情報\n\n\n\n\n\n\nx: 棒の横軸上の位置 (大陸)\ny: 棒の高さ (人間開発指数の平均値)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ny: 棒の縦軸上の位置 (大陸)\nx: 棒の長さ (人間開発指数の平均値)"
-  },
-  {
-    "objectID": "slide/slide13.html#データの用意",
-    "href": "slide/slide13.html#データの用意",
-    "title": "ミクロ政治データ分析実習",
-    "section": "データの用意",
-    "text": "データの用意\n第9回講義のデータ (Micro09.csv) を使用\n\n{dplyr}を使用し、大陸 (Continent)ごとの人間開発指数 (HDI_2018)の平均値を計算し、df2という名で格納\n\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")\n\ndf2 <- df %>%\n   group_by(Continent) %>%\n   summarise(HDI = mean(HDI_2018, na.rm = TRUE))\n\ndf2\n\n# A tibble: 5 × 2\n  Continent   HDI\n  <chr>     <dbl>\n1 Africa    0.553\n2 America   0.742\n3 Asia      0.723\n4 Europe    0.861\n5 Oceania   0.782"
-  },
-  {
-    "objectID": "slide/slide13.html#とりあえず作図してみる-1",
-    "href": "slide/slide13.html#とりあえず作図してみる-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "とりあえず作図してみる (1)",
-    "text": "とりあえず作図してみる (1)\n\n使用する幾何オブジェクト: geom_bar()\nマッピング要素 (幾何オブジェクト内にaes())\n\n棒の横軸上の位置は大陸 (Continent)を意味する\n棒の高さは人間開発指数の平均値 (HDI)を意味する\n\ngeom_bar()内にstat = \"identity\"を忘れないこと\n\n\n\nコード\n\nbar_plot1 <- df2 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = HDI), \n           stat = \"identity\")\n\n\n\n\n結果\n\nbar_plot1"
-  },
-  {
-    "objectID": "slide/slide13.html#とりあえず作図してみる-2",
-    "href": "slide/slide13.html#とりあえず作図してみる-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "とりあえず作図してみる (2)",
-    "text": "とりあえず作図してみる (2)"
-  },
-  {
-    "objectID": "slide/slide13.html#日本語の使用-1",
-    "href": "slide/slide13.html#日本語の使用-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "日本語の使用 (1)",
-    "text": "日本語の使用 (1)\nStep1: df2のContinent列を日本語にリコーディング\n\ndf2 <- df2 %>%\n   mutate(Continent_J = case_when(Continent == \"Asia\"    ~ \"アジア\",\n                                  Continent == \"Africa\"  ~ \"アフリカ\",\n                                  Continent == \"America\" ~ \"アメリカ\",\n                                  Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                  TRUE                   ~ \"オセアニア\"))\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア"
-  },
-  {
-    "objectID": "slide/slide13.html#日本語の使用-2",
-    "href": "slide/slide13.html#日本語の使用-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "日本語の使用 (2)",
-    "text": "日本語の使用 (2)\nStep2: 図のラベルを修正 (labs())\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")"
-  },
-  {
-    "objectID": "slide/slide13.html#日本語の使用-2-1",
-    "href": "slide/slide13.html#日本語の使用-2-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "日本語の使用 (2)",
-    "text": "日本語の使用 (2)\nStep2: 図のラベルを修正 (labs())"
-  },
-  {
-    "objectID": "slide/slide13.html#日本語の使用-3",
-    "href": "slide/slide13.html#日本語の使用-3",
-    "title": "ミクロ政治データ分析実習",
-    "section": "日本語の使用 (3)",
-    "text": "日本語の使用 (3)\nStep3: 文字化けが生じる場合、日本語フォントの設定\n\ntheme_gray(): {ggplot2}の基本テーマ\n\n他にもtheme_bw()、theme_minimal()など\n\nmacOSの場合、\"HiraKakuProN-W3\"、Windowsの場合、\"Yu Gothic\"を指定\nNIIオンライン分析システムを使用する場合、生じない\n\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\") #<<"
-  },
-  {
-    "objectID": "slide/slide13.html#日本語の使用-3-1",
-    "href": "slide/slide13.html#日本語の使用-3-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "日本語の使用 (3)",
-    "text": "日本語の使用 (3)\nStep3: 文字化けが生じる場合、日本語フォントの設定\n\ntheme_gray(): {ggplot2}の基本テーマ\n\n他にもtheme_bw()、theme_minimal()など\n\nmacOSの場合、\"HiraKakuProN-W3\"、Windowsの場合、\"Yu Gothic\"を指定"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の並び替え",
-    "href": "slide/slide13.html#棒の並び替え",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の並び替え",
-    "text": "棒の並び替え\nアルファベット順に並べ替えたい場合\n\nコード結果\n\n\n\nContinet_J列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順とする\n\n\ndf2 %>%\n   mutate(Continent_J = factor(Continent_J, \n                               levels = c(\"アフリカ\", \"アメリカ\", \"アジア\", \n                                          \"ヨーロッパ\", \"オセアニア\"))) %>% \n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_bw() # Black and Whiteテーマも使ってみよう"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の並び替え-1",
-    "href": "slide/slide13.html#棒の並び替え-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の並び替え",
-    "text": "棒の並び替え\nアルファベット順に並べ替えたい場合\n\nContinet_J列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順とする"
-  },
-  {
-    "objectID": "slide/slide13.html#便利な関数-fct_inorder",
-    "href": "slide/slide13.html#便利な関数-fct_inorder",
-    "title": "ミクロ政治データ分析実習",
-    "section": "便利な関数: fct_inorder()",
-    "text": "便利な関数: fct_inorder()\n{forcats}のfct_inorder()関数（{forcats}は{tidyverse}の一部）\n\nfactor化を行い、各要素順番を表で登場した順番とする\n\n\n\ndf2の中身\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n\n\n\n\ndf2 %>%\n   mutate(Continent_J = fct_inorder(Continent_J)) %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), \n            stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")"
-  },
-  {
-    "objectID": "slide/slide13.html#section-2",
-    "href": "slide/slide13.html#section-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "次元の追加"
-  },
-  {
-    "objectID": "slide/slide13.html#ケース数の棒グラフ",
-    "href": "slide/slide13.html#ケース数の棒グラフ",
-    "title": "ミクロ政治データ分析実習",
-    "section": "ケース数の棒グラフ",
-    "text": "ケース数の棒グラフ\n各政治体制に属する国家数を計算\n\ndf3 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type) %>%\n   summarise(N = n())\n\ndf3\n\n# A tibble: 5 × 2\n  Polity_Type         N\n  <fct>           <int>\n1 Autocracy          19\n2 Closed Anocracy    23\n3 Open Anocracy      20\n4 Democracy          65\n5 Full Democracy     31"
-  },
-  {
-    "objectID": "slide/slide13.html#作図",
-    "href": "slide/slide13.html#作図",
-    "title": "ミクロ政治データ分析実習",
-    "section": "作図",
-    "text": "作図\n\ndf3 %>%\n   ggplot() +\n   geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\")"
-  },
-  {
-    "objectID": "slide/slide13.html#棒が持つ情報",
-    "href": "slide/slide13.html#棒が持つ情報",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒が持つ情報",
-    "text": "棒が持つ情報\n\n政治体制のタイプ (x = Polity_Type)\n国家数 (y = N)\n\n例) さらに大陸の情報を持たせ、色分けしたい\n\n大陸の列が必要\n\n\ndf4 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type, Continent) %>%\n   summarise(N       = n(),\n             .groups = \"drop\")"
-  },
-  {
-    "objectID": "slide/slide13.html#データ",
-    "href": "slide/slide13.html#データ",
-    "title": "ミクロ政治データ分析実習",
-    "section": "データ",
-    "text": "データ\n\ndf4\n\n# A tibble: 20 × 3\n   Polity_Type     Continent     N\n   <fct>           <chr>     <int>\n 1 Autocracy       Africa        3\n 2 Autocracy       Asia         14\n 3 Autocracy       Europe        2\n 4 Closed Anocracy Africa       14\n 5 Closed Anocracy America       2\n 6 Closed Anocracy Asia          6\n 7 Closed Anocracy Europe        1\n 8 Open Anocracy   Africa       12\n 9 Open Anocracy   America       4\n10 Open Anocracy   Europe        2\n11 Open Anocracy   Oceania       2\n12 Democracy       Africa       18\n13 Democracy       America      16\n14 Democracy       Asia         15\n15 Democracy       Europe       16\n16 Full Democracy  Africa        1\n17 Full Democracy  America       5\n18 Full Democracy  Asia          3\n19 Full Democracy  Europe       20\n20 Full Democracy  Oceania       2"
-  },
-  {
-    "objectID": "slide/slide13.html#次元の追加",
-    "href": "slide/slide13.html#次元の追加",
-    "title": "ミクロ政治データ分析実習",
-    "section": "次元の追加",
-    "text": "次元の追加\naes()内にfill = Continentを追加\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\")"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の位置をずらす",
-    "href": "slide/slide13.html#棒の位置をずらす",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の位置をずらす",
-    "text": "棒の位置をずらす\ngeom_bar()内にposition = \"dodge\"を指定（aes()の外）\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\")"
-  },
-  {
-    "objectID": "slide/slide13.html#凡例の位置調整",
-    "href": "slide/slide13.html#凡例の位置調整",
-    "title": "ミクロ政治データ分析実習",
-    "section": "凡例の位置調整",
-    "text": "凡例の位置調整\ntheme()内にlegend.position = \"bottom\"を指定\n\nデフォルトは\"right\"（\"top\"は上段; \"none\"は削除）\n\n\nコード結果\n\n\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\") +\n  theme(legend.position = \"bottom\")"
-  },
-  {
-    "objectID": "slide/slide13.html#もう一つの方法-マッピングの交換",
-    "href": "slide/slide13.html#もう一つの方法-マッピングの交換",
-    "title": "ミクロ政治データ分析実習",
-    "section": "もう一つの方法: マッピングの交換",
-    "text": "もう一つの方法: マッピングの交換\n\n前ページの場合、「ある政治体制内の大陸の分布」を知ることに特化\n「ある大陸内の政治体制の分布」を見るには? \\(\\rightarrow\\) xとfillを交換\n\n\nコード結果\n\n\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = N, fill = Polity_Type), stat = \"identity\",\n           position = \"dodge\") +\n  labs(x = \"Continent\", y = \"Number of Countries\", fill = \"Polity Type\")"
-  },
-  {
-    "objectID": "slide/slide13.html#もう一つの方法-ファセット分割",
-    "href": "slide/slide13.html#もう一つの方法-ファセット分割",
-    "title": "ミクロ政治データ分析実習",
-    "section": "もう一つの方法: ファセット分割",
-    "text": "もう一つの方法: ファセット分割\n\n色分けを出来る限り抑えたい\nfacet_wrap(~ 分割の基準となる変数名)\n\n\nコード結果\n\n\n\nbar_plot2 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\") +\n  facet_wrap(~ Continent, ncol = 5) # ncol/nrowで列/行数の指定が可能\n\n\n\n\nbar_plot2"
-  },
-  {
-    "objectID": "slide/slide13.html#値ラベルの回転",
-    "href": "slide/slide13.html#値ラベルの回転",
-    "title": "ミクロ政治データ分析実習",
-    "section": "値ラベルの回転",
-    "text": "値ラベルの回転\n値ラベルが長すぎる場合、ラベルを回転することで重複を避ける\n\n覚える必要はなく、必要に応じてググる（theme()レイヤーはかなり複雑）\n\n\nコード結果\n\n\n\n# 以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。\nbar_plot3 <- bar_plot2 +\n   theme_minimal() + # テーマを変えてみよう\n   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転\n\n\n\n\nbar_plot3"
-  },
-  {
-    "objectID": "slide/slide13.html#section-3",
-    "href": "slide/slide13.html#section-3",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "図の保存"
-  },
-  {
-    "objectID": "slide/slide13.html#rstudioから保存する方法",
-    "href": "slide/slide13.html#rstudioから保存する方法",
-    "title": "ミクロ政治データ分析実習",
-    "section": "RStudioから保存する方法",
-    "text": "RStudioから保存する方法\nRStudio内のPlotsペインに図を出力し、Plotsペイン上段の「Export」をクリック\n\n文字化けの可能性があるため、非推奨\nPDF形式で保存する場合: 「Save as PDF…」\n\n拡大しても図が綺麗なまま\n複雑な図であれば、ファイルのサイズが大きくなる\n\nその他の形式（ビットマップ）で保存する場合: 「Save as Image…」\n\n推奨はPNG形式（DPI \\(\\geq\\) 300）\n拡大すると図がカクカクする（DPI調整で対応可; ファイルサイズに注意）\n図が複雑でも、ファイルサイズが安定\n\n\n\n\nPDFフォーマット（ベクトル）\n\n\n\n\n\n\n\n\n\n\n\n\nPNGフォーマット（ビットマップ）"
-  },
-  {
-    "objectID": "slide/slide13.html#rstudioで図の保存-pdf",
-    "href": "slide/slide13.html#rstudioで図の保存-pdf",
-    "title": "ミクロ政治データ分析実習",
-    "section": "RStudioで図の保存 (PDF)",
-    "text": "RStudioで図の保存 (PDF)\n\nRStudio内のPlotsペインに図を出力し、Plotsペイン上段の「Export」をクリック\n「Save as PDF…」をクリック\n詳細設定\n\nPDF Size: 図のサイズ指定（インチ）\nOrientation: Portrait (長辺が縦)、Landscape（長辺が横）\nUse cairo_pdf device: 必ずチェックする\nDirectory: 保存するフォルダ指定\nFile Name: ファイル名を指定\n\n「Save」クリック\n保存された図を必ず確認すること\n\nPCの設定によっては日本語が表示されない（豆腐化）場合もあるため"
-  },
-  {
-    "objectID": "slide/slide13.html#rstudioで図の保存-png",
-    "href": "slide/slide13.html#rstudioで図の保存-png",
-    "title": "ミクロ政治データ分析実習",
-    "section": "RStudioで図の保存 (PNG)",
-    "text": "RStudioで図の保存 (PNG)\n\nRStudio内のPlotsペインに図を出力し、Plotsペイン上段の「Export」をクリック\n「Save as Image…」をクリック\n詳細設定\n\nDirectory: 保存するフォルダ指定\nFile Name: ファイル名を指定\nWidth / Height: 図のサイズ指定（ピクセル単位）\n\n「Save」クリック\n保存された図を必ず確認すること\n\nPCの設定によっては日本語が表示されない（豆腐化）場合もあるため"
-  },
-  {
-    "objectID": "slide/slide13.html#コマンドで保存する方法-macos",
-    "href": "slide/slide13.html#コマンドで保存する方法-macos",
-    "title": "ミクロ政治データ分析実習",
-    "section": "コマンドで保存する方法 (macOS)",
-    "text": "コマンドで保存する方法 (macOS)\nFig2を保存する例 * 作業フォルダ内のFigsフォルダにFigure1.pdfという名で保存 * 図のサイズは幅6インチ、高さ3インチ * PNGの場合、DPIが高いほど鮮明（印刷用の場合、300以上推奨）\nPDF形式\n\nquartz(type = \"pdf\", file = \"Figs/Figure1.pdf\", width = 6, height = 3)\nprint(Fig2)\ndev.off()\n\nPNG形式 (DPI = 300)\n\nggsave(filename = \"Figs/Figure1.png\", plot = Fig2,\n       width = 6, height = 3, dpi = 300)"
-  },
-  {
-    "objectID": "slide/slide13.html#コマンドで保存する方法-windows",
-    "href": "slide/slide13.html#コマンドで保存する方法-windows",
-    "title": "ミクロ政治データ分析実習",
-    "section": "コマンドで保存する方法 (Windows)",
-    "text": "コマンドで保存する方法 (Windows)\nFig2を保存する例 * 作業フォルダ内のFigsフォルダにFigure1.pdf (.png)という名で保存 * 図のサイズは幅6インチ、高さ3インチ * PNGの場合、DPIが高いほど鮮明（印刷用の場合、300以上推奨）\nPDF形式\n\n# 以下のコードはmacOSでも作動する問題なく使える場合もある\nggsave(filename = \"Figs/Figure1.pdf\", plot = Fig2, device = cairo_pdf,\n       width = 6, height = 3)\n\nPNG形式 (DPI = 300)\n\nggsave(filename = \"Figs/Figure1.png\", plot = Fig2,\n       width = 6, height = 3, dpi = 300)"
-  },
-  {
-    "objectID": "slide/slide13.html#コマンドで保存する方法-クラウド版",
-    "href": "slide/slide13.html#コマンドで保存する方法-クラウド版",
-    "title": "ミクロ政治データ分析実習",
-    "section": "コマンドで保存する方法 (クラウド版)",
-    "text": "コマンドで保存する方法 (クラウド版)\nFig2を保存する例 * 作業フォルダ内のFigsフォルダにFigure1.pdfという名で保存 * 図のサイズは幅6インチ、高さ3インチ * PNGの場合、DPIが高いほど鮮明（印刷用の場合、300以上推奨）\n\nggsave(filename = \"Figs/Figure1.pdf\", plot = Fig2, device = cairo_pdf,\n       width = 6, height = 3)\n\nPNG形式 (DPI = 300)\n\nggsave(filename = \"Figs/Figure1.png\", plot = Fig2,\n       width = 6, height = 3, dpi = 300)"
-  },
-  {
-    "objectID": "slide/slide13.html#注意事項",
-    "href": "slide/slide13.html#注意事項",
-    "title": "ミクロ政治データ分析実習",
-    "section": "注意事項",
-    "text": "注意事項\n英語のみで構成された図の場合、文字化けが生じる可能性は低い\n\nただし、日本語の場合は注意が必要\n同じコマンドでも使用するPC環境によって文字化けが生じる場合も\n\nmacOSローカル版でもggsave()を使えるが、日本語が出力されない場合がある。\n\n保存した図で文字化けが生じた場合は、宋に相談\n\nただし、期末テストで図の保存は出題されない\n\n参考記事\n\n片桐智志さんの記事「おまえはもうRのグラフの日本語表示に悩まない (各OS対応)」"
-  },
-  {
-    "objectID": "slide/slide13.html#section-4",
-    "href": "slide/slide13.html#section-4",
-    "title": "ミクロ政治データ分析実習",
-    "section": "",
-    "text": "ヒストグラム"
-  },
-  {
-    "objectID": "slide/slide13.html#変数の分布を確認する方法",
-    "href": "slide/slide13.html#変数の分布を確認する方法",
-    "title": "ミクロ政治データ分析実習",
-    "section": "変数の分布を確認する方法",
-    "text": "変数の分布を確認する方法\n変数が一つの場合\n\n変数が離散変数の場合: 棒グラフ\n\n性別、国、都道府県など、数値が意味を持たないか変数\n順位など取りうる値が有限\n\n変数が連続変数の場合: ヒストグラム、箱ひげ図\n\n気温、成績、所得、身長、体重、人間開発指数、…\n取りうる値が無限個\n\n\n変数が2つの場合\n\n連続変数と連続変数: 散布図\n順序付き離散変数と連続変数: 折れ線グラフ\n離散変数と離散変数: モザイク図\n\n変数が3つ以上の場合\n\n次元を追加する形で対応"
-  },
-  {
-    "objectID": "slide/slide13.html#ヒストグラムの棒が持つ情報",
-    "href": "slide/slide13.html#ヒストグラムの棒が持つ情報",
-    "title": "ミクロ政治データ分析実習",
-    "section": "ヒストグラムの棒が持つ情報",
-    "text": "ヒストグラムの棒が持つ情報\n棒の横軸上の位置と高さ\n\n{ggplot2}の場合、ヒストグラムを出力する変数をxにマッピングするだけで、自動的にヒストグラムを生成"
-  },
-  {
-    "objectID": "slide/slide13.html#ヒストグラムの作成",
-    "href": "slide/slide13.html#ヒストグラムの作成",
-    "title": "ミクロ政治データ分析実習",
-    "section": "ヒストグラムの作成",
-    "text": "ヒストグラムの作成\ngeom_histogram()を使用: マッピングはxのみ\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の幅を調整する-1",
-    "href": "slide/slide13.html#棒の幅を調整する-1",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の幅を調整する (1)",
-    "text": "棒の幅を調整する (1)\ngeom_histogram()内にbinsまたはbinwidth引数を指定\n\nbins: 棒の数\n\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の幅を調整する-2",
-    "href": "slide/slide13.html#棒の幅を調整する-2",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の幅を調整する (2)",
-    "text": "棒の幅を調整する (2)\ngeom_histogram()内にbinsまたはbinwidth引数を指定 * binwidth: 棒の幅\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒を0.05単位で刻む"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の枠線を入れる",
-    "href": "slide/slide13.html#棒の枠線を入れる",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の枠線を入れる",
-    "text": "棒の枠線を入れる\ngeom_histogram()内、aes()の外にcolor引数を指定\n\nhist_plot1 <- df %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = \"white\") +\n  labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\")\nhist_plot1"
-  },
-  {
-    "objectID": "slide/slide13.html#横軸のスケール調整",
-    "href": "slide/slide13.html#横軸のスケール調整",
-    "title": "ミクロ政治データ分析実習",
-    "section": "横軸のスケール調整",
-    "text": "横軸のスケール調整\nscale_x_continuous()を使用 (xをyに変えると縦軸修正)\n\nbreaks引数: 目盛りの位置 / labels引数: 目盛りのラベル\n\n\nコード結果\n\n\n\nhist_plot2 <- hist_plot1 +\n   scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),\n                      labels = seq(0.4, 1.0, by = 0.1))\n\n\n\n\nhist_plot2"
-  },
-  {
-    "objectID": "slide/slide13.html#次元の追加ファセット分割",
-    "href": "slide/slide13.html#次元の追加ファセット分割",
-    "title": "ミクロ政治データ分析実習",
-    "section": "次元の追加（ファセット分割）",
-    "text": "次元の追加（ファセット分割）\n大陸ごとのHDI_2018のヒストグラム: ファセット分割を使用\n\nhist_plot1 +\n   facet_wrap(~Continent, ncol = 6)"
-  },
-  {
-    "objectID": "slide/slide13.html#次元の追加-色分け",
-    "href": "slide/slide13.html#次元の追加-色分け",
-    "title": "ミクロ政治データ分析実習",
-    "section": "次元の追加 (色分け)",
-    "text": "次元の追加 (色分け)\nposition = \"identity\"とalpha = 0.5で可能であるが、非推奨\n\nalpha = 1の場合、棒が不透明であるため、0.5程度に調整\n\n\nコード結果\n\n\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"OECD Members\", \"Others\")) %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = OECD), position = \"identity\",\n                  binwidth = 0.05, color = \"white\", alpha = 0.5)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://www.jaysong.net/micro-book"
-  },
-  {
-    "objectID": "slide/slide13.html#文字化けが生じる場合",
-    "href": "slide/slide13.html#文字化けが生じる場合",
-    "title": "ミクロ政治データ分析実習",
-    "section": "文字化けが生じる場合",
-    "text": "文字化けが生じる場合\nNIIオンライン分析システムを使用する場合、文字化けは生じない\n\ntheme_*()レイヤーを追加し、base_family = \"日本語フォント\"を指定\ntheme_gray(): {ggplot2}の基本テーマ\n\n他にもtheme_bw()、theme_minimal()など\n\nmacOSの場合、\"HiraginoSans-W3\"、Windowsの場合、\"Yu Gothic\"を指定\n\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_gray(base_family = \"HiraginoSans-W3\")"
-  },
-  {
-    "objectID": "slide/slide13.html#pdfとpng",
-    "href": "slide/slide13.html#pdfとpng",
-    "title": "ミクロ政治データ分析実習",
-    "section": "PDFとPNG",
-    "text": "PDFとPNG\nPDFを推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。\n\n\nベクトル画像\n\n.pdf、.svgなど\n\n推奨はPDF形式\n\n拡大しても図が綺麗なまま\n複雑な図であれば、ファイルのサイズが大きくなる\n\n\n\n\n\n\n\n\n\n\n\n\n\nビットマップがとう\n\n.png、.bmp、.jpg（= .jpeg）など\n\n推奨はPNG形式（DPI \\(\\geq\\) 300）\n\n拡大すると図がカクカクする（DPI調整で対応可; ファイルサイズに注意）\n図が複雑でも、ファイルサイズが比較的安定"
-  },
-  {
-    "objectID": "slide/slide13.html#ベクトルとビットマップ",
-    "href": "slide/slide13.html#ベクトルとビットマップ",
-    "title": "ミクロ政治データ分析実習",
-    "section": "ベクトルとビットマップ",
-    "text": "ベクトルとビットマップ\nベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。\n\n本講義では高解像度の.png形式の保存方法について解説する。\n\n\n\nベクトル画像\n\n.pdf、.svgなど\n\n推奨はPDF形式\n\n拡大しても図が綺麗なまま\n複雑な図であれば、ファイルのサイズが大きくなる\n\n\n\n\n\n\n\n\n\n\n\n\n\nビットマップ画像\n\n.png、.bmp、.jpg（= .jpeg）など\n\n推奨はPNG形式\n\n拡大すると図がカクカクする\n\n高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意\n\n図が複雑でも、ファイルサイズが比較的安定"
-  },
-  {
-    "objectID": "slide/slide13.html#図の保存",
-    "href": "slide/slide13.html#図の保存",
-    "title": "ミクロ政治データ分析実習",
-    "section": "図の保存",
-    "text": "図の保存\nbar_plot3を保存する例\n\nggsave()関数を利用\n作業フォルダー内のFigsフォルダにFigure1.pngという名で保存\n\n予めFigsフォルダーを作成しておくこと\n\n図のサイズは幅6インチ、高さ3インチ\n保存形式はPNG形式 & 解像度は400\n\n画面表示のみなら最低150、印刷目的なら最低300\n\n{ragg}パッケージをインストールしておく（文字化け防止）\n\n\nggsave(filename = \"Figs/Figure1.png\", # 保存先とファイル名\n       plot     = bar_plot3,          # 保存する図のオブジェクト名\n       width    = 6,                  # 図の幅 (インチ)\n       height   = 3,                  # 図の高さ (インチ)\n       dpi      = 400,                # 解像度\n       device   = ragg::agg_png)      # 文字化け防止"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の数を調整する",
-    "href": "slide/slide13.html#棒の数を調整する",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の数を調整する",
-    "text": "棒の数を調整する\ngeom_histogram()内、aes()の外にbins引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする"
-  },
-  {
-    "objectID": "slide/slide13.html#棒の幅を調整する",
-    "href": "slide/slide13.html#棒の幅を調整する",
-    "title": "ミクロ政治データ分析実習",
-    "section": "棒の幅を調整する",
-    "text": "棒の幅を調整する\ngeom_histogram()内、aes()の外にbinwidth引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする"
-  },
-  {
-    "objectID": "slide/slide13.html#とりあえず作図してみよう",
-    "href": "slide/slide13.html#とりあえず作図してみよう",
-    "title": "ミクロ政治データ分析実習",
-    "section": "とりあえず作図してみよう",
-    "text": "とりあえず作図してみよう\n\n使用する幾何オブジェクト: geom_bar()\nマッピング要素 (幾何オブジェクト内にaes())\n\n棒の横軸上の位置は大陸 (Continent)を意味する\n棒の高さは人間開発指数の平均値 (HDI)を意味する\n\ngeom_bar()内にstat = \"identity\"を忘れないこと\n\n\n\nコード\n\nbar_plot1 <- df2 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = HDI), \n           stat = \"identity\")\n\n\n\n\n結果\n\nbar_plot1"
-  },
-  {
-    "objectID": "slide/slide13.html#マッピング交換でも解決可能",
-    "href": "slide/slide13.html#マッピング交換でも解決可能",
-    "title": "ミクロ政治データ分析実習",
-    "section": "マッピング交換でも解決可能",
-    "text": "マッピング交換でも解決可能\nxとyを交換しても良い\n\nコード結果\n\n\n\nbar_plot4 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = N, y = Polity_Type), stat = \"identity\") +\n  labs(x = \"Number of Countries\", y = \"Poltiy Type\") +\n  facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割\n  theme_minimal(base_size = 12)       # フォントサイズの調整も可能\n\n\n\n\nbar_plot4"
-  },
-  {
-    "objectID": "materials/visualization2.html#named-graphs-5ng",
-    "href": "materials/visualization2.html#named-graphs-5ng",
-    "title": "第13回講義資料",
-    "section": "5 Named Graphs (5NG)",
-    "text": "5 Named Graphs (5NG)\n\n棒グラフ (bar plot)\n\ngeom_bar()\n\nヒストグラム (histogram)\n\ngeom_histogram()\n\n箱ひげ図 (box plot / box-and-whisker plot)\n\ngeom_box()\n\n散布図 (scatter plot)\n\ngeom_point()\n\n折れ線グラフ (line plot)\n\ngeom_line()"
-  },
-  {
-    "objectID": "materials/visualization2.html#グラフ作成の手順",
-    "href": "materials/visualization2.html#グラフ作成の手順",
-    "title": "第13回講義資料",
-    "section": "グラフ作成の手順",
-    "text": "グラフ作成の手順\n　{ggplot2}を用いた作図は以下の手順で行われる。\n\n作成したいグラフを決める\n作成したいグラフの完成図を想像する or 描いてみる\nグラフ上の要素（点、線、面）が持つ情報を考える\n3の情報が一つの変数（列）と対応するような整然データを作成する\n{ggplot2}で作図\n図のカスタマイズ\n図の保存\n\n　今回は第9回の実習用データ（Micro09.csv）を使用する。{tidyverse}パッケージを読み込んだ後、read_csv()関数でデータを読み込む。\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒グラフの必須要素",
-    "href": "materials/visualization2.html#棒グラフの必須要素",
-    "title": "第13回講義資料",
-    "section": "棒グラフの必須要素",
-    "text": "棒グラフの必須要素\n棒グラフを作成する際に必要な最低限の情報\n\n\n\n\n\n\nx: 棒の横軸上の位置 (大陸)\ny: 棒の高さ (人間開発指数の平均値)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ny: 棒の縦軸上の位置 (大陸)\nx: 棒の長さ (人間開発指数の平均値)"
-  },
-  {
-    "objectID": "materials/visualization2.html#データの用意",
-    "href": "materials/visualization2.html#データの用意",
-    "title": "第13回講義資料",
-    "section": "データの用意",
-    "text": "データの用意\n第9回講義のデータ (Micro09.csv) を使用\n\n{dplyr}を使用し、大陸 (Continent)ごとの人間開発指数 (HDI_2018)の平均値を計算し、df2という名で格納\n\n\ndf2 <- df %>%\n   group_by(Continent) %>%\n   summarise(HDI = mean(HDI_2018, na.rm = TRUE))\n\ndf2\n\n# A tibble: 5 × 2\n  Continent   HDI\n  <chr>     <dbl>\n1 Africa    0.553\n2 America   0.742\n3 Asia      0.723\n4 Europe    0.861\n5 Oceania   0.782"
-  },
-  {
-    "objectID": "materials/visualization2.html#とりあえず作図してみよう",
-    "href": "materials/visualization2.html#とりあえず作図してみよう",
-    "title": "第13回講義資料",
-    "section": "とりあえず作図してみよう",
-    "text": "とりあえず作図してみよう\n\n使用する幾何オブジェクト: geom_bar()\nマッピング要素 (幾何オブジェクト内にaes())\n\n棒の横軸上の位置は大陸 (Continent)を意味する\n棒の高さは人間開発指数の平均値 (HDI)を意味する\n\ngeom_bar()内にstat = \"identity\"を忘れないこと\n\n\nbar_plot1 <- df2 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = HDI), \n           stat = \"identity\")\n\nbar_plot1"
-  },
-  {
-    "objectID": "materials/visualization2.html#日本語の使用-1",
-    "href": "materials/visualization2.html#日本語の使用-1",
-    "title": "第13回講義資料",
-    "section": "日本語の使用 (1)",
-    "text": "日本語の使用 (1)\nStep1: df2のContinent列を日本語にリコーディング\n\ndf2 <- df2 %>%\n   mutate(Continent_J = case_when(Continent == \"Asia\"    ~ \"アジア\",\n                                  Continent == \"Africa\"  ~ \"アフリカ\",\n                                  Continent == \"America\" ~ \"アメリカ\",\n                                  Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                  TRUE                   ~ \"オセアニア\"))\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\nStep2: 図のラベルを修正 (labs())\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#文字化けが生じる場合",
-    "href": "materials/visualization2.html#文字化けが生じる場合",
-    "title": "第13回講義資料",
-    "section": "文字化けが生じる場合",
-    "text": "文字化けが生じる場合\nNIIオンライン分析システムを使用する場合、文字化けは生じない\n\ntheme_*()レイヤーを追加し、base_family = \"日本語フォント\"を指定\ntheme_gray(): {ggplot2}の基本テーマ\n\n他にもtheme_bw()、theme_minimal()など\n\nmacOSの場合、\"HiraginoSans-W3\"、Windowsの場合、\"Yu Gothic\"を指定\n\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_gray(base_family = \"HiraginoSans-W3\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒の並び替え",
-    "href": "materials/visualization2.html#棒の並び替え",
-    "title": "第13回講義資料",
-    "section": "棒の並び替え",
-    "text": "棒の並び替え\nアルファベット順に並べ替えたい場合\n\nContinet_J列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順とする\n\n\ndf2 %>%\n   mutate(Continent_J = factor(Continent_J, \n                               levels = c(\"アフリカ\", \"アメリカ\", \"アジア\", \n                                          \"ヨーロッパ\", \"オセアニア\"))) %>% \n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_bw() # Black and Whiteテーマも使ってみよう"
-  },
-  {
-    "objectID": "materials/visualization2.html#便利な関数-fct_inorder",
-    "href": "materials/visualization2.html#便利な関数-fct_inorder",
-    "title": "第13回講義資料",
-    "section": "便利な関数: fct_inorder()",
-    "text": "便利な関数: fct_inorder()\n{forcats}のfct_inorder()関数（{forcats}は{tidyverse}の一部）\n\nfactor化を行い、各要素順番を表で登場した順番とする\n\ndf2の中身\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n\ndf2 %>%\n   mutate(Continent_J = fct_inorder(Continent_J)) %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), \n            stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#ケース数の棒グラフ",
-    "href": "materials/visualization2.html#ケース数の棒グラフ",
-    "title": "第13回講義資料",
-    "section": "ケース数の棒グラフ",
-    "text": "ケース数の棒グラフ\n各政治体制に属する国家数を計算\n\ndf3 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type) %>%\n   summarise(N = n())\n\ndf3\n\n# A tibble: 5 × 2\n  Polity_Type         N\n  <fct>           <int>\n1 Autocracy          19\n2 Closed Anocracy    23\n3 Open Anocracy      20\n4 Democracy          65\n5 Full Democracy     31"
-  },
-  {
-    "objectID": "materials/visualization2.html#作図",
-    "href": "materials/visualization2.html#作図",
-    "title": "第13回講義資料",
-    "section": "作図",
-    "text": "作図\n\ndf3 %>%\n   ggplot() +\n   geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒が持つ情報",
-    "href": "materials/visualization2.html#棒が持つ情報",
-    "title": "第13回講義資料",
-    "section": "棒が持つ情報",
-    "text": "棒が持つ情報\n\n政治体制のタイプ (x = Polity_Type)\n国家数 (y = N)\n\n例) さらに大陸の情報を持たせ、色分けしたい\n\n大陸の列が必要\n\n\ndf4 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type, Continent) %>%\n   summarise(N       = n(),\n             .groups = \"drop\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#データ",
-    "href": "materials/visualization2.html#データ",
-    "title": "第13回講義資料",
-    "section": "データ",
-    "text": "データ\n\ndf4\n\n# A tibble: 20 × 3\n   Polity_Type     Continent     N\n   <fct>           <chr>     <int>\n 1 Autocracy       Africa        3\n 2 Autocracy       Asia         14\n 3 Autocracy       Europe        2\n 4 Closed Anocracy Africa       14\n 5 Closed Anocracy America       2\n 6 Closed Anocracy Asia          6\n 7 Closed Anocracy Europe        1\n 8 Open Anocracy   Africa       12\n 9 Open Anocracy   America       4\n10 Open Anocracy   Europe        2\n11 Open Anocracy   Oceania       2\n12 Democracy       Africa       18\n13 Democracy       America      16\n14 Democracy       Asia         15\n15 Democracy       Europe       16\n16 Full Democracy  Africa        1\n17 Full Democracy  America       5\n18 Full Democracy  Asia          3\n19 Full Democracy  Europe       20\n20 Full Democracy  Oceania       2"
-  },
-  {
-    "objectID": "materials/visualization2.html#次元の追加",
-    "href": "materials/visualization2.html#次元の追加",
-    "title": "第13回講義資料",
-    "section": "次元の追加",
-    "text": "次元の追加\naes()内にfill = Continentを追加\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒の位置をずらす",
-    "href": "materials/visualization2.html#棒の位置をずらす",
-    "title": "第13回講義資料",
-    "section": "棒の位置をずらす",
-    "text": "棒の位置をずらす\ngeom_bar()内にposition = \"dodge\"を指定（aes()の外）\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#凡例の位置調整",
-    "href": "materials/visualization2.html#凡例の位置調整",
-    "title": "第13回講義資料",
-    "section": "凡例の位置調整",
-    "text": "凡例の位置調整\ntheme()内にlegend.position = \"bottom\"を指定\n\nデフォルトは\"right\"（\"top\"は上段; \"none\"は削除）\n\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\") +\n  theme(legend.position = \"bottom\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#もう一つの方法-マッピングの交換",
-    "href": "materials/visualization2.html#もう一つの方法-マッピングの交換",
-    "title": "第13回講義資料",
-    "section": "もう一つの方法: マッピングの交換",
-    "text": "もう一つの方法: マッピングの交換\n\n前ページの場合、「ある政治体制内の大陸の分布」を知ることに特化\n「ある大陸内の政治体制の分布」を見るには? \\(\\rightarrow\\) xとfillを交換\n\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = N, fill = Polity_Type), stat = \"identity\",\n           position = \"dodge\") +\n  labs(x = \"Continent\", y = \"Number of Countries\", fill = \"Polity Type\")"
-  },
-  {
-    "objectID": "materials/visualization2.html#もう一つの方法-ファセット分割",
-    "href": "materials/visualization2.html#もう一つの方法-ファセット分割",
-    "title": "第13回講義資料",
-    "section": "もう一つの方法: ファセット分割",
-    "text": "もう一つの方法: ファセット分割\n\n色分けを出来る限り抑えたい\nfacet_wrap(~ 分割の基準となる変数名)\n\n\nbar_plot2 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\") +\n  facet_wrap(~ Continent, ncol = 5) # ncol/nrowで列/行数の指定が可能\n\nbar_plot2"
-  },
-  {
-    "objectID": "materials/visualization2.html#値ラベルの回転",
-    "href": "materials/visualization2.html#値ラベルの回転",
-    "title": "第13回講義資料",
-    "section": "値ラベルの回転",
-    "text": "値ラベルの回転\n値ラベルが長すぎる場合、ラベルを回転することで重複を避ける\n\n覚える必要はなく、必要に応じてググる（theme()レイヤーはかなり複雑）\n\n以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。\n\nbar_plot3 <- bar_plot2 +\n   theme_minimal() + # テーマを変えてみよう\n   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転\n\nbar_plot3"
-  },
-  {
-    "objectID": "materials/visualization2.html#マッピング交換でも解決可能",
-    "href": "materials/visualization2.html#マッピング交換でも解決可能",
-    "title": "第13回講義資料",
-    "section": "マッピング交換でも解決可能",
-    "text": "マッピング交換でも解決可能\nxとyを交換しても良い\n\nbar_plot4 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = N, y = Polity_Type), stat = \"identity\") +\n  labs(x = \"Number of Countries\", y = \"Poltiy Type\") +\n  facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割\n  theme_minimal(base_size = 12)       # フォントサイズの調整も可能\n\nbar_plot4"
-  },
-  {
-    "objectID": "materials/visualization2.html#ベクトルとビットマップ",
-    "href": "materials/visualization2.html#ベクトルとビットマップ",
-    "title": "第13回講義資料",
-    "section": "ベクトルとビットマップ",
-    "text": "ベクトルとビットマップ\nベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。\n\n本講義では高解像度の.png形式の保存方法について解説する。\n\n\n\n\nベクトル画像\n\n.pdf、.svgなど\n\n推奨はPDF形式\n\n拡大しても図が綺麗なまま\n複雑な図であれば、ファイルのサイズが大きくなる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nビットマップ画像\n\n.png、.bmp、.jpg（= .jpeg）など\n\n推奨はPNG形式\n\n拡大すると図がカクカクする\n\n高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意\n\n図が複雑でも、ファイルサイズが比較的安定"
-  },
-  {
-    "objectID": "materials/visualization2.html#図の保存",
-    "href": "materials/visualization2.html#図の保存",
-    "title": "第13回講義資料",
-    "section": "図の保存",
-    "text": "図の保存\n　作成した図をファイルとして保存する時には、まずベクトルとビットマップ、どのフォーマットで保存するかを考える必要がある。ベクトル画像（ 図 2 (a) ）の拡張子は.pdf（推奨）、.svgなどがあり、これらのファイルは図をいくら拡大しても図が綺麗なままだという利点がある。また、複雑な図（例えば、点が数百万個ある散布図など）でないなら、ファイルサイズも比較的小さい。ビットマップ画像（ 図 2 (b) ）の拡張子は.png（推奨）、.bmp、.jpg（= .jpeg）などがあり、図がいくら複雑でもファイルサイズが安定するといったメリットがある。しかし、拡大すると図がカクカクする場合がある。高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意する必要がある。基本的にベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。ビートマップ画像はどのソフトでも確実に埋め込める。\n\n\n\n\n\n\n\n(a) ベクトル画像\n\n\n\n\n\n\n\n(b) ビットマップ画像\n\n\n\n\n図 2: ベクトル vs. ビットマップ\n\n\n　ここではbar_plot3を高解像度の.png形式で保存する方法について解説する。{ggplot2}で作図した図の保存にはggsave()関数が便利だ。たとえば、作業フォルダー内のFigsフォルダにFigure1.pngという名でbar_plot3を保存するとしよう。ただし、予め作業フォルダー内にFigsフォルダーを作成しておく必要がある。図のサイズは幅6インチ、高さ3インチとし、解像度（DPI）は400とする。解像度が高いほどファイルサイズは大きくなるため、適切な解像度を選ぶのが重要だ。モニター画面に表示するだけなら最低150、印刷目的なら最低300はほしい。また、図の保存時、文字化けを防いでくれる{ragg}パッケージがあるが、これも予めインストールしておこう（NIIオンライン分析システムでは導入済み）。ggsave()の使い方の例は以下の通りである。\n\nggsave(filename = \"Figs/Figure1.png\", # 保存先とファイル名\n       plot     = bar_plot3,          # 保存する図のオブジェクト名\n       width    = 6,                  # 図の幅 (インチ)\n       height   = 3,                  # 図の高さ (インチ)\n       dpi      = 400,                # 解像度\n       device   = ragg::agg_png)      # 文字化け防止"
-  },
-  {
-    "objectID": "materials/visualization2.html#変数の分布を確認する方法",
-    "href": "materials/visualization2.html#変数の分布を確認する方法",
-    "title": "第13回講義資料",
-    "section": "変数の分布を確認する方法",
-    "text": "変数の分布を確認する方法\n\n変数が一つの場合\n\n変数が離散変数の場合: 棒グラフ\n\n性別、国、都道府県など、数値が意味を持たないか変数\n順位など取りうる値が有限\n\n変数が連続変数の場合: ヒストグラム、箱ひげ図\n\n気温、成績、所得、身長、体重、人間開発指数、…\n取りうる値が無限個\n\n\n\n\n変数が2つの場合\n\n連続変数と連続変数: 散布図\n順序付き離散変数と連続変数: 折れ線グラフ\n離散変数と離散変数: モザイク図\n\n\n\n変数が3つ以上の場合\n\n次元を追加する形で対応"
-  },
-  {
-    "objectID": "materials/visualization2.html#ヒストグラムの棒が持つ情報",
-    "href": "materials/visualization2.html#ヒストグラムの棒が持つ情報",
-    "title": "第13回講義資料",
-    "section": "ヒストグラムの棒が持つ情報",
-    "text": "ヒストグラムの棒が持つ情報\n棒の横軸上の位置と高さ\n\n{ggplot2}の場合、ヒストグラムを出力する変数をxにマッピングするだけで、自動的にヒストグラムを生成"
-  },
-  {
-    "objectID": "materials/visualization2.html#ヒストグラムの作成",
-    "href": "materials/visualization2.html#ヒストグラムの作成",
-    "title": "第13回講義資料",
-    "section": "ヒストグラムの作成",
-    "text": "ヒストグラムの作成\ngeom_histogram()を使用: マッピングはxのみ\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒の数を調整する",
-    "href": "materials/visualization2.html#棒の数を調整する",
-    "title": "第13回講義資料",
-    "section": "棒の数を調整する",
-    "text": "棒の数を調整する\ngeom_histogram()内、aes()の外にbins引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒の幅を調整する",
-    "href": "materials/visualization2.html#棒の幅を調整する",
-    "title": "第13回講義資料",
-    "section": "棒の幅を調整する",
-    "text": "棒の幅を調整する\ngeom_histogram()内、aes()の外にbinwidth引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒の枠線を入れる",
-    "href": "materials/visualization2.html#棒の枠線を入れる",
-    "title": "第13回講義資料",
-    "section": "棒の枠線を入れる",
-    "text": "棒の枠線を入れる\ngeom_histogram()内、aes()の外にcolor引数を指定\n\nhist_plot1 <- df %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = \"white\") +\n  labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\")\nhist_plot1"
-  },
-  {
-    "objectID": "materials/visualization2.html#横軸のスケール調整",
-    "href": "materials/visualization2.html#横軸のスケール調整",
-    "title": "第13回講義資料",
-    "section": "横軸のスケール調整",
-    "text": "横軸のスケール調整\nscale_x_continuous()を使用 (xをyに変えると縦軸修正)\n\nbreaks引数: 目盛りの位置 / labels引数: 目盛りのラベル\n\n\nhist_plot2 <- hist_plot1 +\n   scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),\n                      labels = seq(0.4, 1.0, by = 0.1))"
-  },
-  {
-    "objectID": "materials/visualization2.html#次元の追加ファセット分割",
-    "href": "materials/visualization2.html#次元の追加ファセット分割",
-    "title": "第13回講義資料",
-    "section": "次元の追加（ファセット分割）",
-    "text": "次元の追加（ファセット分割）\n大陸ごとのHDI_2018のヒストグラム: ファセット分割を使用\n\nhist_plot1 +\n   facet_wrap(~Continent, ncol = 6)"
-  },
-  {
-    "objectID": "materials/visualization2.html#次元の追加-色分け",
-    "href": "materials/visualization2.html#次元の追加-色分け",
-    "title": "第13回講義資料",
-    "section": "次元の追加 (色分け)",
-    "text": "次元の追加 (色分け)\nposition = \"identity\"とalpha = 0.5で可能であるが、非推奨\n\nalpha = 1の場合、棒が不透明であるため、0.5程度に調整\n\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"OECD Members\", \"Others\")) %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = OECD), position = \"identity\",\n                  binwidth = 0.05, color = \"white\", alpha = 0.5)"
-  },
-  {
-    "objectID": "materials/visualization2.html#棒グラフ",
-    "href": "materials/visualization2.html#棒グラフ",
-    "title": "第13回講義資料",
-    "section": "棒グラフ",
-    "text": "棒グラフ\n　まずは、棒グラフについて解説する。ここに紙と鉛筆があるとし、棒グラフを描くとしよう。棒グラフは適当なもので良い。棒グラフには通常、2つ以上の棒が並んでいる。それぞれの棒から我々は何が分かるだろうか。\n\n\n\n\n\n\n\n\n\n　この棒から分かるのは「ある人の成績」である。成績は棒の高さで分かり、それが誰の成績なのかは棒の横軸上の位置から分かる。つまり、棒グラフには棒の横軸上の位置、高さといった2つの次元で構成され、それぞれ人と成績に対応する。この位置と高さは棒グラフを作成する際に必要な最低限の情報である。むろん、以下の 図 1 (b) のように位置を縦軸上の位置に、人間開発指数の平均値を棒の長さとして定義することできる。いずれにせよ、以下のような棒グラフを作成するためには「大陸」と「人間開発指数の平均値」といった2つの変数が必要だ。\n\n\n\n\n\n\n\n(a) xが大陸、yが人間開発指数\n\n\n\n\n\n\n\n(b) yが大陸、xが人間開発指数\n\n\n\n\n図 1: 2つの棒グラフ\n\n\n\n棒グラフの作成\n　それではデータを作成してみよう。{dplyr}を使用し、大陸 (Continent)ごとの人間開発指数 (HDI_2018)の平均値を計算し、df2という名で格納しておく。\n\ndf2 <- df %>%\n   group_by(Continent) %>%\n   summarise(HDI = mean(HDI_2018, na.rm = TRUE))\n\ndf2\n\n# A tibble: 5 × 2\n  Continent   HDI\n  <chr>     <dbl>\n1 Africa    0.553\n2 America   0.742\n3 Asia      0.723\n4 Europe    0.861\n5 Oceania   0.782\n\n\n　棒グラフに必要な2つの変数が揃った。ただし、データがこの2つの変数のみで構成される必要はない。含まれていれば問題ない。それでは作図に移ろう。棒グラフを作成するときに使用する幾何オブジェクトgeom_bar()である。また、aes()内に指定するマッピングは棒の横軸上の位置を意味するxと棒の高さを意味するyである。そして、棒の横軸上の位置は大陸 (Continent)、棒の高さは人間開発指数の平均値 (HDI)なので、マッピングはx = Continent, y = HDIとなる。もし、図 1 (b) のような図を作成するなら、xとyを逆にすれば良い。最後に、geom_bar()内、かつaes()の外にstat = \"identity\"と描く。stat引数は初心者には難しい引数なので、ここでは説明を割愛する。\n　それでは図を作成しbar_plot1という名のオブジェクトとして格納しておこう。格納された図を出力する場合はオブジェクト名のみ入力すれば良い。\n\nbar_plot1 <- df2 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = HDI), stat = \"identity\")\n\nbar_plot1\n\n\n\n\n\n\n\n\n　もし、論文・レポートの使用言語が日本語であるなら図表も日本語にする必要がある。bar_plot1を日本語にする場合、修正が必要な箇所は大陸名とそれぞれの軸のタイトルである。まず、df2のContinent列を日本語にリコーディングし、Continent_Jという名の列として追加する。\n\ndf2 <- df2 %>%\n   mutate(Continent_J = case_when(Continent == \"Asia\"    ~ \"アジア\",\n                                  Continent == \"Africa\"  ~ \"アフリカ\",\n                                  Continent == \"America\" ~ \"アメリカ\",\n                                  Continent == \"Europe\"  ~ \"ヨーロッパ\",\n                                  TRUE                   ~ \"オセアニア\"))\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n　作図の際、Continentの代わりにContinent_Jを使用する。また、X軸とY軸のタイトルを修正するためにlabs()レイヤーを追加し、軸のタイトルを指定する。\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")\n\n\n\n\n\n\n\n\n　NIIオンライン分析システムを使用する場合、以上のような図が得られるはずである。しかし、自分のPCにインストールしたR/RStudioを使用する場合、文字化けは生じる可能性がある。この場合、theme_*()レイヤーを追加し、引数としてbase_family = \"日本語フォント\"を指定する必要がある。theme_*()はtheme_で始まる関数の総称であり、theme_gray()（{ggplot2}のデフォルトテーマ）、theme_bw()、theme_minimal()などがある。日本語フォントは好きなものを使えば良いが、macOSの場合は\"HiraginoSans-W3\"、Windowsの場合は\"Yu Gothic\"が無難だろう。以下のコードはmacOSで文字化けが生じた場合のコードの改善例である。\n\ndf2 %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_gray(base_family = \"HiraginoSans-W3\")\n\n　先ほどのグラフを見ると、大陸がアジア、アフリカ、アメリカ、オセアニア、ヨーロッパ順となっている。これをアルファベット順に並べ替える、つまり、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニアの順番にするにはどうすれば良いだろうか。答えはContinet_J列をfactor化し、アフリカ、アメリカ、アジア、ヨーロッパ、オセアニア順にすることだ。df2をggplot()関数に渡す前にmutate()を入れ、そこでContinent_J列をfactor化すれば良い。\n\ndf2 %>%\n   mutate(Continent_J = factor(Continent_J, \n                               levels = c(\"アフリカ\", \"アメリカ\", \"アジア\", \n                                          \"ヨーロッパ\", \"オセアニア\"))) %>% \n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\") +\n   theme_bw() # Black and Whiteテーマも使ってみよう\n\n\n\n\n\n\n\n\n　ただし、df2を見ると表の順番はアルファベット順になっている。\n\ndf2\n\n# A tibble: 5 × 3\n  Continent   HDI Continent_J\n  <chr>     <dbl> <chr>      \n1 Africa    0.553 アフリカ   \n2 America   0.742 アメリカ   \n3 Asia      0.723 アジア     \n4 Europe    0.861 ヨーロッパ \n5 Oceania   0.782 オセアニア \n\n\n　このように表で表示されている順番は作図の際の順番は一致しない場合がある。この順番を調整するためには、当該変数を予めfactor化しておく必要がある。\n　ここで一つ便利な関数を紹介しよう。それはfct_inorder()関数だ。この関数は{forcats}パッケージに含まれている関数であり、{tidyverse}を読み込む際、一緒に読み込まれるので{tidyverse}を読み込んだら別途読み込む必要はない。このfct_inorder()は()内の変数をfactor化し、各要素順番を表で登場した順番にしてくれる関数だ。現在、df2はアルファベット順になっているので、この表の順番通りにContinent_Jの要素の順番が固定される。\n\ndf2 %>%\n   mutate(Continent_J = fct_inorder(Continent_J)) %>%\n   ggplot() +\n   geom_bar(aes(x = Continent_J, y = HDI), \n            stat = \"identity\") +\n   labs(x = \"大陸\", y = \"人間開発指数の平均値\")\n\n\n\n\n\n\n\n\n\n\n\n次元の追加\n　通常の棒グラフはX軸とY軸のみで構成される2次元グラフである。棒グラフ上の棒には「ある大陸 (X軸) のHDIの平均値 (Y軸)」といった2つの情報が含まれている。つまり、一部の例外を除き、グラフの次元数は情報量を意味し、これは{ggplot2}の幾何オブジェクト内のaes()内で指定する引数の数でもある。以下では次元を増やす方法について紹介する。\n　まず、各政治体制（Polity_Type）に属する国家数の棒グラフを作ってみよう。作図に必要なdata.frameをdf3として用意しておく。\n\ndf3 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type) %>%\n   summarise(N = n())\n\ndf3\n\n# A tibble: 5 × 2\n  Polity_Type         N\n  <fct>           <int>\n1 Autocracy          19\n2 Closed Anocracy    23\n3 Open Anocracy      20\n4 Democracy          65\n5 Full Democracy     31\n\n\n　棒グラフの作り方はこれまでのやり方と同じである。\n\ndf3 %>%\n   ggplot() +\n   geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\")\n\n\n\n\n\n\n\n\n　この棒グラフが持つ情報は2つである。まず、xで指定した政治体制のタイプ (Polity_Type)、そしてyで指定した国家数 (N)だ。ここに更にもう一つの次元を使いすると使用。たとえば、もう一つの次元として大陸（Continent）を使いするとしよう。この場合、作図に使用するデータには大陸の変数（列）も必要だ。一方、先ほど作成したdf3には大陸の情報がない。まずは、政治体制\\(\\times\\)大陸ごとの国家数を計算し、df4として格納しておく。\n\ndf4 <- df %>%\n   drop_na(Polity_Type) %>%\n   mutate(Polity_Type = factor(Polity_Type,\n                               levels = c(\"Autocracy\", \"Closed Anocracy\",\n                                          \"Open Anocracy\", \"Democracy\",\n                                          \"Full Democracy\"))) %>%\n   group_by(Polity_Type, Continent) %>%\n   summarise(N       = n(),\n             .groups = \"drop\")\n\ndf4\n\n# A tibble: 20 × 3\n   Polity_Type     Continent     N\n   <fct>           <chr>     <int>\n 1 Autocracy       Africa        3\n 2 Autocracy       Asia         14\n 3 Autocracy       Europe        2\n 4 Closed Anocracy Africa       14\n 5 Closed Anocracy America       2\n 6 Closed Anocracy Asia          6\n 7 Closed Anocracy Europe        1\n 8 Open Anocracy   Africa       12\n 9 Open Anocracy   America       4\n10 Open Anocracy   Europe        2\n11 Open Anocracy   Oceania       2\n12 Democracy       Africa       18\n13 Democracy       America      16\n14 Democracy       Asia         15\n15 Democracy       Europe       16\n16 Full Democracy  Africa        1\n17 Full Democracy  America       5\n18 Full Democracy  Asia          3\n19 Full Democracy  Europe       20\n20 Full Democracy  Oceania       2\n\n\n　次元を追加するときにはaes()内に引数を追加すれば良い。棒グラフの棒に更に情報を持たせるのであれば、どうすれば良いだろうか。棒は点・線・面のうち、面に該当する。面であるならば、面の色（fill）、枠線の色（color）、枠線のタイプ（linetype）、透明度（alpha）などがある。xとyのみと構成された多くの図において、もう一つの次元を追加するのであれば、定番は色である。棒グラフの場合、面の色と枠線の色をそれぞれ指定することができるが、ここでは面の色（fill）にマッピングする。やり方はaes()内にfill = Continentを追加するだけだ。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\")\n\n\n\n\n\n\n\n\n　このような図を想像した人もいれば、少し違うと思う人もいるだろう。沖積されている形の棒グラフは世の中でそこそこ見るものであるが、実は分かりにくい図でもある。たとえば、民主主義（Democracy）の国の中で最も国家数が多い大陸はどこだろうか。この図ではどの大陸もだいたい同じ国家数にも見える。したがって、色分けした棒グラフは通所湯、棒の位置をずらす必要がある。ずらす方法はgeom_bar()内にposition = \"dodge\"を指定するだけだ。注意する点はaes()の中でなく、外に指定することだ。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\")\n\n\n\n\n\n\n\n\n　あとは図を少しずつ調整してだけであるが、ここでは凡例の位置を変更する方法について紹介する。グラフ全体の見た目などを細かく調整するレイヤーはtheme()である。このtheme()内にlegend.position = \"bottom\"を指定すると、凡例が図の下段へ移動する。デフォルトは\"right\"であり、 　\"top\"は上段、\"none\"は削除を意味する。\"left\"も可能だが、あまり使われない。このtheme()はかなり奥深く、コンソール上で?themeを入力してみれば分かるだろうが、引数の数も数十種類以上だ。これをすべて覚えて使う人は少数だろう。多分、これは{ggplot2}の開発者にとっても同じはずである。必要に応じてヘルプやインターネット検索を活用すれば良い。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N, fill = Continent), stat = \"identity\",\n           position = \"dodge\") +\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n　続いて、全く同じ情報を持つグラフでありながら、だいぶ印象が変わるものを紹介しよう。これまで作成した棒グラフは「ある政治体制内の大陸の分布」を知ることに特化している。つまり、「権威主義国家内にはアフリカがXカ国、アジアが…」といったメッセージを伝えるに効果的である。一方、「ある大陸内の政治体制の分布」を見るにはどうすれば良いだろうか。つまり、「アフリカには権威主義がXカ国、民主主義が…」のメッセージを伝えることである。いずれも必要な変数は同じはずである。異なるのはマッピングだけである。たとえば、xとfillを交換してみよう。厳密に言えば棒を並び替えただけなのに、かなり印象が変わってくる。可視化は「伝えたいメッセージを効果的に伝える」ことが重要であり、そのためには試行錯誤が必要だろう。\n\ndf4 %>%\n  ggplot() +\n  geom_bar(aes(x = Continent, y = N, fill = Polity_Type), stat = \"identity\",\n           position = \"dodge\", color = \"white\") +\n  theme_bw() +\n  labs(x = \"Continent\", y = \"Number of Countries\", fill = \"Polity Type\") +\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n　最後に次元を追加するもう一つの方法として、ファセット（facet）分割について紹介する。これは色分けを出来る限り抑えたい時に効果的である。特に白黒印刷の場合、識別可能な色は白・グレー・黒の3つくらいだろう。しかし、色の種類は増えると、白黒印刷では識別するのが難しくなる。この場合、プロットの面（=ファセット）を分割することで色の増加が抑制できる。使い方はfacet_wrap(~ 分割の基準となる変数名)のレイヤーを入れるだけだ。df4を使い、政治体制ごとの国家数の棒グラフを作成する。ただし、それぞれの棒グラフは大陸ごとに独立したファセットを持つとする。\n\nbar_plot2 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = Polity_Type, y = N), stat = \"identity\") +\n  facet_wrap(~ Continent, ncol = 5) # ncol/nrowで列/行数の指定が可能\n\nbar_plot2\n\n\n\n\n\n\n\n\n\n値ラベルの回転\n値ラベルが長すぎる場合、ラベルを回転することで重複を避ける\n\n覚える必要はなく、必要に応じてググる（theme()レイヤーはかなり複雑）\n\n以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。\n\nbar_plot3 <- bar_plot2 +\n   theme_minimal() + # テーマを変えてみよう\n   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転\n\nbar_plot3\n\n\n\n\n\n\n\n\n\nマッピング交換でも解決可能\nxとyを交換しても良い\n\nbar_plot4 <- df4 %>%\n  ggplot() +\n  geom_bar(aes(x = N, y = Polity_Type), stat = \"identity\") +\n  labs(x = \"Number of Countries\", y = \"Poltiy Type\") +\n  facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割\n  theme_minimal(base_size = 12)       # フォントサイズの調整も可能\n\nbar_plot4"
-  },
-  {
-    "objectID": "materials/visualization2.html#ヒストグラム",
-    "href": "materials/visualization2.html#ヒストグラム",
-    "title": "第13回講義資料",
-    "section": "ヒストグラム",
-    "text": "ヒストグラム"
-  },
-  {
-    "objectID": "materials/visualization2.html#変数の分布",
-    "href": "materials/visualization2.html#変数の分布",
-    "title": "第13回講義資料",
-    "section": "変数の分布",
-    "text": "変数の分布\n\n変数が一つの場合\n\n変数が離散変数の場合: 棒グラフ\n\n性別、国、都道府県など、数値が意味を持たないか変数\n順位など取りうる値が有限\n\n変数が連続変数の場合: ヒストグラム、箱ひげ図\n\n気温、成績、所得、身長、体重、人間開発指数、…\n取りうる値が無限個\n\n\n\n\n変数が2つの場合\n\n連続変数と連続変数: 散布図\n順序付き離散変数と連続変数: 折れ線グラフ\n離散変数と離散変数: モザイク図\n\n\n\n変数が3つ以上の場合\n\n次元を追加する形で対応\n\n\n\n\nヒストグラムの作成\n棒の横軸上の位置と高さ\n\n{ggplot2}の場合、ヒストグラムを出力する変数をxにマッピングするだけで、自動的にヒストグラムを生成\n\n\n\n\n\n\n\n\n\n\n\nヒストグラムの作成\ngeom_histogram()を使用: マッピングはxのみ\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018)) # HDI_2018のヒストグラム\n\n\n\n\n\n\n\n\n\n棒の数を調整する\ngeom_histogram()内、aes()の外にbins引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), bins = 10) # 棒を10本にする\n\n\n\n\n\n\n\n\n\n棒の幅を調整する\ngeom_histogram()内、aes()の外にbinwidth引数を指定\n\ndf %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05) # 棒の幅を0.05にする\n\n\n\n\n\n\n\n\n\n棒の枠線を入れる\ngeom_histogram()内、aes()の外にcolor引数を指定\n\nhist_plot1 <- df %>%\n  ggplot() +\n  geom_histogram(aes(x = HDI_2018), binwidth = 0.05, color = \"white\") +\n  labs(x = \"Human Development Index (2018)\", y = \"Number of Countries\")\nhist_plot1\n\n\n\n\n\n\n\n\n\n横軸のスケール調整\nscale_x_continuous()を使用 (xをyに変えると縦軸修正)\n\nbreaks引数: 目盛りの位置 / labels引数: 目盛りのラベル\n\n\nhist_plot2 <- hist_plot1 +\n   scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),\n                      labels = seq(0.4, 1.0, by = 0.1))\n\n\n\n\n次元の追加\nファセット分割\n大陸ごとのHDI_2018のヒストグラム: ファセット分割を使用\n\nhist_plot1 +\n   facet_wrap(~Continent, ncol = 6)\n\n\n\n\n\n\n\n\n\n色分け\nposition = \"identity\"とalpha = 0.5で可能であるが、非推奨\n\nalpha = 1の場合、棒が不透明であるため、0.5程度に調整\n\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"OECD Members\", \"Others\")) %>%\n   ggplot() +\n   geom_histogram(aes(x = HDI_2018, fill = OECD), position = \"identity\",\n                  binwidth = 0.05, color = \"white\", alpha = 0.5)"
   }
 ]

@@ -21,5 +21,9 @@ ol > li > ul {
 }
 
 figure figcaption {
-    text-align: center;
+  text-align: center;
+}
+
+p {
+  line-height: 2em;
 }

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.305">
+<meta name="generator" content="quarto-0.9.587">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,19 +80,20 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
-<meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
 <link href="../Figs/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -130,7 +131,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -384,12 +385,9 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
   <li><a href="#次元の追加" id="toc-次元の追加" class="nav-link" data-scroll-target="#次元の追加">次元の追加</a></li>
   </ul></li>
   <li><a href="#図の保存" id="toc-図の保存" class="nav-link" data-scroll-target="#図の保存">図の保存</a></li>
-  <li><a href="#ヒストグラム" id="toc-ヒストグラム" class="nav-link" data-scroll-target="#ヒストグラム">ヒストグラム</a></li>
-  <li><a href="#変数の分布" id="toc-変数の分布" class="nav-link" data-scroll-target="#変数の分布">変数の分布</a>
+  <li><a href="#ヒストグラム" id="toc-ヒストグラム" class="nav-link" data-scroll-target="#ヒストグラム">ヒストグラム</a>
   <ul class="collapse">
-  <li><a href="#変数が一つの場合" id="toc-変数が一つの場合" class="nav-link" data-scroll-target="#変数が一つの場合">変数が一つの場合</a></li>
-  <li><a href="#変数が2つの場合" id="toc-変数が2つの場合" class="nav-link" data-scroll-target="#変数が2つの場合">変数が2つの場合</a></li>
-  <li><a href="#変数が3つ以上の場合" id="toc-変数が3つ以上の場合" class="nav-link" data-scroll-target="#変数が3つ以上の場合">変数が3つ以上の場合</a></li>
+  <li><a href="#変数の分布" id="toc-変数の分布" class="nav-link" data-scroll-target="#変数の分布">変数の分布</a></li>
   <li><a href="#ヒストグラムの作成" id="toc-ヒストグラムの作成" class="nav-link" data-scroll-target="#ヒストグラムの作成">ヒストグラムの作成</a></li>
   <li><a href="#次元の追加-1" id="toc-次元の追加-1" class="nav-link" data-scroll-target="#次元の追加-1">次元の追加</a></li>
   </ul></li>
@@ -404,8 +402,6 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <h1 class="title d-none d-lg-block">第13回講義資料</h1>
 <p class="subtitle lead">可視化 (2)</p>
 </div>
-
-
 
 
 
@@ -455,7 +451,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 <p>　この棒から分かるのは「ある<strong>人</strong>の<strong>成績</strong>」である。成績は棒の高さで分かり、それが誰の成績なのかは棒の横軸上の位置から分かる。つまり、棒グラフには棒の横軸上の位置、高さといった2つの次元で構成され、それぞれ人と成績に対応する。この位置と高さは棒グラフを作成する際に必要な<strong>最低限</strong>の情報である。むろん、以下の <a href="#fig-bar-comparison-2">図&nbsp;1 (b)</a> のように位置を縦軸上の位置に、人間開発指数の平均値を棒の長さとして定義することできる。いずれにせよ、以下のような棒グラフを作成するためには「大陸」と「人間開発指数の平均値」といった2つの変数が必要だ。</p>
-<div class="cell quarto-layout-panel">
+<div id="fig-bar-comparison" class="cell quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
@@ -761,39 +757,32 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>値ラベルの回転</p>
-<p>値ラベルが長すぎる場合、ラベルを回転することで重複を避ける</p>
-<ul>
-<li>覚える必要はなく、必要に応じてググる（<code>theme()</code>レイヤーはかなり複雑）</li>
-</ul>
-<p>以下のように図オブジェクトに直接「+」でレイヤーを追加することもできる。</p>
+<p>　ただし、この<code>bar_plot2</code>は値のラベルが重なっており、非常に読みにくい。この場合、ラベルを回転すると読みやすくなるだろう。横軸の目盛りラベルを修正するためには<code>theme()</code>レイヤーを追加し、<code>axis.text.x</code>を指定する必要がある。しかし、<code>theme()</code>レイヤーの中身はかなり複雑であるため、これを覚える必要はない。必要に応じてググればよいだろう。今後、ラベルの回転が必要な場合は以下のコードから<code>angle</code>だけを修正すれば良い。以下の例は35度回転の例である。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>bar_plot3 <span class="ot">&lt;-</span> bar_plot2 <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>   <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co"># テーマを変えてみよう</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>   <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">35</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="co"># 35度回転</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a></span>
-<span id="cb23-5"><a href="#cb23-5"></a>bar_plot3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-2"><a href="#cb23-2"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Countries"</span>, <span class="at">y =</span> <span class="st">"Poltiy Type"</span>) <span class="sc">+</span> <span class="co"># ラベル修正</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>   <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co"># テーマを変えてみよう</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>   <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">35</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="co"># 35度回転</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a>bar_plot3</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization2_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="2100"></p>
+<p><img src="visualization2_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
 </div>
-<!--- --->
-<p>マッピング交換でも解決可能</p>
-<p><code>x</code>と<code>y</code>を交換しても良い</p>
+<p>　もう一つの方法としてマッピング交換が考えられる。今の横軸を縦軸にすれば、長い文字列でも問題なく出力できるだろう。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>bar_plot4 <span class="ot">&lt;-</span> df4 <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> N, <span class="at">y =</span> Polity_Type), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Countries"</span>, <span class="at">y =</span> <span class="st">"Poltiy Type"</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Continent, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="co"># 5列のファセット分割</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)       <span class="co"># フォントサイズの調整も可能</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a></span>
-<span id="cb24-8"><a href="#cb24-8"></a>bar_plot4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>bar_plot4 <span class="ot">&lt;-</span> df4 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> N, <span class="at">y =</span> Polity_Type), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Countries"</span>, <span class="at">y =</span> <span class="st">"Poltiy Type"</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Continent, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="co"># 5列のファセット分割</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)       <span class="co"># フォントサイズの調整も可能</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>bar_plot4</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -808,7 +797,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <section id="図の保存" class="level2">
 <h2 class="anchored" data-anchor-id="図の保存">図の保存</h2>
 <p>　作成した図をファイルとして保存する時には、まずベクトルとビットマップ、どのフォーマットで保存するかを考える必要がある。ベクトル画像（ <a href="#fig-pdf-png-1">図&nbsp;2 (a)</a> ）の拡張子は<code>.pdf</code>（推奨）、<code>.svg</code>などがあり、これらのファイルは図をいくら拡大しても図が綺麗なままだという利点がある。また、複雑な図（例えば、点が数百万個ある散布図など）でないなら、ファイルサイズも比較的小さい。ビットマップ画像（ <a href="#fig-pdf-png-2">図&nbsp;2 (b)</a> ）の拡張子は<code>.png</code>（推奨）、<code>.bmp</code>、<code>.jpg</code>（= <code>.jpeg</code>）などがあり、図がいくら複雑でもファイルサイズが安定するといったメリットがある。しかし、拡大すると図がカクカクする場合がある。高い解像度（DPI）にすると、拡大しても綺麗だが、ファイルサイズに注意する必要がある。基本的にベクトル画像を推奨するが、使用するワードソフトによってはPDFの図の埋め込みができない場合もある。ビートマップ画像はどのソフトでも確実に埋め込める。</p>
-<div class="cell quarto-layout-panel">
+<div id="fig-pdf-png" class="cell quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
@@ -844,45 +833,14 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </section>
 <section id="ヒストグラム" class="level2">
 <h2 class="anchored" data-anchor-id="ヒストグラム">ヒストグラム</h2>
-</section>
-<section id="変数の分布" class="level2">
-<h2 class="anchored" data-anchor-id="変数の分布">変数の分布</h2>
-<section id="変数が一つの場合" class="level3">
-<h3 class="anchored" data-anchor-id="変数が一つの場合">変数が一つの場合</h3>
-<ul>
-<li>変数が<strong>離散変数</strong>の場合: 棒グラフ
-<ul>
-<li>性別、国、都道府県など、数値が意味を持たないか変数</li>
-<li>順位など取りうる値が有限</li>
-</ul></li>
-<li>変数が<strong>連続変数</strong>の場合: ヒストグラム、箱ひげ図
-<ul>
-<li>気温、成績、所得、身長、体重、人間開発指数、…</li>
-<li>取りうる値が無限個</li>
-</ul></li>
-</ul>
-</section>
-<section id="変数が2つの場合" class="level3">
-<h3 class="anchored" data-anchor-id="変数が2つの場合">変数が2つの場合</h3>
-<ul>
-<li><strong>連続変数</strong>と<strong>連続変数</strong>: 散布図</li>
-<li><strong>順序付き離散変数</strong>と<strong>連続変数</strong>: 折れ線グラフ</li>
-<li><strong>離散変数</strong>と<strong>離散変数</strong>: モザイク図</li>
-</ul>
-</section>
-<section id="変数が3つ以上の場合" class="level3">
-<h3 class="anchored" data-anchor-id="変数が3つ以上の場合">変数が3つ以上の場合</h3>
-<ul>
-<li>次元を追加する形で対応</li>
-</ul>
-<!--- --->
+<section id="変数の分布" class="level3">
+<h3 class="anchored" data-anchor-id="変数の分布">変数の分布</h3>
+<p>　ヒストグラムは<strong>連続変数</strong>（=間隔尺度と比率尺度）の分布を確認する普遍的な可視化方法です。実習用データの例だと、大陸（<code>Continent</code>）列は<strong>離散変数</strong>（=名目尺度と順序尺度）であり、名目変数の分布は「アジアはXXカ国、アフリカはXXカ国、…」といった形で示され、これまで見てきた棒グラフで可視化する事ができる。一方、変数が連続変数の場合はヒストグラムと箱ひげ図が頻繁に使われる。</p>
+<p>　以上の例はあくまでも<strong>一つ</strong>の変数の分布を確認するものである。変数が2つになると、分布よりも2つの変数間の<strong>関係</strong>を確認することとなる。これは次回に紹介する散布図（連続変数<span class="math inline">\(\times\)</span>連続変数）と折れ線グラフ（順序変数<span class="math inline">\(\times\)</span>連続変数）で可視化することができる<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
 </section>
 <section id="ヒストグラムの作成" class="level3">
 <h3 class="anchored" data-anchor-id="ヒストグラムの作成">ヒストグラムの作成</h3>
-<p>棒の横軸上の位置と高さ</p>
-<ul>
-<li>{ggplot2}の場合、ヒストグラムを出力する変数を<code>x</code>にマッピングするだけで、自動的にヒストグラムを生成</li>
-</ul>
+<p>　ヒストグラムの見た目は棒グラフと非常に似ている。棒グラフとヒストグラムの違いは棒と棒の間に隙間があるかないかである。棒グラフの場合は隙間がある。横軸が大陸の棒グラフの場合、アフリカとアジアの間の値というものは存在しない。なぜなら、名目尺度はそもそも数字でないか、数値であってもその数値の値に意味がないからだ。また、順序変数の場合、1位と2位の間の値は存在しない。つまり、1.5位といった順位は存在しない。一方、人間開発指数のような連続変数は0.1と0.2の間には無数の値が存在する。棒を並べるとしたら隙間なく棒を並べる必要があろう。</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -892,9 +850,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>ヒストグラムの作成</p>
-<p><code>geom_histogram()</code>を使用: マッピングは<code>x</code>のみ</p>
+<p>　それでも見た目は棒グラフと非常に似ているため、それぞれの棒には棒の横軸上の位置と高さという情報が含まれている。ただし、{ggplot2}を使ったヒストグラムの作成は非常に簡単である。{ggplot2}では<code>geom_histogram()</code>を使用するが、ヒストグラムを出力する変数を<code>x</code>にマッピングするだけで、棒の高さは自動的に計算される。つまり、<code>y</code>に対してマッピングを行う必要はなく、<code>x</code>のみで十分である。それでは<code>df</code>内の人間開発指数（<code>HDI_2018</code>）のヒストグラムを作成してみよう。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -907,9 +863,40 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>棒の数を調整する</p>
-<p><code>geom_histogram()</code>内、<code>aes()</code>の外に<code>bins</code>引数を指定</p>
+<p>　ヒストグラムは連続変数の分布を素早く確認することが目的である。たとえば、分布において峰がいくつか、峰がある場合、どの辺が最も度数/密度が高いかを素早く判断できれば良いヒストグラムと言えよう。棒の数を調整する。</p>
+<p>　以下の3つのヒストグラムを比較してみよう。 <a href="#fig-hist-comparison-1">図&nbsp;3 (a)</a> はヒストグラムが非常にギザギザしている。峰が10個くらいはありそうだ。一方、 <a href="#fig-hist-comparison-2">図&nbsp;3 (b)</a> だと0.5と0.8周辺に大きな2つの峰があるように見える。最後に <a href="#fig-hist-comparison-3">図&nbsp;3 (c)</a> では0.8周辺に1つの峰が確認できる。</p>
+<div id="fig-hist-comparison" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-hist-comparison-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/fig-hist-comparison-1.png" class="img-fluid figure-img" data-ref-parent="fig-hist-comparison" width="1200"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">(a) 棒の幅が狭いヒストグラム</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-hist-comparison-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/fig-hist-comparison-2.png" class="img-fluid figure-img" data-ref-parent="fig-hist-comparison" width="1200"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">(b) 棒の幅が中程度のヒストグラム</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-hist-comparison-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/fig-hist-comparison-3.png" class="img-fluid figure-img" data-ref-parent="fig-hist-comparison" width="1200"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">(c) 棒の幅が広いヒストグラム</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption aria-hidden="true" class="figure-caption">図 3: 2つのヒストグラム</figcaption><p></p>
+</figure>
+</div>
+<p>　この3つの図の中で、良い図はなんだろうか。まず、 <a href="#fig-hist-comparison-3">図&nbsp;3 (c)</a> はあまりにも多くの情報が失われている。たとえば、0.5周辺の峰という情報がない。一方、 <a href="#fig-hist-comparison-2">図&nbsp;3 (b)</a> は情報が多すぎる。その意味で <a href="#fig-hist-comparison-2">図&nbsp;3 (b)</a> が適切だろう。しかし、これは作図する側の人が決めるものであり、いくつかの図を出して比較してみるのが良いだろう。以上の3つの図は、ヒストグラムの棒の数を調整したものである。棒の数は<code>geom_histogram()</code>内、<code>aes()</code>の外に<code>bins</code>引数を指定することで変更することができる。たとえば、 <a href="#fig-hist-comparison-2">図&nbsp;3 (b)</a> は棒が10本のヒストグラムである<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。これを再現するためには<code>bins = 10</code>を指定すれば良い。ちなみに、デフォルトは<code>bins = 30</code>となっている。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -922,9 +909,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>棒の幅を調整する</p>
-<p><code>geom_histogram()</code>内、<code>aes()</code>の外に<code>binwidth</code>引数を指定</p>
+<p>　棒の本数が少ないことは、棒の幅が広いことを意味する。これは棒の数でなく、棒の幅から見た目を調整することもできることを意味し、<code>geom_histogram()</code>内、<code>aes()</code>の外に<code>binwidth</code>引数を指定することで調整可能である。注意点としては<code>bins</code>と<code>binswidth</code>は片方のみ指定可能で両方指定することは出来ないことだ。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -937,15 +922,14 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>棒の枠線を入れる</p>
-<p><code>geom_histogram()</code>内、<code>aes()</code>の外に<code>color</code>引数を指定</p>
+<p>　ヒストグラムをより見やすくするコツとして、棒の枠線を追加することも考えられる。データ・インク比の観点から見ると枠線という視覚情報が追加されるので余計なものかも知れないが、枠線を入れるかどうかは作図する側が判断すれば良い。棒の枠線は<code>geom_histogram()</code>内、<code>aes()</code>の外に<code>color</code>引数を指定可能であり、棒の面の色が黒に近いので枠線は白（<code>"white"</code>）に指定してみよう。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>hist_plot1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018), <span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Human Development Index (2018)"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>hist_plot1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>hist_plot1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -954,26 +938,30 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>横軸のスケール調整</p>
-<p><code>scale_x_continuous()</code>を使用 (<code>x</code>を<code>y</code>に変えると縦軸修正)</p>
-<ul>
-<li><code>breaks</code>引数: 目盛りの位置 / <code>labels</code>引数: 目盛りのラベル</li>
-</ul>
+<p>　最後に、横軸の目盛りを変更してみよう。今は目盛りが0.4、0.6、0.8、1.0の0.2kあん描くとなっている。この目盛りを調整するレイヤーはX軸の場合は<code>scale_x_*()</code>、Y軸の場合は<code>scale_y_*()</code>を使う。<code>*</code>の箇所には各軸の尺度を指定する。ヒストグラムは横軸も縦軸も連続した値であるので、<code>scale_x_continuous()</code>、<code>scale_y_continuous()</code>を使う。ここではX軸の目盛りを変更するので<code>scale_x_continuous()</code>を使ってみよう。必要な引数は目盛りの位置を指定する<code>breaks</code>引数、目盛りのラベルを意味する<code>labels</code>引数だ。それぞれ長さ1以上のベクトルを指定すれば良いが、<code>breaks</code>と<code>labels</code>に使用する実引数（=ベクトル）の長さは同じ長さである必要がある。また、<code>labels</code>にはcharacter型ベクトルを指定することもできる。</p>
+<p>　先ほど作成した<code>hist_plot1</code>に目盛り変更のレイヤを追加してみよう。目盛りは0.4から1.0まで0.1間隔で付け、目盛りラベルもそれぞれ対応する値を指定する。公差0.1の等差数列ベクトルなので<code>seq()</code>関数が便利だろう。目盛り調整済みのヒストグラムは<code>hist_plot2</code>として格納、出力してみよう。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>hist_plot2 <span class="ot">&lt;-</span> hist_plot1 <span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a>   <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.4</span>, <span class="fl">1.0</span>, <span class="at">by =</span> <span class="fl">0.1</span>),</span>
-<span id="cb30-3"><a href="#cb30-3"></a>                      <span class="at">labels =</span> <span class="fu">seq</span>(<span class="fl">0.4</span>, <span class="fl">1.0</span>, <span class="at">by =</span> <span class="fl">0.1</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3"></a>                      <span class="at">labels =</span> <span class="fu">seq</span>(<span class="fl">0.4</span>, <span class="fl">1.0</span>, <span class="at">by =</span> <span class="fl">0.1</span>))</span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a>hist_plot2</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
 </div>
-<!--- --->
+</div>
+</div>
 </section>
 <section id="次元の追加-1" class="level3">
 <h3 class="anchored" data-anchor-id="次元の追加-1">次元の追加</h3>
-<p>ファセット分割</p>
-<p>大陸ごとの<code>HDI_2018</code>のヒストグラム: ファセット分割を使用</p>
+<p>　ヒストグラムにもう一つの次元を追加する場合、棒グラフと同じ技が使える。つまり、面の色分け、またはファセット分割である。棒グラフと異なる点は色分けよりもファセット分割の方が圧倒的に推奨される点だ。</p>
+<p>　まずはファセット分割から見よう。<code>hist_plot2</code>のヒストグラムは大陸（<code>Continent</code>）ごとに分ける場合、棒グラフと同様<code>facet_wrap(~Continent)</code>で分割できる。今回は2行3列で出力してみよう。<code>facet_wrap()</code>内に<code>nrow = 2</code>、または<code>ncol = 3</code>を追加するだけだ。</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>hist_plot1 <span class="sc">+</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>   <span class="fu">facet_wrap</span>(<span class="sc">~</span>Continent, <span class="at">ncol =</span> <span class="dv">6</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>hist_plot2 <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>   <span class="fu">facet_wrap</span>(<span class="sc">~</span>Continent, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -982,18 +970,15 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<!--- --->
-<p>色分け</p>
-<p><code>position = "identity"</code>と<code>alpha = 0.5</code>で可能であるが、非推奨</p>
-<ul>
-<li><code>alpha = 1</code>の場合、棒が不透明であるため、0.5程度に調整</li>
-</ul>
+<p>　それでは色分けの例を見てみよう。棒グラフと同様、<code>aes()</code>内に<code>fill</code>を指定すれば良いが、注意すべき点としては棒グラフのように<code>position = "identity"</code>を追加する必要がある点だ。それでは<code>df</code>の<code>OECD</code>をリコーディング（1なら<code>"OECD Members"</code>、それ以外は<code>"Others"</code>）し、<code>OECD</code>の値ごとにヒストグラムの色分けをしてみよう。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a>   <span class="fu">mutate</span>(<span class="at">OECD =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"OECD Members"</span>, <span class="st">"Others"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb32-3"><a href="#cb32-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb32-4"><a href="#cb32-4"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">fill =</span> OECD), <span class="at">position =</span> <span class="st">"identity"</span>,</span>
-<span id="cb32-5"><a href="#cb32-5"></a>                  <span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-5"><a href="#cb32-5"></a>                  <span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Human Development Index (2018)"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7"></a>        <span class="at">fill =</span> <span class="st">""</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1002,13 +987,54 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
+<p>　このヒストグラムには深刻な問題がある。それはOECD加盟国の棒が非加盟国の棒の後ろに存在するため、一部の棒が消えているということだ。これを避けるためには棒をやや透明にする必要がある。透明度の調整は<code>alpha</code>で引数で行う。今回は全ての棒に対して適用するので<code>aes()</code>の外側に<code>alpha</code>を指定する。<code>alpha</code>が1なら不透明、0なら透明となる。今回は<code>alpha = 0.5</code>程度に調整してみよう。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>   <span class="fu">mutate</span>(<span class="at">OECD =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"OECD Members"</span>, <span class="st">"Others"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">fill =</span> OECD), <span class="at">position =</span> <span class="st">"identity"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5"></a>                  <span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Human Development Index (2018)"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7"></a>        <span class="at">fill =</span> <span class="st">""</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>　このように非加盟国の棒の後ろに加盟国の棒が隠されていることが分かる。人によってはこのような色分けヒストグラムでも良いと思うかも知れない。しかし、色分けのヒストグラムはせいぜい2色までが限界である。もし、3色以上ならどうなるだろうか。たとえば、大陸（<code>Continent</code>）の値ごとに色分けをすればどうなるだろうか。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">fill =</span> Continent), <span class="at">position =</span> <span class="st">"identity"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4"></a>                  <span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Human Development Index (2018)"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6"></a>        <span class="at">fill =</span> <span class="st">""</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>　我々はこのヒストグラムから一体どのような情報が読み取れるだろうか。</p>
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
-<script type="application/javascript">
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">注</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>他にも離散変数<span class="math inline">\(\times\)</span>離散変数に使用するモザイク図がある。モザイク図については<a href="https://www.jaysong.net/RBook/visualization4.html#visual4-mosaic">教科書の第20.16章</a>を参照すること。また、名目尺度<span class="math inline">\(\times\)</span>連続変数は棒グラフが有効である。大陸ごとの人間開発指数の平均値を示した棒グラフがその例である。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>ちなみに、 <a href="#fig-hist-comparison-1">図&nbsp;3 (a)</a> は50本、 <a href="#fig-hist-comparison-3">図&nbsp;3 (c)</a> は5本である。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
