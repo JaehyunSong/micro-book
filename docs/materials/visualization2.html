@@ -757,7 +757,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>　ただし、この<code>bar_plot2</code>は値のラベルが重なっており、非常に読みにくい。この場合、ラベルを回転すると読みやすくなるだろう。横軸の目盛りラベルを修正するためには<code>theme()</code>レイヤーを追加し、<code>axis.text.x</code>を指定する必要がある。しかし、<code>theme()</code>レイヤーの中身はかなり複雑であるため、これを覚える必要はない。必要に応じてググればよいだろう。今後、ラベルの回転が必要な場合は以下のコードから<code>angle</code>だけを修正すれば良い。以下の例は35度回転の例である。</p>
+<p>　ただし、この<code>bar_plot2</code>は値のラベルが重なっており、非常に読みにくい。この場合、ラベルを回転すると読みやすくなるだろう。横軸の目盛りラベルを修正するためには<code>theme()</code>レイヤーを追加し、<code>axis.text.x</code>を指定する必要がある。しかし、<code>theme()</code>レイヤーの中身はかなり複雑であるため、これを覚える必要はない。必要に応じてググれば良いだろう。今後、ラベルの回転が必要な場合は以下のコードから<code>angle</code>だけを修正すれば良い。以下の例は35度回転の例である。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>bar_plot3 <span class="ot">&lt;-</span> bar_plot2 <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Countries"</span>, <span class="at">y =</span> <span class="st">"Poltiy Type"</span>) <span class="sc">+</span> <span class="co"># ラベル修正</span></span>
@@ -1021,6 +1021,22 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 <p>　我々はこのヒストグラムから一体どのような情報が読み取れるだろうか。</p>
+<p>　ちなみに、<code>position = "identity"</code>がない場合、一つのヒストグラムのうち、各大陸が占める割合を見せることができる。ただし、これも読みづらい図であることには変わりない。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">fill =</span> Continent), </span>
+<span id="cb35-4"><a href="#cb35-4"></a>                  <span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Human Development Index (2018)"</span>, <span class="at">y =</span> <span class="st">"Number of Countries"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6"></a>        <span class="at">fill =</span> <span class="st">""</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="visualization2_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
