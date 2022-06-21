@@ -3050,5 +3050,327 @@
     "title": "実習用データ集",
     "section": "データ一覧",
     "text": "データ一覧\n\n\n\n\n\n\n\n\n\nファイル名\n備考\n\n\n\n\n1\nPref_Vote.csv\n第3回講義で使用\n\n\n2\nBuildingData.csv\n第8回講義で使用\n\n\n3\nMicro09.csv\n第9・10回講義で使用\n\n\n4\nMicro11.csv\n第11回講義で使用"
+  },
+  {
+    "objectID": "slide/slide14.html#section",
+    "href": "slide/slide14.html#section",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "代表的な5種類のグラフ"
+  },
+  {
+    "objectID": "slide/slide14.html#期末テストについて",
+    "href": "slide/slide14.html#期末テストについて",
+    "title": "ミクロ政治データ分析実習",
+    "section": "期末テストについて",
+    "text": "期末テストについて\n概要\n\n日時: 2021年7月15日（木）4限\n場所: TC304教室（座席指定; 座席表は事前送付する）\n持参物: 学生証のみ。PCは大学のPCを使用（持ち込みPC不可）\n持ち込み: 可（インターネット使用可能）\n\n携帯は使用禁止\n\n宋は問題そのものに関する質問以外、一切受け付けない\n\nエラーメッセージへの対処もテストの一部\n\n不正行為厳禁\n\n実施形態\n本講義の課題と同じ形式\n\nLMSからデータ、問題ファイル、サンプルファイルをダウンロード\nサンプルファイルと同じ結果が得られるように問題ファイルを編集\n.Rmdファイルと.htmlファイル両方LMSに提出"
+  },
+  {
+    "objectID": "slide/slide14.html#named-graphs-5ng",
+    "href": "slide/slide14.html#named-graphs-5ng",
+    "title": "ミクロ政治データ分析実習",
+    "section": "5 Named Graphs (5NG)",
+    "text": "5 Named Graphs (5NG)\n\n棒グラフ (bar plot)\n\ngeom_bar()\n\nヒストグラム (histogram)\n\ngeom_histogram()\n\n箱ひげ図 (box plot / box-and-whisker plot)\n\ngeom_boxplot()\n\n散布図 (scatter plot)\n\ngeom_point()\n\n折れ線グラフ (line plot)\n\ngeom_line()"
+  },
+  {
+    "objectID": "slide/slide14.html#section-1",
+    "href": "slide/slide14.html#section-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "散布図"
+  },
+  {
+    "objectID": "slide/slide14.html#散布図の必須要素",
+    "href": "slide/slide14.html#散布図の必須要素",
+    "title": "ミクロ政治データ分析実習",
+    "section": "散布図の必須要素",
+    "text": "散布図の必須要素\n散布図を作成する際に必要な最低限の情報\n.pull-left[ データにフリーダムハウス・スコアと人間開発指数の列が必要] .pull-right[]"
+  },
+  {
+    "objectID": "slide/slide14.html#データの読み込み",
+    "href": "slide/slide14.html#データの読み込み",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データの読み込み",
+    "text": "データの読み込み\n第9回実習用データ（Micro09.csv）を使用\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro08.csv\")"
+  },
+  {
+    "objectID": "slide/slide14.html#散布図の作成-1",
+    "href": "slide/slide14.html#散布図の作成-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "散布図の作成 (1)",
+    "text": "散布図の作成 (1)\n幾何オブジェクトはgeom_point()を使用\n\nggplot(df) +\n   geom_point(aes(x = FH_Total, y = HDI_2018))"
+  },
+  {
+    "objectID": "slide/slide14.html#散布図の作成-2",
+    "href": "slide/slide14.html#散布図の作成-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "散布図の作成 (2)",
+    "text": "散布図の作成 (2)\nラベル修正 / 必要に応じてカスタマイズ\n\nggplot(df) +\n   geom_point(aes(x = FH_Total, y = HDI_2018), color = \"royalblue\") +\n   labs(x = \"フリーダムハウス・スコア\", y = \"人間開発指数 (2018)\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#次元の追加",
+    "href": "slide/slide14.html#次元の追加",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加",
+    "text": "次元の追加\n散布図における次元の追加\n\nそれぞれの点は各国の (1) フリーダムハウス・スコアと (2) 人間開発指数の情報を持つ\n\n= 2次元\n\n更に情報を持たせるためには…\n\n色分け: color\n大きさ: size\n形: shape\n透明度(非推奨): alpha\nファセット分割\n\n5次元以上のグラフも可能だが、3次元までを推奨\n\n一つのグラフの情報が多すぎると読みにくくなる\n4次元以上になりそうならファセット分割で対応\n3次元の場合、色分け（color）を推奨するが、白黒の図を作成する場合は形（shape）を使う。"
+  },
+  {
+    "objectID": "slide/slide14.html#次元の散布図",
+    "href": "slide/slide14.html#次元の散布図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "5次元の散布図",
+    "text": "5次元の散布図\n\ndf %>%\n   mutate(OECD = if_else(OECD == 1, \"Member\", \"Non-member\")) %>%\n   ggplot() +\n   geom_point(aes(x = FH_Total, y = HDI_2018, color = Continent,\n                  size = Population, shape = OECD), alpha = 0.65) +\n   scale_size_continuous(trans = \"log10\") +\n   labs(x = \"Freedom House Score\", y = \"Human Development Index (2018)\",\n        size = \"Population (log)\") +\n   theme_gray()"
+  },
+  {
+    "objectID": "slide/slide14.html#次元の散布図-1",
+    "href": "slide/slide14.html#次元の散布図-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "5次元の散布図",
+    "text": "5次元の散布図\n各点はフリーダムハウス・スコア、人間開発指数、人口（対数変換）、大陸、OECD加盟有無の情報を持つ"
+  },
+  {
+    "objectID": "slide/slide14.html#色分けの例コード",
+    "href": "slide/slide14.html#色分けの例コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "色分けの例（コード）",
+    "text": "色分けの例（コード）\naes()の内部にcolor = 色分けする変数を指定 * HighIncome変数を作成し、PPP_per_capitaが2万以上なら\"高\"、未満なら\"低\" * HighIncome値に応じて点の色分けを行う（color = HighIncome） * 点の大きさは2とする（全体に適用させるため、aes()の外側に指定） * labs()内で凡例タイトルを修正; 凡例を下側へ移動\n\nScatter1 <- df %>%\n   drop_na(FH_Total, HDI_2018, PPP_per_capita) %>%\n   mutate(HighIncome = if_else(PPP_per_capita >= 20000, \"高\", \"低\")) %>%\n   ggplot() +\n   geom_point(aes(x = FH_Total, y = HDI_2018, color = HighIncome), \n              size = 2) +\n   labs(x = \"フリーダムハウス・スコア\", y = \"人間開発指数 (2018)\",\n        color = \"一人当たりPPP GDP\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\") +\n   theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "slide/slide14.html#色分けの例図",
+    "href": "slide/slide14.html#色分けの例図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "色分けの例（図）",
+    "text": "色分けの例（図）\n\nprint(Scatter1)"
+  },
+  {
+    "objectID": "slide/slide14.html#色のカスタマイズ",
+    "href": "slide/slide14.html#色のカスタマイズ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "色のカスタマイズ",
+    "text": "色のカスタマイズ\ncolorにマッピングされている変数（HighIncome）が離散変数 * scale_color_manual()を使用 * 引数: values = c(\"値1\" = \"色1\", \"値2\" = \"色2\", ...)\n\nScatter1 +\n   scale_color_manual(values = c(\"低\" = \"orange\", \"高\" = \"royalblue\"))"
+  },
+  {
+    "objectID": "slide/slide14.html#ggplot2で使える色",
+    "href": "slide/slide14.html#ggplot2で使える色",
+    "title": "ミクロ政治データ分析実習",
+    "section": "{ggplot2}で使える色",
+    "text": "{ggplot2}で使える色\n\n文字列で指定\n\n\"red\"、\"blue\"、\"royalblue\"など（全657種類）\nGoogleなどで「ggplot2 color」で検索（例）\n\nRGBカラー（HEXコード）で指定\n\n細かく調整可能（16,777,216種類の色）\n例) \"#FF0000\": 赤、\"#4169E1\": ロイヤルブルー"
+  },
+  {
+    "objectID": "slide/slide14.html#色の見本-一部",
+    "href": "slide/slide14.html#色の見本-一部",
+    "title": "ミクロ政治データ分析実習",
+    "section": "色の見本 (一部)",
+    "text": "色の見本 (一部)"
+  },
+  {
+    "objectID": "slide/slide14.html#shapeの見本",
+    "href": "slide/slide14.html#shapeの見本",
+    "title": "ミクロ政治データ分析実習",
+    "section": "shapeの見本",
+    "text": "shapeの見本\nshapeで指定（デフォルトはshape = 19） * 黒の部分はcolor、グレーの部分はfill（またはbg）で調整 * 21と22の場合、枠線はcolor、内側の色塗りはfill * 0〜14の場合、中身が透明"
+  },
+  {
+    "objectID": "slide/slide14.html#section-2",
+    "href": "slide/slide14.html#section-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "折れ線グラフ"
+  },
+  {
+    "objectID": "slide/slide14.html#折れ線グラフの必須要素",
+    "href": "slide/slide14.html#折れ線グラフの必須要素",
+    "title": "ミクロ政治データ分析実習",
+    "section": "折れ線グラフの必須要素",
+    "text": "折れ線グラフの必須要素\n折れ線グラフを作成する際に必要な最低限の情報\n.pull-left[ データに日と新規感染者数の列が必要] .pull-right[]"
+  },
+  {
+    "objectID": "slide/slide14.html#データの用意",
+    "href": "slide/slide14.html#データの用意",
+    "title": "ミクロ政治データ分析実習",
+    "section": "データの用意",
+    "text": "データの用意\n授業サポートページから実習用データ（Micro13.csv）をダウンロード * 整然データとして加工済み * Day: 日付（2021年6月）; NewCases: 100万人当りCOVID-19新規感染者数\n\nCOVID_df <- read_csv(\"Data/Micro14.csv\")\nCOVID_df\n\n# A tibble: 15 × 3\n   Country   Day NewCases\n   <chr>   <dbl>    <dbl>\n 1 Japan      16    13.6 \n 2 Japan      17    12.2 \n 3 Japan      18    12.9 \n 4 Japan      19    11.9 \n 5 Japan      20    10.4 \n 6 Korea      16    10.5 \n 7 Korea      17     9.89\n 8 Korea      18     9.40\n 9 Korea      19     8.37\n10 Korea      20     6.96\n11 Taiwan     16     7.05\n12 Taiwan     17     7.35\n13 Taiwan     18     7.85\n14 Taiwan     19     5.25\n15 Taiwan     20     4.58"
+  },
+  {
+    "objectID": "slide/slide14.html#線が一本の場合コード",
+    "href": "slide/slide14.html#線が一本の場合コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線が一本の場合（コード）",
+    "text": "線が一本の場合（コード）\ngeom_line()幾何オブジェクトを使用 * x: 点の傾きが変化し得る点の横軸上の位置 * y: 点の傾きが変化し得る点の縦軸上の位置 * 日本の行のみを抽出し、横軸を日、縦軸を100万人当たり新規感染者数とした折れ線グラフを作成\n\nCOVID_df %>%\n   filter(Country == \"Japan\") %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases)) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#線が二本以上の場合コード",
+    "href": "slide/slide14.html#線が二本以上の場合コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線が二本以上の場合（コード）",
+    "text": "線が二本以上の場合（コード）\ngroupに線のグループ変数を指定 * 国別の折れ線グラフの場合、国変数を指定\n\nCOVID_df <- COVID_df %>%\n   mutate(Country = case_when(Country == \"Japan\" ~ \"日本\",\n                              Country == \"Korea\" ~ \"韓国\",\n                              TRUE               ~ \"台湾\"),\n          Country = factor(Country, levels = c(\"日本\", \"韓国\", \"台湾\")))\n\nCOVID_df %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases, group = Country)) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#線が二本以上の場合図",
+    "href": "slide/slide14.html#線が二本以上の場合図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線が二本以上の場合（図）",
+    "text": "線が二本以上の場合（図）\n各線がどの国を示すのかが分からない… * 色分けで解決"
+  },
+  {
+    "objectID": "slide/slide14.html#線が二本以上の場合コード-1",
+    "href": "slide/slide14.html#線が二本以上の場合コード-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線が二本以上の場合（コード）",
+    "text": "線が二本以上の場合（コード）\ncolorで色分け: 国別の折れ線グラフの場合、国変数を指定 * 線をやや太め（1.5）にする * size: 全線に適用させるためにaes()の外側に * 線が細すぎると色が区別しにくい\n\nCOVID_df %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases, group = Country, \n                 color = Country), size = 1.5) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\", \n        color = \"国\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#線が二本以上の場合図-1",
+    "href": "slide/slide14.html#線が二本以上の場合図-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線が二本以上の場合（図）",
+    "text": "線が二本以上の場合（図）"
+  },
+  {
+    "objectID": "slide/slide14.html#次元の追加-1",
+    "href": "slide/slide14.html#次元の追加-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加",
+    "text": "次元の追加\n多くの折れ線グラフは既に3次元\n\n日（x）、新規感染者数（y）、国（group or color）\nこれ以上次元を増やすならファセット分割で対応するのが賢明\nファセット分割せずに次元を増やすなら…\n\nsize: 線の太さ\nlinetype: 線のタイプ（1 = 実線、2 = 破線、4 = 点線、…）\n\n白黒図の場合、colorでなく、linetype\n\nalpha: 透明度"
+  },
+  {
+    "objectID": "slide/slide14.html#線のタイプコード",
+    "href": "slide/slide14.html#線のタイプコード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線のタイプ（コード）",
+    "text": "線のタイプ（コード）\n白黒図の場合\n\nCOVID_df %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases, group = Country, \n                 linetype = Country), size = 1) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\", \n        linetype = \"国\") +\n   theme_gray(base_family = \"HiraKakuProN-W3\")\n\n自分で線のタイプを指定したい場合は\n\nデータ %>%\n  ggplot() +\n  ... +\n  scale_linetype_manual(values = c(\"日本\" = 1, \"韓国\" = 2, \"台湾\" = 4)) #<<"
+  },
+  {
+    "objectID": "slide/slide14.html#線のタイプ図",
+    "href": "slide/slide14.html#線のタイプ図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "線のタイプ（図）",
+    "text": "線のタイプ（図）"
+  },
+  {
+    "objectID": "slide/slide14.html#linetypeの見本",
+    "href": "slide/slide14.html#linetypeの見本",
+    "title": "ミクロ政治データ分析実習",
+    "section": "linetypeの見本",
+    "text": "linetypeの見本\n種類が多くなると区別しにくいため、最大3つ程度 * 1, (2 or 3), (4 or 10） * 一つ面に登場する線は3〜4本程度まで（色分けも同様）"
+  },
+  {
+    "objectID": "slide/slide14.html#折れ線グラフ-散布図コード",
+    "href": "slide/slide14.html#折れ線グラフ-散布図コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "折れ線グラフ + 散布図（コード）",
+    "text": "折れ線グラフ + 散布図（コード）\ngeom_point()とgeom_line()を重ねる * 後（先）に書いたレイヤーが前面（背面）に * 傾きの変化が激しくない場合に有効 * 点は線より大きめに * 白黒印刷に備え、点の形分けも可能\n\nCOVID_df %>%\n   ggplot(aes(x = Day, y = NewCases, color = Country)) +\n   geom_point(aes(shape = Country), size = 3) +\n   geom_line(aes(group = Country), size = 1) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\", \n        color = \"国\", shape = \"国\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#折れ線グラフ-散布図図",
+    "href": "slide/slide14.html#折れ線グラフ-散布図図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "折れ線グラフ + 散布図（図）",
+    "text": "折れ線グラフ + 散布図（図）"
+  },
+  {
+    "objectID": "slide/slide14.html#section-3",
+    "href": "slide/slide14.html#section-3",
+    "title": "ミクロ政治データ分析実習",
+    "section": "",
+    "text": "箱ひげ図"
+  },
+  {
+    "objectID": "slide/slide14.html#箱ひげ図とは",
+    "href": "slide/slide14.html#箱ひげ図とは",
+    "title": "ミクロ政治データ分析実習",
+    "section": "箱ひげ図とは",
+    "text": "箱ひげ図とは\n.pull-left[ 変数の分布を示す方法の一つ * 最小値、最大値 * ひげの両端 * 第一四分位数、第三四分位数 * 箱の上限と下限 * 中央値（第二四分位数） * 箱内の線 * 外れ値がある場合、点] .pull-right[]"
+  },
+  {
+    "objectID": "slide/slide14.html#一変数の箱ひげ図コード",
+    "href": "slide/slide14.html#一変数の箱ひげ図コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "一変数の箱ひげ図（コード）",
+    "text": "一変数の箱ひげ図（コード）\n人間開発指数 (HDI_2018) の箱ひげ図 * xかyに分布を確認した変数をマッピングする * xにマッピングするか、yにするかによって箱の向きが変わる\n\ndf %>%\n   ggplot() +\n   geom_boxplot(aes(y = HDI_2018)) +\n   labs(x = \"\", y = \"人間開発指数 (2018)\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#一変数の箱ひげ図図",
+    "href": "slide/slide14.html#一変数の箱ひげ図図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "一変数の箱ひげ図（図）",
+    "text": "一変数の箱ひげ図（図）"
+  },
+  {
+    "objectID": "slide/slide14.html#次元の追加コード",
+    "href": "slide/slide14.html#次元の追加コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加（コード）",
+    "text": "次元の追加（コード）\nyにしかマッピングされているため、まだ次元追加の余地が残っている * xにマッピング（大陸ごとのHDI_2018の箱ひげ図） * 更に次元を追加したい場合は、ファセット分割\n\ndf %>%\n   ggplot() +\n   geom_boxplot(aes(y = HDI_2018, x = Continent)) +\n   labs(x = \"大陸\", y = \"人間開発指数 (2018)\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#次元の追加図",
+    "href": "slide/slide14.html#次元の追加図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "次元の追加（図）",
+    "text": "次元の追加（図）"
+  },
+  {
+    "objectID": "slide/slide14.html#カスタマイズ色",
+    "href": "slide/slide14.html#カスタマイズ色",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カスタマイズ（色）",
+    "text": "カスタマイズ（色）\n箱の色を変える * すべての色を変える場合、aes()の外側にfill * 箱ごとにの色を変える場合、aes()の内側にfill\n\ndf %>%\n   ggplot() +\n   geom_boxplot(aes(y = HDI_2018, x = Continent), fill = \"cornsilk\") +\n   labs(x = \"大陸\", y = \"人間開発指数 (2018)\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\")"
+  },
+  {
+    "objectID": "slide/slide14.html#カスタマイズ色-1",
+    "href": "slide/slide14.html#カスタマイズ色-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カスタマイズ（色）",
+    "text": "カスタマイズ（色）"
+  },
+  {
+    "objectID": "slide/slide14.html#カスタマイズ色-2",
+    "href": "slide/slide14.html#カスタマイズ色-2",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カスタマイズ（色）",
+    "text": "カスタマイズ（色）\n箱の色を変える * すべての色を変える場合、aes()の外側にfill * 箱ごとにの色を変える場合、aes()の内側にfill\n\ndf %>%\n   ggplot() +\n   geom_boxplot(aes(y = HDI_2018, x = Continent, fill = Continent)) +\n   labs(x = \"大陸\", y = \"人間開発指数 (2018)\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\") +\n   theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "slide/slide14.html#カスタマイズ色-3",
+    "href": "slide/slide14.html#カスタマイズ色-3",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カスタマイズ（色）",
+    "text": "カスタマイズ（色）"
+  },
+  {
+    "objectID": "slide/slide14.html#カスタマイズ大きさ",
+    "href": "slide/slide14.html#カスタマイズ大きさ",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カスタマイズ（大きさ）",
+    "text": "カスタマイズ（大きさ）\n箱の幅を変える * aes()の外側にwidthを指定\n\ndf %>%\n   ggplot() +\n   geom_boxplot(aes(y = HDI_2018, x = Continent), width = 0.5) +\n   labs(x = \"大陸\", y = \"人間開発指数 (2018)\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\") +\n   theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "slide/slide14.html#カスタマイズ大きさ-1",
+    "href": "slide/slide14.html#カスタマイズ大きさ-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "カスタマイズ（大きさ）",
+    "text": "カスタマイズ（大きさ）"
+  },
+  {
+    "objectID": "slide/slide14.html#横軸と縦軸の交換コード",
+    "href": "slide/slide14.html#横軸と縦軸の交換コード",
+    "title": "ミクロ政治データ分析実習",
+    "section": "横軸と縦軸の交換（コード）",
+    "text": "横軸と縦軸の交換（コード）\n箱が多すぎて読みにくい場合、xとyを交換もOK\n\ndf %>%\n   ggplot() +\n   geom_boxplot(aes(x = HDI_2018, y = Continent)) +\n   labs(x = \"人間開発指数 (2018)\", y = \"大陸\") +\n   theme_minimal(base_family = \"HiraKakuProN-W3\",\n                 base_size   = 14) +\n   theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "slide/slide14.html#横軸と縦軸の交換図",
+    "href": "slide/slide14.html#横軸と縦軸の交換図",
+    "title": "ミクロ政治データ分析実習",
+    "section": "横軸と縦軸の交換（図）",
+    "text": "横軸と縦軸の交換（図）"
+  },
+  {
+    "objectID": "slide/slide14.html#その他",
+    "href": "slide/slide14.html#その他",
+    "title": "ミクロ政治データ分析実習",
+    "section": "その他",
+    "text": "その他\n\n散布図の作成: 教科書第18.6章\n折れ線グラフの作成: 教科書第18.7章\n箱ひげ図: 教科書第18.5章\nグラフのカスタマイズ: 教科書第19章\n\nその他のグラフ\n\n教科書第20章 (執筆中)\nThe R Graph Gallery\n\n\n\n\nhttps://www.jaysong.net/micro-book"
   }
 ]
