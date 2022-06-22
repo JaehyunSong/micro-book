@@ -407,32 +407,6 @@
 <p><span class="sec-title">代表的な5種類のグラフ</span></p>
 <!--- --->
 </section>
-<section id="期末テストについて" class="slide level2">
-<h2>期末テストについて</h2>
-<h3 id="概要">概要</h3>
-<ul>
-<li><strong>日時:</strong> 2021年7月15日（木）4限</li>
-<li><strong>場所:</strong> TC304教室（座席指定; 座席表は事前送付する）</li>
-<li><strong>持参物:</strong> 学生証のみ。PCは大学のPCを使用（持ち込みPC<strong>不可</strong>）</li>
-<li><strong>持ち込み:</strong> 可（インターネット使用可能）
-<ul>
-<li>携帯は<strong>使用禁止</strong></li>
-</ul></li>
-<li>宋は問題そのものに関する質問以外、一切受け付けない
-<ul>
-<li>エラーメッセージへの対処もテストの一部</li>
-</ul></li>
-<li>不正行為厳禁</li>
-</ul>
-<h3 id="実施形態">実施形態</h3>
-<p>本講義の課題と同じ形式</p>
-<ol type="1">
-<li>LMSからデータ、問題ファイル、サンプルファイルをダウンロード</li>
-<li>サンプルファイルと同じ結果が得られるように問題ファイルを編集</li>
-<li>.Rmdファイルと.htmlファイル<strong>両方</strong>LMSに提出</li>
-</ol>
-<!--- --->
-</section>
 <section id="named-graphs-5ng" class="slide level2">
 <h2>5 Named Graphs (5NG)</h2>
 <ul>
@@ -467,7 +441,34 @@
 <section id="散布図の必須要素" class="slide level2">
 <h2>散布図の必須要素</h2>
 <p>散布図を作成する際に必要な<strong>最低限</strong>の情報</p>
-<p>.pull-left[ データにフリーダムハウス・スコアと人間開発指数の<strong>列</strong>が必要] .pull-right[]</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p>データにフリーダムハウス・スコアと人間開発指数の<strong>列</strong>が必要</p>
+<ul>
+<li><code>x</code>: 点の横軸上の位置
+<ul>
+<li>フリーダムハウス・スコア</li>
+</ul></li>
+<li><code>y</code>: 点の縦軸上の位置
+<ul>
+<li>人間開発指数</li>
+</ul></li>
+<li>原因と結果の関係（因果関係）が考えられる2変数の場合、<strong>原因を横軸</strong>、<strong>結果を縦軸</strong>にする。</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-2-1.png" width="1500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 <!--- --->
 </section>
 <section id="データの読み込み" class="slide level2">
@@ -483,12 +484,13 @@
 <h2>散布図の作成 (1)</h2>
 <p>幾何オブジェクトは<code>geom_point()</code>を使用</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Total, <span class="at">y =</span> HDI_2018))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Total, <span class="at">y =</span> HDI_2018))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-3-1.png" width="1500"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-4-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -499,14 +501,14 @@
 <h2>散布図の作成 (2)</h2>
 <p>ラベル修正 / 必要に応じてカスタマイズ</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Total, <span class="at">y =</span> HDI_2018), <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス・スコア"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>   <span class="fu">theme_gray</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Total, <span class="at">y =</span> HDI_2018), <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス・スコア"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-4-1.png" width="1500"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-5-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -540,6 +542,11 @@
 </section>
 <section id="次元の散布図" class="slide level2">
 <h2>5次元の散布図</h2>
+<p>各点はフリーダムハウス・スコア、人間開発指数、人口（対数変換）、大陸、OECD加盟有無の情報を持つ</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">コード</a></li><li><a href="#tabset-1-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>   <span class="fu">mutate</span>(<span class="at">OECD =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Member"</span>, <span class="st">"Non-member"</span>)) <span class="sc">%&gt;%</span></span>
@@ -551,17 +558,17 @@
 <span id="cb4-8"><a href="#cb4-8"></a>        <span class="at">size =</span> <span class="st">"Population (log)"</span>) <span class="sc">+</span></span>
 <span id="cb4-9"><a href="#cb4-9"></a>   <span class="fu">theme_gray</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="次元の散布図-1" class="slide level2">
-<h2>5次元の散布図</h2>
-<p>各点はフリーダムハウス・スコア、人間開発指数、人口（対数変換）、大陸、OECD加盟有無の情報を持つ</p>
+</div>
+<div id="tabset-1-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-6-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-7-1.png" width="3000"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -569,9 +576,19 @@
 </section>
 <section id="色分けの例コード" class="slide level2">
 <h2>色分けの例（コード）</h2>
-<p><code>aes()</code>の内部に<code>color = 色分けする変数</code>を指定 * <code>HighIncome</code>変数を作成し、<code>PPP_per_capita</code>が2万以上なら<code>"高"</code>、未満なら<code>"低"</code> * <code>HighIncome</code>値に応じて点の色分けを行う（<code>color = HighIncome</code>） * 点の大きさは2とする（全体に適用させるため、<code>aes()</code>の外側に指定） * <code>labs()</code>内で凡例タイトルを修正; 凡例を下側へ移動</p>
+<p><code>aes()</code>の内部に<code>color = 色分けする変数</code>を指定</p>
+<ul>
+<li><code>HighIncome</code>変数を作成し、<code>PPP_per_capita</code>が2万以上なら<code>"高"</code>、未満なら<code>"低"</code></li>
+<li><code>HighIncome</code>値に応じて点の色分けを行う（<code>color = HighIncome</code>）</li>
+<li>点の大きさは2とする（全体に適用させるため、<code>aes()</code>の外側に指定）</li>
+<li><code>labs()</code>内で凡例タイトルを修正; 凡例を下側へ移動</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">コード</a></li><li><a href="#tabset-2-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>Scatter1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>scatter_plot1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>   <span class="fu">drop_na</span>(FH_Total, HDI_2018, PPP_per_capita) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>   <span class="fu">mutate</span>(<span class="at">HighIncome =</span> <span class="fu">if_else</span>(PPP_per_capita <span class="sc">&gt;=</span> <span class="dv">20000</span>, <span class="st">"高"</span>, <span class="st">"低"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -579,20 +596,20 @@
 <span id="cb5-6"><a href="#cb5-6"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス・スコア"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
 <span id="cb5-8"><a href="#cb5-8"></a>        <span class="at">color =</span> <span class="st">"一人当たりPPP GDP"</span>) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>   <span class="fu">theme_gray</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-9"><a href="#cb5-9"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="色分けの例図" class="slide level2">
-<h2>色分けの例（図）</h2>
+</div>
+<div id="tabset-2-2">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">print</span>(Scatter1)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>scatter_plot1</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-8-1.png" width="1800"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-9-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -600,14 +617,18 @@
 </section>
 <section id="色のカスタマイズ" class="slide level2">
 <h2>色のカスタマイズ</h2>
-<p><code>color</code>にマッピングされている変数（<code>HighIncome</code>）が離散変数 * <code>scale_color_manual()</code>を使用 * 引数: <code>values = c("値1" = "色1", "値2" = "色2", ...)</code></p>
+<p><code>color</code>にマッピングされている変数（<code>HighIncome</code>）が離散変数</p>
+<ul>
+<li><code>scale_color_manual()</code>を使用</li>
+<li>引数: <code>values = c("値1" = "色1", "値2" = "色2", ...)</code></li>
+</ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>Scatter1 <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>scatter_plot1 <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>   <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"低"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"高"</span> <span class="ot">=</span> <span class="st">"royalblue"</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-9-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-10-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -632,11 +653,11 @@
 </section>
 <section id="色の見本-一部" class="slide level2">
 <h2>色の見本 (一部)</h2>
-<div class="cell" data-layout-align="center" data-hash="slide14_cache/revealjs/unnamed-chunk-10_8d03de6c5e81314489095f6f55bf8bc1">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-10-1.png" width="3000"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-11-1.png" width="3600"></p>
 </figure>
 </div>
 </div>
@@ -645,12 +666,19 @@
 </section>
 <section id="shapeの見本" class="slide level2">
 <h2><code>shape</code>の見本</h2>
-<p><code>shape</code>で指定（デフォルトは<code>shape = 19</code>） * 黒の部分は<code>color</code>、グレーの部分は<code>fill</code>（または<code>bg</code>）で調整 * 21と22の場合、枠線は<code>color</code>、内側の色塗りは<code>fill</code> * 0〜14の場合、中身が透明</p>
-<div class="cell" data-layout-align="center" data-hash="slide14_cache/revealjs/unnamed-chunk-11_431fa0b1c371e06efe36a4c35c8e9e8a">
+<p><code>shape</code>で指定（デフォルトは<code>shape = 19</code>）</p>
+<ul>
+<li>黒の部分は<code>color</code>、グレーの部分は<code>fill</code>（または<code>bg</code>）で調整
+<ul>
+<li>21と22の場合、枠線は<code>color</code>、内側の色塗りは<code>fill</code></li>
+</ul></li>
+<li>0〜14の場合、中身が透明</li>
+</ul>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-11-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-12-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -665,12 +693,47 @@
 <section id="折れ線グラフの必須要素" class="slide level2">
 <h2>折れ線グラフの必須要素</h2>
 <p>折れ線グラフを作成する際に必要な<strong>最低限</strong>の情報</p>
-<p>.pull-left[ データに日と新規感染者数の<strong>列</strong>が必要] .pull-right[]</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p>データに日と新規感染者数の<strong>列</strong>が必要</p>
+<ul>
+<li><code>x</code>: 線の傾きが変化し得る点の横軸上の位置
+<ul>
+<li>日</li>
+</ul></li>
+<li><code>y</code>: 線の傾きが変化し得る点の縦軸上の位置
+<ul>
+<li>100万人当たり新規感染者数</li>
+</ul></li>
+<li>散布図とほぼ同じ</li>
+<li>ただし、線が2つ以上の場合<code>groups</code>が必要
+<ul>
+<li>点をグループ化しないと、どの点を繋げば良いかが分からないため</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-13-1.png" width="1500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 <!--- --->
 </section>
 <section id="データの用意" class="slide level2">
 <h2>データの用意</h2>
-<p>授業サポートページから実習用データ（<code>Micro13.csv</code>）をダウンロード * 整然データとして加工済み * <code>Day</code>: 日付（2021年6月）; <code>NewCases</code>: 100万人当りCOVID-19新規感染者数</p>
+<p>授業サポートページから実習用データ（<code>Micro14.csv</code>）をダウンロード</p>
+<ul>
+<li>整然データとして加工済み</li>
+<li><code>Day</code>: 日付（2021年6月）; <code>NewCases</code>: 100万人当りCOVID-19新規感染者数</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro14.csv"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>COVID_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -699,26 +762,34 @@
 </section>
 <section id="線が一本の場合コード" class="slide level2">
 <h2>線が一本の場合（コード）</h2>
-<p><code>geom_line()</code>幾何オブジェクトを使用 * <code>x</code>: 点の傾きが変化し得る点の横軸上の位置 * <code>y</code>: 点の傾きが変化し得る点の縦軸上の位置 * 日本の行のみを抽出し、横軸を日、縦軸を100万人当たり新規感染者数とした折れ線グラフを作成</p>
+<p><code>geom_line()</code>幾何オブジェクトを使用</p>
+<ul>
+<li><code>x</code>: 点の傾きが変化し得る点の横軸上の位置</li>
+<li><code>y</code>: 点の傾きが変化し得る点の縦軸上の位置</li>
+<li>日本の行のみを抽出し、横軸を日、縦軸を100万人当たり新規感染者数とした折れ線グラフを作成</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">コード</a></li><li><a href="#tabset-3-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>   <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>   <span class="fu">theme_gray</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section>
-<section id="線が一本の場合図" class="title-slide slide level1 center">
-<h1>線が一本の場合（図）</h1>
+</div>
+<div id="tabset-3-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-15-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-16-1.png" width="3000"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -726,7 +797,14 @@
 </section>
 <section id="線が二本以上の場合コード" class="slide level2">
 <h2>線が二本以上の場合（コード）</h2>
-<p><code>group</code>に線のグループ変数を指定 * 国別の折れ線グラフの場合、国変数を指定</p>
+<p><code>group</code>に線のグループ変数を指定</p>
+<ul>
+<li>国別の折れ線グラフの場合、国変数を指定</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">コード</a></li><li><a href="#tabset-4-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>COVID_df <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>   <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">case_when</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span> <span class="sc">~</span> <span class="st">"日本"</span>,</span>
@@ -737,20 +815,20 @@
 <span id="cb11-7"><a href="#cb11-7"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb11-8"><a href="#cb11-8"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb11-9"><a href="#cb11-9"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country)) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>) <span class="sc">+</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>   <span class="fu">theme_gray</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-10"><a href="#cb11-10"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="線が二本以上の場合図" class="slide level2">
-<h2>線が二本以上の場合（図）</h2>
-<p>各線がどの国を示すのかが分からない… * 色分けで解決</p>
+</div>
+<div id="tabset-4-2">
+<p>各線がどの国を示すのかが分からない…</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-17-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-18-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -758,26 +836,37 @@
 </section>
 <section id="線が二本以上の場合コード-1" class="slide level2">
 <h2>線が二本以上の場合（コード）</h2>
-<p><code>color</code>で色分け: 国別の折れ線グラフの場合、国変数を指定 * 線をやや太め（1.5）にする * <code>size</code>: 全線に適用させるために<code>aes()</code>の外側に * 線が細すぎると色が区別しにくい</p>
+<p><code>color</code>で色分け: 国別の折れ線グラフの場合、国変数を指定</p>
+<ul>
+<li>線をやや太め（1.5）にする
+<ul>
+<li><code>size</code>: 全線に適用させるために<code>aes()</code>の外側に</li>
+<li>線が細すぎると色が区別しにくい</li>
+</ul></li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">コード</a></li><li><a href="#tabset-5-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, </span>
 <span id="cb12-4"><a href="#cb12-4"></a>                 <span class="at">color =</span> Country), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
 <span id="cb12-5"><a href="#cb12-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
-<span id="cb12-6"><a href="#cb12-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>   <span class="fu">theme_gray</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a href="#cb12-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="線が二本以上の場合図-1" class="slide level2">
-<h2>線が二本以上の場合（図）</h2>
+</div>
+<div id="tabset-5-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-19-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-20-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -803,15 +892,20 @@
 </section>
 <section id="線のタイプコード" class="slide level2">
 <h2>線のタイプ（コード）</h2>
-<p>白黒図の場合</p>
+<ul>
+<li>主に白黒図で使用</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">コード</a></li><li><a href="#tabset-6-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, </span>
-<span id="cb13-4"><a href="#cb13-4"></a>                 <span class="at">linetype =</span> Country), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, <span class="at">linetype =</span> Country),</span>
+<span id="cb13-4"><a href="#cb13-4"></a>             <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb13-5"><a href="#cb13-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
-<span id="cb13-6"><a href="#cb13-6"></a>        <span class="at">linetype =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>   <span class="fu">theme_gray</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-6"><a href="#cb13-6"></a>        <span class="at">linetype =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>自分で線のタイプを指定したい場合は</p>
 <div class="cell" data-layout-align="center">
@@ -820,16 +914,17 @@
 <span id="cb14-3"><a href="#cb14-3"></a>  ... <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"日本"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"韓国"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"台湾"</span> <span class="ot">=</span> <span class="dv">4</span>)) <span class="co">#&lt;&lt;</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="線のタイプ図" class="slide level2">
-<h2>線のタイプ（図）</h2>
+</div>
+<div id="tabset-6-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-22-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-23-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -837,12 +932,16 @@
 </section>
 <section id="linetypeの見本" class="slide level2">
 <h2><code>linetype</code>の見本</h2>
-<p>種類が多くなると区別しにくいため、最大3つ程度 * 1, (2 or 3), (4 or 10） * 一つ面に登場する線は3〜4本程度まで（色分けも同様）</p>
+<p>種類が多くなると区別しにくいため、最大3つ程度</p>
+<ul>
+<li>1, (2 or 3), (4 or 10）</li>
+<li>一つ面に登場する線は3〜4本程度まで（色分けも同様）</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-23-1.png" width="1800"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-24-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -851,7 +950,13 @@
 </section>
 <section id="折れ線グラフ-散布図コード" class="slide level2">
 <h2>折れ線グラフ + 散布図（コード）</h2>
-<p><code>geom_point()</code>と<code>geom_line()</code>を重ねる * 後（先）に書いたレイヤーが前面（背面）に * 傾きの変化が激しくない場合に有効 * 点は線より大きめに * 白黒印刷に備え、点の形分けも可能</p>
+<p><code>geom_point()</code>と<code>geom_line()</code>を重ねる</p>
+<ul>
+<li>後（先）に書いたレイヤーが前面（背面）に</li>
+<li>傾きの変化が激しくない場合に有効</li>
+<li>点は線より大きめに</li>
+<li>白黒印刷に備え、点の形分けも可能</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
@@ -859,7 +964,7 @@
 <span id="cb15-4"><a href="#cb15-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> Country), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb15-5"><a href="#cb15-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
 <span id="cb15-6"><a href="#cb15-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>, <span class="at">shape =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--- --->
 </section>
@@ -869,7 +974,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-25-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-26-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -883,54 +988,104 @@
 </section>
 <section id="箱ひげ図とは" class="slide level2">
 <h2>箱ひげ図とは</h2>
-<p>.pull-left[ 変数の分布を示す方法の一つ * 最小値、最大値 * ひげの両端 * 第一四分位数、第三四分位数 * 箱の上限と下限 * 中央値（第二四分位数） * 箱内の線 * 外れ値がある場合、点] .pull-right[]</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p>変数の分布を示す方法の一つ</p>
+<ul>
+<li>最小値、最大値
+<ul>
+<li>ひげの両端</li>
+</ul></li>
+<li>第一四分位数、第三四分位数
+<ul>
+<li>箱の上限と下限</li>
+</ul></li>
+<li>中央値（第二四分位数）
+<ul>
+<li>箱内の線</li>
+</ul></li>
+<li>外れ値がある場合、点</li>
+</ul>
+<p>変数の分布を<strong>グループごと</strong>に見る時に有効</p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-27-1.png" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 <!--- --->
 </section>
-<section id="一変数の箱ひげ図コード" class="slide level2">
-<h2>一変数の箱ひげ図（コード）</h2>
-<p>人間開発指数 (<code>HDI_2018</code>) の箱ひげ図 * <code>x</code>か<code>y</code>に分布を確認した変数をマッピングする * <code>x</code>にマッピングするか、<code>y</code>にするかによって箱の向きが変わる</p>
+<section id="箱ひげ図の作成" class="slide level2">
+<h2>箱ひげ図の作成</h2>
+<p>人間開発指数 (<code>HDI_2018</code>) の箱ひげ図</p>
+<ul>
+<li><code>x</code>、または<code>y</code>に分布を確認した変数をマッピングする
+<ul>
+<li><code>x</code>にマッピングするか、<code>y</code>にするかによって箱の向きが変わる</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:52%;">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018)) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-5"><a href="#cb16-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="一変数の箱ひげ図図" class="slide level2">
-<h2>一変数の箱ひげ図（図）</h2>
+</div><div class="column" style="width:1%;">
+
+</div><div class="column" style="width:47%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-28-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-29-1.png" width="1500"></p>
 </figure>
+</div>
+</div>
 </div>
 </div>
 </div>
 <!--- --->
 </section>
-<section id="次元の追加コード" class="slide level2">
-<h2>次元の追加（コード）</h2>
-<p><code>y</code>にしかマッピングされているため、まだ次元追加の余地が残っている * <code>x</code>にマッピング（大陸ごとの<code>HDI_2018</code>の箱ひげ図） * 更に次元を追加したい場合は、ファセット分割</p>
+<section id="次元の追加-2" class="slide level2">
+<h2>次元の追加</h2>
+<p><code>y</code>にしかマッピングされているため、まだ次元追加の余地が残っている</p>
+<ul>
+<li><code>x</code>にマッピング（大陸ごとの<code>HDI_2018</code>の箱ひげ図）</li>
+<li>更に次元を追加したい場合は、ファセット分割</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">コード</a></li><li><a href="#tabset-7-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent)) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="次元の追加図" class="slide level2">
-<h2>次元の追加（図）</h2>
+</div>
+<div id="tabset-7-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-30-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-31-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -938,110 +1093,125 @@
 </section>
 <section id="カスタマイズ色" class="slide level2">
 <h2>カスタマイズ（色）</h2>
-<p>箱の色を変える * すべての色を変える場合、<code>aes()</code>の<strong>外側</strong>に<code>fill</code> * 箱ごとにの色を変える場合、<code>aes()</code>の内側に<code>fill</code></p>
+<p>箱の色を変える</p>
+<ul>
+<li>すべての色を変える場合、<code>aes()</code>の<strong>外側</strong>に<code>fill</code></li>
+<li>箱ごとにの色を変える場合、<code>aes()</code>の内側に<code>fill</code></li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">コード (1)</a></li><li><a href="#tabset-8-2">結果 (1)</a></li><li><a href="#tabset-8-3">コード (2)</a></li><li><a href="#tabset-8-4">結果 (2)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent), <span class="at">fill =</span> <span class="st">"cornsilk"</span>) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-5"><a href="#cb18-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="カスタマイズ色-1" class="slide level2">
-<h2>カスタマイズ（色）</h2>
+</div>
+<div id="tabset-8-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-32-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-33-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
 </div>
-<!--- --->
-</section>
-<section id="カスタマイズ色-2" class="slide level2">
-<h2>カスタマイズ（色）</h2>
-<p>箱の色を変える * すべての色を変える場合、<code>aes()</code>の外側に<code>fill</code> * 箱ごとにの色を変える場合、<code>aes()</code>の<strong>内側</strong>に<code>fill</code></p>
+</div>
+<div id="tabset-8-3">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent, <span class="at">fill =</span> Continent)) <span class="sc">+</span></span>
 <span id="cb19-4"><a href="#cb19-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-5"><a href="#cb19-5"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="co"># 凡例の削除</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="カスタマイズ色-3" class="slide level2">
-<h2>カスタマイズ（色）</h2>
+</div>
+<div id="tabset-8-4">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-34-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-35-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <!--- --->
 </section>
-<section id="カスタマイズ大きさ" class="slide level2">
-<h2>カスタマイズ（大きさ）</h2>
-<p>箱の幅を変える * <code>aes()</code>の<strong>外側</strong>に<code>width</code>を指定</p>
+<section id="カスタマイズ箱の幅" class="slide level2">
+<h2>カスタマイズ（箱の幅）</h2>
+<ul>
+<li><code>aes()</code>の<strong>外側</strong>に<code>width</code>を指定</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">コード</a></li><li><a href="#tabset-9-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb20-4"><a href="#cb20-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb20-6"><a href="#cb20-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="カスタマイズ大きさ-1" class="slide level2">
-<h2>カスタマイズ（大きさ）</h2>
+</div>
+<div id="tabset-9-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-36-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-37-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <!--- --->
 </section>
-<section id="横軸と縦軸の交換コード" class="slide level2">
-<h2>横軸と縦軸の交換（コード）</h2>
-<p>箱が多すぎて読みにくい場合、<code>x</code>と<code>y</code>を交換もOK</p>
+<section id="横軸と縦軸の交換" class="slide level2">
+<h2>横軸と縦軸の交換</h2>
+<p>箱が多すぎて読みにくい場合、<code>x</code>と<code>y</code>を交換も良い</p>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">コード</a></li><li><a href="#tabset-10-2">結果</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">y =</span> Continent)) <span class="sc">+</span></span>
 <span id="cb21-4"><a href="#cb21-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"人間開発指数 (2018)"</span>, <span class="at">y =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>   <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>,</span>
-<span id="cb21-6"><a href="#cb21-6"></a>                 <span class="at">base_size   =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-5"><a href="#cb21-5"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!--- --->
-</section>
-<section id="横軸と縦軸の交換図" class="slide level2">
-<h2>横軸と縦軸の交換（図）</h2>
+</div>
+<div id="tabset-10-2">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-38-1.png" width="2100"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-39-1.png" width="2400"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <!--- --->
 </section>
-<section id="その他" class="slide level2">
-<h2>その他</h2>
+<section id="最後に" class="slide level2">
+<h2>最後に</h2>
 <ul>
 <li>散布図の作成: <a href="https://www.jaysong.net/RBook/visualization2.html#visual2-scatter">教科書第18.6章</a></li>
 <li>折れ線グラフの作成: <a href="https://www.jaysong.net/RBook/visualization2.html#visual2-line">教科書第18.7章</a></li>
@@ -1050,15 +1220,25 @@
 </ul>
 <h3 id="その他のグラフ">その他のグラフ</h3>
 <ul>
-<li><a href="https://www.jaysong.net/RBook/visualization4.html">教科書第20章</a> (執筆中)</li>
+<li><a href="https://www.jaysong.net/RBook/visualization4.html">教科書第20章</a></li>
 <li><a href="https://www.r-graph-gallery.com/">The R Graph Gallery</a></li>
+</ul>
+<!--- --->
+</section>
+<section id="期末テストについて" class="slide level2">
+<h2>期末テストについて</h2>
+<ul>
+<li>サポートページを参照
+<ul>
+<li>課題 &gt; 期末テスト実施要領</li>
+</ul></li>
 </ul>
 
 <p><img src="Figs/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p><a href="https://www.jaysong.net/micro-book" class="uri">https://www.jaysong.net/micro-book</a></p>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
