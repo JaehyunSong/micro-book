@@ -575,7 +575,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/The_Grammar_of_Graphics.jpg" width="137"></p>
+<p><img data-src="Figs/12/The_Grammar_of_Graphics.jpg" width="137"></p>
 </figure>
 </div>
 </div>
@@ -591,7 +591,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/ggplot2_logo.png" width="175"></p>
+<p><img data-src="Figs/12/ggplot2_logo.png" width="175"></p>
 </figure>
 </div>
 </div>
@@ -603,7 +603,7 @@
 <li><code>ggplot()</code>: キャンバスを用意</li>
 <li><code>geom_point()</code>: 点 / <code>geom_line()</code>: 線 / <code>geom_bar()</code>: 棒</li>
 <li><code>scale_x_continuous()</code>: 連続変数の横軸</li>
-<li><code>scale_x_discrete()</code>: 離散変数の横軸など</li>
+<li><code>scale_y_discrete()</code>: 離散変数の縦軸など</li>
 </ul></li>
 <li>関数を覚える必要は全くない
 <ul>
@@ -620,7 +620,26 @@
 <span id="cb4-2"><a href="#cb4-2"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro09.csv"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
 <span id="cb4-4"><a href="#cb4-4"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># OECD変数をリコーディングし、OECD_Jへ</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>   <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"加盟国"</span>, <span class="st">"非加盟国"</span>)) </span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5"></a>   <span class="fu">mutate</span>(<span class="at">OECD_J =</span> <span class="fu">if_else</span>(OECD <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"加盟国"</span>, <span class="st">"非加盟国"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>   <span class="fu">select</span>(Country, PPP_per_capita, HDI_2018, FH_Status, OECD_J, Continent)</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 6
+   Country             PPP_per_capita HDI_2018 FH_Status OECD_J   Continent
+   &lt;chr&gt;                        &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    
+ 1 Afghanistan                  2125.    0.496 NF        非加盟国 Asia     
+ 2 Albania                     13781.    0.791 PF        非加盟国 Europe   
+ 3 Algeria                     11324.    0.759 NF        非加盟国 Africa   
+ 4 Andorra                        NA     0.857 F         非加盟国 Europe   
+ 5 Angola                       6649.    0.574 NF        非加盟国 Africa   
+ 6 Antigua and Barbuda         21267.    0.776 F         非加盟国 America  
+ 7 Argentina                   22938.    0.83  F         非加盟国 America  
+ 8 Armenia                     12974.    0.76  PF        非加盟国 Europe   
+ 9 Australia                   50001.    0.938 F         加盟国   Oceania  
+10 Austria                     55824.    0.914 F         加盟国   Europe   
+# … with 176 more rows</code></pre>
+</div>
 </div>
 <!--- --->
 </section>
@@ -628,8 +647,8 @@
 <h2>{ggplot2}のイメージ (2)</h2>
 <p>キャンバスの用意</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="sc">%&gt;%</span> <span class="co"># データdfをggplot()関数に渡し、作図の準備をする</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>   <span class="fu">ggplot</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df <span class="sc">%&gt;%</span> <span class="co"># データdfをggplot()関数に渡し、作図の準備をする</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>   <span class="fu">ggplot</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -644,11 +663,11 @@
 <h2>{ggplot2}のイメージ (3)</h2>
 <p>キャンバス上に点を出力</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>   <span class="co"># 点を出力する。点の横軸上の位置はPPP_per_capita、縦軸上の位置はHDI_2018に対応</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>   <span class="co"># OECD_Jの値に応じて色分けする。</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="co">#&lt;&lt;</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>   <span class="co"># 点を出力する。点の横軸上の位置はPPP_per_capita、縦軸上の位置はHDI_2018に対応</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>   <span class="co"># OECD_Jの値に応じて色分けする。</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -663,11 +682,11 @@
 <h2>{ggplot2}のイメージ (4)</h2>
 <p>ラベルの修正</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="4,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,  </span>
-<span id="cb7-5"><a href="#cb7-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="4,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,  </span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -682,12 +701,12 @@
 <h2>{ggplot2}のイメージ (5)</h2>
 <p>テーマ変更</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="co"># Black and Whiteテーマを使い、文字サイズは12</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="co"># Black and Whiteテーマを使い、文字サイズは12</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -702,13 +721,13 @@
 <h2>{ggplot2}のイメージ (6)</h2>
 <p>凡例の位置調整</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="co"># 凡例を図の下段に</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="co"># 凡例を図の下段に</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -729,7 +748,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/Layer.png" width="800"></p>
+<p><img data-src="Figs/12/Layer.png" width="800"></p>
 </figure>
 </div>
 </div>
@@ -773,7 +792,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/Structure.png" width="800"></p>
+<p><img data-src="Figs/12/Structure.png" width="800"></p>
 </figure>
 </div>
 </div>
@@ -796,8 +815,8 @@
 <li><code>aes()</code>の中にはグラフ上に出力される点、線、面などがデータのどの変数に対応するかを記述</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>   幾何オブジェクト関数(<span class="at">mapping =</span> <span class="fu">aes</span>(マッピング))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>   幾何オブジェクト関数(<span class="at">mapping =</span> <span class="fu">aes</span>(マッピング))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--- --->
 </section>
@@ -813,7 +832,7 @@
 <li><code>data</code>引数にdata.frame (tibble)オブジェクト名を指定</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:2%;">
 
@@ -823,7 +842,7 @@
 <li><code>data</code>引数は第一引数であるため、省略されることも多い</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(データ名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(データ名)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:2%;">
 
@@ -835,8 +854,8 @@
 <li>この方法を推奨</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>データ名 <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>   <span class="fu">ggplot</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>データ名 <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>   <span class="fu">ggplot</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -845,9 +864,9 @@
 <section id="幾何オブジェクト" class="slide level2">
 <h2>幾何オブジェクト</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>データ名 <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>   幾何オブジェクト関数()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>データ名 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>   幾何オブジェクト関数()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>指定されたデータを使ってどのような図を作成するか</p>
 <ul>
@@ -926,9 +945,10 @@
 <div class="tab-content">
 <div id="tabset-4-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-4-2">
@@ -944,9 +964,10 @@
 </div>
 <div id="tabset-4-3">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP (米ドル)"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-4-4">
@@ -988,13 +1009,13 @@
 <div class="tab-content">
 <div id="tabset-5-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J), </span>
-<span id="cb17-4"><a href="#cb17-4"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP"</span>, <span class="at">y =</span> <span class="st">"人間開発指数"</span>, <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a>   <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">30000</span>, <span class="dv">90000</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> PPP_per_capita, <span class="at">y =</span> HDI_2018, <span class="at">color =</span> OECD_J), </span>
+<span id="cb18-4"><a href="#cb18-4"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"一人当たり購買力平価基準GDP"</span>, <span class="at">y =</span> <span class="st">"人間開発指数"</span>, <span class="at">color =</span> <span class="st">"OECD"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>   <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">30000</span>, <span class="dv">90000</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-5-2">
@@ -1025,22 +1046,40 @@
 </ul>
 <!--- --->
 </section>
-<section id="ファセット-facet" class="slide level2">
+<section id="ファセット-facet" class="slide level2 scrollable">
 <h2>ファセット (Facet)</h2>
 <p>グラフを2つ以上の面で分割</p>
 <ul>
 <li>例) <code>FH_Stauts</code>の棒グラフを大陸ごとに出力</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># データの用意</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># 参考) 「\n」は図内の改行を意味する。</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>   <span class="fu">mutate</span>(<span class="at">FH_Status =</span> <span class="fu">case_when</span>(FH_Status <span class="sc">==</span> <span class="st">"F"</span>  <span class="sc">~</span> <span class="st">"自由"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5"></a>                                FH_Status <span class="sc">==</span> <span class="st">"PF"</span> <span class="sc">~</span> <span class="st">"部分的に</span><span class="sc">\n</span><span class="st">自由"</span>,</span>
-<span id="cb18-6"><a href="#cb18-6"></a>                                <span class="cn">TRUE</span>              <span class="sc">~</span> <span class="st">"不自由"</span>),</span>
-<span id="cb18-7"><a href="#cb18-7"></a>          <span class="at">FH_Status =</span> <span class="fu">factor</span>(FH_Status,</span>
-<span id="cb18-8"><a href="#cb18-8"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"自由"</span>, <span class="st">"部分的に</span><span class="sc">\n</span><span class="st">自由"</span>, <span class="st">"不自由"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a>   <span class="fu">drop_na</span>(FH_Status)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># データの用意</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># 参考) 「\n」は図内の改行を意味する。</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>   <span class="fu">mutate</span>(<span class="at">FH_Status =</span> <span class="fu">case_when</span>(FH_Status <span class="sc">==</span> <span class="st">"F"</span>  <span class="sc">~</span> <span class="st">"自由"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5"></a>                                FH_Status <span class="sc">==</span> <span class="st">"PF"</span> <span class="sc">~</span> <span class="st">"部分的に</span><span class="sc">\n</span><span class="st">自由"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>                                <span class="cn">TRUE</span>              <span class="sc">~</span> <span class="st">"不自由"</span>),</span>
+<span id="cb19-7"><a href="#cb19-7"></a>          <span class="at">FH_Status =</span> <span class="fu">factor</span>(FH_Status,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"自由"</span>, <span class="st">"部分的に</span><span class="sc">\n</span><span class="st">自由"</span>, <span class="st">"不自由"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>   <span class="fu">drop_na</span>(FH_Status)</span>
+<span id="cb19-10"><a href="#cb19-10"></a></span>
+<span id="cb19-11"><a href="#cb19-11"></a>df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 186 × 6
+   Country             PPP_per_capita HDI_2018 FH_Status        OECD_J Continent
+   &lt;chr&gt;                        &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;            &lt;chr&gt;  &lt;chr&gt;    
+ 1 Afghanistan                  2125.    0.496 "不自由"         非加…  Asia     
+ 2 Albania                     13781.    0.791 "部分的に\n自由" 非加…  Europe   
+ 3 Algeria                     11324.    0.759 "不自由"         非加…  Africa   
+ 4 Andorra                        NA     0.857 "自由"           非加…  Europe   
+ 5 Angola                       6649.    0.574 "不自由"         非加…  Africa   
+ 6 Antigua and Barbuda         21267.    0.776 "自由"           非加…  America  
+ 7 Argentina                   22938.    0.83  "自由"           非加…  America  
+ 8 Armenia                     12974.    0.76  "部分的に\n自由" 非加…  Europe   
+ 9 Australia                   50001.    0.938 "自由"           加盟国 Oceania  
+10 Austria                     55824.    0.914 "自由"           加盟国 Europe   
+# … with 176 more rows</code></pre>
+</div>
 </div>
 <!--- --->
 </section>
@@ -1048,12 +1087,12 @@
 <h2>ファセット分割なし</h2>
 <p>同じ大陸内の<code>FH_Stauts</code>の分布を確認するには不向き</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Status, <span class="at">fill =</span> Continent),</span>
-<span id="cb19-4"><a href="#cb19-4"></a>            <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス評価"</span>, <span class="at">y =</span> <span class="st">"国家数"</span>, <span class="at">fill =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>   <span class="fu">theme_bw</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Status, <span class="at">fill =</span> Continent),</span>
+<span id="cb21-4"><a href="#cb21-4"></a>            <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス評価"</span>, <span class="at">y =</span> <span class="st">"国家数"</span>, <span class="at">fill =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1067,13 +1106,12 @@
 <section id="ファセット分割あり" class="slide level2">
 <h2>ファセット分割あり</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Status),</span>
-<span id="cb20-4"><a href="#cb20-4"></a>            <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス評価"</span>, <span class="at">y =</span> <span class="st">"国家数"</span>) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   <span class="fu">facet_wrap</span>(<span class="sc">~</span> Continent, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="co">#&lt;&lt;</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a>   <span class="fu">theme_bw</span>(<span class="at">base_family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> FH_Status)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"フリーダムハウス評価"</span>, <span class="at">y =</span> <span class="st">"国家数"</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>   <span class="fu">facet_wrap</span>(<span class="sc">~</span> Continent, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1098,7 +1136,8 @@
 <li>3次元グラフは更に邪悪なる存在</li>
 <li>3次元円グラフは概念レベルで駆逐すべき存在</li>
 </ul>
-<h3 id="参考図書-日本語">参考図書 (日本語)</h3>
+<p><br></p>
+<h4 id="参考図書-日本語">参考図書 (日本語)</h4>
 <p>1と4は{ggplot2}の教科書としても優れている</p>
 <ol type="1">
 <li>Hadley Wickham・Garrett Grolemund(著), 黒川利明(訳). 2017. 『<a href="https://www.amazon.co.jp/dp/487311814X">Rではじめるデータサイエンス</a>』オライリージャパン.</li>
@@ -1106,6 +1145,87 @@
 <li>永田ゆかり. 2020. 『<a href="https://www.amazon.co.jp/dp/B08BHZ4HT3/">データ視覚化のデザイン</a>』SBクリエイティブ.</li>
 <li><strong>【おすすめ】</strong> キーラン・ヒーリー(著), 瓜生真也・江口哲史・三村喬生(訳). 2021.『<a href="https://www.amazon.co.jp/dp/4065164044/">データ分析のためのデータ可視化入門</a>』講談社.</li>
 </ol>
+<!--- --->
+</section>
+<section id="円グラフ大好き" class="slide level2">
+<h2>円グラフ大好き！</h2>
+<p>最も面積が広いのは?</p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>円グラフ</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/12/Pie1.png" width="300"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:0.5%;">
+
+</div><div class="column" style="width:33%;">
+<p><strong>3次元円グラフ</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/12/Pie2.png" width="300"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:0.5%;">
+
+</div><div class="column" style="width:33%;">
+<p><strong>棒グラフ</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Figs/12/Pie3.png" width="300"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="それでも円グラフが描きたいです" class="slide level2">
+<h2>それでも円グラフが描きたいです…</h2>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-35-1.png" width="1500"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-35-2.png" width="1500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<!--- --->
+</section>
+<section id="やめとけって" class="slide level2">
+<h2>やめとけって</h2>
+<p>棒グラフで十分</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide12_files/figure-revealjs/unnamed-chunk-36-1.png" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
 <!--- --->
 </section>
 <section id="データインク比-data-ink-ratio" class="slide level2">
@@ -1131,7 +1251,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/Dataink_ratio1.png" width="800"></p>
+<p><img data-src="Figs/12/Dataink_ratio1.png" width="800"></p>
 </figure>
 </div>
 </div>
@@ -1147,7 +1267,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/Dataink_ratio2.png" width="1000"></p>
+<p><img data-src="Figs/12/Dataink_ratio2.png" width="1000"></p>
 </figure>
 </div>
 </div>
@@ -1163,7 +1283,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/Dataink_ratio3.png" width="700"></p>
+<p><img data-src="Figs/12/Dataink_ratio3.png" width="700"></p>
 </figure>
 </div>
 </div>
@@ -1191,7 +1311,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/ColorUniversal1.png" width="500"></p>
+<p><img data-src="Figs/12/ColorUniversal1.png" width="500"></p>
 </figure>
 </div>
 </div>
@@ -1203,7 +1323,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/ColorUniversal2.png" width="500"></p>
+<p><img data-src="Figs/12/ColorUniversal2.png" width="500"></p>
 </figure>
 </div>
 </div>
@@ -1218,7 +1338,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/3D_Plot1.png" width="800"></p>
+<p><img data-src="Figs/12/3D_Plot1.png" width="800"></p>
 </figure>
 </div>
 </div>
@@ -1231,7 +1351,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/3D_Plot2.jpg" width="500"></p>
+<p><img data-src="Figs/12/3D_Plot2.jpg" width="500"></p>
 </figure>
 </div>
 </div>
@@ -1247,7 +1367,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Figs/11/3D_Plot3.png" width="800"></p>
+<p><img data-src="Figs/12/3D_Plot3.png" width="800"></p>
 </figure>
 </div>
 </div>

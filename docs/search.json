@@ -1047,14 +1047,14 @@
     "href": "slide/slide12.html#ggplot2とは",
     "title": "ミクロ政治データ分析実習",
     "section": "{ggplot2}とは",
-    "text": "{ggplot2}とは\nHadley Wickhamが大学院生の時に開発した可視化パッケージ\n\n\n\n\n\n\n\n\n\n\ngrammer of graphicsの思想をR上で具現化したパッケージ\n図の構成要素それぞれに対応する関数が存在し、一つのレイヤーとして機能\n\nggplot(): キャンバスを用意\ngeom_point(): 点 / geom_line(): 線 / geom_bar(): 棒\nscale_x_continuous(): 連続変数の横軸\nscale_x_discrete(): 離散変数の横軸など\n\n関数を覚える必要は全くない\n\n{ggplot2}の仕組みだけを覚え、後はググりながらコーディング"
+    "text": "{ggplot2}とは\nHadley Wickhamが大学院生の時に開発した可視化パッケージ\n\n\n\n\n\n\n\n\n\n\ngrammer of graphicsの思想をR上で具現化したパッケージ\n図の構成要素それぞれに対応する関数が存在し、一つのレイヤーとして機能\n\nggplot(): キャンバスを用意\ngeom_point(): 点 / geom_line(): 線 / geom_bar(): 棒\nscale_x_continuous(): 連続変数の横軸\nscale_y_discrete(): 離散変数の縦軸など\n\n関数を覚える必要は全くない\n\n{ggplot2}の仕組みだけを覚え、後はググりながらコーディング"
   },
   {
     "objectID": "slide/slide12.html#ggplot2のイメージ-1",
     "href": "slide/slide12.html#ggplot2のイメージ-1",
     "title": "ミクロ政治データ分析実習",
     "section": "{ggplot2}のイメージ (1)",
-    "text": "{ggplot2}のイメージ (1)\nデータの読み込み&ハンドリング\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")\n\ndf <- df %>% # OECD変数をリコーディングし、OECD_Jへ\n   mutate(OECD_J = if_else(OECD == 1, \"加盟国\", \"非加盟国\"))"
+    "text": "{ggplot2}のイメージ (1)\nデータの読み込み&ハンドリング\n\nlibrary(tidyverse)\ndf <- read_csv(\"Data/Micro09.csv\")\n\ndf <- df %>% # OECD変数をリコーディングし、OECD_Jへ\n   mutate(OECD_J = if_else(OECD == 1, \"加盟国\", \"非加盟国\")) %>%\n   select(Country, PPP_per_capita, HDI_2018, FH_Status, OECD_J, Continent)\n\ndf\n\n# A tibble: 186 × 6\n   Country             PPP_per_capita HDI_2018 FH_Status OECD_J   Continent\n   <chr>                        <dbl>    <dbl> <chr>     <chr>    <chr>    \n 1 Afghanistan                  2125.    0.496 NF        非加盟国 Asia     \n 2 Albania                     13781.    0.791 PF        非加盟国 Europe   \n 3 Algeria                     11324.    0.759 NF        非加盟国 Africa   \n 4 Andorra                        NA     0.857 F         非加盟国 Europe   \n 5 Angola                       6649.    0.574 NF        非加盟国 Africa   \n 6 Antigua and Barbuda         21267.    0.776 F         非加盟国 America  \n 7 Argentina                   22938.    0.83  F         非加盟国 America  \n 8 Armenia                     12974.    0.76  PF        非加盟国 Europe   \n 9 Australia                   50001.    0.938 F         加盟国   Oceania  \n10 Austria                     55824.    0.914 F         加盟国   Europe   \n# … with 176 more rows"
   },
   {
     "objectID": "slide/slide12.html#ggplot2のイメージ-2",
@@ -1068,7 +1068,7 @@
     "href": "slide/slide12.html#ggplot2のイメージ-3",
     "title": "ミクロ政治データ分析実習",
     "section": "{ggplot2}のイメージ (3)",
-    "text": "{ggplot2}のイメージ (3)\nキャンバス上に点を出力\n\ndf %>%\n   ggplot() +\n   # 点を出力する。点の横軸上の位置はPPP_per_capita、縦軸上の位置はHDI_2018に対応\n   # OECD_Jの値に応じて色分けする。\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) #<<"
+    "text": "{ggplot2}のイメージ (3)\nキャンバス上に点を出力\n\ndf %>%\n   ggplot() +\n   # 点を出力する。点の横軸上の位置はPPP_per_capita、縦軸上の位置はHDI_2018に対応\n   # OECD_Jの値に応じて色分けする。\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J))"
   },
   {
     "objectID": "slide/slide12.html#ggplot2のイメージ-4",
@@ -1152,7 +1152,7 @@
     "href": "slide/slide12.html#マッピング時の注意",
     "title": "ミクロ政治データ分析実習",
     "section": "マッピング時の注意",
-    "text": "マッピング時の注意\naes()の中で指定するか、外で指定するかで挙動が変わる。\n\naes()の中でcolorを指定する場合、それぞれの点が指定された変数の値に応じて色分けされる、\naes()の外でcolorを指定する場合、全ての点に適用される。\n\n\naes()の中 (コード)aes()の中 (結果)aes()の外 (コード)aes()の外 (結果)\n\n\n\nggplot(df) +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(df) +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018), color = \"red\") +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\")"
+    "text": "マッピング時の注意\naes()の中で指定するか、外で指定するかで挙動が変わる。\n\naes()の中でcolorを指定する場合、それぞれの点が指定された変数の値に応じて色分けされる、\naes()の外でcolorを指定する場合、全ての点に適用される。\n\n\naes()の中 (コード)aes()の中 (結果)aes()の外 (コード)aes()の外 (結果)\n\n\n\ndf %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018, color = OECD_J)) +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndf %>%\n   ggplot() +\n   geom_point(aes(x = PPP_per_capita, y = HDI_2018), color = \"red\") +\n   labs(x = \"一人当たり購買力平価基準GDP (米ドル)\", y = \"人間開発指数 (2018)\")"
   },
   {
     "objectID": "slide/slide12.html#座標系",
@@ -1180,21 +1180,21 @@
     "href": "slide/slide12.html#ファセット-facet",
     "title": "ミクロ政治データ分析実習",
     "section": "ファセット (Facet)",
-    "text": "ファセット (Facet)\nグラフを2つ以上の面で分割\n\n例) FH_Stautsの棒グラフを大陸ごとに出力\n\n\n# データの用意\n# 参考) 「\\n」は図内の改行を意味する。\ndf <- df %>%\n   mutate(FH_Status = case_when(FH_Status == \"F\"  ~ \"自由\",\n                                FH_Status == \"PF\" ~ \"部分的に\\n自由\",\n                                TRUE              ~ \"不自由\"),\n          FH_Status = factor(FH_Status,\n                             levels = c(\"自由\", \"部分的に\\n自由\", \"不自由\"))) %>%\n   drop_na(FH_Status)"
+    "text": "ファセット (Facet)\nグラフを2つ以上の面で分割\n\n例) FH_Stautsの棒グラフを大陸ごとに出力\n\n\n# データの用意\n# 参考) 「\\n」は図内の改行を意味する。\ndf <- df %>%\n   mutate(FH_Status = case_when(FH_Status == \"F\"  ~ \"自由\",\n                                FH_Status == \"PF\" ~ \"部分的に\\n自由\",\n                                TRUE              ~ \"不自由\"),\n          FH_Status = factor(FH_Status,\n                             levels = c(\"自由\", \"部分的に\\n自由\", \"不自由\"))) %>%\n   drop_na(FH_Status)\n\ndf\n\n# A tibble: 186 × 6\n   Country             PPP_per_capita HDI_2018 FH_Status        OECD_J Continent\n   <chr>                        <dbl>    <dbl> <fct>            <chr>  <chr>    \n 1 Afghanistan                  2125.    0.496 \"不自由\"         非加…  Asia     \n 2 Albania                     13781.    0.791 \"部分的に\\n自由\" 非加…  Europe   \n 3 Algeria                     11324.    0.759 \"不自由\"         非加…  Africa   \n 4 Andorra                        NA     0.857 \"自由\"           非加…  Europe   \n 5 Angola                       6649.    0.574 \"不自由\"         非加…  Africa   \n 6 Antigua and Barbuda         21267.    0.776 \"自由\"           非加…  America  \n 7 Argentina                   22938.    0.83  \"自由\"           非加…  America  \n 8 Armenia                     12974.    0.76  \"部分的に\\n自由\" 非加…  Europe   \n 9 Australia                   50001.    0.938 \"自由\"           加盟国 Oceania  \n10 Austria                     55824.    0.914 \"自由\"           加盟国 Europe   \n# … with 176 more rows"
   },
   {
     "objectID": "slide/slide12.html#ファセット分割なし",
     "href": "slide/slide12.html#ファセット分割なし",
     "title": "ミクロ政治データ分析実習",
     "section": "ファセット分割なし",
-    "text": "ファセット分割なし\n同じ大陸内のFH_Stautsの分布を確認するには不向き\n\ndf %>%\n   ggplot() +\n   geom_bar(aes(x = FH_Status, fill = Continent),\n            position = position_dodge2(1/2)) +\n   labs(x = \"フリーダムハウス評価\", y = \"国家数\", fill = \"大陸\") +\n   theme_bw(base_family = \"HiraKakuProN-W3\")"
+    "text": "ファセット分割なし\n同じ大陸内のFH_Stautsの分布を確認するには不向き\n\ndf %>%\n   ggplot() +\n   geom_bar(aes(x = FH_Status, fill = Continent),\n            position = position_dodge2(1/2)) +\n   labs(x = \"フリーダムハウス評価\", y = \"国家数\", fill = \"大陸\") +\n   theme_bw()"
   },
   {
     "objectID": "slide/slide12.html#ファセット分割あり",
     "href": "slide/slide12.html#ファセット分割あり",
     "title": "ミクロ政治データ分析実習",
     "section": "ファセット分割あり",
-    "text": "ファセット分割あり\n\ndf %>%\n   ggplot() +\n   geom_bar(aes(x = FH_Status),\n            position = position_dodge2(1/2)) +\n   labs(x = \"フリーダムハウス評価\", y = \"国家数\") +\n   facet_wrap(~ Continent, ncol = 5) + #<<\n   theme_bw(base_family = \"HiraKakuProN-W3\")"
+    "text": "ファセット分割あり\n\ndf %>%\n   ggplot() +\n   geom_bar(aes(x = FH_Status)) +\n   labs(x = \"フリーダムハウス評価\", y = \"国家数\") +\n   facet_wrap(~ Continent, ncol = 5) +\n   theme_bw()"
   },
   {
     "objectID": "slide/slide12.html#section-2",
@@ -1208,7 +1208,7 @@
     "href": "slide/slide12.html#意識すべきところ",
     "title": "ミクロ政治データ分析実習",
     "section": "意識すべきところ",
-    "text": "意識すべきところ\n\nデータ・インク比\nカラーユニバーサルデザイン\n円グラフは邪悪なる存在\n3次元グラフは更に邪悪なる存在\n3次元円グラフは概念レベルで駆逐すべき存在\n\n参考図書 (日本語)\n1と4は{ggplot2}の教科書としても優れている\n\nHadley Wickham・Garrett Grolemund(著), 黒川利明(訳). 2017. 『Rではじめるデータサイエンス』オライリージャパン.\n藤俊久仁・渡部良一. 2019. 『データビジュアライゼーションの教科書』秀和システム.\n永田ゆかり. 2020. 『データ視覚化のデザイン』SBクリエイティブ.\n【おすすめ】 キーラン・ヒーリー(著), 瓜生真也・江口哲史・三村喬生(訳). 2021.『データ分析のためのデータ可視化入門』講談社."
+    "text": "意識すべきところ\n\nデータ・インク比\nカラーユニバーサルデザイン\n円グラフは邪悪なる存在\n3次元グラフは更に邪悪なる存在\n3次元円グラフは概念レベルで駆逐すべき存在\n\n\n参考図書 (日本語)\n1と4は{ggplot2}の教科書としても優れている\n\nHadley Wickham・Garrett Grolemund(著), 黒川利明(訳). 2017. 『Rではじめるデータサイエンス』オライリージャパン.\n藤俊久仁・渡部良一. 2019. 『データビジュアライゼーションの教科書』秀和システム.\n永田ゆかり. 2020. 『データ視覚化のデザイン』SBクリエイティブ.\n【おすすめ】 キーラン・ヒーリー(著), 瓜生真也・江口哲史・三村喬生(訳). 2021.『データ分析のためのデータ可視化入門』講談社."
   },
   {
     "objectID": "slide/slide12.html#データインク比-data-ink-ratio",
@@ -2041,7 +2041,7 @@
     "href": "slide/slide11.html#列結合に使う関数",
     "title": "ミクロ政治データ分析実習",
     "section": "列結合に使う関数",
-    "text": "列結合に使う関数\n識別子は両データに含まれているが、一致しないケースがある。\n\nどのデータの識別子を優先するか\n\n\nleft_join()\n\n左側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\nright_join()\n\n右側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\ninner_join()\n\n両データの識別子に共通する行のみを残して結合\n\nfull_join()\n\n両データの識別子に存在する行すべて結合\n空欄は欠損値として埋められる"
+    "text": "列結合に使う関数\n識別子は両データに含まれているが、一致しないケースがある。\n\nどのデータの識別子を優先するか\n\n\n\nleft_join()\n\n左側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\nright_join()\n\n右側のデータの識別子を優先する\n空欄は欠損値として埋められる\n\ninner_join()\n\n両データの識別子に共通する行のみを残して結合\n\nfull_join()\n\n両データの識別子に存在する行すべて結合\n空欄は欠損値として埋められる"
   },
   {
     "objectID": "slide/slide11.html#left_joinの仕組み",
@@ -3638,5 +3638,33 @@
     "title": "第14回講義資料",
     "section": "折れ線グラフ",
     "text": "折れ線グラフ\n\n折れ線グラフの作成\n折れ線グラフの必須要素\n折れ線グラフを作成する際に必要な最低限の情報\nデータに日と新規感染者数の列が必要\n\nx: 線の傾きが変化し得る点の横軸上の位置\n\n日\n\ny: 線の傾きが変化し得る点の縦軸上の位置\n\n100万人当たり新規感染者数\n\n散布図とほぼ同じ\nただし、線が2つ以上の場合groupsが必要\n\n点をグループ化しないと、どの点を繋げば良いかが分からないため\n\n\n\n\n\n\n\n\n\n\n\nデータの用意\n授業サポートページから実習用データ（Micro14.csv）をダウンロード\n\n整然データとして加工済み\nDay: 日付（2021年6月）; NewCases: 100万人当りCOVID-19新規感染者数\n\n\nCOVID_df <- read_csv(\"Data/Micro14.csv\")\nCOVID_df\n\n# A tibble: 15 × 3\n   Country   Day NewCases\n   <chr>   <dbl>    <dbl>\n 1 Japan      16    13.6 \n 2 Japan      17    12.2 \n 3 Japan      18    12.9 \n 4 Japan      19    11.9 \n 5 Japan      20    10.4 \n 6 Korea      16    10.5 \n 7 Korea      17     9.89\n 8 Korea      18     9.40\n 9 Korea      19     8.37\n10 Korea      20     6.96\n11 Taiwan     16     7.05\n12 Taiwan     17     7.35\n13 Taiwan     18     7.85\n14 Taiwan     19     5.25\n15 Taiwan     20     4.58\n\n\n線が一本の場合\ngeom_line()幾何オブジェクトを使用\n\nx: 点の傾きが変化し得る点の横軸上の位置\ny: 点の傾きが変化し得る点の縦軸上の位置\n日本の行のみを抽出し、横軸を日、縦軸を100万人当たり新規感染者数とした折れ線グラフを作成\n\n\nCOVID_df %>%\n   filter(Country == \"Japan\") %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases)) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\")\n\n\n\n\n\n\n\n\n線が二本以上の場合\ngroupに線のグループ変数を指定\n\n国別の折れ線グラフの場合、国変数を指定\n\n\nCOVID_df <- COVID_df %>%\n   mutate(Country = case_when(Country == \"Japan\" ~ \"日本\",\n                              Country == \"Korea\" ~ \"韓国\",\n                              TRUE               ~ \"台湾\"),\n          Country = factor(Country, levels = c(\"日本\", \"韓国\", \"台湾\")))\n\nCOVID_df %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases, group = Country)) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\")\n\n\n\n\n\n\n\n\n線が二本以上の場合\ncolorで色分け: 国別の折れ線グラフの場合、国変数を指定\n\n線をやや太め（1.5）にする\n\nsize: 全線に適用させるためにaes()の外側に\n線が細すぎると色が区別しにくい\n\n\n\nCOVID_df %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases, group = Country, color = Country), \n             size = 1.5) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\", \n        color = \"国\")\n\n\n\n\n\n\n\n\n\n\n次元の追加\n多くの折れ線グラフは既に3次元\n\n日（x）、新規感染者数（y）、国（group or color）\nこれ以上次元を増やすならファセット分割で対応するのが賢明\nファセット分割せずに次元を増やすなら…\n\nsize: 線の太さ\nlinetype: 線のタイプ（1 = 実線、2 = 破線、4 = 点線、…）\n\n白黒図の場合、colorでなく、linetype\n\nalpha: 透明度\n\n\n線のタイプ\n\n主に白黒図で使用\n\n\nCOVID_df %>%\n   ggplot() +\n   geom_line(aes(x = Day, y = NewCases, group = Country, \n                 linetype = Country), size = 1) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\", \n        linetype = \"国\") \n\n\n\n\n\n\n\n\n自分で線のタイプを指定したい場合はscale_linetype_manual()レイヤーを追加し、values引数にそれぞれの線のタイプを指定する。\n\nデータ %>%\n  ggplot() +\n  ... +\n  scale_linetype_manual(values = c(\"日本\" = 1, \"韓国\" = 2, \"台湾\" = 4))\n\nlinetypeの見本\n種類が多くなると区別しにくいため、最大3つ程度\n\n1, (2 or 3), (4 or 10）\n\n2と3、または4と10ど同時に使うと、区別することが難しい。\n\n一つ面に登場する線は3〜4本程度まで（色分けも同様）\n\n\n\n\n\n\n\n\n\n\n\n\n折れ線グラフ + 散布図\ngeom_point()とgeom_line()を重ねる\n\n後（先）に書いたレイヤーが前面（背面）に\n傾きの変化が激しくない場合に有効\n点は線より大きめに\n白黒印刷に備え、点の形分けも可能\n\n\nCOVID_df %>%\n   ggplot(aes(x = Day, y = NewCases, color = Country)) +\n   geom_point(aes(shape = Country), size = 3) +\n   geom_line(aes(group = Country), size = 1) +\n   labs(x = \"日 (2021年6月)\", y = \"100万人当たり新規感染者数 (人)\", \n        color = \"国\", shape = \"国\") +\n   theme_bw()"
+  },
+  {
+    "objectID": "slide/slide12.html#円グラフ大好き",
+    "href": "slide/slide12.html#円グラフ大好き",
+    "title": "ミクロ政治データ分析実習",
+    "section": "円グラフ大好き！",
+    "text": "円グラフ大好き！\n最も面積が広いのは?\n\n\n円グラフ\n\n\n\n\n\n\n\n\n\n\n\n\n3次元円グラフ\n\n\n\n\n\n\n\n\n\n\n\n\n棒グラフ"
+  },
+  {
+    "objectID": "slide/slide12.html#円グラフ大好き-1",
+    "href": "slide/slide12.html#円グラフ大好き-1",
+    "title": "ミクロ政治データ分析実習",
+    "section": "円グラフ大好き！",
+    "text": "円グラフ大好き！"
+  },
+  {
+    "objectID": "slide/slide12.html#それでも円グラフが描きたいです",
+    "href": "slide/slide12.html#それでも円グラフが描きたいです",
+    "title": "ミクロ政治データ分析実習",
+    "section": "それでも円グラフが描きたいです…",
+    "text": "それでも円グラフが描きたいです…"
+  },
+  {
+    "objectID": "slide/slide12.html#やめとけって",
+    "href": "slide/slide12.html#やめとけって",
+    "title": "ミクロ政治データ分析実習",
+    "section": "やめとけって",
+    "text": "やめとけって\n棒グラフで十分"
   }
 ]
