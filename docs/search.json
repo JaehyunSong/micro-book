@@ -3175,14 +3175,14 @@
     "href": "intro/project.html",
     "title": "プロジェクト管理",
     "section": "",
-    "text": "手順1: File > New Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: New Directoryをクリックする。\n\n\n\n\n\n\n\n\n\n手順3: New Projectをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: Directory name:にプロジェクト名を入力し、Create Projectをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n注意: プロジェクト名の付け方\n\n\n\nプロジェクト名にはローマ字、数字のみを使おう。スペースもなるべく使わず、空白を入れたい場合はスペースの代わりにアンダースコア（_）を使おう。"
+    "text": "手順1: File > New Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: New Directoryをクリックする。\n\n\n\n\n\n\n\n\n\n手順3: New Projectをクリックする。\n\n\n\n\n\n\n\n\n\n手順4: Directory name:にプロジェクト名を入力し、Create Projectをクリックする。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n注意: プロジェクト名の付け方\n\n\n\n　プロジェクト名にはローマ字、数字のみを使おう。つまり、日本語、中国語、韓国語、全角文字、スペースはなるべく使わないこと。空白を入れたい場合はスペースの代わりにアンダースコア（_）を使おう。"
   },
   {
     "objectID": "intro/project.html#プロジェクトの開き方",
     "href": "intro/project.html#プロジェクトの開き方",
     "title": "プロジェクト管理",
     "section": "2 プロジェクトの開き方",
-    "text": "2 プロジェクトの開き方\n　プロジェクトを作成すれば、自動的に出来たてのプロジェクトが開かれる。しかし、NIIオンライン分析システムから一旦ログアウトし、改めてRStudioを起動する場合、プロジェクトをロードする必要がある。\n手順1: File > Open Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: プロジェクト・フォルダー名をダブルクリックする。\n\n\n\n\n\n\n\n\n\n手順3: .Rprojで終わるファイルをダブルクリックする。\n\n\n\n\n\n\n\n\n\nプロジェクトが正しくロードされている場合、RStudioの右上にプロジェクト名が表示される。"
+    "text": "2 プロジェクトの開き方\n　プロジェクトを作成すれば、自動的に出来たてのプロジェクトが開かれる。しかし、NIIオンライン分析システムから一旦ログアウトし、改めてRStudioを起動する場合、プロジェクトをロードする必要がある。\n手順1: File > Open Project…をクリックする。\n\n\n\n\n\n\n\n\n\n手順2: プロジェクト・フォルダー名をダブルクリックする。\n\n\n\n\n\n\n\n\n\n手順3: .Rprojで終わるファイルをダブルクリックする。\n\n\n\n\n\n\n\n\n\nプロジェクトが正しくロードされている場合、RStudioの右上にプロジェクト名が表示される。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n常にプロジェクト機能を使おう!\n\n\n\n　RStudionの右上のプロジェクト名表示が「Project: (None)」になっていることは、現在プロジェクトを開いていないことを意味する。簡単な計算機として使う目的以外（つまり、授業中の実習や課題）は必ずプロジェクト機能を使おう。"
   },
   {
     "objectID": "intro/rstudio.html",
