@@ -288,6 +288,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
   <li><a href="#ファイルのダウンロード" id="toc-ファイルのダウンロード" class="nav-link" data-scroll-target="#ファイルのダウンロード"> <span class="header-section-number">2.2</span> ファイルのダウンロード</a></li>
   <li><a href="#ファイルの削除" id="toc-ファイルの削除" class="nav-link" data-scroll-target="#ファイルの削除"> <span class="header-section-number">2.3</span> ファイルの削除</a></li>
   </ul></li>
+  <li><a href="#参考-本講義で推奨するファイルフォルダー構造" id="toc-参考-本講義で推奨するファイルフォルダー構造" class="nav-link" data-scroll-target="#参考-本講義で推奨するファイルフォルダー構造"> <span class="header-section-number">3</span> 参考) 本講義で推奨するファイル/フォルダー構造</a></li>
   </ul>
 </nav>
     </div>
@@ -579,9 +580,31 @@ Filesペインはどこ?
 <section id="ファイルの削除" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="ファイルの削除"><span class="header-section-number">2.3</span> ファイルの削除</h3>
 <p>フォルダーの削除と同じ手順で削除できる。</p>
-
-
 </section>
+</section>
+<section id="参考-本講義で推奨するファイルフォルダー構造" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="参考-本講義で推奨するファイルフォルダー構造"><span class="header-section-number">3</span> 参考) 本講義で推奨するファイル/フォルダー構造</h2>
+<ul>
+<li>プロジェクト機能は必ず使用し、RStudioの右上が「Project: (None)」になっている場合、プロジェクトを作成するか、既存のプロジェクトを開く。右上のにプロジェクト名が表示されていればOK</li>
+<li>コードが含まれたファイル（<code>.R</code>、<code>.Rmd</code>、<code>.qmd</code>など）はプロジェクトフォルダーの直に入れる。R Markdownの出力物の基本的にここに保存される。</li>
+<li><code>Data</code>フォルダーを作成し、データファイル（<code>.csv</code>、<code>.xlsx</code>など）は<code>Data</code>フォルダーに入れる。</li>
+<li>グラフを作成し、保存する場合はプロジェクト・フォルダーに<code>Figs</code>フォルダーを作成し、そこに保存する。</li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+ファイルの場所が分からない
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Fileペインではファイルの一覧が確認できる。しかし、これらのファイルがどのフォルダーに入っているかが分からない場合もあろう。この場合、Fileペインの上段バーを確認すること。そこに現在表示されているファイルのパスが表示されている。「Home&gt;プロジェクト名」と表示されている場合、Fileペインに見えるファイルはプロジェクト・フォルダ―直に入っていることを意味する（右上のプロジェクト名とFileペインのプロジェクト名が一致しているか確認すること）。これらのファイルのパスは<code>"ファイル名"</code>のみで良い。上段バーのパスが「Home&gt;プロジェクト名&gt;Data」になっている場合、表示されているファイルはプロジェクト・フォルダー内の<code>Data</code>フォルダーに入っていることを意味する。これらのファイルのパスは<code>"Data/ファイル名"</code>となる。</p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
