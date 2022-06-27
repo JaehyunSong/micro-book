@@ -29,23 +29,15 @@ df <- read_csv("Data/Micro09.csv")
 
 ### 散布図の作成
 
-散布図の必須要素
+散布図は2つの連続変数（=間隔尺度、比率尺度で測定された変数）間の関係を調べる代表的な可視化方法である。散布図を作成する際に必要な**最低限**の情報、つまり散布図の必須要素は何だろうか。例えば、 @fig-scatter-example の例を考えてみよう。この散布図はフリーダムハウスのスコアと人間開発指数の関係を表す散布図である。それぞれの点は一つの観察（国）を意味する。散布図は2次元平面上に複数の点を載せたものであるが、それぞれの点はどのような情報を含んでいるのか。それは、その国のフリーダムハウス・スコアと人間開発指数であり、それぞれ横軸の上の位置と縦軸上の位置から、その情報が読み取れる。
 
-散布図を作成する際に必要な**最低限**の情報
-
-データにフリーダムハウス・スコアと人間開発指数の**列**が必要
-
-* `x`: 点の横軸上の位置
-   * フリーダムハウス・スコア
-* `y`: 点の縦軸上の位置
-   * 人間開発指数
-* 原因と結果の関係（因果関係）が考えられる2変数の場合、**原因を横軸**、**結果を縦軸**にする。
-
-```{r}
+```{r fig-scatter-example}
 #| echo: false
 #| fig-width: 5
 #| fig-height: 5
 #| warning: false
+#| out-width: "500px"
+#| fig-cap: "2次元散布図の例"
 df %>%
    ggplot() +
    geom_point(aes(x = FH_Total, y = HDI_2018)) +
@@ -54,9 +46,7 @@ df %>%
               base_size   = 14)
 ```
 
-データの読み込み
-
-第9回実習用データ（`Micro09.csv`）を使用
+　それでは @fig-scatter-example を作ってみよう。使用するデータは第9回実習用データ（`Micro09.csv`）である。
 
 ```{r}
 #| eval: false
@@ -64,25 +54,25 @@ library(tidyverse)
 df <- read_csv("Data/Micro08.csv")
 ```
 
-散布図の作成 (1)
-
-幾何オブジェクトは`geom_point()`を使用
+　散布図を作成するためには`geom_point()`幾何オブジェクトを使用する。点の横軸上の位置は`x`に、縦軸上の位置は`y`にマッピングする。もし2つの変数の間に原因と結果の関係（因果関係）が考えられる2変数の場合、**原因を横軸**、**結果を縦軸**にするのが通例である。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3
+#| fig-height: 5
 #| warning: false
+#| out-width: "800px"
 df %>%
    ggplot() +
    geom_point(aes(x = FH_Total, y = HDI_2018))
 ```
 
-ラベル修正 / 必要に応じてカスタマイズ
+　しかし、横軸と縦軸のタイトルがFH_Total、HDI_2018になっている。図を作った人から見れば、これが何を意味するのか分かるだろうが、この図を初めて見る人にとっては何を意味するのかが分からないだろう。したがって、ラベル修正を修正し、せっかくなので点の色をおしゃれなロイヤルブルー（royal blue）にしてみよう。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3
+#| fig-height: 5
 #| warning: false
+#| out-width: "800px"
 df %>%
    ggplot() +
    geom_point(aes(x = FH_Total, y = HDI_2018), color = "royalblue") +
@@ -91,29 +81,16 @@ df %>%
 
 ### 次元の追加
 
-散布図における次元の追加
+　通常の散布図、例えば先ほど作成した散布図には、それぞれの点は各国の (1) フリーダムハウス・スコアと (2) 人間開発指数といった2つの情報を持つ。つまり、通常の散布図は2次元である。しかし、散布図は5次元、7次元までにも拡張することができる。たとえば、大陸ごとに色分けをすることによってもう一つの情報を持たせることも可能だし、人口や所得に応じて点の大きさを変えることも可能だろう。また、定番のファセット分割もできる。他にも点の枠線、点の形、透明度などに何かの情報を持たせることも可能である。
 
-* それぞれの点は各国の (1) フリーダムハウス・スコアと (2) 人間開発指数の情報を持つ
-   * = 2次元
-* 更に情報を持たせるためには...
-   * 色分け: `color`
-   * 大きさ: `size`
-   * 形: `shape`
-   * 透明度(非推奨): `alpha` 
-   * ファセット分割
-* 5次元以上のグラフも可能だが、3次元までを推奨
-   * 一つのグラフの情報が多すぎると読みにくくなる
-   * 4次元以上になりそうならファセット分割で対応
-   * 3次元の場合、色分け（`color`）を推奨するが、白黒の図を作成する場合は形（`shape`）を使う。
+　このように高次元の散布図を作ることはできる。ただし、宋は3次元までを推奨する（ファセット分割まで入れる場合、4次元）。なぜなら、一つのグラフの情報が多すぎると読みにくくなるからである。 @fig-5d-scatter は5次元散布図の例である。各点はフリーダムハウス・スコア、人間開発指数、人口（対数変換）、大陸、OECD加盟有無の情報を持つ。
 
-5次元散布図の例
-
-各点はフリーダムハウス・スコア、人間開発指数、人口（対数変換）、大陸、OECD加盟有無の情報を持つ
-
-```{r}
+```{r fig-5d-scatter}
 #| fig-width: 10
 #| fig-height: 4
 #| warning: false
+#| out-width: "1000px"
+#| fig-cap: "5次元散布図の例"
 df %>%
    mutate(OECD = if_else(OECD == 1, "Member", "Non-member")) %>%
    ggplot() +
@@ -121,61 +98,51 @@ df %>%
                   size = Population, shape = OECD), alpha = 0.65) +
    scale_size_continuous(trans = "log10") +
    labs(x = "Freedom House Score", y = "Human Development Index (2018)",
-        size = "Population (log)") +
-   theme_gray(base_family = "HiraKakuProN-W3")
+        size = "Population (log)")
 ```
 
-色分け
+　2次元散布図にもう一つの次元を追加、つまり3次元散布図を作成する場合は色分け（`color`）を推奨するが、白黒の図を作成する場合は形（`shape`）を使う必要がある。まずは色分けから説明しよう。色分けをする場合は、`aes()`の内部に`color = 色分けする変数`を指定する。
 
-`aes()`の内部に`color = 色分けする変数`を指定
+　たとえば、一人上がり購買力平価GDP（`PPP_per_capita`）が2万ドル以上か未満かで点の色分けをするとしよう。まず、`PPP_per_capita`が2万以上なら`"高"`、未満なら`"低"`にリコーディングした`HighIncome`変数を作成する。つづいて、この`HighIncome`変数を利用し、点の色分けを行う（`color = HighIncome`）
 
-* `HighIncome`変数を作成し、`PPP_per_capita`が2万以上なら`"高"`、未満なら`"低"`
-* `HighIncome`値に応じて点の色分けを行う（`color = HighIncome`）
-* 点の大きさは2とする（全体に適用させるため、`aes()`の外側に指定）
-* `labs()`内で凡例タイトルを修正; 凡例を下側へ移動
+　他のカスタマイズとしては作図する側の自由であるが、ここでは点の大きさは2にし（全体に適用させるため、`aes()`の外側に指定）、`labs()`内で凡例タイトルを修正し、凡例を下側へ移動してみる。作成した図は`scatter_plot1`という名のオブジェクトとして格納しておく。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3.5
+#| fig-height: 5
 #| warning: false
+#| out-width: "800px"
 scatter_plot1 <- df %>%
+   # 散布図に使われる変数が一つでも欠損していれば、その行（国）は除外する
    drop_na(FH_Total, HDI_2018, PPP_per_capita) %>%
+   # リコーディング
    mutate(HighIncome = if_else(PPP_per_capita >= 20000, "高", "低")) %>%
    ggplot() +
    geom_point(aes(x = FH_Total, y = HDI_2018, color = HighIncome), 
               size = 2) +
+   # ラベル修正
    labs(x = "フリーダムハウス・スコア", y = "人間開発指数 (2018)",
         color = "一人当たりPPP GDP") +
+   # 凡例を下側に
    theme(legend.position = "bottom")
 
 scatter_plot1
 ```
 
-色のカスタマイズ
-
-`color`にマッピングされている変数（`HighIncome`）が離散変数
-
-* `scale_color_manual()`を使用
-* 引数: `values = c("値1" = "色1", "値2" = "色2", ...)`
+　もし、点の色を変更したい場合は`scale_color_manual()`レイヤーを追加する。引数は`values`であり、`c("値1" = "色1", "値2" = "色2", ...)`のように名前付きcharacter型ベクトルを指定する。たとえば、`HighIncome`の値が`"低"`ならオレンジ色（`"orange"`）、`"高"`ならロイヤルブルー色（`"royalblue"`）にしてみよう。
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 3.5
+#| fig-height: 5
 #| warning: false
+#| out-width: "800px"
 scatter_plot1 +
    scale_color_manual(values = c("低" = "orange", "高" = "royalblue"))
 ```
 
-{ggplot2}で使える色
+　{ggplot2}で使える色は無数にある。`"red"`、`"blue"`、`"royalblue"`のように文字で指定することもでき、全657種類が用意されている[^ggplot2-color]。他にもRGBカラー（HEXコード; 16進数）で指定することもでる。たとえば赤なら`"#FF0000"`、ロイヤルブルーなら`"#4169E1"`と表記する。HEXコードを使う場合、非常に細かく色を指定することができ、全16,777,216種類の色が使える。以下の例はRで使える色の**一部**である。
 
-* 文字列で指定
-   * `"red"`、`"blue"`、`"royalblue"`など（全657種類）
-   * Googleなどで「ggplot2 color」で検索（[例](http://sape.inf.usi.ch/quick-reference/ggplot2/colour)）
-* RGBカラー（HEXコード）で指定
-   * 細かく調整可能（16,777,216種類の色）
-   * 例) `"#FF0000"`: 赤、`"#4169E1"`: ロイヤルブルー
-
-色の見本 (一部)
+[^ggplot2-color]: Googleなどで「ggplot2 color」で検索してみれば、たくさんの資料が見られる（[例](http://sape.inf.usi.ch/quick-reference/ggplot2/colour)）。
 
 ```{r}
 #| echo: false
@@ -195,13 +162,44 @@ data.frame(c=colors()) %>%
    geom_text(aes(x=x+0.5, y=y+0.5, label=c), colour="black", hjust=0.5, vjust=1, size=4)
 ```
 
-`shape`の見本
+　Rで使用可能な色のリストはコンソール上で`colors()`を打ち込むと確認できる。
 
-`shape`で指定（デフォルトは`shape = 19`）
+```{r}
+colors()
+```
 
-* 黒の部分は`color`、グレーの部分は`fill`（または`bg`）で調整
-   * 21と22の場合、枠線は`color`、内側の色塗りは`fill`
-* 0〜14の場合、中身が透明
+　図を白黒で印刷する場合、色によっては区別がつかない可能性がある。この場合、点の形を修正すれば、白黒でも識別できるだろう。点の形は`aes()`内に`shape`で指定することができる。たとえば、`scatter_plot1`と同じ図を、今回は色分けせず形分けをしてみよう。
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| warning: false
+#| out-width: "800px"
+scatter_plot2 <- df %>%
+   drop_na(FH_Total, HDI_2018, PPP_per_capita) %>%
+   mutate(HighIncome = if_else(PPP_per_capita >= 20000, "高", "低")) %>%
+   ggplot() +
+   geom_point(aes(x = FH_Total, y = HDI_2018, shape = HighIncome), 
+              size = 2) +
+   labs(x = "フリーダムハウス・スコア", y = "人間開発指数 (2018)",
+        color = "一人当たりPPP GDP") +
+   theme(legend.position = "bottom")
+
+scatter_plot2
+```
+
+　点の形を自分で調整したい場合は`scale_shape_manual()`を使用する。使い方は`scale_color_manual()`と同じであるが、色は`"red"`や`"blue"`など、人間が分かる名前になっているに対し、形は1、2、3などの数値を使う。たとえば、4はバツ記号、1は中身が空っぽの丸である。
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| warning: false
+#| out-width: "800px"
+scatter_plot2 +
+   scale_shape_manual(values = c("低" = 4, "高" = 1))
+```
+
+　Rで使えるデフォルトの`shape`は全23種類があり（0から22まで）、デフォルトは19である。0〜14の場合、中身が透明であり、枠線のみの形である。枠線の色を変えたい場合は`color`引数で調整できる。また15から20までは中身が埋まっており、枠線のない形である。この中身の色も`color`で調整可能である。注意が必要なのは21番と22番であり、21と22の場合、枠線は`color`、内側の色塗りは`fill`で調整する必要がある。
 
 ```{r}
 #| echo: false
