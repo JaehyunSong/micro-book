@@ -42,8 +42,7 @@ df %>%
    ggplot() +
    geom_point(aes(x = FH_Total, y = HDI_2018)) +
    labs(x = "フリーダムハウス・スコア", y = "人間開発指数 (2018)") +
-   theme_gray(base_family = "HiraKakuProN-W3",
-              base_size   = 14)
+   theme_gray(base_size   = 14)
 ```
 
 　それでは @fig-scatter-example を作ってみよう。使用するデータは第9回実習用データ（`Micro09.csv`）である。
