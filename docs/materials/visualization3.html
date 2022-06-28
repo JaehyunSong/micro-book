@@ -126,6 +126,7 @@ gtag('js', new Date());
 gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -817,41 +818,33 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </section>
 <section id="折れ線グラフ" class="level2">
 <h2 class="anchored" data-anchor-id="折れ線グラフ">折れ線グラフ</h2>
+<p>　折れ線グラフはある連続変数が経時的に変化する具合を示す際に使われる最も代表的なグラフである。たとえば、株価の変動を示す場合、横軸は日付、縦軸は株価となるだろう。この日付は順序変数であり、株価は連続変数である。この意味で、折れ線グラフは順序変数<span class="math inline">\(\times\)</span>連続変数間の関係を調べるときにも使用可能である。</p>
 <section id="折れ線グラフの作成" class="level3">
 <h3 class="anchored" data-anchor-id="折れ線グラフの作成">折れ線グラフの作成</h3>
-<p>折れ線グラフの必須要素</p>
-<p>折れ線グラフを作成する際に必要な<strong>最低限</strong>の情報</p>
-<p>データに日と新規感染者数の<strong>列</strong>が必要</p>
-<ul>
-<li><code>x</code>: 線の傾きが変化し得る点の横軸上の位置
-<ul>
-<li>日</li>
-</ul></li>
-<li><code>y</code>: 線の傾きが変化し得る点の縦軸上の位置
-<ul>
-<li>100万人当たり新規感染者数</li>
-</ul></li>
-<li>散布図とほぼ同じ</li>
-<li>ただし、線が2つ以上の場合<code>groups</code>が必要
-<ul>
-<li>点をグループ化しないと、どの点を繋げば良いかが分からないため</li>
-</ul></li>
-</ul>
+<p>　以下の <strong>?@fig-line-example</strong> を見てみよう。この折れ線グラフにおける「線」にはどのような情報があるだろうか。実はこの線自体には大きな意味を持たない。大事なのはこの線の傾きが変化し得る「点」である。</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-line-example1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="visualization3_files/figure-html/fig-line-example1-1.png" class="img-fluid figure-img" width="500"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">図 3: 折れ線グラフの例 (1)</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>データの用意</p>
-<p>授業サポートページから実習用データ（<code>Micro14.csv</code>）をダウンロード</p>
-<ul>
-<li>整然データとして加工済み</li>
-<li><code>Day</code>: 日付（2021年6月）; <code>NewCases</code>: 100万人当りCOVID-19新規感染者数</li>
-</ul>
+<p>つまり、折れ線グラフはとは <a href="#fig-line-example2">図&nbsp;4</a> のように各線の傾きが変わり得る点を線で繋いだだけである。座標平面上に点を載せるという意味で、折れ線グラフのマッピング要素は散布図のそれと大きく変わらない。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-line-example2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="visualization3_files/figure-html/fig-line-example2-1.png" class="img-fluid figure-img" width="500"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">図 4: 折れ線グラフの例 (2)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>　つまり、折れ線グラフの必須要素とは線の傾きが変化し得る点の<strong>横</strong>軸上の位置（<code>x</code>）と線の傾きが変化し得る点の<strong>縦</strong>軸上の位置（<code>y</code>）であり、線はその点を繋いだだけである。 <a href="#fig-line-example1">図&nbsp;3</a> の例だと、横軸は日付、縦軸は100万人当たり新規感染者数である。ただし、一つ注意が必要であり、それは線が2本以上ある場合だ。線が2本以上存在する折れ線グラフの場合、どの点とどの点を繋げばいいかを指定する必要がある。言い換えれば、それぞれの点がどのグループの点なのかを明確にしておく必要がある（<code>groups</code>）。</p>
+<p>　それでは、折れ線グラフを作ってみよう。最初に折れ線グラフの作成にひつ表なデータを読み込む。データは授業サポートページから実習用データ（<code>Micro14.csv</code>）をダウンロード可能であり、整然データとして加工済みのデータである。このデータは2つの変数で構成されており、<code>Country</code>は国名、<code>Day</code>は日付（2021年6月）、<code>NewCases</code>は100万人当りCOVID-19新規感染者数を意味する。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro14.csv"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>COVID_df</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -876,13 +869,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 15 Taiwan     20     4.58</code></pre>
 </div>
 </div>
-<p>線が一本の場合</p>
-<p><code>geom_line()</code>幾何オブジェクトを使用</p>
-<ul>
-<li><code>x</code>: 点の傾きが変化し得る点の横軸上の位置</li>
-<li><code>y</code>: 点の傾きが変化し得る点の縦軸上の位置</li>
-<li>日本の行のみを抽出し、横軸を日、縦軸を100万人当たり新規感染者数とした折れ線グラフを作成</li>
-</ul>
+<p>　まず、線が一本の場合の折れ線グラフから始めよう。今のデータには複数の国があるので<code>filter(Country == "Japan")</code>で日本のみを抽出し、<code>ggplot()</code>関数に渡す。使用する幾何オブジェクトは<code>geom_line()</code>、マッピングは散布図と同様、<code>x</code>と<code>y</code>に対して行う。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">%&gt;%</span></span>
@@ -892,7 +879,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
@@ -916,7 +903,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
@@ -940,7 +927,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="700"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="700"></p>
 </figure>
 </div>
 </div>
@@ -976,7 +963,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1001,7 +988,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1027,7 +1014,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1059,7 +1046,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
@@ -1080,7 +1067,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
@@ -1102,7 +1089,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1122,7 +1109,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1137,7 +1124,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1156,7 +1143,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1173,7 +1160,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1190,7 +1177,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualization3_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="2400"></p>
+<p><img src="visualization3_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="2400"></p>
 </figure>
 </div>
 </div>

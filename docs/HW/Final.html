@@ -293,19 +293,13 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 
 </header>
 
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-注意!
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>以下の内容は現在の予定であり、7月14日の内容で確定する。</p>
-</div>
-</div>
+<!---
+:::{.callout-important}
+### 注意!
+
+以下の内容は現在の予定であり、7月14日の内容で確定する。
+:::
+--->
 <section id="概要" class="level2">
 <h2 class="anchored" data-anchor-id="概要">概要</h2>
 <ul>
@@ -314,7 +308,10 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <li>宋から開始の合図があれば開始</li>
 </ul></li>
 <li><strong>場所:</strong> TC302教室（<strong>指定席</strong>; 座席表は授業日までにLMSで公開する）</li>
-<li><strong>持参物:</strong> 学生証のみ。PCは大学のPCを使用（持ち込みPC<strong>不可</strong>）</li>
+<li><strong>持参物:</strong> 学生証のみ。PCは大学のPCを使用（持ち込みPC<strong>不可</strong>）
+<ul>
+<li>学生証は宋/TAがいつでも確認できるように机の上に置くこと</li>
+</ul></li>
 <li><strong>持ち込み:</strong> 可（インターネット/書籍など使用可能）
 <ul>
 <li>携帯は<strong>使用禁止</strong>（不正行為とみなす）</li>
@@ -355,7 +352,10 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </ul></li>
 <li>時間内に完成できなかった場合
 <ul>
-<li>4限中に途中経過の提出物（<code>.html</code>ファイル）をLMSに提出</li>
+<li>4限中に途中経過の提出物（<code>.html</code>ファイル）をLMSに提出
+<ul>
+<li><strong>4限中に7問以上に回答する</strong>こと</li>
+</ul></li>
 <li>持ち帰り後、そのまま<strong>引き続き</strong>、残りの問題に取り組む。</li>
 <li><strong>再</strong>提出窓口に提出
 <ul>
@@ -364,8 +364,13 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </ul></li>
 <li>持ち帰り解答の扱いについて
 <ul>
-<li>4限中に提出した問題に対して採点を行う。</li>
-<li>持ち帰り解答は5割減点。</li>
+<li>（1）4限中に提出した問題に対して採点を行う。</li>
+<li>（2）持ち帰り解答は5割減点。
+<ul>
+<li>4限中に提出した回答<strong>以降</strong>の回答のみが対象</li>
+<li>つまり、4限中に提出した回答を修正しても、これらは反映されない。</li>
+</ul></li>
+<li>期末テストの点数は(1) + (2)とする。</li>
 </ul></li>
 </ul>
 </section>
@@ -386,6 +391,28 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
+</section>
+<section id="注意事項" class="level2">
+<h2 class="anchored" data-anchor-id="注意事項">注意事項</h2>
+<ul>
+<li><strong>指定された座席</strong>でテストを受ける。</li>
+<li><strong>遅刻</strong>した場合でも、受験時間の延長はない。余裕を持って大学に来ること。</li>
+<li>持ち帰りの場合でも、<strong>4限中に7問以上回答</strong>すること。7問未満の回答を提出した場合は不可とする。
+<ul>
+<li>ただし、7問全問正解である必要はない。</li>
+</ul></li>
+<li>持ち帰りの場合、4限中に提出した回答を修正することはできるが、採点には反映されない。<strong>持ち帰り分は、4限中に提出した回答以降の回答のみが採点対象</strong>となる。
+<ul>
+<li><strong>必要に応じて既に提出した回答の修正は必要</strong>となる。たとえば、問題8までの回答をしたとする。ここで問題7の回答が不正解の場合、問題8以降はコードが正しくても結果が異なる可能性がある。この場合、持ち帰って問題7を修正する必要があろう。ただし、採点（持ち帰り分）の対象は問題9からである。</li>
+</ul></li>
+<li>持ち帰りの場合、<strong>再提出の期限は授業日当日の23時59分</strong></li>
+<li>宋/TAは問題そのものに関する質問（問題の誤り、NIIシステムの不具合など）以外、一切受け付けない
+<ul>
+<li><strong>エラーメッセージへの対処もテストの一部</strong></li>
+<li>全員が同じ環境のNIIオンライン分析システムを使用しているため、受験者<strong>全員</strong>に共通する不具合以外は対応しない。つまり、他の人にはエラーが発生せず、自分だけエラーが出たということはシステムの不具合でなく、自分のコードが間違っていることを意味する。</li>
+</ul></li>
+<li>提出物はKnitした<code>.html</code>ファイルである。<code>.html</code>ファイルを正しくない方法（マウス右クリックでダウンロードするなど）でダウンロードした場合、コードと結果が含まれていない白紙のページとなる。提出する前に必ずファイルを開いてみて確認すること。<strong>間違ったファイルを提出しても再提出は認めない</strong>。</li>
+</ul>
 
 
 </section>
