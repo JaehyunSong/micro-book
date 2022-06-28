@@ -741,21 +741,21 @@
 <pre><code># A tibble: 15 × 3
    Country   Day NewCases
    &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;
- 1 Japan      16    13.6 
- 2 Japan      17    12.2 
- 3 Japan      18    12.9 
- 4 Japan      19    11.9 
- 5 Japan      20    10.4 
- 6 Korea      16    10.5 
- 7 Korea      17     9.89
- 8 Korea      18     9.40
- 9 Korea      19     8.37
-10 Korea      20     6.96
-11 Taiwan     16     7.05
-12 Taiwan     17     7.35
-13 Taiwan     18     7.85
-14 Taiwan     19     5.25
-15 Taiwan     20     4.58</code></pre>
+ 1 Japan      23    132. 
+ 2 Japan      24    127. 
+ 3 Japan      25    132. 
+ 4 Japan      26    113. 
+ 5 Japan      27     76.0
+ 6 Korea      23    140. 
+ 7 Korea      24    132. 
+ 8 Korea      25    122. 
+ 9 Korea      26     66.8
+10 Korea      27    192. 
+11 Taiwan     23   2022. 
+12 Taiwan     24   1913. 
+13 Taiwan     25   1689. 
+14 Taiwan     26   1658. 
+15 Taiwan     27   1196. </code></pre>
 </div>
 </div>
 <!--- --->
@@ -881,7 +881,7 @@
 <li>ファセット分割せずに次元を増やすなら…
 <ul>
 <li><code>size</code>: 線の太さ</li>
-<li><code>linetype</code>: 線のタイプ（1 = 実線、2 = 破線、4 = 点線、…）
+<li><code>linetype</code>: 線のタイプ（1 = 実線、2 = 破線、3 = 点線、…）
 <ul>
 <li>白黒図の場合、<code>color</code>でなく、<code>linetype</code></li>
 </ul></li>
@@ -909,10 +909,10 @@
 </div>
 <p>自分で線のタイプを指定したい場合は</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>データ <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>データ <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>  ... <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"日本"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"韓国"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"台湾"</span> <span class="ot">=</span> <span class="dv">4</span>)) <span class="co">#&lt;&lt;</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"日本"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"韓国"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"台湾"</span> <span class="ot">=</span> <span class="dv">3</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-6-2">
@@ -934,7 +934,7 @@
 <h2><code>linetype</code>の見本</h2>
 <p>種類が多くなると区別しにくいため、最大3つ程度</p>
 <ul>
-<li>1, (2 or 3), (4 or 10）</li>
+<li>実線（1）、破線（2）、点線（3）</li>
 <li>一つ面に登場する線は3〜4本程度まで（色分けも同様）</li>
 </ul>
 <div class="cell" data-layout-align="center">

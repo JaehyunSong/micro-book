@@ -60,7 +60,6 @@ max(MathScore, na.rm = TRUE) - min(MathScore, na.rm = TRUE)
 
 ```{r}
 #| message: false
-#| echo: false
 library(tidyverse)
 df <- read_csv("Data/Micro09.csv")
 ```

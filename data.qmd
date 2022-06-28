@@ -17,7 +17,7 @@ toc-title: "目次"
 |:---:|:---|:---|
 |1|<a href = "materials/Data/Pref_Vote.csv" download>`Pref_Vote.csv`</a>|第3回講義で使用|
 |2|<a href = "materials/Data/BuildingData.csv" download>`BuildingData.csv`</a>|第8回講義で使用|
-|3|<a href = "materials/Data/Micro09.csv" download>`Micro09.csv`</a>|第9・10回講義で使用|
+|3|<a href = "materials/Data/Micro09.csv" download>`Micro09.csv`</a>|第9・10・13・14回講義で使用|
 |4|<a href = "materials/Data/Micro11.csv" download>`Micro11.csv`</a>|第11回講義で使用|
 |5|<a href = "materials/Data/Micro14.csv" download>`Micro14.csv`</a>|第14回講義で使用|
 
