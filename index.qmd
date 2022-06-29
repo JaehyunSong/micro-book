@@ -20,7 +20,7 @@ title: ""
 * 最終更新日: `r format(Sys.Date(), "%Y年%m月%d日")`
 * 開発環境
    * macOS 12.4 "Monterey"
-   * Firefox 101.0.1
+   * Firefox 102.0.0
    * `r version$version.string`
    * RStudio 2022.02.3+492 "Prairie Trillium"
    * Quarto `r quarto::quarto_inspect()$quarto$version`
