@@ -795,6 +795,27 @@
 </div>
 <!--- --->
 </section>
+<section id="よく出るメッセージ" class="slide level2">
+<h2>よく出るメッセージ</h2>
+<p>折れ線グラフを作成する際、以下のようなエラーメッセージが表示され、グラフが出力されない場合がある。</p>
+<ul>
+<li>原因は不明</li>
+</ul>
+<pre><code>geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?</code></pre>
+<p><br></p>
+<p><strong>【解決策】</strong> このようなメッセージが出た場合は、<code>aes()</code>の中に<code>group = 1</code>を追加すると解決できる。</p>
+<ul>
+<li>普段から付けておく習慣を付けた方が良い。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>   <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- --->
+</section>
 <section id="線が二本以上の場合" class="slide level2">
 <h2>線が二本以上の場合</h2>
 <p><code>group</code>に線のグループ変数を指定</p>
@@ -806,16 +827,16 @@
 <div class="tab-content">
 <div id="tabset-4-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>COVID_df <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>   <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">case_when</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span> <span class="sc">~</span> <span class="st">"日本"</span>,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>                              Country <span class="sc">==</span> <span class="st">"Korea"</span> <span class="sc">~</span> <span class="st">"韓国"</span>,</span>
-<span id="cb11-4"><a href="#cb11-4"></a>                              <span class="cn">TRUE</span>               <span class="sc">~</span> <span class="st">"台湾"</span>),</span>
-<span id="cb11-5"><a href="#cb11-5"></a>          <span class="at">Country =</span> <span class="fu">factor</span>(Country, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"日本"</span>, <span class="st">"韓国"</span>, <span class="st">"台湾"</span>)))</span>
-<span id="cb11-6"><a href="#cb11-6"></a></span>
-<span id="cb11-7"><a href="#cb11-7"></a>COVID_df <span class="sc">%&gt;%</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country)) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>COVID_df <span class="ot">&lt;-</span> COVID_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>   <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">case_when</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span> <span class="sc">~</span> <span class="st">"日本"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>                              Country <span class="sc">==</span> <span class="st">"Korea"</span> <span class="sc">~</span> <span class="st">"韓国"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>                              <span class="cn">TRUE</span>               <span class="sc">~</span> <span class="st">"台湾"</span>),</span>
+<span id="cb13-5"><a href="#cb13-5"></a>          <span class="at">Country =</span> <span class="fu">factor</span>(Country, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"日本"</span>, <span class="st">"韓国"</span>, <span class="st">"台湾"</span>)))</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>COVID_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-4-2">
@@ -824,7 +845,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-18-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-19-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -849,12 +870,12 @@
 <div class="tab-content">
 <div id="tabset-5-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, </span>
-<span id="cb12-4"><a href="#cb12-4"></a>                 <span class="at">color =</span> Country), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
-<span id="cb12-6"><a href="#cb12-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, </span>
+<span id="cb14-4"><a href="#cb14-4"></a>                 <span class="at">color =</span> Country), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
+<span id="cb14-6"><a href="#cb14-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-5-2">
@@ -862,7 +883,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-20-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-21-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -900,19 +921,19 @@
 <div class="tab-content">
 <div id="tabset-6-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, <span class="at">linetype =</span> Country),</span>
-<span id="cb13-4"><a href="#cb13-4"></a>             <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
-<span id="cb13-6"><a href="#cb13-6"></a>        <span class="at">linetype =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, <span class="at">linetype =</span> Country),</span>
+<span id="cb15-4"><a href="#cb15-4"></a>             <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
+<span id="cb15-6"><a href="#cb15-6"></a>        <span class="at">linetype =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>自分で線のタイプを指定したい場合は</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>データ <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  ... <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"日本"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"韓国"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"台湾"</span> <span class="ot">=</span> <span class="dv">3</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>データ <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  ... <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"日本"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"韓国"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"台湾"</span> <span class="ot">=</span> <span class="dv">3</span>))</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-6-2">
@@ -920,7 +941,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-23-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-24-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -941,7 +962,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-24-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-25-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -958,13 +979,13 @@
 <li>白黒印刷に備え、点の形分けも可能</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> Country), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> Country), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
-<span id="cb15-6"><a href="#cb15-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>, <span class="at">shape =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>COVID_df <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> Country), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> Country), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
+<span id="cb17-6"><a href="#cb17-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>, <span class="at">shape =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--- --->
 </section>
@@ -974,7 +995,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-26-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-27-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1014,7 +1035,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-27-1.png" width="1200"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-28-1.png" width="1200"></p>
 </figure>
 </div>
 </div>
@@ -1035,11 +1056,11 @@
 <div class="columns">
 <div class="column" style="width:52%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018)) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:1%;">
 
@@ -1048,7 +1069,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-29-1.png" width="1500"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-30-1.png" width="1500"></p>
 </figure>
 </div>
 </div>
@@ -1069,11 +1090,11 @@
 <div class="tab-content">
 <div id="tabset-7-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent)) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-7-2">
@@ -1081,7 +1102,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-31-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-32-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1103,11 +1124,11 @@
 <div class="tab-content">
 <div id="tabset-8-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent), <span class="at">fill =</span> <span class="st">"cornsilk"</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent), <span class="at">fill =</span> <span class="st">"cornsilk"</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-8-2">
@@ -1115,7 +1136,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-33-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-34-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1123,12 +1144,12 @@
 </div>
 <div id="tabset-8-3">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent, <span class="at">fill =</span> Continent)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="co"># 凡例の削除</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent, <span class="at">fill =</span> Continent)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="co"># 凡例の削除</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-8-4">
@@ -1136,7 +1157,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-35-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-36-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1156,12 +1177,12 @@
 <div class="tab-content">
 <div id="tabset-9-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> HDI_2018, <span class="at">x =</span> Continent), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"大陸"</span>, <span class="at">y =</span> <span class="st">"人間開発指数 (2018)"</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-9-2">
@@ -1169,7 +1190,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-37-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-38-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
@@ -1187,12 +1208,12 @@
 <div class="tab-content">
 <div id="tabset-10-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">y =</span> Continent)) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"人間開発指数 (2018)"</span>, <span class="at">y =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> HDI_2018, <span class="at">y =</span> Continent)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"人間開発指数 (2018)"</span>, <span class="at">y =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>   <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-10-2">
@@ -1200,7 +1221,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-39-1.png" width="2400"></p>
+<p><img data-src="slide14_files/figure-revealjs/unnamed-chunk-40-1.png" width="2400"></p>
 </figure>
 </div>
 </div>
