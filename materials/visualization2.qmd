@@ -573,3 +573,18 @@ df %>%
    labs(x = "Human Development Index (2018)", y = "Number of Countries",
         fill = "")
 ```
+
+　どうしても3つ以上のグループの分布を一つのファセットでオーバーラップしたい場合は、`geom_histogram()`の代わりに`geom_density()`の使用を推奨する。これは密度曲線を出力する幾何オブジェクトであり、マッピングはヒストグラムと同じである。ただし、ヒストグラムではないため`binwidth`や`bins`引数は不要であり、代わりに`adjust`引数を使う。デフォルトは1であるが、小さいほどギザギザの密度曲線が、大きいほど滑らかな密度曲線になる。また、縦軸が数（count）でなく、密度（density）になるため、解釈の際は注意が必要だ。
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+df %>%
+   ggplot() +
+   geom_density(aes(x = HDI_2018, fill = Continent), 
+                alpha = 0.5, adjust = 0.8) +
+   labs(x = "Human Development Index (2018)", y = "Density",
+        fill = "")
+```

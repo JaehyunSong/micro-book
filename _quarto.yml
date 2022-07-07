@@ -53,7 +53,7 @@ website:
         - materials/basic.qmd             # 第 3回
         - materials/programming.qmd       # 第 4回
         - materials/rmarkdown.qmd         # 第 5回
-        - materials/data_collection.qmd  # 第 5回
+        - materials/data_collection.qmd   # 第 5回
         - materials/datatype.qmd          # 第 7回
         - materials/datastructure.qmd     # 第 8回
         - materials/handling1.qmd         # 第 9回
