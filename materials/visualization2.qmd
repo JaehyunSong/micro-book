@@ -20,7 +20,8 @@ library(tidyverse)
 knitr::opts_chunk$set(dev       = "ragg_png",
                       dpi       = 300,
                       fig.align = "center",
-                      echo      = TRUE)
+                      echo      = TRUE,
+                      warning   = FALSE)
 df <- read_csv("Data/Micro09.csv")
 ```
 
@@ -313,7 +314,8 @@ bar_plot2
 bar_plot3 <- bar_plot2 +
    labs(x = "Number of Countries", y = "Poltiy Type") + # ラベル修正
    theme_minimal() + # テーマを変えてみよう
-   theme(axis.text.x = element_text(angle = 35, vjust = 1, hjust = 1)) # 35度回転
+   theme(axis.text.x        = element_text(angle = 35, vjust = 1, hjust = 1), # 35度回転
+         panel.grid.major.x = element_blank()) # 横軸のグリッドを削除するおまじない
 
 bar_plot3
 ```
@@ -328,8 +330,9 @@ bar_plot4 <- df4 %>%
   geom_bar(aes(x = N, y = Polity_Type), stat = "identity") +
   labs(x = "Number of Countries", y = "Poltiy Type") +
   facet_wrap(~ Continent, ncol = 5) + # 5列のファセット分割
-  theme_minimal(base_size = 12)       # フォントサイズの調整も可能
-
+  theme_minimal(base_size = 12) +     # フォントサイズの調整も可能
+  theme(panel.grid.major.y = element_blank()) # 縦軸のグリッドを削除するおまじない
+   
 bar_plot4
 ```
 
@@ -383,7 +386,6 @@ ggsave(filename = "Figs/Figure1.png", # 保存先とファイル名
 #| echo: false
 #| fig-width: 8
 #| fig-height: 3.5
-#| warning: false
 #| message: false
 df %>%
    ggplot() +
@@ -397,7 +399,6 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 3.5
-#| warning: false
 #| message: false
 df %>%
   ggplot() +
@@ -418,7 +419,6 @@ df %>%
 #| echo: false
 #| fig-width: 4
 #| fig-height: 4
-#| warning: false
 df %>%
   ggplot() +
   geom_histogram(aes(x = HDI_2018), bins = 50, color = "white")
@@ -432,14 +432,15 @@ df %>%
   geom_histogram(aes(x = HDI_2018), bins = 5, color = "white")
 ```
 
-　この3つの図の中で、良い図はなんだろうか。まず、 @fig-hist-comparison-3 はあまりにも多くの情報が失われている。たとえば、0.5周辺の峰という情報がない。一方、 @fig-hist-comparison-2 は情報が多すぎる。その意味で @fig-hist-comparison-2 が適切だろう。しかし、これは作図する側の人が決めるものであり、いくつかの図を出して比較してみるのが良いだろう。以上の3つの図は、ヒストグラムの棒の数を調整したものである。棒の数は`geom_histogram()`内、`aes()`の外に`bins`引数を指定することで変更することができる。たとえば、 @fig-hist-comparison-2 は棒が10本のヒストグラムである[^bins]。これを再現するためには`bins = 10`を指定すれば良い。ちなみに、デフォルトは`bins = 30`となっている。
+　この3つの図の中で、良い図はなんだろうか。まず、 @fig-hist-comparison-3 はあまりにも多くの情報が失われている。たとえば、0.5周辺の峰という情報がない。一方、 @fig-hist-comparison-2 は情報が多すぎる。その意味で @fig-hist-comparison-2 が適切だろう。しかし、これは作図する側の人が決めるものであり、いくつかの図を出して比較してみるのが良いだろう。以上の3つの図は、ヒストグラムの棒の数を調整したものである。棒の数は`geom_histogram()`内、`aes()`の外に`bins`引数を指定することで変更することができる。たとえば、 @fig-hist-comparison-2 は棒が10本のヒストグラムである[^bins]。これを再現するためには`bins = 10`を指定すれば良い[^bins2]。ちなみに、デフォルトは`bins = 30`となっている。
 
 [^bins]: ちなみに、 @fig-hist-comparison-1 は50本、 @fig-hist-comparison-3 は5本である。
+
+[^bins2]: 厳密に言えば、棒が10本ではなく、区間が10個になることを意味する。分布を確認する変数を最小値と最大値までの範囲を10個の区間に分割し、それぞれの区間に属するケース数が表示される。したがって、特定の区間にケースがない場合は、棒の数は10本未満になる可能性がある。むろん、10本より多くなることはない。
 
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
 df %>%
   ggplot() +
@@ -451,7 +452,6 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
 df %>%
   ggplot() +
@@ -463,7 +463,6 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
 hist_plot1 <- df %>%
   ggplot() +
@@ -480,9 +479,7 @@ hist_plot1
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
-#| code-line-numbers: "2,3"
 hist_plot2 <- hist_plot1 +
    scale_x_continuous(breaks = seq(0.4, 1.0, by = 0.1),
                       labels = seq(0.4, 1.0, by = 0.1))
@@ -499,9 +496,7 @@ hist_plot2
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
-#| code-line-numbers: "2"
 hist_plot2 +
    facet_wrap(~Continent, nrow = 2)
 ```
@@ -511,9 +506,7 @@ hist_plot2 +
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
-#| code-line-numbers: "4,5"
 df %>%
    mutate(OECD = if_else(OECD == 1, "OECD Members", "Others")) %>%
    ggplot() +
@@ -528,9 +521,7 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
-#| code-line-numbers: "4,5"
 df %>%
    mutate(OECD = if_else(OECD == 1, "OECD Members", "Others")) %>%
    ggplot() +
@@ -545,9 +536,7 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
-#| code-line-numbers: "4,5"
 df %>%
    ggplot() +
    geom_histogram(aes(x = HDI_2018, fill = Continent), position = "identity",
@@ -563,9 +552,7 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
-#| code-line-numbers: "4,5"
 df %>%
    ggplot() +
    geom_histogram(aes(x = HDI_2018, fill = Continent), 
@@ -579,7 +566,6 @@ df %>%
 ```{r}
 #| fig-width: 8
 #| fig-height: 4
-#| warning: false
 #| message: false
 df %>%
    ggplot() +
