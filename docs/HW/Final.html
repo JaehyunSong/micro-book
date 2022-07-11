@@ -327,20 +327,53 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="実施手順">実施手順</h2>
 <p>本講義の課題と同じ形式</p>
 <ul>
-<li><strong>Step1:</strong> LMSから課題用ファイル一式をダウンロードする。</li>
-<li><strong>Step2:</strong> NIIオンライン分析システムを起動し、課題用のプロジェクトを作成する。</li>
+<li><strong>Step1:</strong> LMSから期末テスト用ファイル一式をダウンロードする。
+<ul>
+<li>期末テスト用ファイル（<code>Micro_Final.Rmd</code>）</li>
+<li>期末テスト用データ（<code>Micro_Final.csv</code>）</li>
+<li>サンプルファイル（<code>MicroAnalysis_Final.html</code>）</li>
+</ul></li>
+<li><strong>Step2:</strong> NIIオンライン分析システムを起動し、期末テスト用のプロジェクトを作成する。</li>
 <li><strong>Step3:</strong> プロジェクト・フォルダー内に<code>Data</code>フォルダーを作成する。</li>
-<li><strong>Step4:</strong> プロジェクト・フォルダーに課題用ファイル（<code>Micro_Final.Rmd</code>）をアップロードする。</li>
-<li><strong>Step5:</strong> <code>Data</code>フォルダーに課題用データ（<code>Micro_Final.csv</code>）をアップロードする。</li>
-<li><strong>Step6:</strong> 課題用ファイル（<code>Micro_Final.Rmd</code>）を開き、一旦、Knitしてみる。</li>
-<li><strong>Step7:</strong> サンプルファイル（<code>Final_Sample.html</code>）を確認する。</li>
-<li><strong>Step8:</strong> サンプルファイルと同じ結果が得られるように課題用ファイルを修正する。
+<li><strong>Step4:</strong> プロジェクト・フォルダーに期末テスト用ファイル（<code>Micro_Final.Rmd</code>）をアップロードする。</li>
+<li><strong>Step5:</strong> <code>Data</code>フォルダーに期末テスト用データ（<code>Micro_Final.csv</code>）をアップロードする。</li>
+</ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+ファイルのアップロード先に注意!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>　期末テスト用ファイル（<code>.Rmd</code>）はプロジェクト・フォルダ―の直にアップロードし、期末テスト用データ（<code>.csv</code>）はプロジェクト・フォルダ―内の<code>Data</code>フォルダーに入れること。多くの履修者が<code>Data</code>フォルダーに<code>.Rmd</code>ファイルと<code>.csv</code>ファイルを入れているが、この場合、Knitが出来ない場合がある（自分がファイルシステムに詳しいならコード内のパスを修正して対応することも可能）。</p>
+</div>
+</div>
+<ul>
+<li><strong>Step6:</strong> 期末テスト用ファイル（<code>Micro_Final.Rmd</code>）を開き、一旦、Knitしてみる。</li>
+<li><strong>Step7:</strong> サンプルファイル（<code>MicroAnalysis_Final.html</code>）を確認する。</li>
+<li><strong>Step8:</strong> サンプルファイルと同じ結果が得られるように期末テスト用ファイルを修正する。
 <ul>
 <li>提出者の学籍番号・氏名の修正を忘れないこと。</li>
 </ul></li>
 <li><strong>Step9:</strong> 完成したら出力物（<code>.html</code>ファイル）を自分のPCにダウンロードする。</li>
-<li><strong>Step10:</strong> ダウンロードしたファイルをLMSに提出する。提出する前にダウンロードしたファイルを開き、正しくダウンロードされているかを確認すること。</li>
+<li><strong>Step10:</strong> ダウンロードしたファイルをLMSに提出する。<strong>提出する前にダウンロードしたファイルを開き、正しくダウンロードされているかを確認する</strong>こと。また、提出したファイルはLMSの「マイレポート」から再ダウンロードできる。不安な人は提出後、再確認すること。</li>
 </ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+期末テストを途中で中断し、再開した場合は…（持ち帰りの場合など）
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>　期末テストを途中で中断し、再開した場合、RStudioの右上の「Project:」欄が「(None)」になっているか確認すること。「(None)」のまま、あるいはプロジェクト名が期末テスト用プロジェクト名と一致しない場合はメニューの File &gt; Open Project から開くこと。プロジェクトの開き方は本サポートページの Rの使い方 &gt; プロジェクト管理 から確認できる。</p>
+</div>
+</div>
 </section>
 <section id="期末テストの時間について" class="level2">
 <h2 class="anchored" data-anchor-id="期末テストの時間について">期末テストの時間について</h2>
@@ -354,12 +387,12 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <ul>
 <li>4限中に途中経過の提出物（<code>.html</code>ファイル）をLMSに提出
 <ul>
-<li><strong>4限中に7問以上に回答する</strong>こと</li>
+<li><strong>4限中に7問以上に回答する</strong>こと（6問までの回答は未提出とみなす）</li>
 </ul></li>
 <li>持ち帰り後、そのまま<strong>引き続き</strong>、残りの問題に取り組む。</li>
 <li><strong>再</strong>提出窓口に提出
 <ul>
-<li>再提出の期限は授業日当日の23時59分</li>
+<li>再提出の期限は授業日<strong>当日</strong>の23時59分</li>
 </ul></li>
 </ul></li>
 <li>持ち帰り解答の扱いについて
@@ -379,7 +412,7 @@ gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
 <ul>
 <li>期限内に24点相当を提出し、20点正解</li>
 <li>期限外に16点相当を提出し、12点正解</li>
-<li>20点 + 16点 <span class="math inline">\(\times\)</span> 0.5 = 28点</li>
+<li>20点 + 12点 <span class="math inline">\(\times\)</span> 0.5 = 26点</li>
 <li>各問題の配点は難易度に応じて調整される。</li>
 </ul>
 <div class="cell" data-layout-align="center">
