@@ -455,6 +455,20 @@
     "text": "教科書\n\n『私たちのR: ベストプラクティスの探求』第9章: データ構造"
   },
   {
+    "objectID": "slide/slide14.html#期末テスト",
+    "href": "slide/slide14.html#期末テスト",
+    "title": "ミクロ政治データ分析実習",
+    "section": "期末テスト",
+    "text": "期末テスト"
+  },
+  {
+    "objectID": "slide/slide14.html#授業アンケート任意",
+    "href": "slide/slide14.html#授業アンケート任意",
+    "title": "ミクロ政治データ分析実習",
+    "section": "授業アンケート（任意）",
+    "text": "授業アンケート（任意）\n\nhttps://ctl.jm.kansai-u.ac.jp/q/Ans?ms&cd=13495_22sから回答可能\n\n\n\n\n\n\n\n\n\n\n\n\n\nよくある質問\n\nこの授業のシラバスは?\n\nhttps://bit.ly/3RttGEE\nほぼシラバス通りだが、課題の回数に変更あり（8 \\(\\rightarrow\\) 5）\n\n本講義の到達目標が分かりません…\n\n以下の一つでも達成できたらOK\n\nRがある程度、使えるようになった。\n今は苦手だけど、もっとRを勉強してみたいと思うようになった。\nRは使えないし、使う予定は（多分）ないけど、Rで何が出来るかが分かった。\n自分にRは無理だということが分かった。\n\nつまり、履修前と比べ「何かが分かった」のであれば達成"
+  },
+  {
     "objectID": "slide/slide14.html#section",
     "href": "slide/slide14.html#section",
     "title": "ミクロ政治データ分析実習",
@@ -3315,7 +3329,7 @@
     "href": "index.html",
     "title": "<img src='/Figs/logo.png' height='20' style='vertical-align:baseline;'> MicroAnalysis@Kandai",
     "section": "",
-    "text": "アイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年07月11日\n開発環境\n\nmacOS 12.4 “Monterey”\nFirefox 102.0.0\nR version 4.2.1 (2022-06-23)\nRStudio 2022.02.3+492 “Prairie Trillium”\nQuarto 0.9.649\nR package {quarto} 1.1"
+    "text": "アイコン説明\n\n\n\n\n：NIIオンライン分析システムの起動\n\n右クリックし、新しいタブ（or ウィンドウ）で開いてください。\n初期設定が必要です。初期設定の方法はRの使い方 > Rの導入を参照してください。\n\n：本講義の教科書（『私たちのR』）\n：本ウェブサイト内の検索\n\n\n\n\n\n\n\n\n\nページ情報\n\n\n\n\n最終更新日: 2022年07月13日\n開発環境\n\nmacOS 12.4 “Monterey”\nFirefox 102.0.0\nR version 4.2.1 (2022-06-23)\nRStudio 2022.02.3+492 “Prairie Trillium”\nQuarto 0.9.649\nR package {quarto} 1.1"
   },
   {
     "objectID": "about.html",
