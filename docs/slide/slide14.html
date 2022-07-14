@@ -794,7 +794,7 @@
 <p>授業サポートページから実習用データ（<code>Micro14.csv</code>）をダウンロード</p>
 <ul>
 <li>整然データとして加工済み</li>
-<li><code>Day</code>: 日付（2021年6月）; <code>NewCases</code>: 100万人当りCOVID-19新規感染者数</li>
+<li><code>Day</code>: 日付（2022年6月）; <code>NewCases</code>: 100万人当りCOVID-19新規感染者数</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>COVID_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/Micro14.csv"</span>)</span>
@@ -839,7 +839,7 @@
 <span id="cb10-2"><a href="#cb10-2"></a>   <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2022年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-3-2">
@@ -874,7 +874,7 @@
 <span id="cb12-2"><a href="#cb12-2"></a>   <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2022年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--- --->
 </section>
@@ -898,7 +898,7 @@
 <span id="cb13-7"><a href="#cb13-7"></a>COVID_df <span class="sc">%&gt;%</span></span>
 <span id="cb13-8"><a href="#cb13-8"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-9"><a href="#cb13-9"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country)) <span class="sc">+</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2022年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-4-2">
@@ -936,7 +936,7 @@
 <span id="cb14-2"><a href="#cb14-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, </span>
 <span id="cb14-4"><a href="#cb14-4"></a>                 <span class="at">color =</span> Country), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
+<span id="cb14-5"><a href="#cb14-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2022年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
 <span id="cb14-6"><a href="#cb14-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -987,7 +987,7 @@
 <span id="cb15-2"><a href="#cb15-2"></a>   <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">group =</span> Country, <span class="at">linetype =</span> Country),</span>
 <span id="cb15-4"><a href="#cb15-4"></a>             <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
+<span id="cb15-5"><a href="#cb15-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2022年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
 <span id="cb15-6"><a href="#cb15-6"></a>        <span class="at">linetype =</span> <span class="st">"国"</span>)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>自分で線のタイプを指定したい場合は</p>
@@ -1045,7 +1045,7 @@
 <span id="cb17-2"><a href="#cb17-2"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> NewCases, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> Country), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> Country), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2021年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
+<span id="cb17-5"><a href="#cb17-5"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日 (2022年6月)"</span>, <span class="at">y =</span> <span class="st">"100万人当たり新規感染者数 (人)"</span>, </span>
 <span id="cb17-6"><a href="#cb17-6"></a>        <span class="at">color =</span> <span class="st">"国"</span>, <span class="at">shape =</span> <span class="st">"国"</span>) <span class="sc">+</span></span>
 <span id="cb17-7"><a href="#cb17-7"></a>   <span class="fu">theme_bw</span>()</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1305,16 +1305,6 @@
 <ul>
 <li><a href="https://www.jaysong.net/RBook/visualization4.html">教科書第20章</a></li>
 <li><a href="https://www.r-graph-gallery.com/">The R Graph Gallery</a></li>
-</ul>
-<!--- --->
-</section>
-<section id="期末テストについて" class="slide level2">
-<h2>期末テストについて</h2>
-<ul>
-<li>サポートページを参照
-<ul>
-<li>課題 &gt; 期末テスト実施要領</li>
-</ul></li>
 </ul>
 
 <p><img src="Figs/logo.png" class="slide-logo"></p>

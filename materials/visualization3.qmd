@@ -29,7 +29,7 @@ df <- read_csv("Data/Micro09.csv")
 
 ### 散布図の作成
 
-散布図は2つの連続変数（=間隔尺度、比率尺度で測定された変数）間の関係を調べる代表的な可視化方法である。散布図を作成する際に必要な**最低限**の情報、つまり散布図の必須要素は何だろうか。例えば、 @fig-scatter-example の例を考えてみよう。この散布図はフリーダムハウスのスコアと人間開発指数の関係を表す散布図である。それぞれの点は一つの観察（国）を意味する。散布図は2次元平面上に複数の点を載せたものであるが、それぞれの点はどのような情報を含んでいるのか。それは、その国のフリーダムハウス・スコアと人間開発指数であり、それぞれ横軸の上の位置と縦軸上の位置から、その情報が読み取れる。
+散布図は2つの連続変数（=間隔尺度、比率尺度で測定された変数）間の関係を調べる代表的な可視化方法である。散布図を作成する際に必要な**最低限**の情報、つまり散布図の必須要素は何だろうか。例えば、 @fig-scatter-example の例を考えてみよう。この散布図はフリーダムハウスのスコアと人間開発指数の関係を表す散布図である。それぞれの点は一つの観察（国 or 地域）を意味する。散布図は2次元平面上に複数の点を載せたものであるが、それぞれの点はどのような情報を含んでいるのか。それは、その国（ or 地域）のフリーダムハウス・スコアと人間開発指数であり、それぞれ横軸の上の位置と縦軸上の位置から、その情報が読み取れる。
 
 ```{r fig-scatter-example}
 #| echo: false
@@ -246,7 +246,7 @@ COVID_df <- read_csv("Data/Micro14.csv")
 COVID_df %>%
    ggplot(aes(x = Day, y = NewCases)) +
    geom_line(aes(group = Country)) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)") +
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)") +
    theme_bw(base_size   = 14)
 ```
 
@@ -264,7 +264,7 @@ COVID_df %>%
    ggplot(aes(x = Day, y = NewCases)) +
    geom_line(aes(group = Country)) +
    geom_point(size = 3) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)") +
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)") +
    theme_bw(base_size   = 14)
 ```
 
@@ -288,7 +288,7 @@ COVID_df %>%
    filter(Country == "Japan") %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases)) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)")
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)")
 ```
 
 :::{.callout-note}
@@ -318,7 +318,7 @@ COVID_df <- COVID_df %>%
 COVID_df %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases, group = Country)) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)")
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)")
 ```
 
 　ただし、これでも問題は残る。どの線が日本で、どの線が韓国かが分からない。この場合、線の色分けを行うか、国・地域ごとに線の種類を分ける必要がある。まずは、おなじみの色分けは`aes()`の中に`color`を追加するだけである。また、線がやや細いので、若干太めに調整する。千の太さは`aes()`の外に`size`で調整可能である。
@@ -331,7 +331,7 @@ COVID_df %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases, group = Country, color = Country), 
              size = 1.5) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         color = "国/地域")
 ```
 
@@ -344,7 +344,7 @@ COVID_df %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases, group = Country, 
                  linetype = Country), size = 1) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         linetype = "国/地域") 
 ```
 
@@ -357,7 +357,7 @@ COVID_df %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases, group = Country, 
                  linetype = Country), size = 1) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         linetype = "国/地域") +
    scale_linetype_manual(values = c("日本" = 1, "韓国" = 2, "台湾" = 3))
 ```
@@ -395,7 +395,7 @@ tibble(x = rep(1, 6),
 COVID_df %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases, group = Country), size = 1) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         linetype = "国/地域") + 
    facet_wrap(~Country, ncol = 3)
 ```
@@ -408,7 +408,7 @@ COVID_df %>%
 COVID_df %>%
    ggplot() +
    geom_line(aes(x = Day, y = NewCases, group = Country), size = 1) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         linetype = "国/地域") + 
    facet_wrap(~Country, ncol = 3, scales = "free_y")
 ```
@@ -430,7 +430,7 @@ COVID_df %>%
              size = 1) +
    geom_point(aes(x = Day, y = NewCases, color = Country, shape = Country), 
               size = 3) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         color = "国/地域", shape = "国/地域") +
    scale_color_manual(values = c("日本" = "royalblue",
                                  "韓国" = "darkred",
@@ -448,7 +448,7 @@ COVID_df %>%
    ggplot(aes(x = Day, y = NewCases, color = Country)) +
    geom_line(aes(group = Country), size = 1) +
    geom_point(aes(shape = Country), size = 3) +
-   labs(x = "日 (2021年6月)", y = "100万人当たり新規感染者数 (人)", 
+   labs(x = "日 (2022年6月)", y = "100万人当たり新規感染者数 (人)", 
         color = "国/地域", shape = "国/地域") +
    scale_color_manual(values = c("日本" = "royalblue",
                                  "韓国" = "darkred",
@@ -552,7 +552,6 @@ df %>%
 :::
 
 ::::
-
 
 ### 次元の追加
 
