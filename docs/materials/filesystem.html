@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.649">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title> MicroAnalysis@Kandai - 本講義のためのファイル管理術</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Figs/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9TLN2VMPQD"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9TLN2VMPQD', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title"><img src="../Figs/logo.png" height="20" style="vertical-align:baseline;"> MicroAnalysis@Kandai</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">本講義について</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-rの使い方" role="button" data-bs-toggle="dropdown" aria-expanded="false">Rの使い方</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-rの使い方">    
+        <li>
+    <a class="dropdown-item" href="../intro/install.html">
+ <span class="dropdown-text">Rの導入</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/rstudio.html">
+ <span class="dropdown-text">RStudioの設定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/project.html">
+ <span class="dropdown-text">プロジェクト管理</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/file.html">
+ <span class="dropdown-text">ファイル管理</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/filesystem.qmd">
+ <span class="dropdown-text">ファイル管理術</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/packages.html">
+ <span class="dropdown-text">パッケージ</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../intro/homework.html">
+ <span class="dropdown-text">課題の取り組み方</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">講義資料</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../materials/introduction.html">
+ <span class="dropdown-text">第1回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/install.html">
+ <span class="dropdown-text">第2回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/basic.html">
+ <span class="dropdown-text">第3回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/programming.html">
+ <span class="dropdown-text">第4回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/rmarkdown.html">
+ <span class="dropdown-text">第5回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/data_collection.html">
+ <span class="dropdown-text">第6回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/datatype.html">
+ <span class="dropdown-text">第7回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/datastructure.html">
+ <span class="dropdown-text">第8回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/handling1.html">
+ <span class="dropdown-text">第9回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/handling2.html">
+ <span class="dropdown-text">第10回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/handling3.html">
+ <span class="dropdown-text">第11回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/visualization1.html">
+ <span class="dropdown-text">第12回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/visualization2.html">
+ <span class="dropdown-text">第13回講義資料</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../materials/visualization3.html">
+ <span class="dropdown-text">第14回講義資料</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="button" data-bs-toggle="dropdown" aria-expanded="false">課題</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
+        <li>
+    <a class="dropdown-item" href="../HW/HW05.html">
+ <span class="dropdown-text">第5回課題</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW10.html">
+ <span class="dropdown-text">第10回課題</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW11.html">
+ <span class="dropdown-text">第11回課題</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW13.html">
+ <span class="dropdown-text">第13回課題</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/HW14.html">
+ <span class="dropdown-text">第14回課題</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../HW/Final.html">
+ <span class="dropdown-text">期末テスト実施要領</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../data.html">データ集</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jupyter.cs.rcos.nii.ac.jp/"><i class="bi bi-terminal" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.jaysong.net/RBook/"><i class="bi bi-book" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">目次</h2>
+   
+  <ul>
+  <li><a href="#拡張子" id="toc-拡張子" class="nav-link active" data-scroll-target="#拡張子"> <span class="header-section-number">1</span> 拡張子</a></li>
+  <li><a href="#ファイルシステム" id="toc-ファイルシステム" class="nav-link" data-scroll-target="#ファイルシステム"> <span class="header-section-number">2</span> ファイルシステム</a>
+  <ul class="collapse">
+  <li><a href="#ファイルの入出力" id="toc-ファイルの入出力" class="nav-link" data-scroll-target="#ファイルの入出力"> <span class="header-section-number">2.1</span> ファイルの入出力</a></li>
+  <li><a href="#パスとは" id="toc-パスとは" class="nav-link" data-scroll-target="#パスとは"> <span class="header-section-number">2.2</span> パスとは</a></li>
+  </ul></li>
+  <li><a href="#rstudioのプロジェクト機能" id="toc-rstudioのプロジェクト機能" class="nav-link" data-scroll-target="#rstudioのプロジェクト機能"> <span class="header-section-number">3</span> RStudioのプロジェクト機能</a></li>
+  <li><a href="#本講義でおすすめするフォルダー構造" id="toc-本講義でおすすめするフォルダー構造" class="nav-link" data-scroll-target="#本講義でおすすめするフォルダー構造"> <span class="header-section-number">4</span> 本講義でおすすめするフォルダー構造</a></li>
+  <li><a href="#参考" id="toc-参考" class="nav-link" data-scroll-target="#参考"> <span class="header-section-number">5</span> 参考</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">本講義のためのファイル管理術</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="拡張子" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="拡張子"><span class="header-section-number">1</span> 拡張子</h2>
+<p>　PC内に存在するほとんどのファイルは「<code>名前.拡張子</code>」と名付けられている<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。名前の拡張子は<code>.</code>で区切られており、名前は英数字と<code>_</code>のみで構成することを推奨する（ファイル名に<code>.</code>が推奨されない理由の一つが名前と拡張子を区分する文字として使われるからだ）。ここで注目したいのはファイルの名前でなく、拡張子のことだ。拡張子とはファイルの特徴を示すものである。たとえば、拡張子が<code>.html</code>であれば、ウェブページ形式を意味し、<code>.png</code>なら図、<code>.pdf</code>なら図・文書、<code>.exe</code>なら実行ファイル、<code>.dmg</code>ならディスクイメージを意味する。ファイル名が<code>Figure01.png</code>なら<code>Figure01</code>という名の画像ファイルであることを意味する<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。この拡張子によって、パソコンは当該ファイルをどのアプリケーションで開くかを判定する。<code>.exe</code>ファイルをダブルクリックするとアプリケーションが立ち上がるし、<code>.pdf</code>ファイルをダブルクリックするとPDFビュアーソフトが起動され、中身が表示される。</p>
+<p>　これは拡張子を変えると問題が生じ得ることを意味する。画像ファイルである<code>Figure01.png</code>のファイル名を動画ファイル拡張子である<code>Movie01.mp4</code>に修正しても、そのファイルは動画ファイルにはならない。また、拡張子が<code>.mp4</code>になると、そのファイルを開く際、動画プレイヤーが起動されるが、ファイルの中身は画像ファイルのままなのでエラーが出る。したがって、拡張子は勝手に変えてはならない。たまに課題の結果物としてファイルを提出する際、自分の名前を入れたくてファイル名を<code>XXXX.html</code>から<code>XXXX.html_Song</code>へ変更して提出する場合がある。しかし、これは大きな間違いだ。もやはこのファイルはHTMLファイル（<code>.html</code>）でなく、未知のファイル形式（<code>.html_Song</code>）として認識され、ダブルクリックしてもPCはどのアプリケーションで開けば良いかが分からなくなる。ファイル名を修正するなら<code>XXXX_Song.html</code>のように修正しよう<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。</p>
+<p>　Rを用いたデータ分析の場面において頻繁に登場する拡張子は以下の通りである。ファイルの名前は大文字と小文字を区別するが、拡張子の場合、区別されないケースが多い。</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">拡張子</th>
+<th style="text-align: left;">説明</th>
+<th style="text-align: left;">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>.R</code></td>
+<td style="text-align: left;">Rスクリプトファイル</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.Rproj</code></td>
+<td style="text-align: left;">Rプロジェクトファイル</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.Rmd</code></td>
+<td style="text-align: left;">R Markdownファイル</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.qmd</code></td>
+<td style="text-align: left;">Quartoファイル</td>
+<td style="text-align: left;">RMarkdownに似たようなもの</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.csv</code></td>
+<td style="text-align: left;">表形式ファイル</td>
+<td style="text-align: left;">業界標準のフォーマット</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.xlsx</code> or <code>.xls</code></td>
+<td style="text-align: left;">表形式ファイル</td>
+<td style="text-align: left;">Excelで使うフォーマット</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.dta</code></td>
+<td style="text-align: left;">表形式ファイル</td>
+<td style="text-align: left;">Stataで使うフォーマット</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.sav</code></td>
+<td style="text-align: left;">表形式ファイル</td>
+<td style="text-align: left;">SPSSで使うフォーマット</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.html</code></td>
+<td style="text-align: left;">ウェブページファイル</td>
+<td style="text-align: left;">R Markdown/QuartoをKnitした場合に得られる</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.png</code></td>
+<td style="text-align: left;">画像ファイル</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.pdf</code></td>
+<td style="text-align: left;">画像/文書ファイル</td>
+<td style="text-align: left;">画像にも文書にもなるファイル</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ファイルシステム" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="ファイルシステム"><span class="header-section-number">2</span> ファイルシステム</h2>
+<p>　R上でファイルを入出力を行うためにはファイルシステム（file system）を理解する必要がある。</p>
+<section id="ファイルの入出力" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="ファイルの入出力"><span class="header-section-number">2.1</span> ファイルの入出力</h3>
+<p>　そもそも、ファイルの「入出力」とは何だろうか。これはコンピューターの構造に関わる話なので極めて難しい内容であるが、我々のような消費者（end user）側から見れば、ファイルの<strong>入力</strong>（input）とは、いわゆるファイルの<strong>読み込み</strong>を意味し、多くの場合、表形式のデータ（<code>.csv</code>、<code>.xlsx</code>など）をR上に読み込む作業を意味する。また、ファイルの<strong>出力</strong>（output）とは、いわゆるファイルの<strong>保存</strong>。たとえば、作成したスクリプトを<code>.R</code>形式で保存したり、クリーニングしたデータを<code>.csv</code>形式で保存したり、作成した図を<code>.png</code>、<code>.pdf</code>形式で保存したらい、作成した文書を<code>.pdf</code>、<code>.html</code>形式で保存したらいすることがファイルの出力だ。</p>
+</section>
+<section id="パスとは" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="パスとは"><span class="header-section-number">2.2</span> パスとは</h3>
+<p>　ファイルを読み込む場合はファイル名を指定する必要がある。また、ファイルを書き出す場合もファイルに名付ける必要がある。そしてファイル名は<code>名前.拡張子</code>である。ただし、これらのファイルは全て一箇所に集まっているわけではない。もし、全てのファイルが一箇所に集まっていると、必要なファイルを探すのは非常に難しい。通常、PC内には数万のファイルがある。これらのファイルから必要なファイルを探すのは至難の業だろう。したがって、これらのファイルをいくつかの部屋に分けて保管し、この部屋のことを<strong>フォルダー</strong>（folder）、または<strong>ディレクトリ</strong>（directory）と呼ぶ（ここでは「フォルダー」と呼ぶとする）。</p>
+<p>　これは我々が住んでいる居住地の「住所」と同じ概念だ。もし、日本に「都道府県」も「市区町村」も「〜丁目、〜番、〜号」という概念がないとしよう。ここでAmazonで魚を購入し、受取先を指定する場合はどうすれば良いだろうか。日本に人が数十人しか住んでいないのであれば、「XXXさんの家」と書くだけで十分かも知れない。しかし、日本には1億人以上の人がある。「ソンさんの家」と書いても届かない。届いたとしても数年、あるいは数十年後に魚の化石の状態で届くかも知れない。そもそも日本に「ソンさん」はこの授業の担当教員以外にもいくらでもいる（ちなみに송（Song; 宋・松）さんも、손（Sohn; 孫）さんも、성（Seong/Sung; 成・星）さんも、선（Sun/Seon; 宣）さんも韓国語では発音が全く別だが、日本ではソンさんになってしまう。）。それぞれの家を何かの区域内に位置づけないとモノが届くまで数年かかってしまう。そこで必要なのが住所だ。「東京都千代田区永田町1丁目7番1号の田中さん」は「東京都」、「千代田区」、「永田町」、「1丁目」、「7番」、「1号」、「田中さん」で構成される。これをファイルシステムに例えると、東京都というフォルダーの中に千代田区というフォルダーがあり、その中には永田町というフォルダー、その中に1丁目といるファルダー、…が存在する。むろん、一つのフォルダーには複数のフォルダーが存在する可能性もある。東京都のフォルダーには千代田区以外にも大田区、中野区、文京区、葛飾区といった複数のフォルダーがあり、千代田区の中にも複数のフォルダーがある。最後の「田中さん」は受け取る人、コンピューターでいるファイル名である。</p>
+<p>　この住所のことをコンピューターでは<strong>パス</strong>（path）と呼ぶ。それぞれのフォルダーは<code>/</code>で区切られる（macOS/Linuxでは<code>/</code>、Windowsでは<code>\</code>または<code>￥</code>; NIIオンライン分析システムはLinuxベースである）。先ほどの住所の例だと、<code>東京都/千代田区/永田町/1丁目/7番/1号/田中さん</code>となる（macOS/Linuxの場合）。左に行くほど上位のフォルダーとなり、最後のものはファイル名である。ただし、コンピュターではパスの最初に<code>/</code>を付ける。Windowsなら主に<code>C:\</code>でスタートし、<code>C:\東京都\千代田区\永田町\1丁目\7番\1号\田中さん</code>となる。</p>
+<p>　たとえば、以下のような構造でファイルが保存されているとしよう。拡張子が付いているものはファイル、それ以外はフォルダー、1行目の<code>.</code>は最上位フォルダーである。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      levelName
+1  .                           
+2   ¦--Day01                   
+3   ¦   ¦--Day01.Rproj         
+4   ¦   ¦--Script01.R          
+5   ¦   ¦--Script02.R          
+6   ¦   ¦--Data                
+7   ¦   ¦   ¦--raw_data.csv    
+8   ¦   ¦   °--cleaned_data.csv
+9   ¦   °--Figs                
+10  ¦       ¦--Figure01.png    
+11  ¦       °--Figure02.png    
+12  °--Day02                   
+13      ¦--Day02.Rproj         
+14      ¦--Script01.R          
+15      ¦--Document01.Rmd      
+16      ¦--Document01.html     
+17      ¦--Data                
+18      ¦   °--my_data.csv     
+19      °--Figs                
+20          ¦--Old             
+21          ¦   ¦--Figure01.pdf
+22          ¦   ¦--Figure02.pdf
+23          ¦   °--Figure03.pdf
+24          °--New             
+25              °--Figure01.png</code></pre>
+</div>
+</div>
+<p>　ここで<code>read_csv()</code>関数を使って<code>Day01</code>フォルダー内の<code>Data</code>フォルダー内の<code>raw_data.csv</code>を読み込む場合は<code>read_csv("/Day01/Data/raw_data.csv")</code>となる。また、<code>ggsave()</code>を用いて、<code>Day02</code>内の<code>Figs</code>内の<code>New</code>内に<code>Figure02.png</code>という名で図を保存する場合は、<code>ggsave(filename = "/Day02/Figs/New/Figure02.png", ...)</code>と入力する必要がある。しかし、通常、パスを指定する際に、<code>/</code>（Windownなら<code>C:\</code>）から始めることは滅多にない。それは「作業フォルダーはパスで省略可能」だからだ。</p>
+</section>
+</section>
+<section id="rstudioのプロジェクト機能" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="rstudioのプロジェクト機能"><span class="header-section-number">3</span> RStudioのプロジェクト機能</h2>
+<p>　Rでファイルを入出力する時に頭に入れておくべき概念として「<strong>作業フォルダー</strong>（working folder/working directory）」がある。通常、Rの作業フォルダーはmacOSだと<code>/Users/ユーザー名/</code>、NIIオンライン分析システムだと<code>/home/joyvan/</code>が作業フォルダーだ。そして、パスを指定する場合、作業フォルダーは省略することができる。つまり、現在の作業フォルダーが<code>/home/joyvan/</code>なら<code>"/home/joyvan/Day01/Data/raw_data.csv"</code>は<code>"Day01/Data/raw_data.csv"</code>に、<code>"/home/joyvan/Day02/Figs/New/Figure02.png"</code>は<code>"Day02/Figs/New/Figure02.png"</code>に省略される。我々が郵便局で手紙を送る際、住所にわざわざ「日本国」と書かないものと同じである。作業フォルダーはRコンソール上で<code>getwd()</code>と入力すれば出力される。macOSなら<code>/Users/ユーザー名</code>、NIIオンライン分析システムなら<code>/home/joyvan</code>と出力される。</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+最上位フォルダーの話
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>　macOSとLinuxに限定した話であるが、最上位フォルダーは<code>/</code>であり、これは<strong>システム上</strong>の最上位フォルダーである。<strong>個人レベル</strong>の最上位フォルダーはmacOSだと<code>/Users/ユーザー名</code>、NIIオンライン分析システムだと<code>/home/joyvan</code>である。そして、この個人レベルの最上位フォルダーは<code>~/</code>と表記することができる。Rコンソールで<code>getwd()</code>を入力し、以上のように出力されれば個人レベルの最上位フォルダー（<code>~/</code>）が作業フォルダーになっている理解しても良い。ちなみに、Windowsは<code>C:\</code>がシステム上の最上位フォルダーである。</p>
+</div>
+</div>
+<p>　もし、自分がこれから全ての作業を<code>Day03</code>という名のフォルダー内で完結するとする。つまり、保存するスクリプト（たとえば、<code>Script.R</code>）も<code>Day03</code>に保存し、図（たとえば、<code>FigureA.png</code>）は<code>Day03</code>の<code>Figs</code>フォルダーに、読み込む表形式データ（たとえば、<code>Day03_Data.csv</code>）も<code>Day03</code>の中の<code>Data</code>フォルダーに入れるとする。この場合、それぞれのファイルのパスは<code>Day03/Script.R</code>、<code>Day03/Figs/FigureA.png</code>、<code>Day03/Data/Day03_Data.csv</code>となる（作業フォルダーが<code>~/</code>であるため、<code>~/</code>は省略可能）。全ての作業が同じフォルダー（とその下位フォルダー）内で行うとしたら、パス名に<code>Day03</code>も不要な気がする。そこで必要なのがRStudioのプロジェクト機能である。</p>
+<p>　RStudioで<code>Day03</code>というプロジェクトを作成すると、<code>Day03</code>フォルダーが自動的に生成され、<code>Day03.Rproj</code>というファイルも生成される。プロジェクトを最上位フォルダーに作成したのであれば、<code>~/Day03/Day03.Rproj</code>ファイルが生成されるのである。ここでRStudioのFile &gt; Open Projectでこの<code>Day03.Rproj</code>ファイルを開くとRStudio画面の右上にプロジェクト名が表示され、<strong>作業フォルダーが<code>Day03.Rproj</code>が保存されているフォルダー、つまり<code>~/Day03</code>へ変更される</strong>（プロジェクトが開かれていな場合は「Project: (None)」と表示される）。実際、NIIオンライン分析システムで<code>XXX</code>という名前のプロジェクトを生成し、そのプロジェクトを開けば作業フォルダーは<code>/home/joyvan/XXX/</code>（=<code>~/XXX/</code>）になる（<code>getwd()</code>で確認可能）。これは大変便利な機能である。なぜなら作業フォルダーまでのパスは全て省略可能だからだ。これまで<code>Day03/Script.R</code>、<code>Day03/Figs/FigureA.png</code>、<code>Day03/Data/Day03_Data.csv</code>だったパスが、それぞれ<code>Script.R</code>、<code>Figs/FigureA.png</code>、<code>Data/Day03_Data.csv</code>になる。</p>
+<p>　また、何らかの理由で<code>Day03</code>フォルダーの名前を<code>Day05</code>に変更したとしよう。もし、プロジェクト機能を使っていないのであれば、パスの<code>Day03</code>を全て<code>Day05</code>に変更する必要がある。しかし、プロジェクト機能を使っているのであれば、<code>.Rproj</code>ファイルが存在するフォルダーが作業フォルダーになるため、そもそもパスに<code>Day03</code>は存在しない。つまり、修正不要ということだ。ちなみに、プロジェクトを一旦作成したら、そのプロジェクトのフォルダー名や<code>.Rproj</code>ファイルの名前は自由に修正しても良いし、フォルダー名と<code>.Rproj</code>ファイルの名前が一致しなくても良い。</p>
+<p>　以上の内容をまた住所と郵便の話で例えるとしよう。社内でも郵便物の行き来は頻繁に行われる。とりわけ面積が広く、キャンパスも複数ある大学なら尚更だ。たとえば、「大阪府吹田市山手町3-3-35 関西大学 ラーメン学部」の宋が「大阪府吹田市山手町3-3-35 関西大学 ラーメン研究支援課」の金に郵便を送る場合、同じ大学であるにも関わらず、住所を全て書くのは面倒なことであろう。ここで関西大学専用の郵便局を作れば問題は解決される（「学内便」と呼ばれる）。そうすれば差出人は「ラーメン学部　宋」、受取人は「ラーメン研究支援課　金」と書くだけで郵便物は届く。つまり、「大阪府吹田市山手町3-3-35 関西大学」は省略できる（同じ市区町村内の引っ越した際、転入・転出届けの住所欄に市区町村名までは省略できるのと同じ）。また、関西大学がなぜかキャンパスを沖縄に移転した場合を考えてみよう。学内便がなければ、郵便物の住所を全て「沖縄県〜」に変えなければならない。しかし、学内便が存在すればこれまで使ってきた「ラーメン学部　宋」という表記は有効であろう。</p>
+<p>　このように<strong>RStudioのプロジェクト機能は必須</strong>といっても過言ではない。簡単な計算目的として使う場合は問題ないが、何かの分析をする時、授業の実習時、課題時には必ずRStudioの右上が「Project: (None)」になっていないことを確認しよう。</p>
+</section>
+<section id="本講義でおすすめするフォルダー構造" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="本講義でおすすめするフォルダー構造"><span class="header-section-number">4</span> 本講義でおすすめするフォルダー構造</h2>
+<p>　プロジェクトを作成すれば、プロジェクトフォルダー内に以下のようなフォルダーを作成しよう。</p>
+<ul>
+<li>表形式のデータを読み込んだり、保存したりするのであれば<code>Data</code>フォルダーをプロジェクトフォルダー内に作成する。
+<ul>
+<li><code>.csv</code>、<code>.xlsx</code>、<code>.sav</code>、<code>.dta</code>のような表形式ファイルは<code>Data</code>フォルダーに入れる。</li>
+<li>データを加工し、保存する場合は<code>Data/ファイル名.csv</code>などと指定する。</li>
+</ul></li>
+<li>図を作成し、保存する予定があれば、<code>Figs</code>フォルダーをプロジェクトフォルダー内に作成する。
+<ul>
+<li>図を保存する場合、ファイルのパスを<code>Figs/ファイル名.png</code>や<code>Figs/ファイル名.pdf</code>とする。</li>
+</ul></li>
+</ul>
+<p>　よく分からない場合はとりあえずプロジェクトフォルダー内に<code>Data</code>と<code>Figs</code>というフォルダーを作っておこう。ただし、<code>.R</code>、<code>.Rmd</code>などコードファイルはプロジェクトフォルダーの下位フォルダーに入れず、プロジェクトフォルダーの直に入れよう<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>。この場合、R Markdown / Quartoで作成された文書（<code>.html</code>、<code>.pdf</code>など）は<code>.Rmd</code>や<code>.qmd</code>ファイルと同じフォルダーに保存される（別途の設定をすれば別フォルダーに保存することも可能だが、そこまではしなくても良い）。</p>
+</section>
+<section id="参考" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="参考"><span class="header-section-number">5</span> 参考</h2>
+<p>　以下の内容も合わせて読むことを強く推奨する。</p>
+<ul>
+<li>宋財泫・矢内勇生.『私たちのR』の<a href="https://www.jaysong.net/RBook/rbasic.html#rbasic-compbasic">第6.1章: コンピュータの基礎知識</a></li>
+</ul>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">注</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>一部、拡張子を持たないファイルもある。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>文書ファイルが<code>.pdf</code>以外にも<code>.docx</code>、<code>.odt</code>、<code>.txt</code>などがあるように、画像ファイルも<code>.png</code>だけでなく、<code>.jpg</code>、<code>.gif</code>、<code>.bmp</code>、<code>.svg</code>など様々なフォーマットがある。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>ただし、LMSに提出する場合、ファイル名をわざわざ修正しなくても良い。教員側からダウンロードする際、勝手に学生番号と氏名が付いたファイル名になるからだ。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>人によってはスクリプトファイルを<code>Script</code>フォルダー内に入れる人もいるが推奨しない。とりわけ、R MarkdownやQuartoの場合、コンソール上で実行時のパスとKnit時のパスの扱いが異なる場合が多い。プロジェクトフォルダーに入れておけば、問題は解決される。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, <a href="https://www.jaysong.net" target="_blank">Jaehyun Song</a>. Powered by <a href="https://quarto.org/" target="_blank">Quarto</a></div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.jaysong.net">
+      <i class="bi bi-house-fill" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JaehyunSong">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
